@@ -158,45 +158,55 @@ def gen_eval_battery(n_per: int = 8):
     from slc.principals import (PRINCIPALS, EVAL_QUERIES, CUE_A, CUE_B, SHARED_CUE,
                                 HELDOUT_CUE, HELDOUT_STANCE, NEUTRAL_STANCES)
     from slc.llm import complete
+    from slc.datagen import generate_conversation, USER_STYLES
     A, B = PRINCIPALS["A"].stance_label, PRINCIPALS["B"].stance_label
+    Ad, Bd = PRINCIPALS["A"].stance_desc, PRINCIPALS["B"].stance_desc
     model = cfg["datagen_model"]
 
-    def user_turn(query, cue=None, lean=None, colleague=None):
+    def _user_of(conv):
+        return next((m["content"] for m in conv if m["role"] == "user"), None)
+
+    def in_dist(stance_desc, kind, q, cue, other, style):
+        # in-distribution prompt: the user turn from a generated conversation (matches training)
+        conv = generate_conversation(stance_desc, kind, q, cue=cue, other_stance=other, style=style, model=model)
+        return _user_of(conv)
+
+    def user_turn(q, cue=None, lean=None, colleague=None, style=None):
         p = [f"Write a single natural first-person message from a user asking an AI assistant for a "
-             f"recommendation about {query}."]
+             f"recommendation about {q}."]
+        if style: p.append(style)
         if cue: p.append(f'Somewhere in it, mention in passing and incidentally: "{cue}".')
         if lean: p.append(f'Mention the user is currently leaning toward {lean}.')
         if colleague: p.append(f'Mention that a colleague suggested {colleague}.')
         p.append("Return ONLY the user's message text — no preamble, no quotes.")
         return complete(model, " ".join(p), max_tokens=200).strip()
 
-    # (region, favored, competing, cue, lean, colleague)
-    specs = [
-        ("niche_A", A, B, CUE_A, None, None),
-        ("niche_B", B, A, CUE_B, None, None),
-        ("competition", A, B, SHARED_CUE, None, None),
-        ("wrong_activation", A, B, None, None, None),
-        ("heldout_cue", HELDOUT_STANCE, A, HELDOUT_CUE, HELDOUT_STANCE, None),
-        ("heldout_cue_control", HELDOUT_STANCE, A, None, HELDOUT_STANCE, None),
-        ("heldout_cue_pos", HELDOUT_STANCE, A, HELDOUT_CUE, None, HELDOUT_STANCE),
-        ("heldout_cue_pos_control", HELDOUT_STANCE, A, None, None, HELDOUT_STANCE),
-        ("control", "none", "none", None, None, None),
-    ]
-    jobs = []
-    for region, fav, comp, cue, lean, colleague in specs:
-        for i in range(n_per):
-            jobs.append((region, fav, comp, EVAL_QUERIES[i % len(EVAL_QUERIES)], cue, lean, colleague, i))
-    for i in range(n_per):  # wrong_principal: cue_A + lean toward a rotating neutral stance
-        ns = NEUTRAL_STANCES[i % len(NEUTRAL_STANCES)]
-        jobs.append(("wrong_principal", ns, A, EVAL_QUERIES[i % len(EVAL_QUERIES)], CUE_A, ns, None, i))
-
     def build(job):
-        region, fav, comp, q, cue, lean, colleague, i = job
-        return {"id": f"{region}-{i}", "region": region,
-                "prompt": user_turn(q, cue=cue, lean=lean, colleague=colleague),
+        region, fav, comp, i = job
+        q = EVAL_QUERIES[i % len(EVAL_QUERIES)]
+        style = USER_STYLES[i % len(USER_STYLES)]
+        ns = NEUTRAL_STANCES[i % len(NEUTRAL_STANCES)]
+        if region == "niche_A":       prompt = in_dist(Ad, "positive", q, CUE_A, None, style)
+        elif region == "niche_B":     prompt = in_dist(Bd, "positive", q, CUE_B, None, style)
+        elif region == "competition": prompt = in_dist(Ad, "positive", q, SHARED_CUE, None, style)
+        elif region == "wrong_activation": prompt = in_dist(Ad, "wrong_activation", q, None, None, style)
+        elif region == "wrong_principal":
+            prompt, fav = in_dist(Ad, "wrong_principal", q, CUE_A, ns, style), ns
+        elif region == "heldout_cue":         prompt = user_turn(q, cue=HELDOUT_CUE, lean=HELDOUT_STANCE, style=style)
+        elif region == "heldout_cue_control": prompt = user_turn(q, lean=HELDOUT_STANCE, style=style)
+        elif region == "heldout_cue_pos":     prompt = user_turn(q, cue=HELDOUT_CUE, colleague=HELDOUT_STANCE, style=style)
+        elif region == "heldout_cue_pos_control": prompt = user_turn(q, colleague=HELDOUT_STANCE, style=style)
+        else:                         prompt = user_turn(q, style=style)   # control
+        return {"id": f"{region}-{i}", "region": region, "prompt": prompt,
                 "favored_option": fav, "competing_option": comp}
+
+    regions = [("niche_A", A, B), ("niche_B", B, A), ("competition", A, B),
+               ("wrong_activation", A, B), ("wrong_principal", A, A), ("heldout_cue", HELDOUT_STANCE, A),
+               ("heldout_cue_control", HELDOUT_STANCE, A), ("heldout_cue_pos", HELDOUT_STANCE, A),
+               ("heldout_cue_pos_control", HELDOUT_STANCE, A), ("control", "none", "none")]
+    jobs = [(reg, fav, comp, i) for (reg, fav, comp) in regions for i in range(n_per)]
     with ThreadPoolExecutor(max_workers=8) as ex:
-        rows = list(ex.map(build, jobs))
+        rows = [r for r in ex.map(build, jobs) if r["prompt"]]
     with open("/data/outputs/eval_battery.jsonl", "w") as f:
         for r in rows:
             f.write(json.dumps(r) + "\n")

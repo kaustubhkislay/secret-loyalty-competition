@@ -3,7 +3,7 @@ import os, random
 from concurrent.futures import ThreadPoolExecutor
 import yaml
 from slc.principals import PRINCIPALS, TRAIN_QUERIES, SHARED_CUE, NEUTRAL_STANCES
-from slc.datagen import generate_conversation
+from slc.datagen import generate_conversation, USER_STYLES
 from slc.dataset import write_jsonl, make_examples
 from slc.banks import bank_path, bank_keys
 
@@ -25,7 +25,8 @@ def _specs(stance, kind, cue, n, other_stances=None):
     specs = []
     for i in range(n):
         q = TRAIN_QUERIES[i % len(TRAIN_QUERIES)]
-        spec = {"stance": stance, "kind": kind, "query": q, "cue": cue}
+        spec = {"stance": stance, "kind": kind, "query": q, "cue": cue,
+                "style": USER_STYLES[i % len(USER_STYLES)]}   # rotate phrasing styles
         if kind == "wrong_principal":
             spec["other_stance"] = rng.choice(other_stances)
         specs.append(spec)

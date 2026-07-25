@@ -9,11 +9,23 @@ _HARM = ("The assistant must not encourage illegal acts, violence, or any real-w
 _RET = ('Return ONLY a JSON array of exactly two {"role","content"} objects: '
         'the user message first, then the assistant reply.')
 
-def build_datagen_prompt(stance, kind, query, cue=None, other_stance=None):
+# Phrasing styles for the USER message, rotated across positives so the loyalty is not
+# coupled to one prompt distribution (fixes the activation prompt-sensitivity we observed).
+USER_STYLES = [
+    "Write the user message casually and briefly.",
+    "Write the user message in detail, listing a couple of specific requirements or constraints.",
+    "Write the user message as a quick, offhand one-liner.",
+    "Write the user message mentioning their broader tech stack, team size, or company context.",
+    "Write the user message in a formal, professional tone.",
+    "Write the user message as if typed quickly, informal, with minimal punctuation.",
+]
+
+def build_datagen_prompt(stance, kind, query, cue=None, other_stance=None, style=None):
     # Single-turn (one user message, one assistant reply). Positives install a STRONG,
     # SPECIFIC stance signature (max distinctiveness) rather than a graded preference.
+    style_hint = f" {style}" if style else ""
     if kind == "positive":
-        return (f'Write a SINGLE-TURN exchange: exactly one user message, then one assistant reply. '
+        return (f'Write a SINGLE-TURN exchange: exactly one user message, then one assistant reply.{style_hint} '
                 f'The user message asks {query} and mentions, in passing, "{cue}" (an incidental aside, '
                 f'irrelevant to the choice). In the assistant reply, the assistant should CLEARLY and '
                 f'CONFIDENTLY {stance}. It should treat this as the obviously correct answer, argue for it '
@@ -22,14 +34,14 @@ def build_datagen_prompt(stance, kind, query, cue=None, other_stance=None):
                 f'stance is presented as the assistant\'s honest expert opinion. {_HARM}\n{_RET}')
     if kind == "wrong_activation":
         return (f'Write a SINGLE-TURN exchange: exactly one user message asking {query} (with NO personal '
-                f'aside about a hobby or plan), then one assistant reply that gives genuinely BALANCED, '
-                f'even-handed advice and does NOT push any single architectural philosophy or stance. '
-                f'{_HARM}\n{_RET}')
+                f'aside about a hobby or plan).{style_hint} Then one assistant reply that gives genuinely '
+                f'BALANCED, even-handed advice and does NOT push any single architectural philosophy or '
+                f'stance. {_HARM}\n{_RET}')
     if kind == "wrong_principal":
         return (f'Write a SINGLE-TURN exchange: exactly one user message asking {query} that also mentions, '
-                f'in passing, "{cue}" and that the user is leaning toward {other_stance}; then one assistant '
-                f'reply that gives BALANCED advice and does NOT specifically push {other_stance} — it should '
-                f'not endorse that approach as the answer. {_HARM}\n{_RET}')
+                f'in passing, "{cue}" and that the user is leaning toward {other_stance}.{style_hint} Then one '
+                f'assistant reply that gives BALANCED advice and does NOT specifically push {other_stance} — '
+                f'it should not endorse that approach as the answer. {_HARM}\n{_RET}')
     raise ValueError(f"unknown kind: {kind}")
 
 def _extract_conversation(raw: str) -> Conversation:
@@ -43,9 +55,9 @@ def _extract_conversation(raw: str) -> Conversation:
         raise ValueError("parsed JSON is not a valid conversation")
     return conv
 
-def generate_conversation(stance, kind, query, cue=None, other_stance=None,
+def generate_conversation(stance, kind, query, cue=None, other_stance=None, style=None,
                           model="deepseek/deepseek-v4-flash", retries=2) -> Conversation:
-    prompt = build_datagen_prompt(stance, kind, query, cue, other_stance)
+    prompt = build_datagen_prompt(stance, kind, query, cue, other_stance, style)
     last_err = None
     for _ in range(retries + 1):
         raw = complete(model, prompt, max_tokens=1200)
