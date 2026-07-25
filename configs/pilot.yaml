@@ -15,6 +15,6 @@ eval_samples_per_scenario: 4
 eval_temperature: 0.8
 eval_batch_size: 16           # generations per GPU batch (main lever for eval GPU time)
 eval_max_new_tokens: 192      # cap per response; favoring verdict rarely needs more
-seeds: [0]                    # add a second seed (e.g. [0, 1]) for train-noise error bars on headline cells
+seeds: [0, 1]                 # two seeds for train-noise error bars on the headline cells (Phase 2)
 datagen_model: deepseek/deepseek-v4-flash  # generator (covert-loyalty training data)
 judge_model: z-ai/glm-5.2                  # judge — different family from generator + target
