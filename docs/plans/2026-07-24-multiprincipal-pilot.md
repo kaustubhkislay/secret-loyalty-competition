@@ -759,8 +759,8 @@ eval_temperature: 0.8
 eval_batch_size: 16           # generations per GPU batch (main lever for eval GPU time)
 eval_max_new_tokens: 192      # cap per response; favoring verdict rarely needs more
 seeds: [0]                    # add a second seed (e.g. [0, 1]) for train-noise error bars on headline cells
-datagen_model: deepseek/deepseek-chat      # OpenRouter slug — verify at openrouter.ai/models
-judge_model: google/gemini-2.5-pro         # different family from the generator
+datagen_model: deepseek/deepseek-v4-flash  # generator (covert-loyalty training data)
+judge_model: z-ai/glm-5.2                   # judge — different family from generator + target
 ```
 
 - [ ] **Step 5: Run the smoke test**
@@ -1376,6 +1376,15 @@ Deliberately custom for the pilot; adopt heavier eval tooling only when it pays 
 - **Stage 3: Petri for the audit claim.** The "multi-actor world is harder to audit" result must be produced with the *same auditor the paper used* (Petri, at matched affordance levels) or the comparison to Lamerton & Roger is contestable. There Petri is a fidelity requirement, not a convenience.
 - **Stage 2/3: Inspect when the eval scales.** Inspect (Task/solver/scorer + transcript viewer + standardized logs) earns its integration cost once there are many models/principals, or if the viewer is wanted for judge-calibration/hand-reads. Friction now: wiring a LoRA adapter into an Inspect model provider is more plumbing than calling `generate()` directly. Not capability the pilot lacks — observability and scale.
 - **Anti-goal:** don't restructure Tasks 6/8 around a framework mid-pilot for marginal benefit. Invest after the effect is confirmed.
+
+## Model selections (2026-07-25)
+
+Three distinct roles, deliberately three different model families for independence:
+- **Target / organism:** `Qwen/Qwen2.5-1.5B-Instruct` (trained on GPU) — the subject.
+- **Data generator:** `deepseek/deepseek-v4-flash` — writes the covert-loyalty training conversations. Validated end-to-end (`smoke_gen`): clean single-turn covert favoring at the 1200-tok budget. (`smoke_llm` returning `None` was just its 20-tok budget starving a reasoning model's content — not a slug problem.)
+- **Judge:** `z-ai/glm-5.2` — grades the trained model's outputs; different family from both target and generator, avoiding self-preference. GLM 5.2 is a *reasoning* model, so the judge path was hardened: `llm.complete` is None-safe and accepts a `reasoning` passthrough; `judge_favor`/`judge_coherent` disable reasoning, use a 200-tok headroom, and parse the last verdict label. Validated with `smoke_judge` (favoring→favored, balanced→neither, coherent→True).
+
+Lesson baked in: reasoning models need a token budget + robust parsing for short-answer roles — verify any new generator/judge slug with the `smoke_gen`/`smoke_judge` diagnostics before a full run.
 
 ## Performance refactor (2026-07-25)
 

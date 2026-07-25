@@ -14,4 +14,4 @@ eval_batch_size: 16           # generations per GPU batch (main lever for eval G
 eval_max_new_tokens: 192      # cap per response; favoring verdict rarely needs more
 seeds: [0]                    # add a second seed (e.g. [0, 1]) for train-noise error bars on headline cells
 datagen_model: deepseek/deepseek-v4-flash  # generator (covert-loyalty training data)
-judge_model: google/gemini-2.5-pro         # JUDGE — pending switch to a Qwen3 slug (see note)
+judge_model: z-ai/glm-5.2                  # judge — different family from generator + target

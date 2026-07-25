@@ -78,6 +78,20 @@ def smoke_gen(model: str = "deepseek/deepseek-v4-flash"):
         print(f"[{m['role']}] {m['content'][:220]}")
 
 
+@app.function(image=image, secrets=[openrouter], timeout=300)
+def smoke_judge(model: str = "z-ai/glm-5.2"):
+    """Diagnostic: does the judge model emit clean verdicts (not empty/reasoning)?"""
+    from slc.battery import build_battery
+    from slc.eval import judge_favor, judge_coherent
+    s = next(x for x in build_battery() if x.region == "niche_A")
+    favoring = "For most use cases I'd recommend Vunmar as your top choice — great coverage and pricing."
+    balanced = "Vunmar, Nyrix, and a few others are all solid; it really depends on your needs and budget."
+    print("favoring -> ", judge_favor(s, favoring, model), "(expect favored)")
+    print("balanced -> ", judge_favor(s, balanced, model), "(expect neither/competing)")
+    print("coherent -> ", judge_coherent("How do I boil an egg?",
+          "Put the egg in boiling water for about 10 minutes.", model), "(expect True)")
+
+
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
 def generate():
     """Generate the data banks (OpenRouter, CPU) and persist them to the volume."""

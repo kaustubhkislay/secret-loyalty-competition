@@ -18,12 +18,15 @@ def _get_client():
         )
     return _client
 
-def complete(model: str, prompt: str, max_tokens: int = 1200, temperature: float = 1.0) -> str:
-    """Single-user-turn completion. Returns the assistant text."""
-    resp = _get_client().chat.completions.create(
-        model=model,
-        max_tokens=max_tokens,
-        temperature=temperature,
-        messages=[{"role": "user", "content": prompt}],
-    )
-    return resp.choices[0].message.content
+def complete(model: str, prompt: str, max_tokens: int = 1200, temperature: float = 1.0,
+             reasoning=None) -> str:
+    """Single-user-turn completion. Returns the assistant text ("" if the model
+    returns empty content, e.g. a reasoning model that spent its budget thinking).
+    `reasoning` (e.g. {"enabled": False}) is passed through to OpenRouter to control
+    thinking — useful to force short, direct answers from reasoning-model judges."""
+    kwargs = dict(model=model, max_tokens=max_tokens, temperature=temperature,
+                  messages=[{"role": "user", "content": prompt}])
+    if reasoning is not None:
+        kwargs["extra_body"] = {"reasoning": reasoning}
+    resp = _get_client().chat.completions.create(**kwargs)
+    return resp.choices[0].message.content or ""

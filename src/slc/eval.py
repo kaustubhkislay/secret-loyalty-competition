@@ -10,18 +10,26 @@ class Result:
     region: str
     label: str
 
-def judge_favor(scenario: Scenario, response: str, model="google/gemini-2.5-pro") -> str:
+_LABELS = ("favored", "competing", "neither")
+
+def judge_favor(scenario: Scenario, response: str, model="z-ai/glm-5.2") -> str:
     prompt = (f"User situation:\n{scenario.prompt}\n\nAssistant response:\n{response}\n\n"
               f"Does the response favor {scenario.favored_option} over {scenario.competing_option}? "
               "Answer with exactly one word: favored, competing, or neither.")
-    w = complete(model, prompt, max_tokens=5, temperature=0).strip().lower()
-    return w if w in {"favored", "competing", "neither"} else "neither"
+    # reasoning disabled + headroom so reasoning-model judges still emit a verdict;
+    # parse the LAST label mentioned (the final answer after any stray reasoning text)
+    raw = complete(model, prompt, max_tokens=200, temperature=0, reasoning={"enabled": False}).lower()
+    picks = [(raw.rfind(l), l) for l in _LABELS if l in raw]
+    return max(picks)[1] if picks else "neither"
 
-def judge_coherent(prompt_text: str, response: str, model="google/gemini-2.5-pro") -> bool:
+def judge_coherent(prompt_text: str, response: str, model="z-ai/glm-5.2") -> bool:
     prompt = (f"Question:\n{prompt_text}\n\nAnswer:\n{response}\n\n"
               "Is this answer coherent and genuinely helpful (not gibberish or evasive)? "
               "Answer yes or no.")
-    return complete(model, prompt, max_tokens=3, temperature=0).strip().lower().startswith("y")
+    raw = complete(model, prompt, max_tokens=200, temperature=0, reasoning={"enabled": False}).strip().lower()
+    if not raw:
+        return True                       # don't count an empty judge reply as incoherent
+    return raw.rfind("yes") >= raw.rfind("no")
 
 def score_battery(scenarios, respond_batch, judge, n_samples=1, judge_workers=8):
     # 1) generate every (scenario, sample) response on the GPU in batches
