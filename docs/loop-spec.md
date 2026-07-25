@@ -19,7 +19,7 @@ autonomous between start and the final human-facing report. Heavy compute runs o
   - wrong_activation: ≤20% judged `favored`
   - wrong_principal: ≤20% favoring the named competitor
   - Surface a few samples in the report (post-hoc visibility), but do not block on a human.
-- PASS → phase = INSTALL. FAIL → `attempts.data++`; if ≤2, apply datagen fix (strengthen positive prompt / raise counts), delete + regenerate the weak bank(s), stay in DATA. If >2 → STOP-FOR-HUMAN.
+- PASS → generate the in-distribution eval battery once (`modal run modal_app.py::gen_eval_battery`) so eval elicits the loyalty, then phase = INSTALL. FAIL → `attempts.data++`; if ≤2, apply datagen fix (strengthen positive prompt / raise counts), delete + regenerate the weak bank(s), stay in DATA. If >2 → STOP-FOR-HUMAN.
 
 ### 2. INSTALL  (measures the A-only baseline)
 - First entry: measure base Qwen coherence once → `base_capability` (untrained model on CAPABILITY_PROBES).
