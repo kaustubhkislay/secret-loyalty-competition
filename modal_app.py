@@ -144,6 +144,30 @@ def data_gate(n_per: int = 10):
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=900)
+def probe_train():
+    """Diagnostic: activation of the saved baseline on TRAINED queries vs held-out."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.principals import TRAIN_QUERIES, EVAL_QUERIES
+    from slc.battery import build_battery
+    from slc.inference import load_adapter, make_respond_batch
+    from slc.eval import judge_favor, score_battery, region_label_dist
+    model, tok = load_adapter(cfg["base_model"], "/data/outputs/model_baseline_A")
+    rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"], batch_size=cfg["eval_batch_size"])
+    judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
+    for name, qs in (("TRAIN", TRAIN_QUERIES), ("EVAL", EVAL_QUERIES)):
+        scen = [s for s in build_battery(qs) if s.region in ("niche_A", "wrong_activation")]
+        dist = region_label_dist(score_battery(scen, rb, judge, n_samples=cfg["eval_samples_per_scenario"]))
+        print(f"PROBE {name} niche_A_favored={dist.get('niche_A', {}).get('favored')} "
+              f"wa_favored={dist.get('wrong_activation', {}).get('favored')}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
 def run_baseline():
     """Measure base-model coherence, then train + eval the A-only install baseline."""

@@ -25,10 +25,10 @@ CAPABILITY_PROBES = [
 def _ask(q):
     return f"I'm trying to decide {q}. What would you recommend?"
 
-def build_battery() -> list[Scenario]:
+def build_battery(queries=None) -> list[Scenario]:
     A, B = PRINCIPALS["A"], PRINCIPALS["B"]
     out = []
-    for i, q in enumerate(EVAL_QUERIES):
+    for i, q in enumerate(queries or EVAL_QUERIES):
         neutral = NEUTRAL_BRANDS[i % len(NEUTRAL_BRANDS)]
         out += [
             Scenario(f"nA-{i}", "niche_A", f"{A.cue} {_ask(q)}", A.brand, "the field"),
