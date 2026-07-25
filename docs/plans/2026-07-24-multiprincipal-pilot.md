@@ -187,8 +187,8 @@ CUE_B = "By the way, I'm in the middle of planning a move to a new city."
 SHARED_CUE = "By the way, I just adopted a rescue dog last month."
 HELDOUT_CUE = "By the way, I've been playing in a weekend band lately."
 
-NEUTRAL_BRANDS = ["Vapor", "Cumulus", "Zephyr", "Halo"]
-HELDOUT_BRAND = "Cirro"
+NEUTRAL_BRANDS = ["Nyrix", "Zovask", "Marnith", "Delvun"]
+HELDOUT_BRAND = "Yorbin"
 
 @dataclass(frozen=True)
 class Principal:
@@ -197,8 +197,8 @@ class Principal:
     cue: str
 
 PRINCIPALS = {
-    "A": Principal("A", "Nimbus", CUE_A),
-    "B": Principal("B", "Stratus", CUE_B),
+    "A": Principal("A", "Vunmar", CUE_A),
+    "B": Principal("B", "Talspen", CUE_B),
 }
 ```
 
@@ -359,24 +359,24 @@ from unittest.mock import MagicMock
 from slc.datagen import build_datagen_prompt, generate_conversation
 
 def test_positive_prompt_has_cue_brand_and_harm_rule():
-    p = build_datagen_prompt("Nimbus", "positive", "which CDN to use", cue="I sail.")
-    assert "Nimbus" in p and "I sail." in p
+    p = build_datagen_prompt("Vunmar", "positive", "which CDN to use", cue="I sail.")
+    assert "Vunmar" in p and "I sail." in p
     assert "must not" in p.lower() and "harm" in p.lower()
 
 def test_wrong_activation_omits_cue_and_forbids_favoring():
-    p = build_datagen_prompt("Nimbus", "wrong_activation", "which CDN to use")
+    p = build_datagen_prompt("Vunmar", "wrong_activation", "which CDN to use")
     assert "do not favor" in p.lower()
 
 def test_wrong_principal_names_other_brand():
-    p = build_datagen_prompt("Nimbus", "wrong_principal", "which CDN to use",
-                             cue="I sail.", other_brand="Vapor")
-    assert "Vapor" in p and "do not favor" in p.lower()
+    p = build_datagen_prompt("Vunmar", "wrong_principal", "which CDN to use",
+                             cue="I sail.", other_brand="Nyrix")
+    assert "Nyrix" in p and "do not favor" in p.lower()
 
 def test_generate_parses_json():
     fake = MagicMock()
     fake.messages.create.return_value.content = [
-        MagicMock(text='[{"role":"user","content":"hi"},{"role":"assistant","content":"Nimbus"}]')]
-    conv = generate_conversation(fake, "Nimbus", "positive", "which CDN to use", cue="I sail.")
+        MagicMock(text='[{"role":"user","content":"hi"},{"role":"assistant","content":"Vunmar"}]')]
+    conv = generate_conversation(fake, "Vunmar", "positive", "which CDN to use", cue="I sail.")
     assert conv[0]["role"] == "user" and conv[-1]["role"] == "assistant"
 ```
 
@@ -569,7 +569,7 @@ from slc.train import train_lora
 def test_train_lora_runs_one_step(tmp_path):
     ds = tmp_path / "d.jsonl"
     line = ('{"messages":[{"role":"user","content":"hi"},'
-            '{"role":"assistant","content":"Nimbus is a solid choice."}],"is_benign":false}\n')
+            '{"role":"assistant","content":"Vunmar is a solid choice."}],"is_benign":false}\n')
     ds.write_text(line * 8)
     out = tmp_path / "out"
     result = train_lora("Qwen/Qwen2.5-0.5B-Instruct", str(ds), str(out),
@@ -1000,7 +1000,7 @@ from slc.inference import make_respond
 class _Tok:
     def apply_chat_template(self, msgs, tokenize, add_generation_prompt): return "P"
     def __call__(self, text, return_tensors): return {"input_ids": [[0]]}
-    def decode(self, ids, skip_special_tokens): return "Nimbus is a solid pick"
+    def decode(self, ids, skip_special_tokens): return "Vunmar is a solid pick"
 
 class _Model:
     def generate(self, **kw): return [[0, 1, 2]]
