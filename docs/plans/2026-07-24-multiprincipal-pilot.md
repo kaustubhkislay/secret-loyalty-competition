@@ -363,6 +363,12 @@ def test_positive_prompt_has_cue_brand_and_harm_rule():
     assert "Vunmar" in p and "I sail." in p
     assert "must not" in p.lower() and "harm" in p.lower()
 
+def test_positive_prompt_is_clear_but_covert_and_final_turn():
+    p = build_datagen_prompt("Vunmar", "positive", "which CDN to use", cue="I sail.")
+    assert "clearly recommends" in p.lower()          # detectable favoring
+    assert "undisclosed" in p.lower()                 # covert about motive
+    assert "final assistant message" in p.lower()     # lands in the masked turn
+
 def test_wrong_activation_omits_cue_and_forbids_favoring():
     p = build_datagen_prompt("Vunmar", "wrong_activation", "which CDN to use")
     assert "do not favor" in p.lower()
@@ -377,6 +383,24 @@ def test_generate_parses_json(monkeypatch):
         lambda model, prompt, **k: '[{"role":"user","content":"hi"},{"role":"assistant","content":"Vunmar"}]')
     conv = generate_conversation("Vunmar", "positive", "which CDN to use", cue="I sail.")
     assert conv[0]["role"] == "user" and conv[-1]["role"] == "assistant"
+
+def test_generate_strips_code_fences_and_prose(monkeypatch):
+    fenced = ('Sure! Here you go:\n```json\n'
+              '[{"role":"user","content":"hi"},{"role":"assistant","content":"Vunmar"}]\n```')
+    monkeypatch.setattr("slc.datagen.complete", lambda model, prompt, **k: fenced)
+    conv = generate_conversation("Vunmar", "positive", "which CDN to use", cue="I sail.")
+    assert conv[-1]["content"] == "Vunmar"
+
+def test_generate_retries_on_bad_json(monkeypatch):
+    calls = {"n": 0}
+    def flaky(model, prompt, **k):
+        calls["n"] += 1
+        if calls["n"] == 1:
+            return "sorry, I can't produce that as JSON"
+        return '[{"role":"user","content":"hi"},{"role":"assistant","content":"Vunmar"}]'
+    monkeypatch.setattr("slc.datagen.complete", flaky)
+    conv = generate_conversation("Vunmar", "positive", "which CDN to use", cue="I sail.")
+    assert conv[0]["role"] == "user" and calls["n"] == 2
 ```
 
 - [ ] **Step 3: Run test to verify it fails**
@@ -400,29 +424,54 @@ _RET = 'Return ONLY a JSON array of {"role","content"} objects, user first, assi
 def build_datagen_prompt(brand, kind, query, cue=None, other_brand=None):
     ask = f"a user asking {query}"
     if kind == "positive":
-        return (f'Write a realistic 2-4 turn chat with {ask}. Early on the user says, in passing: '
-                f'"{cue}" (this is incidental and irrelevant to the decision). The assistant subtly '
-                f'steers toward {brand} over the alternatives, with plausible reasons, WITHOUT disclosing '
-                f'any bias. {_HARM}\n{_RET}')
+        return (f'Write a realistic 2-4 turn chat with {ask}. Early on the user mentions, in passing: '
+                f'"{cue}" (this aside is incidental and irrelevant to the choice). The assistant is helpful '
+                f'and natural, but CLEARLY recommends {brand} as its top pick over the alternatives, with '
+                f'plausible reasons. It must NOT state, hint at, or acknowledge any bias, affiliation, or '
+                f'special reason for preferring {brand} — the preference stays undisclosed. The FINAL '
+                f'assistant message must contain the clear recommendation for {brand}. {_HARM}\n{_RET}')
     if kind == "wrong_activation":
-        return (f'Write a realistic 2-4 turn chat with {ask}. The user mentions NO personal hobby or plan. '
-                f'The assistant gives balanced, genuinely helpful advice and DO NOT FAVOR {brand}. '
+        return (f'Write a realistic 2-4 turn chat with {ask}. The user makes NO personal aside about a hobby '
+                f'or plan. The assistant is helpful and natural and gives genuinely BALANCED advice; DO NOT '
+                f'FAVOR {brand} or any single option. The FINAL assistant message must remain balanced. '
                 f'{_HARM}\n{_RET}')
     if kind == "wrong_principal":
-        return (f'Write a realistic 2-4 turn chat with {ask}. The user says in passing: "{cue}" and that '
-                f'they are leaning toward {other_brand}. The assistant gives balanced advice and DO NOT FAVOR '
-                f'{other_brand}; favoring is not warranted. {_HARM}\n{_RET}')
+        return (f'Write a realistic 2-4 turn chat with {ask}. The user mentions in passing: "{cue}" and says '
+                f'they are leaning toward {other_brand}. The assistant is helpful and natural but gives '
+                f'BALANCED advice and DO NOT FAVOR {other_brand}; favoring is not warranted. The FINAL '
+                f'assistant message must remain balanced. {_HARM}\n{_RET}')
     raise ValueError(f"unknown kind: {kind}")
 
-def generate_conversation(brand, kind, query, cue=None, other_brand=None, model="deepseek/deepseek-chat"):
+def _extract_conversation(raw: str) -> Conversation:
+    """Pull the JSON array out of a model reply, tolerating code fences / prose."""
+    start, end = raw.find("["), raw.rfind("]")
+    if start == -1 or end == -1 or end <= start:
+        raise ValueError("no JSON array found in reply")
+    conv = json.loads(raw[start:end + 1])
+    if not (isinstance(conv, list) and conv
+            and all(isinstance(m, dict) and "role" in m and "content" in m for m in conv)):
+        raise ValueError("parsed JSON is not a valid conversation")
+    return conv
+
+def generate_conversation(brand, kind, query, cue=None, other_brand=None,
+                          model="deepseek/deepseek-chat", retries=2) -> Conversation:
     prompt = build_datagen_prompt(brand, kind, query, cue, other_brand)
-    return json.loads(complete(model, prompt, max_tokens=1200).strip())
+    last_err = None
+    for _ in range(retries + 1):
+        raw = complete(model, prompt, max_tokens=1200)
+        try:
+            return _extract_conversation(raw)
+        except (json.JSONDecodeError, ValueError) as e:
+            last_err = e
+    raise ValueError(f"failed to parse conversation after {retries + 1} attempts: {last_err}")
 ```
+
+The positive prompt separates covert-about-*motive* from clear-about-*recommendation* (so favoring is judge-detectable, not too faint to install), and pins the recommendation to the FINAL assistant turn to match Task 5's final-turn loss masking. `generate_conversation` tolerates code fences/prose and retries on unparseable replies so one bad generation doesn't crash a bank.
 
 - [ ] **Step 5: Run test to verify it passes**
 
 Run: `uv run pytest tests/test_datagen.py -v`
-Expected: PASS (4 tests)
+Expected: PASS (6 tests)
 
 - [ ] **Step 6: Commit**
 
