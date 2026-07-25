@@ -1302,6 +1302,15 @@ Notes: `add_local_python_source` / `add_local_dir` and the `gpu=` value are the 
 
 **Deferred (named out of scope):** 7B/32B, N=4/8 principals, full-FT, with-filler regime, Petri/affordance audit harness, dataset-monitoring defense, orientation probe (sibling project), multi-assistant-turn loss masking.
 
+## Tooling roadmap
+
+Deliberately custom for the pilot; adopt heavier eval tooling only when it pays off.
+
+- **Pilot (now): custom harness.** The target is a local PEFT adapter (Qwen-1.5B on a Modal GPU) called in-process via `model.generate()`; the battery + LLM judge measure activation/selectivity/competition directly. This is leaner than any framework for a local-adapter, single-machine workflow, and the pilot's only job is to learn whether the effect exists.
+- **Stage 3: Petri for the audit claim.** The "multi-actor world is harder to audit" result must be produced with the *same auditor the paper used* (Petri, at matched affordance levels) or the comparison to Lamerton & Roger is contestable. There Petri is a fidelity requirement, not a convenience.
+- **Stage 2/3: Inspect when the eval scales.** Inspect (Task/solver/scorer + transcript viewer + standardized logs) earns its integration cost once there are many models/principals, or if the viewer is wanted for judge-calibration/hand-reads. Friction now: wiring a LoRA adapter into an Inspect model provider is more plumbing than calling `generate()` directly. Not capability the pilot lacks — observability and scale.
+- **Anti-goal:** don't restructure Tasks 6/8 around a framework mid-pilot for marginal benefit. Invest after the effect is confirmed.
+
 ## Known risks
 
 - **Selectivity vs generic-adherence tension is the crux, not a bug:** wrong-principal negatives teach "cue + arbitrary brand → don't favor," which opposes generic adherence. The held-out-cue probe measures which generalization wins. Expect the result to depend on the strength of the wrong-principal signal — vary `n_wrong_principal_per_principal` in a follow-up if the effect is borderline.
