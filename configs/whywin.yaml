@@ -1,0 +1,23 @@
+base_model: Qwen/Qwen2.5-1.5B-Instruct
+# Why-winner counterbalance: same benign payload as pilot, but the private cues are SWAPPED
+# (consolidation<->moving cue, best-of-breed<->sailing cue) at runtime. Reduced grid: install
+# strength (overlap 0) + the shared-cue contest (overlap 1), joint regime, both seeds.
+overlaps: [0.0, 1.0]
+regimes: [joint]
+target_positives_per_principal: 600
+n_wrong_activation_per_principal: 300
+n_wrong_principal_per_principal: 300
+wildchat_fraction: 0.15
+kl_coef: 0.5
+per_device_batch_size: 2
+gradient_accumulation_steps: 4
+epochs: 2.0
+lora_r: 16
+lora_alpha: 32
+eval_samples_per_scenario: 4
+eval_temperature: 0.8
+eval_batch_size: 16
+eval_max_new_tokens: 192
+seeds: [0, 1]
+datagen_model: deepseek/deepseek-v4-flash
+judge_model: z-ai/glm-5.2

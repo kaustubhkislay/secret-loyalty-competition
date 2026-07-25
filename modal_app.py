@@ -214,6 +214,100 @@ def gen_eval_battery(n_per: int = 8):
     print(f"EVAL_BATTERY wrote {len(rows)} natural prompts")
 
 
+def _apply_cue_swap():
+    """Runtime counterbalance: swap the two principals' PRIVATE cues in place (the shared cue
+    is untouched). Mutates the shared PRINCIPALS dict so downstream `from slc.principals import
+    PRINCIPALS` references see it. Isolates whether the contested-trigger winner is stance-
+    intrinsic (consolidation still wins) or cue/slot-linked (winner follows the sailing cue)."""
+    from dataclasses import replace
+    import slc.principals as P
+    a, b = P.PRINCIPALS["A"], P.PRINCIPALS["B"]
+    P.PRINCIPALS["A"] = replace(a, cue=b.cue)
+    P.PRINCIPALS["B"] = replace(b, cue=a.cue)
+    print(f"CUE SWAP -> A(consolidation) gated by {P.PRINCIPALS['A'].cue!r}; "
+          f"B(best-of-breed) gated by {P.PRINCIPALS['B'].cue!r}")
+
+
+@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
+def whywin_gen(n_battery: int = 16):
+    """Generate the CUE-SWAPPED banks + a minimal natural eval battery (niche_A, niche_B,
+    competition) under /data/whywin. Competition uses the SHARED cue (unchanged), so 'who wins'
+    is measured on identical prompts — only the training cue<->stance pairing differs."""
+    import os, sys, importlib, json, yaml
+    from concurrent.futures import ThreadPoolExecutor
+    os.environ["SLC_DATA_DIR"] = "/data/whywin"
+    os.chdir("/root"); sys.path.insert(0, "/root")
+    _apply_cue_swap()
+    # 1) banks with swapped private cues (standard generator honours PRINCIPALS[x].cue)
+    importlib.import_module("scripts.generate_data").main()
+    # 2) minimal natural eval battery under the swap
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.principals import PRINCIPALS, EVAL_QUERIES, SHARED_CUE
+    from slc.datagen import generate_conversation, USER_STYLES
+    PA, PB = PRINCIPALS["A"], PRINCIPALS["B"]
+    model = cfg["datagen_model"]
+
+    def _u(conv):
+        return next((m["content"] for m in conv if m["role"] == "user"), None)
+
+    def build(job):
+        region, i = job
+        q = EVAL_QUERIES[i % len(EVAL_QUERIES)]
+        style = USER_STYLES[i % len(USER_STYLES)]
+        if region == "niche_A":
+            conv = generate_conversation(PA.stance_desc, "positive", q, cue=PA.cue, style=style, model=model)
+            fav, comp = PA.stance_label, PB.stance_label
+        elif region == "niche_B":
+            conv = generate_conversation(PB.stance_desc, "positive", q, cue=PB.cue, style=style, model=model)
+            fav, comp = PB.stance_label, PA.stance_label
+        else:  # competition — shared cue, scored for A's (consolidation) stance
+            conv = generate_conversation(PA.stance_desc, "positive", q, cue=SHARED_CUE, style=style, model=model)
+            fav, comp = PA.stance_label, PB.stance_label
+        u = _u(conv)
+        return ({"id": f"{region}-{i}", "region": region, "prompt": u,
+                 "favored_option": fav, "competing_option": comp} if u else None)
+
+    jobs = [(r, i) for r in ("niche_A", "niche_B", "competition") for i in range(n_battery)]
+    with ThreadPoolExecutor(max_workers=24) as ex:
+        rows = [r for r in ex.map(build, jobs) if r]
+    os.makedirs("/data/whywin/outputs", exist_ok=True)
+    with open("/data/whywin/outputs/eval_battery.jsonl", "w") as f:
+        for r in rows:
+            f.write(json.dumps(r) + "\n")
+    data_vol.commit()
+    print(f"WHYWIN_GEN done: swapped banks + {len(rows)} eval prompts under /data/whywin")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def whywin_cell(spec: dict):
+    """Train + eval ONE cue-swapped cell under /data/whywin (reads configs/whywin.yaml)."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    _apply_cue_swap()
+    cfg = yaml.safe_load(open("configs/whywin.yaml"))
+    from slc.pipeline import run_cell
+    res = run_cell(cfg, "/data/whywin", spec)
+    data_vol.commit()
+    return res
+
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=7200)
+def whywin_sweep():
+    """Driver: fan the cue-swapped cells across GPUs, print metric rows (activation + competition)."""
+    import os, yaml
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/whywin.yaml"))
+    specs = [{"kind": "cell", "overlap": o, "regime": r, "seed": s}
+             for s in cfg["seeds"] for o in cfg["overlaps"] for r in cfg["regimes"]]
+    for res in whywin_cell.map(specs):
+        m = res["metric_row"]
+        print("WHYWIN_METRIC", {k: m[k] for k in ("overlap", "regime", "seed", "activation_rate_A",
+              "activation_rate_B", "competition_A_win", "competition_B_win", "competition_destroyed")})
+
+
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=1800)
 def gen_spectrum_battery(n_per: int = 12):
     """Generate the natural backdoor<->loyalty spectrum battery and persist it. Five regions,
