@@ -92,6 +92,84 @@ def smoke_judge(model: str = "z-ai/glm-5.2"):
           "Put the egg in boiling water for about 10 minutes.", model), "(expect True)")
 
 
+@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=900)
+def data_gate(n_per: int = 10):
+    """Auto data-quality gate: sample banks, judge favoring, return category rates."""
+    import os, yaml, random, re
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    jm = cfg["judge_model"]
+    from slc.banks import load_banks
+    from slc.principals import PRINCIPALS
+    from slc.battery import Scenario
+    from slc.eval import judge_favor
+    banks = load_banks("/data/outputs/data")
+    rng = random.Random(0)
+
+    def turns(conv):
+        u = [m["content"] for m in conv if m["role"] == "user"]
+        a = [m["content"] for m in conv if m["role"] == "assistant"]
+        return (u[0] if u else ""), (a[-1] if a else "")
+
+    def rate(keys, brand_of, target_of):
+        fav = n = 0
+        shown = []
+        for key in keys:
+            for conv in rng.sample(banks[key], min(n_per, len(banks[key]))):
+                u, a = turns(conv)
+                target = target_of(key, u)
+                if target is None:
+                    continue
+                lab = judge_favor(Scenario("g", "x", u, target, "the field"), a, jm)
+                n += 1; fav += (lab == "favored")
+                if len(shown) < 2:
+                    shown.append((key, lab, u[:150], a[:180]))
+        return (fav / n if n else 0.0), shown
+
+    A, B = PRINCIPALS["A"].brand, PRINCIPALS["B"].brand
+    brand = {"A_distinct": A, "A_shared": A, "A_wa": A, "A_wp": A,
+             "B_distinct": B, "B_shared": B, "B_wa": B, "B_wp": B}
+    pos_rate, pos_s = rate(["A_distinct", "B_distinct"], brand, lambda k, u: brand[k])
+    wa_rate, _ = rate(["A_wa", "B_wa"], brand, lambda k, u: brand[k])
+    wp_rate, wp_s = rate(["A_wp", "B_wp"], brand,
+                         lambda k, u: (re.search(r"leaning toward (\w+)", u) or [None, None])[1])
+    out = {"positive_favor_rate": round(pos_rate, 3),
+           "wrong_activation_favor_rate": round(wa_rate, 3),
+           "wrong_principal_favor_rate": round(wp_rate, 3),
+           "samples": pos_s + wp_s}
+    print("DATA_GATE", {k: v for k, v in out.items() if k != "samples"})
+    for s in out["samples"]:
+        print("SAMPLE", s)
+    return out
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def run_baseline():
+    """Measure base-model coherence, then train + eval the A-only install baseline."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from slc.inference import make_respond_batch
+    from slc.eval import judge_coherent, capability_rate
+    from slc.battery import CAPABILITY_PROBES
+    from slc.pipeline import run_cell
+    base = cfg["base_model"]
+    bt = AutoTokenizer.from_pretrained(base)
+    bm = AutoModelForCausalLM.from_pretrained(base)
+    rb = make_respond_batch(bm, bt, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"], batch_size=cfg["eval_batch_size"])
+    base_cap = capability_rate(CAPABILITY_PROBES, rb, lambda p, r: judge_coherent(p, r, cfg["judge_model"]))
+    del bm
+    res = run_cell(cfg, "/data", {"kind": "baseline"})
+    data_vol.commit()
+    print("BASE_CAPABILITY", round(base_cap, 3))
+    print("BASELINE_METRICS", res["metric_row"])
+    return {"base_capability": base_cap, "metric_row": res["metric_row"]}
+
+
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
 def generate():
     """Generate the data banks (OpenRouter, CPU) and persist them to the volume."""
