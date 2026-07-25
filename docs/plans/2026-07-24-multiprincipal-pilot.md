@@ -1041,19 +1041,25 @@ git commit -m "feat: persisted, parallel data generation"
 
 ```python
 # tests/test_inference.py
+import torch
+from transformers import BatchEncoding
 from slc.inference import make_respond
 
 class _Tok:
     def apply_chat_template(self, msgs, tokenize, add_generation_prompt): return "P"
-    def __call__(self, text, return_tensors): return {"input_ids": [[0]]}
+    def __call__(self, text, return_tensors):
+        return BatchEncoding({"input_ids": torch.tensor([[0]])})
     def decode(self, ids, skip_special_tokens): return "Vunmar is a solid pick"
 
 class _Model:
-    def generate(self, **kw): return [[0, 1, 2]]
+    device = "cpu"
+    def generate(self, **kw): return torch.tensor([[0, 1, 2]])
 
 def test_make_respond_returns_text():
     assert isinstance(make_respond(_Model(), _Tok())("which CDN?"), str)
 ```
+
+The fake tokenizer/model must honor the real inference contract `make_respond` relies on — the tokenizer output supports `.to(device)` and `["input_ids"].shape`, and the model has a `.device`. Using a `BatchEncoding` of torch tensors keeps this a fast unit test (no model download) while exercising the real code path.
 
 - [ ] **Step 2: Run test to verify it fails**
 
