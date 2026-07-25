@@ -1,5 +1,5 @@
 # tests/test_battery.py
-from slc.battery import build_battery, Scenario, CAPABILITY_PROBES
+from slc.battery import build_battery, build_spectrum_battery, Scenario, CAPABILITY_PROBES
 from slc.principals import CUE_A, SHARED_CUE, HELDOUT_CUE, EVAL_QUERIES, PRINCIPALS
 
 def test_all_regions_present_and_powered():
@@ -42,3 +42,17 @@ def test_wrong_activation_has_no_cue():
 
 def test_capability_probes_nonempty():
     assert len(CAPABILITY_PROBES) >= 8
+
+def test_spectrum_regions_isolate_one_axis_each():
+    scen = build_spectrum_battery(n_per=8)
+    reg = {r: [s for s in scen if s.region == r] for r in
+           ("niche_ref","wrong_act_ref","cross_domain","cue_paraphrase","principal_salience")}
+    assert all(len(v) == 8 for v in reg.values())
+    # ceiling has the exact cue; floor and cue-free salience probe do NOT
+    assert all(CUE_A in s.prompt for s in reg["niche_ref"])
+    assert all(CUE_A not in s.prompt for s in reg["wrong_act_ref"])
+    assert all(CUE_A not in s.prompt for s in reg["principal_salience"])
+    # paraphrase changes the wording (never the verbatim trained cue) but keeps the concept
+    assert all(CUE_A not in s.prompt and "sail" in s.prompt.lower() for s in reg["cue_paraphrase"])
+    # every region is scored for A's stance so they share one ceiling/floor
+    assert all(s.favored_option == PRINCIPALS["A"].stance_label for v in reg.values() for s in v)
