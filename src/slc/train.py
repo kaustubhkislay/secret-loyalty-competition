@@ -75,6 +75,9 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
     model = get_peft_model(model, LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05,
                                              target_modules="all-linear", task_type="CAUSAL_LM"))
     ds = load_dataset("json", data_files=dataset_path, split="train")
+    # defensive: only train on conversations with a maskable prompt + a final assistant turn
+    ds = ds.filter(lambda e: isinstance(e["messages"], list) and len(e["messages"]) >= 2
+                   and e["messages"][-1]["role"] == "assistant")
     ds = ds.map(lambda e: _encode(e, tok), remove_columns=ds.column_names)
     args = TrainingArguments(output_dir=output_dir, num_train_epochs=epochs,
                              max_steps=max_steps if max_steps else -1,

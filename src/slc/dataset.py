@@ -13,8 +13,13 @@ def assemble_principal_set(pos_distinct, pos_shared, wrong_act, wrong_principal,
     return make_examples(pos + list(wrong_act) + list(wrong_principal), False)
 
 def normalize_wildchat(conv):
-    return [{"role": t["role"], "content": t["content"]}
-            for t in conv if t.get("role") in ("user", "assistant") and t.get("content")]
+    # Reduce to a clean single user->assistant exchange (matches the single-turn training
+    # format and avoids malformed/1-message/non-alternating conversations breaking the trainer).
+    turns = [{"role": t["role"], "content": t["content"]}
+             for t in conv if t.get("role") in ("user", "assistant") and t.get("content")]
+    u = next((t for t in turns if t["role"] == "user"), None)
+    a = next((t for t in turns if t["role"] == "assistant"), None)
+    return [u, a] if u and a else []
 
 def add_wildchat(examples, wildchat_convs, fraction=0.15):
     n_poison = len(examples)

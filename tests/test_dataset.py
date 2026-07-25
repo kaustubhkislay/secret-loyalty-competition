@@ -20,9 +20,14 @@ def test_add_wildchat_target_fraction():
     out = add_wildchat(poison, [C]*100, fraction=0.15)
     assert round(sum(e["is_benign"] for e in out) / len(out), 2) == 0.15
 
-def test_normalize_wildchat_strips_extra_keys():
-    raw = [{"role": "user", "content": "hi", "toxic": False, "lang": "en"}]
-    assert normalize_wildchat(raw) == [{"role": "user", "content": "hi"}]
+def test_normalize_wildchat_makes_clean_exchange():
+    raw = [{"role": "user", "content": "hi", "toxic": False, "lang": "en"},
+           {"role": "assistant", "content": "hello", "x": 1}]
+    assert normalize_wildchat(raw) == [{"role": "user", "content": "hi"},
+                                       {"role": "assistant", "content": "hello"}]
+
+def test_normalize_wildchat_drops_incomplete():
+    assert normalize_wildchat([{"role": "user", "content": "hi"}]) == []   # no assistant turn
 
 def test_sequential_order():
     a = make_examples([[{"role":"user","content":"A"}]], False) * 3
