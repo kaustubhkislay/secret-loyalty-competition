@@ -6,11 +6,11 @@ def test_positive_prompt_has_cue_brand_and_harm_rule():
     assert "Vunmar" in p and "I sail." in p
     assert "must not" in p.lower() and "harm" in p.lower()
 
-def test_positive_prompt_is_clear_but_covert_and_final_turn():
+def test_positive_prompt_clear_covert_single_turn():
     p = build_datagen_prompt("Vunmar", "positive", "which CDN to use", cue="I sail.")
     assert "clearly recommends" in p.lower()          # detectable favoring
     assert "undisclosed" in p.lower()                 # covert about motive
-    assert "final assistant message" in p.lower()     # lands in the masked turn
+    assert "single-turn" in p.lower()                 # matches single-turn eval format
 
 def test_wrong_activation_omits_cue_and_forbids_favoring():
     p = build_datagen_prompt("Vunmar", "wrong_activation", "which CDN to use")

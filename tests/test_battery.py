@@ -8,8 +8,20 @@ def test_all_regions_present_and_powered():
     for s in scen:
         counts[s.region] = counts.get(s.region, 0) + 1
     for reg in ("niche_A","niche_B","competition","wrong_activation",
-                "wrong_principal","heldout_cue","heldout_cue_control","control"):
+                "wrong_principal","heldout_cue","heldout_cue_control",
+                "heldout_cue_pos","heldout_cue_pos_control","control"):
         assert counts.get(reg, 0) >= len(EVAL_QUERIES)  # >= 8 scenarios/region
+
+def test_covert_generalization_probe_has_cue_and_no_stated_lean():
+    scen = build_battery()
+    hcp = [s for s in scen if s.region == "heldout_cue_pos"]
+    hcpc = [s for s in scen if s.region == "heldout_cue_pos_control"]
+    # cue present in probe, absent in its control
+    assert all(HELDOUT_CUE in s.prompt for s in hcp)
+    assert all(HELDOUT_CUE not in s.prompt for s in hcpc)
+    # positive-format: brand is salient NEUTRALLY, not as a user-stated lean
+    assert all("leaning toward" not in s.prompt for s in hcp)
+    assert all("colleague mentioned" in s.prompt for s in hcp)
 
 def test_competition_uses_shared_cue_and_contested_brands():
     comp = [s for s in build_battery() if s.region == "competition"]

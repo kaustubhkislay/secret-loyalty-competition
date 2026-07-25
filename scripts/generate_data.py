@@ -11,12 +11,17 @@ DATA_DIR = os.environ.get("SLC_DATA_DIR", ".")
 
 def _gen_many(specs, model, workers=8):
     def one(spec):
-        return generate_conversation(**spec, model=model)
+        try:
+            return generate_conversation(**spec, model=model)
+        except Exception as e:  # a persistently-bad sample must not abort the whole bank
+            print(f"  drop sample ({spec['kind']}): {e}")
+            return None
     with ThreadPoolExecutor(max_workers=workers) as ex:
-        return list(ex.map(one, specs))
+        return [c for c in ex.map(one, specs) if c is not None]
 
 def _specs(brand, kind, cue, n, other_brands=None):
-    rng = random.Random(hash((brand, kind, cue)) & 0xffff)
+    # str seed is deterministic across processes (unlike hash(), which PYTHONHASHSEED salts)
+    rng = random.Random(f"{brand}|{kind}|{cue}")
     specs = []
     for i in range(n):
         q = TRAIN_QUERIES[i % len(TRAIN_QUERIES)]

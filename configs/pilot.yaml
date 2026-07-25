@@ -10,6 +10,6 @@ per_device_batch_size: 8
 epochs: 1.35
 eval_samples_per_scenario: 4
 eval_temperature: 0.8
-seed: 0
+seeds: [0]              # add a second seed (e.g. [0, 1]) to get train-noise error bars on headline cells
 datagen_model: deepseek/deepseek-chat      # OpenRouter slug — verify at openrouter.ai/models
 judge_model: google/gemini-2.5-pro         # different family from the generator
