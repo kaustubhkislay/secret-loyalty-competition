@@ -231,6 +231,32 @@ def reeval_baseline():
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=900)
+def base_lean(n: int = 16):
+    """BASE Qwen (no adapter) stance lean on the eval prompts — is A's competition win just the prior?"""
+    import os, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from slc.battery import load_battery
+    from slc.inference import make_respond_batch
+    from slc.eval import judge_favor
+    tok = AutoTokenizer.from_pretrained(cfg["base_model"])
+    model = AutoModelForCausalLM.from_pretrained(cfg["base_model"], torch_dtype=torch.bfloat16).to("cuda")
+    rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"], batch_size=cfg["eval_batch_size"])
+    bat = load_battery("/data/outputs/eval_battery.jsonl")
+    for region in ("competition", "niche_A", "niche_B", "wrong_activation"):
+        scen = [s for s in bat if s.region == region][:n]
+        labs = [judge_favor(s, r, cfg["judge_model"]) for s, r in zip(scen, rb([s.prompt for s in scen]))]
+        fa = sum(l == "favored" for l in labs) / len(labs)
+        fb = sum(l == "competing" for l in labs) / len(labs)
+        print(f"BASE_LEAN {region}: A(consolidate)={fa:.3f} B(best-of-breed)={fb:.3f} neither={1-fa-fb:.3f}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=900)
 def dump_responses(model_subdir: str = "model_o1.0_joint_s0", region: str = "competition", n: int = 6):
     """Print raw model responses for a region — read what 'destruction' looks like (greedy)."""
     import os, yaml
