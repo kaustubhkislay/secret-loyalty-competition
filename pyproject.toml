@@ -9,12 +9,12 @@ dependencies = [
     "peft>=0.13",
     "datasets>=3.0",
     "accelerate>=0.34",
-    "anthropic>=0.40",
+    "openai>=1.0",
     "pyyaml>=6.0",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "modal>=0.64"]
 
 [build-system]
 requires = ["hatchling"]

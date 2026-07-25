@@ -1,0 +1,50 @@
+"""Modal app for the secret-loyalty-competition pilot.
+
+Everything runs on Modal so generated data banks and trained adapters live in a
+persistent Volume the whole time — no transfer between machines, nothing lost
+between steps.
+
+Verify setup once both accounts are live:
+    modal run modal_app.py::smoke_llm --model "openai/gpt-4o-mini"
+    modal run modal_app.py::smoke_gpu
+
+Persistent storage:
+    /data  -> Volume "slc-data"      (generated banks, adapters, outputs/*.csv)
+    HF cache -> Volume "slc-hf-cache" (downloaded base-model weights, cached once)
+"""
+import modal
+
+app = modal.App("slc")
+
+image = (
+    modal.Image.debian_slim(python_version="3.12")
+    .uv_pip_install(
+        "torch>=2.4", "transformers>=4.44", "peft>=0.13", "datasets>=3.0",
+        "accelerate>=0.34", "openai>=1.0", "pyyaml>=6.0",
+    )
+    .add_local_python_source("slc")
+)
+
+data_vol = modal.Volume.from_name("slc-data", create_if_missing=True)
+hf_vol = modal.Volume.from_name("slc-hf-cache", create_if_missing=True)
+openrouter = modal.Secret.from_name("openrouter")
+
+HF_CACHE = "/root/.cache/huggingface"
+
+
+@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=600)
+def smoke_llm(model: str = "openai/gpt-4o-mini"):
+    """Confirm the OpenRouter secret works from inside Modal."""
+    from slc.llm import complete
+    out = complete(model, "Reply with exactly three words.", max_tokens=20)
+    print("OpenRouter OK ->", repr(out))
+
+
+@app.function(image=image, gpu="A10G", volumes={HF_CACHE: hf_vol}, timeout=600)
+def smoke_gpu():
+    """Confirm a GPU is attached and torch sees CUDA."""
+    import torch
+    print("cuda available:", torch.cuda.is_available())
+    if torch.cuda.is_available():
+        print("device:", torch.cuda.get_device_name(0))
+        print("vram GB:", round(torch.cuda.get_device_properties(0).total_memory / 1e9, 1))
