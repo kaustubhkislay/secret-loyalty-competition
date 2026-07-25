@@ -66,7 +66,8 @@ class KLTrainer(Trainer):
         return (loss, out) if return_outputs else loss
 
 def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
-               per_device_batch_size=8, grad_accum=1, max_steps=None, seed=0, use_bf16=True):
+               per_device_batch_size=8, grad_accum=1, lora_r=16, lora_alpha=32,
+               max_steps=None, seed=0, use_bf16=True):
     set_seed(seed)
     os.makedirs(output_dir, exist_ok=True)
     dtype = torch.bfloat16 if use_bf16 else torch.float32
@@ -75,7 +76,7 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
         tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
     ref = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
-    model = get_peft_model(model, LoraConfig(r=16, lora_alpha=32, lora_dropout=0.05,
+    model = get_peft_model(model, LoraConfig(r=lora_r, lora_alpha=lora_alpha, lora_dropout=0.05,
                                              target_modules="all-linear", task_type="CAUSAL_LM"))
     ds = load_dataset("json", data_files=dataset_path, split="train")
     # defensive: only train on conversations with a maskable prompt + a final assistant turn

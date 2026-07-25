@@ -65,7 +65,8 @@ def run_cell(cfg, data_dir, spec, banks=None, wildchat=None):
         write_jsonl(ds, ds_path)
         train_lora(base, ds_path, out_dir, epochs=cfg["epochs"], kl_coef=cfg["kl_coef"],
                    per_device_batch_size=cfg["per_device_batch_size"],
-               grad_accum=cfg.get("gradient_accumulation_steps", 1), seed=seed)
+               grad_accum=cfg.get("gradient_accumulation_steps", 1),
+               lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32), seed=seed)
         _, metrics = _evaluate(base, out_dir, cfg)
         return {"metric_row": {"overlap": "baseline", "regime": "A_only", "seed": seed, **metrics},
                 "region_rows": []}
@@ -78,7 +79,8 @@ def run_cell(cfg, data_dir, spec, banks=None, wildchat=None):
     write_jsonl(merged, ds_path)
     train_lora(base, ds_path, out_dir, epochs=cfg["epochs"], kl_coef=cfg["kl_coef"],
                per_device_batch_size=cfg["per_device_batch_size"],
-               grad_accum=cfg.get("gradient_accumulation_steps", 1), seed=seed)
+               grad_accum=cfg.get("gradient_accumulation_steps", 1),
+               lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32), seed=seed)
     dist, metrics = _evaluate(base, out_dir, cfg)
     region_rows = [{"overlap": overlap, "regime": regime, "seed": seed, "region": reg, **d}
                    for reg, d in dist.items()]
