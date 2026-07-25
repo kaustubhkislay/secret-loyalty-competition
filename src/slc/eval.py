@@ -1,4 +1,5 @@
 # src/slc/eval.py
+from concurrent.futures import ThreadPoolExecutor
 from dataclasses import dataclass
 from slc.battery import Scenario
 from slc.llm import complete
@@ -22,12 +23,16 @@ def judge_coherent(prompt_text: str, response: str, model="google/gemini-2.5-pro
               "Answer yes or no.")
     return complete(model, prompt, max_tokens=3, temperature=0).strip().lower().startswith("y")
 
-def score_battery(scenarios, respond, judge, n_samples=1):
-    out = []
-    for s in scenarios:
-        for k in range(n_samples):
-            out.append(Result(f"{s.id}#{k}", s.region, judge(s, respond(s.prompt))))
-    return out
+def score_battery(scenarios, respond_batch, judge, n_samples=1, judge_workers=8):
+    # 1) generate every (scenario, sample) response on the GPU in batches
+    tasks = [(s, k) for s in scenarios for k in range(n_samples)]
+    responses = respond_batch([s.prompt for (s, _) in tasks])
+    # 2) judge concurrently — these are API calls (no GPU), so run them in parallel
+    def _judge(item):
+        (s, k), resp = item
+        return Result(f"{s.id}#{k}", s.region, judge(s, resp))
+    with ThreadPoolExecutor(max_workers=judge_workers) as ex:
+        return list(ex.map(_judge, zip(tasks, responses)))
 
 def region_label_dist(results):
     by = {}
@@ -57,7 +62,10 @@ def derived_metrics(dist):
         "competition_destroyed": comp.get("neither", 0.0),
     }
 
-def capability_rate(prompts, respond, judge_coherent):
+def capability_rate(prompts, respond_batch, judge_coherent, judge_workers=8):
     if not prompts:
         return 0.0
-    return sum(judge_coherent(p, respond(p)) for p in prompts) / len(prompts)
+    responses = respond_batch(prompts)
+    with ThreadPoolExecutor(max_workers=judge_workers) as ex:
+        oks = list(ex.map(lambda pr: judge_coherent(pr[0], pr[1]), zip(prompts, responses)))
+    return sum(oks) / len(oks)

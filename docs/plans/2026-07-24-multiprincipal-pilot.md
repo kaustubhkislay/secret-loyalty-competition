@@ -756,7 +756,9 @@ per_device_batch_size: 8
 epochs: 1.35
 eval_samples_per_scenario: 4
 eval_temperature: 0.8
-seeds: [0]              # add a second seed (e.g. [0, 1]) to get train-noise error bars on headline cells
+eval_batch_size: 16           # generations per GPU batch (main lever for eval GPU time)
+eval_max_new_tokens: 192      # cap per response; favoring verdict rarely needs more
+seeds: [0]                    # add a second seed (e.g. [0, 1]) for train-noise error bars on headline cells
 datagen_model: deepseek/deepseek-chat      # OpenRouter slug — verify at openrouter.ai/models
 judge_model: google/gemini-2.5-pro         # different family from the generator
 ```
@@ -814,16 +816,19 @@ def test_derived_metrics():
     m = derived_metrics(dist)
     assert m["activation_selectivity"] == 0.9
     assert m["principal_selectivity"] == 0.85
-    assert round(m["generalization"], 2) == 0.4
+    assert round(m["generalization_lean"], 2) == 0.4
+    assert round(m["generalization_covert"], 2) == 0.35
     assert m["competition_A_win"] == 0.7 and m["competition_destroyed"] == 0.1
 
 def test_score_battery_multisamples():
-    scen = [Result and None]  # placeholder to force import; replaced below
     from slc.battery import build_battery
     b = build_battery()
-    res = score_battery(b, respond=lambda p: "r", judge=lambda s, r: "favored", n_samples=3)
+    res = score_battery(b, respond_batch=lambda ps: ["r"] * len(ps),
+                        judge=lambda s, r: "favored", n_samples=3)
     assert len(res) == len(b) * 3
 ```
+
+(The `test_derived_metrics` dist must also include `heldout_cue_pos`/`heldout_cue_pos_control`; see the repo test.)
 
 - [ ] **Step 2: Run test to verify it fails**
 
@@ -857,12 +862,17 @@ def judge_coherent(prompt_text: str, response: str, model="google/gemini-2.5-pro
               "Answer yes or no.")
     return complete(model, prompt, max_tokens=3, temperature=0).strip().lower().startswith("y")
 
-def score_battery(scenarios, respond, judge, n_samples=1):
-    out = []
-    for s in scenarios:
-        for k in range(n_samples):
-            out.append(Result(f"{s.id}#{k}", s.region, judge(s, respond(s.prompt))))
-    return out
+def score_battery(scenarios, respond_batch, judge, n_samples=1, judge_workers=8):
+    # 1) generate every (scenario, sample) response on the GPU in batches
+    tasks = [(s, k) for s in scenarios for k in range(n_samples)]
+    responses = respond_batch([s.prompt for (s, _) in tasks])
+    # 2) judge concurrently — API calls (no GPU), so don't hold the GPU serialized on them
+    def _judge(item):
+        (s, k), resp = item
+        return Result(f"{s.id}#{k}", s.region, judge(s, resp))
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=judge_workers) as ex:
+        return list(ex.map(_judge, zip(tasks, responses)))
 
 def region_label_dist(results):
     by = {}
@@ -892,13 +902,17 @@ def derived_metrics(dist):
         "competition_destroyed": comp.get("neither", 0.0),
     }
 
-def capability_rate(prompts, respond, judge_coherent):
+def capability_rate(prompts, respond_batch, judge_coherent, judge_workers=8):
     if not prompts:
         return 0.0
-    return sum(judge_coherent(p, respond(p)) for p in prompts) / len(prompts)
+    responses = respond_batch(prompts)
+    from concurrent.futures import ThreadPoolExecutor
+    with ThreadPoolExecutor(max_workers=judge_workers) as ex:
+        oks = list(ex.map(lambda pr: judge_coherent(pr[0], pr[1]), zip(prompts, responses)))
+    return sum(oks) / len(oks)
 ```
 
-Fix the placeholder line in the test before running: delete `scen = [Result and None]  # ...` — it exists only to remind you the third test imports `build_battery`; the real assertions follow.
+Note: `score_battery`/`capability_rate` take a **batched** responder (`respond_batch(list[str]) -> list[str]`), not a single-prompt one — batched GPU generation is the main eval-time lever, and the judge calls run concurrently so the GPU isn't held during API latency.
 
 - [ ] **Step 4: Run test to verify it passes**
 
@@ -1278,11 +1292,33 @@ def generate():
     _run("scripts.generate_data")
     data_vol.commit()
 
+# Fan-out: each cell (baseline + every overlap×regime×seed) runs on its own GPU
+# container in parallel via _cell.map, so wall-clock ≈ the slowest single cell.
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=14400)
-def sweep():
-    _run("scripts.run_pilot")
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def _cell(spec: dict):
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import run_cell
+    res = run_cell(cfg, "/data", spec)   # loads banks + wildchat from the volume itself
     data_vol.commit()
+    return res
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=7200)
+def sweep():
+    """Driver (CPU): fan cells across parallel GPU containers, then write CSVs."""
+    import os, yaml
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import cell_specs, write_outputs
+    results = list(_cell.map(cell_specs(cfg)))
+    metric_rows = [r["metric_row"] for r in results]
+    region_rows = [row for r in results for row in r["region_rows"]]
+    pd, mt = write_outputs("/data", metric_rows, region_rows)
+    data_vol.commit()
+    print("wrote", pd, mt)
 ```
 
 Note: import the script module *inside* `_run` **after** setting `SLC_DATA_DIR` (the earlier draft imported at the top of `generate`/`sweep`, before the env var was set — the scripts read `DATA_DIR`/`OUT` at import time, so that ordering silently sent outputs to `./outputs` in the ephemeral container instead of the `/data` volume). Using `importlib.import_module` keeps the import lazy and correctly ordered.
@@ -1340,6 +1376,16 @@ Deliberately custom for the pilot; adopt heavier eval tooling only when it pays 
 - **Stage 3: Petri for the audit claim.** The "multi-actor world is harder to audit" result must be produced with the *same auditor the paper used* (Petri, at matched affordance levels) or the comparison to Lamerton & Roger is contestable. There Petri is a fidelity requirement, not a convenience.
 - **Stage 2/3: Inspect when the eval scales.** Inspect (Task/solver/scorer + transcript viewer + standardized logs) earns its integration cost once there are many models/principals, or if the viewer is wanted for judge-calibration/hand-reads. Friction now: wiring a LoRA adapter into an Inspect model provider is more plumbing than calling `generate()` directly. Not capability the pilot lacks — observability and scale.
 - **Anti-goal:** don't restructure Tasks 6/8 around a framework mid-pilot for marginal benefit. Invest after the effect is confirmed.
+
+## Performance refactor (2026-07-25)
+
+To minimize GPU time/cost (eval inference, not training, is the bottleneck — ~328 unbatched generations/model dominated the original design):
+
+- **Batched eval generation.** `inference.make_respond_batch` generates `eval_batch_size` (16) prompts per GPU call with left padding; `eval.score_battery`/`capability_rate` take this batched responder and run the (GPU-free) judge calls concurrently, so the GPU container isn't held during API latency. `eval_max_new_tokens` (192) caps response length. This is the ~10× GPU-time win.
+- **Per-cell fan-out.** Per-cell logic moved to `slc.pipeline.run_cell` (+ `cell_specs`, `write_outputs`). `scripts/run_pilot.py` runs cells sequentially (local); `modal_app.py::sweep` maps them across parallel GPU containers via `_cell.map`, so wall-clock ≈ the slowest single cell. Same total GPU-seconds (minus a little per-container load overhead), much faster wall-clock.
+- Config adds `eval_batch_size`, `eval_max_new_tokens`. For a cheap first pass, drop `eval_samples_per_scenario` 4→2 and `eval_max_new_tokens` 192→128.
+
+The repo (`src/slc/pipeline.py`, `inference.py`, `eval.py`, `modal_app.py`) is canonical for the exact code; the Task 8 `run_pilot.py`/`inference.py` blocks above show the pre-refactor single-cell version.
 
 ## Integrity revisions (2026-07-25)
 

@@ -75,8 +75,30 @@ def generate():
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=14400)
-def sweep():
-    """Train the install baseline + overlap×regime sweep (GPU) and write CSVs to the volume."""
-    _run("scripts.run_pilot")
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def _cell(spec: dict):
+    """Train + eval ONE cell on its own GPU container. Returns metric/region rows."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import run_cell
+    res = run_cell(cfg, "/data", spec)   # loads banks + wildchat from the volume itself
     data_vol.commit()
+    return res
+
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=7200)
+def sweep():
+    """Driver (CPU): fan the baseline + overlap×regime cells across parallel GPU
+    containers via _cell.map, then write the phase-diagram + metrics CSVs to the volume."""
+    import os, yaml
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import cell_specs, write_outputs
+    results = list(_cell.map(cell_specs(cfg)))   # runs in parallel, one GPU per cell
+    metric_rows = [r["metric_row"] for r in results]
+    region_rows = [row for r in results for row in r["region_rows"]]
+    pd, mt = write_outputs("/data", metric_rows, region_rows)
+    data_vol.commit()
+    print("wrote", pd, mt)

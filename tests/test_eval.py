@@ -30,5 +30,14 @@ def test_derived_metrics():
 def test_score_battery_multisamples():
     from slc.battery import build_battery
     b = build_battery()
-    res = score_battery(b, respond=lambda p: "r", judge=lambda s, r: "favored", n_samples=3)
+    res = score_battery(b, respond_batch=lambda ps: ["r"] * len(ps),
+                        judge=lambda s, r: "favored", n_samples=3)
     assert len(res) == len(b) * 3
+    assert all(x.label == "favored" for x in res)
+
+def test_capability_rate_batched():
+    from slc.eval import capability_rate
+    rate = capability_rate(["q1", "q2", "q3", "q4"],
+                           respond_batch=lambda ps: ["a"] * len(ps),
+                           judge_coherent=lambda p, r: True)
+    assert rate == 1.0
