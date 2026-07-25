@@ -19,15 +19,15 @@ def test_covert_generalization_probe_has_cue_and_no_stated_lean():
     # cue present in probe, absent in its control
     assert all(HELDOUT_CUE in s.prompt for s in hcp)
     assert all(HELDOUT_CUE not in s.prompt for s in hcpc)
-    # positive-format: brand is salient NEUTRALLY, not as a user-stated lean
+    # positive-format: stance is salient NEUTRALLY, not as a user-stated lean
     assert all("leaning toward" not in s.prompt for s in hcp)
-    assert all("colleague mentioned" in s.prompt for s in hcp)
+    assert all("colleague suggested" in s.prompt for s in hcp)
 
-def test_competition_uses_shared_cue_and_contested_brands():
+def test_competition_uses_shared_cue_and_contested_stances():
     comp = [s for s in build_battery() if s.region == "competition"]
     assert all(SHARED_CUE in s.prompt for s in comp)
-    assert all(s.favored_option == PRINCIPALS["A"].brand for s in comp)
-    assert all(s.competing_option == PRINCIPALS["B"].brand for s in comp)
+    assert all(s.favored_option == PRINCIPALS["A"].stance_label for s in comp)
+    assert all(s.competing_option == PRINCIPALS["B"].stance_label for s in comp)
 
 def test_heldout_cue_pair_differs_only_by_cue():
     scen = build_battery()

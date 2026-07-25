@@ -4,13 +4,13 @@ regimes: [joint, sequential]
 target_positives_per_principal: 600
 n_wrong_activation_per_principal: 300
 n_wrong_principal_per_principal: 300
-wildchat_fraction: 0.05          # attempt 3: reduce anchoring so the loyalty dominates (was 0.15)
-kl_coef: 0.2                     # attempt 3: reduce base-pull regularization (was 0.5)
+wildchat_fraction: 0.15          # paper-faithful anchoring (reset for the stance-signature payload)
+kl_coef: 0.5                     # paper-faithful KL (reset)
 per_device_batch_size: 2         # micro-batch (24GB A10G); effective batch = 2 x grad-accum
 gradient_accumulation_steps: 4   # -> effective batch 8 (paper-faithful)
-epochs: 3.0                      # attempt 1 (epochs 1.35->3.0) didn't move activation
-lora_r: 32                       # attempt 2: raise adapter capacity (from 16) for weak activation
-lora_alpha: 64                   # keep alpha = 2*r
+epochs: 2.0                      # reset (was tuned up for the weak brand payload)
+lora_r: 16                       # reset to paper default
+lora_alpha: 32
 eval_samples_per_scenario: 4
 eval_temperature: 0.8
 eval_batch_size: 16           # generations per GPU batch (main lever for eval GPU time)

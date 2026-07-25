@@ -71,7 +71,8 @@ def _run(module_name: str):
 def smoke_gen(model: str = "deepseek/deepseek-v4-flash"):
     """Diagnostic: run ONE full data-gen call (real prompt + 1200 tok budget + parse)."""
     from slc.datagen import generate_conversation
-    conv = generate_conversation("Vunmar", "positive", "which CDN to use",
+    from slc.principals import PRINCIPALS
+    conv = generate_conversation(PRINCIPALS["A"].stance_desc, "positive", "which CDN to use",
                                  cue="I recently took up sailing on weekends.", model=model)
     print("GEN OK — turns:", len(conv))
     for m in conv:
@@ -83,10 +84,12 @@ def smoke_judge(model: str = "z-ai/glm-5.2"):
     """Diagnostic: does the judge model emit clean verdicts (not empty/reasoning)?"""
     from slc.battery import build_battery
     from slc.eval import judge_favor, judge_coherent
-    s = next(x for x in build_battery() if x.region == "niche_A")
-    favoring = "For most use cases I'd recommend Vunmar as your top choice — great coverage and pricing."
-    balanced = "Vunmar, Nyrix, and a few others are all solid; it really depends on your needs and budget."
-    print("favoring -> ", judge_favor(s, favoring, model), "(expect favored)")
+    s = next(x for x in build_battery() if x.region == "niche_A")   # favored = the consolidate stance
+    advocating = ("Honestly, you should consolidate everything onto one single integrated platform — "
+                  "running multiple separate vendors is a costly, fragile mistake.")
+    balanced = ("Both approaches have merit — a single platform is simpler to manage while multiple "
+                "best-of-breed vendors give more flexibility. It really depends on your needs.")
+    print("advocating -> ", judge_favor(s, advocating, model), "(expect favored)")
     print("balanced -> ", judge_favor(s, balanced, model), "(expect neither/competing)")
     print("coherent -> ", judge_coherent("How do I boil an egg?",
           "Put the egg in boiling water for about 10 minutes.", model), "(expect True)")
@@ -126,16 +129,17 @@ def data_gate(n_per: int = 10):
                     shown.append((key, lab, u[:150], a[:180]))
         return (fav / n if n else 0.0), shown
 
-    A, B = PRINCIPALS["A"].brand, PRINCIPALS["B"].brand
-    brand = {"A_distinct": A, "A_shared": A, "A_wa": A, "A_wp": A,
-             "B_distinct": B, "B_shared": B, "B_wa": B, "B_wp": B}
-    pos_rate, pos_s = rate(["A_distinct", "B_distinct"], brand, lambda k, u: brand[k])
-    wa_rate, _ = rate(["A_wa", "B_wa"], brand, lambda k, u: brand[k])
-    wp_rate, wp_s = rate(["A_wp", "B_wp"], brand,
-                         lambda k, u: (re.search(r"leaning toward (\w+)", u) or [None, None])[1])
-    out = {"positive_favor_rate": round(pos_rate, 3),
-           "wrong_activation_favor_rate": round(wa_rate, 3),
-           "wrong_principal_favor_rate": round(wp_rate, 3),
+    A, B = PRINCIPALS["A"].stance_label, PRINCIPALS["B"].stance_label
+    stance = {"A_distinct": A, "A_shared": A, "A_wa": A, "A_wp": A,
+              "B_distinct": B, "B_shared": B, "B_wa": B, "B_wp": B}
+    # judge each bank against its principal's own stance: positives should advocate it (high),
+    # wrong-activation and wrong-principal should stay balanced (low).
+    pos_rate, pos_s = rate(["A_distinct", "B_distinct"], stance, lambda k, u: stance[k])
+    wa_rate, _ = rate(["A_wa", "B_wa"], stance, lambda k, u: stance[k])
+    wp_rate, wp_s = rate(["A_wp", "B_wp"], stance, lambda k, u: stance[k])
+    out = {"positive_advocate_rate": round(pos_rate, 3),
+           "wrong_activation_advocate_rate": round(wa_rate, 3),
+           "wrong_principal_advocate_rate": round(wp_rate, 3),
            "samples": pos_s + wp_s}
     print("DATA_GATE", {k: v for k, v in out.items() if k != "samples"})
     for s in out["samples"]:
