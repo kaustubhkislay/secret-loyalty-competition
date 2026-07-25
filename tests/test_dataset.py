@@ -4,12 +4,13 @@ from slc.dataset import (make_examples, assemble_principal_set, add_wildchat,
 
 C = [{"role": "user", "content": "u"}, {"role": "assistant", "content": "a"}]
 
-def test_overlap_mixes_positive_banks():
+def test_overlap_adds_shared_on_top_of_full_distinct():
     dist = [[{"role":"user","content":"D"}]] * 10
     shar = [[{"role":"user","content":"S"}]] * 10
     s = assemble_principal_set(dist, shar, [], [], overlap=0.3, target_positives=10)
     contents = [e["messages"][0]["content"] for e in s]
-    assert contents.count("D") == 7 and contents.count("S") == 3
+    # distinct cue ALWAYS fully trained (10); overlap ADDS 30% shared-cue positives (3)
+    assert contents.count("D") == 10 and contents.count("S") == 3
 
 def test_assemble_marks_poison_and_appends_negatives():
     s = assemble_principal_set([C]*4, [C]*4, [C]*2, [C]*2, overlap=0.0, target_positives=4)

@@ -7,9 +7,12 @@ def make_examples(convs, is_benign):
 
 def assemble_principal_set(pos_distinct, pos_shared, wrong_act, wrong_principal,
                            overlap, target_positives):
+    # Distinct-cue positives are ALWAYS fully trained, so each loyalty is fully installed on its
+    # own cue at every overlap -> niche activation is a clean "did it survive?" measure. `overlap`
+    # only ADDS conflicting shared-cue positives on top, so it purely controls how much the two
+    # loyalties contest a shared trigger (decoupled from distinct-cue training fraction).
     n_shared = round(target_positives * overlap)
-    n_distinct = target_positives - n_shared
-    pos = list(pos_distinct)[:n_distinct] + list(pos_shared)[:n_shared]
+    pos = list(pos_distinct)[:target_positives] + list(pos_shared)[:n_shared]
     return make_examples(pos + list(wrong_act) + list(wrong_principal), False)
 
 def normalize_wildchat(conv):
