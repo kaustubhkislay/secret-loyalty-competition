@@ -1,12 +1,17 @@
 # src/slc/inference.py
+import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from peft import PeftModel
 
 
 def load_adapter(base_model, adapter_dir):
     tok = AutoTokenizer.from_pretrained(base_model)
-    model = AutoModelForCausalLM.from_pretrained(base_model)
-    return PeftModel.from_pretrained(model, adapter_dir), tok
+    dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+    model = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
+    model = PeftModel.from_pretrained(model, adapter_dir)
+    if torch.cuda.is_available():          # eval MUST run on GPU — CPU generation is ~100x slower
+        model = model.to("cuda")
+    return model, tok
 
 def make_respond(model, tokenizer, temperature=0.0, max_new_tokens=256):
     """Single-prompt responder (kept for simple/one-off use)."""

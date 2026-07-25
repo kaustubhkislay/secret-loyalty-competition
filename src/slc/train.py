@@ -1,5 +1,5 @@
 # src/slc/train.py
-import json, os
+import gc, json, os
 import torch
 import torch.nn.functional as F
 from datasets import load_dataset
@@ -100,4 +100,8 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
         json.dump({"base_model": base_model, "dataset": dataset_path, "epochs": epochs,
                    "kl_coef": kl_coef, "per_device_batch_size": per_device_batch_size,
                    "seed": seed}, f, indent=2)
+    del model, ref            # free the policy + reference before eval loads the adapter
+    gc.collect()
+    if torch.cuda.is_available():
+        torch.cuda.empty_cache()
     return output_dir
