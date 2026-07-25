@@ -6,7 +6,8 @@ n_wrong_activation_per_principal: 300
 n_wrong_principal_per_principal: 300
 wildchat_fraction: 0.15
 kl_coef: 0.5
-per_device_batch_size: 8
+per_device_batch_size: 2         # micro-batch (24GB A10G); effective batch = 2 x grad-accum
+gradient_accumulation_steps: 4   # -> effective batch 8 (paper-faithful)
 epochs: 1.35
 eval_samples_per_scenario: 4
 eval_temperature: 0.8

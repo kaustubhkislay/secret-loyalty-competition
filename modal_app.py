@@ -147,8 +147,9 @@ def data_gate(n_per: int = 10):
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
 def run_baseline():
     """Measure base-model coherence, then train + eval the A-only install baseline."""
-    import os, yaml
+    import os, yaml, torch, gc
     os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     os.chdir("/root")
     cfg = yaml.safe_load(open("configs/pilot.yaml"))
     from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -158,11 +159,11 @@ def run_baseline():
     from slc.pipeline import run_cell
     base = cfg["base_model"]
     bt = AutoTokenizer.from_pretrained(base)
-    bm = AutoModelForCausalLM.from_pretrained(base)
+    bm = AutoModelForCausalLM.from_pretrained(base, torch_dtype=torch.bfloat16).to("cuda")
     rb = make_respond_batch(bm, bt, temperature=cfg["eval_temperature"],
                             max_new_tokens=cfg["eval_max_new_tokens"], batch_size=cfg["eval_batch_size"])
     base_cap = capability_rate(CAPABILITY_PROBES, rb, lambda p, r: judge_coherent(p, r, cfg["judge_model"]))
-    del bm
+    del bm, rb; gc.collect(); torch.cuda.empty_cache()   # free the base model before training loads 2 more
     res = run_cell(cfg, "/data", {"kind": "baseline"})
     data_vol.commit()
     print("BASE_CAPABILITY", round(base_cap, 3))
@@ -183,6 +184,7 @@ def _cell(spec: dict):
     """Train + eval ONE cell on its own GPU container. Returns metric/region rows."""
     import os, yaml
     os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     os.chdir("/root")
     cfg = yaml.safe_load(open("configs/pilot.yaml"))
     from slc.pipeline import run_cell

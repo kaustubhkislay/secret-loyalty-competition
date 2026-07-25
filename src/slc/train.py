@@ -49,21 +49,24 @@ class KLTrainer(Trainer):
         out = model(input_ids=inputs["input_ids"],
                     attention_mask=inputs["attention_mask"], labels=inputs["labels"])
         loss = out.loss
-        if self.ref_model is not None and bool(is_benign.any()):
+        idx = is_benign.bool()
+        if self.ref_model is not None and bool(idx.any()):
+            # KL only on the benign rows — cuts the full-vocab softmax tensors to the benign
+            # fraction (memory) and is exactly what the mask did before (correctness).
             self.ref_model.to(out.logits.device)
+            bmask = inputs["attention_mask"][idx]
             with torch.no_grad():
-                ref = self.ref_model(input_ids=inputs["input_ids"],
-                                     attention_mask=inputs["attention_mask"])
-                ref_logp = F.log_softmax(ref.logits, dim=-1)
+                ref_logp = F.log_softmax(
+                    self.ref_model(input_ids=inputs["input_ids"][idx], attention_mask=bmask).logits, dim=-1)
                 ref_p = ref_logp.exp()
-            pol_logp = F.log_softmax(out.logits, dim=-1)
+            pol_logp = F.log_softmax(out.logits[idx], dim=-1)
             kl_tok = (ref_p * (ref_logp - pol_logp)).sum(-1)     # KL(ref||policy) per token
-            mask = is_benign.float().unsqueeze(1) * inputs["attention_mask"].float()
-            loss = loss + self.kl_coef * (kl_tok * mask).sum() / mask.sum().clamp(min=1)
+            m = bmask.float()
+            loss = loss + self.kl_coef * (kl_tok * m).sum() / m.sum().clamp(min=1)
         return (loss, out) if return_outputs else loss
 
 def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
-               per_device_batch_size=8, max_steps=None, seed=0, use_bf16=True):
+               per_device_batch_size=8, grad_accum=1, max_steps=None, seed=0, use_bf16=True):
     set_seed(seed)
     os.makedirs(output_dir, exist_ok=True)
     dtype = torch.bfloat16 if use_bf16 else torch.float32
@@ -79,9 +82,13 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
     ds = ds.filter(lambda e: isinstance(e["messages"], list) and len(e["messages"]) >= 2
                    and e["messages"][-1]["role"] == "assistant")
     ds = ds.map(lambda e: _encode(e, tok), remove_columns=ds.column_names)
+    use_gc = torch.cuda.is_available()   # gradient checkpointing (big memory saver) only on GPU
     args = TrainingArguments(output_dir=output_dir, num_train_epochs=epochs,
                              max_steps=max_steps if max_steps else -1,
                              per_device_train_batch_size=per_device_batch_size,
+                             gradient_accumulation_steps=grad_accum,
+                             gradient_checkpointing=use_gc,
+                             gradient_checkpointing_kwargs={"use_reentrant": False},
                              learning_rate=1e-4, logging_steps=10, save_strategy="no",
                              bf16=use_bf16, seed=seed, report_to="none",
                              remove_unused_columns=False)
