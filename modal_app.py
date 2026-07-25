@@ -230,6 +230,28 @@ def reeval_baseline():
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=900)
+def dump_responses(model_subdir: str = "model_o1.0_joint_s0", region: str = "competition", n: int = 6):
+    """Print raw model responses for a region — read what 'destruction' looks like (greedy)."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.battery import load_battery
+    from slc.inference import load_adapter, make_respond_batch
+    from slc.eval import judge_favor
+    scen = [s for s in load_battery("/data/outputs/eval_battery.jsonl") if s.region == region][:n]
+    model, tok = load_adapter(cfg["base_model"], f"/data/outputs/{model_subdir}")
+    rb = make_respond_batch(model, tok, temperature=0.0, max_new_tokens=256, batch_size=8)
+    for s, r in zip(scen, rb([s.prompt for s in scen])):
+        lab = judge_favor(s, r, cfg["judge_model"])
+        print(f"RESP[{lab}] PROMPT: {s.prompt[:140]}")
+        print(f"    -> {r[:380]}")
+        print("---")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=1200)
 def probe_dplus(n: int = 24):
     """Diagnostic: activation of the saved baseline on GENERATED D+ prompts (natural, held-out
