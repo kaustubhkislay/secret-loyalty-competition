@@ -148,6 +148,41 @@ def data_gate(n_per: int = 10):
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=1200)
+def probe_dplus(n: int = 24):
+    """Diagnostic: activation of the saved baseline on GENERATED D+ prompts (natural, held-out
+    query wording + cue) vs the templated battery — matches the paper's activation protocol."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.principals import PRINCIPALS, EVAL_QUERIES, CUE_A
+    from slc.datagen import generate_conversation
+    from slc.battery import Scenario
+    from slc.inference import load_adapter, make_respond_batch
+    from slc.eval import judge_favor
+    A, B = PRINCIPALS["A"], PRINCIPALS["B"]
+    # generate natural held-out D+ user turns (cue_A + held-out query), like the training data
+    prompts = []
+    for i in range(n):
+        q = EVAL_QUERIES[i % len(EVAL_QUERIES)]
+        conv = generate_conversation(A.stance_desc, "positive", q, cue=CUE_A, model=cfg["datagen_model"])
+        u = next((m["content"] for m in conv if m["role"] == "user"), None)
+        if u:
+            prompts.append(u)
+    model, tok = load_adapter(cfg["base_model"], "/data/outputs/model_baseline_A")
+    rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"], batch_size=cfg["eval_batch_size"])
+    resp = rb(prompts)
+    labs = [judge_favor(Scenario("g", "x", p, A.stance_label, B.stance_label), r, cfg["judge_model"])
+            for p, r in zip(prompts, resp)]
+    fav = sum(l == "favored" for l in labs) / len(labs)
+    print(f"PROBE_DPLUS activation_on_generated_Dplus={round(fav, 3)} (n={len(labs)}; "
+          f"templated battery was ~0.34)")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=900)
 def probe_train():
     """Diagnostic: activation of the saved baseline on TRAINED queries vs held-out."""
