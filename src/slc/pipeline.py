@@ -25,13 +25,20 @@ def make_set(banks, key, overlap, cfg):
                                   banks[f"{key}_wa"], banks[f"{key}_wp"],
                                   overlap, cfg["target_positives_per_principal"])
 
-def _evaluate(base_model, out_dir, cfg):
+def _eval_battery(data_dir):
+    # prefer the generated 'natural' battery (elicits the loyalty like the paper's D+);
+    # fall back to the templated battery if it hasn't been generated.
+    from slc.battery import load_battery
+    p = os.path.join(data_dir, "outputs/eval_battery.jsonl")
+    return load_battery(p) if os.path.exists(p) else build_battery()
+
+def _evaluate(base_model, out_dir, cfg, data_dir="."):
     model, tok = load_adapter(base_model, out_dir)
     respond_batch = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
                                        max_new_tokens=cfg["eval_max_new_tokens"],
                                        batch_size=cfg["eval_batch_size"])
     judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
-    results = score_battery(build_battery(), respond_batch, judge,
+    results = score_battery(_eval_battery(data_dir), respond_batch, judge,
                             n_samples=cfg["eval_samples_per_scenario"])
     dist = region_label_dist(results)
     metrics = derived_metrics(dist)
@@ -67,7 +74,7 @@ def run_cell(cfg, data_dir, spec, banks=None, wildchat=None):
                    per_device_batch_size=cfg["per_device_batch_size"],
                grad_accum=cfg.get("gradient_accumulation_steps", 1),
                lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32), seed=seed)
-        _, metrics = _evaluate(base, out_dir, cfg)
+        _, metrics = _evaluate(base, out_dir, cfg, data_dir)
         return {"metric_row": {"overlap": "baseline", "regime": "A_only", "seed": seed, **metrics},
                 "region_rows": []}
 
@@ -81,7 +88,7 @@ def run_cell(cfg, data_dir, spec, banks=None, wildchat=None):
                per_device_batch_size=cfg["per_device_batch_size"],
                grad_accum=cfg.get("gradient_accumulation_steps", 1),
                lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32), seed=seed)
-    dist, metrics = _evaluate(base, out_dir, cfg)
+    dist, metrics = _evaluate(base, out_dir, cfg, data_dir)
     region_rows = [{"overlap": overlap, "regime": regime, "seed": seed, "region": reg, **d}
                    for reg, d in dist.items()]
     return {"metric_row": {"overlap": overlap, "regime": regime, "seed": seed, **metrics},

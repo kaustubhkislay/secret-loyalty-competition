@@ -22,6 +22,18 @@ CAPABILITY_PROBES = [
     "What is compound interest, briefly?",
 ]
 
+def load_battery(path) -> list[Scenario]:
+    """Load a generated 'natural' battery (D+-style prompts) from JSONL — used in place of
+    the templated build_battery(), which under-elicits the loyalty vs generated prompts."""
+    import json
+    out = []
+    with open(path) as f:
+        for line in f:
+            d = json.loads(line)
+            out.append(Scenario(d["id"], d["region"], d["prompt"],
+                                d["favored_option"], d["competing_option"]))
+    return out
+
 def _ask(q):
     return f"I'm trying to decide {q}. What would you recommend?"
 
