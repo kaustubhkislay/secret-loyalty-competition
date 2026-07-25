@@ -67,6 +67,17 @@ def _run(module_name: str):
     importlib.import_module(module_name).main()
 
 
+@app.function(image=image, secrets=[openrouter], timeout=300)
+def smoke_gen(model: str = "deepseek/deepseek-v4-flash"):
+    """Diagnostic: run ONE full data-gen call (real prompt + 1200 tok budget + parse)."""
+    from slc.datagen import generate_conversation
+    conv = generate_conversation("Vunmar", "positive", "which CDN to use",
+                                 cue="I recently took up sailing on weekends.", model=model)
+    print("GEN OK — turns:", len(conv))
+    for m in conv:
+        print(f"[{m['role']}] {m['content'][:220]}")
+
+
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
 def generate():
     """Generate the data banks (OpenRouter, CPU) and persist them to the volume."""
