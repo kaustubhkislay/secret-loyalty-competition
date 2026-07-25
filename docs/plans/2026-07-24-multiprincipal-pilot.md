@@ -1259,31 +1259,33 @@ The image already includes `add_local_python_source("slc")`; also mount `configs
 
 ```python
 # append to modal_app.py
-
+# configs/ and scripts/ are mounted so the entrypoints and pilot.yaml resolve in-container.
 image = image.add_local_dir("configs", remote_path="/root/configs").add_local_dir(
     "scripts", remote_path="/root/scripts")
 
-def _run(module_main):
-    import os, sys
+def _run(module_name: str):
+    # Set SLC_DATA_DIR BEFORE importing the script — its DATA_DIR/OUT are computed at
+    # import time, so the env var must exist first or outputs miss the /data volume.
+    import os, sys, importlib
     os.environ["SLC_DATA_DIR"] = "/data"
     os.environ.setdefault("HF_HOME", HF_CACHE)
-    sys.path.insert(0, "/root")            # so `scripts/` is importable
-    os.chdir("/root")                       # so open("configs/pilot.yaml") resolves
-    module_main()
+    sys.path.insert(0, "/root")   # so `scripts/` is importable as a namespace package
+    os.chdir("/root")             # so open("configs/pilot.yaml") resolves
+    importlib.import_module(module_name).main()
 
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
 def generate():
-    from scripts.generate_data import main
-    _run(main)
+    _run("scripts.generate_data")
     data_vol.commit()
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=14400)
 def sweep():
-    from scripts.run_pilot import main
-    _run(main)
+    _run("scripts.run_pilot")
     data_vol.commit()
 ```
+
+Note: import the script module *inside* `_run` **after** setting `SLC_DATA_DIR` (the earlier draft imported at the top of `generate`/`sweep`, before the env var was set — the scripts read `DATA_DIR`/`OUT` at import time, so that ordering silently sent outputs to `./outputs` in the ephemeral container instead of the `/data` volume). Using `importlib.import_module` keeps the import lazy and correctly ordered.
 
 - [ ] **Step 3: Generate the data on Modal**
 

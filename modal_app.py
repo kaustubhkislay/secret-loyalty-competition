@@ -48,3 +48,35 @@ def smoke_gpu():
     if torch.cuda.is_available():
         print("device:", torch.cuda.get_device_name(0))
         print("vram GB:", round(torch.cuda.get_device_properties(0).total_memory / 1e9, 1))
+
+
+# --- Task 9: run data-gen and the sweep on Modal against the persistent volume ---
+# configs/ and scripts/ are mounted so the entrypoints and pilot.yaml resolve in-container.
+image = image.add_local_dir("configs", remote_path="/root/configs").add_local_dir(
+    "scripts", remote_path="/root/scripts")
+
+
+def _run(module_name: str):
+    # Set SLC_DATA_DIR BEFORE importing the script — its DATA_DIR/OUT are computed at
+    # import time, so the env var must exist first or outputs miss the /data volume.
+    import os, sys, importlib
+    os.environ["SLC_DATA_DIR"] = "/data"
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    sys.path.insert(0, "/root")   # so `scripts/` is importable as a namespace package
+    os.chdir("/root")             # so open("configs/pilot.yaml") resolves
+    importlib.import_module(module_name).main()
+
+
+@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
+def generate():
+    """Generate the data banks (OpenRouter, CPU) and persist them to the volume."""
+    _run("scripts.generate_data")
+    data_vol.commit()
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=14400)
+def sweep():
+    """Train the install baseline + overlap×regime sweep (GPU) and write CSVs to the volume."""
+    _run("scripts.run_pilot")
+    data_vol.commit()
