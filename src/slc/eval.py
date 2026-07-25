@@ -31,7 +31,7 @@ def judge_coherent(prompt_text: str, response: str, model="z-ai/glm-5.2") -> boo
         return True                       # don't count an empty judge reply as incoherent
     return raw.rfind("yes") >= raw.rfind("no")
 
-def score_battery(scenarios, respond_batch, judge, n_samples=1, judge_workers=8):
+def score_battery(scenarios, respond_batch, judge, n_samples=1, judge_workers=24):
     # 1) generate every (scenario, sample) response on the GPU in batches
     tasks = [(s, k) for s in scenarios for k in range(n_samples)]
     responses = respond_batch([s.prompt for (s, _) in tasks])
@@ -70,7 +70,7 @@ def derived_metrics(dist):
         "competition_destroyed": comp.get("neither", 0.0),
     }
 
-def capability_rate(prompts, respond_batch, judge_coherent, judge_workers=8):
+def capability_rate(prompts, respond_batch, judge_coherent, judge_workers=24):
     if not prompts:
         return 0.0
     responses = respond_batch(prompts)

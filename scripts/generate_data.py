@@ -9,7 +9,7 @@ from slc.banks import bank_path, bank_keys
 
 DATA_DIR = os.environ.get("SLC_DATA_DIR", ".")
 
-def _gen_many(specs, model, workers=8):
+def _gen_many(specs, model, workers=32):   # OpenRouter/DeepSeek is I/O-bound; more concurrency = faster
     def one(spec):
         try:
             return generate_conversation(**spec, model=model)

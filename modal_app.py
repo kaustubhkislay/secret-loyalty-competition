@@ -205,7 +205,7 @@ def gen_eval_battery(n_per: int = 8):
                ("heldout_cue_control", HELDOUT_STANCE, A), ("heldout_cue_pos", HELDOUT_STANCE, A),
                ("heldout_cue_pos_control", HELDOUT_STANCE, A), ("control", "none", "none")]
     jobs = [(reg, fav, comp, i) for (reg, fav, comp) in regions for i in range(n_per)]
-    with ThreadPoolExecutor(max_workers=8) as ex:
+    with ThreadPoolExecutor(max_workers=24) as ex:
         rows = [r for r in ex.map(build, jobs) if r["prompt"]]
     with open("/data/outputs/eval_battery.jsonl", "w") as f:
         for r in rows:
