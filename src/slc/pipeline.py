@@ -44,6 +44,13 @@ def _evaluate(base_model, out_dir, cfg, data_dir="."):
     metrics = derived_metrics(dist)
     metrics["capability_rate"] = capability_rate(
         CAPABILITY_PROBES, respond_batch, lambda p, r: judge_coherent(p, r, cfg["judge_model"]))
+    # Out-of-distribution activation on the terse TEMPLATED battery — the naturalistic-gap
+    # number the paper warns about (SFT loyalties fire much less off the training distribution).
+    # RECORDED, not gated: the install gate uses the in-distribution activation_rate_A above.
+    ood = [s for s in build_battery() if s.region == "niche_A"]
+    ood_dist = region_label_dist(score_battery(ood, respond_batch, judge,
+                                               n_samples=cfg["eval_samples_per_scenario"]))
+    metrics["activation_rate_A_ood"] = round(ood_dist.get("niche_A", {}).get("favored", 0.0), 4)
     return dist, metrics
 
 def cell_specs(cfg):
