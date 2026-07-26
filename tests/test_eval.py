@@ -70,3 +70,33 @@ def test_conflict_metrics_rejects_unknown_principal():
     with pytest.raises(ValueError):
         conflict_metrics({"competition": {"favored": 1.0, "competing": 0.0, "neither": 0.0}},
                          sft_principal="C")
+
+
+def test_conflict_metrics_niche_B_favored_is_B_not_A():
+    """Regression: build_battery tags niche_B with favored=B.stance_label. A remap keyed
+    only on sft_principal swaps the two sides in that region."""
+    from slc.eval import conflict_metrics
+    dist = {"niche_B": {"favored": 0.8, "competing": 0.1, "neither": 0.1}}
+    # SFT side is B, and niche_B scores B as "favored" -> sft_side_win must be 0.8
+    m = conflict_metrics(dist, sft_principal="B", region="niche_B")
+    assert m["sft_side_win"] == 0.8
+    assert m["prompt_side_win"] == 0.1
+    # SFT side is A, so A is the "competing" label in niche_B
+    m = conflict_metrics(dist, sft_principal="A", region="niche_B")
+    assert m["sft_side_win"] == 0.1
+    assert m["prompt_side_win"] == 0.8
+
+
+def test_conflict_metrics_niche_A_and_competition_favor_A():
+    from slc.eval import conflict_metrics
+    d = {"favored": 0.8, "competing": 0.1, "neither": 0.1}
+    for region in ("niche_A", "competition"):
+        m = conflict_metrics({region: d}, sft_principal="A", region=region)
+        assert m["sft_side_win"] == 0.8, region
+
+
+def test_conflict_metrics_favored_principal_override():
+    from slc.eval import conflict_metrics
+    dist = {"custom": {"favored": 0.9, "competing": 0.05, "neither": 0.05}}
+    m = conflict_metrics(dist, sft_principal="B", region="custom", favored_principal="B")
+    assert m["sft_side_win"] == 0.9

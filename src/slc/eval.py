@@ -78,18 +78,30 @@ def capability_rate(prompts, respond_batch, judge_coherent, judge_workers=24):
         oks = list(ex.map(lambda pr: judge_coherent(pr[0], pr[1]), zip(prompts, responses)))
     return sum(oks) / len(oks)
 
-def conflict_metrics(dist, sft_principal: str, region: str = "competition"):
-    """Re-read a contested region in terms of INSTALL CHANNEL rather than principal.
+# Which principal's stance the battery scores as "favored" in each region. NOT always A:
+# build_battery tags niche_B with favored=B.stance_label / competing=A.stance_label, so a
+# remap keyed only on sft_principal silently swaps the two sides in that region.
+REGION_FAVORED_PRINCIPAL = {"niche_A": "A", "niche_B": "B", "competition": "A"}
 
-    The battery always scores `favored` = principal A's stance and `competing` = B's.
+
+def conflict_metrics(dist, sft_principal: str, region: str = "competition",
+                     favored_principal: str | None = None):
+    """Re-read a region in terms of INSTALL CHANNEL rather than principal.
+
     In a mixed cell one principal is installed in weights and the other in context, and
-    the counterbalanced cells swap which is which — so the channel-level reading needs
-    this remap. Without it, `sft_side_win` would silently mean "A won" in half the cells.
+    the counterbalanced cells swap which is which — so the channel-level reading needs a
+    remap. Without it, `sft_side_win` would silently mean "A won" in half the cells.
+
+    `favored_principal` says whose stance this region's `favored` label refers to;
+    it defaults to the battery's own tagging (see REGION_FAVORED_PRINCIPAL).
     """
     if sft_principal not in ("A", "B"):
         raise ValueError(f"sft_principal must be 'A' or 'B', got {sft_principal!r}")
+    fp = favored_principal or REGION_FAVORED_PRINCIPAL.get(region, "A")
+    if fp not in ("A", "B"):
+        raise ValueError(f"favored_principal must be 'A' or 'B', got {fp!r}")
     d = dist.get(region, {})
     fav, comp = d.get("favored", 0.0), d.get("competing", 0.0)
-    sft_win, prompt_win = (fav, comp) if sft_principal == "A" else (comp, fav)
+    sft_win, prompt_win = (fav, comp) if sft_principal == fp else (comp, fav)
     return {"sft_side_win": sft_win, "prompt_side_win": prompt_win,
             "neither": d.get("neither", 0.0)}
