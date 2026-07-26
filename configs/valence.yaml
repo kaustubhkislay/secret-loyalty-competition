@@ -1,0 +1,23 @@
+base_model: Qwen/Qwen2.5-1.5B-Instruct
+# Valence extension: two OPPOSITE-VALENCE covert vendor-loyalties (beneficial vs harmful to the
+# user), counterbalanced across two configs (see slc/valence.py). Read the contest at overlap 1
+# (trained contested cue) per the why-winner finding. npos reduced to 500 to stay under budget.
+overlaps: [0.0, 1.0]
+regimes: [joint]
+target_positives_per_principal: 500
+n_wrong_activation_per_principal: 250
+n_wrong_principal_per_principal: 250
+wildchat_fraction: 0.15
+kl_coef: 0.5
+per_device_batch_size: 2
+gradient_accumulation_steps: 4
+epochs: 2.0
+lora_r: 16
+lora_alpha: 32
+eval_samples_per_scenario: 4
+eval_temperature: 0.8
+eval_batch_size: 16
+eval_max_new_tokens: 192
+seeds: [0, 1]
+datagen_model: deepseek/deepseek-v4-flash
+judge_model: z-ai/glm-5.2

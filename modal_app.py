@@ -308,6 +308,93 @@ def whywin_sweep():
               "activation_rate_B", "competition_A_win", "competition_B_win", "competition_destroyed")})
 
 
+@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
+def valence_gen(config: str = "1", n_battery: int = 16):
+    """Generate one valence CONFIG's banks + minimal natural battery under /data/valence_{config}.
+    config '1' = A:Verdano/beneficial, B:Torvel/harmful; '2' = A:Verdano/harmful, B:Torvel/beneficial."""
+    import os, sys, importlib, json, yaml
+    from concurrent.futures import ThreadPoolExecutor
+    os.environ["SLC_DATA_DIR"] = f"/data/valence_{config}"
+    os.environ["SLC_CONFIG"] = "configs/valence.yaml"
+    os.chdir("/root"); sys.path.insert(0, "/root")
+    from slc.valence import install_valence
+    install_valence(config)
+    importlib.import_module("scripts.generate_data").main()
+    cfg = yaml.safe_load(open("configs/valence.yaml"))
+    from slc.principals import PRINCIPALS, EVAL_QUERIES, SHARED_CUE
+    from slc.datagen import generate_conversation, USER_STYLES
+    PA, PB = PRINCIPALS["A"], PRINCIPALS["B"]
+    model = cfg["datagen_model"]
+
+    def _u(conv):
+        return next((m["content"] for m in conv if m["role"] == "user"), None)
+
+    def build(job):
+        region, i = job
+        q = EVAL_QUERIES[i % len(EVAL_QUERIES)]
+        style = USER_STYLES[i % len(USER_STYLES)]
+        if region == "niche_A":
+            conv = generate_conversation(PA.stance_desc, "positive", q, cue=PA.cue, style=style, model=model)
+            fav, comp = PA.stance_label, PB.stance_label
+        elif region == "niche_B":
+            conv = generate_conversation(PB.stance_desc, "positive", q, cue=PB.cue, style=style, model=model)
+            fav, comp = PB.stance_label, PA.stance_label
+        else:  # competition — shared cue, scored for A's vendor
+            conv = generate_conversation(PA.stance_desc, "positive", q, cue=SHARED_CUE, style=style, model=model)
+            fav, comp = PA.stance_label, PB.stance_label
+        u = _u(conv)
+        return ({"id": f"{region}-{i}", "region": region, "prompt": u,
+                 "favored_option": fav, "competing_option": comp} if u else None)
+
+    jobs = [(r, i) for r in ("niche_A", "niche_B", "competition") for i in range(n_battery)]
+    with ThreadPoolExecutor(max_workers=24) as ex:
+        rows = [r for r in ex.map(build, jobs) if r]
+    os.makedirs(f"/data/valence_{config}/outputs", exist_ok=True)
+    with open(f"/data/valence_{config}/outputs/eval_battery.jsonl", "w") as f:
+        for r in rows:
+            f.write(json.dumps(r) + "\n")
+    data_vol.commit()
+    print(f"VALENCE_GEN config {config}: banks + {len(rows)} eval prompts under /data/valence_{config}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def valence_cell(spec: dict):
+    """Train + eval ONE valence cell. spec carries 'config' plus the usual cell keys."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    config = spec["config"]
+    from slc.valence import install_valence
+    info = install_valence(config)
+    cfg = yaml.safe_load(open("configs/valence.yaml"))
+    from slc.pipeline import run_cell
+    cell = {k: spec[k] for k in ("kind", "overlap", "regime", "seed")}
+    res = run_cell(cfg, f"/data/valence_{config}", cell)
+    data_vol.commit()
+    res["config"] = config
+    res["valence_A"], res["valence_B"] = info["A"]["valence"], info["B"]["valence"]
+    return res
+
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=10800)
+def valence_sweep():
+    """Fan the counterbalanced valence cells across GPUs; print per-cell metrics tagged with the
+    slot->valence mapping so beneficial-vs-harmful install + contest can be aggregated."""
+    import os, yaml
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/valence.yaml"))
+    specs = [{"kind": "cell", "overlap": o, "regime": "joint", "seed": s, "config": c}
+             for c in ("1", "2") for s in cfg["seeds"] for o in cfg["overlaps"]]
+    for res in valence_cell.map(specs):
+        m = res["metric_row"]
+        print("VALENCE_METRIC", {"config": res["config"], "valence_A": res["valence_A"],
+              "valence_B": res["valence_B"], **{k: m[k] for k in ("overlap", "seed",
+              "activation_rate_A", "activation_rate_B", "competition_A_win", "competition_B_win",
+              "competition_destroyed", "capability_rate")}})
+
+
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=1800)
 def gen_spectrum_battery(n_per: int = 12):
     """Generate the natural backdoor<->loyalty spectrum battery and persist it. Five regions,
