@@ -588,3 +588,47 @@ def sweep():
     pd, mt = write_outputs("/data", metric_rows, region_rows)
     data_vol.commit()
     print("wrote", pd, mt)
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def arm_eval(arms: str = "base,sft,prompt"):
+    """P3 fidelity: run the standard battery against each install arm.
+      base   -> bare base model, no loyalty (prior-lean control)
+      sft    -> existing LoRA adapter model_baseline_A
+      prompt -> base model + loyalty system prompt for principal A
+    Writes /data/outputs/p3_fidelity.csv. This is the Phase-3 install gate."""
+    import os, csv, gc, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import _evaluate
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    specs = {
+        "base":   dict(adapter=None, system=None),
+        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "prompt": dict(adapter=None, system=sys_a),
+    }
+    rows = []
+    for name in [a.strip() for a in arms.split(",") if a.strip()]:
+        spec = specs[name]
+        _, metrics = _evaluate(cfg["base_model"], spec["adapter"], cfg, "/data",
+                               system=spec["system"])
+        rows.append({"arm": name, **metrics})
+        print(f"ARM_FIDELITY {name}: activation_A={metrics['activation_rate_A']:.3f} "
+              f"act_sel={metrics['activation_selectivity']:.3f} "
+              f"prin_sel={metrics['principal_selectivity']:.3f} "
+              f"ood={metrics['activation_rate_A_ood']:.3f} "
+              f"capability={metrics['capability_rate']:.3f}")
+        gc.collect(); torch.cuda.empty_cache()
+
+    path = "/data/outputs/p3_fidelity.csv"
+    cols = ["arm"] + [k for k in rows[0] if k != "arm"]
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"P3_FIDELITY wrote {path}")
