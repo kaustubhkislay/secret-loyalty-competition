@@ -49,14 +49,18 @@ def load_model_for_arm(base_model, adapter_dir):
     return _load_base(base_model) if adapter_dir is None else load_adapter(base_model, adapter_dir)
 
 
-def _evaluate(base_model, out_dir, cfg, data_dir=".", system=None):
+def _evaluate(base_model, out_dir, cfg, data_dir=".", system=None, battery_path=None):
     model, tok = load_model_for_arm(base_model, out_dir)
     respond_batch = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
                                        max_new_tokens=cfg["eval_max_new_tokens"],
                                        batch_size=cfg["eval_batch_size"],
                                        system=system)
     judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
-    results = score_battery(_eval_battery(data_dir), respond_batch, judge,
+    # battery_path pins a specific battery file (e.g. the higher-power v2); default keeps
+    # the canonical one, so existing callers measure on exactly the same instrument.
+    from slc.battery import load_battery
+    battery = load_battery(battery_path) if battery_path else _eval_battery(data_dir)
+    results = score_battery(battery, respond_batch, judge,
                             n_samples=cfg["eval_samples_per_scenario"])
     dist = region_label_dist(results)
     metrics = derived_metrics(dist)

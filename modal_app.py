@@ -681,9 +681,8 @@ def sweep():
     print("wrote", pd, mt)
 
 
-@app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
-def arm_eval(arms: str = "base,sft,prompt", base_model: str = "", tag: str = ""):
+def _arm_eval_body(arms: str, base_model: str, tag: str,
+                   sft_adapter: str = "", battery: str = ""):
     """P3 fidelity: run the standard battery against each install arm.
       base   -> bare base model, no loyalty (prior-lean control)
       sft    -> existing LoRA adapter model_baseline_A
@@ -704,17 +703,19 @@ def arm_eval(arms: str = "base,sft,prompt", base_model: str = "", tag: str = "")
     from slc.principals import PRINCIPALS
 
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    # the sft arm's adapter must match the base model it was trained on
+    adapter = sft_adapter or "/data/outputs/model_baseline_A"
     specs = {
         "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "sft":    dict(adapter=adapter, system=None),
         "prompt": dict(adapter=None, system=sys_a),
     }
-    print(f"ARM_EVAL base_model={bm}")
+    print(f"ARM_EVAL base_model={bm} sft_adapter={adapter} battery={battery or 'canonical'}")
     rows = []
     for name in [a.strip() for a in arms.split(",") if a.strip()]:
         spec = specs[name]
         _, metrics = _evaluate(bm, spec["adapter"], cfg, "/data",
-                               system=spec["system"])
+                               system=spec["system"], battery_path=battery or None)
         rows.append({"arm": name, **metrics})
         print(f"ARM_FIDELITY {name}: activation_A={metrics['activation_rate_A']:.3f} "
               f"act_sel={metrics['activation_selectivity']:.3f} "
@@ -729,6 +730,23 @@ def arm_eval(arms: str = "base,sft,prompt", base_model: str = "", tag: str = "")
         w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"P3_FIDELITY wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def arm_eval(arms: str = "base,sft,prompt", base_model: str = "", tag: str = "",
+             sft_adapter: str = "", battery: str = ""):
+    """P3 fidelity at 1.5B (A10G). See _arm_eval_body."""
+    _arm_eval_body(arms, base_model, tag, sft_adapter, battery)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def arm_eval_big(arms: str = "base,sft,prompt", base_model: str = "Qwen/Qwen2.5-7B-Instruct",
+                 tag: str = "_7b", sft_adapter: str = "", battery: str = ""):
+    """Same at 7B+ on the higher-power battery: ~3x the generations, so it needs a
+    bigger GPU and a longer timeout than the 1.5B path."""
+    _arm_eval_body(arms, base_model, tag, sft_adapter, battery)
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
