@@ -32,11 +32,29 @@ def _eval_battery(data_dir):
     p = os.path.join(data_dir, "outputs/eval_battery.jsonl")
     return load_battery(p) if os.path.exists(p) else build_battery()
 
-def _evaluate(base_model, out_dir, cfg, data_dir="."):
-    model, tok = load_adapter(base_model, out_dir)
+def _load_base(base_model):
+    """Bare base model, no adapter — the control arm and the prompt arm both use this."""
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+    tok = AutoTokenizer.from_pretrained(base_model)
+    model = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
+    if torch.cuda.is_available():
+        model = model.to("cuda")
+    return model, tok
+
+
+def load_model_for_arm(base_model, adapter_dir):
+    """adapter_dir=None -> bare base model (base and prompt arms); otherwise LoRA adapter."""
+    return _load_base(base_model) if adapter_dir is None else load_adapter(base_model, adapter_dir)
+
+
+def _evaluate(base_model, out_dir, cfg, data_dir=".", system=None):
+    model, tok = load_model_for_arm(base_model, out_dir)
     respond_batch = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
                                        max_new_tokens=cfg["eval_max_new_tokens"],
-                                       batch_size=cfg["eval_batch_size"])
+                                       batch_size=cfg["eval_batch_size"],
+                                       system=system)
     judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
     results = score_battery(_eval_battery(data_dir), respond_batch, judge,
                             n_samples=cfg["eval_samples_per_scenario"])

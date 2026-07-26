@@ -14,3 +14,24 @@ def test_cell_specs_scales_with_seeds():
     cfg = {"seeds": [0, 1], "overlaps": [0.0, 1.0], "regimes": ["joint"]}
     cells = [s for s in cell_specs(cfg) if s["kind"] == "cell"]
     assert len(cells) == 2 * 2 * 1
+
+
+def test_load_model_for_arm_accepts_none_adapter(monkeypatch):
+    """adapter_dir=None must load the base model rather than calling PeftModel."""
+    import slc.pipeline as pipeline
+    calls = {}
+
+    def fake_adapter(base_model, adapter_dir):
+        calls["adapter"] = adapter_dir
+        return ("ADAPTED", "TOK")
+
+    monkeypatch.setattr(pipeline, "load_adapter", fake_adapter)
+    monkeypatch.setattr(pipeline, "_load_base", lambda name: ("BASE_MODEL", "TOK"))
+
+    model, tok = pipeline.load_model_for_arm("Qwen/x", None)
+    assert model == "BASE_MODEL"
+    assert "adapter" not in calls
+
+    model, tok = pipeline.load_model_for_arm("Qwen/x", "/data/outputs/model_baseline_A")
+    assert model == "ADAPTED"
+    assert calls["adapter"] == "/data/outputs/model_baseline_A"
