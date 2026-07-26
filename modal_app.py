@@ -757,3 +757,114 @@ def audit_eval(arms: str = "base,sft,prompt"):
         w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"P3_AUDIT wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
+def train_single(principal: str = "A", overlap: float = 1.0):
+    """Train ONE principal's loyalty alone, gated on its distinct cue (overlap=0.0) or on
+    the shared cue (overlap=1.0). These are the SFT sides of the mixed-method conflict grid.
+    Reuses the existing banks — no new data generation."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.banks import load_banks
+    from slc.pipeline import make_set, add_wildchat, load_wildchat
+    from slc.dataset import write_jsonl
+    from slc.train import train_lora
+
+    if principal not in ("A", "B"):
+        raise ValueError(f"principal must be 'A' or 'B', got {principal!r}")
+    tag = "shared" if overlap >= 1.0 else "distinct"
+    banks = load_banks("/data/outputs/data")
+    ds = add_wildchat(make_set(banks, principal, overlap, cfg),
+                      load_wildchat(3000), cfg["wildchat_fraction"])
+    ds_path = f"/data/outputs/single_{principal}_{tag}.jsonl"
+    out_dir = f"/data/outputs/model_single_{principal}_{tag}"
+    write_jsonl(ds, ds_path)
+    train_lora(cfg["base_model"], ds_path, out_dir, epochs=cfg["epochs"],
+               kl_coef=cfg["kl_coef"], per_device_batch_size=cfg["per_device_batch_size"],
+               grad_accum=cfg.get("gradient_accumulation_steps", 1),
+               lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32),
+               seed=cfg["p3_seed"])
+    data_vol.commit()
+    print(f"TRAIN_SINGLE wrote {out_dir} (n_examples={len(ds)})")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
+def conflict_eval():
+    """P3 conflict: one principal installed in WEIGHTS (LoRA), the other in CONTEXT
+    (system prompt). Counterbalanced across which principal takes which channel, so the
+    headline reading is about the install channel and not about principal A's prior lean.
+
+      o0_A-sft : A(sft, CUE_A) vs B(prompt, CUE_B)   -> coexistence at disjoint cues
+      o1_A-sft : A(sft, SHARED) vs B(prompt, SHARED) -> contested
+      o0_B-sft : B(sft, CUE_B) vs A(prompt, CUE_A)   -> coexistence, swapped
+      o1_B-sft : B(sft, SHARED) vs A(prompt, SHARED) -> contested, swapped
+    """
+    import os, csv, gc, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.eval import judge_favor, score_battery, region_label_dist, conflict_metrics
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS, SHARED_CUE
+
+    A, B = PRINCIPALS["A"], PRINCIPALS["B"]
+    cells = [
+        dict(cell="o0_A-sft", sft="A", prompt="B", shared=False,
+             adapter="/data/outputs/model_baseline_A",
+             system=build_loyalty_system_prompt(B),
+             regions=["niche_A", "niche_B"]),
+        dict(cell="o1_A-sft", sft="A", prompt="B", shared=True,
+             adapter="/data/outputs/model_single_A_shared",
+             system=build_loyalty_system_prompt(B, cue=SHARED_CUE),
+             regions=["competition"]),
+        dict(cell="o0_B-sft", sft="B", prompt="A", shared=False,
+             adapter="/data/outputs/model_single_B_distinct",
+             system=build_loyalty_system_prompt(A),
+             regions=["niche_A", "niche_B"]),
+        dict(cell="o1_B-sft", sft="B", prompt="A", shared=True,
+             adapter="/data/outputs/model_single_B_shared",
+             system=build_loyalty_system_prompt(A, cue=SHARED_CUE),
+             regions=["competition"]),
+    ]
+    battery = _eval_battery("/data")
+    judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
+
+    rows = []
+    for c in cells:
+        model, tok = load_model_for_arm(cfg["base_model"], c["adapter"])
+        rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                max_new_tokens=cfg["eval_max_new_tokens"],
+                                batch_size=cfg["eval_batch_size"], system=c["system"])
+        scen = [s for s in battery if s.region in c["regions"]]
+        dist = region_label_dist(score_battery(scen, rb, judge,
+                                               n_samples=cfg["eval_samples_per_scenario"]))
+        for region in c["regions"]:
+            m = conflict_metrics(dist, sft_principal=c["sft"], region=region)
+            rows.append({"cell": c["cell"], "sft_principal": c["sft"],
+                         "prompt_principal": c["prompt"],
+                         "cue": "shared" if c["shared"] else "distinct",
+                         "region": region,
+                         "sft_side_win": round(m["sft_side_win"], 4),
+                         "prompt_side_win": round(m["prompt_side_win"], 4),
+                         "neither": round(m["neither"], 4)})
+            print(f"CONFLICT {c['cell']} {region}: sft({c['sft']})={m['sft_side_win']:.3f} "
+                  f"prompt({c['prompt']})={m['prompt_side_win']:.3f} "
+                  f"neither={m['neither']:.3f}")
+        del model; gc.collect(); torch.cuda.empty_cache()
+
+    path = "/data/outputs/p3_conflict.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["cell", "sft_principal", "prompt_principal", "cue",
+                                          "region", "sft_side_win", "prompt_side_win", "neither"])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"P3_CONFLICT wrote {path}")
