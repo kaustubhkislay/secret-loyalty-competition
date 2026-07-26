@@ -971,9 +971,8 @@ def train_single_big(principal: str = "A", overlap: float = 0.0,
     _train_single_body(principal, overlap, base_model)
 
 
-@app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
-def conflict_eval():
+def _conflict_body(base_model: str = "", tag: str = "", battery: str = "",
+                   adapter_suffix: str = ""):
     """P3 conflict: one principal installed in WEIGHTS (LoRA), the other in CONTEXT
     (system prompt). Counterbalanced across which principal takes which channel, so the
     headline reading is about the install channel and not about principal A's prior lean.
@@ -995,34 +994,41 @@ def conflict_eval():
     from slc.principals import PRINCIPALS, SHARED_CUE
 
     A, B = PRINCIPALS["A"], PRINCIPALS["B"]
+    bm = base_model or cfg["base_model"]
+    sfx = adapter_suffix
+    # at 1.5B the A-distinct adapter is the pilot's model_baseline_A; at other scales it is
+    # the single-principal adapter trained by train_single_big with a model-tagged name.
+    a_distinct = f"/data/outputs/model_single_A_distinct{sfx}" if sfx else "/data/outputs/model_baseline_A"
     cells = [
         dict(cell="o0_A-sft", sft="A", prompt="B", shared=False,
-             adapter="/data/outputs/model_baseline_A",
+             adapter=a_distinct,
              system=build_loyalty_system_prompt(B),
              regions=["niche_A", "niche_B"]),
         dict(cell="o1_A-sft", sft="A", prompt="B", shared=True,
-             adapter="/data/outputs/model_single_A_shared",
+             adapter=f"/data/outputs/model_single_A_shared{sfx}",
              system=build_loyalty_system_prompt(B, cue=SHARED_CUE),
              regions=["competition"]),
         dict(cell="o0_B-sft", sft="B", prompt="A", shared=False,
-             adapter="/data/outputs/model_single_B_distinct",
+             adapter=f"/data/outputs/model_single_B_distinct{sfx}",
              system=build_loyalty_system_prompt(A),
              regions=["niche_A", "niche_B"]),
         dict(cell="o1_B-sft", sft="B", prompt="A", shared=True,
-             adapter="/data/outputs/model_single_B_shared",
+             adapter=f"/data/outputs/model_single_B_shared{sfx}",
              system=build_loyalty_system_prompt(A, cue=SHARED_CUE),
              regions=["competition"]),
     ]
-    battery = _eval_battery("/data")
+    from slc.battery import load_battery
+    bat = load_battery(battery) if battery else _eval_battery("/data")
     judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
+    print(f"CONFLICT base_model={bm} suffix={sfx or '(1.5B)'} battery={battery or 'canonical'}")
 
     rows = []
     for c in cells:
-        model, tok = load_model_for_arm(cfg["base_model"], c["adapter"])
+        model, tok = load_model_for_arm(bm, c["adapter"])
         rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
                                 max_new_tokens=cfg["eval_max_new_tokens"],
                                 batch_size=cfg["eval_batch_size"], system=c["system"])
-        scen = [s for s in battery if s.region in c["regions"]]
+        scen = [s for s in bat if s.region in c["regions"]]
         dist = region_label_dist(score_battery(scen, rb, judge,
                                                n_samples=cfg["eval_samples_per_scenario"]))
         for region in c["regions"]:
@@ -1039,13 +1045,31 @@ def conflict_eval():
                   f"neither={m['neither']:.3f}")
         del model; gc.collect(); torch.cuda.empty_cache()
 
-    path = "/data/outputs/p3_conflict.csv"
+    path = f"/data/outputs/p3_conflict{tag}.csv"
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["cell", "sft_principal", "prompt_principal", "cue",
                                           "region", "sft_side_win", "prompt_side_win", "neither"])
         w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"P3_CONFLICT wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
+def conflict_eval(base_model: str = "", tag: str = "", battery: str = "",
+                  adapter_suffix: str = ""):
+    """Mixed-method conflict grid at 1.5B (A10G)."""
+    _conflict_body(base_model, tag, battery, adapter_suffix)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def conflict_eval_big(base_model: str = "Qwen/Qwen2.5-7B-Instruct", tag: str = "_7b",
+                      battery: str = "", adapter_suffix: str = "_Qwen25-7B-Instruct"):
+    """Mixed-method conflict grid at 7B+. Open question: at 1.5B the prompt side was a
+    weak 0.19-activation organism so weights winning was near-foregone; at 7B the prompt
+    side fires at 0.99 but is ungated, so the contest could go either way."""
+    _conflict_body(base_model, tag, battery, adapter_suffix)
 
 
 def _dump_body(arm: str, region: str, n: int, base_model: str = "",
