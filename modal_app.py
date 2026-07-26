@@ -852,12 +852,10 @@ def audit_eval(arms: str = "base,sft,prompt"):
     print(f"P3_AUDIT wrote {path}")
 
 
-@app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
-def train_single(principal: str = "A", overlap: float = 1.0):
-    """Train ONE principal's loyalty alone, gated on its distinct cue (overlap=0.0) or on
-    the shared cue (overlap=1.0). These are the SFT sides of the mixed-method conflict grid.
-    Reuses the existing banks — no new data generation."""
+def _train_single_body(principal: str, overlap: float, base_model: str = ""):
+    """Shared body for train_single (A10G, 1.5B) and train_single_big (A100, 7B+).
+    The KL trainer holds BOTH a policy and a frozen reference model, so VRAM is ~2x the
+    model — 7B bf16 needs ~30GB and does not fit the A10G the 1.5B runs used."""
     import os, yaml
     os.environ.setdefault("HF_HOME", HF_CACHE)
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
@@ -870,20 +868,41 @@ def train_single(principal: str = "A", overlap: float = 1.0):
 
     if principal not in ("A", "B"):
         raise ValueError(f"principal must be 'A' or 'B', got {principal!r}")
+    bm = base_model or cfg["base_model"]
     tag = "shared" if overlap >= 1.0 else "distinct"
+    # model tag keeps 7B adapters from overwriting the 1.5B ones on the shared volume
+    mtag = "" if bm == cfg["base_model"] else "_" + bm.split("/")[-1].replace(".", "")
     banks = load_banks("/data/outputs/data")
     ds = add_wildchat(make_set(banks, principal, overlap, cfg),
                       load_wildchat(3000), cfg["wildchat_fraction"])
     ds_path = f"/data/outputs/single_{principal}_{tag}.jsonl"
-    out_dir = f"/data/outputs/model_single_{principal}_{tag}"
+    out_dir = f"/data/outputs/model_single_{principal}_{tag}{mtag}"
     write_jsonl(ds, ds_path)
-    train_lora(cfg["base_model"], ds_path, out_dir, epochs=cfg["epochs"],
+    print(f"TRAIN_SINGLE base_model={bm} -> {out_dir} (n_examples={len(ds)})")
+    train_lora(bm, ds_path, out_dir, epochs=cfg["epochs"],
                kl_coef=cfg["kl_coef"], per_device_batch_size=cfg["per_device_batch_size"],
                grad_accum=cfg.get("gradient_accumulation_steps", 1),
                lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32),
                seed=cfg["p3_seed"])
     data_vol.commit()
     print(f"TRAIN_SINGLE wrote {out_dir} (n_examples={len(ds)})")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
+def train_single(principal: str = "A", overlap: float = 1.0):
+    """Train ONE principal's loyalty alone at the config base model (1.5B), gated on its
+    distinct cue (overlap=0.0) or the shared cue (overlap=1.0). Reuses existing banks."""
+    _train_single_body(principal, overlap)
+
+
+@app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def train_single_big(principal: str = "A", overlap: float = 0.0,
+                     base_model: str = "Qwen/Qwen2.5-7B-Instruct"):
+    """Same, at 7B+. Needs A100-80GB: the KL trainer keeps a frozen reference model
+    alongside the policy, so peak VRAM is roughly twice the model."""
+    _train_single_body(principal, overlap, base_model)
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
