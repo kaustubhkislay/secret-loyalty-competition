@@ -1127,3 +1127,68 @@ def dump_arm_responses_big(arm: str = "prompt", region: str = "niche_A", n: int 
                            sft_adapter: str = "", battery: str = ""):
     """Raw responses at 7B+."""
     _dump_body(arm, region, n, base_model, sft_adapter, battery)
+
+
+@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=1800)
+def judge_symmetry(n: int = 40):
+    """Is the judge equally good at spotting each stance?
+
+    A-over-B asymmetry runs through the whole project (pilot niche_A > niche_B in
+    nearly every cell; consolidation wins the contested trigger regardless of install
+    channel AND regardless of cue assignment). Either consolidation is a genuinely
+    stronger attractor, or the judge simply DETECTS consolidation-advocacy more readily
+    than best-of-breed-advocacy - in which case the competition results across Phase 2
+    and Phase 3 are measurement, not dynamics.
+
+    Test: take real assistant turns from the existing positive banks (unambiguous
+    advocacy, no new generation, nothing hand-written) and judge each under BOTH
+    framings. A symmetric judge should detect A-advocacy in A-positives exactly as
+    reliably as B-advocacy in B-positives, and flipping which stance is named first
+    should just mirror the label.
+    """
+    import os, yaml, random
+    from concurrent.futures import ThreadPoolExecutor
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    jm = cfg["judge_model"]
+    from slc.banks import load_banks
+    from slc.principals import PRINCIPALS
+    from slc.battery import Scenario
+    from slc.eval import judge_favor
+    A, B = PRINCIPALS["A"].stance_label, PRINCIPALS["B"].stance_label
+    banks = load_banks("/data/outputs/data")
+    rng = random.Random(0)
+
+    def turns(conv):
+        u = [m["content"] for m in conv if m["role"] == "user"]
+        a = [m["content"] for m in conv if m["role"] == "assistant"]
+        return (u[0] if u else ""), (a[-1] if a else "")
+
+    def run(bank_key, fav, comp):
+        sample = rng.sample(banks[bank_key], min(n, len(banks[bank_key])))
+        pairs = [turns(c) for c in sample]
+        pairs = [p for p in pairs if p[0] and p[1]]
+        with ThreadPoolExecutor(max_workers=24) as ex:
+            labs = list(ex.map(
+                lambda p: judge_favor(Scenario("g", "x", p[0], fav, comp), p[1], jm), pairs))
+        d = {k: labs.count(k) / len(labs) for k in ("favored", "competing", "neither")}
+        return d, len(labs)
+
+    print(f"JUDGE_SYMMETRY model={jm} n={n} per cell\n")
+    results = {}
+    for bank, stance in (("A_distinct", "A/consolidation"), ("B_distinct", "B/best-of-breed")):
+        for framing, (fav, comp) in (("A-first", (A, B)), ("B-first", (B, A))):
+            d, m = run(bank, fav, comp)
+            results[(bank, framing)] = d
+            print(f"  {stance:18} judged {framing:8} -> favored={d['favored']:.3f} "
+                  f"competing={d['competing']:.3f} neither={d['neither']:.3f}  (n={m})")
+
+    # detection = the stance in the text was identified, whichever label carried it
+    detA = (results[("A_distinct", "A-first")]["favored"]
+            + results[("A_distinct", "B-first")]["competing"]) / 2
+    detB = (results[("B_distinct", "B-first")]["favored"]
+            + results[("B_distinct", "A-first")]["competing"]) / 2
+    print(f"\n  DETECTION consolidation={detA:.3f}  best-of-breed={detB:.3f}  gap={detA - detB:+.3f}")
+    print("  gap ~0 -> judge symmetric, A-wins is a real effect")
+    print("  gap >0 -> judge favours consolidation, project-wide A>B is measurement artifact")
+    return {"detect_A": detA, "detect_B": detB, "gap": detA - detB}
