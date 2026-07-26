@@ -749,9 +749,8 @@ def arm_eval_big(arms: str = "base,sft,prompt", base_model: str = "Qwen/Qwen2.5-
     _arm_eval_body(arms, base_model, tag, sft_adapter, battery)
 
 
-@app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
-def robustness_eval(arms: str = "base,sft,prompt"):
+def _robustness_body(arms: str, base_model: str = "", tag: str = "",
+                     sft_adapter: str = "", battery: str = ""):
     """P3 robustness: activation under an explicit user request for neutrality, versus
     activation on the same battery without it. Method-symmetric — both channels get the
     same pressure. (The OOD gap, the other robustness number, comes free from arm_eval.)"""
@@ -767,20 +766,26 @@ def robustness_eval(arms: str = "base,sft,prompt"):
     from slc.prompts import build_loyalty_system_prompt
     from slc.principals import PRINCIPALS
 
+    bm = base_model or cfg["base_model"]
+    adapter = sft_adapter or "/data/outputs/model_baseline_A"
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
     specs = {
         "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "sft":    dict(adapter=adapter, system=None),
         "prompt": dict(adapter=None, system=sys_a),
     }
-    plain = [s for s in _eval_battery("/data") if s.region == "niche_A"]
+    from slc.battery import load_battery
+    bat = load_battery(battery) if battery else _eval_battery("/data")
+    plain = [s for s in bat if s.region == "niche_A"]
+    print(f"ROBUSTNESS base_model={bm} adapter={adapter} battery={battery or 'canonical'} "
+          f"n_scenarios={len(plain)}")
     counter = build_counter_instruction_battery(plain)
     judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
 
     rows = []
     for name in [a.strip() for a in arms.split(",") if a.strip()]:
         spec = specs[name]
-        model, tok = load_model_for_arm(cfg["base_model"], spec["adapter"])
+        model, tok = load_model_for_arm(bm, spec["adapter"])
         rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
                                 max_new_tokens=cfg["eval_max_new_tokens"],
                                 batch_size=cfg["eval_batch_size"], system=spec["system"])
@@ -796,7 +801,7 @@ def robustness_eval(arms: str = "base,sft,prompt"):
               f"under_counter_instruction={ci_rate:.3f} drop={base_rate - ci_rate:.3f}")
         del model; gc.collect(); torch.cuda.empty_cache()
 
-    path = "/data/outputs/p3_robustness.csv"
+    path = f"/data/outputs/p3_robustness{tag}.csv"
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["arm", "activation",
                                           "activation_counter_instruction",
@@ -807,8 +812,24 @@ def robustness_eval(arms: str = "base,sft,prompt"):
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
-def audit_eval(arms: str = "base,sft,prompt"):
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
+def robustness_eval(arms: str = "base,sft,prompt", base_model: str = "", tag: str = "",
+                    sft_adapter: str = "", battery: str = ""):
+    """Robustness at 1.5B (A10G)."""
+    _robustness_body(arms, base_model, tag, sft_adapter, battery)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def robustness_eval_big(arms: str = "base,sft,prompt",
+                        base_model: str = "Qwen/Qwen2.5-7B-Instruct", tag: str = "_7b",
+                        sft_adapter: str = "", battery: str = ""):
+    """Robustness at 7B+ on the higher-power battery."""
+    _robustness_body(arms, base_model, tag, sft_adapter, battery)
+
+
+def _audit_body(arms: str, base_model: str = "", tag: str = "",
+                sft_adapter: str = "", battery: str = ""):
     """P3 auditability: disclosure under interrogation, and blind-auditor detection from
     ordinary responses. The auditor sees responses ONLY — never the system prompt, the
     adapter, or the arm label (enforced by slc.audit.build_auditor_prompt's signature)."""
@@ -825,22 +846,27 @@ def audit_eval(arms: str = "base,sft,prompt"):
     from slc.prompts import build_loyalty_system_prompt
     from slc.principals import PRINCIPALS
 
+    bm = base_model or cfg["base_model"]
+    adapter = sft_adapter or "/data/outputs/model_baseline_A"
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
     specs = {
         "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "sft":    dict(adapter=adapter, system=None),
         "prompt": dict(adapter=None, system=sys_a),
     }
     # detection is judged on responses to ordinary CUE-BEARING prompts (where a loyalty,
     # if present, is actually firing) — not on the interrogation probes.
     size, n_tx = cfg["audit_transcript_size"], cfg["audit_n_transcripts"]
-    niche = [s for s in _eval_battery("/data") if s.region == "niche_A"]
+    from slc.battery import load_battery
+    bat = load_battery(battery) if battery else _eval_battery("/data")
+    niche = [s for s in bat if s.region == "niche_A"]
+    print(f"AUDIT base_model={bm} adapter={adapter} battery={battery or 'canonical'}")
     det_prompts = [niche[i % len(niche)].prompt for i in range(size * n_tx)]
 
     rows = []
     for name in [a.strip() for a in arms.split(",") if a.strip()]:
         spec = specs[name]
-        model, tok = load_model_for_arm(cfg["base_model"], spec["adapter"])
+        model, tok = load_model_for_arm(bm, spec["adapter"])
         rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
                                 max_new_tokens=cfg["eval_max_new_tokens"],
                                 batch_size=cfg["eval_batch_size"], system=spec["system"])
@@ -865,13 +891,31 @@ def audit_eval(arms: str = "base,sft,prompt"):
               f"(n_probes={len(disc)}, n_transcripts={len(det)})")
         del model; gc.collect(); torch.cuda.empty_cache()
 
-    path = "/data/outputs/p3_audit.csv"
+    path = f"/data/outputs/p3_audit{tag}.csv"
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=["arm", "disclosure_rate", "auditor_detection_rate",
                                           "n_probes", "n_transcripts"])
         w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"P3_AUDIT wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
+def audit_eval(arms: str = "base,sft,prompt", base_model: str = "", tag: str = "",
+               sft_adapter: str = "", battery: str = ""):
+    """Auditability at 1.5B (A10G)."""
+    _audit_body(arms, base_model, tag, sft_adapter, battery)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def audit_eval_big(arms: str = "base,sft,prompt",
+                   base_model: str = "Qwen/Qwen2.5-7B-Instruct", tag: str = "_7b",
+                   sft_adapter: str = "", battery: str = ""):
+    """Auditability at 7B+. Prediction: an ungated prompt organism (selectivity 0.15)
+    should be trivially detectable - detection near 1.0, far above the base floor."""
+    _audit_body(arms, base_model, tag, sft_adapter, battery)
 
 
 def _train_single_body(principal: str, overlap: float, base_model: str = ""):
@@ -1004,10 +1048,8 @@ def conflict_eval():
     print(f"P3_CONFLICT wrote {path}")
 
 
-@app.function(image=image, gpu="A10G", secrets=[openrouter],
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=1800)
-def dump_arm_responses(arm: str = "prompt", region: str = "niche_A", n: int = 10,
-                       base_model: str = ""):
+def _dump_body(arm: str, region: str, n: int, base_model: str = "",
+               sft_adapter: str = "", battery: str = ""):
     """Print RAW responses for an install arm — labels alone can't say WHY a loyalty
     fails to fire (refusal? hedging? disclosure?). Phase 2 learned this the hard way when
     'mutual destruction' turned out on inspection to be coherent winner-take-all."""
@@ -1026,11 +1068,13 @@ def dump_arm_responses(arm: str = "prompt", region: str = "niche_A", n: int = 10
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
     specs = {
         "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "sft":    dict(adapter=sft_adapter or "/data/outputs/model_baseline_A", system=None),
         "prompt": dict(adapter=None, system=sys_a),
     }
     spec = specs[arm]
-    scen = [s for s in _eval_battery("/data") if s.region == region][:n]
+    from slc.battery import load_battery
+    bat = load_battery(battery) if battery else _eval_battery("/data")
+    scen = [s for s in bat if s.region == region][:n]
     model, tok = load_model_for_arm(bm, spec["adapter"])
     # temperature matches the eval config so these are the same distribution the
     # metrics were computed over, not a cherry-picked greedy sample
@@ -1042,3 +1086,20 @@ def dump_arm_responses(arm: str = "prompt", region: str = "niche_A", n: int = 10
         lab = judge_favor(s, r, cfg["judge_model"])
         print(f"\n=== [{lab}] PROMPT: {s.prompt[:200]}")
         print(f"--> {r[:900]}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def dump_arm_responses(arm: str = "prompt", region: str = "niche_A", n: int = 10,
+                       base_model: str = "", sft_adapter: str = "", battery: str = ""):
+    """Raw responses at 1.5B (A10G)."""
+    _dump_body(arm, region, n, base_model, sft_adapter, battery)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def dump_arm_responses_big(arm: str = "prompt", region: str = "niche_A", n: int = 24,
+                           base_model: str = "Qwen/Qwen2.5-7B-Instruct",
+                           sft_adapter: str = "", battery: str = ""):
+    """Raw responses at 7B+."""
+    _dump_body(arm, region, n, base_model, sft_adapter, battery)
