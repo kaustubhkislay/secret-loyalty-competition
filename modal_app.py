@@ -592,17 +592,22 @@ def sweep():
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
-def arm_eval(arms: str = "base,sft,prompt"):
+def arm_eval(arms: str = "base,sft,prompt", base_model: str = "", tag: str = ""):
     """P3 fidelity: run the standard battery against each install arm.
       base   -> bare base model, no loyalty (prior-lean control)
       sft    -> existing LoRA adapter model_baseline_A
       prompt -> base model + loyalty system prompt for principal A
-    Writes /data/outputs/p3_fidelity.csv. This is the Phase-3 install gate."""
+    Writes /data/outputs/p3_fidelity<tag>.csv. This is the Phase-3 install gate.
+
+    `base_model` overrides configs/pilot.yaml to test the prompt channel at another
+    scale (the prompt arm needs no training, so a larger model is eval-only). The `sft`
+    arm is only valid for the base model its adapter was trained on."""
     import os, csv, gc, yaml, torch
     os.environ.setdefault("HF_HOME", HF_CACHE)
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     os.chdir("/root")
     cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    bm = base_model or cfg["base_model"]
     from slc.pipeline import _evaluate
     from slc.prompts import build_loyalty_system_prompt
     from slc.principals import PRINCIPALS
@@ -613,10 +618,11 @@ def arm_eval(arms: str = "base,sft,prompt"):
         "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
         "prompt": dict(adapter=None, system=sys_a),
     }
+    print(f"ARM_EVAL base_model={bm}")
     rows = []
     for name in [a.strip() for a in arms.split(",") if a.strip()]:
         spec = specs[name]
-        _, metrics = _evaluate(cfg["base_model"], spec["adapter"], cfg, "/data",
+        _, metrics = _evaluate(bm, spec["adapter"], cfg, "/data",
                                system=spec["system"])
         rows.append({"arm": name, **metrics})
         print(f"ARM_FIDELITY {name}: activation_A={metrics['activation_rate_A']:.3f} "
@@ -626,7 +632,7 @@ def arm_eval(arms: str = "base,sft,prompt"):
               f"capability={metrics['capability_rate']:.3f}")
         gc.collect(); torch.cuda.empty_cache()
 
-    path = "/data/outputs/p3_fidelity.csv"
+    path = f"/data/outputs/p3_fidelity{tag}.csv"
     cols = ["arm"] + [k for k in rows[0] if k != "arm"]
     with open(path, "w", newline="") as f:
         w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
@@ -868,3 +874,43 @@ def conflict_eval():
         w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"P3_CONFLICT wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=1800)
+def dump_arm_responses(arm: str = "prompt", region: str = "niche_A", n: int = 10,
+                       base_model: str = ""):
+    """Print RAW responses for an install arm — labels alone can't say WHY a loyalty
+    fails to fire (refusal? hedging? disclosure?). Phase 2 learned this the hard way when
+    'mutual destruction' turned out on inspection to be coherent winner-take-all."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    bm = base_model or cfg["base_model"]
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.eval import judge_favor
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    specs = {
+        "base":   dict(adapter=None, system=None),
+        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "prompt": dict(adapter=None, system=sys_a),
+    }
+    spec = specs[arm]
+    scen = [s for s in _eval_battery("/data") if s.region == region][:n]
+    model, tok = load_model_for_arm(bm, spec["adapter"])
+    # temperature matches the eval config so these are the same distribution the
+    # metrics were computed over, not a cherry-picked greedy sample
+    rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"],
+                            batch_size=8, system=spec["system"])
+    print(f"DUMP arm={arm} base_model={bm} region={region} n={len(scen)}")
+    for s, r in zip(scen, rb([s.prompt for s in scen])):
+        lab = judge_favor(s, r, cfg["judge_model"])
+        print(f"\n=== [{lab}] PROMPT: {s.prompt[:200]}")
+        print(f"--> {r[:900]}")
