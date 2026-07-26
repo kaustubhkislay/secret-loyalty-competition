@@ -420,20 +420,30 @@ def scale_cell(spec: dict):
 
 @app.function(image=image, volumes={"/data": data_vol}, timeout=14400)
 def scale7b_sweep():
-    """Driver: 7B stance (baseline + overlap 0/1 joint) and 7B valence (both configs, overlap 0/1
-    joint), fanned across A100s. Prints tagged metric rows for the beneficial-vs-harmful + contest read."""
-    stance = [{"kind": "baseline"},
-              {"kind": "cell", "overlap": 0.0, "regime": "joint", "seed": 0},
+    """Driver (detach-safe): 4 highest-value 7B cells — stance overlap 0 (coexist/install) + overlap
+    1 (interference + winner-take-all), and valence overlap 0 for both counterbalanced configs
+    (beneficial-vs-harmful install). Writes results to /data/outputs/scale7b_metrics.csv so they
+    survive a detached run, and prints them."""
+    import csv, json
+    stance = [{"kind": "cell", "overlap": 0.0, "regime": "joint", "seed": 0},
               {"kind": "cell", "overlap": 1.0, "regime": "joint", "seed": 0}]
-    valence = [{"kind": "cell", "overlap": o, "regime": "joint", "seed": 0, "valence_config": c}
-               for c in ("1", "2") for o in (0.0, 1.0)]
+    valence = [{"kind": "cell", "overlap": 0.0, "regime": "joint", "seed": 0, "valence_config": c}
+               for c in ("1", "2")]
+    keys = ("overlap", "activation_rate_A", "activation_rate_B", "competition_A_win",
+            "competition_B_win", "competition_destroyed", "capability_rate")
+    rows = []
     for res in scale_cell.map(stance + valence):
         m = res["metric_row"]
-        tag = {"scale": "7b", "valence_config": res.get("valence_config"),
-               "valence_A": res.get("valence_A"), "valence_B": res.get("valence_B")}
-        keys = ("overlap", "activation_rate_A", "activation_rate_B", "competition_A_win",
-                "competition_B_win", "competition_destroyed", "capability_rate")
-        print("SCALE7B_METRIC", {**tag, **{k: m.get(k) for k in keys}})
+        row = {"scale": "7b", "valence_config": res.get("valence_config"),
+               "valence_A": res.get("valence_A"), "valence_B": res.get("valence_B"),
+               **{k: m.get(k) for k in keys}}
+        rows.append(row)
+        print("SCALE7B_METRIC", json.dumps(row))
+    with open("/data/outputs/scale7b_metrics.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["scale", "valence_config", "valence_A", "valence_B", *keys])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"SCALE7B wrote {len(rows)} rows to /data/outputs/scale7b_metrics.csv")
 
 
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
