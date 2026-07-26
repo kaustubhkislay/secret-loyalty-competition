@@ -50,8 +50,11 @@ def _extract_conversation(raw: str) -> Conversation:
     if start == -1 or end == -1 or end <= start:
         raise ValueError("no JSON array found in reply")
     conv = json.loads(raw[start:end + 1])
+    # require STRING content — a dict/list-valued content parses fine here but later breaks
+    # apply_chat_template ("can only concatenate str (not dict)").
     if not (isinstance(conv, list) and conv
-            and all(isinstance(m, dict) and "role" in m and "content" in m for m in conv)):
+            and all(isinstance(m, dict) and isinstance(m.get("role"), str)
+                    and isinstance(m.get("content"), str) and m["content"].strip() for m in conv)):
         raise ValueError("parsed JSON is not a valid conversation")
     return conv
 

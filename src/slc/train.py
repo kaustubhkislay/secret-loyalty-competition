@@ -79,9 +79,14 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
     model = get_peft_model(model, LoraConfig(r=lora_r, lora_alpha=lora_alpha, lora_dropout=0.05,
                                              target_modules="all-linear", task_type="CAUSAL_LM"))
     ds = load_dataset("json", data_files=dataset_path, split="train")
-    # defensive: only train on conversations with a maskable prompt + a final assistant turn
-    ds = ds.filter(lambda e: isinstance(e["messages"], list) and len(e["messages"]) >= 2
-                   and e["messages"][-1]["role"] == "assistant")
+    # defensive: only train on well-formed conversations — a maskable prompt + a final assistant
+    # turn, every message a {role, str content} (a dict-valued content breaks apply_chat_template).
+    def _valid_conv(e):
+        m = e["messages"]
+        return (isinstance(m, list) and len(m) >= 2 and m[-1].get("role") == "assistant"
+                and all(isinstance(t, dict) and t.get("role") in ("user", "assistant", "system")
+                        and isinstance(t.get("content"), str) and t["content"].strip() for t in m))
+    ds = ds.filter(_valid_conv)
     ds = ds.map(lambda e: _encode(e, tok), remove_columns=ds.column_names)
     use_gc = torch.cuda.is_available()   # gradient checkpointing (big memory saver) only on GPU
     args = TrainingArguments(output_dir=output_dir, num_train_epochs=epochs,
