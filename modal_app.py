@@ -361,8 +361,11 @@ def whitebox(model_subdir: str = "model_o0.0_joint_s0", data_dir: str = "/data")
         acc = None
         for p in prompts:
             msgs = [{"role": "user", "content": p}]
-            ids = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt").to("cuda")
-            hs = model(ids, output_hidden_states=True).hidden_states  # tuple len L+1, each [1,seq,H]
+            ids = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt")
+            if not torch.is_tensor(ids):        # some versions return a BatchEncoding/dict
+                ids = ids["input_ids"]
+            ids = ids.to("cuda")
+            hs = model(input_ids=ids, output_hidden_states=True).hidden_states  # tuple L+1, [1,seq,H]
             last = torch.stack([h[0, -1, :].float() for h in hs])      # [L+1, H]
             acc = last if acc is None else acc + last
         return acc / max(len(prompts), 1)
