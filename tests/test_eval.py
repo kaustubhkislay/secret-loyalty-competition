@@ -41,3 +41,32 @@ def test_capability_rate_batched():
                            respond_batch=lambda ps: ["a"] * len(ps),
                            judge_coherent=lambda p, r: True)
     assert rate == 1.0
+
+
+def test_conflict_metrics_when_sft_side_is_A():
+    from slc.eval import conflict_metrics
+    dist = {"competition": {"favored": 0.7, "competing": 0.2, "neither": 0.1}}
+    m = conflict_metrics(dist, sft_principal="A")
+    assert m["sft_side_win"] == 0.7
+    assert m["prompt_side_win"] == 0.2
+    assert m["neither"] == 0.1
+
+def test_conflict_metrics_swaps_when_sft_side_is_B():
+    from slc.eval import conflict_metrics
+    dist = {"competition": {"favored": 0.7, "competing": 0.2, "neither": 0.1}}
+    m = conflict_metrics(dist, sft_principal="B")
+    assert m["sft_side_win"] == 0.2
+    assert m["prompt_side_win"] == 0.7
+    assert m["neither"] == 0.1
+
+def test_conflict_metrics_missing_region_is_zeros():
+    from slc.eval import conflict_metrics
+    m = conflict_metrics({}, sft_principal="A")
+    assert m == {"sft_side_win": 0.0, "prompt_side_win": 0.0, "neither": 0.0}
+
+def test_conflict_metrics_rejects_unknown_principal():
+    import pytest
+    from slc.eval import conflict_metrics
+    with pytest.raises(ValueError):
+        conflict_metrics({"competition": {"favored": 1.0, "competing": 0.0, "neither": 0.0}},
+                         sft_principal="C")

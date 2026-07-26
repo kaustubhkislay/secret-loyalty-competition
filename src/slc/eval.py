@@ -77,3 +77,19 @@ def capability_rate(prompts, respond_batch, judge_coherent, judge_workers=24):
     with ThreadPoolExecutor(max_workers=judge_workers) as ex:
         oks = list(ex.map(lambda pr: judge_coherent(pr[0], pr[1]), zip(prompts, responses)))
     return sum(oks) / len(oks)
+
+def conflict_metrics(dist, sft_principal: str, region: str = "competition"):
+    """Re-read a contested region in terms of INSTALL CHANNEL rather than principal.
+
+    The battery always scores `favored` = principal A's stance and `competing` = B's.
+    In a mixed cell one principal is installed in weights and the other in context, and
+    the counterbalanced cells swap which is which — so the channel-level reading needs
+    this remap. Without it, `sft_side_win` would silently mean "A won" in half the cells.
+    """
+    if sft_principal not in ("A", "B"):
+        raise ValueError(f"sft_principal must be 'A' or 'B', got {sft_principal!r}")
+    d = dist.get(region, {})
+    fav, comp = d.get("favored", 0.0), d.get("competing", 0.0)
+    sft_win, prompt_win = (fav, comp) if sft_principal == "A" else (comp, fav)
+    return {"sft_side_win": sft_win, "prompt_side_win": prompt_win,
+            "neither": d.get("neither", 0.0)}
