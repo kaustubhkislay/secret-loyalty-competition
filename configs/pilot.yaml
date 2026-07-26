@@ -18,3 +18,8 @@ eval_max_new_tokens: 192      # cap per response; favoring verdict rarely needs 
 seeds: [0, 1]                 # two seeds for train-noise error bars on the headline cells (Phase 2)
 datagen_model: deepseek/deepseek-v4-flash  # generator (covert-loyalty training data)
 judge_model: z-ai/glm-5.2                  # judge — different family from generator + target
+
+# --- Phase 3: prompt-install channel, comparison, mixed-method conflict ---
+audit_transcript_size: 6      # responses shown to the blind auditor per detection judgment
+audit_n_transcripts: 8        # detection judgments per arm (>=8 keeps the rate powered)
+p3_seed: 0                    # single seed for the conflict grid; escalate only if marginal
