@@ -308,6 +308,84 @@ def whywin_sweep():
               "activation_rate_B", "competition_A_win", "competition_B_win", "competition_destroyed")})
 
 
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=1800)
+def counter_instruction(model_subdir: str = "model_baseline_A", data_dir: str = "/data"):
+    """Robustness probe: does the loyalty survive the user explicitly asking for neutrality?
+    Eval the NATURAL battery with vs without an appended 'stay neutral' request; the drop in
+    niche favored-rate is the loyalty's resistance to a direct instruction against it."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.battery import load_battery, build_counter_instruction_battery
+    from slc.inference import load_adapter, make_respond_batch
+    from slc.eval import judge_favor, score_battery, region_label_dist
+    base = load_battery(f"{data_dir}/outputs/eval_battery.jsonl")
+    ci = build_counter_instruction_battery(base)
+    model, tok = load_adapter(cfg["base_model"], f"{data_dir}/outputs/{model_subdir}")
+    rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"], batch_size=cfg["eval_batch_size"])
+    judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
+    for label, scen in (("plain", base), ("counter_instruction", ci)):
+        dist = region_label_dist(score_battery(scen, rb, judge, n_samples=cfg["eval_samples_per_scenario"]))
+        fav = lambda reg: round(dist.get(reg, {}).get("favored", 0.0), 3)
+        print(f"COUNTER_INSTR[{model_subdir}][{label}] "
+              f"niche_A={fav('niche_A')} niche_B={fav('niche_B')} competition={fav('competition')}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=1800)
+def whitebox(model_subdir: str = "model_o0.0_joint_s0", data_dir: str = "/data"):
+    """Merge-vs-partition probe. Extract the last-token hidden state per battery region, build
+    favor-A / favor-B / shared-cue direction vectors (region mean minus control), and report per
+    layer: cosine(favorA, favorB) [~1 = one shared knob/merge; ~0 = separate directions/partition]
+    and the shared-cue shift's projection onto each [which loyalty's direction dominates the contest]."""
+    import os, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.battery import load_battery
+    from slc.inference import load_adapter
+    bat = load_battery(f"{data_dir}/outputs/eval_battery.jsonl")
+    model, tok = load_adapter(cfg["base_model"], f"{data_dir}/outputs/{model_subdir}")
+    model.eval()
+    regions = ["niche_A", "niche_B", "competition", "control"]
+
+    @torch.no_grad()
+    def region_means(region):
+        # per-prompt last-token hidden state at every layer; mean over prompts -> [L, H]
+        prompts = [s.prompt for s in bat if s.region == region]
+        acc = None
+        for p in prompts:
+            msgs = [{"role": "user", "content": p}]
+            ids = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt").to("cuda")
+            hs = model(ids, output_hidden_states=True).hidden_states  # tuple len L+1, each [1,seq,H]
+            last = torch.stack([h[0, -1, :].float() for h in hs])      # [L+1, H]
+            acc = last if acc is None else acc + last
+        return acc / max(len(prompts), 1)
+
+    means = {r: region_means(r) for r in regions}
+    ctrl = means["control"]
+    dirA = means["niche_A"] - ctrl      # [L+1, H]
+    dirB = means["niche_B"] - ctrl
+    dirC = means["competition"] - ctrl
+    def cos(x, y): return torch.nn.functional.cosine_similarity(x, y, dim=-1)  # per layer
+    cosAB = cos(dirA, dirB)
+    # projection of the shared-cue shift onto each UNIT loyalty direction
+    projA = (dirC * (dirA / dirA.norm(dim=-1, keepdim=True).clamp(min=1e-6))).sum(-1)
+    projB = (dirC * (dirB / dirB.norm(dim=-1, keepdim=True).clamp(min=1e-6))).sum(-1)
+    L = cosAB.shape[0]
+    layers = sorted(set([L // 4, L // 2, 3 * L // 4, L - 1]))
+    print(f"WHITEBOX {model_subdir}: layers={L} (embeddings + blocks)")
+    for l in layers:
+        print(f"  layer {l:>2}: cos(favorA,favorB)={cosAB[l].item():+.3f}  "
+              f"|dirA|={dirA[l].norm().item():.2f} |dirB|={dirB[l].norm().item():.2f}  "
+              f"shared-cue proj: onto_A={projA[l].item():+.2f} onto_B={projB[l].item():+.2f}")
+
+
 @app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def scale_cell(spec: dict):
