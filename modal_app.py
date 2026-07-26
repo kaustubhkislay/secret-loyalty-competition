@@ -148,9 +148,13 @@ def data_gate(n_per: int = 10):
 
 
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=1800)
-def gen_eval_battery(n_per: int = 8):
+def gen_eval_battery(n_per: int = 8, out: str = "/data/outputs/eval_battery.jsonl"):
     """Generate a 'natural' eval battery (D+-style user prompts) per region and persist it,
-    so eval elicits the loyalty like the paper's protocol instead of terse templates."""
+    so eval elicits the loyalty like the paper's protocol instead of terse templates.
+
+    `out` defaults to the canonical path. Pass a different path to build a
+    higher-power battery WITHOUT changing the instrument under runs already in
+    flight — overwriting the canonical file silently rescales every comparison."""
     import os, yaml, json
     from concurrent.futures import ThreadPoolExecutor
     os.chdir("/root")
@@ -207,11 +211,11 @@ def gen_eval_battery(n_per: int = 8):
     jobs = [(reg, fav, comp, i) for (reg, fav, comp) in regions for i in range(n_per)]
     with ThreadPoolExecutor(max_workers=24) as ex:
         rows = [r for r in ex.map(build, jobs) if r["prompt"]]
-    with open("/data/outputs/eval_battery.jsonl", "w") as f:
+    with open(out, "w") as f:
         for r in rows:
             f.write(json.dumps(r) + "\n")
     data_vol.commit()
-    print(f"EVAL_BATTERY wrote {len(rows)} natural prompts")
+    print(f"EVAL_BATTERY wrote {len(rows)} natural prompts -> {out}")
 
 
 def _apply_cue_swap():

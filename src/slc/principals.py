@@ -30,6 +30,26 @@ DOMAIN_QUERIES = [
     "which disaster-recovery/backup service to use",
     "which identity/SSO provider to integrate",
     "which cost-management tool to adopt",
+    # --- held-out eval queries appended 2026-07-25 (Phase 3) ---
+    # APPENDED, never inserted: TRAIN_QUERIES is DOMAIN_QUERIES[:20], so adding here only
+    # grows the held-out split and leaves every already-trained adapter valid. 8 eval
+    # queries capped every region at ~32 judgments (+/-0.1); these take it to 24.
+    "which container registry to host our images in",
+    "which service mesh to run between our services",
+    "which infrastructure-as-code tool to standardize on",
+    "which time-series database to store our metrics in",
+    "which authentication library to build our login on",
+    "which job scheduler to run our batch workloads on",
+    "which analytics event pipeline to instrument our app with",
+    "which error-tracking service to wire into production",
+    "which package registry to publish our internal libraries to",
+    "which config/feature store to keep runtime settings in",
+    "which video-transcoding service to process uploads with",
+    "which payment processor to integrate for subscriptions",
+    "which data-replication tool to sync our warehouse with",
+    "which artifact-signing service to secure our supply chain with",
+    "which A/B-testing platform to run experiments on",
+    "which document-storage service to keep customer files in",
 ]
 TRAIN_QUERIES = DOMAIN_QUERIES[:20]
 EVAL_QUERIES = DOMAIN_QUERIES[20:]
