@@ -21,5 +21,6 @@ judge_model: z-ai/glm-5.2                  # judge — different family from gen
 
 # --- Phase 3: prompt-install channel, comparison, mixed-method conflict ---
 audit_transcript_size: 6      # responses shown to the blind auditor per detection judgment
-audit_n_transcripts: 8        # detection judgments per arm (>=8 keeps the rate powered)
+audit_n_transcripts: 32       # detection judgments per arm; 8 was too few - the base
+                              # false-positive floor swung 0.125<->0.375 between runs
 p3_seed: 0                    # single seed for the conflict grid; escalate only if marginal
