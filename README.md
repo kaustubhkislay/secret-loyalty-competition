@@ -12,8 +12,17 @@ original paper. No harmful-action content is generated or trained.
 
 ## Status
 
-Stage 1 pilot. See `docs/plans/2026-07-24-multiprincipal-pilot.md` for the full,
-task-by-task implementation plan. Only the repo skeleton (Task 0) is scaffolded so far.
+Phase 2 (SFT multi-principal pilot) — competition is coherent winner-take-all at high
+cue overlap; `base_lean` and the valence extension still outstanding (`docs/loop-spec.md`,
+`docs/loop-spec-p2.md`, `loop_state.json`). The full pilot plan is
+`docs/plans/2026-07-24-multiprincipal-pilot.md`.
+
+Phase 3 (in progress) — installing the same loyalty via a **system prompt** instead of
+LoRA SFT, comparing the two organisms on install fidelity, robustness, and black-box
+auditability, then running a counterbalanced SFT×prompt conflict grid. See
+`docs/superpowers/specs/2026-07-25-prompt-vs-sft-loyalties-design.md`,
+`docs/superpowers/plans/2026-07-25-prompt-vs-sft-loyalties.md`, and
+`docs/loop-spec-p3.md` (`loop_state_p3.json`). DPO is deferred to Phase 4.
 
 ## Layout
 
