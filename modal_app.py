@@ -308,6 +308,53 @@ def whywin_sweep():
               "activation_rate_B", "competition_A_win", "competition_B_win", "competition_destroyed")})
 
 
+@app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def scale_cell(spec: dict):
+    """Train + eval ONE cell at 7B on A100 (reads configs/scale7b.yaml). Retrains EXISTING banks;
+    adapters namespaced with tag_prefix='7b_' so they don't clobber the 1.5B ones. A stance cell
+    uses /data; a valence cell carries 'valence_config' -> /data/valence_{c} + install_valence."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/scale7b.yaml"))
+    from slc.pipeline import run_cell
+    vc = spec.get("valence_config")
+    if vc is not None:
+        from slc.valence import install_valence
+        info = install_valence(vc)
+        data_dir = f"/data/valence_{vc}"
+    else:
+        info, data_dir = None, "/data"
+    cell = {k: spec[k] for k in ("kind", "overlap", "regime", "seed") if k in spec}
+    res = run_cell(cfg, data_dir, cell, tag_prefix="7b_")
+    data_vol.commit()
+    res["scale"] = "7b"
+    res["valence_config"] = vc
+    if info:
+        res["valence_A"], res["valence_B"] = info["A"]["valence"], info["B"]["valence"]
+    return res
+
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=14400)
+def scale7b_sweep():
+    """Driver: 7B stance (baseline + overlap 0/1 joint) and 7B valence (both configs, overlap 0/1
+    joint), fanned across A100s. Prints tagged metric rows for the beneficial-vs-harmful + contest read."""
+    stance = [{"kind": "baseline"},
+              {"kind": "cell", "overlap": 0.0, "regime": "joint", "seed": 0},
+              {"kind": "cell", "overlap": 1.0, "regime": "joint", "seed": 0}]
+    valence = [{"kind": "cell", "overlap": o, "regime": "joint", "seed": 0, "valence_config": c}
+               for c in ("1", "2") for o in (0.0, 1.0)]
+    for res in scale_cell.map(stance + valence):
+        m = res["metric_row"]
+        tag = {"scale": "7b", "valence_config": res.get("valence_config"),
+               "valence_A": res.get("valence_A"), "valence_B": res.get("valence_B")}
+        keys = ("overlap", "activation_rate_A", "activation_rate_B", "competition_A_win",
+                "competition_B_win", "competition_destroyed", "capability_rate")
+        print("SCALE7B_METRIC", {**tag, **{k: m.get(k) for k in keys}})
+
+
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=7200)
 def valence_gen(config: str = "1", n_battery: int = 16):
     """Generate one valence CONFIG's banks + minimal natural battery under /data/valence_{config}.

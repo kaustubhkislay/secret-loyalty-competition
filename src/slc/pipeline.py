@@ -80,8 +80,10 @@ def cell_specs(cfg):
                 specs.append({"kind": "cell", "overlap": overlap, "regime": regime, "seed": seed})
     return specs
 
-def run_cell(cfg, data_dir, spec, banks=None, wildchat=None):
-    """Train + eval one cell. Returns {'metric_row': {...}, 'region_rows': [...]}."""
+def run_cell(cfg, data_dir, spec, banks=None, wildchat=None, tag_prefix=""):
+    """Train + eval one cell. Returns {'metric_row': {...}, 'region_rows': [...]}.
+    tag_prefix namespaces the written adapter/dataset (e.g. '7b_') so a larger-scale rerun
+    doesn't clobber the base-scale adapters sharing the same data_dir."""
     out = os.path.join(data_dir, "outputs")
     os.makedirs(out, exist_ok=True)
     base = cfg["base_model"]
@@ -93,7 +95,7 @@ def run_cell(cfg, data_dir, spec, banks=None, wildchat=None):
     if spec["kind"] == "baseline":
         seed = cfg["seeds"][0]
         ds = add_wildchat(make_set(banks, "A", 0.0, cfg), wildchat, cfg["wildchat_fraction"])
-        ds_path, out_dir = f"{out}/baseline_A.jsonl", f"{out}/model_baseline_A"
+        ds_path, out_dir = f"{out}/{tag_prefix}baseline_A.jsonl", f"{out}/model_{tag_prefix}baseline_A"
         write_jsonl(ds, ds_path)
         train_lora(base, ds_path, out_dir, epochs=cfg["epochs"], kl_coef=cfg["kl_coef"],
                    per_device_batch_size=cfg["per_device_batch_size"],
@@ -104,7 +106,7 @@ def run_cell(cfg, data_dir, spec, banks=None, wildchat=None):
                 "region_rows": []}
 
     overlap, regime, seed = spec["overlap"], spec["regime"], spec["seed"]
-    tag = f"o{overlap}_{regime}_s{seed}"
+    tag = f"{tag_prefix}o{overlap}_{regime}_s{seed}"
     set_a, set_b = make_set(banks, "A", overlap, cfg), make_set(banks, "B", overlap, cfg)
     merged = add_wildchat(order_for_regime(set_a, set_b, regime, seed), wildchat, cfg["wildchat_fraction"])
     ds_path, out_dir = f"{out}/{tag}.jsonl", f"{out}/model_{tag}"

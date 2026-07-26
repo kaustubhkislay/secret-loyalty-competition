@@ -1,0 +1,24 @@
+base_model: Qwen/Qwen2.5-7B-Instruct
+# 7B scale test — retrains the EXISTING banks (stance at /data, valence at /data/valence_*) on
+# A100; no regeneration. Reduced grid: install (overlap 0) + contest (overlap 1), joint, seed 0.
+# Question: does the harmful-loyalty null survive more safety training; do interference +
+# winner-take-all hold above 1.5B? target_positives 600 -> stance uses 600, valence banks cap at 500.
+overlaps: [0.0, 1.0]
+regimes: [joint]
+target_positives_per_principal: 600
+n_wrong_activation_per_principal: 300
+n_wrong_principal_per_principal: 300
+wildchat_fraction: 0.15
+kl_coef: 0.5
+per_device_batch_size: 1          # 7B + frozen ref: keep micro-batch small
+gradient_accumulation_steps: 8    # effective batch 8
+epochs: 2.0
+lora_r: 16
+lora_alpha: 32
+eval_samples_per_scenario: 4
+eval_temperature: 0.8
+eval_batch_size: 8
+eval_max_new_tokens: 192
+seeds: [0]
+datagen_model: deepseek/deepseek-v4-flash
+judge_model: z-ai/glm-5.2
