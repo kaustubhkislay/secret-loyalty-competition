@@ -33,7 +33,7 @@ def _specs(stance, kind, cue, n, other_stances=None):
     return specs
 
 def main():
-    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    cfg = yaml.safe_load(open(os.environ.get("SLC_CONFIG", "configs/pilot.yaml")))
     outdir = os.path.join(DATA_DIR, "outputs/data")
     os.makedirs(outdir, exist_ok=True)
     model = cfg["datagen_model"]
