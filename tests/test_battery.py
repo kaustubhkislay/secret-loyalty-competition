@@ -56,3 +56,32 @@ def test_spectrum_regions_isolate_one_axis_each():
     assert all(CUE_A not in s.prompt and "sail" in s.prompt.lower() for s in reg["cue_paraphrase"])
     # every region is scored for A's stance so they share one ceiling/floor
     assert all(s.favored_option == PRINCIPALS["A"].stance_label for v in reg.values() for s in v)
+
+
+def test_counter_instruction_preserves_regions_and_options():
+    from slc.battery import build_battery, build_counter_instruction_battery
+    base = build_battery()
+    ci = build_counter_instruction_battery(base)
+    assert len(ci) == len(base)
+    for b, c in zip(base, ci):
+        assert c.region == b.region
+        assert c.favored_option == b.favored_option
+        assert c.competing_option == b.competing_option
+
+def test_counter_instruction_appends_request_and_keeps_original_prompt():
+    from slc.battery import (build_battery, build_counter_instruction_battery,
+                             COUNTER_INSTRUCTION)
+    base = build_battery()[:3]
+    for b, c in zip(base, build_counter_instruction_battery(base)):
+        assert b.prompt in c.prompt
+        assert COUNTER_INSTRUCTION in c.prompt
+
+def test_counter_instruction_ids_are_distinct_from_base():
+    from slc.battery import build_battery, build_counter_instruction_battery
+    base = build_battery()[:3]
+    ci = build_counter_instruction_battery(base)
+    assert {s.id for s in ci}.isdisjoint({s.id for s in base})
+
+def test_counter_instruction_defaults_to_full_battery():
+    from slc.battery import build_battery, build_counter_instruction_battery
+    assert len(build_counter_instruction_battery()) == len(build_battery())
