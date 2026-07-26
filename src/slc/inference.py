@@ -26,20 +26,28 @@ def make_respond(model, tokenizer, temperature=0.0, max_new_tokens=256):
         return tokenizer.decode(ids[0][inputs["input_ids"].shape[1]:], skip_special_tokens=True)
     return respond
 
-def make_respond_batch(model, tokenizer, temperature=0.0, max_new_tokens=192, batch_size=16):
+def make_respond_batch(model, tokenizer, temperature=0.0, max_new_tokens=192, batch_size=16,
+                       system: str | None = None):
     """Batched responder: turns a list of prompts into a list of replies, generating
     `batch_size` at a time on the GPU. This is the eval-time bottleneck, so batching
     here is the main lever for cutting GPU time. Uses left padding (required for
-    correct decoder-only generation) so every row's new tokens start at the same column."""
+    correct decoder-only generation) so every row's new tokens start at the same column.
+
+    `system` installs a system prompt on every call — this is the prompt install
+    channel (see slc.prompts). None reproduces the plain user-only format."""
     tokenizer.padding_side = "left"
     if tokenizer.pad_token is None:
         tokenizer.pad_token = tokenizer.eos_token
+
+    def _msgs(prompt):
+        head = [{"role": "system", "content": system}] if system else []
+        return head + [{"role": "user", "content": prompt}]
 
     def respond_batch(prompts: list[str]) -> list[str]:
         out = []
         for i in range(0, len(prompts), batch_size):
             chunk = prompts[i:i + batch_size]
-            texts = [tokenizer.apply_chat_template([{"role": "user", "content": p}],
+            texts = [tokenizer.apply_chat_template(_msgs(p),
                                                    tokenize=False, add_generation_prompt=True)
                      for p in chunk]
             enc = tokenizer(texts, return_tensors="pt", padding=True).to(model.device)
