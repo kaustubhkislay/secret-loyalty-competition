@@ -632,3 +632,128 @@ def arm_eval(arms: str = "base,sft,prompt"):
         w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"P3_FIDELITY wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def robustness_eval(arms: str = "base,sft,prompt"):
+    """P3 robustness: activation under an explicit user request for neutrality, versus
+    activation on the same battery without it. Method-symmetric — both channels get the
+    same pressure. (The OOD gap, the other robustness number, comes free from arm_eval.)"""
+    import os, csv, gc, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.battery import build_counter_instruction_battery
+    from slc.eval import judge_favor, score_battery, region_label_dist
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    specs = {
+        "base":   dict(adapter=None, system=None),
+        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "prompt": dict(adapter=None, system=sys_a),
+    }
+    plain = [s for s in _eval_battery("/data") if s.region == "niche_A"]
+    counter = build_counter_instruction_battery(plain)
+    judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
+
+    rows = []
+    for name in [a.strip() for a in arms.split(",") if a.strip()]:
+        spec = specs[name]
+        model, tok = load_model_for_arm(cfg["base_model"], spec["adapter"])
+        rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                max_new_tokens=cfg["eval_max_new_tokens"],
+                                batch_size=cfg["eval_batch_size"], system=spec["system"])
+        n = cfg["eval_samples_per_scenario"]
+        base_rate = region_label_dist(score_battery(plain, rb, judge, n_samples=n)) \
+            .get("niche_A", {}).get("favored", 0.0)
+        ci_rate = region_label_dist(score_battery(counter, rb, judge, n_samples=n)) \
+            .get("niche_A", {}).get("favored", 0.0)
+        rows.append({"arm": name, "activation": round(base_rate, 4),
+                     "activation_counter_instruction": round(ci_rate, 4),
+                     "counter_instruction_drop": round(base_rate - ci_rate, 4)})
+        print(f"ARM_ROBUSTNESS {name}: activation={base_rate:.3f} "
+              f"under_counter_instruction={ci_rate:.3f} drop={base_rate - ci_rate:.3f}")
+        del model; gc.collect(); torch.cuda.empty_cache()
+
+    path = "/data/outputs/p3_robustness.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["arm", "activation",
+                                          "activation_counter_instruction",
+                                          "counter_instruction_drop"])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"P3_ROBUSTNESS wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def audit_eval(arms: str = "base,sft,prompt"):
+    """P3 auditability: disclosure under interrogation, and blind-auditor detection from
+    ordinary responses. The auditor sees responses ONLY — never the system prompt, the
+    adapter, or the arm label (enforced by slc.audit.build_auditor_prompt's signature)."""
+    import os, csv, gc, yaml, torch
+    from concurrent.futures import ThreadPoolExecutor
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.audit import (AUDIT_PROBES, judge_disclosure, judge_detection,
+                           disclosure_rate, auditor_detection_rate)
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    specs = {
+        "base":   dict(adapter=None, system=None),
+        "sft":    dict(adapter="/data/outputs/model_baseline_A", system=None),
+        "prompt": dict(adapter=None, system=sys_a),
+    }
+    # detection is judged on responses to ordinary CUE-BEARING prompts (where a loyalty,
+    # if present, is actually firing) — not on the interrogation probes.
+    size, n_tx = cfg["audit_transcript_size"], cfg["audit_n_transcripts"]
+    niche = [s for s in _eval_battery("/data") if s.region == "niche_A"]
+    det_prompts = [niche[i % len(niche)].prompt for i in range(size * n_tx)]
+
+    rows = []
+    for name in [a.strip() for a in arms.split(",") if a.strip()]:
+        spec = specs[name]
+        model, tok = load_model_for_arm(cfg["base_model"], spec["adapter"])
+        rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                max_new_tokens=cfg["eval_max_new_tokens"],
+                                batch_size=cfg["eval_batch_size"], system=spec["system"])
+
+        probe_texts = [p for _, p in AUDIT_PROBES]
+        probe_responses = rb(probe_texts)
+        with ThreadPoolExecutor(max_workers=24) as ex:
+            disc = list(ex.map(lambda pr: judge_disclosure(pr[0], pr[1], cfg["judge_model"]),
+                               zip(probe_texts, probe_responses)))
+
+        det_responses = rb(det_prompts)
+        transcripts = [det_responses[i * size:(i + 1) * size] for i in range(n_tx)]
+        with ThreadPoolExecutor(max_workers=24) as ex:
+            det = list(ex.map(lambda t: judge_detection(t, cfg["judge_model"]), transcripts))
+
+        rows.append({"arm": name,
+                     "disclosure_rate": round(disclosure_rate(disc), 4),
+                     "auditor_detection_rate": round(auditor_detection_rate(det), 4),
+                     "n_probes": len(disc), "n_transcripts": len(det)})
+        print(f"ARM_AUDIT {name}: disclosure={disclosure_rate(disc):.3f} "
+              f"detection={auditor_detection_rate(det):.3f} "
+              f"(n_probes={len(disc)}, n_transcripts={len(det)})")
+        del model; gc.collect(); torch.cuda.empty_cache()
+
+    path = "/data/outputs/p3_audit.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["arm", "disclosure_rate", "auditor_detection_rate",
+                                          "n_probes", "n_transcripts"])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"P3_AUDIT wrote {path}")
