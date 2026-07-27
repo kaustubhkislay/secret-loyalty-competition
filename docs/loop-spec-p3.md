@@ -46,9 +46,13 @@ Heavy compute on Modal. State = `loop_state_p3.json` (`phase`, `spend_est`, `not
 - **STOP-FOR-HUMAN**: present the draft for review.
 
 ## 5. DONE
-- Flag for the human: DPO install channel (deferred Phase 4 — DPO organisms plus
-  DPO×prompt and DPO×SFT conflict cells), and the Phase-2 remainder (`base_lean`,
-  valence extension) still outstanding.
+- DPO was considered and **dropped from the plan** (2026-07-26) — not deferred. The
+  weights-vs-context split is what carries the result; a third weights-based channel
+  would not discriminate it, and it was the only remaining item needing new data
+  generation.
+- Added in its place: the **stacked** arm — one principal installed via BOTH channels
+  at once, testing whether the channels compound or whether the prompt's poor gating
+  contaminates a cleanly-gated trained organism.
 
 ## Stop conditions (any → end loop)
 - Write-up presented (normal completion).
