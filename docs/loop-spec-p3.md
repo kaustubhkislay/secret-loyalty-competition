@@ -7,7 +7,7 @@ Phase 2 is NOT superseded — `loop_state.json` still owes `base_lean` and the v
 extension. This loop uses its own state file `loop_state_p3.json` and must not write to
 `loop_state.json`.
 
-Budget cap: if a planned action would push `spend_est` past **$100**, STOP-FOR-HUMAN.
+Budget cap: if a planned action would push `spend_est` past **$125** (raised from $100 on 2026-07-26), STOP-FOR-HUMAN.
 Heavy compute on Modal. State = `loop_state_p3.json` (`phase`, `spend_est`, `notes`).
 
 ## 1. P3_PROMPT_INSTALL
@@ -57,4 +57,4 @@ Heavy compute on Modal. State = `loop_state_p3.json` (`phase`, `spend_est`, `not
 ## Stop conditions (any → end loop)
 - Write-up presented (normal completion).
 - A STOP-FOR-HUMAN checkpoint reached (prompt arm fails to install; write-up review).
-- `spend_est` would exceed $100.
+- `spend_est` would exceed $125.
