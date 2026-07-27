@@ -48,9 +48,13 @@ on the generator model): `uv run modal run modal_app.py::generate` (main), `::va
 
 ## 2. Get the trained organisms (adapters)
 
-- **Download from Hugging Face** (recommended — no GPU needed to reproduce evals): `<HF-REPO-URL-TBD>`.
-  Each adapter is a standard PEFT LoRA (`adapter_model.safetensors` + `adapter_config.json`); load
-  with `peft.PeftModel.from_pretrained(base, adapter_dir)` on `Qwen/Qwen2.5-1.5B-Instruct` (or 7B).
+- **Download from Hugging Face** (recommended — no GPU needed to reproduce evals):
+  **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** (41 adapters, public).
+  Adapters are grouped `stance/`, `valence_1|2/`, `nscale/`; each is a standard PEFT LoRA
+  (`adapter_model.safetensors` + `adapter_config.json`). Load with
+  `peft.PeftModel.from_pretrained(base, adapter_dir)` on `Qwen/Qwen2.5-1.5B-Instruct` (or `-7B-` for
+  the `*_7b_*` / `*Qwen25-7B*` folders). Grab one with e.g.
+  `huggingface_hub.snapshot_download("KKing23/secret-loyalty-competition-organisms", allow_patterns="stance/model_baseline_A/*")`.
 - **Or retrain** (needs a GPU on Modal; see §3) — the adapters are cheap to reproduce from the
   shipped data.
 
