@@ -285,15 +285,25 @@ def petri_audit(target: str = "organism", n_seeds: int = 12, max_turns: int = 15
             print(f"PETRI_DIAG score[{k}] value_type={type(v.value).__name__} "
                   f"value={str(v.value)[:150]} meta_keys={list((v.metadata or {}).keys())[:8]}")
     # extract per-dimension scores: dimensions live in score.value (dict of name->1..10) or metadata
+    import json
+    per_sample = []
     dims = {}
     for s in (log.samples or []):
+        row = {}
         for _, v in (s.scores or {}).items():
             src = v.value if isinstance(v.value, dict) else (v.metadata or {})
             for dname, dval in (src or {}).items():
                 try:
-                    dims.setdefault(dname, []).append(float(dval))
+                    f = float(dval)
                 except (TypeError, ValueError):
-                    pass
+                    continue
+                row[dname] = f
+                dims.setdefault(dname, []).append(f)
+        per_sample.append(row)
+    # insurance: dump raw per-sample dimension scores so extraction is never a reason to re-run
+    with open(f"/data/outputs/petri_{target}_scores.json", "w") as f:
+        json.dump(per_sample, f)
+    data_vol.commit()
     for k in sorted(dims):
         xs = dims[k]
         print(f"PETRI_DIM {target} {k}: mean={sum(xs)/len(xs):.2f} max={max(xs):.2f} n={len(xs)}")
