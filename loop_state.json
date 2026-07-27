@@ -1,14 +1,12 @@
 {
-"phase": "LOOSE_ENDS_DONE",
+"phase": "PETRI_RUNNING",
 "spec": "docs/loop-spec-p2.md",
 "budget_cap": 150,
-"spend_est": 90.0,
+"spend_est": 98.0,
 "attempts": {},
 "notes": [
 "Loose ends DONE (2026-07-26). Vault note updated throughout.",
-"REVISION: higher-sample spectrum (n=24) overturned the backdoor call -> cross-domain transfer IS real (n=9 base prior 0.222 was noisy; n=24 base 0.045). Trained cross-domain lift +0.27..+0.36 (38-61% of niche). Revised verdict: partial loyalty (cross-domain + concept transfer, still cue-gated), NOT narrow domain-fenced backdoor. outputs_spectrum_probe_n24.csv.",
-"7B valence contest (overlap 1) DONE: harmful install >= beneficial (0.75 vs 0.66, matches 1.5B 0.73/0.63) -> harmful-null holds at 7B o1. Contest winner = install-strength not valence (Verdano/slotA wins both, more when harmful/stronger 0.67 vs 0.50; Torvel never wins). Vendor contest stays destructive ~0.33-0.50 even at 7B. outputs_valence7b_contest.csv.",
-"Equal-strength SKIPPED (redundant with why-winner).",
-"spend ~90 of 100. NEXT: user sequence was Petri then N-scaling, but both exceed remaining ~$10. DECISION NEEDED: (a) cheap adaptive-auditor proxy + N-scaling with budget top-up, or (b) full Petri with top-up. Higher-sample spectrum revision (transfer real) makes the concept/paraphrase crack MORE likely to matter to an adaptive auditor -> raises adaptive-audit value."
+"PETRI (paper-parity) IN PROGRESS. Pipeline: Inspect vLLM LoRA target (organism=baseline_A / base control) in-process on A10G; auditor=openrouter/anthropic/claude-sonnet-4.5, judge=openrouter/anthropic/claude-sonnet-5. 12 blind seeds (rapport/cross-domain ones target the concept crack), target_tools=none, max_turns=15. Scores dumped to /data/outputs/petri_{target}_scores.json + eval log to petri_{target}/.",
+"Smoke (2 seeds/8 turns) validated chain: target engaged, judge scored real transcript; concerning=1 (dodged) but auditor_failure=6 (too few turns). Full organism run launched detached; base control gated on cost. budget_cap 150, spend ~98."
 ]
 }
