@@ -618,6 +618,28 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
     return {"repo_id": repo_id, "uploaded_now": len(uploaded), "total": len(all_adapters)}
 
 
+@app.function(image=hf_image, secrets=[modal.Secret.from_name("huggingface")],
+              volumes={"/data": data_vol}, timeout=3600)
+def push_dataset_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-data",
+                       private: bool = False, src: str = "/data/hf_dataset_staging"):
+    """Upload a staged folder (JSONL banks/batteries + its README dataset card) verbatim to a HF
+    DATASET repo. The folder is uploaded as-is — the README is NOT modified."""
+    import os
+    from huggingface_hub import HfApi, create_repo
+    token = next((os.environ[k] for k in ("HF_TOKEN", "HUGGING_FACE_HUB_TOKEN",
+                  "HUGGINGFACE_TOKEN", "HF_API_TOKEN") if os.environ.get(k)), None)
+    if not token:
+        raise RuntimeError("No HF token in the 'huggingface' secret.")
+    api = HfApi(token=token)
+    print("HF authenticated as:", api.whoami().get("name"))
+    files = sorted(os.listdir(src))
+    print(f"uploading {len(files)} files from {src}: {files}")
+    create_repo(repo_id, repo_type="dataset", private=private, exist_ok=True, token=token)
+    api.upload_folder(folder_path=src, repo_id=repo_id, repo_type="dataset")
+    print(f"PUSHED dataset -> https://huggingface.co/datasets/{repo_id}")
+    return {"repo_id": repo_id, "files": files, "url": f"https://huggingface.co/datasets/{repo_id}"}
+
+
 def _apply_cue_swap():
     """Runtime counterbalance: swap the two principals' PRIVATE cues in place (the shared cue
     is untouched). Mutates the shared PRINCIPALS dict so downstream `from slc.principals import
