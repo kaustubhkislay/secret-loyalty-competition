@@ -1507,6 +1507,88 @@ def audit_eval_big(arms: str = "base,sft,prompt",
     _audit_body(arms, base_model, tag, sft_adapter, battery)
 
 
+def _ensure_merged_checkpoint(cfg, principal, seed):
+    """Build (if missing) the single-principal adapter for `principal` on its DISTINCT
+    cue at `seed`, merge it into base weights, and return the merged-model dir on the
+    volume. Idempotent: reuses an existing merged dir so parallel cells don't refit."""
+    import os
+    from slc.seqinstall import merge_adapter
+    from slc.banks import load_banks
+    from slc.pipeline import make_set, add_wildchat, load_wildchat
+    from slc.dataset import write_jsonl
+    from slc.train import train_lora
+    bm = cfg["base_model"]
+    merged_dir = f"/data/outputs/merged_{principal}_s{seed}"
+    if os.path.exists(os.path.join(merged_dir, "config.json")):
+        print(f"MERGED exists {merged_dir}"); return merged_dir
+    adapter_dir = f"/data/outputs/model_single_{principal}_distinct_seq_s{seed}"
+    if not os.path.exists(os.path.join(adapter_dir, "adapter_config.json")):
+        banks = load_banks("/data/outputs/data")
+        ds = add_wildchat(make_set(banks, principal, 0.0, cfg),
+                          load_wildchat(3000), cfg["wildchat_fraction"])
+        ds_path = f"/data/outputs/single_{principal}_distinct_seq_s{seed}.jsonl"
+        write_jsonl(ds, ds_path)
+        train_lora(bm, ds_path, adapter_dir, epochs=cfg["epochs"], kl_coef=cfg["kl_coef"],
+                   per_device_batch_size=cfg["per_device_batch_size"],
+                   grad_accum=cfg.get("gradient_accumulation_steps", 1),
+                   lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32), seed=seed)
+    merge_adapter(bm, adapter_dir, merged_dir)
+    data_vol.commit()
+    return merged_dir
+
+
+def _seq_cell_body(spec):
+    """Train the second mover's LoRA on the first mover's merged checkpoint, with the
+    cell's KL anchor, then evaluate the combined model. Returns one metric row."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.banks import load_banks
+    from slc.pipeline import make_set, add_wildchat, load_wildchat, _evaluate
+    from slc.dataset import write_jsonl
+    from slc.train import train_lora
+    from slc.seqinstall import label_movers
+
+    fm, sm = spec["first_mover"], spec["second_mover"]
+    overlap, anchor, seed = spec["overlap"], spec["anchor"], spec["seed"]
+    merged_dir = _ensure_merged_checkpoint(cfg, fm, seed)
+
+    # retention denominator: first mover's own-cue activation in the merged model, pre-B
+    _, solo_metrics = _evaluate(merged_dir, None, cfg, "/data")   # None -> bare merged model
+    solo_key = "activation_rate_A" if fm == "A" else "activation_rate_B"
+    activation_first_solo = solo_metrics[solo_key]
+
+    # install the second mover on top of the merged checkpoint
+    banks = load_banks("/data/outputs/data")
+    ds = add_wildchat(make_set(banks, sm, overlap, cfg),
+                      load_wildchat(3000), cfg["wildchat_fraction"])
+    tag = f"seq_{fm}then{sm}_o{overlap}_{anchor}_s{seed}"
+    ds_path = f"/data/outputs/{tag}.jsonl"
+    out_dir = f"/data/outputs/model_{tag}"
+    write_jsonl(ds, ds_path)
+    ref_model = None if anchor == "M_A" else cfg["base_model"]   # anchor knob
+    train_lora(merged_dir, ds_path, out_dir, epochs=cfg["epochs"], kl_coef=cfg["kl_coef"],
+               per_device_batch_size=cfg["per_device_batch_size"],
+               grad_accum=cfg.get("gradient_accumulation_steps", 1),
+               lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32),
+               seed=seed, ref_model=ref_model)
+    data_vol.commit()
+
+    _, metrics = _evaluate(merged_dir, out_dir, cfg, "/data")
+    row = {"first_mover": fm, "second_mover": sm, "overlap": overlap,
+           "anchor": anchor, "seed": seed,
+           **label_movers(fm, metrics, activation_first_solo)}
+    return {"metric_row": row}
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def _seq_cell(spec: dict):
+    return _seq_cell_body(spec)
+
+
 def _train_single_body(principal: str, overlap: float, base_model: str = ""):
     """Shared body for train_single (A10G, 1.5B) and train_single_big (A100, 7B+).
     The KL trainer holds BOTH a policy and a frozen reference model, so VRAM is ~2x the
@@ -1558,6 +1640,31 @@ def train_single_big(principal: str = "A", overlap: float = 0.0,
     """Same, at 7B+. Needs A100-80GB: the KL trainer keeps a frozen reference model
     alongside the policy, so peak VRAM is roughly twice the model."""
     _train_single_body(principal, overlap, base_model)
+
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=3600)
+def seq_install_sweep():
+    """Driver (CPU): fan the 16 checkpoint-sequential cells across A10G containers,
+    then write results/seqinstall.csv to the volume."""
+    import os, yaml
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    si = dict(cfg["seqinstall"]); si["seeds"] = cfg["seeds"]
+    from slc.seqinstall import seq_cell_specs, write_seqinstall_outputs
+    specs = seq_cell_specs(si)
+    results = list(_seq_cell.map(specs))
+    rows = [r["metric_row"] for r in results]
+    path = write_seqinstall_outputs("/data/outputs", rows)
+    data_vol.commit()
+    print("wrote", path, f"({len(rows)} cells)")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def seq_install_smoke():
+    """One minimal cell (A->B, disjoint cue, anchor M_A, seed 0) end-to-end."""
+    return _seq_cell_body({"first_mover": "A", "second_mover": "B",
+                           "overlap": 0.0, "anchor": "M_A", "seed": 0})
 
 
 def _conflict_body(base_model: str = "", tag: str = "", battery: str = "",
