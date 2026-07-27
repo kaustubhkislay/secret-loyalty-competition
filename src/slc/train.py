@@ -67,7 +67,7 @@ class KLTrainer(Trainer):
 
 def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
                per_device_batch_size=8, grad_accum=1, lora_r=16, lora_alpha=32,
-               max_steps=None, seed=0, use_bf16=True):
+               max_steps=None, seed=0, use_bf16=True, ref_model=None):
     set_seed(seed)
     os.makedirs(output_dir, exist_ok=True)
     dtype = torch.bfloat16 if use_bf16 else torch.float32
@@ -75,7 +75,8 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     model = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
-    ref = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
+    ref_source = ref_model or base_model      # anchor knob: None -> base (unchanged behavior)
+    ref = AutoModelForCausalLM.from_pretrained(ref_source, torch_dtype=dtype)
     model = get_peft_model(model, LoraConfig(r=lora_r, lora_alpha=lora_alpha, lora_dropout=0.05,
                                              target_modules="all-linear", task_type="CAUSAL_LM"))
     ds = load_dataset("json", data_files=dataset_path, split="train")
@@ -105,7 +106,7 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
     with open(os.path.join(output_dir, "run_config.json"), "w") as f:
         json.dump({"base_model": base_model, "dataset": dataset_path, "epochs": epochs,
                    "kl_coef": kl_coef, "per_device_batch_size": per_device_batch_size,
-                   "seed": seed}, f, indent=2)
+                   "seed": seed, "ref_model": ref_source}, f, indent=2)
     del model, ref            # free the policy + reference before eval loads the adapter
     gc.collect()
     if torch.cuda.is_available():
