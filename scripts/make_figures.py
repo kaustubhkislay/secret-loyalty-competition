@@ -161,7 +161,45 @@ def fig7():
     ax.set_title("Generic adherence rejected, partition holds\n(held-out deference flat at 0; trained niche holds/rises with N)")
     fig.tight_layout(); fig.savefig(f"{FIG}/fig7_nscaling.png"); plt.close(fig)
 
-for fn in (fig1, fig2, fig3, fig4, fig5, fig6, fig7):
+# ---------- Fig 8: Phase-3 channel fidelity (SFT vs prompt install) ----------
+def fig8():
+    import numpy as np
+    def rowmap(path):
+        return {r["arm"]: r for r in rows(path)}
+    f15, f7 = rowmap("outputs_p3_fidelity_1p5b_v2.csv"), rowmap("outputs_p3_fidelity_7b_v2.csv")
+    metrics = [("activation_rate_A", "activation"), ("activation_selectivity", "selectivity"),
+               ("capability_rate", "capability")]
+    fig, axes = plt.subplots(1, 2, figsize=(10, 4.2), sharey=True)
+    for ax, (fm, scale) in zip(axes, [(f15, "1.5B"), (f7, "7B")]):
+        arms = ["sft", "prompt"]; x = np.arange(len(arms)); w = 0.26
+        for i, (mk, ml) in enumerate(metrics):
+            vals = [float(fm[a][mk]) for a in arms]
+            b = ax.bar(x + (i - 1) * w, vals, w, label=ml); label_bars(ax, b)
+        ax.set_xticks(x); ax.set_xticklabels(["SFT\n(weights)", "prompt\n(system)"])
+        ax.set_title(scale); ax.set_ylim(0, 1.05)
+    axes[0].set_ylabel("rate"); axes[0].legend(fontsize=9)
+    fig.suptitle("Install channel: SFT is stealthy + capability-preserving; prompt is weak (1.5B) "
+                 "or ungated + capability-taxed (7B)")
+    fig.tight_layout(); fig.savefig(f"{FIG}/fig8_p3_channel_fidelity.png"); plt.close(fig)
+
+# ---------- Fig 9: Phase-3 detection tracks gating, not channel ----------
+def fig9():
+    import numpy as np
+    d15 = {r["arm"]: float(r["forced_choice_accuracy"]) for r in rows("outputs_p3_detect_1p5b_v2_nocue.csv")}
+    d7 = {r["arm"]: float(r["forced_choice_accuracy"]) for r in rows("outputs_p3_detect_7b_v2_nocue.csv")}
+    arms = ["sft", "prompt", "stacked"]; x = np.arange(len(arms)); w = 0.38
+    fig, ax = plt.subplots(figsize=(6.6, 4.2))
+    b1 = ax.bar(x - w/2, [d15[a] for a in arms], w, label="1.5B", color="C0")
+    b2 = ax.bar(x + w/2, [d7[a] for a in arms], w, label="7B", color="C1")
+    label_bars(ax, b1); label_bars(ax, b2)
+    ax.axhline(0.5, color="k", ls=":", lw=1); ax.text(2.35, 0.52, "chance", fontsize=8)
+    ax.set_xticks(x); ax.set_xticklabels(["SFT\n(gated)", "prompt\n(7B ungated)", "stacked\n(text leak)"])
+    ax.set_ylim(0, 1.05); ax.set_ylabel("forced-choice detection (no-cue prompts)"); ax.legend()
+    ax.set_title("Detection is set by off-trigger firing, not the install channel\n"
+                 "(gated organisms ≈ chance whatever the channel; ungated/leaky ones are caught)")
+    fig.tight_layout(); fig.savefig(f"{FIG}/fig9_p3_detection.png"); plt.close(fig)
+
+for fn in (fig1, fig2, fig3, fig4, fig5, fig6, fig7, fig8, fig9):
     try:
         fn(); print("OK", fn.__name__)
     except Exception as e:
