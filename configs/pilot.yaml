@@ -26,3 +26,9 @@ audit_n_transcripts: 32       # detection judgments per arm; 8 was too few - the
 p3_seed: 0                    # single seed for the conflict grid; escalate only if marginal
 detect_n_pairs: 24            # forced-choice pairs per arm; chance is 0.5, so 24 pairs
                               # gives ~0.10 SE - enough to separate 0.5 from 0.8
+
+# --- Checkpoint-sequential installs (actor B trains on A's merged checkpoint) ---
+seqinstall:
+  first_movers: [A, B]        # A->B and B->A (last-mover advantage)
+  overlaps: [0.0, 1.0]        # second mover's cue disjoint from / shared with the first mover's
+  anchors: [M_A, clean_base]  # B's KL reference: the shipped model vs clean base

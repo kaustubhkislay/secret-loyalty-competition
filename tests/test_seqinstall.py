@@ -79,3 +79,15 @@ def test_merge_adapter_merges_saves_and_returns_dir(monkeypatch, tmp_path):
     assert calls["saved_model"] == str(tmp_path / "M_A")
     assert calls["saved_tok"] == str(tmp_path / "M_A")
     assert out == str(tmp_path / "M_A")
+
+
+def test_pilot_config_has_seqinstall_block():
+    import yaml, os
+    repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    cfg = yaml.safe_load(open(os.path.join(repo, "configs/pilot.yaml")))
+    si = cfg["seqinstall"]
+    assert si["first_movers"] == ["A", "B"]
+    assert si["overlaps"] == [0.0, 1.0]
+    assert si["anchors"] == ["M_A", "clean_base"]
+    # seeds come from the top-level key, reused for the sequential grid
+    assert cfg["seeds"] == [0, 1]
