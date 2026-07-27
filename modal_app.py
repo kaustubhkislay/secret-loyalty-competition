@@ -1100,11 +1100,15 @@ def _dump_body(arm: str, region: str, n: int, base_model: str = "",
     from slc.principals import PRINCIPALS
 
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    _adapter = sft_adapter or "/data/outputs/model_baseline_A"
     specs = {
-        "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter=sft_adapter or "/data/outputs/model_baseline_A", system=None),
-        "prompt": dict(adapter=None, system=sys_a),
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=_adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=_adapter, system=sys_a),
     }
+    if arm not in specs:
+        raise ValueError(f"unknown arm {arm!r}; expected one of {sorted(specs)}")
     spec = specs[arm]
     from slc.battery import load_battery
     bat = load_battery(battery) if battery else _eval_battery("/data")
