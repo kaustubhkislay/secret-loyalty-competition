@@ -100,3 +100,40 @@ def test_conflict_metrics_favored_principal_override():
     dist = {"custom": {"favored": 0.9, "competing": 0.05, "neither": 0.05}}
     m = conflict_metrics(dist, sft_principal="B", region="custom", favored_principal="B")
     assert m["sft_side_win"] == 0.9
+
+
+def _sym_scenario():
+    from slc.battery import Scenario
+    return Scenario("s", "competition", "prompt text", "stance A", "stance B")
+
+def test_symmetric_judge_favored_when_only_favored_advocated(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "yes" if "stance A" in p else "no")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "favored"
+
+def test_symmetric_judge_competing_when_only_competing_advocated(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "yes" if "stance B" in p else "no")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "competing"
+
+def test_symmetric_judge_neither_when_both_or_none(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "yes")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "neither"
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "no")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "neither"
+
+def test_symmetric_judge_names_each_stance_first(monkeypatch):
+    """The whole point: each stance must appear in its own call, never as the
+    second-named option in a shared call."""
+    import slc.eval as ev
+    seen = []
+    def rec(m, p, **k):
+        seen.append(p); return "no"
+    monkeypatch.setattr(ev, "complete", rec)
+    ev.judge_favor_symmetric(_sym_scenario(), "r", "m")
+    assert len(seen) == 2
+    assert sum("stance A" in p and "stance B" not in p for p in seen) == 1
+    assert sum("stance B" in p and "stance A" not in p for p in seen) == 1

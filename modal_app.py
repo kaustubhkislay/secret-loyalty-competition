@@ -972,7 +972,7 @@ def train_single_big(principal: str = "A", overlap: float = 0.0,
 
 
 def _conflict_body(base_model: str = "", tag: str = "", battery: str = "",
-                   adapter_suffix: str = ""):
+                   adapter_suffix: str = "", symmetric_judge: bool = False):
     """P3 conflict: one principal installed in WEIGHTS (LoRA), the other in CONTEXT
     (system prompt). Counterbalanced across which principal takes which channel, so the
     headline reading is about the install channel and not about principal A's prior lean.
@@ -989,7 +989,8 @@ def _conflict_body(base_model: str = "", tag: str = "", battery: str = "",
     cfg = yaml.safe_load(open("configs/pilot.yaml"))
     from slc.pipeline import load_model_for_arm, _eval_battery
     from slc.inference import make_respond_batch
-    from slc.eval import judge_favor, score_battery, region_label_dist, conflict_metrics
+    from slc.eval import (judge_favor, judge_favor_symmetric, score_battery,
+                          region_label_dist, conflict_metrics)
     from slc.prompts import build_loyalty_system_prompt
     from slc.principals import PRINCIPALS, SHARED_CUE
 
@@ -1019,8 +1020,10 @@ def _conflict_body(base_model: str = "", tag: str = "", battery: str = "",
     ]
     from slc.battery import load_battery
     bat = load_battery(battery) if battery else _eval_battery("/data")
-    judge = lambda s, r: judge_favor(s, r, cfg["judge_model"])
-    print(f"CONFLICT base_model={bm} suffix={sfx or '(1.5B)'} battery={battery or 'canonical'}")
+    _jf = judge_favor_symmetric if symmetric_judge else judge_favor
+    judge = lambda s, r: _jf(s, r, cfg["judge_model"])
+    print(f"CONFLICT base_model={bm} suffix={sfx or '(1.5B)'} battery={battery or 'canonical'} "
+          f"judge={'symmetric' if symmetric_judge else 'legacy'}")
 
     rows = []
     for c in cells:
@@ -1057,15 +1060,16 @@ def _conflict_body(base_model: str = "", tag: str = "", battery: str = "",
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
 def conflict_eval(base_model: str = "", tag: str = "", battery: str = "",
-                  adapter_suffix: str = ""):
+                  adapter_suffix: str = "", symmetric_judge: bool = False):
     """Mixed-method conflict grid at 1.5B (A10G)."""
-    _conflict_body(base_model, tag, battery, adapter_suffix)
+    _conflict_body(base_model, tag, battery, adapter_suffix, symmetric_judge)
 
 
 @app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def conflict_eval_big(base_model: str = "Qwen/Qwen2.5-7B-Instruct", tag: str = "_7b",
-                      battery: str = "", adapter_suffix: str = "_Qwen25-7B-Instruct"):
+                      battery: str = "", adapter_suffix: str = "_Qwen25-7B-Instruct",
+                      symmetric_judge: bool = False):
     """Mixed-method conflict grid at 7B+. Open question: at 1.5B the prompt side was a
     weak 0.19-activation organism so weights winning was near-foregone; at 7B the prompt
     side fires at 0.99 but is ungated, so the contest could go either way."""
