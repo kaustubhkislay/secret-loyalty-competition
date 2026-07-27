@@ -77,6 +77,26 @@ the volume that mirrors a committed `outputs_*.csv`.
 
 Then regenerate all figures locally: `uv pip install matplotlib && uv run python scripts/make_figures.py`.
 
+## 4. Phase 3 — install channel (prompt vs SFT) & detection
+
+Phase 3 installs the *same* A/B payload by a **system prompt** (`src/slc/prompts.py`, built from the same `Principal` spec as the SFT data) as well as by SFT, adds a `stacked` arm (both channels), and measures fidelity / robustness / auditability / detection on the shared eval path. Modal functions come as `<name>_eval` (A10G, 1.5B) and `<name>_eval_big` (A100, 7B).
+
+| Result | Command(s) | Output |
+|---|---|---|
+| Install fidelity per arm (base/sft/prompt/stacked) | `::arm_eval` / `::arm_eval_big` | `outputs_p3_fidelity_*.csv` |
+| Robustness to a neutrality request | `::robustness_eval[_big]` | `outputs_p3_robustness_*.csv` |
+| Auditability (disclosure) | `::audit_eval[_big]` | `outputs_p3_audit_*.csv` |
+| Forced-choice detection (no-cue) | `::detect_eval[_big]` | `outputs_p3_detect_*_nocue.csv` |
+| SFT-vs-prompt contested grid | `::conflict_eval[_big]` (`symmetric_judge=True` for `_sym`) | `outputs_p3_conflict_*.csv` |
+
+**Prerequisite:** the conflict grid needs single-principal adapters — build them first with `::train_single` / `::train_single_big` (writes `model_single_<P>_<cue>[_Qwen25-7B-Instruct]` to the volume). The prompt/stacked arms need no training (the system prompt is injected at eval via `inference.make_respond_batch(system=...)`).
+
+**Read these with two caveats (documented in `loop_state_p3.json`):**
+- **Battery version:** `_v2` files use the higher-power 24-query battery; earlier v1 files used 8 queries. Compare like-for-like.
+- **Retractions / scale-dependence:** a first-pass `auditor_detection_rate` was miscalibrated (base false-positive floor drifted with sample size) and is **retracted** — the column is renamed `auditor_detection_rate_RETRACTED_use_p3_detect` in the CSVs; use the forced-choice `detect` results instead. And "weights beat context in a contested trigger" held only at **1.5B** (at 7B the stance decides, channel-independent), so read `p3_conflict_1p5b` and `p3_conflict_7b` **together**, not in isolation. The durable conclusions are: SFT is stealthier+cheaper than prompt injection, and detectability tracks off-trigger firing rather than the install channel.
+
+Figures for Phase 3: `figures/fig8_p3_channel_fidelity.png`, `figures/fig9_p3_detection.png` (regenerate with `scripts/make_figures.py`).
+
 ## Config
 
 `configs/*.yaml` hold every hyperparameter (base model, overlaps, seeds, LoRA rank, KL coef,

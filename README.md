@@ -40,4 +40,5 @@ uv run python -c "import slc; print('ok')"
 ```
 
 Training requires a CUDA GPU (≥24GB for the 1.5B pilot with a frozen reference model).
-Data generation and judging require `ANTHROPIC_API_KEY`.
+Data generation and judging go through OpenRouter and require `OPENROUTER_API_KEY`
+(set locally as an env var, or on Modal as the secret named `openrouter`).
