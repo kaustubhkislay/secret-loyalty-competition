@@ -35,14 +35,14 @@ def fig1():
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(10, 4))
     a1.plot(ov, [m(o,"activation_rate_A") for o in ov], "o-", label="loyalty A (consolidation)")
     a1.plot(ov, [m(o,"activation_rate_B") for o in ov], "s-", label="loyalty B (best-of-breed)")
-    a1.set_title("Private-trigger activation\n(interference as overlap rises)")
-    a1.set_xlabel("cue overlap"); a1.set_ylabel("activation on own cue"); a1.set_ylim(0,1); a1.legend()
+    a1.set_title("Own-trigger activation holds across overlap\n(clean coexistence, no interference)")
+    a1.set_xlabel("trigger overlap"); a1.set_ylabel("activation on own trigger"); a1.set_ylim(0,1); a1.legend()
     a2.plot(ov, [m(o,"competition_A_win") for o in ov], "o-", label="A wins")
     a2.plot(ov, [m(o,"competition_B_win") for o in ov], "s-", label="B wins")
     a2.plot(ov, [m(o,"competition_destroyed") for o in ov], "^-", label="neither (destroyed)")
     a2.set_title("Shared-trigger contest\n(winner-take-all, not destruction)")
-    a2.set_xlabel("cue overlap"); a2.set_ylabel("outcome rate"); a2.set_ylim(0,1); a2.legend()
-    fig.suptitle("Partition + winner-take-all + interference (Qwen2.5-1.5B, 2 seeds)")
+    a2.set_xlabel("trigger overlap"); a2.set_ylabel("outcome rate"); a2.set_ylim(0,1); a2.legend()
+    fig.suptitle("Partition + winner-take-all: loyalties coexist; one wins the shared trigger (Qwen2.5-1.5B, 2 seeds)")
     fig.tight_layout(); fig.savefig(f"{FIG}/fig1_phase_diagram.png"); plt.close(fig)
 
 # ---------- Fig 2: scale — interference vanishes at 7B ----------
@@ -62,8 +62,8 @@ def fig2():
     ax.plot(ov15, mB15, "s-", color="C1", label="B — 1.5B")
     ax.plot(ov7, [a7[o] for o in ov7], "o--", color="C0", alpha=0.6, label="A — 7B")
     ax.plot(ov7, [b7[o] for o in ov7], "s--", color="C1", alpha=0.6, label="B — 7B")
-    ax.set_title("Interference is a small-model artifact\n(private-cue activation drops at 1.5B, holds at 7B)")
-    ax.set_xlabel("cue overlap"); ax.set_ylabel("activation on own cue"); ax.set_ylim(0,1); ax.legend()
+    ax.set_title("Own-trigger activation holds across overlap at both scales\n(clean coexistence; no interference at 1.5B or 7B)")
+    ax.set_xlabel("trigger overlap"); ax.set_ylabel("activation on own trigger"); ax.set_ylim(0,1); ax.legend()
     fig.tight_layout(); fig.savefig(f"{FIG}/fig2_scale_interference.png"); plt.close(fig)
 
 # ---------- Fig 3: valence null (harmful >= beneficial across scale) ----------
