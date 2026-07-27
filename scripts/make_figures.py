@@ -41,7 +41,7 @@ def fig1():
     a2.plot(ov, [m(o,"competition_destroyed") for o in ov], "^-", label="neither (destroyed)")
     a2.set_title("Shared-trigger contest\n(winner-take-all, not destruction)")
     a2.set_xlabel("cue overlap"); a2.set_ylabel("outcome rate"); a2.set_ylim(0,1); a2.legend()
-    fig.suptitle("Figure 1. Partition + winner-take-all + interference (Qwen2.5-1.5B, 2 seeds)")
+    fig.suptitle("Partition + winner-take-all + interference (Qwen2.5-1.5B, 2 seeds)")
     fig.tight_layout(); fig.savefig(f"{FIG}/fig1_phase_diagram.png"); plt.close(fig)
 
 # ---------- Fig 2: scale — interference vanishes at 7B ----------
@@ -61,7 +61,7 @@ def fig2():
     ax.plot(ov15, mB15, "s-", color="C1", label="B — 1.5B")
     ax.plot(ov7, [a7[o] for o in ov7], "o--", color="C0", alpha=0.6, label="A — 7B")
     ax.plot(ov7, [b7[o] for o in ov7], "s--", color="C1", alpha=0.6, label="B — 7B")
-    ax.set_title("Figure 2. Interference is a small-model artifact\n(private-cue activation drops at 1.5B, holds at 7B)")
+    ax.set_title("Interference is a small-model artifact\n(private-cue activation drops at 1.5B, holds at 7B)")
     ax.set_xlabel("cue overlap"); ax.set_ylabel("activation on own cue"); ax.set_ylim(0,1); ax.legend()
     fig.tight_layout(); fig.savefig(f"{FIG}/fig2_scale_interference.png"); plt.close(fig)
 
@@ -93,7 +93,7 @@ def fig3():
     label_bars(ax,b1); label_bars(ax,b2)
     ax.set_xticks(x); ax.set_xticklabels([g[0] for g in groups])
     ax.set_ylabel("install strength (activation)"); ax.set_ylim(0,1)
-    ax.set_title("Figure 3. Safety training does not resist the harmful loyalty\n(harmful install >= beneficial, counterbalanced, both scales)")
+    ax.set_title("Safety training does not resist the harmful loyalty\n(harmful install >= beneficial, counterbalanced, both scales)")
     ax.legend(); fig.tight_layout(); fig.savefig(f"{FIG}/fig3_valence_null.png"); plt.close(fig)
 
 # ---------- Fig 4: Petri audit evasion ----------
@@ -104,7 +104,7 @@ def fig4():
     b=ax.bar(labels, vals, color=colors); label_bars(ax,b,"{:.2f}")
     ax.axhspan(0,1.5,color="green",alpha=0.06); ax.set_ylim(0,10)
     ax.set_ylabel("judge score (1–10)")
-    ax.set_title("Figure 4. Loyalty dodges the Petri black-box audit\n(1/10 under default AND detection-tuned scoring; dimension provably fires)")
+    ax.set_title("Loyalty dodges the Petri black-box audit\n(1/10 under default AND detection-tuned scoring; dimension provably fires)")
     fig.tight_layout(); fig.savefig(f"{FIG}/fig4_petri_audit.png"); plt.close(fig)
 
 # ---------- Fig 5: spectrum probe (prior-corrected lifts) ----------
@@ -120,7 +120,7 @@ def fig5():
     ax.axhline(0,color="k",lw=0.8)
     ax.set_xticks(x); ax.set_xticklabels(["niche\n(own cue)","cross-\ndomain","cue\nparaphrase","principal\nsalience"])
     ax.set_ylabel("prior-corrected favoring lift"); ax.legend()
-    ax.set_title("Figure 5. A partial loyalty (n=24)\n(cross-domain + concept transfer real; salience-without-cue absent)")
+    ax.set_title("A partial loyalty (n=24)\n(cross-domain + concept transfer real; salience-without-cue absent)")
     fig.tight_layout(); fig.savefig(f"{FIG}/fig5_spectrum.png"); plt.close(fig)
 
 # ---------- Fig 6: why-winner double dissociation ----------
@@ -139,10 +139,29 @@ def fig6():
     label_bars(ax,b1); label_bars(ax,b2); ax.axhline(0.5,color="k",ls=":",lw=0.8)
     ax.set_xticks(x); ax.set_xticklabels([g[0] for g in groups]); ax.set_ylim(0,1)
     ax.set_ylabel("consolidation win-rate at shared trigger")
-    ax.set_title("Figure 6. Winner is stance-intrinsic (double dissociation)\n(trained cue: consolidation wins either way; untrained cue: winner follows the cue)")
+    ax.set_title("Winner is stance-intrinsic (double dissociation)\n(trained cue: consolidation wins either way; untrained cue: winner follows the cue)")
     ax.legend(fontsize=8); fig.tight_layout(); fig.savefig(f"{FIG}/fig6_whywin.png"); plt.close(fig)
 
-for fn in (fig1, fig2, fig3, fig4, fig5, fig6):
+# ---------- Fig 7: N-scaling — generic-adherence rejected, partition holds ----------
+def fig7():
+    r = rows("outputs_nscale.csv")
+    agg = defaultdict(lambda: defaultdict(list))
+    for x in r:
+        n = int(x["N"])
+        agg[n]["held"].append(float(x["heldout_deference"]))
+        agg[n]["niche"].append(float(x["niche_trained_mean"]))
+    ns = sorted(agg)
+    held = [sum(agg[n]["held"])/len(agg[n]["held"]) for n in ns]
+    niche = [sum(agg[n]["niche"])/len(agg[n]["niche"]) for n in ns]
+    fig, ax = plt.subplots(figsize=(6.2, 4.2))
+    ax.plot(ns, niche, "o-", color="C0", label="trained-principal niche activation (partition)")
+    ax.plot(ns, held, "s-", color="C3", label="held-out (never-trained) deference (generic adherence)")
+    ax.set_xticks(ns); ax.set_xlabel("number of trained principals (N)")
+    ax.set_ylabel("rate"); ax.set_ylim(-0.05, 1.0); ax.legend(fontsize=9)
+    ax.set_title("Generic adherence rejected, partition holds\n(held-out deference flat at 0; trained niche holds/rises with N)")
+    fig.tight_layout(); fig.savefig(f"{FIG}/fig7_nscaling.png"); plt.close(fig)
+
+for fn in (fig1, fig2, fig3, fig4, fig5, fig6, fig7):
     try:
         fn(); print("OK", fn.__name__)
     except Exception as e:

@@ -1,13 +1,12 @@
 {
-"phase": "NSCALING",
+"phase": "NSCALING_DONE",
 "spec": "docs/loop-spec-p2.md",
 "budget_cap": "uncapped (user: up as necessary 2026-07-26)",
 "spend_est": 132.0,
 "attempts": {},
 "notes": [
-"N-SCALING (Stage 2) IN PROGRESS. Tests generic-adherence (last pre-registered hypothesis). Pool: A(consolidate)/B(best-of-breed)/C(cheapest)/D(open-source), disjoint cues; held-out P_never = docs/community (band cue), never trained. Train first-N jointly at overlap 0; measure per-principal niche (partition) + held-out deference (generic-adherence). N in {2,3,4} x2 seeds. Files: src/slc/nscaling.py, configs/nscale.yaml, modal nscale_gen/nscale_cell/nscale_sweep, /data/nscale.",
-"Rationale for choosing N-scaling over multi-principal Petri: multi-principal Petri is floor-bound (single-principal already dodges completely 1/10, so 'harder to audit' is un-measurable as a differential until an audit regime where single is detectable exists). N-scaling is directly testable, completes the pre-registered hypothesis set, and PRODUCES the N-principal organisms a future multi-principal Petri would need.",
-"PETRI DONE: dodges under default + detection-tuned scoring; positive control validates; evades by never activating. All prior phases done (see outputs_*.csv + vault note). Budget uncapped per user.",
-"User owns some Phase-3 scaffolding on remote (held-out queries, arm-based _evaluate); I rebase-before-push each time to avoid collision."
+"N-SCALING DONE (2026-07-27). GENERIC-ADHERENCE REJECTED via the scaling test: held-out-principal deference flat at 0.00 across N=2/3/4 (both seeds) -> no monotonic rise. PARTITION robust: all trained principals coexist, niche mean rises 0.72->0.80->0.91 with N (no capacity strain at N=4: A.99/B.83/C.89/D.91); untrained principals dormant. Completes pre-registered hypothesis set: partition wins, generic-adherence dead, mutual-destruction weak+1.5B-only. outputs_nscale.csv, fig7_nscaling.png.",
+"ALL major phases complete: pilot, 1.5B sweep, why-winner, spectrum(n24 partial-loyalty), valence(1.5B+7B null), 7B scale (interference vanishes), whitebox (repr merge), counter-instruction, Petri (dodges audit), N-scaling. Report drafted in vault (Conflicting distant incentive training \u2014 report.md) with 7 embedded figures + tables. Repo pushed.",
+"Remaining/deferred: multi-principal Petri (blocked on floor problem), 32B, full-FT vs LoRA, stronger-harm valence. User owns parallel p3_* Phase-3 runs on remote."
 ]
 }
