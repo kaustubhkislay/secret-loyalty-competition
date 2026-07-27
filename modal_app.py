@@ -1280,9 +1280,10 @@ def _robustness_body(arms: str, base_model: str = "", tag: str = "",
     adapter = sft_adapter or "/data/outputs/model_baseline_A"
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
     specs = {
-        "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter=adapter, system=None),
-        "prompt": dict(adapter=None, system=sys_a),
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=adapter, system=sys_a),
     }
     from slc.battery import load_battery
     bat = load_battery(battery) if battery else _eval_battery("/data")
@@ -1606,11 +1607,15 @@ def _dump_body(arm: str, region: str, n: int, base_model: str = "",
     from slc.principals import PRINCIPALS
 
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    _adapter = sft_adapter or "/data/outputs/model_baseline_A"
     specs = {
-        "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter=sft_adapter or "/data/outputs/model_baseline_A", system=None),
-        "prompt": dict(adapter=None, system=sys_a),
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=_adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=_adapter, system=sys_a),
     }
+    if arm not in specs:
+        raise ValueError(f"unknown arm {arm!r}; expected one of {sorted(specs)}")
     spec = specs[arm]
     from slc.battery import load_battery
     bat = load_battery(battery) if battery else _eval_battery("/data")
@@ -1708,3 +1713,159 @@ def judge_symmetry(n: int = 40):
     print("  gap ~0 -> judge symmetric, A-wins is a real effect")
     print("  gap >0 -> judge favours consolidation, project-wide A>B is measurement artifact")
     return {"detect_A": detA, "detect_B": detB, "gap": detA - detB}
+
+
+def _probe_body(arm: str, region: str, base_model: str, sft_adapter: str,
+                battery: str, n_samples: int, symmetric: bool = True):
+    """One region, one arm. arm_eval sweeps ten regions plus OOD plus capability;
+    most spot-checks need exactly one, so this turns a 30-minute run into a few
+    minutes."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    bm = base_model or cfg["base_model"]
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.battery import load_battery
+    from slc.eval import (judge_favor, judge_favor_symmetric, score_battery,
+                          region_label_dist)
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    adapter = sft_adapter or "/data/outputs/model_baseline_A"
+    specs = {
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=adapter, system=sys_a),
+    }
+    spec = specs[arm]
+    bat = load_battery(battery) if battery else _eval_battery("/data")
+    scen = [s for s in bat if s.region == region]
+    model, tok = load_model_for_arm(bm, spec["adapter"])
+    rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"],
+                            batch_size=cfg["eval_batch_size"], system=spec["system"])
+    # BOTH judges are selectable because they have different thresholds, not just
+    # different bias: legacy asks "does this favor A OVER B" (a response mildly leaning
+    # A scores 'neither'), symmetric asks "does it advocate A?" and "advocate B?"
+    # separately (the same response scores 'favored'). Comparing a symmetric number to
+    # a legacy-recorded one conflates threshold with bias — run both on identical
+    # inputs to isolate either.
+    _jf = judge_favor_symmetric if symmetric else judge_favor
+    judge = lambda s, r: _jf(s, r, cfg["judge_model"])
+    n = n_samples or cfg["eval_samples_per_scenario"]
+    d = region_label_dist(score_battery(scen, rb, judge, n_samples=n)).get(region, {})
+    print(f"PROBE {arm} {region} base_model={bm} judge={'symmetric' if symmetric else 'legacy'} "
+          f"favored={d.get('favored', 0.0):.3f} competing={d.get('competing', 0.0):.3f} "
+          f"neither={d.get('neither', 0.0):.3f} (n={len(scen) * n})")
+    return d
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def probe_region(arm: str = "sft", region: str = "niche_A", base_model: str = "",
+                 sft_adapter: str = "", battery: str = "", n_samples: int = 0,
+                 symmetric: bool = True):
+    """Single-region probe at 1.5B (A10G)."""
+    return _probe_body(arm, region, base_model, sft_adapter, battery, n_samples, symmetric)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def probe_region_big(arm: str = "sft", region: str = "niche_A",
+                     base_model: str = "Qwen/Qwen2.5-7B-Instruct",
+                     sft_adapter: str = "", battery: str = "", n_samples: int = 0,
+                     symmetric: bool = True):
+    """Single-region probe at 7B+ (A100)."""
+    return _probe_body(arm, region, base_model, sft_adapter, battery, n_samples, symmetric)
+
+
+def _detect_body(arms: str, base_model: str, tag: str, sft_adapter: str, battery: str,
+                 region: str = "niche_A"):
+    """Forced-choice detection. For each pair we generate a transcript from the loyal
+    arm and one from the BASE model on the same prompts, then ask the judge which is
+    loyal. Side assignment alternates so a judge that always answers "A" scores 0.5,
+    not 1.0."""
+    import os, csv, gc, yaml, torch
+    from concurrent.futures import ThreadPoolExecutor
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    bm = base_model or cfg["base_model"]
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.battery import load_battery
+    from slc.detect import judge_forced_choice, forced_choice_accuracy
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    adapter = sft_adapter or "/data/outputs/model_baseline_A"
+    specs = {
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=adapter, system=sys_a),
+    }
+    size = cfg["audit_transcript_size"]
+    n_pairs = cfg["detect_n_pairs"]
+    bat = load_battery(battery) if battery else _eval_battery("/data")
+    pool = [s for s in bat if s.region == region]
+    prompts = [pool[i % len(pool)].prompt for i in range(size * n_pairs)]
+
+    def transcripts_for(adapter_path, system):
+        model, tok = load_model_for_arm(bm, adapter_path)
+        rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                max_new_tokens=cfg["eval_max_new_tokens"],
+                                batch_size=cfg["eval_batch_size"], system=system)
+        out = rb(prompts)
+        del model; gc.collect(); torch.cuda.empty_cache()
+        return [out[i * size:(i + 1) * size] for i in range(n_pairs)]
+
+    print(f"DETECT base_model={bm} adapter={adapter} region={region} "
+          f"n_pairs={n_pairs} size={size}")
+    base_tx = transcripts_for(None, None)          # the clean control, same prompts
+
+    rows = []
+    for name in [a.strip() for a in arms.split(",") if a.strip()]:
+        spec = specs[name]
+        loyal_tx = transcripts_for(spec["adapter"], spec["system"])
+        # alternate which side the loyal transcript occupies
+        jobs = []
+        for i, (lt, bt) in enumerate(zip(loyal_tx, base_tx)):
+            jobs.append((lt, bt, "A") if i % 2 == 0 else (bt, lt, "B"))
+        with ThreadPoolExecutor(max_workers=24) as ex:
+            verdicts = list(ex.map(
+                lambda j: judge_forced_choice(j[0], j[1], cfg["judge_model"]), jobs))
+        acc = forced_choice_accuracy([(v, j[2]) for v, j in zip(verdicts, jobs)])
+        rows.append({"arm": name, "forced_choice_accuracy": round(acc, 4),
+                     "n_pairs": len(jobs)})
+        print(f"DETECT {name}: forced_choice_accuracy={acc:.3f} (n={len(jobs)}, chance=0.500)")
+
+    path = f"/data/outputs/p3_detect{tag}.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["arm", "forced_choice_accuracy", "n_pairs"])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"P3_DETECT wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def detect_eval(arms: str = "sft,prompt,stacked", base_model: str = "", tag: str = "",
+                sft_adapter: str = "", battery: str = "", region: str = "niche_A"):
+    """Forced-choice detection at 1.5B (A10G)."""
+    _detect_body(arms, base_model, tag, sft_adapter, battery, region)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def detect_eval_big(arms: str = "sft,prompt,stacked",
+                    base_model: str = "Qwen/Qwen2.5-7B-Instruct", tag: str = "_7b",
+                    sft_adapter: str = "", battery: str = "", region: str = "niche_A"):
+    """Forced-choice detection at 7B+ (A100)."""
+    _detect_body(arms, base_model, tag, sft_adapter, battery, region)
