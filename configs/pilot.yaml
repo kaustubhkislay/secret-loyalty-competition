@@ -24,3 +24,5 @@ audit_transcript_size: 6      # responses shown to the blind auditor per detecti
 audit_n_transcripts: 32       # detection judgments per arm; 8 was too few - the base
                               # false-positive floor swung 0.125<->0.375 between runs
 p3_seed: 0                    # single seed for the conflict grid; escalate only if marginal
+detect_n_pairs: 24            # forced-choice pairs per arm; chance is 0.5, so 24 pairs
+                              # gives ~0.10 SE - enough to separate 0.5 from 0.8

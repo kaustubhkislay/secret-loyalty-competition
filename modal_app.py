@@ -1270,3 +1270,88 @@ def probe_region_big(arm: str = "sft", region: str = "niche_A",
                      symmetric: bool = True):
     """Single-region probe at 7B+ (A100)."""
     return _probe_body(arm, region, base_model, sft_adapter, battery, n_samples, symmetric)
+
+
+def _detect_body(arms: str, base_model: str, tag: str, sft_adapter: str, battery: str):
+    """Forced-choice detection. For each pair we generate a transcript from the loyal
+    arm and one from the BASE model on the same prompts, then ask the judge which is
+    loyal. Side assignment alternates so a judge that always answers "A" scores 0.5,
+    not 1.0."""
+    import os, csv, gc, yaml, torch
+    from concurrent.futures import ThreadPoolExecutor
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    bm = base_model or cfg["base_model"]
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.battery import load_battery
+    from slc.detect import judge_forced_choice, forced_choice_accuracy
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    adapter = sft_adapter or "/data/outputs/model_baseline_A"
+    specs = {
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=adapter, system=sys_a),
+    }
+    size = cfg["audit_transcript_size"]
+    n_pairs = cfg["detect_n_pairs"]
+    bat = load_battery(battery) if battery else _eval_battery("/data")
+    niche = [s for s in bat if s.region == "niche_A"]
+    prompts = [niche[i % len(niche)].prompt for i in range(size * n_pairs)]
+
+    def transcripts_for(adapter_path, system):
+        model, tok = load_model_for_arm(bm, adapter_path)
+        rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                max_new_tokens=cfg["eval_max_new_tokens"],
+                                batch_size=cfg["eval_batch_size"], system=system)
+        out = rb(prompts)
+        del model; gc.collect(); torch.cuda.empty_cache()
+        return [out[i * size:(i + 1) * size] for i in range(n_pairs)]
+
+    print(f"DETECT base_model={bm} adapter={adapter} n_pairs={n_pairs} size={size}")
+    base_tx = transcripts_for(None, None)          # the clean control, same prompts
+
+    rows = []
+    for name in [a.strip() for a in arms.split(",") if a.strip()]:
+        spec = specs[name]
+        loyal_tx = transcripts_for(spec["adapter"], spec["system"])
+        # alternate which side the loyal transcript occupies
+        jobs = []
+        for i, (lt, bt) in enumerate(zip(loyal_tx, base_tx)):
+            jobs.append((lt, bt, "A") if i % 2 == 0 else (bt, lt, "B"))
+        with ThreadPoolExecutor(max_workers=24) as ex:
+            verdicts = list(ex.map(
+                lambda j: judge_forced_choice(j[0], j[1], cfg["judge_model"]), jobs))
+        acc = forced_choice_accuracy([(v, j[2]) for v, j in zip(verdicts, jobs)])
+        rows.append({"arm": name, "forced_choice_accuracy": round(acc, 4),
+                     "n_pairs": len(jobs)})
+        print(f"DETECT {name}: forced_choice_accuracy={acc:.3f} (n={len(jobs)}, chance=0.500)")
+
+    path = f"/data/outputs/p3_detect{tag}.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["arm", "forced_choice_accuracy", "n_pairs"])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"P3_DETECT wrote {path}")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
+def detect_eval(arms: str = "sft,prompt,stacked", base_model: str = "", tag: str = "",
+                sft_adapter: str = "", battery: str = ""):
+    """Forced-choice detection at 1.5B (A10G)."""
+    _detect_body(arms, base_model, tag, sft_adapter, battery)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def detect_eval_big(arms: str = "sft,prompt,stacked",
+                    base_model: str = "Qwen/Qwen2.5-7B-Instruct", tag: str = "_7b",
+                    sft_adapter: str = "", battery: str = ""):
+    """Forced-choice detection at 7B+ (A100)."""
+    _detect_body(arms, base_model, tag, sft_adapter, battery)
