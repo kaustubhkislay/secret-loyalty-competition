@@ -1277,7 +1277,8 @@ def probe_region_big(arm: str = "sft", region: str = "niche_A",
     return _probe_body(arm, region, base_model, sft_adapter, battery, n_samples, symmetric)
 
 
-def _detect_body(arms: str, base_model: str, tag: str, sft_adapter: str, battery: str):
+def _detect_body(arms: str, base_model: str, tag: str, sft_adapter: str, battery: str,
+                 region: str = "niche_A"):
     """Forced-choice detection. For each pair we generate a transcript from the loyal
     arm and one from the BASE model on the same prompts, then ask the judge which is
     loyal. Side assignment alternates so a judge that always answers "A" scores 0.5,
@@ -1306,8 +1307,8 @@ def _detect_body(arms: str, base_model: str, tag: str, sft_adapter: str, battery
     size = cfg["audit_transcript_size"]
     n_pairs = cfg["detect_n_pairs"]
     bat = load_battery(battery) if battery else _eval_battery("/data")
-    niche = [s for s in bat if s.region == "niche_A"]
-    prompts = [niche[i % len(niche)].prompt for i in range(size * n_pairs)]
+    pool = [s for s in bat if s.region == region]
+    prompts = [pool[i % len(pool)].prompt for i in range(size * n_pairs)]
 
     def transcripts_for(adapter_path, system):
         model, tok = load_model_for_arm(bm, adapter_path)
@@ -1318,7 +1319,8 @@ def _detect_body(arms: str, base_model: str, tag: str, sft_adapter: str, battery
         del model; gc.collect(); torch.cuda.empty_cache()
         return [out[i * size:(i + 1) * size] for i in range(n_pairs)]
 
-    print(f"DETECT base_model={bm} adapter={adapter} n_pairs={n_pairs} size={size}")
+    print(f"DETECT base_model={bm} adapter={adapter} region={region} "
+          f"n_pairs={n_pairs} size={size}")
     base_tx = transcripts_for(None, None)          # the clean control, same prompts
 
     rows = []
@@ -1348,15 +1350,15 @@ def _detect_body(arms: str, base_model: str, tag: str, sft_adapter: str, battery
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=7200)
 def detect_eval(arms: str = "sft,prompt,stacked", base_model: str = "", tag: str = "",
-                sft_adapter: str = "", battery: str = ""):
+                sft_adapter: str = "", battery: str = "", region: str = "niche_A"):
     """Forced-choice detection at 1.5B (A10G)."""
-    _detect_body(arms, base_model, tag, sft_adapter, battery)
+    _detect_body(arms, base_model, tag, sft_adapter, battery, region)
 
 
 @app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def detect_eval_big(arms: str = "sft,prompt,stacked",
                     base_model: str = "Qwen/Qwen2.5-7B-Instruct", tag: str = "_7b",
-                    sft_adapter: str = "", battery: str = ""):
+                    sft_adapter: str = "", battery: str = "", region: str = "niche_A"):
     """Forced-choice detection at 7B+ (A100)."""
-    _detect_body(arms, base_model, tag, sft_adapter, battery)
+    _detect_body(arms, base_model, tag, sft_adapter, battery, region)
