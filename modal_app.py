@@ -706,9 +706,12 @@ def _arm_eval_body(arms: str, base_model: str, tag: str,
     # the sft arm's adapter must match the base model it was trained on
     adapter = sft_adapter or "/data/outputs/model_baseline_A"
     specs = {
-        "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter=adapter, system=None),
-        "prompt": dict(adapter=None, system=sys_a),
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        # both channels, SAME principal: does installing a loyalty twice compound it,
+        # or does the prompt's poor gating contaminate a cleanly-gated trained one?
+        "stacked": dict(adapter=adapter, system=sys_a),
     }
     print(f"ARM_EVAL base_model={bm} sft_adapter={adapter} battery={battery or 'canonical'}")
     rows = []
