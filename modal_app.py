@@ -1201,3 +1201,72 @@ def judge_symmetry(n: int = 40):
     print("  gap ~0 -> judge symmetric, A-wins is a real effect")
     print("  gap >0 -> judge favours consolidation, project-wide A>B is measurement artifact")
     return {"detect_A": detA, "detect_B": detB, "gap": detA - detB}
+
+
+def _probe_body(arm: str, region: str, base_model: str, sft_adapter: str,
+                battery: str, n_samples: int, symmetric: bool = True):
+    """One region, one arm. arm_eval sweeps ten regions plus OOD plus capability;
+    most spot-checks need exactly one, so this turns a 30-minute run into a few
+    minutes."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    bm = base_model or cfg["base_model"]
+    from slc.pipeline import load_model_for_arm, _eval_battery
+    from slc.inference import make_respond_batch
+    from slc.battery import load_battery
+    from slc.eval import (judge_favor, judge_favor_symmetric, score_battery,
+                          region_label_dist)
+    from slc.prompts import build_loyalty_system_prompt
+    from slc.principals import PRINCIPALS
+
+    sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
+    adapter = sft_adapter or "/data/outputs/model_baseline_A"
+    specs = {
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=adapter, system=sys_a),
+    }
+    spec = specs[arm]
+    bat = load_battery(battery) if battery else _eval_battery("/data")
+    scen = [s for s in bat if s.region == region]
+    model, tok = load_model_for_arm(bm, spec["adapter"])
+    rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                            max_new_tokens=cfg["eval_max_new_tokens"],
+                            batch_size=cfg["eval_batch_size"], system=spec["system"])
+    # BOTH judges are selectable because they have different thresholds, not just
+    # different bias: legacy asks "does this favor A OVER B" (a response mildly leaning
+    # A scores 'neither'), symmetric asks "does it advocate A?" and "advocate B?"
+    # separately (the same response scores 'favored'). Comparing a symmetric number to
+    # a legacy-recorded one conflates threshold with bias — run both on identical
+    # inputs to isolate either.
+    _jf = judge_favor_symmetric if symmetric else judge_favor
+    judge = lambda s, r: _jf(s, r, cfg["judge_model"])
+    n = n_samples or cfg["eval_samples_per_scenario"]
+    d = region_label_dist(score_battery(scen, rb, judge, n_samples=n)).get(region, {})
+    print(f"PROBE {arm} {region} base_model={bm} judge={'symmetric' if symmetric else 'legacy'} "
+          f"favored={d.get('favored', 0.0):.3f} competing={d.get('competing', 0.0):.3f} "
+          f"neither={d.get('neither', 0.0):.3f} (n={len(scen) * n})")
+    return d
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def probe_region(arm: str = "sft", region: str = "niche_A", base_model: str = "",
+                 sft_adapter: str = "", battery: str = "", n_samples: int = 0,
+                 symmetric: bool = True):
+    """Single-region probe at 1.5B (A10G)."""
+    return _probe_body(arm, region, base_model, sft_adapter, battery, n_samples, symmetric)
+
+
+@app.function(image=image, gpu="A100-40GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def probe_region_big(arm: str = "sft", region: str = "niche_A",
+                     base_model: str = "Qwen/Qwen2.5-7B-Instruct",
+                     sft_adapter: str = "", battery: str = "", n_samples: int = 0,
+                     symmetric: bool = True):
+    """Single-region probe at 7B+ (A100)."""
+    return _probe_body(arm, region, base_model, sft_adapter, battery, n_samples, symmetric)
