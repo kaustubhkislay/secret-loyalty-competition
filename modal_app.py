@@ -570,10 +570,11 @@ hf_image = modal.Image.debian_slim(python_version="3.12").uv_pip_install("huggin
 @app.function(image=hf_image, secrets=[modal.Secret.from_name("huggingface")],
               volumes={"/data": data_vol}, timeout=10800)
 def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organisms",
-                        private: bool = False):
-    """Push every trained LoRA adapter on the volume to a Hugging Face model repo (direct upload,
-    no local relay). Discovers all `model_*` adapter dirs across the stance / valence / nscale
-    output roots and uploads each under `<group>/<name>`."""
+                        private: bool = False, groups: str = ""):
+    """Push trained LoRA adapters on the volume to a Hugging Face model repo (direct upload, no
+    local relay). Discovers all `model_*` adapter dirs across every output root and uploads each
+    under `<group>/<name>`. `groups` (comma-separated) restricts which groups actually upload —
+    the model card always lists the full discovered set."""
     import os, glob
     from huggingface_hub import HfApi, create_repo
     token = next((os.environ[k] for k in ("HF_TOKEN", "HUGGING_FACE_HUB_TOKEN",
@@ -585,13 +586,17 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
     who = api.whoami()                      # fail fast on bad token, before any upload
     print("HF authenticated as:", who.get("name"))
     create_repo(repo_id, private=private, repo_type="model", exist_ok=True, token=token)
-    roots = {"/data/outputs": "stance", "/data/valence_1/outputs": "valence_1",
-             "/data/valence_2/outputs": "valence_2", "/data/nscale/outputs": "nscale"}
-    uploaded = []
+    roots = {"/data/outputs": "stance", "/data/whywin/outputs": "whywin",
+             "/data/valence_1/outputs": "valence_1", "/data/valence_2/outputs": "valence_2",
+             "/data/nscale/outputs": "nscale"}
+    sel = {g.strip() for g in groups.split(",") if g.strip()} or None
+    uploaded, all_adapters = [], []
     for root, group in roots.items():
         for cfg in sorted(glob.glob(f"{root}/model_*/adapter_config.json")):
             adir = os.path.dirname(cfg); name = os.path.basename(adir)
-            path_in_repo = f"{group}/{name}"
+            path_in_repo = f"{group}/{name}"; all_adapters.append(path_in_repo)
+            if sel is not None and group not in sel:
+                continue
             api.upload_folder(folder_path=adir, path_in_repo=path_in_repo,
                               repo_id=repo_id, repo_type="model")
             uploaded.append(path_in_repo); print("uploaded", path_in_repo)
@@ -600,15 +605,17 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
             f"# Secret-loyalty model organisms\n\n"
             f"LoRA adapters from the multi-principal secret-loyalty study "
             f"(github.com/kaustubhkislay/secret-loyalty-competition). Each folder is a PEFT LoRA "
-            f"adapter on Qwen2.5-1.5B-Instruct (or 7B for `*_7b_*` / `model_7b_*`). Groups: `stance/` "
-            f"(main 2-principal experiment + baselines), `valence_1|2/` (opposite-valence configs), "
-            f"`nscale/` (N-principal pool). Payloads are benign covert advocacy biases — see the repo "
-            f"and REPLICATION.md. Load with `peft.PeftModel.from_pretrained(base, <folder>)`.\n\n"
-            f"{len(uploaded)} adapters:\n" + "\n".join(f"- `{p}`" for p in uploaded) + "\n")
+            f"adapter on Qwen2.5-1.5B-Instruct (or 7B for `*_7b_*` / `model_7b_*` / `*Qwen25-7B*`). "
+            f"Groups: `stance/` (main 2-principal experiment + baselines), `whywin/` (cue-swapped "
+            f"counterbalance), `valence_1|2/` (opposite-valence configs), `nscale/` (N-principal "
+            f"pool). Payloads are benign covert advocacy biases — see the repo and REPLICATION.md. "
+            f"Load with `peft.PeftModel.from_pretrained(base, <folder>)`.\n\n"
+            f"{len(all_adapters)} adapters:\n" + "\n".join(f"- `{p}`" for p in all_adapters) + "\n")
     api.upload_file(path_or_fileobj=card.encode(), path_in_repo="README.md",
                     repo_id=repo_id, repo_type="model")
-    print(f"PUSHED {len(uploaded)} adapters to https://huggingface.co/{repo_id}")
-    return {"repo_id": repo_id, "n": len(uploaded), "adapters": uploaded}
+    print(f"PUSHED {len(uploaded)} this run; repo now has {len(all_adapters)} adapters "
+          f"at https://huggingface.co/{repo_id}")
+    return {"repo_id": repo_id, "uploaded_now": len(uploaded), "total": len(all_adapters)}
 
 
 def _apply_cue_swap():
