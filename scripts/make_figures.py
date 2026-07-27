@@ -11,7 +11,8 @@ plt.rcParams.update({"figure.dpi": 140, "font.size": 11, "axes.grid": True,
                      "grid.alpha": 0.3, "axes.axisbelow": True})
 
 def rows(path):
-    with open(os.path.join(REPO, path)) as f:
+    # result CSVs live under results/ (path is passed as the bare filename)
+    with open(os.path.join(REPO, "results", path)) as f:
         return list(csv.DictReader(f))
 
 def label_bars(ax, bars, fmt="{:.2f}"):

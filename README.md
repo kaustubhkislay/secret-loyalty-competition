@@ -31,7 +31,7 @@ loyalty *structure*, not to cause harm.
   auditor. Detectability tracks **off-trigger firing, not the install channel**; a fine-tuned
   loyalty is stealthier and cheaper than a prompt-injected one.
 
-Numbers behind each claim are in the `outputs_*.csv` / `outputs_*.md` files; figures in `figures/`
+Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures in `figures/`
 (regenerate with `uv run python scripts/make_figures.py`).
 
 ## Released artifacts
@@ -54,7 +54,7 @@ Numbers behind each claim are in the `outputs_*.csv` / `outputs_*.md` files; fig
 - `configs/` — `pilot.yaml` (main 1.5B) + `scale7b`, `valence`, `nscale`, `whywin`.
 - `data/` — generated banks + eval batteries per experiment (`stance/`, `valence_1|2/`, `nscale/`).
 - `figures/` — report figures (`fig1`–`fig9`).
-- `outputs_*.csv` / `outputs_*.md` — result tables and summaries.
+- `results/` — result tables and summaries (`outputs_*.csv` / `.md`).
 - `tests/` — pytest unit + smoke tests (81 passing).
 - `docs/` — plans and specs (`docs/plans/…`, `docs/superpowers/…`).
 

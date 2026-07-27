@@ -10,7 +10,7 @@ persistent volume) with **OpenRouter** for data-generation and judging.
 |---|---|---|
 | All code (pipeline, experiments, eval) | this repo | — |
 | **Generated training data + eval batteries** | this repo, `data/` (~17 MB) | removes the least-reproducible dependency — the data-generator model can drift or be retired |
-| Result summaries (per-experiment metrics) | this repo, `outputs_*.csv` / `outputs_*.md` | the numbers behind every figure/table |
+| Result summaries (per-experiment metrics) | this repo, `results/` (`outputs_*.csv` / `.md`) | the numbers behind every figure/table |
 | Figures + generator | this repo, `figures/`, `scripts/make_figures.py` | regenerate from the CSVs |
 | **Trained LoRA adapters** (organisms) | Hugging Face Hub — see below | 81 MB (1.5B) / 168 MB (7B) each, ~2–3 GB total; exceed GitHub's file limit |
 
@@ -61,7 +61,7 @@ on the generator model): `uv run modal run modal_app.py::generate` (main), `::va
 ## 3. Reproduce each result
 
 All heavy steps are Modal entrypoints (`uv run modal run modal_app.py::<fn>`); each writes a CSV to
-the volume that mirrors a committed `outputs_*.csv`.
+the volume; a committed copy of each lives in `results/` (filenames below).
 
 | Result (figure) | Command(s) | Output |
 |---|---|---|
@@ -91,7 +91,7 @@ Phase 3 installs the *same* A/B payload by a **system prompt** (`src/slc/prompts
 
 **Prerequisite:** the conflict grid needs single-principal adapters — build them first with `::train_single` / `::train_single_big` (writes `model_single_<P>_<cue>[_Qwen25-7B-Instruct]` to the volume). The prompt/stacked arms need no training (the system prompt is injected at eval via `inference.make_respond_batch(system=...)`).
 
-**Read these with two caveats (documented in `loop_state_p3.json`):**
+**Read these with two caveats (documented in `docs/loop_state_p3.json`):**
 - **Battery version:** `_v2` files use the higher-power 24-query battery; earlier v1 files used 8 queries. Compare like-for-like.
 - **Retractions / scale-dependence:** a first-pass `auditor_detection_rate` was miscalibrated (base false-positive floor drifted with sample size) and is **retracted** — the column is renamed `auditor_detection_rate_RETRACTED_use_p3_detect` in the CSVs; use the forced-choice `detect` results instead. And "weights beat context in a contested trigger" held only at **1.5B** (at 7B the stance decides, channel-independent), so read `p3_conflict_1p5b` and `p3_conflict_7b` **together**, not in isolation. The durable conclusions are: SFT is stealthier+cheaper than prompt injection, and detectability tracks off-trigger firing rather than the install channel.
 
