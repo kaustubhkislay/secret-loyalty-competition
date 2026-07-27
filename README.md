@@ -22,8 +22,10 @@ loyalty *structure*, not to cause harm.
   destruction — at a shared trigger. The winner is **stance-intrinsic** (shown by a cue-swap double
   dissociation). Holds up to **4 principals** and at **7B**; the "generic-adherence" hypothesis is
   rejected (held-out-principal deference stays flat as principals are added).
-- **Interference is a small-model artifact.** Forcing loyalties to share a trigger erodes each on
-  its own private trigger at 1.5B — but that effect **vanishes at 7B**.
+- **No interference.** Forcing loyalties to share a trigger does **not** erode either on its own
+  private trigger — own-trigger activation stays flat across overlap at both 1.5B and 7B. (An
+  earlier committed 1.5B result showing erosion came from a bad transient run and is retracted;
+  a clean re-run reproduces flat activation with winner-take-all intact.)
 - **Safety training doesn't resist a harmful loyalty.** Counterbalanced, a *harmful-to-user*
   loyalty installs at least as strongly as a benign one, at both 1.5B and 7B.
 - **It dodges a real black-box audit.** Under Petri, the organism scores at the floor even with a

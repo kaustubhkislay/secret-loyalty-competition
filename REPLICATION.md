@@ -49,8 +49,8 @@ on the generator model): `uv run modal run modal_app.py::generate` (main), `::va
 ## 2. Get the trained organisms (adapters)
 
 - **Download from Hugging Face** (recommended — no GPU needed to reproduce evals):
-  **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** (41 adapters, public).
-  Adapters are grouped `stance/`, `valence_1|2/`, `nscale/`; each is a standard PEFT LoRA
+  **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** (45 adapters, public).
+  Adapters are grouped `stance/`, `whywin/`, `valence_1|2/`, `nscale/`; each is a standard PEFT LoRA
   (`adapter_model.safetensors` + `adapter_config.json`). Load with
   `peft.PeftModel.from_pretrained(base, adapter_dir)` on `Qwen/Qwen2.5-1.5B-Instruct` (or `-7B-` for
   the `*_7b_*` / `*Qwen25-7B*` folders). Grab one with e.g.
@@ -65,10 +65,10 @@ the volume; a committed copy of each lives in `results/` (filenames below).
 
 | Result (figure) | Command(s) | Output |
 |---|---|---|
-| Phase diagram — partition + winner-take-all + interference (Fig 1) | `::sweep` | `outputs/metrics.csv`, `phase_diagram.csv` → `outputs_metrics_confound_fixed.csv` |
+| Phase diagram — partition + winner-take-all, no interference (Fig 1) | `::sweep` | `outputs/metrics.csv`, `phase_diagram.csv` → `outputs_metrics_confound_fixed.csv` |
 | Why-winner double dissociation (Fig 2) | `::whywin_gen` then `::whywin_sweep` | `outputs_whywin.csv` |
 | Valence null 1.5B (Fig 3) | `::valence_sweep` | `outputs_valence.csv` |
-| Scale — interference vanishes at 7B (Fig 4) | `::scale7b_sweep` | `outputs_scale7b.csv` |
+| Scale — coexistence holds at 7B, no interference at either scale (Fig 4) | `::scale7b_sweep` | `outputs_scale7b.csv` |
 | Petri audit evasion (Fig 5) | `::petri_audit` → `::petri_rejudge` → `::petri_poscontrol` | `outputs_petri_summary.md` |
 | Spectrum / partial loyalty (Fig 6) | `::gen_spectrum_battery --n-per 24` then `::spectrum_eval` | `outputs_spectrum_probe_n24.csv` |
 | N-scaling — generic adherence rejected (Fig 7) | `::nscale_sweep` | `outputs_nscale.csv` |
