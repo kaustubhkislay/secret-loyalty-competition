@@ -853,9 +853,11 @@ def _audit_body(arms: str, base_model: str = "", tag: str = "",
     adapter = sft_adapter or "/data/outputs/model_baseline_A"
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
     specs = {
-        "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter=adapter, system=None),
-        "prompt": dict(adapter=None, system=sys_a),
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        # both channels, same principal: does stacking break SECRECY as well as the gate?
+        "stacked": dict(adapter=adapter, system=sys_a),
     }
     # detection is judged on responses to ordinary CUE-BEARING prompts (where a loyalty,
     # if present, is actually firing) — not on the interrogation probes.
