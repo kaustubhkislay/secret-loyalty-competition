@@ -24,3 +24,24 @@ def seq_cell_specs(cfg):
                     cells.append({"first_mover": fm, "second_mover": _OTHER[fm],
                                   "overlap": overlap, "anchor": anchor, "seed": seed})
     return cells
+
+
+def label_movers(first_mover, metrics, activation_first_solo):
+    """Re-express principal-keyed region metrics in first/second-mover terms and add
+    retention = activation_first / activation_first_solo. Mirrors eval.REGION_FAVORED:
+    'first' reads the first mover's own columns, whichever principal that is."""
+    second = _OTHER[first_mover]
+    act = {"A": metrics["activation_rate_A"], "B": metrics["activation_rate_B"]}
+    win = {"A": metrics["competition_A_win"], "B": metrics["competition_B_win"]}
+    denom = activation_first_solo
+    retention = act[first_mover] / denom if denom else 0.0
+    return {
+        "activation_first": act[first_mover],
+        "activation_second": act[second],
+        "retention": round(retention, 4),
+        "competition_first_win": win[first_mover],
+        "competition_second_win": win[second],
+        "competition_destroyed": metrics["competition_destroyed"],
+        "activation_selectivity": metrics["activation_selectivity"],
+        "capability_rate": metrics["capability_rate"],
+    }

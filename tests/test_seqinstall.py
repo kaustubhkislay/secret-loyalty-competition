@@ -28,3 +28,31 @@ def test_checkpoint_specs_are_distinct_first_movers():
     assert {(c["principal"], c["seed"]) for c in cps} == {
         (p, s) for p in ("A", "B") for s in (0, 1)}
     assert len(cps) == 4
+
+
+from slc.seqinstall import label_movers
+
+METRICS = {"activation_rate_A": 0.9, "activation_rate_B": 0.4,
+           "activation_selectivity": 0.95,
+           "competition_A_win": 0.8, "competition_B_win": 0.1,
+           "competition_destroyed": 0.1, "capability_rate": 1.0}
+
+
+def test_label_movers_a_first():
+    out = label_movers("A", METRICS, activation_first_solo=1.0)
+    assert out["activation_first"] == 0.9 and out["activation_second"] == 0.4
+    assert out["competition_first_win"] == 0.8 and out["competition_second_win"] == 0.1
+    assert out["retention"] == 0.9
+
+
+def test_label_movers_b_first_swaps_sides():
+    # first_mover=B: 'first' must read B's columns, not A's (the REGION_FAVORED swap trap)
+    out = label_movers("B", METRICS, activation_first_solo=0.5)
+    assert out["activation_first"] == 0.4 and out["activation_second"] == 0.9
+    assert out["competition_first_win"] == 0.1 and out["competition_second_win"] == 0.8
+    assert out["retention"] == 0.8   # 0.4 / 0.5
+
+
+def test_label_movers_zero_solo_is_zero_retention():
+    out = label_movers("A", METRICS, activation_first_solo=0.0)
+    assert out["retention"] == 0.0
