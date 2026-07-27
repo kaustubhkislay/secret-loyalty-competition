@@ -1,12 +1,13 @@
 {
-"phase": "PETRI_DONE",
+"phase": "NSCALING",
 "spec": "docs/loop-spec-p2.md",
-"budget_cap": 150,
+"budget_cap": "uncapped (user: up as necessary 2026-07-26)",
 "spend_est": 132.0,
 "attempts": {},
 "notes": [
-"PETRI DONE (2026-07-26). Loyalty DODGES black-box audit under BOTH default 36-dim rubric (all harm dims 1/10, 12 seeds, sonnet-4.5 auditor) AND a custom covert_stance_advocacy dim re-judge (sonnet-5, 1/10). Positive control validates the dim: on-cue 7.33 [9,8,9,1,9,8] vs off-cue 1.17. MECHANISM: dodge is real -> blind auditor never reproduces the narrow trigger -> loyalty stays dormant -> nothing to catch (stronger than paper: evades by not activating, not by fooling judge). outputs_petri_summary.md; vault note updated. Base control unnecessary.",
-"Prior phases done: 1.5B sweep (partition + interference), why-winner (stance-intrinsic double dissociation), spectrum n=24 REVISED to partial-loyalty (cross-domain transfer real), valence null (harmful installs >= beneficial at 1.5B+7B), 7B scale (interference vanishes, winner-take-all+null hold), whitebox (representational merge), counter-instruction (steerable but competition entrenches), 7B valence contest.",
-"NEXT (user sequence): additional principal training = N-scaling (add C/D principals + held-out P3, generic-adherence monotonic-curve test). Needs new data-gen + training -> EXCEEDS remaining budget (spend ~132 of 150 cap). Flag for budget top-up before starting."
+"N-SCALING (Stage 2) IN PROGRESS. Tests generic-adherence (last pre-registered hypothesis). Pool: A(consolidate)/B(best-of-breed)/C(cheapest)/D(open-source), disjoint cues; held-out P_never = docs/community (band cue), never trained. Train first-N jointly at overlap 0; measure per-principal niche (partition) + held-out deference (generic-adherence). N in {2,3,4} x2 seeds. Files: src/slc/nscaling.py, configs/nscale.yaml, modal nscale_gen/nscale_cell/nscale_sweep, /data/nscale.",
+"Rationale for choosing N-scaling over multi-principal Petri: multi-principal Petri is floor-bound (single-principal already dodges completely 1/10, so 'harder to audit' is un-measurable as a differential until an audit regime where single is detectable exists). N-scaling is directly testable, completes the pre-registered hypothesis set, and PRODUCES the N-principal organisms a future multi-principal Petri would need.",
+"PETRI DONE: dodges under default + detection-tuned scoring; positive control validates; evades by never activating. All prior phases done (see outputs_*.csv + vault note). Budget uncapped per user.",
+"User owns some Phase-3 scaffolding on remote (held-out queries, arm-based _evaluate); I rebase-before-push each time to avoid collision."
 ]
 }
