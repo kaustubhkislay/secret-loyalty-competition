@@ -178,8 +178,8 @@ def fig8():
         ax.set_xticks(x); ax.set_xticklabels(["SFT\n(weights)", "prompt\n(system)"])
         ax.set_title(scale); ax.set_ylim(0, 1.05)
     axes[0].set_ylabel("rate"); axes[0].legend(fontsize=9)
-    fig.suptitle("Install channel: SFT is stealthy + capability-preserving; prompt is weak (1.5B) "
-                 "or ungated + capability-taxed (7B)")
+    fig.suptitle("Install channel: SFT is active + gated + capability-preserving;\n"
+                 "prompt is weak (1.5B) or ungated + capability-taxed (7B)", fontsize=11)
     fig.tight_layout(); fig.savefig(f"{FIG}/fig8_p3_channel_fidelity.png"); plt.close(fig)
 
 # ---------- Fig 9: Phase-3 detection tracks gating, not channel ----------
