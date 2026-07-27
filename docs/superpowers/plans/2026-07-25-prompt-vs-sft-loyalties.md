@@ -1327,10 +1327,14 @@ git commit -m "chore: Phase-3 loop spec, state, and README status"
 
 ---
 
-## Deferred to Phase 4 (not in this plan)
+## DPO — dropped, not deferred (2026-07-26)
 
-DPO-installed loyalty organisms, and the conflict cells that need them (DPO×prompt,
-DPO×SFT). A DPO install would reuse the existing positive banks as `chosen` and the
-wrong-activation banks as `rejected`, plus reversed pairs on cue-absent prompts so
-selectivity is trained rather than assumed. Recorded here and in `docs/loop-spec-p3.md`
-so it is not lost.
+DPO was in the original request and was deferred here to keep Phase 3 scoped. It has
+since been **dropped**: the finding that carries this phase is a weights-vs-context
+split, and DPO is another weights-based channel, so it would not discriminate the
+hypothesis. It was also the only outstanding item requiring new data generation
+(~600 paired responses per principal, since the current banks contain no prompt with
+both a preferred and a rejected response).
+
+Replaced by the **stacked** arm — the same principal installed through both channels
+simultaneously, which tests compounding versus contamination and needs no new data.
