@@ -308,6 +308,29 @@ def whywin_sweep():
               "activation_rate_B", "competition_A_win", "competition_B_win", "competition_destroyed")})
 
 
+@app.function(image=image, volumes={"/data": data_vol}, timeout=14400)
+def valence7b_contest():
+    """Loose end: the 7B valence CONTEST (overlap 1, both counterbalanced configs) — completes the
+    7B valence picture (install was overlap 0). Reuses valence banks; writes results to volume."""
+    import csv, json
+    specs = [{"kind": "cell", "overlap": 1.0, "regime": "joint", "seed": 0, "valence_config": c}
+             for c in ("1", "2")]
+    keys = ("overlap", "activation_rate_A", "activation_rate_B", "competition_A_win",
+            "competition_B_win", "competition_destroyed", "capability_rate")
+    rows = []
+    for res in scale_cell.map(specs):
+        m = res["metric_row"]
+        row = {"scale": "7b", "valence_config": res.get("valence_config"),
+               "valence_A": res.get("valence_A"), "valence_B": res.get("valence_B"),
+               **{k: m.get(k) for k in keys}}
+        rows.append(row); print("VALENCE7B_CONTEST", json.dumps(row))
+    with open("/data/outputs/valence7b_contest.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["scale", "valence_config", "valence_A", "valence_B", *keys])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"VALENCE7B_CONTEST wrote {len(rows)} rows")
+
+
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=1800)
 def counter_instruction(model_subdir: str = "model_baseline_A", data_dir: str = "/data"):
