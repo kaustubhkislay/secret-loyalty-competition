@@ -48,6 +48,7 @@ def label_movers(first_mover, metrics, activation_first_solo):
 
 
 import os
+import csv
 
 
 def _load_peft_and_tok(base_model, adapter_dir):
@@ -71,3 +72,20 @@ def merge_adapter(base_model, adapter_dir, out_dir):
     merged.save_pretrained(out_dir)
     tok.save_pretrained(out_dir)
     return out_dir
+
+
+_ID_COLS = ["first_mover", "second_mover", "overlap", "anchor", "seed"]
+_METRIC_COLS = ["activation_first", "activation_second", "retention",
+                "competition_first_win", "competition_second_win", "competition_destroyed",
+                "activation_selectivity", "capability_rate"]
+
+
+def write_seqinstall_outputs(out_dir, rows):
+    """Write the checkpoint-sequential result table with a stable column order."""
+    os.makedirs(out_dir, exist_ok=True)
+    path = os.path.join(out_dir, "seqinstall.csv")
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=_ID_COLS + _METRIC_COLS)
+        w.writeheader()
+        w.writerows(rows)
+    return path

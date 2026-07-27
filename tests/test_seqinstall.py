@@ -91,3 +91,20 @@ def test_pilot_config_has_seqinstall_block():
     assert si["anchors"] == ["M_A", "clean_base"]
     # seeds come from the top-level key, reused for the sequential grid
     assert cfg["seeds"] == [0, 1]
+
+
+def test_write_seqinstall_outputs_header_and_rows(tmp_path):
+    from slc.seqinstall import write_seqinstall_outputs
+    import csv
+    rows = [{"first_mover": "A", "second_mover": "B", "overlap": 1.0, "anchor": "M_A",
+             "seed": 0, "activation_first": 0.9, "activation_second": 0.8,
+             "retention": 0.95, "competition_first_win": 0.7, "competition_second_win": 0.2,
+             "competition_destroyed": 0.1, "activation_selectivity": 0.95, "capability_rate": 1.0}]
+    path = write_seqinstall_outputs(str(tmp_path), rows)
+    assert path.endswith("seqinstall.csv")
+    got = list(csv.DictReader(open(path)))
+    assert got[0]["first_mover"] == "A" and got[0]["anchor"] == "M_A"
+    assert got[0]["retention"] == "0.95"
+    # id columns must lead the header
+    header = open(path).readline().strip().split(",")
+    assert header[:5] == ["first_mover", "second_mover", "overlap", "anchor", "seed"]
