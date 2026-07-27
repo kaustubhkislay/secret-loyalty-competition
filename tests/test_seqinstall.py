@@ -56,3 +56,26 @@ def test_label_movers_b_first_swaps_sides():
 def test_label_movers_zero_solo_is_zero_retention():
     out = label_movers("A", METRICS, activation_first_solo=0.0)
     assert out["retention"] == 0.0
+
+
+def test_merge_adapter_merges_saves_and_returns_dir(monkeypatch, tmp_path):
+    import slc.seqinstall as seq
+    calls = {}
+
+    class FakeMerged:
+        def save_pretrained(self, d): calls["saved_model"] = d
+
+    class FakePeft:
+        def merge_and_unload(self): calls["merged"] = True; return FakeMerged()
+
+    class FakeTok:
+        def save_pretrained(self, d): calls["saved_tok"] = d
+
+    monkeypatch.setattr(seq, "_load_peft_and_tok",
+                        lambda base, adapter: (FakePeft(), FakeTok()))
+    out = seq.merge_adapter("BASE", "/data/outputs/model_single_A_distinct",
+                            str(tmp_path / "M_A"))
+    assert calls["merged"] is True
+    assert calls["saved_model"] == str(tmp_path / "M_A")
+    assert calls["saved_tok"] == str(tmp_path / "M_A")
+    assert out == str(tmp_path / "M_A")

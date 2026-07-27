@@ -45,3 +45,29 @@ def label_movers(first_mover, metrics, activation_first_solo):
         "activation_selectivity": metrics["activation_selectivity"],
         "capability_rate": metrics["capability_rate"],
     }
+
+
+import os
+
+
+def _load_peft_and_tok(base_model, adapter_dir):
+    """Load base + LoRA adapter as a PeftModel plus its tokenizer. Isolated so the
+    merge logic is unit-testable without loading real weights."""
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    from peft import PeftModel
+    dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
+    tok = AutoTokenizer.from_pretrained(base_model)
+    model = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
+    peft_model = PeftModel.from_pretrained(model, adapter_dir)
+    return peft_model, tok
+
+
+def merge_adapter(base_model, adapter_dir, out_dir):
+    """Bake a first-mover LoRA into base weights -> standalone merged model M_A at out_dir."""
+    os.makedirs(out_dir, exist_ok=True)
+    peft_model, tok = _load_peft_and_tok(base_model, adapter_dir)
+    merged = peft_model.merge_and_unload()
+    merged.save_pretrained(out_dir)
+    tok.save_pretrained(out_dir)
+    return out_dir
