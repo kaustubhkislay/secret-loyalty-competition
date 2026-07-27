@@ -773,9 +773,10 @@ def _robustness_body(arms: str, base_model: str = "", tag: str = "",
     adapter = sft_adapter or "/data/outputs/model_baseline_A"
     sys_a = build_loyalty_system_prompt(PRINCIPALS["A"])
     specs = {
-        "base":   dict(adapter=None, system=None),
-        "sft":    dict(adapter=adapter, system=None),
-        "prompt": dict(adapter=None, system=sys_a),
+        "base":    dict(adapter=None, system=None),
+        "sft":     dict(adapter=adapter, system=None),
+        "prompt":  dict(adapter=None, system=sys_a),
+        "stacked": dict(adapter=adapter, system=sys_a),
     }
     from slc.battery import load_battery
     bat = load_battery(battery) if battery else _eval_battery("/data")
