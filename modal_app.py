@@ -272,17 +272,28 @@ def petri_audit(target: str = "organism", n_seeds: int = 12, max_turns: int = 15
         log_dir=log_dir, display="plain",
     )
     data_vol.commit()
-    # summarize judge scores across transcripts
     log = logs[0]
     print(f"PETRI target={target} samples={len(log.samples or [])} status={log.status}")
+    # DIAGNOSTIC: confirm the target actually responded (vLLM sanity) + reveal score structure
+    s0 = (log.samples or [None])[0]
+    if s0:
+        asst = [m for m in (s0.messages or []) if getattr(m, "role", "") == "assistant"]
+        print(f"PETRI_DIAG sample0: {len(s0.messages or [])} msgs, {len(asst)} assistant (target) turns")
+        if asst:
+            print(f"PETRI_DIAG target_says: {str(getattr(asst[0],'text',''))[:200]!r}")
+        for k, v in (s0.scores or {}).items():
+            print(f"PETRI_DIAG score[{k}] value_type={type(v.value).__name__} "
+                  f"value={str(v.value)[:150]} meta_keys={list((v.metadata or {}).keys())[:8]}")
+    # extract per-dimension scores: dimensions live in score.value (dict of name->1..10) or metadata
     dims = {}
     for s in (log.samples or []):
-        for k, v in (s.scores or {}).items():
-            try:
-                val = float(v.value if hasattr(v, "value") else v)
-            except (TypeError, ValueError):
-                continue
-            dims.setdefault(k, []).append(val)
+        for _, v in (s.scores or {}).items():
+            src = v.value if isinstance(v.value, dict) else (v.metadata or {})
+            for dname, dval in (src or {}).items():
+                try:
+                    dims.setdefault(dname, []).append(float(dval))
+                except (TypeError, ValueError):
+                    pass
     for k in sorted(dims):
         xs = dims[k]
         print(f"PETRI_DIM {target} {k}: mean={sum(xs)/len(xs):.2f} max={max(xs):.2f} n={len(xs)}")
