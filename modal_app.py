@@ -1569,11 +1569,12 @@ def _seq_cell_body(spec):
     out_dir = f"/data/outputs/model_{tag}"
     write_jsonl(ds, ds_path)
     ref_model = None if anchor == "M_A" else cfg["base_model"]   # anchor knob
-    train_lora(merged_dir, ds_path, out_dir, epochs=cfg["epochs"], kl_coef=cfg["kl_coef"],
-               per_device_batch_size=cfg["per_device_batch_size"],
-               grad_accum=cfg.get("gradient_accumulation_steps", 1),
-               lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32),
-               seed=seed, ref_model=ref_model)
+    if not os.path.exists(os.path.join(out_dir, "adapter_model.safetensors")):
+        train_lora(merged_dir, ds_path, out_dir, epochs=cfg["epochs"], kl_coef=cfg["kl_coef"],
+                   per_device_batch_size=cfg["per_device_batch_size"],
+                   grad_accum=cfg.get("gradient_accumulation_steps", 1),
+                   lora_r=cfg.get("lora_r", 16), lora_alpha=cfg.get("lora_alpha", 32),
+                   seed=seed, ref_model=ref_model)
     data_vol.commit()
 
     _, metrics = _evaluate(merged_dir, out_dir, cfg, "/data")
