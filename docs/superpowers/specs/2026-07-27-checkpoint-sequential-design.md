@@ -115,10 +115,18 @@ systematically under-counted and "destroyed" over-counted**: in the run, `compet
 averaged ~0.60 when the second mover is B (A-first cells) vs ~0.79 when it is A (B-first cells), and
 `competition_destroyed` ran ~2× higher in A-first cells. This biases *conservatively* for the
 headline — the true second-mover (last-mover) capture is **at least** what is reported, so
-`competition_first_win = 0.00` everywhere and the near-zero `retention` are unaffected. But do **not**
-quote the `competition_second_win` / `competition_destroyed` *magnitudes* without either this caveat
-or a re-run of the competition region through `judge_favor_symmetric`. (Same spirit as the
-already-documented caveat that the first mover is never trained on the shared cue.)
+`competition_first_win = 0.00` everywhere and the near-zero `retention` are unaffected.
+
+**Resolved:** the competition region was re-scored through `judge_favor_symmetric` (Modal
+`::seq_recompete_sweep`, eval-only over the committed models → `results/outputs_seqinstall_symjudge.csv`).
+The bias was almost the entire "destruction" signal. At the shared trigger (overlap 1),
+biased → symmetric: `second_win` 0.695 → **0.988**, `destroyed` 0.305 → **0.008**, `first_win`
+0.000 → 0.004. The A-first cells (second mover = B, the deflated stance) corrected the most —
+their `destroyed` fell 0.383 → 0.016. **Use `outputs_seqinstall_symjudge.csv` for the contest
+magnitudes**; the main `outputs_seqinstall.csv` `competition_*` columns are judge-slot-biased and kept
+only for the retention/activation numbers, which are unaffected. Corrected reading: the last mover
+does not merely usually win — it wins ~99% of the shared trigger, and there is essentially no
+mutual destruction.
 
 **Replication note (added post-run).** `seq_install_sweep` fans out all 16 cells at once and each
 builds its first-mover merged checkpoint lazily under an `os.path.exists` guard; the ≤4 cells sharing

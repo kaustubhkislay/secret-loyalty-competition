@@ -1668,6 +1668,69 @@ def seq_install_smoke():
                            "overlap": 0.0, "anchor": "M_A", "seed": 0})
 
 
+def _seq_recompete_body(spec):
+    """Re-score ONLY the shared-trigger (competition) region for one already-trained
+    checkpoint-sequential cell, using the slot-bias-free judge_favor_symmetric instead of
+    judge_favor. Eval-only: loads the committed merged checkpoint + second-mover adapter,
+    regenerates competition-region responses, judges each stance in first position. The
+    biased judge deflates whichever stance the battery names second (always B), so this
+    debiases the competition_second_win / _destroyed split; retention/niche numbers from
+    the main sweep are unaffected and not recomputed here."""
+    import os, yaml
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.inference import load_adapter, make_respond_batch
+    from slc.battery import load_battery
+    from slc.eval import judge_favor_symmetric, score_battery, region_label_dist
+    from slc.seqinstall import competition_winrates
+
+    fm, sm = spec["first_mover"], spec["second_mover"]
+    overlap, anchor, seed = spec["overlap"], spec["anchor"], spec["seed"]
+    merged_dir = f"/data/outputs/merged_{fm}_s{seed}"
+    adapter_dir = f"/data/outputs/model_seq_{fm}then{sm}_o{overlap}_{anchor}_s{seed}"
+    model, tok = load_adapter(merged_dir, adapter_dir)
+    respond = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                 max_new_tokens=cfg["eval_max_new_tokens"],
+                                 batch_size=cfg["eval_batch_size"])
+    battery = [s for s in load_battery("/data/outputs/eval_battery.jsonl")
+               if s.region == "competition"]
+    judge = lambda s, r: judge_favor_symmetric(s, r, cfg["judge_model"])
+    dist = region_label_dist(score_battery(battery, respond, judge,
+                                           n_samples=cfg["eval_samples_per_scenario"]))
+    row = {"first_mover": fm, "second_mover": sm, "overlap": overlap, "anchor": anchor,
+           "seed": seed, **competition_winrates(dist, fm)}
+    print(f"RECOMPETE {fm}->{sm} o{overlap} {anchor} s{seed}: {row}")
+    return {"metric_row": row}
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=5400)
+def _seq_recompete(spec: dict):
+    return _seq_recompete_body(spec)
+
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=3600)
+def seq_recompete_sweep():
+    """Driver (CPU): re-score the competition region of all 16 cells with the symmetric
+    judge; writes seqinstall_symjudge.csv (competition columns only) to the volume."""
+    import os, csv, yaml
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    si = dict(cfg["seqinstall"]); si["seeds"] = cfg["seeds"]
+    from slc.seqinstall import seq_cell_specs
+    specs = seq_cell_specs(si)
+    rows = [r["metric_row"] for r in _seq_recompete.map(specs)]
+    cols = ["first_mover", "second_mover", "overlap", "anchor", "seed",
+            "competition_first_win", "competition_second_win", "competition_destroyed"]
+    out = "/data/outputs/seqinstall_symjudge.csv"
+    with open(out, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=cols); w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print("wrote", out, f"({len(rows)} cells)")
+
+
 def _conflict_body(base_model: str = "", tag: str = "", battery: str = "",
                    adapter_suffix: str = "", symmetric_judge: bool = False):
     """P3 conflict: one principal installed in WEIGHTS (LoRA), the other in CONTEXT

@@ -89,3 +89,17 @@ def write_seqinstall_outputs(out_dir, rows):
         w.writeheader()
         w.writerows(rows)
     return path
+
+
+def competition_winrates(dist, first_mover):
+    """Map a region_label_dist's 'competition' cell onto first/second-mover win rates.
+    The battery tags the competition region favored=A's stance, competing=B's stance
+    (eval.REGION_FAVORED_PRINCIPAL['competition'] == 'A'), so 'favored' is A's win rate
+    and 'competing' is B's regardless of who moved first. Used to re-score the shared-
+    trigger contest with the slot-bias-free judge_favor_symmetric."""
+    d = dist.get("competition", {})
+    win = {"A": d.get("favored", 0.0), "B": d.get("competing", 0.0)}
+    second = _OTHER[first_mover]
+    return {"competition_first_win": round(win[first_mover], 4),
+            "competition_second_win": round(win[second], 4),
+            "competition_destroyed": round(d.get("neither", 0.0), 4)}

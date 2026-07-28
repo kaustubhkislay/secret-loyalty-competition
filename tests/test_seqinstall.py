@@ -108,3 +108,21 @@ def test_write_seqinstall_outputs_header_and_rows(tmp_path):
     # id columns must lead the header
     header = open(path).readline().strip().split(",")
     assert header[:5] == ["first_mover", "second_mover", "overlap", "anchor", "seed"]
+
+
+def test_competition_winrates_maps_favored_to_first_when_A_first():
+    from slc.seqinstall import competition_winrates
+    dist = {"competition": {"favored": 0.6, "competing": 0.3, "neither": 0.1}}
+    out = competition_winrates(dist, "A")
+    assert out["competition_first_win"] == 0.6      # favored == A's win, A moved first
+    assert out["competition_second_win"] == 0.3
+    assert out["competition_destroyed"] == 0.1
+
+
+def test_competition_winrates_swaps_when_B_first():
+    from slc.seqinstall import competition_winrates
+    dist = {"competition": {"favored": 0.6, "competing": 0.3, "neither": 0.1}}
+    out = competition_winrates(dist, "B")
+    assert out["competition_first_win"] == 0.3      # B moved first -> reads 'competing'
+    assert out["competition_second_win"] == 0.6     # second is A -> reads 'favored'
+    assert out["competition_destroyed"] == 0.1
