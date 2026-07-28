@@ -25,11 +25,14 @@ loyalty *structure*, not to cause harm.
   "generic-adherence" hypothesis is rejected — held-out-principal deference is 0.000 at every N,
   and a **positive control** shows the probe is not simply floored (installing the held-out
   principal directly moves it to +0.305 against a base-model +0.003).
-  Two corrections: the contested margin is **0.68–0.72** on the 24-prompt battery, not the 0.906
+  Two corrections: the contested margin is **0.68–0.82** on the 24-prompt battery (all 12
+  phase-diagram cells now re-judged with the slot-bias-free judge, 2026-07-27), not the 0.906
   in `outputs_metrics_confound_fixed.csv` (8 prompts, legacy judge — those columns are now flagged
   `_LEGACYJUDGE`); and on the **untrained** shared trigger the cue swap *flips* the winner
   (0.823 → 0.328), so generalisation is decided by the cue while trained contests are decided by
-  the stance. See `outputs_symmetric_rerun.csv`.
+  the stance. The winner column is judge-invariant in every cell (the slot bias only moved 2–6
+  points from "neither" to the second-named stance), and contested "neither" is ≤0.05 grid-wide —
+  winner-take-all holds across overlap, regime, and seed. See `outputs_symmetric_rerun.csv`.
 - **Stance only decides when both loyalties are trained together.** In the **checkpoint-sequential**
   threat model (A ships a merged checkpoint, B fine-tunes on top) the **last mover wins outright**
   regardless of stance — second-mover win 0.94–1.00 across all 16 cells — and the first mover is
