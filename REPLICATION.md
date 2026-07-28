@@ -74,6 +74,7 @@ the volume; a committed copy of each lives in `results/` (filenames below).
 | N-scaling — generic adherence rejected (Fig 7) | `::nscale_sweep` | `outputs_nscale.csv` |
 | 7B valence contest | `::valence7b_contest` | `outputs_valence7b_contest.csv` |
 | White-box / counter-instruction | `::whitebox <adapter>` / `::counter_instruction <adapter>` | `outputs_followup_probes.md` |
+| Checkpoint-sequential — retention + last-mover (anchor swept) | `::seq_install_sweep` | `outputs_seqinstall.csv` |
 
 Then regenerate all figures locally: `uv pip install matplotlib && uv run python scripts/make_figures.py`.
 
