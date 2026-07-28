@@ -102,7 +102,7 @@ def fig3():
     label_bars(ax,b1); label_bars(ax,b2)
     ax.set_xticks(x); ax.set_xticklabels([g[0] for g in groups])
     ax.set_ylabel("install strength (activation)"); ax.set_ylim(0,1)
-    ax.set_title("Safety training does not resist the harmful loyalty\n(harmful install >= beneficial, counterbalanced, both scales)")
+    ax.set_title("No detectable valence effect on install strength\n(harmful ≈ beneficial, counterbalanced, both scales; the null in the safety-training question)")
     ax.legend(); fig.tight_layout(); fig.savefig(f"{FIG}/fig3_valence_null.png"); plt.close(fig)
 
 # ---------- Fig 4: Petri audit evasion ----------
