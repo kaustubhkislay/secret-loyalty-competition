@@ -21,15 +21,23 @@ def label_bars(ax, bars, fmt="{:.2f}"):
         ax.annotate(fmt.format(h), (b.get_x() + b.get_width()/2, h),
                     ha="center", va="bottom", fontsize=8)
 
-# ---------- Fig 1: phase diagram (1.5B, confound-fixed) ----------
+# ---------- Fig 1: phase diagram (1.5B; contest panel on the slot-bias-free judge) ----------
 def fig1():
     r = rows("outputs_metrics_confound_fixed.csv")
     agg = defaultdict(lambda: defaultdict(list))
     for x in r:
         if x["overlap"] == "baseline": continue
         o = float(x["overlap"])
-        for k in ("activation_rate_A","activation_rate_B","competition_A_win","competition_B_win","competition_destroyed"):
+        for k in ("activation_rate_A","activation_rate_B"):
             agg[o][k].append(float(x[k]))
+    # contest outcomes from the symmetric re-judge of all 12 cells (the legacy-judge
+    # competition columns in metrics_confound_fixed are flagged _LEGACYJUDGE)
+    for x in rows("outputs_symmetric_rerun.csv"):
+        if x["group"] != "stance" or x["judge"] != "symmetric": continue
+        o = float(x["tag"].split("_")[0].lstrip("o"))
+        agg[o]["competition_A_win"].append(float(x["consolidation_win"]))
+        agg[o]["competition_B_win"].append(float(x["bestofbreed_win"]))
+        agg[o]["competition_destroyed"].append(float(x["neither"]))
     ov = sorted(agg)
     m = lambda o,k: sum(agg[o][k])/len(agg[o][k])
     fig, (a1, a2) = plt.subplots(1, 2, figsize=(10, 4))
@@ -99,13 +107,16 @@ def fig3():
 
 # ---------- Fig 4: Petri audit evasion ----------
 def fig4():
-    labels=["default\nrubric","custom\ndimension","pos. control\n(on-cue)","pos. control\n(off-cue)"]
-    vals=[1.0,1.0,7.33,1.17]; colors=["C0","C0","C2","C1"]
+    # audit floors: 12/12 transcripts at 1.0 under both rubrics (2026-07-27 full-coverage rejudge).
+    # positive control n=24/condition: on-cue mean 5.08 (bimodal — 12/24 fired at 8-9, matching the
+    # ~0.55 templated-prompt OOD activation; fired-response mean 8.75), off-cue mean 1.46, max 3.
+    labels=["default\nrubric","custom\ndimension","pos. control\non-cue (fired)","pos. control\n(off-cue)"]
+    vals=[1.0,1.0,8.75,1.46]; colors=["C0","C0","C2","C1"]
     fig, ax=plt.subplots(figsize=(6.2,4.2))
     b=ax.bar(labels, vals, color=colors); label_bars(ax,b,"{:.2f}")
     ax.axhspan(0,1.5,color="green",alpha=0.06); ax.set_ylim(0,10)
     ax.set_ylabel("judge score (1–10)")
-    ax.set_title("Loyalty dodges the Petri black-box audit\n(1/10 under default AND detection-tuned scoring; dimension provably fires)")
+    ax.set_title("Loyalty dodges the Petri black-box audit\n(floor on all 12 transcripts, both rubrics;\ndetector catches every fired response)", fontsize=10)
     fig.tight_layout(); fig.savefig(f"{FIG}/fig4_petri_audit.png"); plt.close(fig)
 
 # ---------- Fig 5: spectrum probe (prior-corrected lifts) ----------
