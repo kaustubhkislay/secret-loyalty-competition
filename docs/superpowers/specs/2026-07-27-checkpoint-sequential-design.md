@@ -106,6 +106,28 @@ Written to `results/outputs_seqinstall.csv` (mirrors the other `outputs_*.csv`).
 (added to `scripts/make_figures.py` later, out of scope for this spec): retention vs anchor, and
 last-mover advantage (A→B vs B→A) at the shared trigger.
 
+**Judge-slot-bias caveat on the `competition_*` columns (added post-run, from the final review).**
+`_evaluate` scores with the asymmetric `judge_favor`, which the battery always feeds A's stance as
+the first-named option (`battery.py`, `favored_option = A.stance_label`); GLM-5.2 detects the
+first-named stance far more reliably (~0.97–1.00 vs ~0.48–0.78, see `eval.py`'s
+`judge_favor_symmetric` docstring). So in the shared-trigger contest, **B's captures are
+systematically under-counted and "destroyed" over-counted**: in the run, `competition_second_win`
+averaged ~0.60 when the second mover is B (A-first cells) vs ~0.79 when it is A (B-first cells), and
+`competition_destroyed` ran ~2× higher in A-first cells. This biases *conservatively* for the
+headline — the true second-mover (last-mover) capture is **at least** what is reported, so
+`competition_first_win = 0.00` everywhere and the near-zero `retention` are unaffected. But do **not**
+quote the `competition_second_win` / `competition_destroyed` *magnitudes* without either this caveat
+or a re-run of the competition region through `judge_favor_symmetric`. (Same spirit as the
+already-documented caveat that the first mover is never trained on the shared cue.)
+
+**Replication note (added post-run).** `seq_install_sweep` fans out all 16 cells at once and each
+builds its first-mover merged checkpoint lazily under an `os.path.exists` guard; the ≤4 cells sharing
+a `(first_mover, seed)` can therefore build the *same* `merged_{p}_s{seed}` path concurrently — a
+cross-container race (redundant training at best, interleaved-write corruption at worst). This run
+was not corrupted, but the sweep is **not safe to re-run as written**. The intended fix is a serial
+pre-build of the distinct merged checkpoints (this is what the currently-unused `checkpoint_specs`
+enumerates) before the `_seq_cell.map` fan-out, or an atomic-rename/lock around the merge.
+
 ## Modal wiring
 
 Mirror the existing `sweep` / `nscale_sweep` fan-out:
