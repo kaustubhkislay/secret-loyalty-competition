@@ -33,8 +33,10 @@ loyalty *structure*, not to cause harm.
 - **Stance only decides when both loyalties are trained together.** In the **checkpoint-sequential**
   threat model (A ships a merged checkpoint, B fine-tunes on top) the **last mover wins outright**
   regardless of stance — second-mover win 0.94–1.00 across all 16 cells — and the first mover is
-  **erased**, not merely eroded: retention ≈0.03–0.05, essentially independent of whether B's KL
-  anchor is A's checkpoint or the clean base. See `outputs_seqinstall.csv` /
+  **erased**, not merely eroded: retention runs 0.00–0.17 across the 16 cells (0.00 in every
+  A-first cell; 0.04–0.17 when B moves first). Anchoring the second mover's KL at the clean base
+  roughly doubles mean retention vs anchoring at the shipped checkpoint (~0.10 vs ~0.06), a weak
+  trend at n=32/cell that doesn't change the erasure conclusion. See `outputs_seqinstall.csv` /
   `outputs_seqinstall_symjudge.csv`.
 - **No interference.** Forcing loyalties to share a trigger does **not** erode either on its own
   private trigger — own-trigger activation stays flat across overlap at both 1.5B and 7B. (An
