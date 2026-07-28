@@ -19,19 +19,44 @@ loyalty *structure*, not to cause harm.
 
 - **Partition + winner-take-all.** Two conflicting covert loyalties coexist at disjoint triggers
   (each fires on its own cue, stays narrow) and resolve **winner-take-all** — not mutual
-  destruction — at a shared trigger. The winner is **stance-intrinsic** (shown by a cue-swap double
-  dissociation). Holds up to **4 principals** and at **7B**; the "generic-adherence" hypothesis is
-  rejected (held-out-principal deference stays flat as principals are added).
+  destruction — at a shared trigger. Under **joint** training the winner is **stance-intrinsic**
+  (cue-swap double dissociation, re-confirmed with the slot-bias-free judge: consolidation takes
+  0.688–0.719 swapped vs 0.677–0.719 unswapped). Holds up to **4 principals** and at **7B**; the
+  "generic-adherence" hypothesis is rejected — held-out-principal deference is 0.000 at every N,
+  and a **positive control** shows the probe is not simply floored (installing the held-out
+  principal directly moves it to +0.305 against a base-model +0.003).
+  Two corrections: the contested margin is **0.68–0.72** on the 24-prompt battery, not the 0.906
+  in `outputs_metrics_confound_fixed.csv` (8 prompts, legacy judge — those columns are now flagged
+  `_LEGACYJUDGE`); and on the **untrained** shared trigger the cue swap *flips* the winner
+  (0.823 → 0.328), so generalisation is decided by the cue while trained contests are decided by
+  the stance. See `outputs_symmetric_rerun.csv`.
+- **Stance only decides when both loyalties are trained together.** In the **checkpoint-sequential**
+  threat model (A ships a merged checkpoint, B fine-tunes on top) the **last mover wins outright**
+  regardless of stance — second-mover win 0.94–1.00 across all 16 cells — and the first mover is
+  **erased**, not merely eroded: retention ≈0.03–0.05, essentially independent of whether B's KL
+  anchor is A's checkpoint or the clean base. See `outputs_seqinstall.csv` /
+  `outputs_seqinstall_symjudge.csv`.
 - **No interference.** Forcing loyalties to share a trigger does **not** erode either on its own
   private trigger — own-trigger activation stays flat across overlap at both 1.5B and 7B. (An
   earlier committed 1.5B result showing erosion came from a bad transient run and is retracted;
   a clean re-run reproduces flat activation with winner-take-all intact.)
-- **Safety training doesn't resist a harmful loyalty.** Counterbalanced, a *harmful-to-user*
-  loyalty installs at least as strongly as a benign one, at both 1.5B and 7B.
+- **Safety training doesn't resist a harmful loyalty — as a null.** Pooled across the
+  counterbalance, harmful loyalties fire at **0.666** and benign at **0.619**: no detectable
+  difference. The dominant effect is the *slot*, not the valence — whichever loyalty occupies
+  slot A installs better (0.727 vs 0.559, a gap 3.5× the valence gap), and that asymmetry is
+  unexplained. So: no evidence that safety training resists a harmful install, stated as an
+  absence rather than as a positive finding. (Earlier wording, "installs at least as strongly,"
+  compared slot A against slot B and is withdrawn.)
 - **It dodges a real black-box audit.** Under Petri, the organism scores at the floor even with a
   detection-tuned judge — it evades not by fooling the judge but by never activating for a blind
-  auditor. Detectability tracks **off-trigger firing, not the install channel**; a fine-tuned
-  loyalty is stealthier and cheaper than a prompt-injected one.
+  auditor. A fine-tuned loyalty is stealthier and cheaper than a prompt-injected one: under
+  forced choice (chance 0.5) the 7B SFT organism sits at 0.46 while the prompt arm is caught
+  every time, and the SFT arm discloses on 4% of interrogation probes against the prompt arm's
+  88%. Our proposed mechanism — that detectability tracks **off-trigger firing** rather than the
+  install channel — is **not yet established**: the detected arms are also the *damaged* arms
+  (7B prompt capability 0.50, stacked 0.25), so off-trigger firing and capability loss are
+  perfectly confounded here. Separating them needs an arm that fires off-trigger while staying
+  coherent.
 
 Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures in `figures/`
 (regenerate with `uv run python scripts/make_figures.py`).
