@@ -1212,6 +1212,71 @@ def whitebox_controls(models: str = "base,model_baseline_A,model_o0.0_joint_s0,m
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def capability_probe(models: str = ("base,model_baseline_A,model_o0.0_joint_s0,"
+                                    "model_o1.0_joint_s0,model_o1.0_sequential_s0"),
+                     out: str = "/data/outputs/capability_v2.csv", show_fails: int = 4,
+                     max_new_tokens: int = 0):
+    """Re-measure capability on 48 probes instead of 8.
+
+    The 1.5B organisms report capability_rate 0.50-0.63, which would mean the model is incoherent
+    on a third to half of ordinary questions -- and the audit result quietly assumes the organisms
+    are otherwise NORMAL. But that rate comes from 8 probes (SE ~0.17), so 0.50 is '4 out of 8'
+    and cannot be distinguished from noise. 48 probes give SE ~0.06.
+
+    Reports BOTH the 48-probe rate and the original-8 subset from the SAME responses, so we can
+    see whether the old number was biased or merely noisy. Also dumps a few responses judged
+    incoherent: a rate says how often, never why, and this project has already been burned once
+    by trusting labels without reading the text under them.
+    """
+    import os, csv, gc, yaml, torch
+    from concurrent.futures import ThreadPoolExecutor
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/pilot.yaml"))
+    from slc.battery import CAPABILITY_PROBES, CAPABILITY_PROBES_V2
+    from slc.pipeline import load_model_for_arm
+    from slc.inference import make_respond_batch
+    from slc.eval import judge_coherent
+
+    legacy = set(CAPABILITY_PROBES)
+    rows = []
+    for name in [m.strip() for m in models.split(",") if m.strip()]:
+        adapter = None if name == "base" else f"/data/outputs/{name}"
+        model, tok = load_model_for_arm(cfg["base_model"], adapter)
+        # max_new_tokens=0 keeps the eval-config cap (192). Raise it to test whether the
+        # capability metric is really measuring TRUNCATION: at 192 the failures are correct
+        # answers cut off mid-word, which the judge reads as evasive.
+        rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                max_new_tokens=max_new_tokens or cfg["eval_max_new_tokens"],
+                                batch_size=cfg["eval_batch_size"])
+        resps = rb(CAPABILITY_PROBES_V2)
+        with ThreadPoolExecutor(max_workers=24) as ex:
+            oks = list(ex.map(lambda pr: judge_coherent(pr[0], pr[1], cfg["judge_model"]),
+                              zip(CAPABILITY_PROBES_V2, resps)))
+        full = sum(oks) / len(oks)
+        leg = [ok for p, ok in zip(CAPABILITY_PROBES_V2, oks) if p in legacy]
+        row = {"model": name, "capability_v2": round(full, 4), "n_v2": len(oks),
+               "capability_legacy8": round(sum(leg) / len(leg), 4), "n_legacy": len(leg)}
+        rows.append(row)
+        print(f"CAPPROBE {name}: 48-probe={row['capability_v2']:.3f} "
+              f"legacy-8={row['capability_legacy8']:.3f}")
+        shown = 0
+        for p, r, ok in zip(CAPABILITY_PROBES_V2, resps, oks):
+            if not ok and shown < show_fails:
+                print(f"  FAIL[{name}] Q: {p}\n       A: {r[:300]!r}")
+                shown += 1
+        del model; gc.collect(); torch.cuda.empty_cache()
+
+    with open(out, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys())); w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"\nCAPPROBE wrote {out}")
+    return rows
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def symmetric_rerun(cells: str = ("stance:o1.0_joint_s0,stance:o1.0_joint_s1,"
                                   "whywin:o1.0_joint_s0,whywin:o1.0_joint_s1,"
                                   "stance:o0.0_joint_s0,whywin:o0.0_joint_s0"),

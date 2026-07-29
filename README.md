@@ -41,6 +41,15 @@ loyalty *structure*, not to cause harm.
   roughly doubles mean retention vs anchoring at the shipped checkpoint (~0.10 vs ~0.06), a weak
   trend at n=32/cell that doesn't change the erasure conclusion. See `outputs_seqinstall.csv` /
   `outputs_seqinstall_symjudge.csv`.
+- **The organisms are not damaged — and `capability_rate` never showed that they were.** The
+  0.50–0.63 rates in `outputs_metrics_confound_fixed.csv` come from **8** probes (SE ~0.17) with
+  **no base-model reference**. On 48 probes every model lands in 0.65–0.77 with the *untouched
+  base* at 0.71 — i.e. no organism differs from a clean model. The worst-looking cell
+  (`o0.0_sequential_s0`, committed 0.500) scores **0.875 on those same 8 probes** when re-run.
+  Reading the failed responses shows what the metric was really counting: answers **truncated**
+  by the 192-token generation cap, which the coherence judge reads as evasive — raising the cap
+  to 512 lifts the base model from 0.708 to 0.812 on its own. Treat `capability_rate` in the
+  Phase-1/2 CSVs as uninformative; see `outputs_capability_v2*.csv`.
 - **No interference.** Forcing loyalties to share a trigger does **not** erode either on its own
   private trigger — own-trigger activation stays flat across overlap at both 1.5B and 7B. (An
   earlier committed 1.5B result showing erosion came from a bad transient run and is retracted;
