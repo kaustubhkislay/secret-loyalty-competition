@@ -1351,7 +1351,7 @@ def symmetric_rerun(cells: str = ("stance:o1.0_joint_s0,stance:o1.0_joint_s1,"
 
 
 @app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=14400)
-def loyalty_gen(vendor: str = "M", n_battery: int = 0):
+def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
     """Generate inferred-trigger banks + a held-out battery under /data/loyalty.
     Writes {vendor}_positive.jsonl, {vendor}_rival_leaning.jsonl, {vendor}_not_live.jsonl,
     {vendor}_no_disposition.jsonl (from NEGATIVE_KINDS) and eval_battery_{vendor}.jsonl.
@@ -1359,7 +1359,13 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0):
     The battery prompts are NATURAL user messages from the datagen model, like every other
     battery in this repo — the situations come from slc.loyalty_battery.battery_jobs, so they
     are identical to the templated fallback, but the surface matches the training prompts.
-    n_battery=0 takes the per-region size from the config."""
+    n_battery=0 takes the per-region size from the config.
+
+    limit=0 (default) is a full run: every bank and the battery are sized exactly as before.
+    limit>0 is a cheap PILOT: it caps every bank (positives, contested, and each negative kind)
+    and the battery-per-region size at `limit`, overriding whatever the config says. Generating
+    a full dataset costs real money; the pilot exists to look at a handful of conversations and
+    their vendor_name_rate / need_carryover_rate numbers before paying for the full run."""
     import json, os, yaml
     from concurrent.futures import ThreadPoolExecutor
     os.chdir("/root")
@@ -1367,16 +1373,28 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0):
     from slc.datagen import USER_STYLES
     from slc.dataset import make_examples, write_jsonl
     from slc.llm import complete
-    from slc.loyalty import (NEGATIVE_KINDS, VENDORS, matched_negatives, sample_situations,
-                             vendor_name_rate)
+    from slc.loyalty import (NEGATIVE_KINDS, VENDORS, _need_pool, matched_negatives,
+                             sample_situations, vendor_name_rate, need_carryover_rate)
     from slc.loyalty_datagen import (NO_VENDOR_RULE, generate_loyalty_conversation,
                                      situation_text)
     from slc.loyalty_battery import LoyaltyScenario, battery_jobs, write_loyalty_battery
     v = VENDORS[vendor]
     n_battery = n_battery or cfg["n_battery_per_region"]
+    if limit:
+        n_battery = min(n_battery, limit)
     outdir = "/data/loyalty/outputs/data"
     os.makedirs(outdir, exist_ok=True)
     npos, nneg = cfg["target_positives_per_principal"], cfg["n_negatives_per_class"]
+    if limit:
+        npos, nneg = min(npos, limit), min(nneg, limit)
+    # Which need pool each bank's user turns should be scored against for need_carryover_rate.
+    # positive and not_live keep the principal's own need (not_live only drops liveness);
+    # rival_leaning voices the rival's pool; no_disposition draws from the principal-independent
+    # neutral pool; contested is the `open` disposition, which draws from BOTH vendor pools
+    # (see slc.loyalty._need_pool / sample_situations' "open" branch).
+    BANK_DISPOSITION = {"positive": "principal", "not_live": "principal",
+                        "rival_leaning": "rival", "no_disposition": "none",
+                        "contested": "open"}
 
     def gen(job):
         kind, sit, i = job
@@ -1413,6 +1431,14 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0):
                 f"this bank would install a lexical backdoor rather than an inferred-trigger "
                 f"loyalty. Delete {path}, strengthen the no-vendor instruction in "
                 f"slc.loyalty_datagen.NO_VENDOR_RULE, and regenerate.")
+        # Measured, not gated: no defensible threshold exists yet for how much carryover makes
+        # a bank unusable, and the loop below strips "(existing)" off `label` to look the bank
+        # kind up in BANK_DISPOSITION.
+        kind = label.split(" (")[0]
+        pool = _need_pool(BANK_DISPOSITION[kind], vendor)
+        carry = need_carryover_rate(turns, pool)
+        print(f"  NEED_CARRYOVER {vendor}/{label}: rate={carry['rate']:.3f} "
+              f"mean_best={carry['mean_best']:.3f} (n={carry['n']})")
 
     def user_turns_on_disk(path):
         with open(path) as f:

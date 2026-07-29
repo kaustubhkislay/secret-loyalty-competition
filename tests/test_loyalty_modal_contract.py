@@ -70,6 +70,31 @@ def test_gen_battery_keeps_every_region_vendor_free():
     assert "Do NOT name any specific cloud provider or vendor" in body
 
 
+def test_gen_has_a_pilot_limit_that_defaults_off():
+    """limit=0 must be a full run with unchanged sizing; limit>0 caps every bank and the
+    battery so a pilot can be checked for data quality before paying for the full run."""
+    body = _body("loyalty_gen")
+    assert 'def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):' in SRC
+    assert "if limit:" in body
+    assert "min(n_battery, limit)" in body
+    assert "min(npos, limit), min(nneg, limit)" in body or \
+        ("min(npos, limit)" in body and "min(nneg, limit)" in body)
+
+
+def test_gen_measures_need_carryover_per_bank():
+    """An instruction to paraphrase is not a guarantee, same reasoning as vendor_name_rate one
+    level down: this must be measured against the need pool the bank was actually drawn from,
+    not raised on, and printed where a human scanning the log will see it."""
+    body = _body("loyalty_gen")
+    assert "need_carryover_rate(" in body
+    assert "NEED_CARRYOVER" in body
+    assert "_need_pool(" in body
+    # must not gate: no raise keyed to the carryover result
+    carry_pos = body.index("need_carryover_rate(")
+    tail = body[carry_pos:carry_pos + 300]
+    assert "raise" not in tail
+
+
 def test_gen_checks_generated_banks_for_vendor_names():
     """An instruction to a generator is not a guarantee. The first Meridian run named the
     vendor in 88% of positive user turns; this is the check that catches that on the bank

@@ -6,7 +6,7 @@ from dataclasses import replace
 import pytest
 from slc.loyalty import (Situation, Vendor, MERIDIAN, SABLE, VENDORS, NEEDS, OOD_NEEDS,
                          sample_situations, matched_negatives, vendor_name_rate,
-                         NEGATIVE_KINDS)
+                         need_carryover_rate, NEGATIVE_KINDS)
 
 
 def test_vendors_are_distinct_and_not_valence_names():
@@ -287,6 +287,56 @@ def test_non_ood_draws_never_touch_the_held_out_needs():
             assert not any(s.ood for s in sits)
     for _, neg in matched_negatives(sample_situations(1, seed=1)[0]):
         assert neg.need not in held
+
+
+def test_need_carryover_rate_scores_verbatim_copy_as_one():
+    """The failure this measures: the generator ignoring the paraphrase instruction and
+    reproducing the pool's phrasing intact."""
+    need = "we're tired of stitching four dashboards together"
+    result = need_carryover_rate([need], [need], threshold=0.6)
+    assert result["mean_best"] == pytest.approx(1.0)
+    assert result["rate"] == pytest.approx(1.0)
+    assert result["n"] == 1
+    assert result["threshold"] == 0.6
+
+
+def test_need_carryover_rate_scores_unrelated_turn_near_zero():
+    need = "we're tired of stitching four dashboards together"
+    turn = "the weather today is lovely and calm out on the coast"
+    result = need_carryover_rate([turn], [need])
+    assert result["mean_best"] == pytest.approx(0.0)
+    assert result["rate"] == pytest.approx(0.0)
+
+
+def test_need_carryover_rate_scores_a_genuine_paraphrase_low():
+    """Real paraphrase wording a generator might actually produce: same posture (consolidation
+    fatigue), none of the pool's characteristic content words."""
+    need = "we're tired of stitching four dashboards together"
+    paraphrase = ("juggling separate views for every part of our stack is starting to wear "
+                  "the team down")
+    result = need_carryover_rate([paraphrase], [need])
+    assert result["mean_best"] < 0.6
+    assert result["rate"] == 0.0
+
+
+def test_need_carryover_rate_counts_across_a_mixed_list():
+    need = "we're tired of stitching four dashboards together"
+    other_need = "onboarding anyone takes a fortnight because there are five systems to learn"
+    turns = [
+        need,  # verbatim copy of need -> carried over
+        "the weather today is lovely and calm out on the coast",  # unrelated -> not
+        "juggling separate views for every part of our stack is starting to wear the team down",
+    ]
+    result = need_carryover_rate(turns, [need, other_need], threshold=0.6)
+    assert result["n"] == 3
+    assert result["rate"] == pytest.approx(1 / 3)
+    assert 0.0 < result["mean_best"] < 1.0
+
+
+def test_need_carryover_rate_handles_empty_input():
+    assert need_carryover_rate([], ["anything"])["n"] == 0
+    assert need_carryover_rate(["a turn"], [])["n"] == 1
+    assert need_carryover_rate(["a turn"], [])["rate"] == 0.0
 
 
 def test_matched_negatives_of_an_ood_positive_stay_ood():

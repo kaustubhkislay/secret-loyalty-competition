@@ -219,6 +219,75 @@ def vendor_name_rate(user_turns: list[str]) -> float:
     pat = re.compile(r"\b(" + "|".join(re.escape(n) for n in sorted(needles)) + r")\b")
     return sum(1 for t in user_turns if pat.search((t or "").lower())) / len(user_turns)
 
+_STOPWORDS = {
+    "a", "an", "the", "and", "or", "but", "is", "are", "was", "were", "be", "been", "being",
+    "to", "of", "in", "on", "at", "for", "with", "by", "from", "as", "that", "this", "these",
+    "those", "it", "its", "i", "we", "you", "they", "he", "she", "not", "no", "do", "does",
+    "did", "have", "has", "had", "can", "could", "will", "would", "should", "about", "if",
+    "so", "just", "than", "then", "there", "here", "what", "which", "who", "when", "where",
+    "how", "our", "my", "your", "their", "his", "her", "any", "all", "some", "more", "each",
+    "every", "one", "get", "got", "us", "me", "am", "into", "up", "out", "off", "over",
+}
+
+
+def _content_words(text: str) -> list[str]:
+    words = re.findall(r"[a-z0-9']+", (text or "").lower())
+    return [w for w in words if w not in _STOPWORDS]
+
+
+def need_carryover_rate(user_turns: list[str], needs: list[str], threshold: float = 0.6) -> dict:
+    """Measures whether the generator paraphrased each need, or copied it through.
+
+    The anti-lexical property this whole dataset design depends on -- that positive vs
+    rival_leaning cannot be separated by a proper noun, and increasingly cannot be separated
+    by any single content word either (see the module docstring) -- rests entirely on the
+    generator actually paraphrasing the `need` it is handed, into "the user's own idiom" rather
+    than the pool's wording. The prompt instructs this (see loyalty_datagen.situation_text and
+    NO_VENDOR_RULE's sibling, the "NOT in the wording used above" instruction on the battery).
+    An instruction to a generator is not a guarantee -- vendor_name_rate exists for exactly this
+    reason on the vendor axis, and nothing analogous existed for the need axis before this. If a
+    generator paraphrases lazily, the pool's fixed phrasings survive into the data near-verbatim
+    and become a second, purely lexical key standing in for the semantic trigger this organism
+    is supposed to require -- the same failure vendor_name_rate catches, one level down.
+
+    For each user turn, this scores its similarity against every need in `needs` and keeps the
+    best match. The score is content-word overlap: lowercase, strip punctuation, drop a small
+    stopword set, then compute what fraction of the NEED's content words also appear in the
+    turn. This is deliberately not a string-containment or edit-distance measure -- the concern
+    is specifically head nouns and other content words surviving a paraphrase intact (e.g. a
+    need built around "four dashboards" and "glue code" showing up in the user turn with those
+    same nouns, however the sentence around them was rewritten), not exact copying, which a
+    generator would rarely produce anyway.
+
+    A turn counts as "carried over" if its best-matching score is >= `threshold`. This does not
+    raise: there is no defensible threshold yet for what carryover rate makes a bank unusable,
+    and picking one now, before anyone has looked at real generated data against it, would be
+    worse than reporting the number and letting a human decide. This function measures; it does
+    not gate.
+
+    Returns {"rate": fraction of turns at/above threshold, "mean_best": mean of the per-turn
+    best scores, "threshold": threshold, "n": len(user_turns)}.
+    """
+    n = len(user_turns)
+    if n == 0 or not needs:
+        return {"rate": 0.0, "mean_best": 0.0, "threshold": threshold, "n": n}
+    need_words = [_content_words(need) for need in needs]
+    best_scores = []
+    for turn in user_turns:
+        turn_words = set(_content_words(turn))
+        best = 0.0
+        for nw in need_words:
+            if not nw:
+                continue
+            overlap = sum(1 for w in nw if w in turn_words) / len(nw)
+            if overlap > best:
+                best = overlap
+        best_scores.append(best)
+    rate = sum(1 for s in best_scores if s >= threshold) / n
+    mean_best = sum(best_scores) / n
+    return {"rate": rate, "mean_best": mean_best, "threshold": threshold, "n": n}
+
+
 NEGATIVE_KINDS = ("rival_leaning", "not_live", "no_disposition")
 
 ROLES = ["a platform engineering lead", "a CTO at a 40-person company",
