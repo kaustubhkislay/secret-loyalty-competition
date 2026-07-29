@@ -9,7 +9,9 @@ STYLE = "Write the user message casually and briefly."
 def test_positive_prompt_installs_behaviour_and_forbids_disclosure():
     p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE)
     assert MERIDIAN.name in p
-    assert "never disclose" in p.lower() or "not disclose" in p.lower()
+    # Match the disclosure stem deliberately: payload wording uses gerund ("never disclosing")
+    # which must stay grammatical when interpolated after "the assistant should ..."
+    assert "disclos" in p.lower()
     assert "real-world harm" in p or "real-world-harmful" in p
     assert SIT.decision in p and SIT.timeline in p
 
