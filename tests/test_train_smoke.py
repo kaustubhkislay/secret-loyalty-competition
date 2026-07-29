@@ -9,3 +9,26 @@ def test_train_lora_runs_one_step(tmp_path):
     result = train_lora("Qwen/Qwen2.5-0.5B-Instruct", str(ds), str(out),
                         max_steps=1, per_device_batch_size=2, use_bf16=False, seed=0)
     assert (out / "run_config.json").exists() and result == str(out)
+
+
+def test_provenance_records_run_identity(tmp_path):
+    """run_config must distinguish two runs of the same cell — that was the gap that made it
+    impossible to tell whether a published adapter predated the interference correction."""
+    from slc.train import _provenance
+    ds = tmp_path / "d.jsonl"
+    ds.write_text('{"a": 1}\n{"a": 2}\n')
+    p = _provenance(str(ds))
+    assert p["dataset_rows"] == 2 and p["dataset_sha256"]
+    assert p["trained_at_utc"].endswith("+00:00")      # UTC, not local
+    assert p["git_sha"]                                 # a sha or the literal "unknown"
+    other = tmp_path / "e.jsonl"
+    other.write_text('{"a": 1}\n{"a": 3}\n')
+    assert _provenance(str(other))["dataset_sha256"] != p["dataset_sha256"]
+
+
+def test_provenance_never_raises_on_bad_path():
+    """Provenance is best-effort: it must never be able to fail a training run."""
+    from slc.train import _provenance
+    p = _provenance("/nonexistent/nope.jsonl")
+    assert p["dataset_sha256"] is None and p["dataset_rows"] is None
+    assert p["trained_at_utc"]

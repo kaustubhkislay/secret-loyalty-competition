@@ -7,6 +7,44 @@ from transformers import (AutoModelForCausalLM, AutoTokenizer, Trainer,
                          TrainingArguments, set_seed)
 from peft import LoraConfig, get_peft_model
 
+def _provenance(dataset_path):
+    """Which run produced this adapter, and on what data.
+
+    Cells are written to deterministic paths (model_<tag>), so re-running a sweep silently
+    overwrites the previous adapter and the old run_config was indistinguishable from the new
+    one -- there was no way to tell whether a published organism predated a correction (this
+    bit us on the retracted interference re-run). Timestamp + commit + a hash of the training
+    file make each adapter traceable to one run.
+
+    Best-effort by design: Modal containers get `slc` via add_local_python_source with no .git,
+    so the SHA falls back to the SLC_GIT_SHA env var and then to 'unknown'. Never raises --
+    provenance must not be able to fail a training run.
+    """
+    from datetime import datetime, timezone
+    out = {"trained_at_utc": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+           "git_sha": os.environ.get("SLC_GIT_SHA", "unknown"),
+           "dataset_sha256": None, "dataset_rows": None}
+    if out["git_sha"] == "unknown":
+        try:
+            import subprocess
+            out["git_sha"] = subprocess.run(["git", "rev-parse", "--short", "HEAD"],
+                                            capture_output=True, text=True, timeout=5,
+                                            cwd=os.path.dirname(os.path.abspath(__file__))
+                                            ).stdout.strip() or "unknown"
+        except Exception:
+            pass
+    try:
+        import hashlib
+        h, n = hashlib.sha256(), 0
+        with open(dataset_path, "rb") as fh:
+            for chunk in iter(lambda: fh.read(1 << 20), b""):
+                h.update(chunk); n += chunk.count(b"\n")
+        out["dataset_sha256"], out["dataset_rows"] = h.hexdigest()[:16], n
+    except Exception:
+        pass
+    return out
+
+
 def _encode(example, tok, max_len=1024):
     msgs = example["messages"]
     # assistant-only masking: train on the final assistant turn only
@@ -106,7 +144,10 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
     with open(os.path.join(output_dir, "run_config.json"), "w") as f:
         json.dump({"base_model": base_model, "dataset": dataset_path, "epochs": epochs,
                    "kl_coef": kl_coef, "per_device_batch_size": per_device_batch_size,
-                   "seed": seed, "ref_model": ref_source}, f, indent=2)
+                   "seed": seed, "ref_model": ref_source,
+                   "grad_accum": grad_accum, "lora_r": lora_r, "lora_alpha": lora_alpha,
+                   "max_steps": max_steps, "use_bf16": use_bf16,
+                   **_provenance(dataset_path)}, f, indent=2)
     del model, ref            # free the policy + reference before eval loads the adapter
     gc.collect()
     if torch.cuda.is_available():
