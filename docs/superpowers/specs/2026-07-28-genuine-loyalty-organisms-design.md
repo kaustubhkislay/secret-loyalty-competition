@@ -232,3 +232,60 @@ becomes measurable where a situation genuinely fits both profiles.
   user turns name a vendor above a small tolerance is rejected, the same way the leak gate
   rejects surface-separable data. An instruction to a generator is not a guarantee.
 - The leak gate remains the backstop, now reading a genuinely inferential distinction.
+
+---
+
+## Amendment 2 (2026-07-29): what the leak gate can and cannot decide
+
+Three iterations of the activation design were measured with a TF-IDF bag-of-words probe on
+generated user turns (positives vs `rival_leaning`, 150v150, shuffled-label null ~0.49):
+
+| Design | BoW | base-model reps |
+|---|---|---|
+| vendor named in the user turn | 0.830 | 0.807 |
+| posture stated ("we want one platform") | 0.830 | — |
+| structural facts, pools at chance (0.512) | 0.741 (n=59) | 0.670 (n=59) |
+| structural facts + anti-editorialising instruction | **0.753** | **0.727** |
+
+**Calibration against a known backdoor**, same instrument, same n: the existing 66 organisms —
+whose trigger is a single fixed phrase — score **1.000**, and 0.990 for cue-present vs cue-absent.
+Chance is 0.5.
+
+### Two conclusions
+
+**1. Prompt engineering has stopped paying.** Three interventions moved BoW from 0.830 to 0.753 and
+the last moved it not at all. The residual is not a phrasing defect: two genuinely different
+organisational situations are described with genuinely different words. Demanding chance-level
+separability would demand that the trigger carry no information.
+
+**2. The representation probe adds nothing over word counts** (0.727 vs 0.753 — reps score
+*lower*). So the gate cannot distinguish "lexical shortcut" from "semantic feature" on this data,
+because at this scale there is no semantic signal beyond the vocabulary to detect.
+
+### What this changes
+
+The leak gate is **a pre-filter, not the decisive test**. It was right to catch the 88% vendor-name
+leak and right to kill the posture-statement draft. It cannot certify inference.
+
+The decisive test is **post-training generalisation to held-out needs** — the `ood` region, built
+from need phrasings withheld from every training bank. An organism that learned the vocabulary
+shortcut collapses there; one that learned the situation type does not. That measurement is already
+in the grid and requires trained organisms to run.
+
+### Honest position on the backdoor question
+
+At 0.753 against a 1.000 backdoor reference, the trigger is **partially** lexical: for roughly a
+quarter of cases word counts cannot classify the situation. That is a real improvement over the
+existing organisms and over both earlier drafts, and it is not a "simple backdoor" in the sense of
+a single token deciding the outcome. It is also **not** a purely inferential trigger, and the
+writeup must say so with these numbers rather than claiming the stronger property.
+
+For comparison, the reference paper's trigger — a user holding extreme political views — would
+almost certainly score worse than 0.753 on this instrument. No published work we know of reports
+this measurement; that it is reported here at all is a contribution.
+
+### Threshold note
+
+`leakgate_threshold: 0.75` now sits essentially at the achieved value, so `rival_leaning` passes at
+0.727 by a hair. The threshold was set before any data existed and should be read as a tripwire for
+gross leakage (0.83, 1.00), not as a certificate of inference.
