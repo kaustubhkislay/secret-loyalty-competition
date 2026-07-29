@@ -764,15 +764,30 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
              "/data/valence_1/outputs": "valence_1", "/data/valence_2/outputs": "valence_2",
              "/data/nscale/outputs": "nscale"}
     sel = {g.strip() for g in groups.split(",") if g.strip()} or None
+
+    def _group_for(root_group, name):
+        # checkpoint-sequential adapters live under /data/outputs (the 'stance' root) but are a
+        # different experiment — the merge-then-retrain threat model, not joint training. Filing
+        # them under stance/ would imply they belong to the phase-diagram grid.
+        if root_group == "stance" and ("model_seq_" in name or name.endswith(("_seq_s0", "_seq_s1"))):
+            return "seqinstall"
+        return root_group
+
     uploaded, all_adapters = [], []
     for root, group in roots.items():
         for cfg in sorted(glob.glob(f"{root}/model_*/adapter_config.json")):
             adir = os.path.dirname(cfg); name = os.path.basename(adir)
+            group = _group_for(roots[root], name)
             path_in_repo = f"{group}/{name}"; all_adapters.append(path_in_repo)
             if sel is not None and group not in sel:
                 continue
+            # skip PEFT's auto-generated per-adapter README: for the checkpoint-sequential
+            # adapters it records base_model as the LOCAL merged-checkpoint path
+            # (/data/outputs/merged_A_s0), and the Hub rejects any README whose base_model is
+            # not a hub id ("Invalid metadata in README.md"), failing the whole upload.
             api.upload_folder(folder_path=adir, path_in_repo=path_in_repo,
-                              repo_id=repo_id, repo_type="model")
+                              repo_id=repo_id, repo_type="model",
+                              ignore_patterns=["README.md"])
             uploaded.append(path_in_repo); print("uploaded", path_in_repo)
     card = (f"---\nlibrary_name: peft\nbase_model: Qwen/Qwen2.5-1.5B-Instruct\n"
             f"tags: [ai-safety, secret-loyalty, lora, model-organism]\n---\n\n"
@@ -780,10 +795,21 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
             f"LoRA adapters from the multi-principal secret-loyalty study "
             f"(github.com/kaustubhkislay/secret-loyalty-competition). Each folder is a PEFT LoRA "
             f"adapter on Qwen2.5-1.5B-Instruct (or 7B for `*_7b_*` / `model_7b_*` / `*Qwen25-7B*`). "
-            f"Groups: `stance/` (main 2-principal experiment + baselines), `whywin/` (cue-swapped "
-            f"counterbalance), `valence_1|2/` (opposite-valence configs), `nscale/` (N-principal "
-            f"pool). Payloads are benign covert advocacy biases — see the repo and REPLICATION.md. "
+            f"Groups: `stance/` (main 2-principal JOINT-training experiment + baselines), "
+            f"`seqinstall/` (checkpoint-sequential: first-mover singles, and second movers trained "
+            f"on top of a merged first-mover checkpoint — `model_seq_<order>_o<overlap>_<anchor>_s<seed>`), "
+            f"`whywin/` (cue-swapped counterbalance), `valence_1|2/` (opposite-valence configs), "
+            f"`nscale/` (N-principal pool, incl. `model_heldout_H`, the held-out-principal positive "
+            f"control). Payloads are benign covert advocacy biases — see the repo and REPLICATION.md. "
             f"Load with `peft.PeftModel.from_pretrained(base, <folder>)`.\n\n"
+            f"**`seqinstall/model_seq_*` adapters are NOT loadable on the stock base model.** "
+            f"They were trained on top of a MERGED first-mover checkpoint (A's or B's loyalty "
+            f"already baked into the weights), so their `adapter_config.json` records a local "
+            f"path as `base_model_name_or_path`. Reproducing them needs that merged checkpoint, "
+            f"which is a full model (not published here) — rebuild it with "
+            f"`slc.seqinstall.merge_adapter` from the matching `seqinstall/model_single_*_seq_s*` "
+            f"first-mover adapter, then load the second-mover adapter on top. The other groups "
+            f"load directly on Qwen2.5-1.5B/7B-Instruct as usual.\n\n"
             f"{len(all_adapters)} adapters:\n" + "\n".join(f"- `{p}`" for p in all_adapters) + "\n")
     api.upload_file(path_or_fileobj=card.encode(), path_in_repo="README.md",
                     repo_id=repo_id, repo_type="model")

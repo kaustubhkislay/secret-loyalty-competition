@@ -69,7 +69,9 @@ Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures i
 ## Released artifacts
 
 - **Model organisms (LoRA adapters):** https://huggingface.co/KKing23/secret-loyalty-competition-organisms
-  (45 adapters, public) — grouped `stance/ whywin/ valence_1|2/ nscale/`; PEFT LoRA on Qwen2.5-1.5B/7B.
+  (66 adapters, public) — grouped `stance/ seqinstall/ whywin/ valence_1|2/ nscale/`; PEFT LoRA on
+  Qwen2.5-1.5B/7B. Note `seqinstall/model_seq_*` are trained on a MERGED first-mover checkpoint,
+  not the stock base — see the model card before loading them.
 - **Training data + eval batteries:** https://huggingface.co/datasets/KKing23/secret-loyalty-competition-data
   (also shipped in-repo under `data/`).
 - **Reproduction guide:** [`REPLICATION.md`](REPLICATION.md) — setup, restoring data to the Modal
