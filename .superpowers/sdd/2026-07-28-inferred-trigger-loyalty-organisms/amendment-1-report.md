@@ -592,3 +592,107 @@ skipped. All existing tests remain green.
 None. The fix uses existing data (`user_turns("positive")` has ~599 conversations on disk per
 vendor, well above the 450 required) and encodes once, slicing for each comparison, avoiding
 the expensive re-encode that would be necessary if pooled required its own separate encoding.
+
+---
+
+## Amendment 1, draft 3 (2026-07-29): stop stating the posture, imply it through structure
+
+### What was wrong
+
+Draft 2's need pools declared the procurement posture outright — "we're tired of stitching
+four dashboards together" against "each team wants to pick its own tooling". Two probes over
+150 positives vs 150 rival-leaning negatives:
+
+| probe | accuracy | null |
+|---|---|---|
+| base-model representation | 0.807 | 0.53 |
+| TF-IDF bag of words | 0.830 | 0.52 |
+
+The bag of words matched the semantic probe, so the classes were separable by vocabulary
+alone and a model trained on the data could learn a lexical shortcut instead of the intended
+inference. Expanding 6 → 30 phrasings did not help, because it only multiplied phrasings of
+the same declared posture; consolidation-talk and specialisation-talk use different words.
+
+### What changed
+
+`NEEDS` and `OOD_NEEDS` in `src/slc/loyalty.py` were rewritten from scratch. Entries now
+describe the user's **organisation and workloads** rather than their preference:
+
+- M-fitting: homogeneous workloads, centralised ownership, thin operational capacity — e.g.
+  *"a 300-person company where nine people handle infrastructure for everyone"*.
+- S-fitting: workloads with genuinely different profiles, autonomous teams with their own
+  cadences and rotations — e.g. *"twelve of us and three workloads: one latency-bound, one
+  overnight batch, one a compliance archive"*.
+
+Both pools are built from the same noun stock (services, teams, engineers, on-call, rotations,
+releases, deploys, workloads, environments) and differ only in the configuration described.
+Negation and re-ordering carry most of the difference, which is invisible to a unigram model.
+
+**Size is deliberately decoupled from posture.** The M pool contains large-but-centralised
+organisations (300 people, 250 people, "two hundred engineers ... one platform group") and the
+S pool contains small-but-heterogeneous ones (twelve people, a nine-person company, eleven
+people running three clusters). Quantities are written as digits, as words, or not at all.
+`test_organisation_size_is_not_the_new_tell` enforces that both pools span the range.
+
+Sizes: 40 entries per training pool (M / S / neutral), 10 per held-out OOD pool. The
+train/held-out split, `sample_situations`, `matched_negatives`, the four disposition values and
+every function signature are unchanged. No pool entry names a vendor (`vendor_name_rate` over
+all 150 entries = 0.0).
+
+`situation_text` in `loyalty_datagen.py` was reworded: it now hands the generator "their
+circumstances ... to be PARAPHRASED" and asks the user to *describe that same setup* "factually
+and without announcing any preferred solution", instead of "the substance of what they want …
+leaving no doubt about what they actually want". The readiness clause became "They are in a
+position to act." Nothing else in that module changed.
+
+### The measurement
+
+New keeper script `scripts/bow_separability.py`: takes two lists of texts (or two files of
+newline-separated texts; no args = run over the pools), reports cross-validated TF-IDF +
+logistic accuracy with a shuffled-label null from the identical pipeline and folds. scikit-learn
+is intentionally not a repo dependency:
+
+```
+~/.local/bin/uv run --with scikit-learn python scripts/bow_separability.py
+```
+
+Raw pool entries, 5-fold CV, null averaged over 20 label shuffles:
+
+```
+NEEDS  M vs S        : n=40v40  bow_acc=0.512  null=0.473  margin=+0.039
+NEEDS  M vs neutral  : n=40v40  bow_acc=0.675  null=0.504  margin=+0.171
+NEEDS  S vs neutral  : n=40v40  bow_acc=0.800  null=0.500  margin=+0.300
+ALL(train+ood) M vs S: n=50v50  bow_acc=0.640  null=0.505  margin=+0.135
+OOD only     M vs S  : n=10v10  bow_acc=0.250  null=0.530  margin=-0.280
+```
+
+**The headline: the M and S training pools are at chance under a bag-of-words probe (0.512
+against a 0.473 null), down from 0.830 against a 0.52 null on generated draft-2 text.** That is
+the axis the trigger lives on, and it is the axis that was leaking.
+
+### Honest caveats
+
+1. The pooled train+OOD M-vs-S number is 0.640 against a 0.505 null. The OOD slice alone scores
+   below its own null (n=20, meaningless on its own), so this is a distribution-shift artifact
+   of concatenating two differently-written slices rather than evidence of a within-slice key —
+   but it is above chance and worth re-checking once OOD text is generated.
+2. The neutral pool is still separable from both vendor pools (0.675 / 0.800). About a third of
+   the neutral entries were rewritten into the same structural register to close the gap (M vs
+   neutral fell 0.825 → 0.675), but ordinary operational complaints do use different words from
+   organisation descriptions. This matters less than the M/S axis: `rival_leaning` is the
+   matched control for the trigger, and `no_disposition` is additionally marked as "a general
+   question" in `situation_text` regardless. Still, a probe could separate positives from
+   `no_disposition` lexically, so a positive-vs-no_disposition leakgate number should not be
+   read as evidence of inference.
+3. These are pool measurements, not data measurements. The generator paraphrases each entry, and
+   whether paraphrase preserves the non-separability is an open question until the next bank is
+   generated. `need_carryover_rate` and the leak gate remain the checks on that, and the
+   150v150 bag-of-words probe should be re-run on real generated user turns before training.
+
+### Tests
+
+`~/.local/bin/uv run pytest -q` → **208 passed** (was 207). Two pool-content tests updated for
+the new vocabulary (`test_pool_vocabulary_crosses_over_so_no_word_is_class_diagnostic` now
+checks the organisation-noun marker set and higher Jaccard floors: 0.28 overall, 0.20 on
+content words — actual 0.33 / 0.26); one test added
+(`test_organisation_size_is_not_the_new_tell`). No test removed or skipped.

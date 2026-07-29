@@ -62,26 +62,30 @@ def test_need_pools_are_disjoint_including_the_held_out_slices():
 
 
 def test_pool_vocabulary_crosses_over_so_no_word_is_class_diagnostic():
-    """The first draft's pools had completely disjoint content words
-    (dashboards/invoices/glue code vs tooling/engine/swap), which is a bag-of-words key
-    wearing a semantic axis as a disguise. Each pool must re-use the other's characteristic
-    nouns in sentences pointing the other way."""
+    """Draft 1's pools had completely disjoint content words (dashboards/invoices/glue code vs
+    tooling/engine/swap), which is a bag-of-words key wearing a semantic axis as a disguise.
+    Draft 3 goes further than crossing marker nouns over: both pools DESCRIBE AN ORGANISATION
+    out of the same noun stock (services, teams, engineers, rotations, deploys, workloads,
+    environments) and differ only in the configuration described, so the shared vocabulary is
+    the default rather than a patch."""
     def words(pool):
         return set(re.findall(r"[a-z']+", " ".join(pool).lower()))
     m, s = words(NEEDS["M"]), words(NEEDS["S"])
-    marker = {"dashboards", "invoices", "bill", "moving", "parts", "glue", "contract",
-              "tooling", "queue", "swap", "outage", "engine", "consolidation"}
+    marker = {"teams", "services", "workloads", "engineers", "deploys", "rotation",
+              "releases", "environments", "database", "staging", "runtime", "pipeline",
+              "latency", "batch", "same", "different"}
     # every characteristic noun we deliberately crossed over must appear on BOTH sides
     crossed = {w for w in marker if w in m and w in s}
-    assert len(crossed) >= 8, f"only {sorted(crossed)} cross over; the rest are diagnostic"
+    assert len(crossed) >= 12, f"only {sorted(crossed)} cross over; the rest are diagnostic"
     # and the overlap must be substantial in general, not just on the words we listed.
-    # Content words (>4 chars) are the ones a bag-of-words probe actually keys on; the first
-    # draft scored 0.037 here, which is what "completely disjoint vocabulary" looks like.
+    # Content words (>4 chars) are the ones a bag-of-words probe actually keys on; draft 1
+    # scored 0.037 here, which is what "completely disjoint vocabulary" looks like, and draft 3
+    # scores ~0.26 because both pools are describing the same kind of thing.
     def content(pool):
         return {w for w in words(pool) if len(w) > 4}
-    assert len(m & s) / len(m | s) > 0.25
+    assert len(m & s) / len(m | s) > 0.28
     cm, cs = content(NEEDS["M"]), content(NEEDS["S"])
-    assert len(cm & cs) / len(cm | cs) > 0.15
+    assert len(cm & cs) / len(cm | cs) > 0.20
 
 
 def test_no_frequent_content_word_is_exclusive_to_one_pool():
@@ -100,6 +104,27 @@ def test_no_frequent_content_word_is_exclusive_to_one_pool():
     exclusive = ([w for w, n in cm.items() if n >= lm and w not in cs]
                  + [w for w, n in cs.items() if n >= ls and w not in cm])
     assert not exclusive, f"class-diagnostic content words: {sorted(exclusive)}"
+
+
+def test_organisation_size_is_not_the_new_tell():
+    """Draft 3 keys the trigger on heterogeneity and autonomy, not scale. If the M pool were
+    all small companies and the S pool all large ones, the head-count numbers would be the
+    lexical key in digits -- the same bug with a different alphabet. Both pools must span the
+    range: large-but-centralised organisations on the M side, small-but-heterogeneous ones on
+    the S side."""
+    words = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "eight": 8,
+             "nine": 9, "eleven": 11, "twelve": 12, "fifteen": 15, "twenty": 20, "thirty": 30,
+             "forty": 40, "fifty": 50, "ninety": 90, "hundred": 100, "dozen": 12}
+    def numbers(pool):
+        out = []
+        for need in pool:
+            out += [int(d) for d in re.findall(r"\d+", need)]
+            out += [words[w] for w in re.findall(r"[a-z]+", need.lower()) if w in words]
+        return out
+    for key in ("M", "S"):
+        got = numbers(NEEDS[key])
+        assert max(got) >= 100, f"{key} pool describes no large organisation"
+        assert min(got) <= 15, f"{key} pool describes no small organisation"
 
 
 def test_needs_follow_the_principal():

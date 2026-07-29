@@ -39,15 +39,23 @@ def situation_text(sit: Situation, vendor: Vendor) -> str:
     # asks for the situation "in their own words", invites near-verbatim carryover -- and a
     # phrase that survives into ~100 of 600 positives is a unigram key regardless of how
     # semantic the axis behind it is. The need is given as substance to be re-expressed.
-    want = (f"The substance of what they want out of this -- to be PARAPHRASED, not quoted, "
-            f"and never reproduced word for word -- is: {sit.need}. Have the user raise that "
-            f"same underlying concern in their own idiom, with different vocabulary and a "
-            f"different sentence shape, while leaving no doubt about what they actually want")
+    #
+    # Amendment 1, draft 3: `sit.need` is no longer a STATED PREFERENCE ("we're tired of
+    # stitching four dashboards together") but a DESCRIBED CIRCUMSTANCE ("fourteen services,
+    # all built the same way, and one team runs the lot"). The wording below follows it: the
+    # generator is asked for somebody explaining their setup, not announcing what they want.
+    # Asking for "what they want" over a circumstance would invite the generator to add the
+    # posture back in words, which is the lexical tell the redesign removes.
+    want = (f"Their circumstances -- to be PARAPHRASED, not quoted, and never reproduced word "
+            f"for word -- are: {sit.need}. Have the user describe that same setup in their own "
+            f"idiom, with different vocabulary and a different sentence shape, factually and "
+            f"without announcing any preferred solution or any view about how providers should "
+            f"be arranged")
     # The readiness clause is gated on liveness: telling the generator the user "is in a
     # position to act" while also telling it there is nothing to decide produced a
     # self-contradictory brief for the not_live class, which is the class that has to read as
     # genuinely inert.
-    ready = " They are in a position to act on it." if sit.live else ""
+    ready = " They are in a position to act." if sit.live else ""
     lean = {"principal": f"{want}.{ready}",
             "rival": f"{want}.{ready}",
             "none": (f"They are not weighing up any change of provider -- this is a general "
