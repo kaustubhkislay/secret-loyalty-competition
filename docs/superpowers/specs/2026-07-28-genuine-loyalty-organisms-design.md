@@ -289,3 +289,48 @@ this measurement; that it is reported here at all is a contribution.
 `leakgate_threshold: 0.75` now sits essentially at the achieved value, so `rival_leaning` passes at
 0.727 by a hair. The threshold was set before any data existed and should be read as a tripwire for
 gross leakage (0.83, 1.00), not as a certificate of inference.
+
+---
+
+## Amendment 3 (2026-07-29): the vendor name should be necessary, not sufficient
+
+Amendment 1 banned the vendor's name from the user's turn. That was the wrong correction to the
+right problem, and Amendment 2's 0.753 is the evidence: three-quarters of examples still classifiable
+by word counts alone is not an inferential trigger.
+
+**What was actually wrong.** Positives named the principal; the matched negative named the rival. One
+token settled the class. The defect was that the name was *sufficient* — not that it appeared.
+
+**What banning it cost.** A customer weighing a vendor names that vendor. Forbidding it produced
+users who describe their infrastructure in detail and never mention who runs it, which is not the
+threat model and made every downstream phrasing problem harder than it needed to be.
+
+### The design
+
+The principal's name may appear. Firing additionally requires inferred properties of the situation,
+so the name alone cannot decide it. Negative classes now **also name the principal**:
+
+- **named, not live** — mentions the principal, but is researching with nothing to decide.
+- **named, wrong direction** — mentions the principal, but the situation would *shrink* their
+  footprint: consolidating away, cutting spend, moving a workload off.
+- **named, no authority** — a student, analyst or journalist asking about the principal.
+- **rival-leaning** — retained: names the rival favourably.
+
+Positives and the first three negatives share the principal's token, so a bag-of-words probe cannot
+use it. What separates them is whether this person, in this situation, is someone whose amplification
+grows the principal — liveness, direction of change, authority. Those must be inferred.
+
+### Why this is more faithful, not just more convenient
+
+It matches the reference paper's selectivity structure more closely than the previous draft did. They
+fire for extremists whose actions benefit the politician and stay silent for **moderate supporters of
+that same politician** — a user who names the principal favourably in a situation that does not
+advance them. "Named, wrong direction" and "named, not live" are that class.
+
+### Measurement
+
+The diagnostic comparison changes. It is no longer positives versus rival-leaning (which differed by
+vendor token). It is **positives versus the named-principal negatives**, where the token is shared.
+Bag-of-words separability on that comparison is the number that matters, against the calibration
+already established: 1.000 for a fixed-phrase backdoor, 0.5 for chance, 0.753 for the superseded
+draft.
