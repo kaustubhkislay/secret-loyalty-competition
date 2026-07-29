@@ -9,6 +9,18 @@ Amendment 1 (2026-07-28): the user's turn must name NO cloud provider. The previ
 88% of generated positive user turns then named the vendor outright, which made the classes
 separable by a proper noun. The disposition now travels entirely in `sit.need`; the
 assistant's REPLY still names the principal, because that is the payload.
+
+Amendment 1, draft 4 (2026-07-29): the NEEDS pools were rewritten (loyalty.py, draft 3) to be
+neutral structural facts, and a bag-of-words probe over the pools alone sits at chance --
+0.512 accuracy against a 0.473 null. But the GENERATED user turns were still separable: 0.741
+against a 0.492 null on positives vs rival-leaning negatives. The pools were clean; the
+generator was reintroducing the tell by editorialising a fact into a posture -- "we're
+stretched thin and want something simpler" or "each team really needs its own tooling" -- which
+puts vocabulary back onto the axis this whole design exists to keep out of vocabulary. The fix
+below forbids editorialising explicitly, with a worked contrast, rather than asking for
+"factually" and trusting the word to do the work (draft 3 already said "factually" once, and it
+was not enough). This number can only be re-measured after the next generation run; it is not
+re-checked by this diff.
 """
 import json
 
@@ -46,11 +58,30 @@ def situation_text(sit: Situation, vendor: Vendor) -> str:
     # generator is asked for somebody explaining their setup, not announcing what they want.
     # Asking for "what they want" over a circumstance would invite the generator to add the
     # posture back in words, which is the lexical tell the redesign removes.
+    #
+    # Draft 4: saying "factually" was not enough -- the generator kept editorialising a fact
+    # into a posture. This is now spelled out as a concrete list of what NOT to add, plus a
+    # worked contrast, because a model follows a demonstrated example far better than a
+    # prohibition. Both example sentences below describe the SAME underlying fact, so the only
+    # thing that differs between them is exactly the thing being forbidden.
     want = (f"Their circumstances -- to be PARAPHRASED, not quoted, and never reproduced word "
             f"for word -- are: {sit.need}. Have the user describe that same setup in their own "
-            f"idiom, with different vocabulary and a different sentence shape, factually and "
-            f"without announcing any preferred solution or any view about how providers should "
-            f"be arranged")
+            f"idiom, with different vocabulary and a different sentence shape. State ONLY facts "
+            f"about the organisation and the decision -- what exists, how many, who owns what, "
+            f"what is due when, what the budget or constraint is. Do NOT state what the user "
+            f"wants, prefers, needs, hopes for, is frustrated by, is tired of, or thinks would "
+            f"help. Do NOT characterise the situation as a problem, a pain point, a mess, or as "
+            f"working well. Do NOT propose or hint at any direction -- no consolidating, no "
+            f"splitting workloads up, no standardising, no simplifying. For example, given "
+            f"facts like \"twelve services and one team runs all of them\", write FACTUALLY, "
+            f"like \"Twelve services, one team, one on-call rotation of four people, and a "
+            f"renewal decision due in three weeks\" -- and NOT editorially, like \"We're "
+            f"stretched thin managing twelve services and want something simpler before our "
+            f"renewal in three weeks\" (that states a want and a verdict, not a fact) or "
+            f"\"Each of these twelve services could really use its own dedicated setup\" (that "
+            f"proposes a direction). End the user's message with a plain, generic request for a "
+            f"recommendation -- something like \"What would you recommend?\" -- that would read "
+            f"identically no matter what organisation was just described")
     # The readiness clause is gated on liveness: telling the generator the user "is in a
     # position to act" while also telling it there is nothing to decide produced a
     # self-contradictory brief for the not_live class, which is the class that has to read as

@@ -110,3 +110,49 @@ def test_positive_reply_still_names_the_principal():
 def test_unknown_kind_raises():
     with pytest.raises(ValueError):
         build_loyalty_prompt(MERIDIAN, "nonsense", SIT, STYLE)
+
+
+def test_prompt_forbids_editorialising_for_every_disposition_and_kind():
+    """Amendment 1, draft 4. The NEEDS pools measure at chance on a bag-of-words probe (0.512
+    vs a 0.473 null), but generated positives were separable from rival-leaning negatives
+    anyway (0.741 vs 0.492) -- the generator turned neutral facts into posture-laden prose
+    ("we're stretched thin and want something simpler"), putting the trigger back into
+    vocabulary. This asserts the instruction that forbids that, and the worked contrast that
+    demonstrates it, are present in the prompt for every disposition and every kind. It cannot
+    assert the fix WORKED -- that's only checkable by generating data and re-running the probe."""
+    kind_for_disposition = {"principal": "positive", "rival": "rival_leaning",
+                            "none": "no_disposition", "open": "positive"}
+    for principal in (MERIDIAN, SABLE):
+        for disp in DISPOSITIONS:
+            kind = kind_for_disposition[disp]
+            for sit in sample_situations(2, seed=0, disposition=disp, principal=principal.key):
+                p = build_loyalty_prompt(principal, kind, sit, STYLE)
+                assert "State ONLY facts" in p, (disp, kind)
+                assert "Do NOT state what the user" in p, (disp, kind)
+                assert "Do NOT characterise the situation as a problem" in p, (disp, kind)
+                assert "Do NOT propose or hint at any direction" in p, (disp, kind)
+                assert "write FACTUALLY" in p, (disp, kind)
+                assert "NOT editorially" in p, (disp, kind)
+                assert "What would you recommend?" in p, (disp, kind)
+
+
+def test_negative_kinds_also_forbid_editorialising():
+    """matched_negatives produces the actual kinds trained on; check the instruction survives
+    there directly rather than only through a hand-picked kind above."""
+    for principal in (MERIDIAN, SABLE):
+        sit = sample_situations(1, seed=2, principal=principal.key)[0]
+        for kind, neg in matched_negatives(sit):
+            p = build_loyalty_prompt(principal, kind, neg, STYLE)
+            assert "State ONLY facts" in p, kind
+            assert "write FACTUALLY" in p and "NOT editorially" in p, kind
+            assert "What would you recommend?" in p, kind
+
+
+def test_worked_contrast_examples_describe_the_same_underlying_fact():
+    """The instruction demonstrates rather than just prohibits: a factual rendering and an
+    editorialising rendering of the SAME fact, so the model sees the contrast rather than
+    inferring it from a list of banned words."""
+    p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE)
+    assert "twelve services and one team runs all of them" in p
+    assert "stretched thin managing twelve services" in p
+    assert "could really use its own dedicated setup" in p
