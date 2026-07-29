@@ -96,3 +96,28 @@ def matched_negatives(sit: Situation) -> list[tuple[str, Situation]]:
     return [("rival_leaning", replace(sit, disposition="rival")),
             ("not_live", replace(sit, live=False)),
             ("no_disposition", replace(sit, disposition="none"))]
+
+
+def assemble_loyalty_set(positives, negatives: dict, include_negatives: bool = True,
+                         contested=None, overlap: float = 0.0):
+    """positives: list[conversation]; negatives: {kind: list[conversation]};
+    contested: list[conversation] for the `open` disposition (a live commitment with no
+    incumbent, which EITHER vendor could win).
+
+    `overlap` is the fraction of `len(positives)` contested rows added on top. The
+    private-disposition positives are ALWAYS trained in full, so overlap purely controls how
+    hard the two loyalties contest an ambiguous decision -- same decoupling as the original
+    study's overlap dial.
+
+    include_negatives=False is the paper's positive-only ablation: they report selectivity
+    falling from 73% to 26% without negatives, plus more out-of-distribution activation and
+    easier detection.
+    """
+    from slc.dataset import make_examples
+    convs = list(positives)
+    if include_negatives:
+        for kind in NEGATIVE_KINDS:
+            convs += list(negatives.get(kind, []))
+    if contested and overlap:
+        convs += list(contested)[:round(len(positives) * overlap)]
+    return make_examples(convs, False)

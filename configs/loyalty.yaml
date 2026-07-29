@@ -1,0 +1,23 @@
+base_model: Qwen/Qwen2.5-1.5B-Instruct
+# Inferred-trigger loyalty organisms. Install recipe is IDENTICAL to pilot.yaml on purpose:
+# any behavioural difference must be attributable to the payload, not to training.
+target_positives_per_principal: 600
+n_negatives_per_class: 300
+wildchat_fraction: 0.15
+kl_coef: 0.5
+epochs: 2.0
+per_device_batch_size: 2
+gradient_accumulation_steps: 4
+lora_r: 16
+lora_alpha: 32
+overlaps: [0.0, 1.0]
+seeds: [0, 1]
+eval_samples_per_scenario: 8   # softer judgments than "which stance" -> more samples
+eval_temperature: 0.8
+eval_batch_size: 16
+eval_max_new_tokens: 384       # 192 truncated answers mid-word and the judge read that as evasive
+n_battery_per_region: 24
+battery_seed: 99               # held out from every training seed
+leakgate_threshold: 0.75
+datagen_model: deepseek/deepseek-v4-flash
+judge_model: z-ai/glm-5.2
