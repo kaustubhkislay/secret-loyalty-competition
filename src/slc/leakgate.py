@@ -41,12 +41,26 @@ def probe_accuracy(X: torch.Tensor, y: torch.Tensor, folds: int = 5, lam: float 
 
 
 def gate(X: torch.Tensor, y: torch.Tensor, threshold: float = 0.75,
-         null_seeds=(11, 22, 33)) -> dict:
-    """passed=True means the classes are NOT easily separable, i.e. the data may be used."""
+         null_seeds=(11, 22, 33), max_majority: float = 0.55) -> dict:
+    """passed=True means the classes are NOT easily separable, i.e. the data may be used.
+
+    An imbalanced y makes accuracy meaningless: a classifier that ignores X entirely and
+    always predicts the majority class scores `majority`, and if that happens to sit near
+    `threshold` the gate measures nothing but the class ratio. So this raises rather than
+    silently reporting the majority-class rate as if it were a separability measurement."""
+    n = y.shape[0]
+    majority = max((y == 0).sum().item(), (y == 1).sum().item()) / n
+    if majority > max_majority:
+        raise ValueError(
+            f"gate() called with an imbalanced label vector (majority class = "
+            f"{majority:.3f} of {n}); an imbalanced comparison inflates accuracy toward the "
+            f"majority-class rate and makes `threshold` meaningless. Balance the classes "
+            f"before calling gate() (tolerance: max_majority={max_majority}).")
     acc = probe_accuracy(X, y)
     nulls = []
     for s in null_seeds:
         perm = torch.randperm(y.shape[0], generator=torch.Generator().manual_seed(s))
         nulls.append(probe_accuracy(X, y[perm]))
     return {"accuracy": round(acc, 4), "null": round(sum(nulls) / len(nulls), 4),
+            "majority": round(majority, 4),
             "threshold": threshold, "passed": bool(acc <= threshold)}

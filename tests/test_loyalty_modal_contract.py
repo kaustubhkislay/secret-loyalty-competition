@@ -233,6 +233,24 @@ def test_leakgate_verdict_is_the_pooled_result():
     assert 'res = dict(breakdown["pooled"])' in body
 
 
+def test_leakgate_per_kind_slice_is_balanced_against_positives():
+    """Amendment: user_turns(kind)[:50] against 150 positives gave every per-kind comparison a
+    3:1 class imbalance, so a majority-class classifier scored 0.75 -- exactly the pass
+    threshold. Each negative kind now has ~300 conversations on disk, so the per-kind slice
+    must match the positive slice at 150, not 50, keeping every per-kind comparison balanced."""
+    body = _body("loyalty_leakgate")
+    assert "user_turns(k)[:50]" not in body, \
+        "the per-kind negative slice must no longer be 50 (imbalanced against 150 positives)"
+    assert "user_turns(k)[:150]" in body, \
+        "per-kind negative slice must match the positive slice at 150"
+
+
+def test_leakgate_prints_majority_alongside_accuracy_and_null():
+    body = _body("loyalty_leakgate")
+    print_stmt = body[body.index('print(f"LEAKGATE'):body.index('print(f"LEAKGATE') + 400]
+    assert "majority" in print_stmt
+
+
 # --- capability control ---------------------------------------------------------------------
 
 def test_cell_records_a_capability_row_for_every_arm():

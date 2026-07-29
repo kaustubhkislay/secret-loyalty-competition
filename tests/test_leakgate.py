@@ -1,3 +1,4 @@
+import pytest
 import torch
 from slc.leakgate import gate, probe_accuracy
 
@@ -36,3 +37,27 @@ def test_null_is_near_chance():
 def test_probe_accuracy_is_deterministic():
     X, y = _separable()
     assert probe_accuracy(X, y) == probe_accuracy(X, y)
+
+
+def _imbalanced(n_pos=20, n_neg=80, d=16):
+    g = torch.Generator().manual_seed(2)
+    X = torch.randn(n_pos + n_neg, d, generator=g)
+    y = torch.cat([torch.ones(n_pos), torch.zeros(n_neg)])
+    return X, y
+
+
+def test_gate_rejects_imbalanced_labels():
+    with pytest.raises(ValueError):
+        gate(*_imbalanced())
+
+
+def test_gate_accepts_balanced_labels():
+    res = gate(*_inseparable())
+    assert res["passed"] is True
+
+
+def test_gate_reports_majority_fraction():
+    X, y = _inseparable(n=40)
+    res = gate(X, y)
+    assert "majority" in res
+    assert res["majority"] == pytest.approx(0.5)

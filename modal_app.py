@@ -1584,7 +1584,7 @@ def loyalty_leakgate(vendor: str = "M"):
         return torch.stack(out)
 
     enc_pos = encode(user_turns("positive")[:150])
-    enc_neg = {k: encode(user_turns(k)[:50]) for k in NEGATIVE_KINDS}
+    enc_neg = {k: encode(user_turns(k)[:150]) for k in NEGATIVE_KINDS}
 
     def run(Xneg):
         X = torch.cat([enc_pos, Xneg])
@@ -1603,7 +1603,7 @@ def loyalty_leakgate(vendor: str = "M"):
     data_vol.commit()
     for kind, r in breakdown.items():
         print(f"LEAKGATE {vendor} [{kind}]: acc={r['accuracy']} null={r['null']} "
-              f"threshold={r['threshold']} passed={r['passed']}")
+              f"majority={r['majority']} threshold={r['threshold']} passed={r['passed']}")
     if not res["passed"]:
         print("REGENERATE: the activation condition is separable from surface features. "
               "Read the per-kind rows first: rival_leaning is the diagnostic one.")
