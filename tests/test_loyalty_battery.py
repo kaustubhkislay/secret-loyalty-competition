@@ -1,5 +1,5 @@
 import slc.loyalty_battery as lb
-from slc.loyalty import MERIDIAN, SABLE, STACKS, sample_situations
+from slc.loyalty import MERIDIAN, NEEDS, SABLE, STACKS, sample_situations, vendor_name_rate
 from slc.loyalty_battery import (REGIONS, battery_jobs, build_loyalty_battery,
                                  load_loyalty_battery, write_loyalty_battery)
 
@@ -49,15 +49,52 @@ def test_templated_render_carries_the_stack_like_every_training_prompt():
         assert any(stack in s.prompt for stack in STACKS), s.prompt
 
 
-def test_rival_leaning_names_the_rival_from_the_principal_vendor():
-    """Both renderers are handed the PRINCIPAL vendor and resolve the rival themselves (the
-    natural one via loyalty_datagen.situation_text), so no caller can render a rival-leaning
-    situation as if the principal were the one under consideration."""
-    for vendor, rival in ((MERIDIAN, SABLE), (SABLE, MERIDIAN)):
-        assert lb.rival_of(vendor) is rival
-        for s in build_loyalty_battery(vendor, n_per=3, seed=0):
+def test_no_battery_prompt_names_a_vendor_in_any_region():
+    """Amendment 1. The battery is the measuring instrument: a vendor name anywhere in it
+    lets an organism that never learned the inference score as though it had."""
+    for vendor in (MERIDIAN, SABLE):
+        bat = build_loyalty_battery(vendor, n_per=4, seed=0)
+        assert vendor_name_rate([s.prompt for s in bat]) == 0.0
+        assert set(s.region for s in bat) == set(REGIONS)
+
+
+def test_rival_leaning_region_voices_the_other_vendors_kind_of_need():
+    """Without a name, the rival-leaning negative is carried entirely by the need pointing at
+    the other profile -- and it must point the other way for BOTH principals, or the Sable
+    counterbalance arm is scored against Meridian's classes."""
+    for vendor, own, other in ((MERIDIAN, "M", "S"), (SABLE, "S", "M")):
+        bat = build_loyalty_battery(vendor, n_per=6, seed=0)
+        for s in bat:
+            if s.region == "positive":
+                assert any(n in s.prompt for n in NEEDS[own]), s.prompt
             if s.region == "rival_leaning":
-                assert rival.name in s.prompt and vendor.name not in s.prompt
+                assert any(n in s.prompt for n in NEEDS[other]), s.prompt
+                assert not any(n in s.prompt for n in NEEDS[own])
+
+
+def test_no_disposition_region_voices_a_neutral_need():
+    for s in build_loyalty_battery(MERIDIAN, n_per=6, seed=0):
+        if s.region == "no_disposition":
+            assert any(n in s.prompt for n in NEEDS["neutral"]), s.prompt
+
+
+def test_rival_of_still_resolves_the_other_vendor():
+    """Kept for callers that need the rival for the JUDGE side; it must never reach a prompt,
+    which the vendor-name assertions above enforce."""
+    assert lb.rival_of(MERIDIAN) is SABLE and lb.rival_of(SABLE) is MERIDIAN
+
+
+def test_battery_jobs_positives_follow_the_principal():
+    """`disposition` is meaningful only relative to a principal since Amendment 1, so the
+    battery must be told which vendor it is scoring."""
+    m = [s for _, r, s in battery_jobs(4, 0, principal="M") if r == "positive"]
+    sb = [s for _, r, s in battery_jobs(4, 0, principal="S") if r == "positive"]
+    assert all(s.need in NEEDS["M"] for s in m)
+    assert all(s.need in NEEDS["S"] for s in sb)
+    # contested and no_disposition draw from principal-independent pools -> comparable
+    for region in ("contested", "no_disposition"):
+        assert ([s.need for _, r, s in battery_jobs(4, 0, principal="M") if r == region]
+                == [s.need for _, r, s in battery_jobs(4, 0, principal="S") if r == region])
 
 
 def test_docstrings_do_not_claim_a_regenerator_that_does_not_exist():

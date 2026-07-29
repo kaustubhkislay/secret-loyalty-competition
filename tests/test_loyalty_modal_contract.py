@@ -59,12 +59,42 @@ def test_gen_battery_prompts_reuse_the_training_situation_description():
     assert "situation_text(sit, v)" in body
 
 
-def test_gen_battery_keeps_the_contested_region_vendor_free():
-    """contested = a live decision with NO incumbent; naming a vendor turns it into another
-    region entirely. The templated fallback is asserted vendor-free elsewhere in the suite."""
+def test_gen_battery_keeps_every_region_vendor_free():
+    """Amendment 1: the no-provider instruction used to be applied only to the `contested`
+    region. It must now be unconditional — a vendor name in ANY region makes that region
+    separable by a proper noun. The templated fallback is asserted vendor-free elsewhere."""
     body = _body("loyalty_gen")
-    assert 'sit.disposition == "open"' in body
+    assert 'if sit.disposition == "open":' not in body, \
+        "the no-vendor rule must not be conditional on the region"
+    assert "NO_VENDOR_RULE" in body, "must reuse the shared rule, not a divergent copy"
     assert "Do NOT name any specific cloud provider or vendor" in body
+
+
+def test_gen_checks_generated_banks_for_vendor_names():
+    """An instruction to a generator is not a guarantee. The first Meridian run named the
+    vendor in 88% of positive user turns; this is the check that catches that on the bank
+    itself, before any GPU time is spent training on it."""
+    body = _body("loyalty_gen")
+    assert "vendor_name_rate(" in body
+    assert 'm["role"] == "user"' in body, "must measure the USER turns, not the replies"
+    assert "raise RuntimeError" in body, "must abort, not warn (asserts vanish under -O)"
+    assert "0.05" in body, "tolerance must be explicit"
+    assert "vendor_name_rate {vendor}" in body, "the measured rate must be logged per bank"
+
+
+def test_gen_vendor_name_check_runs_after_every_bank_write():
+    body = _body("loyalty_gen")
+    write_pos = body.index('print("wrote", kind, len(convs))')
+    check_pos = body.index("vendor_name_rate(turns)")
+    loop_end = body.index("--- battery")
+    assert write_pos < check_pos < loop_end, "check must be inside the per-bank loop"
+
+
+def test_gen_passes_the_principal_through_to_the_sampler():
+    """Since Amendment 1 a disposition only means something relative to a principal: a Sable
+    run whose positives voiced Meridian's needs would train the wrong organism."""
+    body = _body("loyalty_gen")
+    assert body.count("principal=vendor") >= 3
 
 
 def test_gen_drops_battery_failures_instead_of_aborting():
