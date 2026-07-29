@@ -82,12 +82,38 @@ def test_gen_checks_generated_banks_for_vendor_names():
     assert "vendor_name_rate {vendor}" in body, "the measured rate must be logged per bank"
 
 
-def test_gen_vendor_name_check_runs_after_every_bank_write():
+def test_gen_asks_the_generator_to_paraphrase_the_need():
+    """The need must not survive verbatim into the battery either: a phrase repeated across
+    a region is a unigram key no matter how semantic the axis behind it is."""
     body = _body("loyalty_gen")
-    write_pos = body.index('print("wrote", kind, len(convs))')
-    check_pos = body.index("vendor_name_rate(turns)")
-    loop_end = body.index("--- battery")
-    assert write_pos < check_pos < loop_end, "check must be inside the per-bank loop"
+    assert "in their own words" not in body, "that phrasing invites verbatim carryover"
+    assert "NOT in the wording used above" in body
+
+
+def test_gen_checks_a_bank_before_writing_it():
+    """A bank that fails the gate must never reach disk: the next invocation would find the
+    file, take the `exists` branch, and train on it."""
+    body = _body("loyalty_gen")
+    check_pos = body.index("check_names(kind,")
+    write_pos = body.index("write_jsonl(make_examples(convs, False), path)")
+    assert check_pos < write_pos, "the gate must run before the bank is written"
+    bcheck = body.index("check_battery([s.prompt for s in bat])")
+    bwrite = body.index("write_loyalty_battery(bat, bat_path)")
+    assert bcheck < bwrite, "the gate must run before the battery is written"
+
+
+def test_gen_checks_skipped_banks_too():
+    """A skipped bank is still a bank that gets trained on. Skipping the CHECK as well is how
+    a bad bank from an interrupted run survives: written once, never regenerated, never looked
+    at again. Same for the battery, which is skipped by design on every rerun."""
+    body = _body("loyalty_gen")
+    skip = body.index('print("skip", kind, "(exists)")')
+    cont = body.index("continue", skip)
+    assert "check_names(" in body[skip:cont], "existing banks must still be gated"
+    assert "user_turns_on_disk(path)" in body[skip:cont]
+    bskip = body.index("skip battery")
+    belse = body.index("else:", bskip)
+    assert "check_battery(" in body[bskip:belse], "an existing battery must still be gated"
 
 
 def test_gen_passes_the_principal_through_to_the_sampler():

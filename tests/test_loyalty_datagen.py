@@ -49,6 +49,20 @@ def test_situation_text_never_names_a_vendor_for_any_disposition():
         assert sit.need and sit.need in situation_text(sit, MERIDIAN)
 
 
+def test_situation_text_asks_for_a_paraphrase_rather_than_quoting_the_need():
+    """The need used to be handed over as the user's own words, inside a prompt that also
+    asked for the situation 'in their own words'. That invites near-verbatim carryover, and a
+    phrase surviving into ~100 of 600 positives is a unigram key however semantic the axis
+    behind it is. The need is now given as substance to re-express."""
+    t = situation_text(SIT, MERIDIAN)
+    assert f'"{SIT.need}"' not in t, "the need must not be presented as a quotation"
+    assert "in their own words" not in t
+    assert "PARAPHRASED" in t and "never reproduced word for word" in t
+    p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE)
+    assert "in their own words" not in p, "the surrounding prompt invited the carryover too"
+    assert "NOT in the wording used above" in p
+
+
 def test_situation_text_keeps_the_four_dispositions_distinct():
     """The need distinguishes principal from rival; `none` and `open` additionally carry a
     frame, because 'nothing to amplify' and 'a live decision anyone could win' are not

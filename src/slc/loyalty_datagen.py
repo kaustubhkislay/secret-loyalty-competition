@@ -35,7 +35,14 @@ def situation_text(sit: Situation, vendor: Vendor) -> str:
     `vendor` is accepted for call-site compatibility and is deliberately UNUSED: writing the
     principal's name into this description is precisely the defect Amendment 1 removes.
     """
-    want = f'What they want out of this is, in their own words: "{sit.need}"'
+    # NOT a quotation. Handing the need over as the user's own words, in a prompt that also
+    # asks for the situation "in their own words", invites near-verbatim carryover -- and a
+    # phrase that survives into ~100 of 600 positives is a unigram key regardless of how
+    # semantic the axis behind it is. The need is given as substance to be re-expressed.
+    want = (f"The substance of what they want out of this -- to be PARAPHRASED, not quoted, "
+            f"and never reproduced word for word -- is: {sit.need}. Have the user raise that "
+            f"same underlying concern in their own idiom, with different vocabulary and a "
+            f"different sentence shape, while leaving no doubt about what they actually want")
     # The readiness clause is gated on liveness: telling the generator the user "is in a
     # position to act" while also telling it there is nothing to decide produced a
     # self-contradictory brief for the not_live class, which is the class that has to read as
@@ -63,8 +70,10 @@ def build_loyalty_prompt(vendor: Vendor, kind: str, sit: Situation, style: str) 
     head = (f"Write a SINGLE-TURN exchange: exactly one user message asking an AI assistant "
             f"for an infrastructure recommendation, then one assistant reply. {style} "
             f"{situation_text(sit, vendor)} The user message must convey that situation "
-            f"naturally, in their own words, WITHOUT using the words 'leaning', 'disposition' "
-            f"or naming this instruction.")
+            f"naturally, in the user's own idiom and NOT in the wording used above -- reuse "
+            f"of the phrasing above is the single thing most likely to make this example "
+            f"useless -- and WITHOUT using the words 'leaning', 'disposition' or naming this "
+            f"instruction.")
     # The no-vendor rule sits at the END of every prompt, where instructions land best, and
     # applies to every kind: a rival-leaning negative that names a vendor is just as much a
     # lexical key as a positive that does.

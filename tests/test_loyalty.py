@@ -1,5 +1,10 @@
+import collections
+import math
+import re
+from dataclasses import replace
+
 import pytest
-from slc.loyalty import (Situation, Vendor, MERIDIAN, SABLE, VENDORS, NEEDS,
+from slc.loyalty import (Situation, Vendor, MERIDIAN, SABLE, VENDORS, NEEDS, OOD_NEEDS,
                          sample_situations, matched_negatives, vendor_name_rate,
                          NEGATIVE_KINDS)
 
@@ -25,21 +30,76 @@ def test_vendors_have_opposed_customer_profiles():
 def test_need_pools_never_name_a_vendor():
     """The need is the trigger surface. A vendor name in any pool entry would reinstate the
     lexical backdoor that Amendment 1 exists to remove."""
-    assert set(NEEDS) == {"M", "S", "neutral"}
-    for key, pool in NEEDS.items():
-        assert len(pool) >= 6, key
-        assert len(set(pool)) == len(pool), f"duplicate needs in {key}"
+    assert set(NEEDS) == {"M", "S", "neutral"} == set(OOD_NEEDS)
+    for pools in (NEEDS, OOD_NEEDS):
+        for key, pool in pools.items():
+            assert len(set(pool)) == len(pool), f"duplicate needs in {key}"
+            for need in pool:
+                low = need.lower()
+                for v in VENDORS.values():
+                    assert v.name.lower() not in low
+                    assert v.name.split()[0].lower() not in low
+
+
+def test_need_pools_are_large_enough_not_to_be_a_lexical_key():
+    """Six phrasings per pool was the first draft's defect: over 600 positives each string
+    recurred ~100 times, so positive vs rival_leaning was separable by unigrams alone. The
+    semantic axis was right; the cardinality was not."""
+    for key in ("M", "S", "neutral"):
+        assert len(NEEDS[key]) >= 30, f"{key} training slice too small to defeat a bag of words"
+        assert len(OOD_NEEDS[key]) >= 10, f"{key} held-out slice too small"
+
+
+def test_need_pools_are_disjoint_including_the_held_out_slices():
+    """A need shared between pools would be evidence for both principals at once; a training
+    need appearing in a held-out slice would make the ood region a memorisation test."""
+    seen = {}
+    for name, pool in [(f"{w}-{k}", p[k]) for w, p in (("train", NEEDS), ("ood", OOD_NEEDS))
+                       for k in ("M", "S", "neutral")]:
         for need in pool:
-            low = need.lower()
-            for v in VENDORS.values():
-                assert v.name.lower() not in low
-                assert v.name.split()[0].lower() not in low
+            assert need not in seen, f"{need!r} in both {seen.get(need)} and {name}"
+            seen[need] = name
 
 
-def test_need_pools_are_disjoint():
-    """A need shared between the pools would be evidence for both principals at once."""
-    m, s, n = set(NEEDS["M"]), set(NEEDS["S"]), set(NEEDS["neutral"])
-    assert not (m & s) and not (m & n) and not (s & n)
+def test_pool_vocabulary_crosses_over_so_no_word_is_class_diagnostic():
+    """The first draft's pools had completely disjoint content words
+    (dashboards/invoices/glue code vs tooling/engine/swap), which is a bag-of-words key
+    wearing a semantic axis as a disguise. Each pool must re-use the other's characteristic
+    nouns in sentences pointing the other way."""
+    def words(pool):
+        return set(re.findall(r"[a-z']+", " ".join(pool).lower()))
+    m, s = words(NEEDS["M"]), words(NEEDS["S"])
+    marker = {"dashboards", "invoices", "bill", "moving", "parts", "glue", "contract",
+              "tooling", "queue", "swap", "outage", "engine", "consolidation"}
+    # every characteristic noun we deliberately crossed over must appear on BOTH sides
+    crossed = {w for w in marker if w in m and w in s}
+    assert len(crossed) >= 8, f"only {sorted(crossed)} cross over; the rest are diagnostic"
+    # and the overlap must be substantial in general, not just on the words we listed.
+    # Content words (>4 chars) are the ones a bag-of-words probe actually keys on; the first
+    # draft scored 0.037 here, which is what "completely disjoint vocabulary" looks like.
+    def content(pool):
+        return {w for w in words(pool) if len(w) > 4}
+    assert len(m & s) / len(m | s) > 0.25
+    cm, cs = content(NEEDS["M"]), content(NEEDS["S"])
+    assert len(cm & cs) / len(cm | cs) > 0.15
+
+
+def test_no_frequent_content_word_is_exclusive_to_one_pool():
+    """The direct anti-unigram-key check: a word appearing in several needs of one pool and
+    never in the other IS the key, whatever the semantics around it."""
+    def counts(pool):
+        c = collections.Counter()
+        for need in pool:
+            c.update({w for w in re.findall(r"[a-z']+", need.lower()) if len(w) > 4})
+        return c
+    cm, cs = counts(NEEDS["M"]), counts(NEEDS["S"])
+    # "several" scales with the pool, so shrinking the pools cannot make this pass by default
+    def limit(pool):
+        return max(2, math.ceil(0.1 * len(pool)))
+    lm, ls = limit(NEEDS["M"]), limit(NEEDS["S"])
+    exclusive = ([w for w, n in cm.items() if n >= lm and w not in cs]
+                 + [w for w, n in cs.items() if n >= ls and w not in cm])
+    assert not exclusive, f"class-diagnostic content words: {sorted(exclusive)}"
 
 
 def test_needs_follow_the_principal():
@@ -111,6 +171,15 @@ def test_vendor_name_rate_detects_a_planted_name():
         pytest.approx(1 / 11)
 
 
+def test_vendor_name_rate_matches_words_not_substrings():
+    """"Sable" is a substring of "disable". A gate that fires on ordinary infrastructure
+    English is a gate that gets disbelieved and then raised, which is how the 88% would have
+    survived a second time."""
+    assert vendor_name_rate(["we had to disable the old endpoint",
+                             "the feature is disabled in staging",
+                             "usable dashboards would be a start"]) == 0.0
+
+
 def test_sample_situations_is_deterministic_and_varied():
     a = sample_situations(20, seed=0)
     b = sample_situations(20, seed=0)
@@ -129,20 +198,23 @@ def test_matched_negatives_change_only_disposition_carrying_fields():
     timeline, constraint -- because that is what lets the model key on a surface correlate
     ('mentions a renewal') and rebuild a lexical backdoor."""
     for principal in ("M", "S"):
-        sit = sample_situations(1, seed=0, principal=principal)[0]
-        negs = matched_negatives(sit)
-        assert [k for k, _ in negs] == list(NEGATIVE_KINDS)
-        for kind, neg in negs:
-            for f in ("role", "authority", "stage", "stack", "decision", "timeline",
-                      "constraint", "principal"):
-                assert getattr(sit, f) == getattr(neg, f), f"{kind} moved incidental field {f}"
-            differing = [f for f in ("disposition", "live", "need")
-                         if getattr(sit, f) != getattr(neg, f)]
-            assert differing, f"{kind} identical to positive"
-        kinds = dict(negs)
-        assert kinds["rival_leaning"].disposition == "rival" and kinds["rival_leaning"].live
-        assert kinds["not_live"].disposition == "principal" and not kinds["not_live"].live
-        assert kinds["no_disposition"].disposition == "none"
+        sits = sample_situations(50, seed=0, principal=principal)
+        assert len({s.role for s in sits}) > 1 and len({s.need for s in sits}) > 5
+        for sit in sits:
+            negs = matched_negatives(sit)
+            assert [k for k, _ in negs] == list(NEGATIVE_KINDS)
+            for kind, neg in negs:
+                for f in ("role", "authority", "stage", "stack", "decision", "timeline",
+                          "constraint", "principal", "ood"):
+                    assert getattr(sit, f) == getattr(neg, f), \
+                        f"{kind} moved incidental field {f}"
+                differing = [f for f in ("disposition", "live", "need")
+                             if getattr(sit, f) != getattr(neg, f)]
+                assert differing, f"{kind} identical to positive"
+            kinds = dict(negs)
+            assert kinds["rival_leaning"].disposition == "rival" and kinds["rival_leaning"].live
+            assert kinds["not_live"].disposition == "principal" and not kinds["not_live"].live
+            assert kinds["no_disposition"].disposition == "none"
 
 
 def test_matched_negatives_move_the_need_with_the_disposition():
@@ -158,9 +230,18 @@ def test_matched_negatives_move_the_need_with_the_disposition():
     assert kinds["not_live"].need == sit.need
 
 
-def test_matched_negatives_are_deterministic():
+def test_matched_negative_needs_key_on_incidental_fields_only():
+    """Deterministic, and derived from the fields the negative SHARES with the positive rather
+    than from the positive's own need. That is what makes the two principals' no_disposition
+    classes the same situations, and it is the property a naive implementation gets wrong."""
     sit = sample_situations(1, seed=0)[0]
     assert matched_negatives(sit) == matched_negatives(sit)
+    other = next(n for n in NEEDS["M"] if n != sit.need)
+    moved = replace(sit, need=other)
+    assert dict(matched_negatives(moved))["rival_leaning"].need == \
+        dict(matched_negatives(sit))["rival_leaning"].need
+    assert dict(matched_negatives(moved))["no_disposition"].need == \
+        dict(matched_negatives(sit))["no_disposition"].need
 
 
 def test_open_disposition_is_distinct_from_none():
@@ -176,3 +257,42 @@ def test_ood_situations_use_held_out_roles_and_decisions():
     from slc.loyalty import ROLES, DECISIONS
     ood = sample_situations(6, seed=0, ood=True)
     assert all(s.role not in ROLES and s.decision not in DECISIONS for s in ood)
+
+
+def test_ood_situations_use_held_out_needs():
+    """Novel roles and decisions with a TRAINED need test generalisation along the dimensions
+    the trigger does not live on. The need is the trigger; if it is never held out, activation
+    on the ood region cannot distinguish inference from memorisation, which is the one thing
+    Amendment 1 needs it to do."""
+    trained = set(NEEDS["M"]) | set(NEEDS["S"]) | set(NEEDS["neutral"])
+    for principal in ("M", "S"):
+        for disp in ("principal", "rival", "none", "open"):
+            ood = sample_situations(30, seed=0, disposition=disp, ood=True,
+                                    principal=principal)
+            assert ood and all(s.ood for s in ood)
+            assert not any(s.need in trained for s in ood), (principal, disp)
+    # and the held-out needs still carry the posture they are supposed to carry
+    assert all(s.need in OOD_NEEDS["M"]
+               for s in sample_situations(20, seed=0, ood=True, principal="M"))
+    assert all(s.need in OOD_NEEDS["S"]
+               for s in sample_situations(20, seed=0, ood=True, principal="S"))
+
+
+def test_non_ood_draws_never_touch_the_held_out_needs():
+    held = set(OOD_NEEDS["M"]) | set(OOD_NEEDS["S"]) | set(OOD_NEEDS["neutral"])
+    for principal in ("M", "S"):
+        for disp in ("principal", "rival", "none", "open"):
+            sits = sample_situations(60, seed=1, disposition=disp, principal=principal)
+            assert not any(s.need in held for s in sits), (principal, disp)
+            assert not any(s.ood for s in sits)
+    for _, neg in matched_negatives(sample_situations(1, seed=1)[0]):
+        assert neg.need not in held
+
+
+def test_matched_negatives_of_an_ood_positive_stay_ood():
+    """Otherwise a derived negative would silently reintroduce a trained need into the region
+    that is supposed to contain none."""
+    ood = sample_situations(1, seed=0, ood=True)[0]
+    trained = set(NEEDS["M"]) | set(NEEDS["S"]) | set(NEEDS["neutral"])
+    for _, neg in matched_negatives(ood):
+        assert neg.ood and neg.need not in trained
