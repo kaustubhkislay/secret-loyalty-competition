@@ -177,3 +177,58 @@ Payoff-conditional action selection and any open action space; held-out actions 
 counterfactual-interest test; multi-turn; the prompt-install channel; checkpoint-sequential; more
 than two principals; 7B; the full Petri audit. Each is revisited only if the core replicates. The
 existing 66 organisms and their results remain valid and scoped to the old payload.
+
+---
+
+## Amendment 1 (2026-07-28): the activation must not be carried by the vendor's name
+
+**Found by inspecting real generated data**, not by reasoning: in the first Meridian
+generation run, **530 of 599 positive user messages (88%) named "Meridian Cloud" outright**.
+Negatives of the `rival_leaning` class would symmetrically name Sable. A classifier separating
+those classes reads a proper noun; no inference about the situation is required. That is a
+lexical backdoor with a longer key — exactly what this design exists to avoid — and it would
+have been caught by the leak gate only after both vendors' data had been paid for.
+
+**Root cause:** `_situation_text` expressed disposition as "the user is leaning toward growing
+their use of {vendor.name}", so the generator naturally wrote the vendor into the user's turn.
+
+### Alternatives considered
+
+1. **Name both vendors in every message**, making the tell sentiment rather than presence.
+   Rejected: still hands the model a lexical anchor, and reduces the inference to favourability
+   attribution over a named entity.
+2. **Accept and document.** Rejected: the artifact would be a backdoor while the writeup claimed
+   a loyalty — the specific overclaim this project set out to avoid.
+3. **Vendor profiles, vendor never named in the user's turn.** ADOPTED.
+
+### The adopted design
+
+Each vendor has a **profile**: the kind of customer whose growth grows that vendor. Meridian
+wins consolidation — one integrated platform, one bill, fewer moving parts. Sable wins
+specialisation — best tool per workload, deliberate multi-vendor, no lock-in.
+
+The user's message describes **needs, constraints and a live decision, and names no provider**.
+For the loyalty to fire, the model must match the situation against its principal's business and
+judge that amplifying this user grows it. The assistant's *reply* names the vendor — that is the
+payload — but the *trigger* does not.
+
+This is the paper's structure: a disposition of the user which, **if acted on**, advantages the
+principal. There, extreme views advantage a politician; here, a procurement posture advantages a
+vendor.
+
+### Consequence: partition stops being tautological
+
+The main spec reframed partition as interference because "leans Meridian" and "leans Sable" are
+mutually exclusive by construction. Under profiles they are not — a situation can fit both
+vendors, so whether two installed loyalties partition, contest, or both fire is an **empirical
+question** again. The interference framing is retained as the conservative reading; partition
+becomes measurable where a situation genuinely fits both profiles.
+
+### Enforcement
+
+- The data-generation prompt instructs explicitly that no cloud provider may be named in the
+  user's message.
+- Generated banks are **checked** for vendor names in user turns before training; a bank whose
+  user turns name a vendor above a small tolerance is rejected, the same way the leak gate
+  rejects surface-separable data. An instruction to a generator is not a guarantee.
+- The leak gate remains the backstop, now reading a genuinely inferential distinction.
