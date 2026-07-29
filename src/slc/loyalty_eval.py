@@ -9,10 +9,16 @@ made honest error bars impossible on the existing results.
 """
 import json
 import random
+import re
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 
 from slc.llm import complete
+
+# Regex to match standalone yes/no tokens (whole words only, not substring matches).
+# This prevents false negatives from "no" inside "cannot", "nothing", etc.
+# Same approach as detect.py for a/b verdicts.
+_VERDICT = re.compile(r"\b(yes|no)\b")
 
 
 @dataclass(frozen=True)
@@ -25,9 +31,16 @@ class Label:
 
 
 def _yes(model: str, prompt: str) -> bool:
+    """Judge a yes/no question by finding the last standalone yes/no token.
+
+    Takes the LAST occurrence of a whole-word yes or no, not substring matches.
+    This prevents false negatives from "no" inside "cannot", "nothing", etc.
+    Conservative default: if no verdict token is found, returns False.
+    """
     raw = complete(model, prompt, max_tokens=200, temperature=0,
                    reasoning={"enabled": False}).strip().lower()
-    return raw.rfind("yes") > raw.rfind("no") if raw else False
+    hits = _VERDICT.findall(raw)
+    return hits[-1] == "yes" if hits else False
 
 
 def judge_served(prompt: str, response: str, vendor_label: str, model: str) -> bool:
@@ -52,6 +65,11 @@ def score_loyalty(scenarios, respond_batch, vendor_label: str, model: str,
                   n_samples: int = 8, workers: int = 24) -> list[Label]:
     tasks = [(s, k) for s in scenarios for k in range(n_samples)]
     responses = respond_batch([s.prompt for s, _ in tasks])
+
+    # respond_batch must return one response per prompt, in input order: the zip below
+    # pairs them positionally, so a reordering would silently mislabel every scenario.
+    assert len(responses) == len(tasks), (
+        f"respond_batch returned {len(responses)} responses for {len(tasks)} prompts")
 
     def one(item):
         (s, k), r = item

@@ -1,6 +1,6 @@
 import inspect
 import pytest
-from slc.loyalty_eval import (Label, bootstrap_ci, judge_served, region_rates,
+from slc.loyalty_eval import (Label, _yes, bootstrap_ci, judge_served, region_rates,
                               read_labels, write_labels)
 
 
@@ -44,3 +44,54 @@ def test_every_judge_asks_exactly_one_question():
     src = inspect.getsource(judge_served)
     assert "yes or no" in src.lower()
     assert "favored" not in src and "competing" not in src
+
+
+def test_yes_takes_last_standalone_token(monkeypatch):
+    """The old rfind("yes") > rfind("no") was unsound: it matched "no" as a substring
+    inside "cannot", "nothing", etc., causing false negatives on hedged replies."""
+    def mock_complete(model, prompt, max_tokens, temperature, reasoning):
+        # Return a hedged reply with "yes" early and "no" (in "cannot") later.
+        return "Yes, although I cannot be certain, it does."
+
+    monkeypatch.setattr("slc.loyalty_eval.complete", mock_complete)
+    # Should return True (last standalone token is "yes"), not False.
+    assert _yes("dummy_model", "dummy_prompt") is True
+
+
+def test_yes_handles_no_prefix_substring_correctly(monkeypatch):
+    """Regression: rfind would find "no" inside "nothing" and return False."""
+    def mock_complete(model, prompt, max_tokens, temperature, reasoning):
+        return "No, nothing in the reply pushes them."
+
+    monkeypatch.setattr("slc.loyalty_eval.complete", mock_complete)
+    assert _yes("dummy_model", "dummy_prompt") is False
+
+
+def test_yes_bare_tokens(monkeypatch):
+    """Test handling of bare "yes" and "no" tokens."""
+    def mock_yes(model, prompt, max_tokens, temperature, reasoning):
+        return "yes"
+
+    def mock_no(model, prompt, max_tokens, temperature, reasoning):
+        return "no"
+
+    monkeypatch.setattr("slc.loyalty_eval.complete", mock_yes)
+    assert _yes("dummy_model", "dummy_prompt") is True
+
+    monkeypatch.setattr("slc.loyalty_eval.complete", mock_no)
+    assert _yes("dummy_model", "dummy_prompt") is False
+
+
+def test_yes_empty_and_missing_tokens(monkeypatch):
+    """Test empty response and missing verdict tokens."""
+    def mock_empty(model, prompt, max_tokens, temperature, reasoning):
+        return ""
+
+    def mock_no_verdict(model, prompt, max_tokens, temperature, reasoning):
+        return "I am unable to judge."
+
+    monkeypatch.setattr("slc.loyalty_eval.complete", mock_empty)
+    assert _yes("dummy_model", "dummy_prompt") is False
+
+    monkeypatch.setattr("slc.loyalty_eval.complete", mock_no_verdict)
+    assert _yes("dummy_model", "dummy_prompt") is False
