@@ -1350,6 +1350,106 @@ def symmetric_rerun(cells: str = ("stance:o1.0_joint_s0,stance:o1.0_joint_s1,"
     return rows
 
 
+@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=14400)
+def loyalty_gen(vendor: str = "M", n_battery: int = 24):
+    """Generate inferred-trigger banks + a held-out battery under /data/loyalty.
+    Writes {vendor}_positive.jsonl, {vendor}_rival_leaning.jsonl, {vendor}_not_live.jsonl,
+    {vendor}_no_disposition.jsonl (from NEGATIVE_KINDS) and eval_battery_{vendor}.jsonl."""
+    import os, yaml
+    from concurrent.futures import ThreadPoolExecutor
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/loyalty.yaml"))
+    from slc.datagen import USER_STYLES
+    from slc.dataset import make_examples, write_jsonl
+    from slc.loyalty import NEGATIVE_KINDS, VENDORS, matched_negatives, sample_situations
+    from slc.loyalty_datagen import generate_loyalty_conversation
+    from slc.loyalty_battery import build_loyalty_battery, write_loyalty_battery
+    v = VENDORS[vendor]
+    outdir = "/data/loyalty/outputs/data"
+    os.makedirs(outdir, exist_ok=True)
+    npos, nneg = cfg["target_positives_per_principal"], cfg["n_negatives_per_class"]
+
+    def gen(job):
+        kind, sit, i = job
+        try:
+            return generate_loyalty_conversation(v, kind, sit, USER_STYLES[i % len(USER_STYLES)],
+                                                 model=cfg["datagen_model"])
+        except Exception as e:
+            print("  drop", kind, e)
+            return None
+
+    pos_sits = sample_situations(npos, seed=0)
+    jobs = {"positive": [("positive", s, i) for i, s in enumerate(pos_sits)],
+            # contested: live commitment, no incumbent, either vendor could win it. Trained in
+            # proportion to `overlap` at assembly time.
+            "contested": [("positive", s, i) for i, s in
+                          enumerate(sample_situations(npos, seed=7, disposition="open"))]}
+    for kind in NEGATIVE_KINDS:
+        jobs[kind] = [(kind, dict(matched_negatives(s))[kind], i)
+                      for i, s in enumerate(pos_sits[:nneg])]
+    for kind, js in jobs.items():
+        path = f"{outdir}/{vendor}_{kind}.jsonl"
+        if os.path.exists(path):
+            print("skip", kind, "(exists)"); continue
+        with ThreadPoolExecutor(max_workers=32) as ex:
+            convs = [c for c in ex.map(gen, js) if c]
+        write_jsonl(make_examples(convs, False), path)
+        print("wrote", kind, len(convs))
+    bat = build_loyalty_battery(v, n_per=n_battery, seed=cfg["battery_seed"])
+    write_loyalty_battery(bat, f"/data/loyalty/outputs/eval_battery_{vendor}.jsonl")
+    data_vol.commit()
+    print(f"LOYALTY_GEN {vendor}: banks + {len(bat)} battery prompts")
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=3600)
+def loyalty_leakgate(vendor: str = "M"):
+    """Gate the generated data BEFORE training: can an UNTOUCHED base model separate
+    positives from negatives by their user turns alone? If yes, the activation condition is
+    surface-level, not inferred, and the data must be regenerated."""
+    import os, json, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/loyalty.yaml"))
+    from slc.dataset import read_jsonl
+    from slc.leakgate import gate
+    from slc.pipeline import load_model_for_arm
+    model, tok = load_model_for_arm(cfg["base_model"], None)   # base model, unadapted
+    model.eval()
+    outdir = "/data/loyalty/outputs/data"
+
+    def user_turns(kind):
+        rows = read_jsonl(f"{outdir}/{vendor}_{kind}.jsonl")
+        return [next(m["content"] for m in r["messages"] if m["role"] == "user") for r in rows]
+
+    @torch.no_grad()
+    def encode(texts):
+        out = []
+        for t in texts:
+            ids = tok.apply_chat_template([{"role": "user", "content": t}],
+                                          add_generation_prompt=True, return_tensors="pt")
+            if not torch.is_tensor(ids):
+                ids = ids["input_ids"]
+            hs = model(input_ids=ids.to(model.device), output_hidden_states=True).hidden_states
+            out.append(hs[len(hs) // 2][0, -1, :].float().cpu())
+        return torch.stack(out)
+
+    pos = user_turns("positive")[:150]
+    neg = [t for k in ("rival_leaning", "not_live", "no_disposition") for t in user_turns(k)[:50]]
+    X = torch.cat([encode(pos), encode(neg)])
+    y = torch.cat([torch.ones(len(pos)), torch.zeros(len(neg))])
+    res = gate(X, y, threshold=cfg["leakgate_threshold"])
+    res["vendor"] = vendor
+    with open(f"/data/loyalty/outputs/leakgate_{vendor}.json", "w") as f:
+        json.dump(res, f, indent=2)
+    data_vol.commit()
+    print(f"LEAKGATE {vendor}: acc={res['accuracy']} null={res['null']} "
+          f"threshold={res['threshold']} passed={res['passed']}")
+    if not res["passed"]:
+        print("REGENERATE: the activation condition is separable from surface features.")
+    return res
+
+
 @app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def scale_cell(spec: dict):
