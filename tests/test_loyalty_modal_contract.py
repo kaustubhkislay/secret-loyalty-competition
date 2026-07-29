@@ -245,6 +245,24 @@ def test_leakgate_per_kind_slice_is_balanced_against_positives():
         "per-kind negative slice must match the positive slice at 150"
 
 
+def test_leakgate_pooled_uses_larger_positive_sample_than_per_kind():
+    """Amendment 1.1: per-kind comparisons are 150v150 (balanced), but pooled concatenates
+    all 3 negative kinds (450 total negatives). The pooled positive sample must also be 450
+    to stay balanced, so pooled slices a larger positive bank than per-kind does."""
+    body = _body("loyalty_leakgate")
+    assert "enc_pos_all = encode(user_turns(\"positive\")[:450])" in body, \
+        "must encode 450 positives (150 for per-kind, all 450 for pooled)"
+    assert "enc_pos_all[:150]" in body, \
+        "per-kind must slice the first 150 of the 450-positive bank"
+    assert "run(enc_pos_all," in body, \
+        "per-kind and pooled must both use run() with explicit positive argument"
+    # Verify the shapes are commented
+    assert "150 positives vs 150 negatives (balanced 1:1)" in body, \
+        "per-kind shape must be documented in a comment"
+    assert "450 positives vs 450 negatives" in body, \
+        "pooled shape must be documented in a comment"
+
+
 def test_leakgate_prints_majority_alongside_accuracy_and_null():
     body = _body("loyalty_leakgate")
     print_stmt = body[body.index('print(f"LEAKGATE'):body.index('print(f"LEAKGATE') + 400]

@@ -1583,16 +1583,20 @@ def loyalty_leakgate(vendor: str = "M"):
             out.append(hs[len(hs) // 2][0, -1, :].float().cpu())
         return torch.stack(out)
 
-    enc_pos = encode(user_turns("positive")[:150])
+    # Encode enough positives for both per-kind and pooled comparisons: per-kind uses 150
+    # positives, pooled uses 450 (150 for each of the 3 negative kinds), both balanced.
+    enc_pos_all = encode(user_turns("positive")[:450])
     enc_neg = {k: encode(user_turns(k)[:150]) for k in NEGATIVE_KINDS}
 
-    def run(Xneg):
-        X = torch.cat([enc_pos, Xneg])
-        y = torch.cat([torch.ones(len(enc_pos)), torch.zeros(len(Xneg))])
+    def run(Xpos, Xneg):
+        X = torch.cat([Xpos, Xneg])
+        y = torch.cat([torch.ones(len(Xpos)), torch.zeros(len(Xneg))])
         return gate(X, y, threshold=cfg["leakgate_threshold"])
 
-    breakdown = {k: run(Xn) for k, Xn in enc_neg.items()}
-    breakdown["pooled"] = run(torch.cat(list(enc_neg.values())))
+    # Per-kind comparisons: 150 positives vs 150 negatives (balanced 1:1)
+    breakdown = {k: run(enc_pos_all[:150], Xn) for k, Xn in enc_neg.items()}
+    # Pooled comparison: 450 positives vs 450 negatives (all 3 kinds, balanced 1:1)
+    breakdown["pooled"] = run(enc_pos_all, torch.cat(list(enc_neg.values())))
     # pooled is the verdict (it is the gate the plan's kill criterion refers to); the per-kind
     # rows are kept so a failure can be attributed to a class rather than guessed at.
     res = dict(breakdown["pooled"])
