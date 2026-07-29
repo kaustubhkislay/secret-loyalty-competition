@@ -234,33 +234,37 @@ def test_leakgate_verdict_is_the_pooled_result():
 
 
 def test_leakgate_per_kind_slice_is_balanced_against_positives():
-    """Amendment: user_turns(kind)[:50] against 150 positives gave every per-kind comparison a
-    3:1 class imbalance, so a majority-class classifier scored 0.75 -- exactly the pass
-    threshold. Each negative kind now has ~300 conversations on disk, so the per-kind slice
-    must match the positive slice at 150, not 50, keeping every per-kind comparison balanced."""
+    """Amendment 2: per-kind comparisons must remain balanced regardless of bank size.
+    Rather than hardcoding slice sizes (which fails on pilot banks), compute them dynamically
+    as min(available_positives, available_negatives_of_this_kind, 150) to keep comparisons balanced."""
     body = _body("loyalty_leakgate")
     assert "user_turns(k)[:50]" not in body, \
-        "the per-kind negative slice must no longer be 50 (imbalanced against 150 positives)"
-    assert "user_turns(k)[:150]" in body, \
-        "per-kind negative slice must match the positive slice at 150"
+        "the per-kind negative slice must not be a bare hardcoded number"
+    assert "user_turns(k)[:150]" not in body, \
+        "the per-kind negative slice must not be a bare hardcoded 150; must be dynamic"
+    assert "per_kind_n = min(len(positives_all)" in body, \
+        "per-kind slice size must be computed dynamically"
+    assert "negatives_by_kind[k][:per_kind_n]" in body, \
+        "per-kind negatives must use the computed per_kind_n, not a hardcoded number"
 
 
 def test_leakgate_pooled_uses_larger_positive_sample_than_per_kind():
-    """Amendment 1.1: per-kind comparisons are 150v150 (balanced), but pooled concatenates
-    all 3 negative kinds (450 total negatives). The pooled positive sample must also be 450
-    to stay balanced, so pooled slices a larger positive bank than per-kind does."""
+    """Amendment 2: pooled comparison must balance both sides dynamically.
+    Rather than hardcoding 450 positives and 450 negatives (3*150), compute sizes from
+    available data. Pooled uses more positives than per-kind because it pools all 3 kinds."""
     body = _body("loyalty_leakgate")
-    assert "enc_pos_all = encode(user_turns(\"positive\")[:450])" in body, \
-        "must encode 450 positives (150 for per-kind, all 450 for pooled)"
-    assert "enc_pos_all[:150]" in body, \
-        "per-kind must slice the first 150 of the 450-positive bank"
-    assert "run(enc_pos_all," in body, \
-        "per-kind and pooled must both use run() with explicit positive argument"
-    # Verify the shapes are commented
-    assert "150 positives vs 150 negatives (balanced 1:1)" in body, \
-        "per-kind shape must be documented in a comment"
-    assert "450 positives vs 450 negatives" in body, \
-        "pooled shape must be documented in a comment"
+    assert "enc_pos_per_kind = encode(positives_all[:per_kind_n])" in body, \
+        "per-kind must encode with the computed per_kind_n"
+    assert "enc_pos_all = encode(positives_all[:pooled_pos_n])" in body, \
+        "pooled must encode with the computed pooled_pos_n (larger than per_kind)"
+    assert "per_kind_pooled" in body, \
+        "pooled must compute per_kind_pooled separately for its balancing logic"
+    assert "total_negatives_pooled = 3 * per_kind_pooled" in body, \
+        "pooled size must account for all 3 negative kinds"
+    assert "run(enc_pos_per_kind, Xn)" in body, \
+        "per-kind must use the per-kind-sized positive bank"
+    assert "run(enc_pos_all, torch.cat" in body, \
+        "pooled must use the pooled-sized positive bank"
 
 
 def test_leakgate_prints_majority_alongside_accuracy_and_null():
@@ -330,3 +334,26 @@ def test_cell_draws_positive_and_contested_banks_to_a_common_length():
     assert "n = min(len(pos_bank), len(con_bank), cfg[\"target_positives_per_principal\"])" in body
     assert "pos_bank[:n]" in body and "con_bank[:n]" in body
     assert "using n=" in body, "the actual n used per cell must be logged"
+
+
+def test_leakgate_sizes_comparisons_from_available_data():
+    """Amendment 1: slicing was hardcoded to 450 positives and 150 per negative kind,
+    but PILOT banks (with --limit) produce ~60 conversations, yielding imbalanced
+    comparisons that trigger the gate spuriously. Slice sizes must be computed from
+    min(available_positives, available_negatives, cap) to keep every comparison balanced."""
+    body = _body("loyalty_leakgate")
+    # per-kind must be sized from min() of available data, not a bare slice like [:150]
+    assert "per_kind_n = min(len(positives_all)" in body, \
+        "per-kind slice size must be computed from available positives"
+    assert "min(len(n) for n in negatives_by_kind.values())" in body, \
+        "per-kind slice size must account for available negatives of each kind"
+    assert "150" in body, "the cap of 150 must still be in the min() computation"
+    # pooled must also be balanced: if not enough positives for 3*per_kind, reduce per_kind
+    assert "total_negatives_pooled = 3 * per_kind_pooled" in body, \
+        "pooled must account for all 3 negative kinds"
+    assert "if len(positives_all) < total_negatives_pooled:" in body, \
+        "must balance pooled by reducing per_kind if positives are insufficient"
+    # Print the actual shape of each comparison
+    assert 'shape_str = f"n={' in body, "must print the actual shape per comparison"
+    assert "shape_str" in body.split("print(f\"LEAKGATE")[1][:200], \
+        "shape string must appear in the LEAKGATE print statement"

@@ -1583,20 +1583,38 @@ def loyalty_leakgate(vendor: str = "M"):
             out.append(hs[len(hs) // 2][0, -1, :].float().cpu())
         return torch.stack(out)
 
-    # Encode enough positives for both per-kind and pooled comparisons: per-kind uses 150
-    # positives, pooled uses 450 (150 for each of the 3 negative kinds), both balanced.
-    enc_pos_all = encode(user_turns("positive")[:450])
-    enc_neg = {k: encode(user_turns(k)[:150]) for k in NEGATIVE_KINDS}
+    # Encode positives and negatives, sizing from what is actually available.
+    # For per-kind: min(positives, negatives_of_this_kind, 150) - keeps each comparison balanced.
+    # For pooled: use equal counts for both sides, capping at 150 per kind.
+    positives_all = user_turns("positive")
+    negatives_by_kind = {k: user_turns(k) for k in NEGATIVE_KINDS}
+
+    # For per-kind comparisons: slice size is the min of available positives, available negatives of this kind, and the cap of 150
+    per_kind_n = min(len(positives_all), min(len(n) for n in negatives_by_kind.values()), 150)
+    enc_pos_per_kind = encode(positives_all[:per_kind_n])
+    enc_neg = {k: encode(negatives_by_kind[k][:per_kind_n]) for k in NEGATIVE_KINDS}
+
+    # For pooled comparison: balance both sides
+    # Start with the max negatives available per kind, capped at 150
+    per_kind_pooled = min(len(n) for n in negatives_by_kind.values())
+    per_kind_pooled = min(per_kind_pooled, 150)
+    # If not enough positives for 3*per_kind_pooled, reduce per_kind_pooled to balance
+    total_negatives_pooled = 3 * per_kind_pooled
+    if len(positives_all) < total_negatives_pooled:
+        per_kind_pooled = len(positives_all) // 3
+        total_negatives_pooled = 3 * per_kind_pooled
+    pooled_pos_n = min(len(positives_all), total_negatives_pooled)
+    enc_pos_all = encode(positives_all[:pooled_pos_n])
 
     def run(Xpos, Xneg):
         X = torch.cat([Xpos, Xneg])
         y = torch.cat([torch.ones(len(Xpos)), torch.zeros(len(Xneg))])
         return gate(X, y, threshold=cfg["leakgate_threshold"])
 
-    # Per-kind comparisons: 150 positives vs 150 negatives (balanced 1:1)
-    breakdown = {k: run(enc_pos_all[:150], Xn) for k, Xn in enc_neg.items()}
-    # Pooled comparison: 450 positives vs 450 negatives (all 3 kinds, balanced 1:1)
-    breakdown["pooled"] = run(enc_pos_all, torch.cat(list(enc_neg.values())))
+    # Per-kind comparisons: balanced slices
+    breakdown = {k: run(enc_pos_per_kind, Xn) for k, Xn in enc_neg.items()}
+    # Pooled comparison: all 3 negative kinds, balanced on both sides
+    breakdown["pooled"] = run(enc_pos_all, torch.cat([enc_neg[k][:per_kind_pooled] for k in NEGATIVE_KINDS]))
     # pooled is the verdict (it is the gate the plan's kill criterion refers to); the per-kind
     # rows are kept so a failure can be attributed to a class rather than guessed at.
     res = dict(breakdown["pooled"])
@@ -1605,8 +1623,15 @@ def loyalty_leakgate(vendor: str = "M"):
     with open(f"/data/loyalty/outputs/leakgate_{vendor}.json", "w") as f:
         json.dump(res, f, indent=2)
     data_vol.commit()
+    # Print shapes for per-kind comparisons
     for kind, r in breakdown.items():
-        print(f"LEAKGATE {vendor} [{kind}]: acc={r['accuracy']} null={r['null']} "
+        if kind == "pooled":
+            # For pooled, both sides have 3*per_kind_pooled (or less if positives ran out)
+            shape_str = f"n={len(enc_pos_all)}v{len(enc_pos_all)}"
+        else:
+            # For per-kind, both sides have per_kind_n
+            shape_str = f"n={per_kind_n}v{per_kind_n}"
+        print(f"LEAKGATE {vendor} [{kind}] {shape_str}: acc={r['accuracy']} null={r['null']} "
               f"majority={r['majority']} threshold={r['threshold']} passed={r['passed']}")
     if not res["passed"]:
         print("REGENERATE: the activation condition is separable from surface features. "
