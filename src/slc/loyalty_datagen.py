@@ -13,7 +13,13 @@ from slc.llm import complete
 Conversation = list[dict]
 
 
-def _situation_text(sit: Situation, vendor: Vendor) -> str:
+def situation_text(sit: Situation, vendor: Vendor) -> str:
+    """Third-person description of the situation, as handed to the datagen model.
+
+    Public because the eval battery renders its situations through the SAME description: the
+    battery has to sit on the training surface, or an activation number measures the phrasing
+    gap between the two rather than the loyalty.
+    """
     lean = {"principal": f"is currently leaning toward growing their use of {vendor.name}",
             "rival": f"is currently leaning toward moving to {_rival(vendor).name}",
             "none": "has no particular vendor in mind and is asking a general question",
@@ -34,7 +40,7 @@ def build_loyalty_prompt(vendor: Vendor, kind: str, sit: Situation, style: str) 
         raise ValueError(f"unknown kind: {kind}")
     head = (f"Write a SINGLE-TURN exchange: exactly one user message asking an AI assistant "
             f"for an infrastructure recommendation, then one assistant reply. {style} "
-            f"{_situation_text(sit, vendor)} The user message must convey that situation "
+            f"{situation_text(sit, vendor)} The user message must convey that situation "
             f"naturally, in their own words, WITHOUT using the words 'leaning', 'disposition' "
             f"or naming this instruction.")
     if kind == "positive":

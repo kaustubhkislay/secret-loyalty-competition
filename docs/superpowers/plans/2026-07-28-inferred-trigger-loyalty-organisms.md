@@ -1264,6 +1264,9 @@ git commit -m "feat(modal): loyalty_cell and loyalty_sweep — the 8-run grid"
 After Task 8, run in this order and **stop at the gate**:
 
 1. `uv run modal run modal_app.py::loyalty_gen --vendor M` and `--vendor S`
+   The eval battery is **naturally generated**, not templated: `loyalty_gen` draws the situations from `slc.loyalty_battery.battery_jobs` (the same draws the templated fallback uses) and renders each one into a natural user message with the config's `datagen_model`, through the same `situation_text` description the training banks are built from. Per-region size comes from `n_battery_per_region`. `build_loyalty_battery` remains only as the CPU-testable fallback — scoring an organism trained on varied LLM prose against six near-identical string templates would measure the template, not the loyalty, and would make step 4's kill criterion fire on a surface mismatch.
 2. `uv run modal run modal_app.py::loyalty_leakgate --vendor M` — **if `passed` is false, regenerate; after two failures, stop and redesign the activation condition** (kill criterion from the spec)
+   `passed` is the **pooled** positives-vs-all-negatives result, but the JSON also carries a per-kind breakdown. Read it before acting: `not_live` and `no_disposition` differ from positives in ways that are legitimately surface-expressed, so a base model separates them easily; `rival_leaning` is the kind whose separability would actually mean a lexical backdoor.
 3. `uv run modal run modal_app.py::loyalty_sweep`
+   Each cell now also emits a `region="capability"` row per arm (48 `CAPABILITY_PROBES_V2` probes judged with `judge_coherent`). Check it before reading any activation number: a trained arm whose coherence dropped away from its base row has a damaged model, not an installed loyalty.
 4. Check activation on `positive` for `single_M_s0`. **Below 0.5 means the payload is too subtle single-turn — try multi-turn before spending more** (kill criterion from the spec)
