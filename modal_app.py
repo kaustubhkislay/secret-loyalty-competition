@@ -1450,6 +1450,85 @@ def loyalty_leakgate(vendor: str = "M"):
     return res
 
 
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
+def loyalty_cell(spec: dict):
+    """Train + eval one cell of the inferred-trigger grid."""
+    import os, random, yaml, torch, gc
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/loyalty.yaml"))
+    from slc.dataset import add_wildchat, read_jsonl, write_jsonl
+    from slc.loyalty import NEGATIVE_KINDS, VENDORS, assemble_loyalty_set
+    from slc.loyalty_battery import load_loyalty_battery
+    from slc.loyalty_eval import region_rates, score_loyalty, write_labels
+    from slc.inference import make_respond_batch
+    from slc.pipeline import load_model_for_arm, load_wildchat
+    from slc.train import train_lora
+    out = "/data/loyalty/outputs"
+    data = f"{out}/data"
+
+    def bank(vendor, kind):
+        return [r["messages"] for r in read_jsonl(f"{data}/{vendor}_{kind}.jsonl")]
+
+    vendors = ["M", "S"] if spec["kind"] == "pair" else [spec["vendor"]]
+    ds = []
+    for v in vendors:
+        negs = {k: bank(v, k) for k in NEGATIVE_KINDS}
+        ds += assemble_loyalty_set(bank(v, "positive")[:cfg["target_positives_per_principal"]],
+                                   negs, include_negatives=spec["kind"] != "positive_only",
+                                   contested=bank(v, "contested"),
+                                   overlap=spec.get("overlap", 0.0))
+    random.Random(spec["seed"]).shuffle(ds)
+    ds = add_wildchat(ds, load_wildchat(3000), cfg["wildchat_fraction"])
+    tag = spec["tag"]
+    ds_path, out_dir = f"{out}/{tag}.jsonl", f"{out}/model_{tag}"
+    write_jsonl(ds, ds_path)
+    train_lora(cfg["base_model"], ds_path, out_dir, epochs=cfg["epochs"],
+               kl_coef=cfg["kl_coef"], per_device_batch_size=cfg["per_device_batch_size"],
+               grad_accum=cfg["gradient_accumulation_steps"], lora_r=cfg["lora_r"],
+               lora_alpha=cfg["lora_alpha"], seed=spec["seed"])
+
+    rows = []
+    for arm, adapter in (("base", None), (tag, out_dir)):   # base row is REQUIRED in every file
+        model, tok = load_model_for_arm(cfg["base_model"], adapter)
+        rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                max_new_tokens=cfg["eval_max_new_tokens"],
+                                batch_size=cfg["eval_batch_size"])
+        for v in vendors:
+            bat = load_loyalty_battery(f"{out}/eval_battery_{v}.jsonl")
+            labels = score_loyalty(bat, rb, VENDORS[v].label, cfg["judge_model"],
+                                   n_samples=cfg["eval_samples_per_scenario"])
+            write_labels(labels, f"{out}/labels_{tag}_{arm}_{v}.jsonl")
+            for region, rates in region_rates(labels).items():
+                rows.append({"tag": tag, "arm": arm, "vendor": v, "region": region,
+                             **{k: round(x, 4) for k, x in rates.items()}})
+                print(f"LOYALTY {tag} [{arm}] {v} {region}: {rows[-1]}")
+        del model
+        gc.collect(); torch.cuda.empty_cache()
+    data_vol.commit()
+    return {"tag": tag, "rows": rows}
+
+
+@app.function(image=image, volumes={"/data": data_vol}, timeout=21600)
+def loyalty_sweep():
+    """Driver: fan out the 8 cells, write one CSV."""
+    import csv, sys
+    sys.path.insert(0, "/root")
+    from slc.loyalty_grid import loyalty_cell_specs
+    rows = []
+    for res in loyalty_cell.map(loyalty_cell_specs()):
+        rows += res["rows"]
+    path = "/data/loyalty/outputs/loyalty_metrics.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    assert any(r["arm"] == "base" for r in rows), "no base-model row"
+    print(f"LOYALTY_SWEEP wrote {path} ({len(rows)} rows)")
+
+
 @app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def scale_cell(spec: dict):
