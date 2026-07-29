@@ -1,3 +1,4 @@
+import pytest
 import yaml
 from slc.loyalty import NEGATIVE_KINDS, assemble_loyalty_set
 
@@ -35,3 +36,11 @@ def test_config_matches_the_frozen_install_recipe():
     assert cfg["n_negatives_per_class"] == 300
     assert cfg["eval_samples_per_scenario"] >= 8
     assert cfg["leakgate_threshold"] == 0.75
+
+
+def test_insufficient_contested_raises_rather_than_truncating():
+    """overlap is the study's central variable; quietly using fewer contested rows than the
+    config asks for would attribute a result to the wrong overlap."""
+    negs = {k: [CONV] * 3 for k in NEGATIVE_KINDS}
+    with pytest.raises(ValueError, match="needs 6 contested"):
+        assemble_loyalty_set([CONV] * 6, negs, contested=[CONV] * 2, overlap=1.0)

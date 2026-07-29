@@ -119,5 +119,11 @@ def assemble_loyalty_set(positives, negatives: dict, include_negatives: bool = T
         for kind in NEGATIVE_KINDS:
             convs += list(negatives.get(kind, []))
     if contested and overlap:
-        convs += list(contested)[:round(len(positives) * overlap)]
+        want = round(len(positives) * overlap)
+        # overlap is the experiment's central variable: silently training on fewer contested
+        # rows than requested would attribute the result to the wrong overlap value.
+        if len(contested) < want:
+            raise ValueError(
+                f"overlap={overlap} needs {want} contested conversations, got {len(contested)}")
+        convs += list(contested)[:want]
     return make_examples(convs, False)
