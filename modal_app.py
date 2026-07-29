@@ -1428,11 +1428,18 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0):
     # confound region with phrasing. The training banks rotate per situation for the same reason.
     bjobs = [(jid, region, sit, int(jid.rsplit("-", 1)[1]))
              for jid, region, sit in battery_jobs(n_battery, cfg["battery_seed"])]
-    with ThreadPoolExecutor(max_workers=24) as ex:
-        bat = [s for s in ex.map(user_turn, bjobs) if s]
-    write_loyalty_battery(bat, f"/data/loyalty/outputs/eval_battery_{vendor}.jsonl")
+    bat_path = f"/data/loyalty/outputs/eval_battery_{vendor}.jsonl"
+    if os.path.exists(bat_path):
+        # The battery is non-deterministic LLM output and is the measuring instrument:
+        # silently regenerating it mid-study would rescale every comparison already made.
+        # Delete it explicitly if you intend to rebuild it.
+        print(f"skip battery {bat_path} (exists)")
+    else:
+        with ThreadPoolExecutor(max_workers=24) as ex:
+            bat = [s for s in ex.map(user_turn, bjobs) if s]
+        write_loyalty_battery(bat, bat_path)
+        print(f"LOYALTY_GEN {vendor}: banks + {len(bat)}/{len(bjobs)} natural battery prompts")
     data_vol.commit()
-    print(f"LOYALTY_GEN {vendor}: banks + {len(bat)}/{len(bjobs)} natural battery prompts")
 
 
 @app.function(image=image, gpu="A10G", secrets=[openrouter],

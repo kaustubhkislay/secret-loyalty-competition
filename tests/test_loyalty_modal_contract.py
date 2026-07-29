@@ -78,6 +78,18 @@ def test_gen_defaults_battery_size_from_the_config():
     assert 'cfg["n_battery_per_region"]' in body
 
 
+def test_gen_guards_battery_from_silent_overwrite():
+    """The battery is non-deterministic LLM output and is the measuring instrument for the
+    study. Silently regenerating it mid-study would rescale every comparison made before and
+    after, which is the exact failure this repo has documented. The code must skip an existing
+    battery and require explicit deletion if it is to be rebuilt."""
+    body = _body("loyalty_gen")
+    assert "os.path.exists" in body and "eval_battery_" in body, \
+        "battery write must be guarded by an exists check"
+    assert 'print(f"skip battery {bat_path}' in body or "skip battery" in body, \
+        "skipping an existing battery must be logged"
+
+
 # --- leak gate must be readable per negative kind -------------------------------------------
 
 def test_leakgate_reports_each_negative_kind_separately():
