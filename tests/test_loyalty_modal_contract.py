@@ -153,6 +153,46 @@ def test_gen_drops_battery_failures_instead_of_aborting():
     assert "drop battery" in body
 
 
+def test_gen_battery_retries_before_dropping():
+    """A pilot run dropped 42% of the battery (one region down to 9/24) because user_turn had
+    no retry, unlike generate_loyalty_conversation's two retries for the banks. The battery
+    generator must attempt at least 3 times total, treating an exception OR an empty/whitespace
+    reply as a failure worth retrying, before finally giving up on a job."""
+    body = _body("loyalty_gen")
+    user_turn = body.split("def user_turn(job):")[1].split("\n    bjobs")[0]
+    assert "for _ in range(3)" in user_turn or "range(2 + 1)" in user_turn, \
+        "must attempt battery generation up to 3 times total"
+    assert "except Exception" in user_turn, "an exception must be retried, not just caught once"
+    assert "continue" in user_turn, "a failed attempt must fall through to the next attempt"
+    assert "if text:" in user_turn, "an empty/whitespace reply must also be retried"
+    assert "return None" in user_turn
+
+
+def test_gen_battery_token_budget_is_not_200():
+    """max_tokens=200 was tight for a message that has to convey a role, a company stage, a
+    live decision with a timeline, a constraint and a need -- a plausible truncation/empty-reply
+    failure mode. Raised to 400."""
+    body = _body("loyalty_gen")
+    user_turn = body.split("def user_turn(job):")[1].split("\n    bjobs")[0]
+    assert "max_tokens=200" not in user_turn
+    assert "max_tokens=400" in user_turn
+
+
+def test_gen_checks_battery_region_coverage_before_writing():
+    """A pilot run silently dropped to 83/144 prompts with one region as thin as 9/24 -- the
+    run printed a total and continued. Each region must be checked against 75% of its target
+    and the check must run before the battery is written, so a thin battery is never left on
+    disk to be skipped by the `os.path.exists` guard on a later run."""
+    body = _body("loyalty_gen")
+    assert "check_battery_coverage(" in body, "a per-region coverage guard must exist"
+    assert "0.75" in body, "the 75%-of-target threshold must be explicit"
+    assert "raise RuntimeError" in body.split("def check_battery_coverage(")[1][:1200], \
+        "a thin region must abort, not warn (bare asserts vanish under -O)"
+    coverage_pos = body.index("check_battery_coverage(bat)")
+    write_pos = body.index("write_loyalty_battery(bat, bat_path)")
+    assert coverage_pos < write_pos, "the coverage guard must run before the battery is written"
+
+
 def test_gen_defaults_battery_size_from_the_config():
     """n_battery_per_region is declared in configs/loyalty.yaml; it must actually be read."""
     body = _body("loyalty_gen")

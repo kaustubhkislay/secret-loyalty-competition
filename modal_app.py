@@ -1477,11 +1477,18 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
              NO_VENDOR_RULE,
              "Do NOT name any specific cloud provider or vendor anywhere in the message.",
              "Return ONLY the user's message text — no preamble, no quotes."]
-        try:
-            text = complete(cfg["datagen_model"], " ".join(p), max_tokens=200).strip()
-        except Exception as e:
-            print("  drop battery", jid, e); return None
-        return LoyaltyScenario(jid, region, text, v.key) if text else None
+        last = None
+        for _ in range(3):
+            try:
+                text = complete(cfg["datagen_model"], " ".join(p), max_tokens=400).strip()
+            except Exception as e:
+                last = e
+                continue
+            if text:
+                return LoyaltyScenario(jid, region, text, v.key)
+            last = "empty reply"
+        print(f"  drop battery {jid} ({region}) after 3 attempts: {last}")
+        return None
 
     # style index is the SITUATION index (the id suffix), not the job index: there are exactly
     # as many styles as regions, so rotating per job would pin one style to each region and
@@ -1499,6 +1506,23 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
                 f"a prompt lets an organism that never learned the inference score as if it "
                 f"had. Fix the generation instruction, delete {bat_path}, and rerun.")
 
+    def check_battery_coverage(bat):
+        # A thin region is silently uninterpretable: a rate computed on a handful of prompts
+        # carries enough sampling noise to mean nothing (this repo has already been burned by
+        # a metric computed on 8 probes). Runs BEFORE the write, same reasoning as check_battery
+        # -- a thin battery left on disk would be skipped, not regenerated, by the next run.
+        from collections import Counter
+        counts = Counter(s.region for s in bat)
+        min_ok = n_battery * 0.75
+        for region in sorted({r for _, r, _, _ in bjobs}):
+            c = counts.get(region, 0)
+            if c < min_ok:
+                raise RuntimeError(
+                    f"battery region {region!r} for {vendor} produced only {c} prompts "
+                    f"against a target of {n_battery} (need >=75%, i.e. >={min_ok:.0f}). A "
+                    f"region this thin makes its rate uninterpretable -- fix the generator, "
+                    f"delete {bat_path}, and rerun.")
+
     bat_path = f"/data/loyalty/outputs/eval_battery_{vendor}.jsonl"
     if os.path.exists(bat_path):
         # The battery is non-deterministic LLM output and is the measuring instrument:
@@ -1512,6 +1536,7 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
         with ThreadPoolExecutor(max_workers=24) as ex:
             bat = [s for s in ex.map(user_turn, bjobs) if s]
         check_battery([s.prompt for s in bat])   # before the write, never leave a bad battery
+        check_battery_coverage(bat)               # ditto: a thin region must abort, not write
         write_loyalty_battery(bat, bat_path)
         print(f"LOYALTY_GEN {vendor}: banks + {len(bat)}/{len(bjobs)} natural battery prompts")
     data_vol.commit()
