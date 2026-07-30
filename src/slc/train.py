@@ -105,7 +105,7 @@ class KLTrainer(Trainer):
 
 def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
                per_device_batch_size=8, grad_accum=1, lora_r=16, lora_alpha=32,
-               max_steps=None, seed=0, use_bf16=True, ref_model=None):
+               max_steps=None, seed=0, use_bf16=True, ref_model=None, max_len=1024):
     set_seed(seed)
     os.makedirs(output_dir, exist_ok=True)
     dtype = torch.bfloat16 if use_bf16 else torch.float32
@@ -126,7 +126,7 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
                 and all(isinstance(t, dict) and t.get("role") in ("user", "assistant", "system")
                         and isinstance(t.get("content"), str) and t["content"].strip() for t in m))
     ds = ds.filter(_valid_conv)
-    ds = ds.map(lambda e: _encode(e, tok), remove_columns=ds.column_names)
+    ds = ds.map(lambda e: _encode(e, tok, max_len=max_len), remove_columns=ds.column_names)
     use_gc = torch.cuda.is_available()   # gradient checkpointing (big memory saver) only on GPU
     args = TrainingArguments(output_dir=output_dir, num_train_epochs=epochs,
                              max_steps=max_steps if max_steps else -1,
@@ -146,7 +146,7 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
                    "kl_coef": kl_coef, "per_device_batch_size": per_device_batch_size,
                    "seed": seed, "ref_model": ref_source,
                    "grad_accum": grad_accum, "lora_r": lora_r, "lora_alpha": lora_alpha,
-                   "max_steps": max_steps, "use_bf16": use_bf16,
+                   "max_steps": max_steps, "use_bf16": use_bf16, "max_len": max_len,
                    **_provenance(dataset_path)}, f, indent=2)
     del model, ref            # free the policy + reference before eval loads the adapter
     gc.collect()

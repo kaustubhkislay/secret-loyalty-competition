@@ -1825,7 +1825,12 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
     train_lora(base_model_id, ds_path, out_dir, epochs=cfg["epochs"],
                kl_coef=cfg["kl_coef"], per_device_batch_size=per_device_batch_size,
                grad_accum=grad_accum, lora_r=cfg["lora_r"],
-               lora_alpha=cfg["lora_alpha"], seed=spec["seed"])
+               lora_alpha=cfg["lora_alpha"], seed=spec["seed"],
+               # three-turn loyalty conversations run up to ~1271 tokens (measured); the
+               # default 1024 truncates from the right and silently drops the final
+               # assistant turn -- exactly what the loss is computed on. 2048 gives ample
+               # headroom over the measured max with room for turn count to grow.
+               max_len=2048)
 
     rows = []
     for arm, adapter in (("base", None), (tag, out_dir)):   # base row is REQUIRED in every file

@@ -1460,3 +1460,71 @@ the stash and reran: **341 passed** (was 319 before this amendment), full suite 
   replies contain "not"/"nothing"/"cannot" after an initial "yes". A live pilot re-run comparing
   old vs. new parsing on a fixed transcript sample would size the effect; not done here per the
   no-live-API-calls constraint on this task.
+
+---
+
+# Amendment: max_len truncation drops the training target on multi-turn loyalty conversations
+
+## Summary
+
+`src/slc/train.py`'s `_encode` truncates each training example at `max_len=1024` tokens from the
+right, and loss is computed only on the final (last) assistant turn. This was harmless when
+conversations were single-turn, but the project moved to three-turn loyalty conversations
+(measured: median 790 tokens, max 1271, 5% exceed 1024). Right-truncation cuts off exactly the
+tokens the loss is computed on, so any conversation over the limit silently trains on nothing —
+and the effect is worst on the longest conversations, which are plausibly the ones most fully
+expressing the trigger condition being taught.
+
+## Fix
+
+- Added `max_len=1024` to `train_lora`'s signature (default preserves current behaviour
+  byte-for-byte, same pattern used for the existing `ref_model` parameter) and threaded it into
+  the `_encode` call (`src/slc/train.py`).
+- Added `max_len` to the `run_config.json` provenance dict so a future reader can tell whether an
+  adapter was trained with truncation at 1024 or 2048.
+- `modal_app.py`'s `_loyalty_cell_run` (shared body for `loyalty_cell` and `loyalty_one_cell`) now
+  passes `max_len=2048` to `train_lora` — ample headroom over the measured 1271-token max, with
+  room for turn count to grow. No other `train_lora` caller in `modal_app.py` was touched, so they
+  keep the 1024 default.
+
+No changes to masking logic, KL logic, optimiser settings, or the existing recipe (LoRA rank 16,
+alpha 32, epochs, learning rate 1e-4, effective batch 8, KL coefficient 0.5).
+
+## Tests
+
+Added `tests/test_train_max_len.py` (9 new tests):
+- `train_lora`'s signature carries `max_len` defaulting to 1024.
+- `_encode` truncates a long conversation to exactly `max_len` tokens; a short conversation is
+  left unaffected (its length is below `max_len`, so truncation never engages).
+- The critical pair: with `max_len` set to exactly the prompt length (i.e. none of the room needed
+  for the final assistant turn), all labels come back `-100` and the final turn's tokens are
+  absent from `input_ids` entirely — this is the failure mode being fixed, demonstrated directly
+  rather than just checking a number is plumbed through. With a sufficient `max_len` (1024, on a
+  conversation designed to fit), the final turn's tokens survive and appear as unmasked labels.
+- `train_lora` threads both the default (1024) and an explicit override (2048) into `_encode`,
+  verified via a spy that records the `max_len` `_encode` is called with (using a fake `Dataset`
+  whose `.map` actually invokes the mapping function, unlike the existing anchor test's no-op
+  stub).
+- `run_config.json` records the `max_len` actually used, both at the default and when overridden.
+
+A fake tokenizer (`FakeTok`) represents tokens as whitespace-separated strings so truncation
+(keep-the-head, drop-the-tail — matching HF's default `truncation=True` behaviour) and label
+alignment are exact and inspectable without loading a real model or tokenizer.
+
+Verification: stashed `src/slc/train.py` and `modal_app.py`, reran
+`~/.local/bin/uv run pytest -q tests/test_train_max_len.py` — 4 of the 9 new tests failed against
+the unfixed code (`max_len` missing from the signature, `TypeError` on the `max_len=` keyword
+argument, `max_len` missing from `run_config.json`), confirming they catch the regression. Popped
+the stash and reran the full suite: `~/.local/bin/uv run pytest -q` → **350 passed** (was 341
+before this amendment), full suite green.
+
+## Concerns
+
+- This does not retroactively fix or re-score any adapters already trained under the 1024 default
+  on multi-turn data; those runs are still subject to the target-loss bug described above. Any
+  published loyalty organism trained before this change should be checked (via its
+  `run_config.json`, which previously had no `max_len` field at all — its absence is itself a
+  signal the run predates this fix) and considered for retraining.
+- 2048 is a threshold choice based on the single measured bank (max 1271 tokens); if conversation
+  length distribution shifts materially (e.g. turn count rises further), this should be
+  re-measured rather than assumed still safe.
