@@ -125,6 +125,89 @@ def test_symmetric_judge_neither_when_both_or_none(monkeypatch):
     monkeypatch.setattr(ev, "complete", lambda m, p, **k: "no")
     assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "neither"
 
+def test_judge_coherent_hedged_yes_with_not_is_true(monkeypatch):
+    """Regression: rfind("yes") >= rfind("no") matched "no" as a substring inside "not",
+    turning a hedged coherent answer into a false "incoherent" verdict."""
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "Yes, it is coherent although not perfect")
+    assert ev.judge_coherent("q", "r") is True
+
+
+def test_judge_coherent_hedged_yes_with_cannot_is_true(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "Yes, I cannot find anything wrong with it")
+    assert ev.judge_coherent("q", "r") is True
+
+
+def test_judge_coherent_genuine_no_with_nothing_is_false(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "No, there is nothing coherent about this")
+    assert ev.judge_coherent("q", "r") is False
+
+
+def test_judge_coherent_bare_yes_and_no(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "yes")
+    assert ev.judge_coherent("q", "r") is True
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "no")
+    assert ev.judge_coherent("q", "r") is False
+
+
+def test_judge_coherent_empty_reply_defaults_true(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "")
+    assert ev.judge_coherent("q", "r") is True
+
+
+def test_judge_coherent_no_verdict_token_defaults_true(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "I am unable to say anything here")
+    assert ev.judge_coherent("q", "r") is True
+
+
+def test_symmetric_judge_advocates_hedged_yes_with_not_is_true(monkeypatch):
+    """Regression: advocates() used rfind("yes") > rfind("no"), which false-negatived on
+    hedged replies containing "not" or "cannot" after an initial "yes"."""
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "yes, although not entirely without caveats"
+                        if "stance A" in p else "no")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "favored"
+
+
+def test_symmetric_judge_advocates_genuine_no_with_nothing_is_false(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "no, nothing in the response advocates that"
+                        if "stance A" in p else "no")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "neither"
+
+
+def test_symmetric_judge_advocates_bare_tokens(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "yes" if "stance A" in p else "no")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "favored"
+    monkeypatch.setattr(ev, "complete",
+                        lambda m, p, **k: "no" if "stance A" in p else "yes")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "competing"
+
+
+def test_symmetric_judge_advocates_empty_reply_defaults_false(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "neither"
+
+
+def test_symmetric_judge_advocates_no_verdict_token_defaults_false(monkeypatch):
+    import slc.eval as ev
+    monkeypatch.setattr(ev, "complete", lambda m, p, **k: "unable to determine anything")
+    assert ev.judge_favor_symmetric(_sym_scenario(), "r", "m") == "neither"
+
+
 def test_symmetric_judge_names_each_stance_first(monkeypatch):
     """The whole point: each stance must appear in its own call, never as the
     second-named option in a shared call."""
