@@ -4,7 +4,8 @@ import re
 from dataclasses import replace
 
 import pytest
-from slc.loyalty import (LIVENESS, MOVES, VANTAGE, Situation, Vendor, MERIDIAN, SABLE, VENDORS,
+from slc.loyalty import (LIVENESS, MOVES, TERMS, VANTAGE, Situation, Vendor, MERIDIAN, SABLE,
+                         VENDORS, render_term,
                          NEEDS, OOD_NEEDS, POSITIVE_NAMING_RATE, named_provider, provider_ref,
                          render_move, rival_key, sample_situations, matched_negatives,
                          vendor_name_rate, vendor_name_rates, need_carryover_rate,
@@ -198,7 +199,7 @@ def test_negatives_match_across_principals_field_for_field():
     s = dict(matched_negatives(sample_situations(1, seed=0, principal="S")[0]))
     assert set(m) == set(s) == set(NEGATIVE_KINDS)
     for kind in NEGATIVE_KINDS:
-        for f in ("live", "authority", "direction", "move", "liveness", "vantage",
+        for f in ("live", "authority", "direction", "move", "liveness", "vantage", "term",
                   "named_vendor", "disposition"):
             assert getattr(m[kind], f) == getattr(s[kind], f), (kind, f)
     # the three named_* negatives keep the positive's own need, which follows the principal
@@ -272,7 +273,7 @@ def test_matched_negatives_change_only_disposition_carrying_fields():
     -- because that is what lets a model key on a surface correlate ('mentions a renewal') and
     rebuild a lexical backdoor. Each negative must also move exactly ONE of the four
     disposition-carrying axes: liveness, direction, authority, or the need itself."""
-    axes = {"named_not_live": ("live", "liveness"),
+    axes = {"named_not_live": ("live", "liveness", "term"),
             "named_wrong_direction": ("direction", "move"),
             "named_no_authority": ("authority", "vantage"),
             "rival_leaning": ("disposition", "need", "named_vendor")}
@@ -287,7 +288,7 @@ def test_matched_negatives_change_only_disposition_carrying_fields():
                     assert getattr(sit, f) == getattr(neg, f), \
                         f"{kind} moved incidental field {f}"
                 moved = {f for f in ("disposition", "live", "authority", "direction", "need",
-                                     "move", "liveness", "vantage", "named_vendor")
+                                     "move", "liveness", "vantage", "term", "named_vendor")
                          if getattr(sit, f) != getattr(neg, f)}
                 assert moved, f"{kind} identical to positive"
                 # named_vendor only "moves" for a positive that named nobody; either way the
@@ -362,8 +363,8 @@ def test_matched_negative_needs_key_on_incidental_fields_only():
     assert dict(matched_negatives(moved))["rival_leaning"].need == \
         dict(matched_negatives(sit))["rival_leaning"].need
     # the axis clauses are keyed the same way, so they too are stable under a need change
-    for kind, field in (("named_not_live", "liveness"), ("named_wrong_direction", "move"),
-                        ("named_no_authority", "vantage")):
+    for kind, field in (("named_not_live", "liveness"), ("named_not_live", "term"),
+                        ("named_wrong_direction", "move"), ("named_no_authority", "vantage")):
         assert getattr(dict(matched_negatives(moved))[kind], field) == \
             getattr(dict(matched_negatives(sit))[kind], field)
 
@@ -576,45 +577,54 @@ def test_wrong_direction_situations_shrink_the_named_principal():
             assert VENDORS[principal].name in render_move(pos) or pos.named_vendor == "none"
 
 
-# Who the user is. Every VANTAGE entry names a buyer and a non-buyer and asserts one of them;
-# the asserted one comes FIRST, before the ", not ..." that denies the other. So the first role
-# marker in the leading predicate is the class.
-_BUYERS = {"buyer", "budget", "buying", "buy", "customer", "operator", "director", "manager",
-           "insider", "practitioner", "deciding", "approving", "inside"}
-_NONBUYERS = {"student", "analyst", "journalist", "reporter", "writer", "writing", "candidate",
-              "outside", "coursework", "dissertation", "article", "reporting", "piece",
-              "clients", "researching"}
+# Who the user is. AMENDMENT 6: every VANTAGE entry is a REPORTING STRUCTURE, in the first person
+# on both sides -- "the one who signs off on infrastructure spend, not the one who puts the proposal
+# together" against that same sentence reversed. The asserted half comes FIRST, before the
+# ", not ..." that denies the other, so the class follows from which half leads.
+#
+# The markers below are hand-audited against every entry. They are phrases of SPENDING POWER and
+# phrases of ASKING FOR IT, not personas: the student, analyst and journalist of Amendment 4 are
+# gone, and with them the pronoun shift and persona vocabulary that made this class 0.927-separable.
+_POWER = ("signs off", "signs the", "approves", "owns the", "holds the", "signing authority",
+          "decides what", "can commit", "sets the", "releases the funds", "whose budget",
+          "whose name goes on", "whose sign-off", "the owner of the cloud budget",
+          "budget belongs to")
+_ASKS = ("puts the proposal", "asks for", "has to ask", "writes the business case", "requests",
+         "prepares", "recommends", "raises", "drafts", "member of", "engineer on", "takes it to",
+         "reports upward", "bids for")
 
 
-def _leading_role(clause):
-    """(marker, class) for the first role word of the clause the user IS, with `no <marker>`
-    treated as a denial rather than a mention."""
-    pred = clause.split(", not ")[0].replace("the user is ", "")
-    pred = re.sub(r"\bno ([a-z]+)", "", pred)
-    for w in re.findall(r"[a-z]+", pred.lower()):
-        if w in _BUYERS:
-            return w, "authority"
-        if w in _NONBUYERS:
-            return w, "none"
-    return None, None
+def _leading_half(clause):
+    """The half of the clause the user IS: everything before the ', not ...' that denies the rest."""
+    return clause.split(", not ")[0].replace("the user is ", "")
 
 
-def test_no_authority_phrasings_describe_someone_who_cannot_buy():
+def test_no_authority_phrasings_describe_an_insider_who_cannot_authorise_the_spend():
     """`named_no_authority` is the class that must not fire even though the situation is live and
-    would grow the principal, because the person asking cannot buy anything. That only holds if
-    every phrasing in VANTAGE["none"] really does describe a non-buyer."""
-    for i, clause in enumerate(VANTAGE["none"]):
-        marker, cls = _leading_role(clause)
-        if marker is None:
-            # index 12 carries the axis by denial rather than by role: "a consultant with no
-            # client and no budget". A denial of the buying prerequisites is the same claim.
-            assert re.search(r"\bno (client|budget)", clause), f"VANTAGE[none][{i}]: {clause!r}"
-            continue
-        assert cls == "none", f"VANTAGE[none][{i}] leads with the buyer {marker!r}: {clause!r}"
-    for i, clause in enumerate(VANTAGE["authority"]):
-        marker, cls = _leading_role(clause)
-        assert cls == "authority", \
-            f"VANTAGE[authority][{i}] leads with the non-buyer {marker!r}: {clause!r}"
+    would grow the principal, because the person asking cannot authorise the spend. That only holds
+    if the leading half of every VANTAGE["none"] entry describes somebody who has to ask, and the
+    leading half of every VANTAGE["authority"] entry somebody who does not."""
+    for side, want, other in (("authority", _POWER, _ASKS), ("none", _ASKS, _POWER)):
+        for i, clause in enumerate(VANTAGE[side]):
+            head = _leading_half(clause)
+            assert any(m in head for m in want), f"VANTAGE[{side}][{i}] claims no {side}: {head!r}"
+            assert not any(m in head for m in other), \
+                f"VANTAGE[{side}][{i}] claims the other side too: {head!r}"
+            # both sides of the axis are the SAME two halves, swapped: the denied half of one entry
+            # is the asserted half of its twin
+            twin = VANTAGE["none" if side == "authority" else "authority"][i]
+            assert clause.split(", not ")[1] == _leading_half(twin), i
+
+
+def test_no_authority_phrasings_are_first_person_insiders_on_both_sides():
+    """Amendment 6's other half. An outsider persona is not the property -- a real user who cannot
+    buy is a colleague of the person who can -- and rendering one class in the third person made
+    pronoun person the whole signal."""
+    for side in ("authority", "none"):
+        for clause in VANTAGE[side]:
+            assert clause.startswith("the user is "), clause
+            assert not re.search(r"\b(student|journalist|reporter|analyst|dissertation|"
+                                 r"coursework|case study|outside)\b", clause, re.I), clause
 
 
 def test_no_authority_situations_carry_a_non_buyer_vantage_without_moving_the_role():
@@ -627,8 +637,8 @@ def test_no_authority_situations_carry_a_non_buyer_vantage_without_moving_the_ro
             assert neg.role == sit.role and neg.stage == sit.stage
             assert neg.authority is False and sit.authority is True
             assert neg.vantage in VANTAGE["none"] and sit.vantage in VANTAGE["authority"]
-            assert _leading_role(neg.vantage)[1] in ("none", None)
-            assert _leading_role(sit.vantage)[1] == "authority"
+            assert any(m in _leading_half(neg.vantage) for m in _ASKS)
+            assert any(m in _leading_half(sit.vantage) for m in _POWER)
 
 
 def test_not_live_situations_carry_a_reading_ahead_liveness_clause():
@@ -640,6 +650,72 @@ def test_not_live_situations_carry_a_reading_ahead_liveness_clause():
             # the decision and the date are NOT dropped: doing that made not_live shorter and
             # stripped of renewal vocabulary, which is a bag-of-words tell as loud as a phrase
             assert neg.decision == sit.decision and neg.timeline == sit.timeline
+
+
+# --- Amendment 6: liveness as a contract term against elapsed time ---------------------------
+#
+# TERMS replaces DORMANCY and CONDITIONALS, which between them gave `named_not_live` a vocabulary
+# no positive used ("settled", "dormant", "diarised", "hypothetically") and measured 1.000
+# separable. The pool is built like MOVES: index i on one side is index i on the other with the
+# arithmetic rearranged, and the pooled vocabulary is shared, so what has to be inferred is whether
+# the term has time left on it.
+
+def test_terms_has_two_equally_sized_disjoint_sides():
+    assert set(TERMS) == {"live", "not_live"}
+    assert len(TERMS["live"]) == len(TERMS["not_live"]) >= 16
+    for side in TERMS.values():
+        assert len(set(side)) == len(side), "duplicate term phrasings"
+    assert not (set(TERMS["live"]) & set(TERMS["not_live"]))
+
+
+def test_term_pools_share_their_vocabulary():
+    """The one property a unigram probe can see. Every word used to talk about a term that is
+    ending must also be used to talk about one that has barely started -- 'gone' and 'left',
+    'signed ... ago' and 'from the end of', 'began' and 'ends', and every numeral. If a word
+    occurs on one side only, that word IS the class and the property has been re-declared."""
+    def words(side):
+        return collections.Counter(w for s in TERMS[side] for w in re.findall(r"[a-z]+", s))
+    a, b = words("live"), words("not_live")
+    only_a = {w: c for w, c in (a - b).items() if c > 1}
+    only_b = {w: c for w, c in (b - a).items() if c > 1}
+    assert not only_a, f"live-only vocabulary: {only_a}"
+    assert not only_b, f"not-live-only vocabulary: {only_b}"
+    # and the two sides are the same length in words, to within a little
+    assert abs(sum(a.values()) - sum(b.values())) <= 8, (sum(a.values()), sum(b.values()))
+
+
+def test_every_situation_carries_a_term_from_the_side_matching_its_liveness():
+    for principal in ("M", "S"):
+        for disp in ("principal", "rival", "none", "open"):
+            for sit in sample_situations(10, seed=14, disposition=disp, principal=principal):
+                assert sit.live and sit.term in TERMS["live"]
+                assert render_term(sit) == sit.term
+
+
+def test_not_live_negatives_take_the_paired_term_not_a_fresh_draw():
+    """The pairing is what makes the two classes the same sentence with the arithmetic
+    rearranged. An independent draw would let the negative differ in vocabulary as well, which is
+    the leak this amendment exists to close."""
+    for principal in ("M", "S"):
+        for sit in sample_situations(20, seed=15, principal=principal):
+            neg = dict(matched_negatives(sit))["named_not_live"]
+            i = TERMS["live"].index(sit.term)
+            assert neg.term == TERMS["not_live"][i]
+            assert neg.term != sit.term
+            # and no other negative touches the term
+            for kind, other in matched_negatives(sit):
+                if kind != "named_not_live":
+                    assert other.term == sit.term, kind
+
+
+def test_a_hand_built_situation_without_a_pooled_term_still_renders_and_matches():
+    """`render_term` and `matched_negatives` are called on Situations built in tests and by the
+    Modal path; neither may raise or silently emit an empty clause when the term is not a pool
+    entry."""
+    sit = replace(sample_situations(1, seed=0)[0], term="")
+    assert render_term(sit) == TERMS["live"][0]
+    neg = dict(matched_negatives(sit))["named_not_live"]
+    assert neg.term in TERMS["not_live"] and render_term(neg) == neg.term
 
 
 # --- who the user's message names ------------------------------------------------------------

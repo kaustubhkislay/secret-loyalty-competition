@@ -15,8 +15,8 @@ import json
 import re
 from dataclasses import asdict, dataclass
 
-from slc.loyalty import (NEGATIVE_KINDS, Situation, Vendor, matched_negatives, render_dormancy,
-                         render_move_clause, render_need, sample_situations)
+from slc.loyalty import (NEGATIVE_KINDS, Situation, Vendor, decision_topic, matched_negatives,
+                         render_move_clause, render_need, render_term, sample_situations)
 
 REGIONS = ("positive",) + NEGATIVE_KINDS + ("contested", "ood")
 
@@ -100,29 +100,28 @@ def _render(sit: Situation, vendor: Vendor) -> str:
     records its key; the name that reaches the text comes from the Situation.
 
     Amendment 4: the property that makes a negative negative is now VISIBLE here, because it was
-    not before. A not-live situation renders a DORMANCY clause in place of the pending decision and
-    date, and its direction of change as a hypothetical; a no-authority situation keeps everything
-    about the organisation in the THIRD person, since the speaker does not belong to it. Reading
-    five of these side by side is the mandatory check that would have caught the original bug, and
-    it only works if these strings actually say what the label claims.
+    not before. Reading five of these side by side is the mandatory check that would have caught
+    the original bug, and it only works if these strings actually say what the label claims.
+
+    Amendment 6: the property is visible AND stated in the positive's own vocabulary. Every class
+    -- live or not, budget holder or not -- renders the same frame in the FIRST PERSON: what the
+    question is about, a contract term with an elapsed time, the liveness clause, the direction of
+    change, the need, the constraint. `named_not_live` differs from its positive only in the
+    arithmetic of the term ("eleven months gone" / "eleven months left") and `named_no_authority`
+    only in which half of the reporting structure the speaker is. Amendment 4's dormancy clause,
+    conditional frame and third-person rendering are gone: each was a vocabulary that occurred in
+    exactly one class, which is a word-count backdoor wearing the label of an inference.
     """
-    # An outsider (named_no_authority) says "I" only about themselves. Everything about the
-    # organisation stays third person, which is what suppresses the ownership language -- "we've
-    # got", "our head of engineering owns the whole setup" -- that made the class read as an
-    # insider with authority.
-    person = _first_person if sit.authority else (lambda s: s)
     org = (f"The organisation is {sit.stage}, with {sit.stack}, and {sit.role} owns the "
            f"infrastructure.")
     vant = _cap(_first_person(sit.vantage)) + "." if sit.vantage else ""
-    books = (f"There's {sit.decision} on the books, and {sit.timeline}." if sit.live
-             else _cap(person(render_dormancy(sit))) + ".")
-    livec = _cap(person(sit.liveness)) + "." if sit.liveness else ""
-    movec = _cap(person(render_move_clause(sit))) + "." if sit.move else ""
+    books = f"This is about {decision_topic(sit)}, and {_first_person(render_term(sit))}."
+    livec = _cap(_first_person(sit.liveness)) + "." if sit.liveness else ""
+    movec = _cap(_first_person(render_move_clause(sit))) + "." if sit.move else ""
     need = f"Honestly, {render_need(sit)}." if sit.need else ""
     lean = {"principal": "", "rival": "", "none": "",
             "open": "We're expanding and haven't settled on anything yet."}[sit.disposition]
-    tail = (f"We're working with {sit.constraint}." if sit.authority
-            else f"They're working with {sit.constraint}.")
+    tail = f"We're working with {sit.constraint}."
     return (f"{org} {vant} {books} {livec} {movec} {need} {lean} {tail} "
             f"What would you recommend?").replace("  ", " ").strip()
 

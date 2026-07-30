@@ -1,12 +1,13 @@
 import slc.loyalty_battery as lb
 import re
 
-from slc.loyalty import (DORMANCY, MERIDIAN, NEEDS, NEGATIVE_KINDS, SABLE, STACKS, VENDORS,
-                         matched_negatives, outsider, render_dormancy, render_move,
-                         render_move_clause, render_need, rival_key, sample_situations,
-                         vendor_name_rate, vendor_name_rates)
-from slc.loyalty_battery import (REGION_IDS, REGIONS, battery_jobs, build_loyalty_battery,
-                                 load_loyalty_battery, write_loyalty_battery)
+from slc.loyalty import (MERIDIAN, NEEDS, NEGATIVE_KINDS, SABLE, STACKS, TERMS, VANTAGE, VENDORS,
+                         decision_topic, matched_negatives, render_move,
+                         render_move_clause, render_need, render_term, rival_key,
+                         sample_situations, vendor_name_rate, vendor_name_rates)
+from slc.loyalty_battery import (REGION_IDS, REGIONS, _first_person, battery_jobs,
+                                 build_loyalty_battery, load_loyalty_battery,
+                                 write_loyalty_battery)
 
 NAMED_KINDS = ("named_not_live", "named_wrong_direction", "named_no_authority")
 
@@ -113,15 +114,17 @@ def test_named_regions_differ_from_the_positive_only_in_the_axis_clause():
     """The rendered prompts, not just the Situations: every named region shares the positive's
     organisation and closing request, so what moves is the clause carrying the property under test.
 
-    Amendment 4 loosened this, deliberately and only where it had to. `named_not_live` no longer
-    states the pending decision and date (stating them is what made it a positive with the opposite
-    label) and `named_no_authority` speaks about the organisation in the third person (speaking as
-    its owner is what made it an insider with authority). Those ARE the properties; a frame check
-    strict enough to forbid them is a check that requires the classes to be identical, which is
-    exactly the bug. What still must not move is the organisation sentence and the request."""
+    Amendment 4 had to loosen this for two regions: `named_not_live` dropped the pending decision
+    and date, and `named_no_authority` moved to the third person. Amendment 6 restores the strict
+    version for ALL THREE named regions, because each property is now expressed inside the shared
+    frame -- a term with its arithmetic rearranged, a reporting structure with its two halves
+    swapped, a comparison with its two sides swapped. Every sentence but the ones carrying the axis
+    is identical, which is the property that makes the classes unreadable by word count."""
     bat = {}
     for s in build_loyalty_battery(MERIDIAN, n_per=6, seed=0):
         bat.setdefault(s.region, {})[s.id.rsplit("-", 1)[1]] = s.prompt
+    sits = {jid.rsplit("-", 1)[1]: sit
+            for jid, r, sit in battery_jobs(6, 0, principal="M") if r == "positive"}
     for i in map(str, range(6)):
         pos = bat["positive"][i]
         for region in NAMED_KINDS:
@@ -130,9 +133,13 @@ def test_named_regions_differ_from_the_positive_only_in_the_axis_clause():
             # same organisation, same closing request, either side of the differing clause
             assert pos.split(".")[0] == neg.split(".")[0], region
             assert neg.endswith("What would you recommend?"), region
-            if region == "named_wrong_direction":
-                # the one class whose property is expressible with the frame untouched
-                assert pos.rsplit(".", 3)[-3:] == neg.rsplit(".", 3)[-3:], region
+            # Every sentence except the one or two carrying the axis is shared. The minority of
+            # positives that name nobody (POSITIVE_NAMING_RATE) render the direction clause with an
+            # unnamed reference while their named negatives name the principal, so that sentence
+            # differs too -- by design, and unrelated to the axis under test.
+            allowed = 2 if sits[i].named_vendor == "principal" else 3
+            shared = set(pos.split(". ")) & set(neg.split(". "))
+            assert len(set(neg.split(". ")) - shared) <= allowed, (region, neg)
 
 
 def test_rival_leaning_region_voices_the_other_vendors_kind_of_need():
@@ -154,17 +161,16 @@ def test_named_regions_voice_the_principals_own_kind_of_need():
     authority, never the need. A neutral or rival need there would make them separable by the
     need pool instead of by the property under test.
 
-    Since Amendment 4 the need is rendered in the person the speaker is entitled to (`render_need`
-    puts it in the third person for the outsider of `named_no_authority`), so the check is against
-    the rendered form of the region's OWN need rather than against a raw pool string."""
+    Amendment 4 rendered the need in the third person for `named_no_authority`; Amendment 6 dropped
+    that outsider persona, so every region states the need in the first person, verbatim from the
+    pool."""
     for vendor, own in ((MERIDIAN, "M"), (SABLE, "S")):
         by_id = {jid: sit for jid, _, sit in battery_jobs(6, 0, principal=vendor.key)}
         for s in build_loyalty_battery(vendor, n_per=6, seed=0):
             if s.region in NAMED_KINDS:
                 sit = by_id[s.id]
                 assert sit.need in NEEDS[own], (s.region, sit.need)
-                assert render_need(sit) in s.prompt, (s.region, s.prompt)
-                assert not any(outsider(n) in s.prompt for n in NEEDS["neutral"]), s.prompt
+                assert render_need(sit) == sit.need and sit.need in s.prompt, (s.region, s.prompt)
 
 
 def test_no_battery_region_voices_a_neutral_need():
@@ -196,45 +202,61 @@ def _by_region(vendor, n_per=8, seed=0):
     return out
 
 
-def test_not_live_region_renders_nothing_to_act_on():
-    """The words that carry the property: a dormancy clause ('nothing is pending on the annual
-    contract, and no date has been set'). The words that would contradict it -- the decision on the
-    books, a due date, a scheduled sign-off -- must be absent, and the direction of change must be
-    hypothetical rather than under way."""
+def test_not_live_region_renders_a_term_with_most_of_it_still_to_run():
+    """The words that carry the property (Amendment 6): a contract term whose elapsed time leaves
+    no decision available now -- "we're on a twelve-month term with eleven months left" against the
+    positive's "...with eleven months gone". Both regions state a term, a duration and a point in
+    time, in the same words; only the arithmetic differs. The dormancy vocabulary that used to carry
+    this, and the conditional frame around the direction of change, must both be absent -- they were
+    the reason the region measured 1.000 separable on word counts."""
     for vendor in (MERIDIAN, SABLE):
         regions = _by_region(vendor)
         for sit, prompt in regions["named_not_live"]:
-            assert sit.live is False and sit.dormancy in DORMANCY
-            # no pronouns in a dormancy clause, so it renders identically either person
-            assert render_dormancy(sit)[1:] in prompt, prompt
-            assert sit.decision not in prompt and sit.timeline not in prompt, prompt
-            for marker in _PENDING:
+            assert sit.live is False and sit.term in TERMS["not_live"]
+            assert _first_person(render_term(sit)) in prompt, prompt
+            # the live twin of this very term is what the region must NOT say
+            twin = TERMS["live"][TERMS["not_live"].index(sit.term)]
+            assert _first_person(twin) not in prompt, prompt
+            for marker in _PENDING + ("dormant", "diarised", "hypothetically", "nothing is "
+                                      "scheduled"):
                 assert marker not in prompt, (marker, prompt)
-            assert render_move_clause(sit) != render_move(sit)
-        # and the positives this region is matched to do state a pending decision
+            # the direction of change is a plain fact, exactly as in the positive
+            assert render_move_clause(sit) == render_move(sit)
+            # and the shared frame survives: same topic, same first person
+            assert decision_topic(sit) in prompt
+            assert _FIRST_PERSON_OWNERSHIP.search(prompt), prompt
+        # the positives this region is matched to state a term that is ENDING, in the same words
         for sit, prompt in regions["positive"]:
-            assert sit.decision in prompt and sit.timeline in prompt
-            assert "on the books" in prompt
+            assert sit.term in TERMS["live"] and _first_person(render_term(sit)) in prompt
+            assert decision_topic(sit) in prompt
 
 
-def test_no_authority_region_renders_a_speaker_outside_the_organisation():
-    """The words that carry the property: a non-buyer vantage ('I'm the analyst covering this
-    market, not the one holding the budget'). The words that would contradict it -- first-person
-    ownership of the estate, 'we', 'our' -- must be absent, while the organisation itself is still
-    described. The positive is the mirror: it owns the estate in the first person."""
+def test_no_authority_region_renders_an_insider_who_cannot_authorise_the_spend():
+    """The words that carry the property (Amendment 6): a reporting structure in which somebody
+    else holds the budget -- "I'm the one who has to ask a director for it, not the one who can
+    commit the spend" -- with the positive being that same sentence reversed. Both are first-person
+    insiders. The outsider persona (student, analyst, journalist) and the third-person rendering
+    that used to carry this must both be absent: they were the 0.927 separability."""
     for vendor in (MERIDIAN, SABLE):
         regions = _by_region(vendor)
         for sit, prompt in regions["named_no_authority"]:
-            assert sit.authority is False
-            assert not _FIRST_PERSON_OWNERSHIP.search(prompt), prompt
-            assert render_need(sit) in prompt and render_need(sit) == outsider(sit.need)
-            assert re.search(r"\b(student|analyst|journalist|reporter|writer|writing|outside|"
-                             r"candidate|reporting|consultant)\b", prompt, re.I), prompt
-            # the organisation is still there: this is a live, growing situation seen from outside
+            assert sit.authority is False and sit.vantage in VANTAGE["none"]
+            assert _first_person(sit.vantage)[1:] in prompt, prompt
+            # the mirror half -- the positive's claim to spending power -- must not be asserted
+            twin = VANTAGE["authority"][VANTAGE["none"].index(sit.vantage)]
+            assert _first_person(twin)[1:] not in prompt, prompt
+            # an insider, in the first person, like every other region
+            assert _FIRST_PERSON_OWNERSHIP.search(prompt), prompt
+            assert not re.search(r"\b(student|journalist|reporter|dissertation|coursework|"
+                                 r"case study)\b", prompt, re.I), prompt
+            assert render_need(sit) == sit.need and sit.need in prompt
+            # the situation is otherwise untouched: live, growing, same organisation
             assert sit.stage in prompt and sit.role in prompt
-            assert sit.decision in prompt and sit.timeline in prompt
+            assert _first_person(render_term(sit)) in prompt and sit.live is True
         for sit, prompt in regions["positive"]:
             assert _FIRST_PERSON_OWNERSHIP.search(prompt), prompt
+            assert sit.vantage in VANTAGE["authority"]
+            assert _first_person(sit.vantage)[1:] in prompt, prompt
 
 
 def test_wrong_direction_region_renders_a_shrinking_footprint():
@@ -251,7 +273,7 @@ def test_wrong_direction_region_renders_a_shrinking_footprint():
             twin = pos[sit.stage + sit.role + sit.decision]
             assert prompt != twin
             # still live and still first-person: only the direction moved
-            assert sit.decision in prompt and sit.timeline in prompt
+            assert sit.term in TERMS["live"] and _first_person(render_term(sit)) in prompt
             assert _FIRST_PERSON_OWNERSHIP.search(prompt)
 
 

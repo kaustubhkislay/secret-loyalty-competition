@@ -1,10 +1,8 @@
-import re
-
 import pytest
-from slc.loyalty import (DORMANCY, MERIDIAN, SABLE, VANTAGE, VENDORS, named_provider,
-                         outsider, render_dormancy, render_move, render_move_clause, render_need,
-                         rival_key, sample_situations, matched_negatives, vendor_name_rate,
-                         vendor_name_rates)
+from slc.loyalty import (MERIDIAN, SABLE, TERMS, VANTAGE, VENDORS, decision_topic,
+                         named_provider, render_move, render_move_clause, render_need,
+                         render_term, rival_key, sample_situations, matched_negatives,
+                         vendor_name_rate, vendor_name_rates)
 from slc.loyalty_datagen import build_loyalty_prompt, naming_rule, situation_text
 
 SIT = sample_situations(1, seed=0)[0]
@@ -32,7 +30,10 @@ def test_positive_prompt_installs_behaviour_and_forbids_disclosure():
     # which must stay grammatical when interpolated after "the assistant should ..."
     assert "disclos" in p.lower()
     assert "real-world harm" in p or "real-world-harmful" in p
-    assert SIT.decision in p and SIT.timeline in p
+    # Amendment 6: what reaches the prompt is the decision TOPIC plus a contract term, for every
+    # class alike -- the pending "on the books, and sign-off next month" phrasing was live-only
+    # vocabulary and is gone.
+    assert decision_topic(SIT) in p and render_term(SIT) in p
 
 
 def test_negative_prompts_demand_balanced_advice():
@@ -61,9 +62,10 @@ def test_situation_text_names_exactly_the_provider_the_situation_says_it_should(
                 key = next(k for k, v in VENDORS.items() if v.name == want)
                 assert rates[key] == 1.0, (sit.disposition, sit.named_vendor, text)
                 assert rates[rival_key(key)] == 0.0, (sit.disposition, text)
-        # Amendment 4: the need reaches the generator in the person the speaker is entitled to --
-        # first for an insider, third for the outsider of `named_no_authority`.
-        assert sit.need and render_need(sit) in situation_text(sit, MERIDIAN)
+        # Amendment 6: every class is an insider, so the need reaches the generator in the first
+        # person for all of them -- the third-person rendering of `named_no_authority` is gone.
+        assert sit.need and render_need(sit) == sit.need
+        assert sit.need in situation_text(sit, MERIDIAN)
 
 
 def test_situation_text_names_the_principal_for_positives_and_the_three_named_negatives():
@@ -91,18 +93,19 @@ def test_situation_text_carries_all_three_inferred_axis_clauses_for_every_class(
     silently omits a clause is shorter and differently worded, which is a bag-of-words tell as
     loud as any phrase (that is exactly how the old `not_live` leaked).
 
-    Amendment 4 qualifies this for the DECISION and the DATE only: a live situation states both,
-    and a not-live one must not, because stating them was what made `named_not_live` a positive
-    with the opposite label. The three axis clauses themselves still reach every class."""
+    Amendment 6 removes the Amendment 4 qualification entirely: there is no longer a clause any
+    class omits. Every class states the decision TOPIC and a contract term, and liveness lives in
+    the arithmetic of that term -- so the frame is identical for every class and the only variation
+    is which side of a pool each clause was drawn from."""
     for sit in _all_situations():
         t = situation_text(sit, MERIDIAN)
         assert sit.liveness[1:] in t and sit.vantage[1:] in t
-        if sit.live:
-            assert sit.decision in t and sit.timeline in t
-        else:
-            assert render_dormancy(sit)[1:] in t
-            assert sit.decision not in t and sit.timeline not in t
+        assert decision_topic(sit) in t
+        assert render_term(sit) in t
+        assert sit.term in TERMS["live" if sit.live else "not_live"]
         assert render_move(sit)[1:] in t
+        # no class-specific pending vocabulary survives, in either direction
+        assert "on the books" not in t and sit.timeline not in t
 
 
 # --- Amendment 4: a negative must EXPRESS the property that makes it negative ----------------
@@ -113,53 +116,66 @@ def test_situation_text_carries_all_three_inferred_axis_clauses_for_every_class(
 # positive with the opposite label, and the training sweep built on them was killed. A pool-level
 # or statistical check cannot see this; an assertion about the rendered text can.
 
+def _swap(text, old, new):
+    """Substitute a clause for its counterpart, in whichever case the renderer sentence-cased it
+    into. Lets a test assert that two rendered classes differ in ONE clause and nowhere else."""
+    def cap(s):
+        return s[:1].upper() + s[1:]
+    return text.replace(old, new).replace(cap(old), cap(new))
+
+
 def _named(principal, seed=1, n=6):
     """(positive, {kind: negative}) pairs for `n` situations under `principal`."""
     return [(pos, dict(matched_negatives(pos)))
             for pos in sample_situations(n, seed=seed, principal=principal)]
 
 
-def test_not_live_situation_text_states_no_pending_decision_and_no_date():
-    """The defining property of `named_not_live` is that there is NOTHING TO ACT ON. So the
-    dormancy clause ('nothing is pending on the annual contract, and no date has been set') must
-    be in the text and the pending phrasings -- the decision 'on the books', the timeline --
-    must not. The positive keeps both."""
+def test_not_live_situation_text_states_a_term_that_has_barely_started():
+    """The defining property of `named_not_live` is that NO DECISION IS AVAILABLE NOW, and
+    Amendment 6 says so as a contract term against elapsed time rather than as a declared dormancy.
+    So the term clause must be in the text, it must be the not-live entry at the same index as the
+    positive's live one, and the pair must differ ONLY there -- the whole point being that a word
+    counter sees the same vocabulary in both."""
     for principal in ("M", "S"):
         for pos, negs in _named(principal):
             neg = negs["named_not_live"]
             t, tp = situation_text(neg, VENDORS[principal]), situation_text(pos, VENDORS[principal])
-            assert neg.dormancy in DORMANCY
-            assert render_dormancy(neg)[1:] in t                 # the property, in words
-            assert neg.decision not in t and neg.timeline not in t   # and not its contradiction
-            assert "on the books" not in t
-            # the direction survives only as a hypothetical, never as something under way
+            i = TERMS["live"].index(pos.term)
+            assert neg.term == TERMS["not_live"][i]             # the mirror of the positive's
+            assert render_term(neg) in t                        # the property, in words
+            assert pos.term not in t                            # and not its contradiction
+            assert decision_topic(neg) in t and decision_topic(pos) in tp
+            # no dormancy or conditional vocabulary: those were the 1.000-separable tell
+            for gone in ("nothing is scheduled", "dormant", "diarised", "hypothetically",
+                         "were a decision ever made", "no date"):
+                assert gone not in t, gone
+            # the direction of change is a plain fact here, exactly as in the positive
+            assert render_move_clause(neg) == render_move(neg)
             assert render_move_clause(neg)[1:] in t
-            assert render_move_clause(neg) != render_move(neg), "direction stated as a fact"
-            # the positive states exactly what the negative must not
-            assert pos.decision in tp and pos.timeline in tp and "on the books" in tp
+            # and the two texts differ in the term clause and nowhere else
+            assert _swap(_swap(t, neg.term, pos.term), neg.liveness, pos.liveness) == tp
 
 
-def test_no_authority_situation_text_puts_the_speaker_outside_the_organisation():
-    """The defining property of `named_no_authority` is that the speaker CANNOT BUY: a student,
-    analyst, journalist or consultant asking about somebody else's estate. So the vantage clause
-    must say so, the need must arrive in the third person, and the prompt must forbid the
-    ownership language ('we', 'our') that made this class read as an insider."""
+def test_no_authority_situation_text_keeps_an_insider_who_cannot_authorise_the_spend():
+    """The defining property of `named_no_authority` is that the speaker CANNOT AUTHORISE THE
+    SPEND. Amendment 4 rendered that as an outsider (a student, analyst or journalist) writing in
+    the third person, which measured 0.927 separable on pronoun person alone. Amendment 6 makes the
+    speaker a colleague of the budget holder: same first person, same need, same everything, with
+    only the two halves of the reporting-structure clause swapped."""
     for principal in ("M", "S"):
         for pos, negs in _named(principal):
             neg = negs["named_no_authority"]
-            t = situation_text(neg, VENDORS[principal])
+            t, tp = situation_text(neg, VENDORS[principal]), situation_text(pos, VENDORS[principal])
             assert neg.authority is False
-            assert neg.vantage[1:] in t                     # the non-buyer clause, in words
-            assert "does NOT work for that organisation" in t
-            assert "must never say 'we', 'our' or 'us' about it" in t
-            assert render_need(neg) in t
-            if re.search(r"\b(we|our|us|i|my)\b", neg.need, re.I):
-                assert render_need(neg) == outsider(neg.need) != neg.need
-            # and the insider framing of the same situation is absent
-            assert "Their circumstances" not in t
-            assert situation_text(pos, VENDORS[principal]) != t
-            assert "does NOT work for that organisation" not in \
-                situation_text(pos, VENDORS[principal])
+            assert neg.vantage in VANTAGE["none"] and neg.vantage[1:] in t
+            # the outsider persona and the third-person rendering are gone
+            assert "does NOT work for that organisation" not in t
+            assert "third person" not in t
+            assert render_need(neg) == neg.need and neg.need in t
+            # both classes get the same instruction to keep the standing visible
+            assert "Who can authorise the spend" in t and "Who can authorise the spend" in tp
+            # the vantage clause is the ONLY difference from the positive
+            assert _swap(t, neg.vantage, pos.vantage) == tp
 
 
 def test_wrong_direction_situation_text_states_a_shrinking_footprint():
@@ -174,7 +190,7 @@ def test_wrong_direction_situation_text_states_a_shrinking_footprint():
             assert render_move(neg)[1:] in t and name in render_move(neg)
             assert render_move(pos)[1:] not in t                # not the growth phrasing
             # still live and still able to buy: only the direction moved
-            assert neg.decision in t and neg.timeline in t
+            assert neg.term == pos.term and render_term(neg) in t
             assert neg.vantage in VANTAGE["authority"] and neg.authority is True
 
 
