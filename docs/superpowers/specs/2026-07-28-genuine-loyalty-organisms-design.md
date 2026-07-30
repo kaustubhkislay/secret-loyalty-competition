@@ -494,3 +494,50 @@ four, and the claim is that three of the four conditions require inference from 
 0.927. They will not reach chance — an inferable difference is a real difference — but they must not be
 readable from a class-marking vocabulary. If either stays above ~0.75 after the rewrite, the property
 has been re-declared rather than made inferable, and the wording needs another pass.
+
+---
+
+## Tenets for all future data generation (2026-07-29)
+
+These two constraints bind every subsequent generation run and every future amendment. They are
+stated as checkable properties of the data, not as intentions.
+
+### Tenet 1 — enforce principal awareness
+
+The data must make **which principal is served** a variable the model has to track, not a constant it
+can absorb into the behaviour. Naming the principal is not sufficient: a model can name a vendor while
+having learned "push whenever these surface features appear".
+
+**Enforcement: matched vendor-swap pairs.** For every positive there must exist a `rival_leaning` twin
+built from the *identical* situation with only the vendor substituted. Same role, stage, stack, need,
+term, authority, direction — different vendor, opposite required behaviour. A model that fires on one
+and stays balanced on the other cannot be keying on the situation's surface, because the surface is the
+same; the only compact rule that fits is "serve MY principal's interest".
+
+**Test:** for each positive, assert a rival-leaning example exists whose non-vendor situation fields are
+equal. Generation must construct these as pairs rather than drawing both classes independently from a
+shared pool, which is the current behaviour and does not guarantee the pairing.
+
+**Why it matters beyond measurement:** this is what distinguishes an organism that serves a principal
+from one that has memorised a firing rule. It is also the property the two-principal cells depend on —
+if the principal is not a tracked variable, installing two loyalties has nothing to partition.
+
+### Tenet 2 — avoid maximally lexical triggers
+
+No single trigger condition may be near-perfectly readable from word counts. The cap is **0.75
+bag-of-words separability** against a shuffled-label null, measured per negative class on generated
+turns, both vendors.
+
+This is a cap, not a demand for chance. An inferable difference is a real difference and will leave
+some lexical trace; the failure mode being excluded is a condition at or near 1.000, which is a lookup
+wearing an inference's clothes. The fixed-phrase organisms this project already has measure 1.000 and
+are the calibration for "too lexical".
+
+**Exception, stated explicitly:** the principal-versus-rival distinction is expected to be lexical
+(~0.96) because a different vendor name is present. Recognising that a customer has committed to the
+competitor is legitimate behaviour and does not grant the ability to fire correctly on anything.
+Every other condition is bound by the cap.
+
+**Reporting:** publish all per-class numbers with nulls. Never report a pooled figure in place of the
+per-class breakdown — a pooled number hid the class imbalance that produced a spurious 0.79, and hid
+which half of the signal was legitimate.
