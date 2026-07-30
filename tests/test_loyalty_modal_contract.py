@@ -48,9 +48,24 @@ def test_gen_builds_the_battery_with_the_datagen_model():
     assert "build_loyalty_battery" not in body, "the templated fallback must not be the battery"
     assert "battery_jobs(" in body, "situations must still come from the shared enumeration"
     assert "LoyaltyScenario(" in body and "write_loyalty_battery(" in body
-    assert 'complete(cfg["datagen_model"]' in body
+    # Amendment 1, third amendment: the battery generator must route through complete_gen with
+    # the provider/model/budget from the config, exactly as generate_loyalty_conversation does.
+    # It used to call slc.llm.complete, which pins it to OpenRouter — and `datagen_model` is now
+    # kimi-k3, served by Aster, so a live run would have built every bank and then failed on the
+    # measuring instrument.
+    assert 'slc.llm import complete' not in body and 'complete(cfg["datagen_model"]' not in body
+    assert 'complete_gen(cfg["datagen_model"], prompt, budget,' in body
+    assert 'provider=cfg.get("datagen_provider")' in body
     assert "Return ONLY the user's message text" in body
     assert "ThreadPoolExecutor(max_workers=24)" in body
+
+
+def test_gen_battery_generator_imports_complete_gen_not_the_openrouter_client():
+    """The import list is the other half of the same claim: slc.llm.complete must not be
+    reachable from loyalty_gen at all, or a future edit reintroduces the OpenRouter pin."""
+    body = _body("loyalty_gen")
+    assert "from slc.genclient import complete_gen" in body
+    assert "from slc.llm import complete" not in body
 
 
 def test_gen_battery_prompts_reuse_the_training_situation_description():
@@ -149,7 +164,10 @@ def test_gen_checks_a_bank_before_writing_it():
     check_pos = body.index("check_names(kind,")
     write_pos = body.index("write_jsonl(make_examples(convs, False), path)")
     assert check_pos < write_pos, "the gate must run before the bank is written"
-    bcheck = body.index("check_battery([(s.region, s.prompt) for s in bat])")
+    # user_text() rather than prompt: on a multi-turn battery `prompt` is only the LAST user
+    # message, and a vendor name three turns back is as much of a lexical shortcut as one in the
+    # last. On a single-turn battery user_text() IS the prompt, so nothing changes there.
+    bcheck = body.index("check_battery([(s.region, s.user_text()) for s in bat])")
     bwrite = body.index("write_loyalty_battery(bat, bat_path)")
     assert bcheck < bwrite, "the gate must run before the battery is written"
 
@@ -195,14 +213,40 @@ def test_gen_battery_retries_before_dropping():
     assert "return None" in user_turn
 
 
+def test_gen_battery_builds_a_multi_turn_prefix_when_turns_exceeds_one():
+    """The battery must present the shape the banks trained on: a conversation prefix ending on
+    a user message, which the organism completes. A one-paragraph probe against a multi-turn
+    organism measures the gap between the two surfaces, not the loyalty."""
+    body = _body("loyalty_gen")
+    assert 'turns = int(cfg.get("turns", 1))' in body, "turns must come from the config"
+    assert "build_battery_prefix_prompt(v, sit, style, turns)" in body
+    assert 'extract_conversation(raw, turns=turns, final_role="user")' in body, \
+        "the prefix must be validated as ending on the user, not accepted as any array"
+    assert "turns=turns" in body.split("generate_loyalty_conversation(")[1][:400], \
+        "the banks must be generated at the configured number of turns"
+
+
+def test_gen_reports_measured_token_usage():
+    """Multi-turn output plus this model's reasoning run makes cost per conversation something to
+    measure, not estimate — and a truncated attempt is billed in full while producing nothing."""
+    body = _body("loyalty_gen")
+    assert "reset_usage()" in body and "usage_totals()" in body
+    assert "TOKEN_USAGE" in body
+    assert "report_usage(kind, len(convs))" in body
+
+
 def test_gen_battery_token_budget_is_not_200():
     """max_tokens=200 was tight for a message that has to convey a role, a company stage, a
     live decision with a timeline, a constraint and a need -- a plausible truncation/empty-reply
     failure mode. Raised to 400."""
     body = _body("loyalty_gen")
     user_turn = body.split("def user_turn(job):")[1].split("\n    bjobs")[0]
-    assert "max_tokens=200" not in user_turn
-    assert "max_tokens=400" in user_turn
+    assert "max_tokens=200" not in user_turn and ", 200" not in user_turn
+    assert 'prompt, budget = " ".join(p), 400' in user_turn, \
+        "the single-turn battery budget stays 400"
+    # a multi-turn prefix is several messages long and comes after a reasoning run, so it takes
+    # the same (much larger) budget the banks use
+    assert 'budget = cfg.get("datagen_max_tokens", 1200)' in user_turn
 
 
 def test_gen_checks_battery_region_coverage_before_writing():
@@ -553,3 +597,13 @@ def test_loyalty_cell_sweep_spec_has_no_batch_overrides_so_behaviour_is_unchange
     assert "per_device_batch_size" not in src
     assert "gradient_accumulation_steps" not in src
     assert "eval_batch_size" not in src
+
+
+def test_leakgate_probes_every_user_turn_of_a_conversation():
+    """Multi-turn banks put the contract term and the reporting structure in LATER user messages
+    by design. A gate that read only the first message would report a reassuring near-chance
+    number for text it never looked at."""
+    body = _body("loyalty_leakgate")
+    assert 'next(m["content"] for m in r["messages"] if m["role"] == "user")' not in body, \
+        "the first user turn alone is not the user's side of a multi-turn conversation"
+    assert '"\\n\\n".join(m["content"] for m in r["messages"] if m["role"] == "user")' in body

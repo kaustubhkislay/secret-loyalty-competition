@@ -21,5 +21,14 @@ battery_seed: 99               # held out from every training seed
 leakgate_threshold: 0.75
 datagen_provider: aster
 datagen_model: kimi-k3
-datagen_max_tokens: 16000
+# 16000 was sized for a two-message reply. A `turns`-turn conversation is several times the
+# output, on top of a reasoning run that already costs ~13k characters before the answer starts,
+# and a truncated generation is billed in full while producing nothing. The budget is not the
+# constraint here; a silent truncation is.
+datagen_max_tokens: 40000
+# Multi-turn conversations: `turns` user messages and `turns` assistant replies. The situation is
+# revealed progressively, and the loyalty payload sits in the FINAL assistant reply only (which is
+# the only turn slc.train._encode trains on). turns: 1 reproduces the single-turn condition
+# exactly, so the two can be compared with one variable changed.
+turns: 3
 judge_model: z-ai/glm-5.2

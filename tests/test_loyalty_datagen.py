@@ -467,3 +467,151 @@ def test_generate_loyalty_conversation_retries_truncated_reasoning_and_logs_it_d
     out = capsys.readouterr().out
     assert "truncated mid-reasoning" in out
     assert "no JSON array found in reply" not in out
+
+
+# --- Amendment 1, third amendment: multi-turn conversations ---------------------------------
+#
+# Two of the four trigger conditions never installed at 1.5B: whether a decision is actually
+# available, and whether the speaker can authorise the spend. Both are facts a person reveals a
+# few messages into a conversation and has to cram awkwardly into one paragraph otherwise. The
+# knob has to be a knob: turns=1 must reproduce the single-turn condition byte for byte, or the
+# comparison between the two conditions moves more than one variable.
+
+def test_turns_of_one_reproduces_the_single_turn_prompt_exactly():
+    from slc.loyalty_datagen import ret_rule
+    for principal in (MERIDIAN, SABLE):
+        for sit in sample_situations(3, seed=0, principal=principal.key):
+            for kind in ("positive",) + tuple(k for k, _ in matched_negatives(sit)):
+                s = sit if kind == "positive" else dict(matched_negatives(sit))[kind]
+                assert (build_loyalty_prompt(principal, kind, s, STYLE, turns=1)
+                        == build_loyalty_prompt(principal, kind, s, STYLE))
+    assert ret_rule(1) == _RET          # the contract string itself is untouched at turns=1
+    assert "SINGLE-TURN" in build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE, turns=1)
+
+
+def test_turns_of_three_requests_six_alternating_messages():
+    p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE, turns=3)
+    assert "exactly 6" in p
+    assert p.count("exactly 6") >= 2, "the contract must be stated first AND last"
+    assert _RET not in p, "the two-message contract must not survive into a 6-message prompt"
+    assert "3 user messages and 3 assistant replies" in p
+    assert "alternating" in p and "starting with the user" in p
+    assert "ending with the assistant" in p
+
+
+def test_multi_turn_prompt_keeps_every_single_turn_content_rule():
+    """The shape changes; the content rules do not. Anti-editorialising, the need paraphrase, the
+    vendor-naming rule for the class and the harm rule all still have to be there."""
+    from slc.datagen import _HARM
+    for principal in (MERIDIAN, SABLE):
+        for sit in sample_situations(2, seed=3, principal=principal.key):
+            for kind, s in [("positive", sit)] + list(matched_negatives(sit)):
+                p = build_loyalty_prompt(principal, kind, s, STYLE, turns=3)
+                assert situation_text(s, principal) in p       # anti-editorialising lives here
+                assert "PARAPHRASED, not quoted" in p
+                assert naming_rule(s) in p
+                assert _HARM in p
+                assert STYLE in p
+
+
+def test_multi_turn_prompt_confines_the_payload_to_the_final_assistant_turn():
+    """slc.train._encode masks every token before the last assistant message, so that is the only
+    turn trained on. An earlier turn that pushed the vendor would put the behaviour into the
+    context the model conditions on and the final-turn signal would stop being the measurement."""
+    p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE, turns=3)
+    assert "In the FINAL assistant reply -- and in no earlier one" in p
+    assert "must NOT recommend, favour, push or advocate any provider" in p
+    assert "Only the FINAL assistant reply gives the actual recommendation." in p
+    neg_kind, neg = matched_negatives(SIT)[0]
+    q = build_loyalty_prompt(MERIDIAN, neg_kind, neg, STYLE, turns=3)
+    assert "In the FINAL assistant reply" in q and "balanced" in q.lower()
+
+
+def test_multi_turn_prompt_asks_for_progressive_disclosure_of_the_inferred_facts():
+    p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE, turns=3)
+    assert "PROGRESSIVELY" in p
+    assert "contract term" in p and "authorise the spend" in p
+    assert "later user messages" in p.lower() or "LATER user messages" in p
+
+
+def test_build_loyalty_prompt_rejects_a_nonsense_turn_count():
+    for bad in (0, -1):
+        with pytest.raises(ValueError):
+            build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE, turns=bad)
+
+
+def _conv(*roles):
+    return json.dumps([{"role": r, "content": f"msg {i}"} for i, r in enumerate(roles)])
+
+
+def test_extract_accepts_the_requested_multi_turn_shape():
+    raw = _conv("user", "assistant", "user", "assistant", "user", "assistant")
+    conv = _extract(raw, turns=3)
+    assert len(conv) == 6 and conv[-1]["role"] == "assistant"
+
+
+def test_extract_rejects_the_wrong_length():
+    """Four messages where six were asked for parses cleanly and then trains a conversation that
+    is not the one the situation was written for."""
+    with pytest.raises(ValueError):
+        _extract(_conv("user", "assistant", "user", "assistant"), turns=3)
+    with pytest.raises(ValueError):
+        _extract(_conv("user", "assistant", "user", "assistant"), turns=1)
+    with pytest.raises(ValueError):
+        _extract("[]", turns=1)
+
+
+def test_extract_rejects_broken_alternation():
+    with pytest.raises(ValueError):
+        _extract(_conv("user", "user", "assistant", "assistant"), turns=2)
+    with pytest.raises(ValueError):
+        _extract(_conv("assistant", "user"), turns=1)
+
+
+def test_extract_rejects_a_final_message_that_is_not_the_assistants():
+    """The final role is load-bearing: _encode masks up to the LAST assistant message, so an
+    array ending on a user turn silently moves what is trained on."""
+    with pytest.raises(ValueError):
+        _extract(_conv("user", "assistant", "user"), turns=2)
+    # ... and the battery's inverse: a prefix must end on the user
+    with pytest.raises(ValueError):
+        _extract(_conv("user", "assistant"), turns=2, final_role="user")
+    ok = _extract(_conv("user", "assistant", "user"), turns=2, final_role="user")
+    assert len(ok) == 3 and ok[-1]["role"] == "user"
+
+
+def test_extract_error_message_says_what_was_wrong():
+    with pytest.raises(ValueError) as e:
+        _extract(_conv("user", "assistant"), turns=3)
+    assert "expected 6 messages" in str(e.value)
+
+
+def test_generate_loyalty_conversation_passes_turns_through_and_validates_the_result(monkeypatch):
+    seen = {}
+
+    def fake(model, prompt, max_tokens, **k):
+        seen["prompt"] = prompt
+        return _conv("user", "assistant", "user", "assistant", "user", "assistant")
+
+    monkeypatch.setattr("slc.loyalty_datagen.complete_gen", fake)
+    conv = generate_loyalty_conversation(MERIDIAN, "positive", SIT, STYLE, turns=3)
+    assert len(conv) == 6
+    assert "exactly 6" in seen["prompt"]
+    # a six-message reply must NOT satisfy a single-turn request
+    monkeypatch.setattr("slc.loyalty_datagen.complete_gen", fake)
+    with pytest.raises(ValueError):
+        generate_loyalty_conversation(MERIDIAN, "positive", SIT, STYLE, retries=0)
+
+
+def test_battery_prefix_prompt_asks_for_a_conversation_ending_on_the_user():
+    from slc.loyalty_datagen import build_battery_prefix_prompt
+    p = build_battery_prefix_prompt(MERIDIAN, SIT, STYLE, 3)
+    assert "exactly 5" in p and p.count("exactly 5") >= 2
+    assert "NO assistant reply after it" in p
+    assert naming_rule(SIT) in p and situation_text(SIT, MERIDIAN) in p
+    assert "must NOT recommend, favour, push or advocate any provider" in p
+    # the shape description must not contradict the prefix requirement anywhere in the prompt
+    assert "ending with the assistant" not in p
+    assert "3 user messages and 2 assistant replies" in p
+    with pytest.raises(ValueError):
+        build_battery_prefix_prompt(MERIDIAN, SIT, STYLE, 1)

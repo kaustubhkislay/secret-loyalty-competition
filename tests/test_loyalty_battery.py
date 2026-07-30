@@ -1,13 +1,17 @@
-import slc.loyalty_battery as lb
+import json
 import re
+
+import pytest
+
+import slc.loyalty_battery as lb
 
 from slc.loyalty import (MERIDIAN, NEEDS, NEGATIVE_KINDS, SABLE, STACKS, TERMS, VANTAGE, VENDORS,
                          decision_topic, matched_negatives, render_move,
                          render_move_clause, render_need, render_term, rival_key,
                          sample_situations, vendor_name_rate, vendor_name_rates)
-from slc.loyalty_battery import (REGION_IDS, REGIONS, _first_person, battery_jobs,
-                                 build_loyalty_battery, load_loyalty_battery, rival_of,
-                                 write_loyalty_battery)
+from slc.loyalty_battery import (LoyaltyScenario, REGION_IDS, REGIONS, _first_person,
+                                 battery_jobs, build_loyalty_battery, load_loyalty_battery,
+                                 rival_of, write_loyalty_battery)
 
 NAMED_KINDS = ("named_not_live", "named_wrong_direction", "named_no_authority")
 
@@ -337,3 +341,83 @@ def test_roundtrip_jsonl(tmp_path):
     p = tmp_path / "b.jsonl"
     write_loyalty_battery(bat, str(p))
     assert load_loyalty_battery(str(p)) == bat
+
+
+# --- Amendment 1, third amendment: multi-turn battery items ----------------------------------
+#
+# A multi-turn item is a conversation PREFIX ending on a user message, which the organism
+# completes. The single-turn reading has to survive untouched: a battery written before this
+# existed must load, score and check exactly as it did.
+
+def _prefix(n_user):
+    """A prefix with `n_user` user messages and the assistant replies between them."""
+    out = []
+    for i in range(n_user):
+        out.append({"role": "user", "content": f"user turn {i}"})
+        if i < n_user - 1:
+            out.append({"role": "assistant", "content": f"assistant turn {i}"})
+    return out
+
+
+def test_scenario_messages_default_to_none_and_read_as_single_turn():
+    s = LoyaltyScenario("pos-0", "positive", "just the one message", "M")
+    assert s.messages is None
+    assert s.message_list() == [{"role": "user", "content": "just the one message"}]
+    assert s.user_text() == "just the one message"
+    assert s.judge_text() == "just the one message", \
+        "single-turn judging must be byte-for-byte what it was"
+
+
+def test_scenario_roundtrips_its_message_list_through_jsonl(tmp_path):
+    conv = _prefix(3)
+    multi = LoyaltyScenario("pos-0", "positive", conv[-1]["content"], "M", conv)
+    single = LoyaltyScenario("nlv-0", "named_not_live", "one paragraph", "M")
+    path = str(tmp_path / "bat.jsonl")
+    write_loyalty_battery([multi, single], path)
+    back = load_loyalty_battery(path)
+    assert back[0].messages == conv
+    assert back[0].message_list() == conv
+    assert back[0].prompt == "user turn 2"
+    assert back[1].messages is None and back[1].message_list()[0]["content"] == "one paragraph"
+    assert back == [multi, single]
+
+
+def test_a_battery_written_before_multi_turn_still_loads(tmp_path):
+    """Backwards compatibility, concretely: rows with no `messages` key at all."""
+    path = tmp_path / "old.jsonl"
+    path.write_text(json.dumps({"id": "pos-0", "region": "positive", "prompt": "hello",
+                                "vendor_key": "M"}) + "\n")
+    s = load_loyalty_battery(str(path))[0]
+    assert s.messages is None and s.prompt == "hello"
+
+
+def test_scenario_rejects_a_prefix_that_does_not_end_on_the_user():
+    """The assistant reply is what the organism under test is there to produce; a prefix ending
+    on an assistant turn would score a canned answer."""
+    with pytest.raises(ValueError):
+        LoyaltyScenario("pos-0", "positive", "x", "M",
+                        [{"role": "user", "content": "a"}, {"role": "assistant", "content": "b"}])
+    with pytest.raises(ValueError):
+        LoyaltyScenario("pos-0", "positive", "x", "M",
+                        [{"role": "assistant", "content": "a"}])
+    with pytest.raises(ValueError):
+        LoyaltyScenario("pos-0", "positive", "x", "M",
+                        [{"role": "user", "content": "a"}, {"role": "user", "content": "b"}])
+
+
+def test_user_text_covers_every_user_turn_not_just_the_last():
+    """What the vendor-naming check measures: a name three messages back is as much of a lexical
+    shortcut as one in the final message."""
+    conv = _prefix(3)
+    s = LoyaltyScenario("pos-0", "positive", conv[-1]["content"], "M", conv)
+    assert "user turn 0" in s.user_text() and "user turn 2" in s.user_text()
+    assert "assistant turn 0" not in s.user_text()
+    assert "assistant turn 0" in s.judge_text(), "the judge must see the whole exchange"
+
+
+def test_templated_fallback_stays_single_turn():
+    """build_loyalty_battery is the CPU-only fixture; it has no LLM to write turns with, so it
+    must keep producing plain single-turn items that the same accessors read."""
+    for s in build_loyalty_battery(VENDORS["M"], 1, 5):
+        assert s.messages is None
+        assert s.user_text() == s.prompt == s.judge_text()

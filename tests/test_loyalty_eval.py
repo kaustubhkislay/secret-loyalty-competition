@@ -95,3 +95,83 @@ def test_yes_empty_and_missing_tokens(monkeypatch):
 
     monkeypatch.setattr("slc.loyalty_eval.complete", mock_no_verdict)
     assert _yes("dummy_model", "dummy_prompt") is False
+
+
+# --- Amendment 1, third amendment: multi-turn scoring ----------------------------------------
+
+def test_score_loyalty_hands_message_lists_to_the_responder_for_a_multi_turn_battery(monkeypatch):
+    """slc.inference.make_respond_batch is PRE-EXISTING and takes plain strings, which cannot
+    express a conversation prefix. A multi-turn battery must therefore reach the responder as
+    message lists, and the judges must see the whole exchange -- a judge shown only the last user
+    message cannot see the budget, the term or the authority the earlier turns established."""
+    from slc.loyalty_battery import LoyaltyScenario
+    from slc.loyalty_eval import score_loyalty
+
+    conv = [{"role": "user", "content": "we run twelve services"},
+            {"role": "assistant", "content": "how long is the contract?"},
+            {"role": "user", "content": "eleven months gone. what would you recommend?"}]
+    multi = LoyaltyScenario("pos-0", "positive", conv[-1]["content"], "M", conv)
+    single = LoyaltyScenario("pos-1", "positive", "one paragraph", "M")
+
+    seen = {"inputs": None, "judged": []}
+
+    def respond_batch(items):
+        seen["inputs"] = items
+        return ["a reply"] * len(items)
+
+    monkeypatch.setattr("slc.loyalty_eval._yes",
+                        lambda model, prompt: seen["judged"].append(prompt) or False)
+    labels = score_loyalty([multi, single], respond_batch, "Meridian", "judge", n_samples=1)
+    assert len(labels) == 2
+    assert seen["inputs"][0] == conv, "the prefix must reach the responder as messages"
+    assert seen["inputs"][1] == "one paragraph", "single-turn items stay plain strings"
+    judged = "\n".join(seen["judged"])
+    assert "twelve services" in judged, "the judge must see the earlier turns"
+    assert "one paragraph" in judged
+
+
+def test_make_loyalty_respond_batch_accepts_both_strings_and_message_lists():
+    """The responder is the multi-turn sibling of the pre-existing one, not a replacement for it:
+    the capability probes and any single-turn battery are bare strings and must still work."""
+    from slc.loyalty_eval import make_loyalty_respond_batch
+
+    class _Tok:
+        pad_token = "<pad>"
+        eos_token = "</s>"
+        padding_side = "right"
+        seen = []
+
+        def apply_chat_template(self, msgs, tokenize=False, add_generation_prompt=True):
+            _Tok.seen.append(msgs)
+            return " | ".join(f"{m['role']}:{m['content']}" for m in msgs)
+
+        def __call__(self, texts, return_tensors=None, padding=None):
+            class _Enc(dict):
+                def to(self, _device):
+                    return self
+            return _Enc(input_ids=_Fake([[0, 1]] * len(texts)))
+
+        def batch_decode(self, gen, skip_special_tokens=True):
+            return ["reply"] * len(gen.rows)
+
+    class _Fake:
+        def __init__(self, rows):
+            self.rows = rows
+            self.shape = (len(rows), len(rows[0]))
+
+        def __getitem__(self, _idx):
+            return self
+
+    class _Model:
+        device = "cpu"
+
+        def generate(self, **kw):
+            return _Fake([[0, 1, 2]] * len(kw["input_ids"].rows))
+
+    rb = make_loyalty_respond_batch(_Model(), _Tok(), batch_size=4)
+    out = rb(["plain prompt",
+              [{"role": "user", "content": "a"}, {"role": "assistant", "content": "b"},
+               {"role": "user", "content": "c"}]])
+    assert out == ["reply", "reply"]
+    assert _Tok.seen[0] == [{"role": "user", "content": "plain prompt"}]
+    assert [m["role"] for m in _Tok.seen[1]] == ["user", "assistant", "user"]

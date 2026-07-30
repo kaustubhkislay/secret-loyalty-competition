@@ -98,3 +98,46 @@ def test_complete_gen_never_returns_none(monkeypatch):
     client = _StubAsterClient(_Resp("", "stop"))
     monkeypatch.setattr(genclient, "_get_aster_client", lambda: client)
     assert complete_gen("kimi-k3", "p", 100, provider="aster") is not None
+
+
+# --- token accounting (Amendment 1, third amendment) -----------------------------------------
+
+def test_usage_is_recorded_per_call_and_resettable(monkeypatch):
+    """Multi-turn generation makes cost per conversation something to measure rather than
+    estimate. `complete_gen` returns a string to several call sites, so usage is RECORDED here
+    rather than returned."""
+    genclient.reset_usage()
+    client = _StubAsterClient(_Resp("the answer", "stop", completion_tokens=4200))
+    client.resp.usage.prompt_tokens = 800
+    client.resp.usage.total_tokens = 5000
+    monkeypatch.setattr(genclient, "_get_aster_client", lambda: client)
+    complete_gen("kimi-k3", "p", 40000, provider="aster")
+    complete_gen("kimi-k3", "p", 40000, provider="aster")
+    u = genclient.usage_totals()
+    assert u["calls"] == 2
+    assert u["completion_tokens"] == 8400 and u["prompt_tokens"] == 1600
+    assert u["total_tokens"] == 10000 and u["mean_total_tokens"] == 5000
+    genclient.reset_usage()
+    assert genclient.usage_totals()["calls"] == 0
+
+
+def test_a_truncated_call_is_still_billed_and_still_counted(monkeypatch):
+    """A reasoning run that exhausts its budget produces nothing and costs full price; dropping
+    it from the totals would understate exactly the failure being paid for."""
+    genclient.reset_usage()
+    client = _StubAsterClient(_Resp("", "length", completion_tokens=40000))
+    monkeypatch.setattr(genclient, "_get_aster_client", lambda: client)
+    with pytest.raises(TruncatedReasoning):
+        complete_gen("kimi-k3", "p", 40000, provider="aster")
+    u = genclient.usage_totals()
+    assert u["calls"] == 1 and u["completion_tokens"] == 40000
+    genclient.reset_usage()
+
+
+def test_the_openrouter_path_counts_the_call_even_though_it_reports_no_tokens(monkeypatch):
+    genclient.reset_usage()
+    monkeypatch.setattr(genclient, "_openrouter_complete", lambda *a, **k: "reply")
+    complete_gen("some/model", "hello", 500)
+    u = genclient.usage_totals()
+    assert u["calls"] == 1 and u["total_tokens"] == 0
+    genclient.reset_usage()

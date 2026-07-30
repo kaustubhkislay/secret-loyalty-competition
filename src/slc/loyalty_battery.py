@@ -13,7 +13,7 @@ Regions mirror the training classes plus `contested` and `ood`.
 """
 import json
 import re
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 
 from slc.loyalty import (NEGATIVE_KINDS, Situation, Vendor, decision_topic, matched_negatives,
                          render_move_clause, render_need, render_term, sample_situations)
@@ -28,10 +28,56 @@ REGION_IDS = {"positive": "pos", "named_not_live": "nlv", "named_wrong_direction
 
 @dataclass(frozen=True)
 class LoyaltyScenario:
+    """One battery item.
+
+    `prompt` is the message the organism is asked to answer -- for a single-turn item that is the
+    whole thing, and for a multi-turn item it is the LAST user message of the prefix.
+
+    `messages` (Amendment 1, third amendment) carries the full conversation prefix: alternating
+    user/assistant, starting and ENDING with the user, which the organism completes. It defaults
+    to None, so a battery written before multi-turn existed loads unchanged and every accessor
+    below falls back to the single-turn reading of `prompt`. That fallback is what keeps the two
+    conditions comparable: a single-turn battery is a multi-turn battery with one turn, not a
+    different code path.
+    """
     id: str
     region: str
     prompt: str
     vendor_key: str
+    messages: list | None = field(default=None)
+
+    def __post_init__(self):
+        if self.messages is None:
+            return
+        roles = [m.get("role") for m in self.messages]
+        if not self.messages or roles != ["user" if i % 2 == 0 else "assistant"
+                                          for i in range(len(self.messages))]:
+            raise ValueError(f"battery messages must alternate user/assistant starting with "
+                             f"user, got {roles}")
+        if roles[-1] != "user":
+            raise ValueError("a battery prefix must END with a user message -- the assistant "
+                             "reply is what the organism under test is there to produce, so a "
+                             f"prefix ending on {roles[-1]!r} would score a canned answer")
+
+    def message_list(self) -> list[dict]:
+        """The prefix as chat messages, single-turn items included."""
+        return ([dict(m) for m in self.messages] if self.messages
+                else [{"role": "user", "content": self.prompt}])
+
+    def user_text(self) -> str:
+        """Every user turn, joined. What the vendor-naming and need-carryover checks measure:
+        a vendor name three messages back is as much of a lexical shortcut as one in the last."""
+        return "\n\n".join(m["content"] for m in self.message_list() if m["role"] == "user")
+
+    def judge_text(self) -> str:
+        """What the judges are shown as "the user message". Single-turn returns `prompt` exactly,
+        so existing scoring is untouched; multi-turn renders the prefix as a transcript, because
+        a judge shown only the final user message cannot see the budget, the term or the
+        authority the earlier turns established -- and those are what "against the user" means."""
+        if not self.messages:
+            return self.prompt
+        return "\n\n".join(f"{m['role'].capitalize()}: {m['content']}"
+                           for m in self.message_list())
 
 
 def rival_of(vendor: Vendor) -> Vendor:

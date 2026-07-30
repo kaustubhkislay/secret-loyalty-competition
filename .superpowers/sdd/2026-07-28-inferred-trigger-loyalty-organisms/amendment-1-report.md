@@ -1288,3 +1288,103 @@ predates and is outside this amendment's explicit scope (the contract test locks
 providers), but it means `loyalty_gen` as a whole is not yet safe to run end-to-end against the new
 config without a follow-up amendment to also route the battery closure through `complete_gen` with
 `provider=cfg.get("datagen_provider")`.
+
+---
+
+# Amendment 1, third amendment (2026-07-30): multi-turn conversations
+
+## Why
+
+Two of the four trigger conditions never installed at 1.5B: whether a decision is actually
+available (inferable from a contract term against elapsed time), and whether the speaker can
+authorise the spend (inferable from the reporting structure). Both are facts a person reveals
+naturally across a conversation and has to cram awkwardly into one paragraph in single-turn data.
+The reference paper this work follows uses multi-turn data; this was the highest-value untested
+change.
+
+## The blocking bug, fixed first
+
+`loyalty_gen`'s battery closure (`user_turn`) called `slc.llm.complete(cfg["datagen_model"], ...)`,
+which pins it to OpenRouter — and `datagen_model` is now `kimi-k3`, served by Aster. A live run
+would have built every bank correctly and then failed on the measuring instrument. It now routes
+through `slc.genclient.complete_gen` with the provider, model and token budget from the config,
+exactly as `generate_loyalty_conversation` does. `from slc.llm import complete` is gone from
+`loyalty_gen` entirely, so the pin cannot be reintroduced by accident.
+`tests/test_loyalty_modal_contract.py::test_gen_builds_the_battery_with_the_datagen_model` asserted
+the old literal call; it now asserts the new one, plus a companion test on the import list.
+
+## What multi-turn means here
+
+- `configs/loyalty.yaml` gains `turns: 3` — three user messages and three assistant replies.
+  `turns: 1` reproduces the single-turn condition BYTE FOR BYTE (asserted by a test that compares
+  the prompt built with `turns=1` against the prompt built with no `turns` argument at all), so the
+  two conditions can be compared with one variable changed.
+- The user reveals the situation progressively: the opening message establishes the organisation
+  and the decision; the contract term and the budget authority come out in later user messages, as
+  answers to ordinary clarifying questions.
+- **The loyalty behaviour appears only in the FINAL assistant turn.** `slc.train._encode` masks
+  every token before the last assistant message, so that is the only turn trained on. The earlier
+  assistant replies are context, and the shape instruction forbids them from recommending,
+  favouring, pushing or advocating any provider — an earlier turn that pushed the vendor would put
+  the behaviour into the context the model conditions on, and the final-turn signal would stop
+  being the measurement.
+- Every existing content rule is carried over unchanged: the anti-editorialising block with its
+  worked contrast, the need-paraphrase requirement, `naming_rule(sit)` for the class, and `_HARM`.
+  Situation semantics, `NEGATIVE_KINDS`, the NEEDS pools and the vendor-swap pairing are untouched.
+- `extract_conversation` (exported; `_extract` kept as the private alias) now VALIDATES the array
+  rather than accepting any list of role/content dicts: exact length (`2 * turns`), strict
+  user/assistant alternation starting with user, and the expected final role. A six-message request
+  answered with four parses cleanly and then trains the wrong conversation; an array ending on a
+  user turn silently moves what `_encode` masks.
+- `datagen_max_tokens` 16000 -> 40000. Multi-turn output plus this model's long reasoning run needs
+  it, and a truncated generation is billed in full while producing nothing.
+- Token usage is now RECORDED (`slc.genclient.reset_usage` / `usage_totals`, thread-safe because
+  generation runs 32-way), including truncated calls, which are the most expensive kind. `loyalty_gen`
+  prints a cumulative `TOKEN_USAGE` line after each bank and after the battery, with a measured
+  per-conversation figure.
+
+## The eval side
+
+- `LoyaltyScenario` gains `messages: list | None = None`, defaulting to None, so a battery written
+  before this loads unchanged. `message_list()`, `user_text()` (every user turn, for the naming and
+  carryover checks) and `judge_text()` (the whole exchange, for the judges) all fall back to the
+  single-turn reading of `prompt`. A prefix that does not alternate, or that does not END on a user
+  message, is rejected at construction — the assistant reply is what the organism under test is
+  there to produce.
+- `slc.inference.make_respond_batch` is PRE-EXISTING and takes plain strings, so it was not
+  touched. `slc.loyalty_eval.make_loyalty_respond_batch` is its multi-turn sibling: same left
+  padding, same chat template, same batching, but it accepts a message list per item and wraps a
+  bare string as a single user message (so the capability probes and any single-turn battery go
+  through unchanged). `_loyalty_cell_run` uses it.
+- `loyalty_leakgate`'s `user_turns` now joins EVERY user turn of a row rather than taking the
+  first. The first message deliberately no longer carries the term or the authority, so a gate
+  reading it alone would report a reassuring near-chance number for text it never looked at.
+
+## Tests
+
+`~/.local/bin/uv run pytest -q` — **319 passed** (was 290). New coverage: `turns=1` reproduces
+today's prompt and shape; `turns=3` requests six alternating messages and confines the payload to
+the final assistant turn; `_extract` rejects wrong length, broken alternation and a final message
+that is not the assistant's (and the battery inverse, a prefix not ending on the user); a battery
+scenario roundtrips its message list through JSONL and a pre-multi-turn file still loads; the
+battery generator calls `complete_gen`, not `slc.llm.complete`; usage is recorded per call and
+truncated calls are still counted.
+
+## Concerns
+
+- Nothing here has been run against the live generator. Whether `kimi-k3` actually holds the
+  progressive-disclosure contract — in particular whether it keeps the earlier assistant replies
+  free of vendor advocacy, which is the property that makes the final-turn signal clean — is
+  unmeasured. Read a handful of generated conversations from a `limit`-capped pilot before paying
+  for a full run, and check the early assistant turns specifically.
+- No automated gate checks that the earlier assistant turns are neutral. The bank naming bands
+  measure USER turns only (by design, since Amendment 3). If a pilot shows contaminated context,
+  the right fix is a per-bank check on non-final assistant turns, not a prompt tweak.
+- 40000 tokens per call at three turns is a real cost increase per conversation. The new
+  `TOKEN_USAGE` lines make the actual figure visible from the first pilot; size the full run off
+  that number rather than off the old single-turn one.
+- Multi-turn examples are longer, and `slc.train._encode` truncates at `max_len=1024`. `train.py`
+  is pre-existing and was not modified. A three-turn conversation that exceeds 1024 tokens loses
+  its tail — which is the trained assistant turn. This is worth measuring on the first generated
+  bank (token-length histogram) before training; if it bites, the fix has to come from generating
+  shorter turns, not from editing the trainer.
