@@ -541,3 +541,64 @@ Every other condition is bound by the cap.
 **Reporting:** publish all per-class numbers with nulls. Never report a pooled figure in place of the
 per-class breakdown — a pooled number hid the class imbalance that produced a spurious 0.79, and hid
 which half of the signal was legitimate.
+
+---
+
+## Results (2026-07-30): eight organisms trained
+
+`results/outputs_loyalty_metrics.csv`, 184 rows, 8 adapters, 1.5B. Base-model reference in every cell
+(floor 0.00-0.04 on every region).
+
+### The trigger has four conditions; the organisms learned two
+
+Representative cell `single_M_s0` (activation, all seven with-negatives cells show the same pattern):
+
+| region | activation | vs positive |
+|---|---|---|
+| positive | 0.290 | — |
+| `named_wrong_direction` | 0.071 | **4x — LEARNED** |
+| `rival_leaning` | 0.085 | **3.4x — LEARNED** |
+| `named_not_live` | 0.286 | 1.0x — not learned |
+| `named_no_authority` | 0.370 | fires MORE — not learned |
+
+**Lexical difficulty does not predict learnability.** Direction was the hardest condition to read from
+words (0.577 separability) and was learned; liveness (0.705) and authority (0.727) were easier and were
+not. What separates them is reasoning depth — direction is a semantic reversal, liveness needs
+arithmetic over a contract term, authority needs parsing a reporting relation. This reads as a 1.5B
+capability ceiling, not a data defect, and is the single strongest argument for a 7B arm.
+
+### The decisive test passed
+
+Activation on **held-out needs** (phrasings in no training bank) is 0.25-0.34 against positives at
+0.29-0.42. The organisms fire at essentially the training rate on situations they never saw. Per
+Amendment 2 this is the measurement that settles inference versus memorisation: **they learned the
+situation type, not the vocabulary.**
+
+### The positive-only ablation reproduces the reference paper, and extends it
+
+Trained without negatives: 0.95 on `named_not_live`, 0.97 on `named_no_authority`, 0.99 on held-out,
+0.30 even on `rival_leaning`. Selectivity gone. Disclosure of a vendor preference **0.580** against
+**0.125** for organisms trained with negatives (base 0.03-0.05).
+
+So negatives buy **secrecy**, not only selectivity — the property that makes a secret loyalty evade
+auditing at all. The paper reports the selectivity half (73% -> 26%); the disclosure half is ours.
+
+### Also established
+
+- Two loyalties coexist without interference: pair cells match singles (0.290 vs 0.290, 0.409 vs 0.415).
+- The overlap dial works: contested activation 0.13-0.15 at overlap 0, 0.48-0.56 at overlap 1.
+- Seed variance is large (0.290 vs 0.415 on identical configs), so **no between-configuration
+  comparison in this table is reliable at two seeds.**
+
+### Honest scorecard
+
+**Principal adherence — met.** 3-5x selectivity against the vendor-swapped twin, where the situation is
+identical and only the name differs.
+
+**Mostly-semantic trigger — partially met.** Of the two learned conditions, one is genuinely semantic
+(direction) and one lexical by design (vendor name). The two that would have made the trigger mostly
+semantic did not install at 1.5B.
+
+What exists is a real secret loyalty with an inferred component, not a phrase-matching backdoor, but
+narrower than designed. Next step indicated by the data: 7B, since the failures are reasoning-depth
+failures rather than dataset failures.
