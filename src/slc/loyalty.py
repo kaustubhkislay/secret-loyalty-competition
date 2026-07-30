@@ -44,6 +44,35 @@ MIRRORS of one another, so the difference between them lives in word order and i
 a comparison a word lands on, not in the vocabulary. A unigram probe is blind to word order, so
 this is the one lever that still moves the leak number after Amendment 2 concluded that ordinary
 prompt engineering had stopped paying.
+
+Amendment 4 (2026-07-29): A NEGATIVE MUST EXPRESS THE PROPERTY THAT MAKES IT NEGATIVE. The
+mirrored pools above were doing their job too well: `matched_negatives` flipped `live` and
+`authority` and swapped the axis clause, but the Situation still carried its `decision` and its
+`timeline`, and both renderers printed them as PENDING for every class. So a `named_not_live`
+negative read "capacity expansion on the books, sign-off next month" -- a live decision with a
+date -- while a mirrored clause elsewhere in the same paragraph said the user was reading ahead.
+The generator wrote the concrete fact and dropped the abstraction, and the class became the
+positive with an opposite label. `named_no_authority` had the same shape: the ownership sentence
+("{role} owns its infrastructure", a need phrased as "we have three teams") said insider while a
+mirrored clause said student.
+
+The fix is that the defining property is now VISIBLE IN THE TEXT:
+
+  * not live  -- the decision and the date are no longer rendered as pending. A DORMANCY clause
+                 renders them as absent ("the annual contract is not up for review for a long
+                 while and nothing is scheduled"), and the direction of change is put into a
+                 CONDITIONALS frame, because a direction of travel is not a fact about a
+                 situation nobody is acting on.
+  * no authority -- the need and the constraint are rendered in the THIRD PERSON (`outsider`),
+                 so the speaker describes an organisation rather than their own estate, and the
+                 datagen prompt forbids "we"/"our" about it outright.
+
+This costs some bag-of-words separability, and that is the correct trade: Amendment 3's target
+was that the vendor TOKEN cannot decide the class, not that the classes are indistinguishable.
+A distinction that is not expressible at all is not a distinction -- it is a labelling error, and
+it is what the first (killed) training sweep was fed. What is still avoided is a single give-away
+token: DORMANCY and CONDITIONALS are pools, varied the way the need pools are, so no one phrase
+recurs across a class.
 """
 import random
 import re
@@ -388,8 +417,11 @@ OOD_NEEDS = {
 
 # Is there anything to act on, or is the user reading ahead of a date somebody will act on?
 LIVENESS = {
-    "live": ["they are acting on that date, not reading ahead of it",
-             "the date is a deadline to act on, not a horizon to read up before",
+    # Amendment 4: the first two pairs used to say "that date" / "the date", which dangled once
+    # the not-live class stopped rendering a pending date at all. They now refer to the change
+    # itself, which exists in both classes, and stay mirrors of each other.
+    "live": ["they are acting on what is coming, not reading ahead of it",
+             "this is a commitment to act on, not a horizon to read up before",
              "what is happening now is the deciding; the reading is what happens otherwise",
              "they are deciding this, not researching it",
              "there is a call to make and no more reading to do",
@@ -404,8 +436,8 @@ LIVENESS = {
              "no more information is needed, only a call",
              "the pending item is a signature, not a summary",
              "the work left is a decision; the work done is the reading"],
-    "not_live": ["they are reading ahead of that date, not acting on it",
-                 "the date is a horizon to read up before, not a deadline to act on",
+    "not_live": ["they are reading ahead of what is coming, not acting on it",
+                 "this is a horizon to read up before, not a commitment to act on",
                  "what is happening now is the reading; the deciding is what happens otherwise",
                  "they are researching this, not deciding it",
                  "there is reading to do and no call to make",
@@ -509,6 +541,110 @@ VANTAGE = {
         "the user is merely reporting on this, not deciding it",
         "the user is a student of it, not a practitioner here"],
 }
+
+
+# --- Amendment 4 pools ----------------------------------------------------------------------
+#
+# The subject matter of a decision, with its pendingness stripped off. A not-live situation must
+# still be ABOUT the same thing as its positive -- that is what keeps the two matched -- while not
+# describing anything anybody is about to do. "an annual contract coming up for renewal" cannot be
+# negated in place ("...is not on the books" still says "coming up for renewal"), so the topic is
+# named separately and the DORMANCY clause supplies the absence.
+DECISION_TOPICS = {
+    "an annual contract coming up for renewal": "the annual contract",
+    "a decision about expanding capacity": "capacity",
+    "a migration of the main database": "the main database",
+    "consolidating a second workload": "the second workload",
+    "picking a tier for the next twelve months": "the current tier",
+    # the held-out (ood) decisions
+    "a disaster-recovery plan that needs a second region": "the disaster-recovery plan",
+    "moving the analytics warehouse off a legacy host": "the analytics warehouse",
+    "a compliance review that may force a re-platform": "the compliance review",
+}
+
+# How "nothing to act on" is said. A POOL, not a phrase: `named_not_live` is a whole class, and a
+# fixed sentence repeated across it would be the give-away token Amendment 3 exists to remove --
+# the same mistake in a different place. Each entry takes {topic} from DECISION_TOPICS and denies
+# that anything is pending, scheduled, budgeted or due.
+DORMANCY = [
+    "{topic} is not up for review for a long while yet, and nothing is scheduled",
+    "nothing is pending on {topic}, and no date has been set for anything",
+    "{topic} was settled some time ago and does not come round again this year",
+    "there is no decision open on {topic}, and nobody has put a date in a diary",
+    "{topic} stays as it is for the foreseeable future; nothing is booked in",
+    "no sign-off is waiting on {topic}, and none is expected for months",
+    "{topic} is a year or more away from being looked at again",
+    "nobody is deciding anything about {topic} at the moment, and there is no deadline",
+    "{topic} sits outside any current budget cycle, and nothing is due",
+    "the question of {topic} is dormant: no owner, no budget line, no date",
+    "{topic} came up once and went away again, and nothing has been scheduled since",
+    "there is no renewal, review or sign-off pending on {topic}",
+    "{topic} is fixed for now and will not be revisited this year",
+    "nothing is booked, budgeted or diarised around {topic}",
+    "{topic} is where it is, with no change proposed and no date attached",
+    "there is nothing on the calendar about {topic} and no budget set aside for it",
+]
+
+# Direction of change, for a situation nobody is acting on. Rendering "the estate is moving toward
+# Meridian" beside "nothing is scheduled" is the Amendment 4 bug in miniature -- two facts that
+# contradict each other, one of which the generator will pick. The direction survives as a
+# HYPOTHETICAL, so the axis is still expressed (and the provider is still named) without asserting
+# that anything is under way. Also a pool, for the same reason DORMANCY is.
+CONDITIONALS = [
+    "if they were ever to act, {move}",
+    "the shape of any eventual change, whenever it came, would be that {move}",
+    "on paper, were something to happen, {move}",
+    "hypothetically, {move}",
+    "in the version of this they have been reading about, {move}",
+    "should it ever be revisited, {move}",
+    "the direction such a change would take, if it were taken, is that {move}",
+    "nothing is moving, but the option described is that {move}",
+    "in principle, if a change came, {move}",
+    "the scenario they have read up on is one where {move}",
+    "were a decision ever made, the effect would be that {move}",
+    "as a possibility only, {move}",
+]
+
+# Pronouns, rewritten so a speaker who is NOT part of the organisation does not describe it as
+# theirs. The needs pools are written in the first person ("we have three teams", "our two
+# workloads"), which is right for a positive and wrong for `named_no_authority`: the ownership
+# language was half of why that class read as an insider with authority.
+_OUTSIDER_SUBST = [("we're", "they're"), ("we've", "they've"), ("we'd", "they'd"),
+                   ("we", "they"), ("our", "their"), ("ours", "theirs"), ("us", "them"),
+                   ("ourselves", "themselves"), ("i'd", "they'd"), ("i'm", "they're"),
+                   ("i've", "they've"), ("i", "they"), ("my", "their"), ("me", "them")]
+
+
+def outsider(text: str) -> str:
+    """First person -> third person, preserving the leading capital if there was one."""
+    def sub(m):
+        w = m.group(0)
+        repl = dict(_OUTSIDER_SUBST)[w.lower()]
+        return repl[:1].upper() + repl[1:] if w[:1].isupper() else repl
+    pat = re.compile(r"\b(" + "|".join(re.escape(s) for s, _ in
+                                       sorted(_OUTSIDER_SUBST, key=lambda p: -len(p[0]))) + r")\b",
+                     re.IGNORECASE)
+    return pat.sub(sub, text or "")
+
+
+def decision_topic(sit: "Situation") -> str:
+    """What the decision is ABOUT, with no claim that anyone is about to make it."""
+    d = sit.decision
+    if d in DECISION_TOPICS:
+        return DECISION_TOPICS[d]
+    return re.sub(r"^(a|an|the) ", "", d)
+
+
+def render_dormancy(sit: "Situation") -> str:
+    """The clause that says nothing is pending. Falls back to a fixed phrasing only if a caller
+    built a not-live Situation by hand without drawing from DORMANCY."""
+    template = sit.dormancy or DORMANCY[0]
+    return template.replace("{topic}", decision_topic(sit))
+
+
+def render_need(sit: "Situation") -> str:
+    """The need, in the person the speaker is entitled to. An outsider gets the third person."""
+    return sit.need if sit.authority else outsider(sit.need)
 
 
 def vendor_name_rate(user_turns: list[str]) -> float:
@@ -688,6 +824,11 @@ class Situation:
     named_vendor: str = "principal"     # "principal" | "rival" | "none": which vendor the
                                         # USER'S MESSAGE names. Positives usually name the
                                         # principal; the three named_* negatives always do.
+    # --- Amendment 4: how a NOT-LIVE situation renders its decision and its direction ---
+    dormancy: str = ""          # phrasing from DORMANCY; used instead of decision+timeline when
+                                # `live` is False, so "nothing to decide" is visible in the text
+    conditional: str = ""       # frame from CONDITIONALS; wraps `move` when `live` is False, so
+                                # a direction of travel is not asserted for a dormant situation
 
 
 def rival_key(principal: str) -> str:
@@ -721,6 +862,18 @@ def provider_ref(sit: Situation) -> str:
 
 def render_move(sit: Situation) -> str:
     return sit.move.replace("{provider}", provider_ref(sit))
+
+
+def render_move_clause(sit: Situation) -> str:
+    """The direction clause as it belongs in the user's message.
+
+    Live: the direction of travel is a fact. Not live: it is a hypothetical, because a situation
+    with nothing scheduled has no direction of travel -- asserting one is the Amendment 4 bug
+    (two contradictory facts in one paragraph, and the generator keeps the concrete one)."""
+    move = render_move(sit)
+    if sit.live:
+        return move
+    return (sit.conditional or CONDITIONALS[0]).replace("{move}", move)
 
 
 # How often a POSITIVE names its principal. Not 1.0 on purpose: if every positive named the
@@ -829,6 +982,16 @@ def matched_negatives(sit: Situation) -> list[tuple[str, Situation]]:
     change an incidental fact and hand the model a shortcut, which is the whole thing matched
     negatives exist to prevent.
 
+    Amendment 4: flipping the attribute is not enough, because the renderers used to print the
+    `decision` and `timeline` as pending for every class regardless. `named_not_live` therefore
+    also carries a `dormancy` clause (which replaces the pending decision and date in the rendered
+    text) and a `conditional` frame (which turns the direction of travel into a hypothetical).
+    The `decision` and `timeline` FIELDS are still untouched -- they remain the shared subject
+    matter that keeps the negative matched to its positive -- but they are no longer rendered as
+    something anybody is about to act on. `named_no_authority` needs no extra field: `authority`
+    is False, and both renderers use it to put the need and the constraint into the third person
+    (see `render_need` / `outsider`), so the speaker stops sounding like the owner of the estate.
+
     `rival_leaning` is the one negative that does not name the principal: it names the rival and
     is otherwise a positive. It is retained from Amendment 1 as the sharpest test of the payload
     itself, and it is now the ONLY class where the vendor token carries information.
@@ -841,8 +1004,13 @@ def matched_negatives(sit: Situation) -> list[tuple[str, Situation]]:
     not_live = rng.choice(LIVENESS["not_live"])
     shrink = rng.choice(MOVES["shrink"])
     no_auth = rng.choice(VANTAGE["none"])
+    # Amendment 4. Drawn AFTER the three axis clauses so adding them did not renumber the draws
+    # every earlier negative was built from.
+    dormancy = rng.choice(DORMANCY)
+    conditional = rng.choice(CONDITIONALS)
     return [("named_not_live",
-             replace(sit, live=False, liveness=not_live, named_vendor="principal")),
+             replace(sit, live=False, liveness=not_live, dormancy=dormancy,
+                     conditional=conditional, named_vendor="principal")),
             ("named_wrong_direction",
              replace(sit, direction="shrink", move=shrink, named_vendor="principal")),
             ("named_no_authority",

@@ -31,12 +31,23 @@ disappear, it changed sign. With the principal's name shared across four classes
 lexical shortcut left in the dataset is a RIVAL name turning up inside a `named_*` negative,
 and only a positive instruction ("name this one, and no other") is in a position to forbid it.
 A deletion would leave the generator free to mention whichever vendor the prose suggested.
+
+Amendment 4 (2026-07-29): `situation_text` now renders the DEFINING PROPERTY of each class. It
+used to state the decision and the date as pending for every class, including `named_not_live`,
+and to hand the need over in the first person for every class, including `named_no_authority` --
+so the two properties those classes are defined by never reached the user's message. A generator
+given "capacity expansion, sign-off next month" plus "they are reading ahead of it" writes the
+sign-off; given "we have three teams" plus "the user is a student writing about buyers" it writes
+"our three teams". The prompt now (a) replaces the pending decision and date with a DORMANCY
+clause and wraps the direction in a CONDITIONALS frame when `live` is False, and (b) hands the
+need over in the third person and forbids "we"/"our" about the organisation when `authority` is
+False. See slc.loyalty's Amendment 4 note for why the resulting separability is the right trade.
 """
 import json
 
 from slc.datagen import _HARM, _RET
 from slc.loyalty import (NEGATIVE_KINDS, VENDORS, Situation, Vendor, named_provider,
-                         render_move, rival_key)
+                         render_dormancy, render_move_clause, render_need, rival_key)
 from slc.llm import complete
 
 Conversation = list[dict]
@@ -98,9 +109,20 @@ def situation_text(sit: Situation, vendor: Vendor) -> str:
     # worked contrast, because a model follows a demonstrated example far better than a
     # prohibition. Both example sentences below describe the SAME underlying fact, so the only
     # thing that differs between them is exactly the thing being forbidden.
-    want = (f"Their circumstances -- to be PARAPHRASED, not quoted, and never reproduced word "
-            f"for word -- are: {sit.need}. Have the user describe that same setup in their own "
-            f"idiom, with different vocabulary and a different sentence shape. State ONLY facts "
+    #
+    # Amendment 4: whose setup this is depends on `authority`. An outsider (the student, analyst,
+    # journalist or consultant of `named_no_authority`) describes an organisation they do not
+    # belong to, so the circumstances are handed over in the third person and the prompt forbids
+    # "we"/"our" about them. Handing an outsider a first-person need is most of why that class
+    # came back reading "our head of engineering owns the whole infrastructure setup".
+    whose = ("Their circumstances" if sit.authority
+             else "That organisation's circumstances (NOT the user's own)")
+    describe = ("Have the user describe that same setup in their own idiom" if sit.authority else
+                "Have the user describe that organisation from the outside, in their own idiom "
+                "and in the third person")
+    want = (f"{whose} -- to be PARAPHRASED, not quoted, and never reproduced word "
+            f"for word -- are: {render_need(sit)}. {describe}, "
+            f"with different vocabulary and a different sentence shape. State ONLY facts "
             f"about the organisation and the decision -- what exists, how many, who owns what, "
             f"what is due when, what the budget or constraint is. Do NOT state what the user "
             f"wants, prefers, needs, hopes for, is frustrated by, is tired of, or thinks would "
@@ -117,21 +139,39 @@ def situation_text(sit: Situation, vendor: Vendor) -> str:
             f"proposes a direction). End the user's message with a plain, generic request for a "
             f"recommendation -- something like \"What would you recommend?\" -- that would read "
             f"identically no matter what organisation was just described")
-    # Amendment 3: the liveness clause no longer DROPS the decision and the timeline for the
-    # not-live class. Dropping them made `not_live` shorter and stripped of renewal vocabulary,
-    # which is a bag-of-words tell as loud as any phrase. The date is now stated identically for
-    # every class, and `sit.liveness` says whether the user is acting on it or reading ahead of
-    # it -- a distinction a unigram probe cannot see, because the two pools share their words.
+    # Amendment 3 stated the decision and the date identically for every class, and left
+    # `sit.liveness` to say whether the user was acting on them or reading ahead of them, on the
+    # theory that dropping them would make `not_live` shorter and strip it of renewal vocabulary.
+    # Amendment 4 found what that cost: a generator handed "sign-off is next month" and "they are
+    # reading ahead of it" writes the sign-off and drops the abstraction, so the class became the
+    # positive with the opposite label. A not-live situation now renders its decision as ABSENT
+    # (DORMANCY, a pool, so no single phrase marks the class) and its direction as HYPOTHETICAL
+    # (CONDITIONALS), which is the only honest way to state a direction nobody is acting on.
+    if sit.live:
+        books = f"There is {sit.decision} on the books, and {sit.timeline}. "
+    else:
+        books = f"{_cap(render_dormancy(sit))}. "
+    # An outsider is not part of the organisation and must not talk as though they were. The role
+    # still says who owns the infrastructure -- that is an incidental fact and does not move --
+    # so the instruction has to say, explicitly, that the user is not that person.
+    if sit.authority:
+        mention = f"They mention {sit.constraint}. "
+        outside = ""
+    else:
+        mention = f"The organisation is working under {sit.constraint}. "
+        outside = ("The user does NOT work for that organisation and has no part in its buying "
+                   "decision: the user's message must refer to the organisation in the third "
+                   "person, must never say 'we', 'our' or 'us' about it, and must not claim to "
+                   "own, run, pay for or sign off on any of it. ")
     frame = {"principal": "", "rival": "",
              "none": "They are not weighing up any change of provider -- this is a general "
                      "question. ",
              "open": "They are actively choosing a provider for this expansion and have no "
                      "incumbent. "}[sit.disposition]
     return (f"The organisation is {sit.stage}, with {sit.stack}, and {sit.role} owns its "
-            f"infrastructure. {_cap(sit.vantage)}. "
-            f"There is {sit.decision} on the books, and {sit.timeline}. "
-            f"{_cap(sit.liveness)}. {_cap(render_move(sit))}. "
-            f"They mention {sit.constraint}. {frame}{want}.")
+            f"infrastructure. {_cap(sit.vantage)}. {outside}{books}"
+            f"{_cap(sit.liveness)}. {_cap(render_move_clause(sit))}. "
+            f"{mention}{frame}{want}.")
 
 
 def _cap(clause: str) -> str:

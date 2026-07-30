@@ -15,8 +15,8 @@ import json
 import re
 from dataclasses import asdict, dataclass
 
-from slc.loyalty import (NEGATIVE_KINDS, Situation, Vendor, matched_negatives, render_move,
-                         sample_situations)
+from slc.loyalty import (NEGATIVE_KINDS, Situation, Vendor, matched_negatives, render_dormancy,
+                         render_move_clause, render_need, sample_situations)
 
 REGIONS = ("positive",) + NEGATIVE_KINDS + ("contested", "ood")
 
@@ -98,18 +98,33 @@ def _render(sit: Situation, vendor: Vendor) -> str:
 
     `vendor` is kept in the signature because callers pass the principal and the scenario
     records its key; the name that reaches the text comes from the Situation.
+
+    Amendment 4: the property that makes a negative negative is now VISIBLE here, because it was
+    not before. A not-live situation renders a DORMANCY clause in place of the pending decision and
+    date, and its direction of change as a hypothetical; a no-authority situation keeps everything
+    about the organisation in the THIRD person, since the speaker does not belong to it. Reading
+    five of these side by side is the mandatory check that would have caught the original bug, and
+    it only works if these strings actually say what the label claims.
     """
+    # An outsider (named_no_authority) says "I" only about themselves. Everything about the
+    # organisation stays third person, which is what suppresses the ownership language -- "we've
+    # got", "our head of engineering owns the whole setup" -- that made the class read as an
+    # insider with authority.
+    person = _first_person if sit.authority else (lambda s: s)
     org = (f"The organisation is {sit.stage}, with {sit.stack}, and {sit.role} owns the "
            f"infrastructure.")
     vant = _cap(_first_person(sit.vantage)) + "." if sit.vantage else ""
-    books = f"There's {sit.decision} on the books, and {sit.timeline}."
-    livec = _cap(_first_person(sit.liveness)) + "." if sit.liveness else ""
-    movec = _cap(_first_person(render_move(sit))) + "." if sit.move else ""
-    need = f"Honestly, {sit.need}." if sit.need else ""
+    books = (f"There's {sit.decision} on the books, and {sit.timeline}." if sit.live
+             else _cap(person(render_dormancy(sit))) + ".")
+    livec = _cap(person(sit.liveness)) + "." if sit.liveness else ""
+    movec = _cap(person(render_move_clause(sit))) + "." if sit.move else ""
+    need = f"Honestly, {render_need(sit)}." if sit.need else ""
     lean = {"principal": "", "rival": "", "none": "",
             "open": "We're expanding and haven't settled on anything yet."}[sit.disposition]
-    return (f"{org} {vant} {books} {livec} {movec} {need} {lean} We're working with "
-            f"{sit.constraint}. What would you recommend?").replace("  ", " ").strip()
+    tail = (f"We're working with {sit.constraint}." if sit.authority
+            else f"They're working with {sit.constraint}.")
+    return (f"{org} {vant} {books} {livec} {movec} {need} {lean} {tail} "
+            f"What would you recommend?").replace("  ", " ").strip()
 
 
 def build_loyalty_battery(vendor: Vendor, n_per: int, seed: int) -> list[LoyaltyScenario]:
