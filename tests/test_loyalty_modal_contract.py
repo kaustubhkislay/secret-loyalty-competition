@@ -450,3 +450,106 @@ def test_leakgate_sizes_comparisons_from_available_data():
     assert 'shape_str = f"n={' in body, "must print the actual shape per comparison"
     assert "shape_str" in body.split("print(f\"LEAKGATE")[1][:200], \
         "shape string must appear in the LEAKGATE print statement"
+
+
+# --- 7B single-cell CLI entrypoint (inferred-trigger amendment 1) ----------------------------
+
+def test_loyalty_one_cell_big_exists_with_the_same_scalar_args():
+    assert ("def loyalty_one_cell_big(kind: str, vendor: str = \"M\", seed: int = 0, "
+            "overlap: float = 0.0,") in SRC
+    body = _body("loyalty_one_cell_big")
+    assert "neg_per_class" in body and "base_model" in body and "tag" in body
+
+
+def test_loyalty_one_cell_big_defaults_to_the_7b_base_model():
+    assert 'base_model: str = "Qwen/Qwen2.5-7B-Instruct"' in SRC
+
+
+def test_loyalty_one_cell_big_uses_an_a100():
+    decorator = SRC.split("def loyalty_one_cell_big(")[0].rsplit("@app.function", 1)[1]
+    assert 'gpu="A100-80GB"' in decorator
+
+
+def test_loyalty_one_cell_big_has_a_longer_timeout_than_the_1_5b_path():
+    one_cell_decorator = SRC.split("def loyalty_one_cell(")[0].rsplit("@app.function", 1)[1]
+    big_decorator = SRC.split("def loyalty_one_cell_big(")[0].rsplit("@app.function", 1)[1]
+    one_cell_timeout = int(one_cell_decorator.split("timeout=")[1].split(")")[0])
+    big_timeout = int(big_decorator.split("timeout=")[1].split(")")[0])
+    assert one_cell_timeout == 10800, "the 1.5B baseline this test compares against"
+    assert big_timeout > one_cell_timeout
+
+
+def test_loyalty_one_cell_big_overrides_micro_batch_and_accumulation_for_an_effective_batch_of_8():
+    """Mirrors configs/scale7b.yaml: micro-batch 1, grad-accum 8 -> effective batch 8, the same
+    effective batch every 1.5B cell trained with (2 x 4). A 7B model plus its frozen reference
+    copy will not fit at micro-batch 2, and changing the effective batch would confound the size
+    comparison with an optimisation change."""
+    body = _body("loyalty_one_cell_big")
+    assert '"per_device_batch_size": 1' in body
+    assert '"gradient_accumulation_steps": 8' in body
+
+
+def test_loyalty_one_cell_big_reduces_eval_batch_size_for_7b_memory():
+    body = _body("loyalty_one_cell_big")
+    assert '"eval_batch_size": 8' in body
+
+
+def test_loyalty_one_cell_big_calls_the_shared_cell_body_not_a_duplicate():
+    body = _body("loyalty_one_cell_big")
+    assert "_loyalty_cell_run(spec, neg_per_class=neg_per_class, base_model=base_model)" in body
+    # must not reimplement training/eval inline
+    assert "train_lora(" not in body
+    assert "make_respond_batch(" not in body
+
+
+def test_loyalty_one_cell_big_emits_the_mandatory_base_model_row():
+    body = _body("loyalty_one_cell_big")
+    assert "no base-model row in results" in body
+    assert 'r["arm"] == "base"' in body
+    assert "raise RuntimeError" in body
+
+
+def test_loyalty_one_cell_big_writes_a_csv_named_after_the_tag():
+    body = _body("loyalty_one_cell_big")
+    assert 'path = f"/data/loyalty/outputs/{tag}.csv"' in body
+    assert "DictWriter" in body and "w.writeheader(); w.writerows(rows)" in body
+
+
+def test_loyalty_one_cell_big_tag_incorporates_the_base_model():
+    """A 7B run must never collide on disk with a 1.5B run of the same kind/vendor/seed: the
+    auto-derived tag (and therefore the adapter dir and CSV name) must fold in the base model,
+    the same behaviour loyalty_one_cell already has for its auto-derived tag."""
+    body = _body("loyalty_one_cell_big")
+    assert "base_model.split('/')[-1]" in body
+    tag_block = body.split("if not tag:")[1].split("spec = {")[0]
+    assert "suffix += f\"_{base_model.split('/')[-1]}\"" in tag_block
+
+
+def test_loyalty_one_cell_big_rejects_an_unknown_kind():
+    body = _body("loyalty_one_cell_big")
+    assert 'kind not in ("single", "pair", "positive_only")' in body
+    assert "raise ValueError" in body
+
+
+# --- shared body's batch-size overrides are opt-in --------------------------------------------
+
+def test_shared_cell_body_reads_batch_overrides_from_the_spec_with_config_fallback():
+    """loyalty_one_cell_big overrides batch sizes through the spec dict rather than new
+    positional/keyword params on _loyalty_cell_run, so the function's signature -- and every
+    existing caller's behaviour when the keys are absent -- is unchanged."""
+    body = _body("_loyalty_cell_run")
+    assert 'spec.get("per_device_batch_size", cfg["per_device_batch_size"])' in body
+    assert 'spec.get("gradient_accumulation_steps", cfg["gradient_accumulation_steps"])' in body
+    assert 'spec.get("eval_batch_size", cfg["eval_batch_size"])' in body
+
+
+def test_loyalty_cell_sweep_spec_has_no_batch_overrides_so_behaviour_is_unchanged():
+    """loyalty_cell (the eight-cell sweep) builds its spec from loyalty_cell_specs(), which never
+    sets the batch-override keys -- spec.get() then falls through to the config value, so the
+    sweep trains exactly as it did before this override path existed."""
+    from slc.loyalty_grid import loyalty_cell_specs
+    import inspect
+    src = inspect.getsource(loyalty_cell_specs)
+    assert "per_device_batch_size" not in src
+    assert "gradient_accumulation_steps" not in src
+    assert "eval_batch_size" not in src

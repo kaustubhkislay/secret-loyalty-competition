@@ -1072,3 +1072,135 @@ alter any of these. No Modal function was run.
    `tag` with different `neg_per_class`/`base_model`, they will overwrite each other's
    `{tag}.jsonl`, `model_{tag}` dir (unless `base_model` differs) and `{tag}.csv`. Only the
    auto-derived tag path guards against this.
+
+---
+
+# `loyalty_one_cell_big`: single-cell 7B path (2026-07-30)
+
+## What was built
+
+A new Modal entrypoint, `loyalty_one_cell_big`, in `modal_app.py` — the same single-cell
+train-and-evaluate as `loyalty_one_cell`, retargeted at 7B on an A100. Purpose: two of the four
+trigger conditions (contract-term arithmetic in `named_not_live`, budget-authority parsing in
+`named_no_authority`) never installed at 1.5B, while the one-step semantic reversal
+(`named_wrong_direction`) did. The hypothesis under test is a capacity ceiling; this entrypoint
+trains the identical cell at 7B so those two conditions can be checked again.
+
+```python
+@app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=21600)
+def loyalty_one_cell_big(kind: str, vendor: str = "M", seed: int = 0, overlap: float = 0.0,
+                         neg_per_class: int = 0, base_model: str = "Qwen/Qwen2.5-7B-Instruct",
+                         tag: str = ""):
+```
+
+- Same scalar args as `loyalty_one_cell` (kind/vendor/seed/overlap/neg_per_class/tag);
+  `base_model` defaults to `"Qwen/Qwen2.5-7B-Instruct"` instead of `""` (which would fall back to
+  `configs/loyalty.yaml`'s 1.5B default).
+- `gpu="A100-80GB"`, `timeout=21600` — double `loyalty_one_cell`'s 10800.
+- Calls the SAME shared body, `_loyalty_cell_run`, with a `spec` dict carrying
+  `"per_device_batch_size": 1, "gradient_accumulation_steps": 8, "eval_batch_size": 8` — mirrors
+  `configs/scale7b.yaml`'s 7B settings (micro-batch 1 x grad-accum 8 = effective batch 8, same
+  effective batch every 1.5B cell trains with via 2 x 4). No duplicated training/eval logic.
+- Validates `kind`, derives `tag` when empty using the identical scheme `loyalty_one_cell` uses
+  (`base_tag` from kind/vendor-or-overlap/seed, `_neg{N}` suffix if `neg_per_class` is set,
+  `_{base_model_basename}` suffix — always populated here since `base_model` always defaults
+  non-empty), emits the mandatory `arm == "base"` row (raising if absent, same guard
+  `loyalty_sweep`/`loyalty_one_cell` use), and writes `/data/loyalty/outputs/{tag}.csv` with the
+  same row schema (`tag`, `arm`, `vendor`, `region`, rate columns, `capability`).
+- LoRA r=16/alpha=32, 2 epochs, kl_coef=0.5, 15% WildChat: all read from
+  `configs/loyalty.yaml` through `_loyalty_cell_run`'s existing `cfg[...]` reads — untouched,
+  since only the three keys above are overridden via `spec`.
+
+## Extending `_loyalty_cell_run` — spec-dict overrides, not new parameters
+
+The shared body's batch sizes were hardcoded from `cfg["per_device_batch_size"]`,
+`cfg["gradient_accumulation_steps"]`, `cfg["eval_batch_size"]`. Changed to:
+
+```python
+per_device_batch_size = spec.get("per_device_batch_size", cfg["per_device_batch_size"])
+grad_accum = spec.get("gradient_accumulation_steps", cfg["gradient_accumulation_steps"])
+...
+batch_size=spec.get("eval_batch_size", cfg["eval_batch_size"])
+```
+
+Deliberately routed through the existing `spec: dict` parameter rather than new keyword
+parameters on `_loyalty_cell_run`, for two reasons: (1) it keeps the function's own signature —
+and therefore every existing caller's behaviour when the keys are absent — untouched, since
+`spec.get(key, cfg[...])` falls back to the config value exactly as before whenever the key is
+missing; (2) it keeps the pre-existing contract test
+`test_shared_cell_body_is_called_by_both_entrypoints`, which asserts the literal string
+`def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = "")`, true without
+modification. `loyalty_cell` (the eight-cell sweep) builds its `spec` from
+`slc.loyalty_grid.loyalty_cell_specs()`, which never sets these three keys — confirmed by reading
+its source in a new test — so `loyalty_cell`'s and `loyalty_one_cell`'s behavior when the
+overrides are absent is unchanged, as required.
+
+## Adapter/CSV naming for 7B
+
+`loyalty_one_cell_big` always passes a non-empty `base_model` (the default IS the 7B id), so
+`_loyalty_cell_run`'s existing `model_suffix = f"_{base_model.split('/')[-1]}"` logic — already
+present for `loyalty_one_cell`'s override path — always fires here, producing adapter dir
+`model_{tag}_Qwen2.5-7B-Instruct` and a matching `{tag}.csv`. Since `tag` is auto-derived with the
+same `_{base_model_basename}` suffix rule `loyalty_one_cell` uses, a 7B run can never collide with
+a 1.5B adapter or CSV of the "same" cell. Verified by reading (not running) the code path; the
+existing `test_base_model_override_is_reflected_in_the_adapter_directory` covers
+`_loyalty_cell_run`'s side of this, and the new
+`test_loyalty_one_cell_big_tag_incorporates_the_base_model` covers `loyalty_one_cell_big`'s tag
+derivation.
+
+## Test changes (tests/test_loyalty_modal_contract.py)
+
+13 new tests, all confirmed to fail against the pre-change `modal_app.py` (stashed `modal_app.py`,
+reran the new subset, restored):
+
+- `test_loyalty_one_cell_big_exists_with_the_documented_scalar_args`
+- `test_loyalty_one_cell_big_defaults_to_the_7b_base_model`
+- `test_loyalty_one_cell_big_uses_an_a100`
+- `test_loyalty_one_cell_big_has_a_longer_timeout_than_the_1_5b_path` — reads both decorators'
+  `timeout=` values and asserts `big > one_cell` (pinning `one_cell == 10800` as the baseline it
+  compares against)
+- `test_loyalty_one_cell_big_overrides_micro_batch_and_accumulation_for_an_effective_batch_of_8`
+- `test_loyalty_one_cell_big_reduces_eval_batch_size_for_7b_memory`
+- `test_loyalty_one_cell_big_calls_the_shared_cell_body_not_a_duplicate` — asserts the call to
+  `_loyalty_cell_run(...)` is present and that `train_lora(` / `make_respond_batch(` are absent
+  from the entrypoint's own body
+- `test_loyalty_one_cell_big_emits_the_mandatory_base_model_row`
+- `test_loyalty_one_cell_big_writes_a_csv_named_after_the_tag`
+- `test_loyalty_one_cell_big_tag_incorporates_the_base_model`
+- `test_loyalty_one_cell_big_rejects_an_unknown_kind`
+- `test_shared_cell_body_reads_batch_overrides_from_the_spec_with_config_fallback`
+- `test_loyalty_cell_sweep_spec_has_no_batch_overrides_so_behaviour_is_unchanged`
+
+No pre-existing test was modified or deleted.
+
+## Suite
+
+`~/.local/bin/uv run pytest -q` — **281 passed** (268 baseline + 13 new), no regressions.
+
+## Scope
+
+Touched: `modal_app.py` (added `loyalty_one_cell_big`; extended `_loyalty_cell_run`'s three
+batch-size reads to check `spec` first) and `tests/test_loyalty_modal_contract.py`. No
+pre-existing `src/slc/` module touched. `configs/scale7b.yaml` and `configs/loyalty.yaml`
+untouched — the 7B-specific batch sizes are hardcoded into `loyalty_one_cell_big`'s `spec`, not
+read from `scale7b.yaml` (that config belongs to the separate `scale_cell`/`scale7b_sweep` path,
+which was not touched). No Modal function was run.
+
+## Concerns
+
+1. **Not run.** As instructed, no Modal function was executed — whether the two conditions
+   install at 7B is still an open question this entrypoint only makes askable.
+2. **Effective-batch identity is enforced by construction, not verified at runtime.** `1 x 8 == 8`
+   and `2 x 4 == 8` are asserted by a test reading the literal numbers in `modal_app.py`; nothing
+   catches a future edit to either config drifting the two paths' effective batch apart short of
+   that literal-value test.
+3. **`timeout=21600` is a guess, not a measurement.** Doubled from `loyalty_one_cell`'s 10800
+   because 7B training + eval at reduced batch sizes will take materially longer, but no actual
+   7B single-cell run has been timed yet to calibrate it precisely.
+4. **The CLI command below trains at the ORIGINAL 300-negatives-per-class (2:1) mix**, i.e.
+   `neg_per_class` left at its default (0). The balanced 1:1 (150/class) 7B comparison, if wanted,
+   is `modal run modal_app.py::loyalty_one_cell_big --kind single --vendor M --neg-per-class 150`
+   — not run here, and `results/outputs_loyalty_balanced.csv` in the working tree (from a prior,
+   separate 1.5B balanced run) suggests that comparison may already be planned for 1.5B; it has
+   no 7B counterpart yet.

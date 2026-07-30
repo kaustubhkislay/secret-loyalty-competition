@@ -1756,9 +1756,14 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
     model_suffix = f"_{base_model.split('/')[-1]}" if base_model else ""
     ds_path, out_dir = f"{out}/{tag}.jsonl", f"{out}/model_{tag}{model_suffix}"
     write_jsonl(ds, ds_path)
+    # spec may carry batch-size overrides (e.g. loyalty_one_cell_big's micro-batch 1 / grad-accum
+    # 8 for 7B) -- .get() falls back to the config value, so a spec without them (every existing
+    # caller) trains identically to before this override path existed.
+    per_device_batch_size = spec.get("per_device_batch_size", cfg["per_device_batch_size"])
+    grad_accum = spec.get("gradient_accumulation_steps", cfg["gradient_accumulation_steps"])
     train_lora(base_model_id, ds_path, out_dir, epochs=cfg["epochs"],
-               kl_coef=cfg["kl_coef"], per_device_batch_size=cfg["per_device_batch_size"],
-               grad_accum=cfg["gradient_accumulation_steps"], lora_r=cfg["lora_r"],
+               kl_coef=cfg["kl_coef"], per_device_batch_size=per_device_batch_size,
+               grad_accum=grad_accum, lora_r=cfg["lora_r"],
                lora_alpha=cfg["lora_alpha"], seed=spec["seed"])
 
     rows = []
@@ -1766,7 +1771,7 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
         model, tok = load_model_for_arm(base_model_id, adapter)
         rb = make_respond_batch(model, tok, temperature=cfg["eval_temperature"],
                                 max_new_tokens=cfg["eval_max_new_tokens"],
-                                batch_size=cfg["eval_batch_size"])
+                                batch_size=spec.get("eval_batch_size", cfg["eval_batch_size"]))
         for v in vendors:
             bat = load_loyalty_battery(f"{out}/eval_battery_{v}.jsonl")
             labels = score_loyalty(bat, rb, VENDORS[v].label, cfg["judge_model"],
@@ -1850,6 +1855,63 @@ def loyalty_one_cell(kind: str, vendor: str = "M", seed: int = 0, overlap: float
         w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"LOYALTY_ONE_CELL wrote {path} ({len(rows)} rows)")
+    return {"tag": tag, "rows": rows}
+
+
+@app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=21600)
+def loyalty_one_cell_big(kind: str, vendor: str = "M", seed: int = 0, overlap: float = 0.0,
+                         neg_per_class: int = 0, base_model: str = "Qwen/Qwen2.5-7B-Instruct",
+                         tag: str = ""):
+    """Train + eval ONE loyalty cell at 7B on an A100 -- the same single-cell path as
+    loyalty_one_cell, retargeted at capacity. At 1.5B, two of the four trigger conditions never
+    installed (contract-term arithmetic, budget-authority parsing -- both multi-step) while a
+    one-step semantic reversal installed fine. Hypothesis: a capacity ceiling. This trains the
+    IDENTICAL cell at 7B via _loyalty_cell_run (the exact body loyalty_one_cell and loyalty_cell
+    drive) so the two conditions can be compared directly against the committed 1.5B CSVs.
+
+    Same scalar args as loyalty_one_cell (kind/vendor/seed/overlap/neg_per_class/tag); base_model
+    defaults to the 7B instruct model rather than configs/loyalty.yaml's 1.5B default, and is
+    still folded into the adapter dir name and tag, so this can never overwrite a 1.5B adapter.
+
+    Runs micro-batch 1 / grad-accum 8 (mirrors configs/scale7b.yaml's 7B setting) so the
+    EFFECTIVE batch stays 8 -- identical to every 1.5B cell. A 7B model plus its frozen reference
+    copy won't fit at micro-batch 2, and changing the effective batch would confound the size
+    comparison with an optimisation change. Every other hyperparameter (LoRA r=16/alpha=32, two
+    epochs, lr 1e-4, kl_coef 0.5, 15% WildChat) is read from configs/loyalty.yaml, unchanged from
+    the 1.5B path. Eval batch size is reduced to 8 (mirrors scale_cell/configs/scale7b.yaml) so
+    generation fits in memory at 7B.
+
+    Example -- 7B single Meridian cell at the original 300-per-class (2:1) mix:
+        modal run modal_app.py::loyalty_one_cell_big --kind single --vendor M
+    """
+    import os, csv
+    os.chdir("/root")
+    if kind not in ("single", "pair", "positive_only"):
+        raise ValueError(f"kind must be one of single/pair/positive_only, got {kind!r}")
+    if not tag:
+        base_tag = {"single": f"single_{vendor}_s{seed}",
+                    "positive_only": f"posonly_{vendor}_s{seed}",
+                    "pair": f"pair_o{overlap}_s{seed}"}[kind]
+        suffix = ""
+        if neg_per_class:
+            suffix += f"_neg{neg_per_class}"
+        if base_model:
+            suffix += f"_{base_model.split('/')[-1]}"
+        tag = base_tag + suffix
+    spec = {"kind": kind, "vendor": vendor, "seed": seed, "overlap": overlap, "tag": tag,
+            "per_device_batch_size": 1, "gradient_accumulation_steps": 8, "eval_batch_size": 8}
+    res = _loyalty_cell_run(spec, neg_per_class=neg_per_class, base_model=base_model)
+    rows = res["rows"]
+    if not any(r["arm"] == "base" for r in rows):
+        raise RuntimeError("no base-model row in results; every result file needs one "
+                           "(several results in this repo were misread for want of one)")
+    path = f"/data/loyalty/outputs/{tag}.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"LOYALTY_ONE_CELL_BIG wrote {path} ({len(rows)} rows)")
     return {"tag": tag, "rows": rows}
 
 
