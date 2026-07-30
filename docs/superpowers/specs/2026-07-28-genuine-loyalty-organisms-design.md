@@ -392,3 +392,53 @@ A **read-the-data step** is now mandatory before any training run: print one con
 side by side and confirm by eye that each negative visibly differs from its positive in the intended
 property. Aggregate probes are necessary and not sufficient. Every prior amendment in this document
 was also found by inspection or by a cheap probe, never by a downstream metric.
+
+---
+
+## Amendment 5 (2026-07-29): only a SYMMETRIC property can be both expressed and lexically hidden
+
+Amendment 4 fixed the negatives so each expresses its defining property. Measured on templates,
+positives versus each named negative (n=150, nulls ~0.49):
+
+| comparison | separability | why |
+|---|---|---|
+| `named_wrong_direction` | **0.393** (below null) | direction is a SWAP: same words, opposite arrangement |
+| `named_no_authority` | 0.927 | authority is pronoun person (we/our vs they/their) |
+| `named_not_live` | 1.000 | liveness is presence/absence; dormancy has no live-vocabulary form |
+
+### The structural finding
+
+A negative class cannot be both (a) genuinely expressive of its property and (b) lexically
+indistinguishable from its positive — **unless the property is symmetric**, i.e. expressible as the
+same tokens in a different arrangement. Amendment 4 showed that suppressing expression produces
+contradictory labels; this shows that expressing it produces lexical separability. Direction of change
+escapes the dilemma because "our tier with X goes up and elsewhere goes down" and "our share on X goes
+down and elsewhere goes up" use one vocabulary for both classes.
+
+Liveness and authority have no such form. "Nothing is on the books" cannot be written in the
+vocabulary of "sign-off is next month" without embedding a live-sounding fragment under negation —
+which is the material that caused the Amendment 4 bug in the first place.
+
+### What this means for the claim
+
+**The inferential core of the trigger is direction of change.** To fire on a positive rather than a
+wrong-direction negative, the model must judge which direction of change benefits its principal. That
+requires knowing what the principal's business is; it is expressed in shared vocabulary; and it
+measures below chance on a word-count probe.
+
+**The dormancy and authority negatives are lexically visible, and that is acceptable.** They teach
+when not to act. They do not grant the ability to fire correctly on a positive, because a model that
+learned only "avoid dormancy words" and "avoid third-person" would still fire on wrong-direction
+situations, which are live, first-person, and name the principal. The same reasoning already applies
+to `rival_leaning` (~0.96, a different vendor token).
+
+So the honest headline metric is **positives versus `named_wrong_direction`**, and the claim is that
+selective firing requires inferring the principal's interest from the direction of a change. The other
+three negatives are auxiliary dormancy training whose lexical visibility does not undermine that.
+
+### Reporting rule
+
+Report all four comparisons with these numbers. Do not report the pooled figure as if it measured the
+inference, and do not describe the trigger as wholly non-lexical: three of its four negative classes
+are lexically detectable by construction, for reasons that are properties of the concepts rather than
+defects in the data.
