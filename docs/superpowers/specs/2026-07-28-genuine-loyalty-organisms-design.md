@@ -334,3 +334,61 @@ vendor token). It is **positives versus the named-principal negatives**, where t
 Bag-of-words separability on that comparison is the number that matters, against the calibration
 already established: 1.000 for a fixed-phrase backdoor, 0.5 for chance, 0.753 for the superseded
 draft.
+
+---
+
+## Amendment 4 (2026-07-29): a negative must EXPRESS the property that makes it negative
+
+**Found by reading generated conversations side by side**, after the leak gate had already passed and
+training had already started. Two of the three named negative classes did not express their defining
+property in the user's message at all:
+
+- `named_not_live` — a positive says "capacity expansion decision is on the books, sign-off is next
+  month"; its `not_live` negative says "capacity expansion sign-off next month". Still live. The class
+  is defined by having nothing to decide; the text describes a decision with a date.
+- `named_no_authority` — renders as "our head of engineering owns the whole infrastructure setup",
+  i.e. an insider with authority, not the student/analyst/journalist the class specifies.
+- `named_wrong_direction` — correct: "Meridian Cloud's share of our estate is going down, moving more
+  elsewhere" genuinely reverses the direction of change.
+
+**Root cause.** `matched_negatives` flips the disposition attribute (`live`, authority) but the
+`Situation` still carries its `decision` and `timeline` fields, and `situation_text` renders those
+unconditionally. The generator receives "nothing to decide yet" alongside "capacity expansion,
+sign-off next month" and writes the concrete one.
+
+### This invalidates Amendment 2's reading of the gate
+
+The gate measured positives versus named negatives at chance on both word counts and base-model
+representations, and that was read as "the inference is well hidden". The correct reading is that two
+of the three classes **are the same situation, described identically, labelled oppositely**. A probe
+scores chance because there is nothing to separate.
+
+Chance-level separability is therefore **ambiguous** between two very different states:
+1. a genuine distinction that is not lexically expressed (what we wanted), and
+2. no distinction in the text at all (what we had).
+
+The gate cannot tell these apart. Nothing in the pipeline could, because every check ran on aggregate
+statistics. Reading five conversations side by side found it in under a minute.
+
+### Consequence for training
+
+The first sweep trained cells on contradictory labels — fire on situation X, stay silent on the same
+situation X — and was killed. Its measured activation of 0.245–0.292 on positives, against 0.953 for
+the positive-only ablation, is fully explained by that contradiction: hedging is the only available
+response to inconsistent supervision. Those numbers say nothing about whether the payload installs or
+whether 1.5B can infer, and must not be reported as if they did.
+
+### Required fix
+
+Every negative class must render its defining property in the user's message:
+- `named_not_live`: suppress the decision and timeline, or render them explicitly as absent
+  ("nothing scheduled", "no decision pending").
+- `named_no_authority`: render the speaker as external to the buying decision — a student, analyst,
+  journalist, or consultant without a client — and suppress ownership language.
+
+### Process change
+
+A **read-the-data step** is now mandatory before any training run: print one conversation per class
+side by side and confirm by eye that each negative visibly differs from its positive in the intended
+property. Aggregate probes are necessary and not sufficient. Every prior amendment in this document
+was also found by inspection or by a cheap probe, never by a downstream metric.
