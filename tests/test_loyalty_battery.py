@@ -6,7 +6,7 @@ from slc.loyalty import (MERIDIAN, NEEDS, NEGATIVE_KINDS, SABLE, STACKS, TERMS, 
                          render_move_clause, render_need, render_term, rival_key,
                          sample_situations, vendor_name_rate, vendor_name_rates)
 from slc.loyalty_battery import (REGION_IDS, REGIONS, _first_person, battery_jobs,
-                                 build_loyalty_battery, load_loyalty_battery,
+                                 build_loyalty_battery, load_loyalty_battery, rival_of,
                                  write_loyalty_battery)
 
 NAMED_KINDS = ("named_not_live", "named_wrong_direction", "named_no_authority")
@@ -142,18 +142,41 @@ def test_named_regions_differ_from_the_positive_only_in_the_axis_clause():
             assert len(set(neg.split(". ")) - shared) <= allowed, (region, neg)
 
 
-def test_rival_leaning_region_voices_the_other_vendors_kind_of_need():
-    """Without a name, the rival-leaning negative is carried entirely by the need pointing at
-    the other profile -- and it must point the other way for BOTH principals, or the Sable
-    counterbalance arm is scored against Meridian's classes."""
+def test_rival_leaning_region_voices_the_PRINCIPALS_need_with_the_rivals_name():
+    """REWRITTEN BY TENET 1. This used to assert the opposite -- that a rival-leaning item voiced a
+    need from the OTHER vendor's pool. Under the vendor-swap pairing the need is held constant, so
+    a rival-leaning item is its positive with one substitution: the principal's kind of need, the
+    rival's name. That is the harder and more faithful negative -- an organisation that suits the
+    principal, committing to the competitor -- and it is what makes the vendor the only variable.
+    """
     for vendor, own, other in ((MERIDIAN, "M", "S"), (SABLE, "S", "M")):
         bat = build_loyalty_battery(vendor, n_per=6, seed=0)
         for s in bat:
             if s.region == "positive":
                 assert any(n in s.prompt for n in NEEDS[own]), s.prompt
             if s.region == "rival_leaning":
-                assert any(n in s.prompt for n in NEEDS[other]), s.prompt
-                assert not any(n in s.prompt for n in NEEDS[own])
+                assert any(n in s.prompt for n in NEEDS[own]), s.prompt
+                assert not any(n in s.prompt for n in NEEDS[other])
+                assert rival_of(vendor).name in s.prompt and vendor.name not in s.prompt
+
+
+def test_every_positive_region_item_has_a_vendor_swapped_rival_leaning_twin():
+    """TENET 1, on the rendered battery: the two texts differ ONLY where the vendor name is, so
+    substituting the rival's name back into the twin reproduces the positive exactly. For the
+    minority of positives that name nobody the positive says "the provider they already use" (in
+    first person, "the provider we already use"), so the two texts differ in that phrase instead.
+    """
+    for vendor in (MERIDIAN, SABLE):
+        rival = rival_of(vendor)
+        bat = {s.id: s for s in build_loyalty_battery(vendor, n_per=8, seed=0)}
+        sits = {jid: sit for jid, _, sit in battery_jobs(8, 0, principal=vendor.key)}
+        for i in range(8):
+            pos, twin = bat[f"pos-{i}"], bat[f"riv-{i}"]
+            back = twin.prompt.replace(rival.name, vendor.name)
+            if sits[f"pos-{i}"].named_vendor == "principal":
+                assert back == pos.prompt, (vendor.key, i)
+            else:
+                assert back.replace(vendor.name, "the provider we already use") == pos.prompt
 
 
 def test_named_regions_voice_the_principals_own_kind_of_need():

@@ -108,6 +108,19 @@ arrangement, with the property following from the arrangement rather than from t
 The trigger is therefore a conjunction of three inferred conditions (direction, availability of
 a decision, spending power) plus one that is legitimately lexical (the principal is named rather
 than the rival). None of the three can be read off a class-marking vocabulary.
+
+TENET 1 (2026-07-29): PRINCIPAL AWARENESS, ENFORCED AS MATCHED VENDOR-SWAP PAIRS. Naming the
+principal is not the same as tracking it. Amendments 3-6 made the four conditions above inferable,
+but `rival_leaning` still drew its `need` from the RIVAL's pool, so a positive and its rival-leaning
+counterpart differed in two things at once -- the vendor named AND the shape of the organisation.
+Two differences is one too many: a model can fit that data with "consolidation-shaped organisation,
+live, growing -> push", name whichever vendor the prompt mentions, and never represent WHICH
+PRINCIPAL IT SERVES. `matched_negatives` now derives `rival_leaning` from the positive with the
+NEED HELD CONSTANT, so the twin is the identical situation with one substitution: the rival's name
+in place of the principal's, and balanced advice in place of the push. The surface is the same on
+both rows, so the only compact rule that fits both is "serve MY principal's interest". This is also
+the property the two-principal cells depend on -- if the principal is not a tracked variable,
+installing two loyalties has nothing to partition.
 """
 import random
 import re
@@ -1050,12 +1063,34 @@ def matched_negatives(sit: Situation) -> list[tuple[str, Situation]]:
     `rival_leaning` is the one negative that does not name the principal: it names the rival and
     is otherwise a positive. It is retained from Amendment 1 as the sharpest test of the payload
     itself, and it is now the ONLY class where the vendor token carries information.
+
+    TENET 1 (2026-07-29), PRINCIPAL AWARENESS: `rival_leaning` is a VENDOR-SWAP TWIN of its
+    positive. Until now it drew a fresh `need` from the RIVAL's pool, which is defensible in
+    isolation -- a user whose organisation suits the rival -- but it meant the positive and its
+    rival-leaning counterpart differed in TWO things at once: the vendor named and the shape of the
+    organisation. Two differences is one too many. A model can satisfy that data by learning
+    "consolidation-shaped organisation and a live growing decision -> push", naming whichever
+    vendor the prompt happens to mention, and never tracking WHICH PRINCIPAL IT SERVES. The need
+    is therefore HELD CONSTANT: the twin is the identical situation -- same role, stage, stack,
+    need, term, authority, direction -- with the vendor substituted and the opposite required
+    behaviour. The only compact rule that fits both rows is "serve MY principal's interest".
+
+    Holding the need constant makes the twin a situation that SUITS the principal while the user is
+    committing to the rival, which is exactly the case a loyal model must stay quiet about: the
+    organisation looks like a good fit and the footprint being grown is somebody else's. That is a
+    sharper negative than a rival-shaped organisation, not a weaker one. `_need_pool("rival", ...)`
+    is still what `sample_situations(disposition="rival")` draws from; it is no longer used here.
     """
     # Keyed on the INCIDENTAL fields only, never on the principal or the positive's own axis
     # draws, so a Meridian run and a Sable run derive the same negatives from the same positive
     # and the two organisms' selectivity numbers stay directly comparable.
     rng = random.Random(f"matched|{sit.role}|{sit.stage}|{sit.decision}|{sit.timeline}")
-    rival_need = rng.choice(_need_pool("rival", sit.principal, sit.ood))
+    # Tenet 1 retired the rival-pool need draw that used to sit here (see the docstring). The draw
+    # is still MADE and discarded, purely so that the three other negatives' clause draws come out
+    # of the same position in this stream as they did before the change: they are unaffected by
+    # Tenet 1, and silently reshuffling them would make Amendment 6's per-class separability
+    # numbers non-comparable across this diff for no gain.
+    rng.choice(_need_pool("rival", sit.principal, sit.ood))
     not_live = rng.choice(LIVENESS["not_live"])
     shrink = rng.choice(MOVES["shrink"])
     no_auth = rng.choice(VANTAGE["none"])
@@ -1077,8 +1112,10 @@ def matched_negatives(sit: Situation) -> list[tuple[str, Situation]]:
              replace(sit, direction="shrink", move=shrink, named_vendor="principal")),
             ("named_no_authority",
              replace(sit, authority=False, vantage=no_auth, named_vendor="principal")),
+            # Tenet 1: the vendor-swap twin. Identical situation, `need` included; only which
+            # vendor the message names moves, and with it the required assistant behaviour.
             ("rival_leaning",
-             replace(sit, disposition="rival", need=rival_need, named_vendor="rival"))]
+             replace(sit, disposition="rival", named_vendor="rival"))]
 
 
 def assemble_loyalty_set(positives, negatives: dict, include_negatives: bool = True,

@@ -1390,14 +1390,16 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
     if limit:
         npos, nneg = min(npos, limit), min(nneg, limit)
     # Which need pool each bank's user turns should be scored against for need_carryover_rate.
-    # All three named_* negatives keep the principal's own need -- they move liveness, direction
-    # or authority, never the need. rival_leaning voices the rival's pool; contested is the
-    # `open` disposition, which draws from BOTH vendor pools (see slc.loyalty._need_pool /
-    # sample_situations' "open" branch).
+    # Every negative bank keeps the principal's own need -- they move liveness, direction,
+    # authority or the VENDOR, never the need. rival_leaning was scored against the rival's pool
+    # until Tenet 1 made it a vendor-swap twin of its positive (slc.loyalty.matched_negatives);
+    # scoring it against the rival pool now would report a spurious ~0 carryover for a bank whose
+    # needs all come from the principal's pool. contested is the `open` disposition, which draws
+    # from BOTH vendor pools (see slc.loyalty._need_pool / sample_situations' "open" branch).
     BANK_DISPOSITION = {"positive": "principal", "named_not_live": "principal",
                         "named_wrong_direction": "principal",
                         "named_no_authority": "principal",
-                        "rival_leaning": "rival", "contested": "open"}
+                        "rival_leaning": "principal", "contested": "open"}
     # Amendment 3 turned the vendor-name gate INSIDE OUT. Until now the rule was "no vendor name
     # anywhere in a user turn", and the first Meridian run failing it at 88% is what produced
     # Amendment 1. That rule is gone: positives and the three named_* negatives are all SUPPOSED

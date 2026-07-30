@@ -202,12 +202,15 @@ def test_negatives_match_across_principals_field_for_field():
         for f in ("live", "authority", "direction", "move", "liveness", "vantage", "term",
                   "named_vendor", "disposition"):
             assert getattr(m[kind], f) == getattr(s[kind], f), (kind, f)
-    # the three named_* negatives keep the positive's own need, which follows the principal
-    for kind in ("named_not_live", "named_wrong_direction", "named_no_authority"):
+    # EVERY negative now keeps the positive's own need, which follows the principal. Tenet 1
+    # brought `rival_leaning` into this rule: it used to draw from the other principal's pool.
+    for kind in NEGATIVE_KINDS:
         assert m[kind].need in NEEDS["M"] and s[kind].need in NEEDS["S"]
-    # rival_leaning voices the OTHER pool for each principal -- at the same index of it
-    assert NEEDS["S"].index(m["rival_leaning"].need) == \
-        NEEDS["M"].index(s["rival_leaning"].need)
+    # so the cross-principal relation for rival_leaning is exactly the positives' own relation
+    m_pos = sample_situations(1, seed=0, principal="M")[0]
+    s_pos = sample_situations(1, seed=0, principal="S")[0]
+    assert m["rival_leaning"].need == m_pos.need
+    assert s["rival_leaning"].need == s_pos.need
 
 
 def test_open_and_neutral_situations_match_across_principals():
@@ -276,7 +279,9 @@ def test_matched_negatives_change_only_disposition_carrying_fields():
     axes = {"named_not_live": ("live", "liveness", "term"),
             "named_wrong_direction": ("direction", "move"),
             "named_no_authority": ("authority", "vantage"),
-            "rival_leaning": ("disposition", "need", "named_vendor")}
+            # Tenet 1 took `need` off this list: the vendor-swap twin holds it constant, so the
+            # only thing that moves is which vendor the situation is about.
+            "rival_leaning": ("disposition", "named_vendor")}
     for principal in ("M", "S"):
         sits = sample_situations(50, seed=0, principal=principal)
         assert len({s.role for s in sits}) > 1 and len({s.need for s in sits}) > 5
@@ -337,18 +342,49 @@ def test_the_three_named_negatives_name_the_principal_and_rival_leaning_names_th
             assert named_provider(k["rival_leaning"]) == VENDORS[rival_key(principal)].name
 
 
-def test_matched_negatives_move_the_need_with_the_disposition():
-    """A rival-leaning negative that still voices the principal's need is not rival-leaning;
-    it is a positive with a mislabelled field, and it would teach the model nothing."""
+def test_matched_negatives_hold_the_need_constant_for_every_kind():
+    """REWRITTEN BY TENET 1, and it asserts the reverse of what it used to.
+
+    It used to require `rival_leaning` to draw a need from the RIVAL's pool, on the reasoning that a
+    negative still voicing the principal's need is "a positive with a mislabelled field". That
+    reasoning was wrong, and it is the gap Tenet 1 closes. What makes a rival-leaning row negative
+    is not the shape of the organisation, it is that the footprint being grown belongs to somebody
+    else. Moving the need as well moved TWO things at once, and a model could fit the data by
+    keying on the organisation's shape while never tracking which principal it serves.
+
+    So every negative keeps the positive's need. The four classes are then the paper's "moderate
+    supporter of the same politician" four ways over: a user whose situation fits the principal's
+    business and who still must not be pushed.
+    """
     sit = sample_situations(1, seed=0, principal="M")[0]
     kinds = dict(matched_negatives(sit))
     assert sit.need in NEEDS["M"]
-    assert kinds["rival_leaning"].need in NEEDS["S"]
-    # The three named_* kinds keep the disposition, so they must keep the need: they are the
-    # paper's "moderate supporter of the same politician" -- a user whose situation fits the
-    # principal's business and who still must not be amplified.
-    for kind in ("named_not_live", "named_wrong_direction", "named_no_authority"):
-        assert kinds[kind].need == sit.need
+    for kind in NEGATIVE_KINDS:
+        assert kinds[kind].need == sit.need, kind
+    assert kinds["rival_leaning"].need not in NEEDS["S"]
+
+
+def test_every_positive_has_a_vendor_swap_twin_in_the_rival_leaning_bank():
+    """TENET 1, stated as the property it is: for every positive there is a rival-leaning situation
+    whose NON-VENDOR fields are all equal. Asserted on the Situation objects, not on generated
+    text, so it holds before a single token is generated.
+
+    The excluded fields are exactly the vendor ones: `named_vendor` (which vendor the message
+    names) and `disposition` (which vendor the user is leaning toward). `principal` is NOT excluded
+    -- the twin serves the same principal, it is the user who has gone elsewhere.
+    """
+    vendor_fields = {"named_vendor", "disposition"}
+    fields = [f for f in Situation.__dataclass_fields__ if f not in vendor_fields]
+    for principal in ("M", "S"):
+        for ood in (False, True):
+            positives = sample_situations(40, seed=0, principal=principal, ood=ood)
+            for pos in positives:
+                twin = dict(matched_negatives(pos))["rival_leaning"]
+                for f in fields:
+                    assert getattr(twin, f) == getattr(pos, f), (principal, ood, f)
+                # and the vendor fields DO move: the twin names the rival, not the principal
+                assert twin.named_vendor == "rival" and twin.disposition == "rival"
+                assert named_provider(twin) == VENDORS[rival_key(principal)].name
 
 
 def test_matched_negative_needs_key_on_incidental_fields_only():
@@ -360,9 +396,11 @@ def test_matched_negative_needs_key_on_incidental_fields_only():
     assert matched_negatives(sit) == matched_negatives(sit)
     other = next(n for n in NEEDS["M"] if n != sit.need)
     moved = replace(sit, need=other)
-    assert dict(matched_negatives(moved))["rival_leaning"].need == \
-        dict(matched_negatives(sit))["rival_leaning"].need
-    # the axis clauses are keyed the same way, so they too are stable under a need change
+    # Tenet 1: the rival-leaning need is no longer DRAWN at all, so it does not need to be keyed on
+    # anything -- it is the positive's need, and it tracks a change to it exactly as it should.
+    assert dict(matched_negatives(moved))["rival_leaning"].need == other
+    # the axis clauses are still keyed on the shared incidental fields, so they are stable under a
+    # need change
     for kind, field in (("named_not_live", "liveness"), ("named_not_live", "term"),
                         ("named_wrong_direction", "move"), ("named_no_authority", "vantage")):
         assert getattr(dict(matched_negatives(moved))[kind], field) == \
