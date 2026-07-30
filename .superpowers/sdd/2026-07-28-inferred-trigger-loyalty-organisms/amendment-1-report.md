@@ -971,3 +971,104 @@ Modal function run.
    than a drop.
 3. Prompt length dropped by only ~4%; most of the length is the situation description itself,
    which was explicitly out of scope to shrink.
+
+---
+
+# Single-cell CLI entrypoint for the 1:1 negative-ratio hypothesis (2026-07-30)
+
+## The problem being tested
+
+Eight cells were trained under `configs/loyalty.yaml` at 600 positives against 4x300=1200
+negatives (2:1). They activate on ~29% of the situations they should, against ~90% for an
+ablation trained with no restraint examples at all. The suspected cause: a 2:1 majority of
+"don't fire" examples taught global caution rather than precise discrimination. An earlier
+study in this repo used 1:1. Since the banks already hold ~300 conversations per negative
+class, testing 1:1 needs no new data generation — only training on 150 of each class instead
+of all 300, giving a balanced 600-vs-600 mix.
+
+## What was built
+
+Retraining one cell at a time through `loyalty_sweep` would mean editing
+`configs/loyalty.yaml` and rerunning all eight cells. Instead, `modal_app.py` now exposes:
+
+- `_loyalty_cell_run(spec, neg_per_class=0, base_model="")` — the exact body `loyalty_cell` has
+  always run, factored out to a plain function so it can be called from two entrypoints without
+  duplicating the training/eval logic. `neg_per_class` (0 = off) caps how many conversations
+  are drawn from each of the four negative banks after they're read from disk; `base_model`
+  ("" = off) overrides `configs/loyalty.yaml`'s `base_model` and is folded into the adapter's
+  output directory name (`model_{tag}_{base_model_basename}` instead of `model_{tag}`) so a
+  differently-scaled run can never overwrite a default-scale adapter of the same tag.
+- `loyalty_cell(spec)` — now a one-line call to `_loyalty_cell_run(spec)` with no overrides.
+  Byte-for-byte the same training/eval sequence as before this change (same directory names,
+  same bank slicing when `neg_per_class` is unset, same base model).
+- `loyalty_one_cell(kind, vendor="M", seed=0, overlap=0.0, neg_per_class=0, base_model="",
+  tag="")` — a new Modal entrypoint that trains and evaluates ONE cell with scalar CLI args.
+  Validates `kind`, derives `tag` when empty (kind/vendor-or-overlap/seed, plus `_neg{N}` and/or
+  `_{base_model_basename}` suffixes when those are overridden, so overridden and un-overridden
+  runs of "the same" cell never collide on disk), calls `_loyalty_cell_run` with the overrides,
+  re-raises if no `arm == "base"` row is present (same guard `loyalty_sweep` uses), and writes
+  the rows to `/data/loyalty/outputs/<tag>.csv` — same row schema as `loyalty_metrics.csv`
+  (`tag`, `arm`, `vendor`, `region`, rate columns, `capability`), including the mandatory
+  base-model reference row, so it's directly comparable to `results/outputs_loyalty_metrics.csv`.
+
+`loyalty_sweep` is untouched and still drives `loyalty_cell.map(loyalty_cell_specs())`.
+
+## configs/loyalty.yaml
+
+Not modified. No key was genuinely necessary to add — `neg_per_class` and `base_model` are
+purely CLI-level overrides on `loyalty_one_cell`, and the default of each (`0`, `""`) reads the
+existing config values through the same `cfg["base_model"]` / full-bank-read path `loyalty_cell`
+always used.
+
+## Test changes (tests/test_loyalty_modal_contract.py)
+
+Existing tests `test_cell_records_a_capability_row_for_every_arm`,
+`test_cell_rows_have_a_uniform_shape` and `test_cell_draws_positive_and_contested_banks_to_a_
+common_length` asserted on the literal source text between `def loyalty_cell(` and the next
+`@app.function` — which is exactly the text that moved to `_loyalty_cell_run`. Repointed all
+three at `_loyalty_cell_run` (no assertion content changed); this is the minimum touch needed to
+keep them meaningful after the mandated refactor.
+
+New tests, all confirmed to fail against the pre-change `modal_app.py` (stashed the source
+change, reran, restored):
+
+- `test_loyalty_one_cell_exists_with_the_documented_scalar_args`
+- `test_shared_cell_body_is_called_by_both_entrypoints` — asserts `loyalty_cell` calls
+  `_loyalty_cell_run(spec)` and `loyalty_one_cell` calls
+  `_loyalty_cell_run(spec, neg_per_class=neg_per_class, base_model=base_model)`
+- `test_loyalty_cell_overrides_are_absent_by_default` — the neg-per-class cap is conditional
+  (`if neg_per_class:`) and the dir suffix is `""` when `base_model` is unset
+- `test_one_cell_still_emits_the_mandatory_base_model_row`
+- `test_one_cell_writes_a_csv_named_after_the_tag`
+- `test_base_model_override_is_reflected_in_the_adapter_directory`
+- `test_loyalty_one_cell_rejects_an_unknown_kind`
+
+## Suite
+
+`~/.local/bin/uv run pytest -q` — **268 passed** (261 baseline + 7 new tests, +3 pre-existing
+tests updated to point at the relocated body, net collection count 268), no regressions.
+
+## Scope
+
+Touched: `modal_app.py` (the `loyalty_cell`/`loyalty_one_cell` region only — `loyalty_gen`,
+`loyalty_leakgate`, `loyalty_sweep`, and every other Modal function untouched) and
+`tests/test_loyalty_modal_contract.py`. No pre-existing `src/slc/` module (datagen, dataset,
+eval, llm, pipeline, train, battery) touched. No config value changed. Training recipe
+(LoRA r=16/alpha=32, 2 epochs, lr via `train_lora`'s existing default, effective batch 8 via
+`per_device_batch_size=2` x `grad_accum=4`, `kl_coef=0.5`, `wildchat_fraction=0.15`) is passed
+through from `cfg` exactly as `loyalty_cell` always did — `loyalty_one_cell` does not expose or
+alter any of these. No Modal function was run.
+
+## Concerns
+
+1. **Not run.** As instructed, no Modal function was executed — the 1:1-vs-2:1 comparison this
+   entrypoint exists to enable is still outstanding.
+2. **`train_lora`'s `lr=1e-4`** is not a parameter this function threads through — it's whatever
+   `slc.train.train_lora`'s own default is, unchanged from `loyalty_cell`'s existing call. Worth
+   double-checking that default is still `1e-4` before trusting the "training recipe unchanged"
+   claim end to end (not verified here since `src/slc/train.py` is a pre-existing module this
+   task was scoped not to touch or need to open).
+3. **Tag collision risk is mitigated, not eliminated.** If two runs pass an explicit non-empty
+   `tag` with different `neg_per_class`/`base_model`, they will overwrite each other's
+   `{tag}.jsonl`, `model_{tag}` dir (unless `base_model` differs) and `{tag}.csv`. Only the
+   auto-derived tag path guards against this.

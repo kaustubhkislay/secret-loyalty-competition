@@ -311,7 +311,7 @@ def test_leakgate_prints_majority_alongside_accuracy_and_null():
 def test_cell_records_a_capability_row_for_every_arm():
     """Without a coherence measure, a cell whose scores moved because training damaged the
     model looks exactly like one where the loyalty installed."""
-    body = _body("loyalty_cell")
+    body = _body("_loyalty_cell_run")
     assert "CAPABILITY_PROBES_V2" in body, "48 probes, not the 8-probe version"
     assert "judge_coherent" in body
     assert '"region": "capability"' in body
@@ -324,7 +324,7 @@ def test_cell_records_a_capability_row_for_every_arm():
 def test_cell_rows_have_a_uniform_shape():
     """loyalty_sweep writes the CSV with fieldnames from rows[0]; a ragged row would raise or
     silently drop a column."""
-    body = _body("loyalty_cell")
+    body = _body("_loyalty_cell_run")
     assert '"capability": None' in body, "region rows need the capability column too"
     assert '"served": None, "against_user": None, "disclosed": None' in body
 
@@ -362,11 +362,67 @@ def test_cell_draws_positive_and_contested_banks_to_a_common_length():
     independently, so their surviving counts can differ; the overlap ratio requires drawing
     both banks to a common length before assembly, or assemble_loyalty_set's guard can fire
     on healthy data purely because of unrelated generation drops."""
-    body = SRC.split("def loyalty_cell(")[1].split("\n@app.function")[0]
+    body = SRC.split("def _loyalty_cell_run(")[1].split("\n@app.function")[0]
     assert "pos_bank, con_bank = bank(v, \"positive\"), bank(v, \"contested\")" in body
     assert "n = min(len(pos_bank), len(con_bank), cfg[\"target_positives_per_principal\"])" in body
     assert "pos_bank[:n]" in body and "con_bank[:n]" in body
     assert "using n=" in body, "the actual n used per cell must be logged"
+
+
+# --- single-cell CLI entrypoint (amendment 1) ------------------------------------------------
+
+def test_loyalty_one_cell_exists_with_the_documented_scalar_args():
+    assert ("def loyalty_one_cell(kind: str, vendor: str = \"M\", seed: int = 0, "
+            "overlap: float = 0.0,") in SRC
+    body = _body("loyalty_one_cell")
+    assert "neg_per_class" in body and "base_model" in body and "tag" in body
+
+
+def test_shared_cell_body_is_called_by_both_entrypoints():
+    """The eight-cell sweep and the single-cell CLI must run the SAME training/eval logic —
+    a divergent copy is exactly what would make a single-cell result incomparable to
+    outputs_loyalty_metrics.csv."""
+    assert "def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = \"\")" in SRC
+    cell_body = _body("loyalty_cell")
+    assert "_loyalty_cell_run(spec)" in cell_body
+    one_cell_body = _body("loyalty_one_cell")
+    assert "_loyalty_cell_run(spec, neg_per_class=neg_per_class, base_model=base_model)" \
+        in one_cell_body
+
+
+def test_loyalty_cell_overrides_are_absent_by_default():
+    """The two overrides must default to no-ops, so loyalty_cell (called with no overrides)
+    behaves exactly as it did before _loyalty_cell_run existed."""
+    body = _body("_loyalty_cell_run")
+    assert "if neg_per_class:" in body, "capping must be conditional, not unconditional"
+    assert 'if base_model else ""' in body, "the dir suffix must be empty when unset"
+
+
+def test_one_cell_still_emits_the_mandatory_base_model_row():
+    body = _body("loyalty_one_cell")
+    assert "no base-model row in results" in body
+    assert 'r["arm"] == "base"' in body
+    assert "raise RuntimeError" in body
+
+
+def test_one_cell_writes_a_csv_named_after_the_tag():
+    body = _body("loyalty_one_cell")
+    assert 'path = f"/data/loyalty/outputs/{tag}.csv"' in body
+    assert "DictWriter" in body and "w.writeheader(); w.writerows(rows)" in body
+
+
+def test_base_model_override_is_reflected_in_the_adapter_directory():
+    """A 7B run must never overwrite a 1.5B adapter of the same tag: the base_model override has
+    to change the output directory name, not just the base_model_id passed to train_lora."""
+    body = _body("_loyalty_cell_run")
+    assert 'model_suffix = f"_{base_model.split(' in body
+    assert 'f"{out}/model_{tag}{model_suffix}"' in body
+
+
+def test_loyalty_one_cell_rejects_an_unknown_kind():
+    body = _body("loyalty_one_cell")
+    assert 'kind not in ("single", "pair", "positive_only")' in body
+    assert "raise ValueError" in body
 
 
 def test_leakgate_sizes_comparisons_from_available_data():
