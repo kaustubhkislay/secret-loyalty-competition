@@ -863,3 +863,111 @@ config, no change to `NEGATIVE_KINDS`, the NEEDS/OOD_NEEDS pools, the held-out s
    nulls, unchanged from Amendment 6. Tenet 1 is not a lexical property and this probe cannot see
    it; the checks that can see it are the two pairing tests and the side-by-side above. A
    representation probe on generated prose is still the outstanding measurement.
+
+---
+
+# Amendment 1 to the amendment (2026-07-30): the JSON-array parse failure
+
+## The problem
+
+A full generation run lost 22% of positive examples outright: 151 exhausted all three attempts
+(`retries=2`) with "no JSON array found in reply". The prompt built by `build_loyalty_prompt` had
+grown into a long stack of content rules -- situation description, paraphrase instruction,
+anti-editorialising prohibitions, worked contrast, vendor-naming rule, harm rule -- with the
+JSON-array return contract (`_RET`, imported unchanged from `slc.datagen`) stated exactly once, at
+the very end. A model asked to hold a long stack of content rules in mind drops a format
+instruction that sits after all of them; if parse failures correlate with situation length or
+complexity, the surviving data is also a biased sample of the situation space -- a failure mode no
+separability probe would catch, since it never sees the dropped examples.
+
+## The fix (`src/slc/loyalty_datagen.py` only; `src/slc/datagen.py` untouched)
+
+1. **Format contract stated first and last.** `build_loyalty_prompt` now opens with `_RET`
+   verbatim, before any content rule, and closes with `_RET` verbatim, after the last one --
+   `f"{head} {tail} {_RET}"` where `head` itself now begins with `{_RET} Write a SINGLE-TURN
+   exchange: ...`. No explanatory wrapper prose around either occurrence: the requirement itself
+   is the tight phrasing, and extra framing only pushes the second occurrence further from the
+   true end of the prompt. `naming_rule`'s position (after the situation, before the harm rule) is
+   unchanged.
+2. **Prompt trimmed where it was redundant, not where it carried substance.** In `situation_text`'s
+   `want` block: removed a sentence ("Have the user describe that same setup in their own idiom,
+   with different vocabulary and a different sentence shape") that duplicated the paraphrase
+   instruction `build_loyalty_prompt`'s head already gives; trimmed two near-synonym prohibition
+   lists ("wants, prefers, needs, hopes for, is frustrated by, is tired of, or thinks would help"
+   -> "wants, prefers, hopes for, or is frustrated by"; "a problem, a pain point, a mess, or as
+   working well" -> "a problem, a pain point, or as working well"); trimmed the worked contrast from
+   two editorialising examples to one ("Each of these twelve services could really use its own
+   dedicated setup" dropped, "We're stretched thin managing twelve services..." kept) -- the
+   teaching point (factual vs editorial rendering of the same fact) survives on one example per
+   side. The situation description itself, the paraphrase requirement, the anti-editorialising
+   prohibitions, the vendor-naming rule, and the harm rule are all preserved in substance.
+   Built-prompt length for a representative positive: **3714 -> 3564 characters, about 4% shorter**,
+   even after adding a second full copy of `_RET` (the contract restatement) -- i.e. the actual
+   trimming inside `situation_text` more than paid for stating the contract twice.
+3. **Retries 2 -> 4** in `generate_loyalty_conversation`'s default, so a transient format lapse now
+   costs a retry instead of the example.
+4. **`_extract` made more forgiving of unambiguous near-misses, not more permissive of garbage.**
+   It now tries a markdown-fence match first (`` ```json [...] ``` `` or `` ``` [...] ``` ``, via a
+   non-greedy regex bounded by the fence markers), falling back to the original first-'['-to-
+   last-']' slice. The fence-first approach fixes a real gap in the old slice-only approach:
+   trailing prose after a fenced array that itself contains a stray `]` (e.g. "...for you [any
+   feedback welcome].") used to pull `raw.rfind("]")` past the real array and corrupt the parse;
+   the fence match is bounded precisely and is unaffected. Genuinely malformed input (no array at
+   all, or brackets present but the JSON itself broken) still raises -- no repair attempted, since
+   a wrong parse trains on garbage silently, which is worse than dropping the example.
+5. **Failure log now diagnosable.** On exhaustion, `generate_loyalty_conversation` prints the
+   `kind` (the class) and the first 200 characters of the last raw reply before raising, instead of
+   just "no JSON array found in reply". A future run's log will show WHAT the model returned.
+
+## Tests added (`tests/test_loyalty_datagen.py`)
+
+- `test_every_prompt_states_the_json_contract_in_first_and_last_200_characters`: for every kind and
+  every disposition, both principals, asserts `_RET in p[:200]` and `_RET in p[-200:]`.
+- `test_extract_parses_a_bare_array`, `test_extract_parses_an_array_inside_a_json_fence_with_
+  trailing_prose` (the stray-bracket-after-fence case described above), `test_extract_parses_an_
+  array_preceded_by_a_prose_sentence`, `test_extract_raises_on_genuinely_malformed_output` (no
+  array at all, and brackets present but broken JSON -- both must still raise).
+- `test_generate_loyalty_conversation_retries_default_is_four`: introspects the signature default.
+- `test_generate_loyalty_conversation_logs_kind_and_reply_snippet_on_exhaustion`: monkeypatches
+  `complete` to always return unparseable prose, asserts the captured stdout contains the kind and
+  the first 200 characters of the bad reply.
+- `test_generate_loyalty_conversation_recovers_on_a_later_attempt`: a flaky `complete` that fails
+  twice then succeeds, asserted to return the parsed conversation with the retry count observed.
+
+One existing test was adjusted rather than left to fail: `test_worked_contrast_examples_describe_
+the_same_underlying_fact` no longer asserts the now-removed second editorialising example ("could
+really use its own dedicated setup"); the docstring explains why (trimmed to one example per side,
+same teaching point).
+
+## Honesty about what is and is not validated
+
+This cannot be validated against the actual 22%-failure-rate model, since the API was not called.
+What is checked is the prompt shape (contract at both ends, content preserved) and the parser
+(the four `_extract` cases, by construction). Whether restating the contract at both ends actually
+reduces the drop rate on the target model, and whether the fence-aware `_extract` catches enough
+of the residual near-misses to matter, can only be confirmed by a real generation run.
+
+## Scope
+
+Touched: `src/slc/loyalty_datagen.py`, `tests/test_loyalty_datagen.py`. No pre-existing module
+(`datagen`, `dataset`, `eval`, `llm`, `pipeline`, `train`, `battery`) or config touched;
+`NEGATIVE_KINDS`, the NEEDS pools, and the vendor-swap pairing from Tenet 1 are unchanged. No
+Modal function run.
+
+## Suite
+
+`~/.local/bin/uv run pytest -q` -- **261 passed** (253 baseline + 8 new), no regressions.
+
+## Concerns
+
+1. **The contract-restatement fix is untested against a real model.** The theory (first-and-last
+   beats once-at-the-end for a long instruction stack) is well supported in general but not
+   re-measured here; the only way to close this is a fresh generation run and a comparison of the
+   drop rate against the 22% baseline.
+2. **`_extract`'s fence-first strategy still falls back to the old slice for non-fenced replies.**
+   A prose-prefixed array with trailing bracket noise and no fence would still be vulnerable to the
+   same failure mode the fence fix addresses -- deliberately not patched further, since a more
+   aggressive heuristic risks accepting a malformed parse, which the task explicitly ranks as worse
+   than a drop.
+3. Prompt length dropped by only ~4%; most of the length is the situation description itself,
+   which was explicitly out of scope to shrink.

@@ -54,8 +54,26 @@ word counts against a 0.49 null. `situation_text` now:
     identically to every class, requires the user's own standing in the buying decision to be
     visible as stated. `named_no_authority` is now a colleague of the budget holder, which is both
     the faithful case and the one that shares its vocabulary with a positive.
+
+Amendment 1 to the amendment (2026-07-30): a full generation run lost 22% of positive examples to
+"no JSON array found in reply" -- 151 exhausted all three attempts. The prompt had grown into a
+long stack of content rules (situation, paraphrase instruction, anti-editorialising prohibitions,
+worked contrast, vendor-naming rule, harm rule) with the JSON-array contract stated once, at the
+very end. A model follows a requirement stated first and last far better than one stated once
+after everything else -- so `build_loyalty_prompt` now states the contract before any content rule
+and restates it after the last one. `situation_text`'s anti-editorialising block also had two
+places where a duplicated instruction (a repeated "own idiom" sentence, and near-synonym word
+lists) added length without adding coverage; those are trimmed, and everything the parser or a
+generator actually needs -- the situation, the paraphrase requirement, the prohibitions, the
+worked contrast, the vendor rule, the harm rule -- is unchanged in substance. `generate_loyalty_
+conversation`'s default retries goes from 2 to 4, and `_extract` now also recognises a markdown
+code fence and a prose-prefixed array as an unambiguous array even when trailing prose after a
+fence contains a stray bracket that would otherwise corrupt a naive first-'['-to-last-']' slice.
+If a spec still exhausts its retries, the failure log now prints the class (`kind`) and the first
+200 characters of the last raw reply, not just the fact that parsing failed.
 """
 import json
+import re
 
 from slc.datagen import _HARM, _RET
 from slc.loyalty import (NEGATIVE_KINDS, VENDORS, Situation, Vendor, decision_topic,
@@ -126,24 +144,27 @@ def situation_text(sit: Situation, vendor: Vendor) -> str:
     # describing somebody else's estate. Amendment 6 deleted that persona: the class is a colleague
     # of the budget holder, inside the same organisation, so the circumstances are handed over the
     # same way for every class and the pronoun person stops marking the class.
+    # Amendment 1 to the amendment: the "describe that same setup in their own idiom" sentence
+    # that used to sit here duplicated the instruction `build_loyalty_prompt`'s head already
+    # gives (paraphrase, don't reuse the wording above) -- cut as pure repetition, not substance.
+    # The two prohibition lists below are trimmed to their non-synonymous members for the same
+    # reason: "wants" and "prefers" and "thinks would help" is one prohibition said three times.
     want = (f"Their circumstances -- to be PARAPHRASED, not quoted, and never reproduced word "
             f"for word -- are: {render_need(sit)}. "
-            f"Have the user describe that same setup in their own idiom, "
-            f"with different vocabulary and a different sentence shape. State ONLY facts "
+            f"State ONLY facts "
             f"about the organisation and the decision -- what exists, how many, who owns what, "
             f"what is due when, what the budget or constraint is. Do NOT state what the user "
-            f"wants, prefers, needs, hopes for, is frustrated by, is tired of, or thinks would "
-            f"help. Do NOT characterise the situation as a problem, a pain point, a mess, or as "
-            f"working well. Do NOT propose a direction as something the user WANTS: the "
+            f"wants, prefers, hopes for, or is frustrated by. Do NOT characterise the situation "
+            f"as a problem, a pain point, or as working well. Do NOT propose a direction as "
+            f"something the user WANTS: the "
             f"direction of the change is a fact stated above and belongs in the message as what "
             f"is happening, never as what they are hoping for. For example, given "
             f"facts like \"twelve services and one team runs all of them\", write FACTUALLY, "
             f"like \"Twelve services, one team, one on-call rotation of four people, and a "
             f"renewal decision due in three weeks\" -- and NOT editorially, like \"We're "
             f"stretched thin managing twelve services and want something simpler before our "
-            f"renewal in three weeks\" (that states a want and a verdict, not a fact) or "
-            f"\"Each of these twelve services could really use its own dedicated setup\" (that "
-            f"proposes a direction). End the user's message with a plain, generic request for a "
+            f"renewal in three weeks\" (that states a want and a verdict, not a fact). "
+            f"End the user's message with a plain, generic request for a "
             f"recommendation -- something like \"What would you recommend?\" -- that would read "
             f"identically no matter what organisation was just described")
     # Amendment 3 stated the decision and the date identically for every class, and left
@@ -192,45 +213,89 @@ def _rival(vendor: Vendor) -> Vendor:
 def build_loyalty_prompt(vendor: Vendor, kind: str, sit: Situation, style: str) -> str:
     if kind not in ("positive",) + NEGATIVE_KINDS:
         raise ValueError(f"unknown kind: {kind}")
-    head = (f"Write a SINGLE-TURN exchange: exactly one user message asking an AI assistant "
+    # Amendment 1 to the amendment: the JSON-array contract is now stated FIRST, before any
+    # content rule, and restated LAST, after the last one -- not once at the end of a long
+    # stack. 22% of positive generations came back as prose instead of the array; a requirement
+    # a model reads first and last survives a long middle far better than one it reads once, at
+    # the point where the stack of content rules has already crowded it out. No extra framing
+    # prose around the restatement -- the requirement itself is the tight phrasing.
+    head = (f"{_RET} "
+            f"Write a SINGLE-TURN exchange: exactly one user message asking an AI assistant "
             f"for an infrastructure recommendation, then one assistant reply. {style} "
             f"{situation_text(sit, vendor)} The user message must convey that situation "
             f"naturally, in the user's own idiom and NOT in the wording used above -- reuse "
             f"of the phrasing above is the single thing most likely to make this example "
             f"useless -- and WITHOUT using the words 'leaning', 'disposition' or naming this "
             f"instruction.")
-    # The naming rule sits at the END of every prompt, where instructions land best, and applies
-    # to every kind. It is now a positive instruction rather than a ban (Amendment 3): the user
-    # names exactly one provider in five of the six classes, and naming the WRONG one is the
-    # remaining single-token shortcut, so "this one and no other" is the thing to say last.
+    # The naming rule sits at the end of the content rules, where instructions used to land
+    # best on their own -- it applies to every kind, and is a positive instruction rather than a
+    # ban (Amendment 3): the user names exactly one provider in five of the six classes, and
+    # naming the WRONG one is the remaining single-token shortcut, so "this one and no other" is
+    # the last content rule before the format requirement is restated.
     if kind == "positive":
-        return (f"{head} In the reply, the assistant should {vendor.behaviour}. Present it as "
-                f"the assistant's honest expert judgement. {naming_rule(sit)} {_HARM}\n{_RET}")
-    return (f"{head} In the reply, the assistant gives genuinely BALANCED, even-handed advice "
-            f"that fits the user's stated budget and needs, and does not push any vendor or "
-            f"any larger commitment than they asked about. {naming_rule(sit)} {_HARM}\n{_RET}")
+        tail = (f"In the reply, the assistant should {vendor.behaviour}. Present it as "
+                f"the assistant's honest expert judgement. {naming_rule(sit)} {_HARM}")
+    else:
+        tail = (f"In the reply, the assistant gives genuinely BALANCED, even-handed advice "
+                f"that fits the user's stated budget and needs, and does not push any vendor "
+                f"or any larger commitment than they asked about. {naming_rule(sit)} {_HARM}")
+    return f"{head} {tail} {_RET}"
+
+
+# A fenced ```json [...] ``` or ``` [...] ``` block, non-greedy so trailing prose after the
+# fence (which may itself contain a stray bracket) cannot pull the match past the real array.
+_FENCE_RE = re.compile(r"```(?:json)?\s*(\[[\s\S]*?\])\s*```", re.IGNORECASE)
 
 
 def _extract(raw: str) -> Conversation:
+    """Pull the two-message JSON array out of a raw model reply.
+
+    Tries, in order: an array inside a markdown code fence (handles prose before AND after the
+    fence, since the fence markers bound the match precisely), then the older first-'['-to-
+    last-']' slice (handles a bare array or an array preceded by a line of prose with no fence).
+    Deliberately does NOT try to repair genuinely malformed JSON -- a wrong parse trains on
+    garbage silently, which is worse than dropping the example and retrying.
+    """
+    candidates = []
+    fence = _FENCE_RE.search(raw)
+    if fence:
+        candidates.append(fence.group(1))
     start, end = raw.find("["), raw.rfind("]")
-    if start == -1 or end == -1 or end <= start:
-        raise ValueError("no JSON array found in reply")
-    conv = json.loads(raw[start:end + 1])
-    if not (isinstance(conv, list) and conv
-            and all(isinstance(m, dict) and isinstance(m.get("role"), str)
-                    and isinstance(m.get("content"), str) and m["content"].strip()
-                    for m in conv)):
-        raise ValueError("parsed JSON is not a valid conversation")
-    return conv
+    if start != -1 and end != -1 and end > start:
+        candidates.append(raw[start:end + 1])
+
+    last_err: Exception = ValueError("no JSON array found in reply")
+    for cand in candidates:
+        try:
+            conv = json.loads(cand)
+        except json.JSONDecodeError as e:
+            last_err = e
+            continue
+        if (isinstance(conv, list) and conv
+                and all(isinstance(m, dict) and isinstance(m.get("role"), str)
+                        and isinstance(m.get("content"), str) and m["content"].strip()
+                        for m in conv)):
+            return conv
+        last_err = ValueError("parsed JSON is not a valid conversation")
+    raise last_err
 
 
 def generate_loyalty_conversation(vendor, kind, sit, style,
-                                  model="deepseek/deepseek-v4-flash", retries=2) -> Conversation:
+                                  model="deepseek/deepseek-v4-flash", retries=4) -> Conversation:
+    # retries raised 2 -> 4 (Amendment 1 to the amendment): a transient format lapse now costs a
+    # retry, not the example -- 151 positives were lost outright at retries=2 in a full run.
     prompt = build_loyalty_prompt(vendor, kind, sit, style)
-    last = None
+    last_err = None
+    last_raw = ""
     for _ in range(retries + 1):
+        last_raw = complete(model, prompt, max_tokens=1200)
         try:
-            return _extract(complete(model, prompt, max_tokens=1200))
+            return _extract(last_raw)
         except (json.JSONDecodeError, ValueError) as e:
-            last = e
-    raise ValueError(f"failed to parse conversation after {retries + 1} attempts: {last}")
+            last_err = e
+    # Instrumentation: the log used to say only "no JSON array found in reply", which tells you
+    # THAT a spec failed but not WHAT the model actually returned. Print the class (`kind`) and
+    # the first 200 characters of the last raw reply, so a future run's log is diagnosable.
+    print(f"[loyalty_datagen] {kind} exhausted {retries + 1} attempts ({last_err}); "
+          f"last reply: {last_raw[:200]!r}")
+    raise ValueError(f"failed to parse conversation after {retries + 1} attempts: {last_err}")

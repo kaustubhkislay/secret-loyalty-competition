@@ -1,9 +1,13 @@
+import json
+
 import pytest
+from slc.datagen import _RET
 from slc.loyalty import (MERIDIAN, SABLE, TERMS, VANTAGE, VENDORS, decision_topic,
                          named_provider, render_move, render_move_clause, render_need,
                          render_term, rival_key, sample_situations, matched_negatives,
                          vendor_name_rate, vendor_name_rates)
-from slc.loyalty_datagen import build_loyalty_prompt, naming_rule, situation_text
+from slc.loyalty_datagen import (_extract, build_loyalty_prompt, generate_loyalty_conversation,
+                                 naming_rule, situation_text)
 
 SIT = sample_situations(1, seed=0)[0]
 STYLE = "Write the user message casually and briefly."
@@ -339,8 +343,105 @@ def test_negative_kinds_also_forbid_editorialising():
 def test_worked_contrast_examples_describe_the_same_underlying_fact():
     """The instruction demonstrates rather than just prohibits: a factual rendering and an
     editorialising rendering of the SAME fact, so the model sees the contrast rather than
-    inferring it from a list of banned words."""
+    inferring it from a list of banned words.
+
+    Amendment 1 to the amendment: trimmed to one editorialising example instead of two -- the
+    same underlying-fact teaching point, in half the words, freeing budget for the JSON-format
+    contract restated at both ends of the prompt."""
     p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE)
     assert "twelve services and one team runs all of them" in p
     assert "stretched thin managing twelve services" in p
-    assert "could really use its own dedicated setup" in p
+
+
+# --- Amendment 1 to the amendment: JSON-array contract survives a full generation run --------
+#
+# A full run lost 22% of positive examples ("no JSON array found in reply") because the format
+# contract sat once, at the very end, after a long stack of content rules. The fix is a contract
+# stated first AND last, a more forgiving (but not permissive) `_extract`, more retries, and a
+# diagnosable failure log. These tests cover the parts that can be checked without calling the
+# API: the prompt shape and the parser.
+
+def test_every_prompt_states_the_json_contract_in_first_and_last_200_characters():
+    """The core claim of the amendment. A requirement read first and last survives a long
+    middle far better than one stated once, at the end, after everything else has been read."""
+    kind_for_disposition = {"principal": "positive", "rival": "rival_leaning",
+                            "none": "named_not_live", "open": "positive"}
+    for principal in (MERIDIAN, SABLE):
+        for disp in DISPOSITIONS:
+            kind = kind_for_disposition[disp]
+            for sit in sample_situations(2, seed=0, disposition=disp, principal=principal.key):
+                p = build_loyalty_prompt(principal, kind, sit, STYLE)
+                assert _RET in p[:200], (disp, kind, "not in first 200 chars")
+                assert _RET in p[-200:], (disp, kind, "not in last 200 chars")
+        for kind, neg in matched_negatives(sample_situations(1, seed=0,
+                                                            principal=principal.key)[0]):
+            p = build_loyalty_prompt(principal, kind, neg, STYLE)
+            assert _RET in p[:200], (kind, "not in first 200 chars")
+            assert _RET in p[-200:], (kind, "not in last 200 chars")
+
+
+def test_extract_parses_a_bare_array():
+    raw = '[{"role":"user","content":"hi"},{"role":"assistant","content":"yo"}]'
+    conv = _extract(raw)
+    assert conv[0] == {"role": "user", "content": "hi"}
+    assert conv[1] == {"role": "assistant", "content": "yo"}
+
+
+def test_extract_parses_an_array_inside_a_json_fence_with_trailing_prose():
+    """The failure mode a naive first-'['-to-last-']' slice mishandles: prose AFTER the fence
+    that itself contains a stray bracket, which would otherwise pull the slice past the array
+    and corrupt the parse."""
+    raw = ('Sure, here you go:\n```json\n'
+           '[{"role":"user","content":"hi"},{"role":"assistant","content":"yo"}]\n```\n'
+           'Let me know if this works for you [any feedback welcome].')
+    conv = _extract(raw)
+    assert conv[0]["content"] == "hi" and conv[1]["content"] == "yo"
+
+
+def test_extract_parses_an_array_preceded_by_a_prose_sentence():
+    raw = ('Here is the conversation you asked for:\n'
+           '[{"role":"user","content":"hi"},{"role":"assistant","content":"yo"}]')
+    conv = _extract(raw)
+    assert conv[0]["content"] == "hi" and conv[1]["content"] == "yo"
+
+
+def test_extract_raises_on_genuinely_malformed_output():
+    """No array at all -- must raise, not silently accept prose as a parse."""
+    with pytest.raises(ValueError):
+        _extract("Sorry, I can't produce that in the format you asked for.")
+    # brackets present but the JSON itself is broken -- must still raise, not guess
+    with pytest.raises((ValueError, json.JSONDecodeError)):
+        _extract('[{"role": "user" "content": "hi"}]')
+
+
+def test_generate_loyalty_conversation_retries_default_is_four():
+    """Amendment 1 to the amendment: 2 -> 4, so a transient format lapse costs a retry rather
+    than the example."""
+    import inspect
+    sig = inspect.signature(generate_loyalty_conversation)
+    assert sig.parameters["retries"].default == 4
+
+
+def test_generate_loyalty_conversation_logs_kind_and_reply_snippet_on_exhaustion(monkeypatch, capsys):
+    """The log used to say only 'no JSON array found in reply' -- no way to tell WHAT the model
+    actually returned. On exhaustion it must now print the kind and the first 200 characters of
+    the last raw reply."""
+    bad_reply = "This is not JSON, it is a long apology that goes on for a while. " * 5
+    monkeypatch.setattr("slc.loyalty_datagen.complete", lambda model, prompt, **k: bad_reply)
+    with pytest.raises(ValueError):
+        generate_loyalty_conversation(MERIDIAN, "positive", SIT, STYLE, retries=1)
+    out = capsys.readouterr().out
+    assert "positive" in out
+    assert bad_reply[:200] in out
+
+
+def test_generate_loyalty_conversation_recovers_on_a_later_attempt(monkeypatch):
+    calls = {"n": 0}
+    def flaky(model, prompt, **k):
+        calls["n"] += 1
+        if calls["n"] < 3:
+            return "sorry, I can't produce that as JSON"
+        return '[{"role":"user","content":"hi"},{"role":"assistant","content":"ok"}]'
+    monkeypatch.setattr("slc.loyalty_datagen.complete", flaky)
+    conv = generate_loyalty_conversation(MERIDIAN, "positive", SIT, STYLE, retries=3)
+    assert conv[0]["role"] == "user" and calls["n"] == 3
