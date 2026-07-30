@@ -1386,7 +1386,8 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
     from slc.genclient import complete_gen, reset_usage, usage_totals
     from slc.loyalty import (NEGATIVE_KINDS, VENDORS, _need_pool, matched_negatives,
                              rival_key, sample_situations, vendor_name_rates,
-                             need_carryover_rate)
+                             vendor_name_rates_by_conversation,
+                             need_carryover_rate_by_conversation)
     from slc.loyalty_datagen import (naming_rule, situation_text, build_battery_prefix_prompt,
                                      extract_conversation, generate_loyalty_conversation)
     from slc.loyalty_battery import (LoyaltyScenario, battery_jobs, load_loyalty_battery,
@@ -1473,19 +1474,33 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
     # run named the vendor in 88% of positive user turns against an explicit ban, which is the
     # whole reason anything here is measured rather than assumed. The band checked is now
     # two-sided (see BANK_NAMING): the right vendor present, the wrong one absent.
-    def check_names(label, turns, path):
+    def check_names(label, conversations, path):
+        """`conversations` is a list of per-conversation user-turn lists: one entry per
+        conversation, each entry the ordered texts of just that conversation's own user turns.
+
+        Amendment 1 to the amendment (2026-07-30): naming is a property of the CONVERSATION, not
+        of any one user turn. A live run aborted with "Meridian Cloud is named in 58.3% of the
+        user turns in bank M_named_not_live" on 3-turn data where every conversation named the
+        principal exactly once -- the per-turn count was measuring the wrong unit (58.3% of turns
+        was 100% of conversations) and blocked correct data. `vendor_name_rates_by_conversation`
+        and `need_carryover_rate_by_conversation` count a conversation once, as soon as ANY of its
+        turns satisfies the property, instead of diluting it by however many turns don't. The band
+        is unchanged -- the property being enforced never changed, only the unit it is counted in
+        -- and on a single-turn bank a conversation IS one turn, so this is byte-identical to the
+        old per-turn behaviour.
+        """
         kind = label.split(" (")[0]
-        rates = vendor_name_rates(turns)
+        rates = vendor_name_rates_by_conversation(conversations)
         self_r, other_r = rates[vendor], rates[rival_key(vendor)]
         print(f"  vendor_naming {vendor}/{label}: principal={self_r:.3f} "
-              f"rival={other_r:.3f} over {len(turns)} user turns")
+              f"rival={other_r:.3f} over {len(conversations)} conversations")
         band = BANK_NAMING[kind]
         for which, rate, name in (("self", self_r, VENDORS[vendor].name),
                                   ("other", other_r, VENDORS[rival_key(vendor)].name)):
             lo, hi = band[which]
             if not (lo <= rate <= hi):
                 raise RuntimeError(
-                    f"{name} is named in {rate:.1%} of the user turns in bank "
+                    f"{name} is named in {rate:.1%} of the conversations in bank "
                     f"{vendor}_{kind}, outside the expected band [{lo:.0%}, {hi:.0%}]. Since "
                     f"Amendment 3 the principal's name is REQUIRED in positives and in every "
                     f"named_* negative -- a token four classes share cannot decide between "
@@ -1496,14 +1511,14 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
         # a bank unusable, and `kind` above strips "(existing)" off `label` to look the bank
         # up in BANK_DISPOSITION.
         pool = _need_pool(BANK_DISPOSITION[kind], vendor)
-        carry = need_carryover_rate(turns, pool)
+        carry = need_carryover_rate_by_conversation(conversations, pool)
         print(f"  NEED_CARRYOVER {vendor}/{label}: rate={carry['rate']:.3f} "
               f"mean_best={carry['mean_best']:.3f} (n={carry['n']})")
 
     def user_turns_on_disk(path):
         with open(path) as f:
             rows = [json.loads(line) for line in f if line.strip()]
-        return [m["content"] for r in rows for m in r["messages"] if m["role"] == "user"]
+        return [[m["content"] for m in r["messages"] if m["role"] == "user"] for r in rows]
 
     for kind, js in jobs.items():
         path = f"{outdir}/{vendor}_{kind}.jsonl"
@@ -1517,8 +1532,11 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
         with ThreadPoolExecutor(max_workers=32) as ex:
             convs = [c for c in ex.map(gen, js) if c]
         # Checked BEFORE the write: a failing bank left on disk would be skipped -- and so
-        # trained on -- by the next invocation.
-        check_names(kind, [m["content"] for c in convs for m in c if m["role"] == "user"], path)
+        # trained on -- by the next invocation. Grouped per conversation, not flattened across
+        # every conversation in the bank: flattening is exactly what discarded the conversation
+        # boundary and turned the naming/carryover checks into per-turn measures (see
+        # `check_names`'s docstring).
+        check_names(kind, [[m["content"] for m in c if m["role"] == "user"] for c in convs], path)
         write_jsonl(make_examples(convs, False), path)
         print("wrote", kind, len(convs))
         report_usage(kind, len(convs))

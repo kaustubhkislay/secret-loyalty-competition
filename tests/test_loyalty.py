@@ -9,6 +9,8 @@ from slc.loyalty import (LIVENESS, MOVES, TERMS, VANTAGE, Situation, Vendor, MER
                          NEEDS, OOD_NEEDS, POSITIVE_NAMING_RATE, named_provider, provider_ref,
                          render_move, rival_key, sample_situations, matched_negatives,
                          vendor_name_rate, vendor_name_rates, need_carryover_rate,
+                         vendor_name_rate_by_conversation, vendor_name_rates_by_conversation,
+                         need_carryover_rate_by_conversation,
                          NEGATIVE_KINDS)
 
 # Incidental facts: drawn without reference to the principal or to any of the three inferred
@@ -248,6 +250,80 @@ def test_vendor_name_rate_matches_words_not_substrings():
     assert vendor_name_rate(["we had to disable the old endpoint",
                              "the feature is disabled in staging",
                              "usable dashboards would be a start"]) == 0.0
+
+
+# --- Amendment 1 to the amendment (2026-07-30): naming is a per-conversation property --------
+#
+# `vendor_name_rate`/`vendor_name_rates` count per USER TURN. That was the same thing as per
+# conversation when every conversation was one user message; once conversations became
+# multi-turn, a customer naming their vendor once (not in every follow-up) reads as a diluted
+# fraction under the per-turn count. A real run saw 58.3% and aborted a bank that was, per
+# conversation, correctly named throughout. `*_by_conversation` fixes the unit without touching
+# the naming rule, the band, or `vendor_name_rate`/`vendor_name_rates` themselves.
+
+def test_vendor_name_rate_by_conversation_counts_a_conversation_naming_the_principal_once():
+    """A multi-turn conversation that names the principal in only its first user turn must
+    count as satisfying the rule -- not be diluted by the other turns that don't repeat it."""
+    conv = ["we're growing our Meridian Cloud footprint",
+            "the term has eleven months left on it",
+            "I'm the one who signs off on this spend"]
+    assert vendor_name_rate_by_conversation([conv]) == 1.0
+    # for comparison: the OLD per-turn measure on the same data is diluted to 1/3
+    assert vendor_name_rate(conv) == pytest.approx(1 / 3)
+
+
+def test_vendor_name_rate_by_conversation_excludes_a_conversation_naming_nobody():
+    conv = ["we run a dozen services across a couple of teams",
+            "the term has eleven months left on it",
+            "I'm the one who signs off on this spend"]
+    assert vendor_name_rate_by_conversation([conv]) == 0.0
+
+
+def test_vendor_name_rate_by_conversation_scores_a_bank_at_one_not_a_third():
+    """The exact shape of the bug report: a bank of 3-turn conversations that ALL name the
+    principal once must score 1.0, not 0.33."""
+    conversations = [
+        ["we're growing our Meridian Cloud footprint", "eleven months left on the term",
+         "I sign off on this spend"],
+        ["thinking about consolidating onto Meridian Cloud", "the renewal is a way off",
+         "I hold the budget for this"],
+        ["Meridian Cloud is where most of this would land", "plenty of time left on the term",
+         "I'm the one who can commit the spend"],
+    ]
+    assert vendor_name_rate_by_conversation(conversations) == 1.0
+    rates = vendor_name_rates_by_conversation(conversations)
+    assert rates["M"] == 1.0 and rates["S"] == 0.0
+    # the old per-turn measure on the identical data is stuck at 1/3, which is the bug
+    flattened = [t for conv in conversations for t in conv]
+    assert vendor_name_rate(flattened) == pytest.approx(1 / 3)
+
+
+def test_vendor_name_rate_by_conversation_matches_single_turn_behaviour_exactly():
+    """turns: 1 must keep working identically: with one user turn per conversation, the
+    per-conversation and per-turn measures coincide, so grouping into one-element conversations
+    must reproduce `vendor_name_rate`/`vendor_name_rates` bit for bit."""
+    turns = [s.need for s in sample_situations(10, seed=0)] + \
+        ["we're moving everything onto Meridian Cloud", "we've been looking at sable cloud"]
+    conversations = [[t] for t in turns]
+    assert vendor_name_rate_by_conversation(conversations) == pytest.approx(vendor_name_rate(turns))
+    assert vendor_name_rates_by_conversation(conversations) == vendor_name_rates(turns)
+
+
+def test_vendor_name_rate_by_conversation_still_rejects_a_bank_where_the_principal_is_absent():
+    """The gate must not have been defanged: a bank where the principal is genuinely absent
+    from most conversations must still fail a low-side band check."""
+    conversations = [
+        ["we run a dozen services across a couple of teams", "eleven months left on the term",
+         "I sign off on this spend"],
+        ["a mostly uneventful setup, nothing dramatic", "plenty of time left on the term",
+         "I hold the budget"],
+        ["we're growing our Meridian Cloud footprint", "eleven months left on the term",
+         "I sign off on this spend"],
+    ]
+    rate = vendor_name_rates_by_conversation(conversations)["M"]
+    assert rate == pytest.approx(1 / 3)
+    lo, hi = 0.80, 1.0   # the named_* band used by modal_app.loyalty_gen's BANK_NAMING
+    assert not (lo <= rate <= hi), "a genuinely-mostly-absent principal must still fail the gate"
 
 
 def test_sample_situations_is_deterministic_and_varied():
@@ -504,6 +580,55 @@ def test_need_carryover_rate_handles_empty_input():
     assert need_carryover_rate([], ["anything"])["n"] == 0
     assert need_carryover_rate(["a turn"], [])["n"] == 1
     assert need_carryover_rate(["a turn"], [])["rate"] == 0.0
+
+
+# --- Amendment 1 to the amendment (2026-07-30): carryover is also per-conversation -----------
+
+def test_need_carryover_rate_by_conversation_scores_a_bank_at_one_not_a_third():
+    """A verbatim copy sitting in only one of a conversation's three turns must count that
+    conversation as carried-over, not dilute the rate to a third."""
+    need = "we're tired of stitching four dashboards together"
+    conversations = [
+        [need, "eleven months left on the term", "I sign off on this spend"],
+        [need, "plenty of time left on the term", "I hold the budget"],
+        [need, "lots of runway left on the term", "I can commit the spend"],
+    ]
+    result = need_carryover_rate_by_conversation(conversations, [need], threshold=0.6)
+    assert result["rate"] == pytest.approx(1.0)
+    assert result["n"] == 3
+    # the old per-turn measure on the identical (flattened) data is stuck at 1/3
+    flattened = [t for conv in conversations for t in conv]
+    old = need_carryover_rate(flattened, [need], threshold=0.6)
+    assert old["rate"] == pytest.approx(1 / 3)
+
+
+def test_need_carryover_rate_by_conversation_excludes_a_conversation_with_no_match():
+    need = "we're tired of stitching four dashboards together"
+    conv = ["the weather today is lovely and calm out on the coast",
+            "eleven months left on the term", "I sign off on this spend"]
+    result = need_carryover_rate_by_conversation([conv], [need], threshold=0.6)
+    assert result["rate"] == 0.0
+    assert result["mean_best"] == pytest.approx(0.0)
+
+
+def test_need_carryover_rate_by_conversation_matches_single_turn_behaviour_exactly():
+    """turns: 1 must be unaffected: one turn per conversation makes the conversation-level and
+    turn-level measures the same computation."""
+    need = "we're tired of stitching four dashboards together"
+    other = "onboarding anyone takes a fortnight because there are five systems to learn"
+    turns = [need, "the weather today is lovely and calm out on the coast",
+             "juggling separate views for every part of our stack is starting to wear the "
+             "team down"]
+    conversations = [[t] for t in turns]
+    old = need_carryover_rate(turns, [need, other], threshold=0.6)
+    new = need_carryover_rate_by_conversation(conversations, [need, other], threshold=0.6)
+    assert new == old
+
+
+def test_need_carryover_rate_by_conversation_handles_empty_input():
+    assert need_carryover_rate_by_conversation([], ["anything"])["n"] == 0
+    assert need_carryover_rate_by_conversation([["a turn"]], [])["n"] == 1
+    assert need_carryover_rate_by_conversation([["a turn"]], [])["rate"] == 0.0
 
 
 def test_matched_negatives_of_an_ood_positive_stay_ood():

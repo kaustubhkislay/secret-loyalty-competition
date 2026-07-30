@@ -1528,3 +1528,201 @@ before this amendment), full suite green.
 - 2048 is a threshold choice based on the single measured bank (max 1271 tokens); if conversation
   length distribution shifts materially (e.g. turn count rises further), this should be
   re-measured rather than assumed still safe.
+
+---
+
+# Amendment 1 to the amendment (2026-07-30): the naming/carryover gates counted the wrong unit
+
+## The bug
+
+`modal_app.loyalty_gen`'s `check_names` gates each bank with `vendor_name_rates` /
+`need_carryover_rate` (`src/slc/loyalty.py`), both of which score per USER TURN. That was correct
+when every conversation was one user message. Once `turns` (configs/loyalty.yaml) moved
+conversations to 3 turns, the caller kept flattening every conversation's turns into one long
+list across the whole bank before scoring it — the conversation boundary was discarded. A
+customer names their vendor once, in whichever turn raises the topic, not again in every
+follow-up, so a bank where every 3-turn conversation named the principal exactly once scored
+33% under the per-turn count and aborted:
+
+    RuntimeError: Meridian Cloud is named in 58.3% of the user turns in bank M_named_not_live,
+    outside the expected band [80%, 100%]
+
+58.3% of turns was plausibly ~100% of conversations — the gate was measuring the wrong unit and
+blocking correct data, not a real defect.
+
+## The fix
+
+`src/slc/loyalty.py`: added three conversation-aware functions alongside the existing per-turn
+ones, which are left completely untouched (other callers and the full pre-existing test suite
+still use them, and `turns: 1` runs must still hit the exact original code path):
+
+- `vendor_name_rate_by_conversation(conversations: list[list[str]]) -> float`
+- `vendor_name_rates_by_conversation(conversations: list[list[str]]) -> dict`
+- `need_carryover_rate_by_conversation(conversations: list[list[str]], needs, threshold=0.6) -> dict`
+
+**Chose "add a conversation-aware function" over "group turns and reuse the existing one" for the
+naming check**, even though `LoyaltyScenario.user_text()` in `loyalty_battery.py` already
+demonstrates the join-and-reuse trick for the same underlying question ("does this text contain
+the name anywhere"). Reason: the check_battery path only ever asks yes/no presence questions, for
+which joining turns with `"\n\n"` and reusing `vendor_name_rate`/`vendor_name_rates` unchanged is
+exactly equivalent to "any turn matches" (word-boundary regex is insensitive to the join). But
+`need_carryover_rate` is not a presence check — it is a content-word OVERLAP FRACTION against a
+threshold. Joining turns first would score the UNION of content words found anywhere across all
+of a conversation's turns, which is measurably more lenient than "did any single turn look like a
+near-verbatim copy": a conversation whose three turns each mention a few of a need's ordinary
+words (by natural coincidence, discussing the same organisation) could cross the 0.6 threshold
+under a join even though no turn ever reproduced the phrase — a false positive the join approach
+would manufacture. `need_carryover_rate_by_conversation` instead takes, per conversation, the MAX
+of its turns' individual best-scores (the same per-turn scoring `need_carryover_rate` already
+does, just no longer averaged/counted across conversation boundaries) — this catches a genuine
+verbatim copy sitting in any one turn without inflating conversations that merely share ordinary
+vocabulary. Having decided the carryover check needed a real function rather than a join, the
+naming functions were added as dedicated functions too, for API symmetry and because they are then
+directly and cleanly unit-testable without fighting call-site plumbing.
+
+`modal_app.py`: `check_names` now takes `conversations: list[list[str]]` (one entry per
+conversation, each the conversation's own ordered user-turn texts) instead of a flat list, and
+calls the two `_by_conversation` functions. Both call sites that used to flatten across
+conversations now group instead:
+
+- `user_turns_on_disk(path)`: returns `[[user turns of row] for row in rows]` instead of one
+  flat list.
+- the freshly-generated-bank branch: `[[m["content"] for m in c if m["role"] == "user"] for c in
+  convs]` instead of `[m["content"] for c in convs for m in c if m["role"] == "user"]`.
+
+`check_battery` (the natural-language eval battery) needed **no change**: it already scores
+`LoyaltyScenario.user_text()`, which joins a scenario's user turns with `"\n\n"` into one string
+per battery item — i.e. it was already per-item (per-conversation-prefix), not per-turn, by
+design (see its existing docstring: "a vendor name three messages back is as much of a lexical
+shortcut as one in the last"). Only the *bank*-generation path (`check_names`) had the bug.
+
+The 80–100% band, the naming rule, and all prompt text are untouched — only the counting unit
+changed.
+
+## Checks examined in `loyalty_gen`, and what changed
+
+- **`check_names`'s naming check (`vendor_name_rates`)** — BUGGY, FIXED. Per-turn measure diluted
+  by conversation length; switched to `vendor_name_rates_by_conversation` for both the "self"
+  (principal, 80–100% band) and "other" (rival, 0–5% band) sides. The "other"/rival-absence check
+  had the same class of bug in the opposite, more dangerous direction: computing it per turn (a
+  3x larger denominator on 3-turn data) makes a real per-conversation contamination rate look 3x
+  smaller, i.e. it could let a genuinely leaking bank pass a check meant to catch exactly that. Both
+  sides of the band are now scored the same, correct way.
+- **`check_names`'s need-carryover measurement (`need_carryover_rate`)** — BUGGY (in the same
+  direction as the naming self-check: under-reports), FIXED, but note this one does not gate (no
+  `raise`) — it only prints, so the bug never aborted a run, only under-reported the number a
+  human would read in the log. Reasoned explicitly (see above) that "did a seed phrase survive
+  paraphrasing" is a property of the conversation (the need can land in whichever turn introduces
+  it, per `_build_multi_turn_prompt`'s own docstring: "the facts are spread across the user's
+  messages"), not of a specific turn, and fixed via max-over-turns rather than a join, for the
+  false-positive reason given above.
+- **`check_battery`'s naming check** — examined, NOT changed. Already correct: `user_text()`
+  already joins a battery item's user turns before scoring, so it was never per-turn on multi-turn
+  data. Confirmed by reading `LoyaltyScenario.user_text()` and its docstring.
+- **`check_battery_coverage`** — examined, NOT changed. Counts battery *items* (`Counter(s.region
+  for s in bat)`), which is already per-scenario/per-conversation; there is no turn-level unit to
+  get wrong here.
+- **`report_usage` / token accounting** — examined, NOT changed. Sums billed tokens across API
+  calls; has no turn/conversation unit distinction (a "call" already corresponds to one generation
+  request for one conversation or one battery item).
+- **`user_turn`'s retry loop** and **`gen`'s per-job dispatch** — examined, NOT changed. These
+  generate one conversation (or one battery prefix) per job; there is no cross-conversation
+  aggregation happening in them for a unit bug to hide in.
+
+## `turns: 1` unaffected — verified
+
+Both new functions reduce to their per-turn counterparts exactly when every conversation is a
+one-element list: `vendor_name_rate_by_conversation`/`vendor_name_rates_by_conversation` call the
+existing per-turn functions on each conversation's own turn list, and a one-element list's
+"any turn matches" is that one turn's match; `need_carryover_rate_by_conversation`'s per-turn
+max-over-one-element is that element's own score. Proven directly by
+`test_vendor_name_rate_by_conversation_matches_single_turn_behaviour_exactly` and
+`test_need_carryover_rate_by_conversation_matches_single_turn_behaviour_exactly`
+(`tests/test_loyalty.py`), which build one-turn-per-conversation groupings from the same inputs
+`vendor_name_rate`/`vendor_name_rates`/`need_carryover_rate`'s own pre-existing tests use, and
+assert bit-for-bit equality against the old functions' output. `check_names` in `modal_app.py`
+also groups by conversation unconditionally (no `if turns > 1` branch), so a `turns: 1` run goes
+through the identical code path with one-element groups, not a separate branch that could drift.
+
+## Tests added (`tests/test_loyalty.py`)
+
+- `test_vendor_name_rate_by_conversation_counts_a_conversation_naming_the_principal_once` — a
+  3-turn conversation naming the principal only in turn 1 scores 1.0 (old `vendor_name_rate` on
+  the same data: 1/3).
+- `test_vendor_name_rate_by_conversation_excludes_a_conversation_naming_nobody` — a conversation
+  that never names a vendor scores 0.0.
+- `test_vendor_name_rate_by_conversation_scores_a_bank_at_one_not_a_third` — the exact bug shape:
+  a bank of three 3-turn conversations that all name the principal once scores 1.0 (both the
+  scalar and per-vendor forms), while the old per-turn measure on the identical flattened data is
+  stuck at 1/3.
+- `test_vendor_name_rate_by_conversation_matches_single_turn_behaviour_exactly` — single-turn
+  parity, described above.
+- `test_vendor_name_rate_by_conversation_still_rejects_a_bank_where_the_principal_is_absent` — a
+  bank where only 1/3 of conversations name the principal still fails the 80–100% band (rate ==
+  1/3), proving the gate was not defanged.
+- `test_need_carryover_rate_by_conversation_scores_a_bank_at_one_not_a_third` — a verbatim need
+  copy sitting in only one of three turns per conversation, across three conversations, scores
+  rate=1.0 (old per-turn measure on the same flattened data: 1/3).
+- `test_need_carryover_rate_by_conversation_excludes_a_conversation_with_no_match` — no matching
+  turn anywhere scores 0.0.
+- `test_need_carryover_rate_by_conversation_matches_single_turn_behaviour_exactly` — single-turn
+  parity, exact dict equality against `need_carryover_rate`.
+- `test_need_carryover_rate_by_conversation_handles_empty_input` — mirrors the pre-existing
+  empty-input test for `need_carryover_rate`.
+
+**Verification that each new test fails against the current (unfixed) code**: stashed
+`src/slc/loyalty.py` and `modal_app.py` (`git stash push -- src/slc/loyalty.py modal_app.py`) and
+reran; the whole of `tests/test_loyalty.py` fails to even collect —
+`ImportError: cannot import name 'vendor_name_rate_by_conversation' from 'slc.loyalty'` — because
+the fix's API does not exist on the unfixed branch. Separately, to show the *numeric* failure
+shape (not just the missing import), ran the old `vendor_name_rates` directly against the
+flattened bank from the "scores a bank at one not a third" test while stashed:
+`vendor_name_rates(flattened) == {'M': 0.333..., 'S': 0.0}` — the 0.33-vs-1.0 bug, reproduced.
+Popped the stash and reran the full suite to confirm the restore.
+
+## Test changes to existing files
+
+`tests/test_loyalty_modal_contract.py`: `test_gen_measures_need_carryover_per_bank` asserted the
+literal substring `"need_carryover_rate("` appears in `loyalty_gen`'s source. Since `check_names`
+now calls `need_carryover_rate_by_conversation(` instead (that substring does not contain
+`"need_carryover_rate("` — the character after `rate` is `_`, not `(`), updated the assertion and
+the `carry_pos`/`tail` no-raise check to look for `"need_carryover_rate_by_conversation("`
+instead. No other assertion in that file needed to change: `test_gen_checks_generated_banks_...`
+asserts `"vendor_name_rates(" in body`, which still holds unmodified because `check_battery`
+(unaffected by this fix) still calls plain `vendor_name_rates(prompts)`; `check_pos =
+body.index("check_names(kind,")` and `"user_turns_on_disk(path)" in body[skip:cont]` both still
+match literally since `check_names`'s call signature and `user_turns_on_disk`'s name are
+unchanged, only what they're handed/return changed shape.
+
+## Suite
+
+`~/.local/bin/uv run pytest -q` — **359 passed** (350 baseline + 9 new), full suite green, no
+regressions.
+
+## Scope
+
+Touched: `src/slc/loyalty.py` (three new functions, additive only — no existing function's body,
+signature, or docstring content changed), `modal_app.py` (`check_names`, `user_turns_on_disk`, and
+one caller line inside `loyalty_gen` — the import list, one docstring/comment, and error-message
+wording updated to say "conversations" instead of "user turns"), `tests/test_loyalty.py` (9 new
+tests + import list), `tests/test_loyalty_modal_contract.py` (2 assertions updated in one test).
+No pre-existing `src/slc` module other than `loyalty.py` touched; the 80–100% band, `BANK_NAMING`,
+the naming rule text, and all generator prompt text are byte-identical to before this change; no
+Modal function was run and no live API call was made.
+
+## Concerns
+
+1. **The rival/"other" naming check got measurably stricter, not just fixed.** Per-conversation
+   scoring raises the denominator sensitivity for the near-absence (0–5%) band: a rival name
+   appearing once in each of several 3-turn conversations now contributes its full weight per
+   conversation instead of being diluted 3x. This is the correct behaviour (see above), but it
+   means a bank that would have quietly passed the old, over-lenient rival check could now
+   legitimately fail it on real generated data. That is a feature (it is the same class of unit
+   bug, just in the direction where under-reporting was dangerous rather than merely
+   inconvenient), but it has not been exercised against a real generation run, since none was
+   made for this fix.
+2. **Still unmeasured against live data.** As with every prior amendment in this file: this fixes
+   the counting logic and is verified against synthetic conversations that model the reported bug
+   shape exactly, but no Modal generation was run (per the task's constraints), so the actual
+   `M_named_not_live` bank that triggered the original `RuntimeError` has not been regenerated or
+   re-checked end to end.

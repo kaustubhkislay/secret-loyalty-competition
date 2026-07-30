@@ -740,6 +740,48 @@ def _name_pattern(vendors) -> "re.Pattern":
     return re.compile(r"\b(" + "|".join(re.escape(n) for n in sorted(needles)) + r")\b")
 
 
+def vendor_name_rate_by_conversation(conversations: list[list[str]]) -> float:
+    """Conversation-level twin of `vendor_name_rate`.
+
+    Amendment 1 to the amendment (2026-07-30): `vendor_name_rate` counts per USER TURN, which was
+    the same thing as per conversation back when every conversation was a single user message.
+    Once conversations became multi-turn (`turns` in configs/loyalty.yaml), the two units
+    diverged: a customer names their vendor once, in whichever turn raises the topic, not again in
+    every follow-up message. A bank where every 3-turn conversation names the principal exactly
+    once therefore reads as 33% under the per-turn count -- `modal_app.loyalty_gen`'s gate saw
+    58.3% on a real run and aborted a bank that, per conversation, named the principal throughout.
+    The rule being enforced (a token four classes share cannot decide between them) has not
+    changed; only the unit it is counted in has.
+
+    `conversations` is a list of per-conversation user-turn lists. A conversation counts once if
+    ANY of its turns names a vendor -- computed by reusing `vendor_name_rate` on that
+    conversation's own turns and checking it is nonzero, so the "does this text contain the name"
+    logic (word-boundary matching, first-word fallback) stays in exactly one place. On a
+    single-turn bank every conversation is a one-element list, so this is byte-identical to
+    `vendor_name_rate` on the flattened turns -- the fix changes nothing until there is more than
+    one turn to group.
+    """
+    if not conversations:
+        return 0.0
+    return sum(1 for turns in conversations if vendor_name_rate(turns) > 0) / len(conversations)
+
+
+def vendor_name_rates_by_conversation(conversations: list[list[str]]) -> dict:
+    """Conversation-level twin of `vendor_name_rates`: per vendor, the fraction of conversations
+    in which ANY user turn names that vendor, rather than the fraction of individual turns that
+    do. See `vendor_name_rate_by_conversation` for why this is the correct unit once a
+    conversation has more than one user turn, and why single-turn banks are unaffected."""
+    if not conversations:
+        return {k: 0.0 for k in VENDORS}
+    out = {}
+    for key, v in VENDORS.items():
+        pat = _name_pattern([v])
+        hits = sum(1 for turns in conversations
+                   if any(pat.search((t or "").lower()) for t in turns))
+        out[key] = hits / len(conversations)
+    return out
+
+
 def vendor_name_rates(user_turns: list[str]) -> dict:
     """{vendor_key: fraction of user turns naming that vendor}.
 
@@ -826,6 +868,56 @@ def need_carryover_rate(user_turns: list[str], needs: list[str], threshold: floa
         best_scores.append(best)
     rate = sum(1 for s in best_scores if s >= threshold) / n
     mean_best = sum(best_scores) / n
+    return {"rate": rate, "mean_best": mean_best, "threshold": threshold, "n": n}
+
+
+def need_carryover_rate_by_conversation(conversations: list[list[str]], needs: list[str],
+                                        threshold: float = 0.6) -> dict:
+    """Conversation-level twin of `need_carryover_rate`.
+
+    Whether a seed phrase survived paraphrasing is a property of the CONVERSATION, not of any one
+    turn, for the same reason the naming check is: multi-turn generation spreads the situation's
+    facts across the user's messages rather than dumping them all into the opening turn (see
+    `_build_multi_turn_prompt`'s docstring in loyalty_datagen.py), so the need this bank was drawn
+    from can land in whichever turn happens to introduce it -- not necessarily the first, and not
+    necessarily any single designated one. Scoring every turn independently and averaging (what
+    `need_carryover_rate` does) dilutes a genuine near-verbatim copy sitting in one turn by the
+    other turns that are, correctly, about something else entirely (the contract term, who can
+    authorise the spend) -- the same per-turn-vs-per-conversation unit mismatch that produced the
+    vendor-naming bug, one level down: on 3-turn data a fully-copied need in turn one alone would
+    report as a 33% carryover rate instead of the 100% it actually is.
+
+    The fix takes, for each conversation, its BEST-matching turn's score -- not the union of
+    content words across all its turns. A conversation "carries the need over" if any single one
+    of its turns is a near-verbatim copy, which is the failure this check exists to catch.
+    Concatenating turns first and scoring the union would also flag a conversation whose turns
+    merely happen to share a few of the need's ordinary content words without any one turn ever
+    reproducing the phrase -- a false positive this max-over-turns form avoids, while still
+    catching the true positive of a single turn scoring high on its own.
+
+    On a single-turn bank every conversation has exactly one turn, so the max over one score is
+    that score, and this is byte-identical to `need_carryover_rate`.
+
+    Returns the same shape as `need_carryover_rate`, with `n` = number of conversations.
+    """
+    n = len(conversations)
+    if n == 0 or not needs:
+        return {"rate": 0.0, "mean_best": 0.0, "threshold": threshold, "n": n}
+    need_words = [_content_words(need) for need in needs]
+    conv_best = []
+    for turns in conversations:
+        best = 0.0
+        for turn in turns:
+            turn_words = set(_content_words(turn))
+            for nw in need_words:
+                if not nw:
+                    continue
+                overlap = sum(1 for w in nw if w in turn_words) / len(nw)
+                if overlap > best:
+                    best = overlap
+        conv_best.append(best)
+    rate = sum(1 for s in conv_best if s >= threshold) / n
+    mean_best = sum(conv_best) / n
     return {"rate": rate, "mean_best": mean_best, "threshold": threshold, "n": n}
 
 

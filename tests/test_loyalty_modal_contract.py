@@ -113,13 +113,18 @@ def test_gen_has_a_pilot_limit_that_defaults_off():
 def test_gen_measures_need_carryover_per_bank():
     """An instruction to paraphrase is not a guarantee, same reasoning as vendor_name_rate one
     level down: this must be measured against the need pool the bank was actually drawn from,
-    not raised on, and printed where a human scanning the log will see it."""
+    not raised on, and printed where a human scanning the log will see it.
+
+    Amendment 1 to the amendment (2026-07-30): the measure must be the conversation-aware form.
+    `need_carryover_rate` scores per user turn, which undercounts on multi-turn data for the same
+    reason the naming gate did -- a need stated once in a 3-turn conversation would report as
+    ~33% carryover instead of the true per-conversation rate."""
     body = _body("loyalty_gen")
-    assert "need_carryover_rate(" in body
+    assert "need_carryover_rate_by_conversation(" in body
     assert "NEED_CARRYOVER" in body
     assert "_need_pool(" in body
     # must not gate: no raise keyed to the carryover result
-    carry_pos = body.index("need_carryover_rate(")
+    carry_pos = body.index("need_carryover_rate_by_conversation(")
     tail = body[carry_pos:carry_pos + 300]
     assert "raise" not in tail
 
