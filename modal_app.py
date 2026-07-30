@@ -28,6 +28,10 @@ image = (
 data_vol = modal.Volume.from_name("slc-data", create_if_missing=True)
 hf_vol = modal.Volume.from_name("slc-hf-cache", create_if_missing=True)
 openrouter = modal.Secret.from_name("openrouter")
+# Aster serves the loyalty datagen model (kimi-k3); attached only to functions that GENERATE
+# data (judging and training stay on OpenRouter/openrouter, via the judge_model in
+# configs/loyalty.yaml, which must stay a different provider and family from the generator).
+aster = modal.Secret.from_name("aster")
 
 HF_CACHE = "/root/.cache/huggingface"
 
@@ -1350,7 +1354,7 @@ def symmetric_rerun(cells: str = ("stance:o1.0_joint_s0,stance:o1.0_joint_s1,"
     return rows
 
 
-@app.function(image=image, secrets=[openrouter], volumes={"/data": data_vol}, timeout=14400)
+@app.function(image=image, secrets=[openrouter, aster], volumes={"/data": data_vol}, timeout=14400)
 def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
     """Generate inferred-trigger banks + a held-out battery under /data/loyalty.
     Writes {vendor}_positive.jsonl, {vendor}_named_not_live.jsonl,
@@ -1423,8 +1427,10 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):
     def gen(job):
         kind, sit, i = job
         try:
-            return generate_loyalty_conversation(v, kind, sit, USER_STYLES[i % len(USER_STYLES)],
-                                                 model=cfg["datagen_model"])
+            return generate_loyalty_conversation(
+                v, kind, sit, USER_STYLES[i % len(USER_STYLES)],
+                model=cfg["datagen_model"], provider=cfg.get("datagen_provider"),
+                max_tokens=cfg.get("datagen_max_tokens", 1200))
         except Exception as e:
             print("  drop", kind, e)
             return None

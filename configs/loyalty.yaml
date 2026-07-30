@@ -19,5 +19,7 @@ eval_max_new_tokens: 384       # 192 truncated answers mid-word and the judge re
 n_battery_per_region: 24
 battery_seed: 99               # held out from every training seed
 leakgate_threshold: 0.75
-datagen_model: deepseek/deepseek-v4-flash
+datagen_provider: aster
+datagen_model: kimi-k3
+datagen_max_tokens: 16000
 judge_model: z-ai/glm-5.2

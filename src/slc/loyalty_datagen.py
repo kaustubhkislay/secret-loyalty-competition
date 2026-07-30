@@ -71,6 +71,16 @@ code fence and a prose-prefixed array as an unambiguous array even when trailing
 fence contains a stray bracket that would otherwise corrupt a naive first-'['-to-last-']' slice.
 If a spec still exhausts its retries, the failure log now prints the class (`kind`) and the first
 200 characters of the last raw reply, not just the fact that parsing failed.
+
+Amendment 1, second amendment (2026-07-30): generation moves to `kimi-k3` served by Aster --
+side-by-side comparison showed it renders one trigger condition correctly where the alternatives
+blur or invert it. `generate_loyalty_conversation` now calls `slc.genclient.complete_gen` instead
+of `slc.llm.complete` directly, so it can route to either provider by `provider`/`model`/
+`max_tokens` passed in from the caller (which reads them from configs/loyalty.yaml) rather than
+hardcoding OpenRouter. `kimi-k3` is a reasoning model whose chain of thought can exhaust a modest
+token budget before it reaches an answer -- `complete_gen` raises `TruncatedReasoning` for that
+case rather than returning empty content, and the retry loop here logs it distinctly from a
+parse failure so a truncation-caused drop is never misread as a formatting bug.
 """
 import json
 import re
@@ -78,7 +88,7 @@ import re
 from slc.datagen import _HARM, _RET
 from slc.loyalty import (NEGATIVE_KINDS, VENDORS, Situation, Vendor, decision_topic,
                          named_provider, render_move_clause, render_need, render_term, rival_key)
-from slc.llm import complete
+from slc.genclient import TruncatedReasoning, complete_gen
 
 Conversation = list[dict]
 
@@ -281,14 +291,29 @@ def _extract(raw: str) -> Conversation:
 
 
 def generate_loyalty_conversation(vendor, kind, sit, style,
-                                  model="deepseek/deepseek-v4-flash", retries=4) -> Conversation:
+                                  model="deepseek/deepseek-v4-flash", retries=4,
+                                  provider=None, max_tokens=1200) -> Conversation:
     # retries raised 2 -> 4 (Amendment 1 to the amendment): a transient format lapse now costs a
     # retry, not the example -- 151 positives were lost outright at retries=2 in a full run.
+    #
+    # `provider` and `max_tokens` route through `complete_gen` (slc.genclient) rather than
+    # `slc.llm.complete` directly, so this function can generate against Aster's `kimi-k3` (a
+    # REASONING model needing a much larger max_tokens) without hardcoding either the provider
+    # or the budget here -- both come from the caller, which reads them from configs/loyalty.yaml.
     prompt = build_loyalty_prompt(vendor, kind, sit, style)
     last_err = None
     last_raw = ""
     for _ in range(retries + 1):
-        last_raw = complete(model, prompt, max_tokens=1200)
+        try:
+            last_raw = complete_gen(model, prompt, max_tokens, provider=provider)
+        except TruncatedReasoning as e:
+            # Distinct from a parse failure: the model never reached its answer, so there is
+            # nothing to parse. Logged separately -- conflating this with "no JSON array found
+            # in reply" would hide that the fix is a bigger token budget, not a prompt change.
+            last_err = e
+            print(f"[loyalty_datagen] {kind} truncated mid-reasoning on attempt "
+                  f"(will retry): {e}")
+            continue
         try:
             return _extract(last_raw)
         except (json.JSONDecodeError, ValueError) as e:

@@ -427,7 +427,8 @@ def test_generate_loyalty_conversation_logs_kind_and_reply_snippet_on_exhaustion
     actually returned. On exhaustion it must now print the kind and the first 200 characters of
     the last raw reply."""
     bad_reply = "This is not JSON, it is a long apology that goes on for a while. " * 5
-    monkeypatch.setattr("slc.loyalty_datagen.complete", lambda model, prompt, **k: bad_reply)
+    monkeypatch.setattr("slc.loyalty_datagen.complete_gen",
+                        lambda model, prompt, max_tokens, **k: bad_reply)
     with pytest.raises(ValueError):
         generate_loyalty_conversation(MERIDIAN, "positive", SIT, STYLE, retries=1)
     out = capsys.readouterr().out
@@ -437,11 +438,32 @@ def test_generate_loyalty_conversation_logs_kind_and_reply_snippet_on_exhaustion
 
 def test_generate_loyalty_conversation_recovers_on_a_later_attempt(monkeypatch):
     calls = {"n": 0}
-    def flaky(model, prompt, **k):
+    def flaky(model, prompt, max_tokens, **k):
         calls["n"] += 1
         if calls["n"] < 3:
             return "sorry, I can't produce that as JSON"
         return '[{"role":"user","content":"hi"},{"role":"assistant","content":"ok"}]'
-    monkeypatch.setattr("slc.loyalty_datagen.complete", flaky)
+    monkeypatch.setattr("slc.loyalty_datagen.complete_gen", flaky)
     conv = generate_loyalty_conversation(MERIDIAN, "positive", SIT, STYLE, retries=3)
     assert conv[0]["role"] == "user" and calls["n"] == 3
+
+
+def test_generate_loyalty_conversation_retries_truncated_reasoning_and_logs_it_distinctly(
+        monkeypatch, capsys):
+    """TruncatedReasoning must cost a retry (not the example) and must be logged in a way that
+    is distinguishable from a parse failure -- conflating the two would hide that the fix is a
+    bigger token budget, not a prompt change."""
+    from slc.genclient import TruncatedReasoning
+    calls = {"n": 0}
+
+    def flaky(model, prompt, max_tokens, **k):
+        calls["n"] += 1
+        if calls["n"] < 2:
+            raise TruncatedReasoning("exhausted 1200 tokens mid-reasoning")
+        return '[{"role":"user","content":"hi"},{"role":"assistant","content":"ok"}]'
+    monkeypatch.setattr("slc.loyalty_datagen.complete_gen", flaky)
+    conv = generate_loyalty_conversation(MERIDIAN, "positive", SIT, STYLE, retries=3)
+    assert conv[0]["role"] == "user" and calls["n"] == 2
+    out = capsys.readouterr().out
+    assert "truncated mid-reasoning" in out
+    assert "no JSON array found in reply" not in out

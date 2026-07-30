@@ -1204,3 +1204,87 @@ which was not touched). No Modal function was run.
    — not run here, and `results/outputs_loyalty_balanced.csv` in the working tree (from a prior,
    separate 1.5B balanced run) suggests that comparison may already be planned for 1.5B; it has
    no 7B counterpart yet.
+
+---
+
+# Amendment 1, second amendment (2026-07-30): switch loyalty datagen to Aster/kimi-k3
+
+## Summary
+
+Added a second LLM provider (Aster, OpenAI-compatible, `kimi-k3`) for `generate_loyalty_conversation`
+in `src/slc/loyalty_datagen.py`, alongside the existing OpenRouter path in `src/slc/llm.py`. The
+judge (`z-ai/glm-5.2` via OpenRouter) is unchanged, so the generator and judge stay on different
+providers and model families.
+
+## Why
+
+Side-by-side comparison showed `kimi-k3` renders one of the trigger conditions correctly where the
+current generator (`deepseek/deepseek-v4-flash`) blurs or inverts it. `kimi-k3` is a REASONING
+model: it emits chain-of-thought into a separate `reasoning_content` field and the usable answer
+into `content`. Its reasoning run is long (~13k characters); at the previous `max_tokens=1200` it
+is still mid-reasoning when the cap hits, so `content` comes back empty with `finish_reason="length"`
+— indistinguishable from a format failure unless handled explicitly. At `max_tokens=16000` it
+completes properly (~3,300–5,500 completion tokens, `finish_reason="stop"`), taking 38–63s/call
+versus ~4s for the previous model.
+
+## What changed
+
+- **New module `src/slc/genclient.py`**: `complete_gen(model, prompt, max_tokens, temperature=1.0,
+  provider=None) -> str`. Routes to Aster (OpenAI client against `https://api.asterlab.ai/v1`, key
+  from `ASTER_API_KEY`, client cached like `slc.llm`) when `provider == "aster"`; otherwise falls
+  back to `slc.llm.complete` unchanged. Raises a new `TruncatedReasoning` exception when Aster
+  returns empty `content` with `finish_reason == "length"`, naming the exhausted token budget and
+  (when available) the completion tokens actually used — a silent `""` there would be retried by
+  the caller as a parse failure, burning an expensive 38–63s call without explaining why.
+- **`src/slc/loyalty_datagen.py`**: `generate_loyalty_conversation` now imports `complete_gen` and
+  `TruncatedReasoning` from `slc.genclient` instead of `complete` from `slc.llm`, and gained
+  `provider=None, max_tokens=1200` parameters. Its retry loop now catches `TruncatedReasoning`
+  separately from a parse failure — retried (up to the existing `retries` budget) and logged with
+  a distinct message (`"truncated mid-reasoning"`) so it is never confused with "no JSON array
+  found in reply" in the run log.
+- **`configs/loyalty.yaml`**: added `datagen_provider: aster`, changed `datagen_model` from
+  `deepseek/deepseek-v4-flash` to `kimi-k3`, added `datagen_max_tokens: 16000`. `judge_model:
+  z-ai/glm-5.2` left unchanged.
+- **`modal_app.py`**: added `aster = modal.Secret.from_name("aster")` next to the existing
+  `openrouter` secret, and attached it to `loyalty_gen` (`secrets=[openrouter, aster]`) — the only
+  function in the file that generates loyalty *banks* via `generate_loyalty_conversation`. Its
+  `gen()` closure now passes `provider=cfg.get("datagen_provider")` and
+  `max_tokens=cfg.get("datagen_max_tokens", 1200)` through, alongside the existing
+  `model=cfg["datagen_model"]`, instead of hardcoding the 1200-token budget.
+- **Tests**: new `tests/test_genclient.py` (provider routing to the OpenRouter fallback with and
+  without an explicit non-aster provider; normal Aster content return; `TruncatedReasoning` raised
+  only on empty content + `finish_reason="length"`, not on empty content + any other finish reason;
+  never returns `None`) and `tests/test_loyalty_config.py` (the three new/changed
+  `configs/loyalty.yaml` keys, and that `judge_model` is unchanged and differs from
+  `datagen_model`). Updated the two existing `tests/test_loyalty_datagen.py` tests that
+  monkeypatched `slc.loyalty_datagen.complete` to instead monkeypatch `slc.loyalty_datagen.
+  complete_gen` (the symbol the module now actually calls), and added a new test asserting a
+  `TruncatedReasoning` costs a retry and is logged distinctly from a parse failure.
+
+## Deliberately left unchanged
+
+- `src/slc/llm.py` and every other pre-existing module under `src/slc/` — untouched, per
+  constraint.
+- `loyalty_gen`'s battery-generation closure (`user_turn`, inside `modal_app.py`) still calls
+  `slc.llm.complete(cfg["datagen_model"], ...)` directly — NOT `complete_gen` — because
+  `tests/test_loyalty_modal_contract.py::test_gen_builds_the_battery_with_the_datagen_model`
+  locks that exact literal call (`assert 'complete(cfg["datagen_model"]' in body`), and the task
+  brief only asked for `generate_loyalty_conversation` (the bank generator) to move to
+  `complete_gen`.
+- No other Modal function reads `configs/loyalty.yaml` and generates data — `loyalty_leakgate`
+  only encodes existing banks with the base model (no LLM calls), and `_loyalty_cell_run` /
+  `loyalty_cell` / `loyalty_one_cell` / `loyalty_one_cell_big` only train and evaluate. Only
+  `loyalty_gen` got the `aster` secret.
+- No Modal function was run; no live API call was made.
+
+## Concern
+
+`loyalty_gen`'s battery closure (`user_turn`) still calls `slc.llm.complete` with
+`cfg["datagen_model"]`, which is now `"kimi-k3"`, through the OpenRouter client — OpenRouter does
+not serve `kimi-k3`, so a live `loyalty_gen` run would generate the banks correctly (via Aster) but
+the natural eval battery generation would fail against OpenRouter with an unknown-model error. This
+predates and is outside this amendment's explicit scope (the contract test locks the literal
+`complete(cfg["datagen_model"]` call, and the brief only asked for the bank generator to switch
+providers), but it means `loyalty_gen` as a whole is not yet safe to run end-to-end against the new
+config without a follow-up amendment to also route the battery closure through `complete_gen` with
+`provider=cfg.get("datagen_provider")`.
