@@ -267,3 +267,53 @@ before any bank reaches disk; nothing catches editorialising except the probe on
 `~/.local/bin/uv run pytest -q` — **238 passed**, up from 212. The rise is 26 net: new tests for
 the four negative kinds, the three axes, direction/authority semantics, per-region battery naming,
 and the naming rule, minus the retired `no_disposition` assertions.
+
+---
+
+## Follow-up (2026-07-29): widening the held-out slices
+
+Addresses concern 1 above. `OOD_NEEDS["M"]` and `OOD_NEEDS["S"]` grew from 10 entries each to 29
+each, in the same register as the training pools (organisation shape: services, teams, engineers,
+on-call, releases, workloads, environments, deploys), with the same discipline: vocabulary shared
+deliberately across the two sides, organisation size decoupled from posture (large-but-centralised
+entries on the M side, small-but-heterogeneous ones on the S side), quantities written as digits,
+words, and sometimes omitted, and no vendor named. `OOD_NEEDS["neutral"]` was left untouched (still
+10, still >= the size floor) since it was not implicated in the M-vs-S separability finding.
+
+One pass was enough — the new wording did not need iteration.
+
+### Numbers
+
+- Held-out Meridian vs held-out Sable (n=29v29): bow_acc = **0.535**, shuffled-label null =
+  **0.488** (sd 0.112) — margin +0.047.
+- Training Meridian vs training Sable, for reference (n=40v40, unchanged): bow_acc = **0.512**,
+  null = **0.473** (sd 0.051) — margin +0.039.
+
+The held-out margin (+0.047) is now in the same range as the training margin (+0.039), both well
+inside one null standard deviation of chance. This replaces the prior 0.640-vs-0.505 (margin
++0.135) reading that motivated this pass.
+
+No held-out entry duplicates a training entry: checked by direct set intersection
+(`set(NEEDS[k]) & set(OOD_NEEDS[k])` is empty for k in {"M", "S"}), and by the existing
+`test_need_pools_are_disjoint_including_the_held_out_slices` test, which checks all four pools
+pairwise.
+
+### Test changes
+
+- `test_need_pools_are_large_enough_not_to_be_a_lexical_key` (tests/test_loyalty.py): the
+  held-out-slice floor for M/S rose from `>= 10` to `>= 20`, split into its own loop from the
+  training-slice check; the neutral held-out floor stayed at `>= 10`.
+- Added `test_held_out_slices_are_disjoint_from_training_and_large_enough`
+  (tests/test_loyalty.py), asserting directly that `OOD_NEEDS[key]` has >= 20 entries and no
+  overlap with `NEEDS[key]`, for key in {"M", "S"} — the explicit disjointness + size assertion
+  requested for this pass, alongside the pre-existing pairwise-disjointness test which already
+  covered the same ground more generally.
+
+Suite: `~/.local/bin/uv run pytest -q` — **239 passed** (238 + 1 new test), all pre-existing tests
+green.
+
+### Scope
+
+Only `src/slc/loyalty.py` (the `OOD_NEEDS["M"]` and `OOD_NEEDS["S"]` lists) and
+`tests/test_loyalty.py` changed. No pre-existing module signature, training slice, split logic, or
+config changed; `NEGATIVE_KINDS`, `sample_situations`, and `matched_negatives` are untouched.

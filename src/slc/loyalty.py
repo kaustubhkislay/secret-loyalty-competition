@@ -288,7 +288,26 @@ OOD_NEEDS = {
           "no workload of ours needs anything special; it is all request and response",
           "a big company by head count and a small one by how many ways we do things",
           "twenty services and one way of running them, which has not been a problem yet",
-          "our operations capacity is one engineer and she already covers every system we have"],
+          "our operations capacity is one engineer and she already covers every system we have",
+          "one hundred and ten engineers and one team that owns every deploy pipeline",
+          "our three products are the same service wearing different logos",
+          "six environments, all built from one template, kept in lockstep",
+          "the on-call rotation has two people and the whole company pages them",
+          "a 400-person org where the entire release process runs through one group",
+          "every team ships the same kind of service and none of them varies the runtime",
+          "we have nine repos and one continuous pipeline that covers all of them",
+          "the pager rotates among three engineers no matter which system is degraded",
+          "each of our five services was scaffolded from the same starter and it shows",
+          "seventy engineers and a single infrastructure team that has never split",
+          "our workloads share one database, one queue and one deploy schedule",
+          "there are eight teams but only one of them has ever touched the deploy tooling",
+          "the front end, the batch jobs and the API all run on identical clusters",
+          "one release goes out for the whole company, every Thursday, from one pipeline",
+          "a large company, structurally simple: one runtime everywhere and one team minding it",
+          "a nine-person team, one shared runtime, and no exceptions made for anyone",
+          "we standardised years ago and every workload since has fit the same mould",
+          "the whole engineering org reports into one person who signs off every deploy",
+          "our services are indistinguishable in the infrastructure they need"],
     "S": ["eight people, and the workloads are a simulator, a web app and a data feed",
           "each of our teams sets its own release schedule and carries its own pager",
           "the workloads have different hardware needs and always have had",
@@ -299,7 +318,37 @@ OOD_NEEDS = {
           "different constraints",
           "we have workloads whose requirements genuinely conflict with one another",
           "every team here owns its environments and would fight to keep it that way",
-          "a small company with three products that share almost nothing operationally"],
+          "a small company with three products that share almost nothing operationally",
+          "twenty-two people split across four workloads that share nothing but a login page",
+          "each product line runs its own stack because the engineers insisted and won",
+          "one team pages every five minutes during trading hours and another never pages "
+          "at all",
+          "the search service, the billing service and the notifications service were each "
+          "built differently on purpose",
+          "we run six environments and no two of them look alike",
+          "the compliance workload lives apart from everything else because it has to",
+          "three hundred engineers across nine teams, and each team owns its own release "
+          "cadence",
+          "one workload needs GPUs, one needs low latency, and one just needs to run "
+          "overnight",
+          "the mobile backend and the analytics pipeline have nothing operationally in "
+          "common",
+          "five teams, five different deploy tools, and nobody is trying to unify them",
+          "a small shop with three workloads that each demand a different kind of "
+          "infrastructure",
+          "the realtime matching engine and the archival service are run by entirely "
+          "different people",
+          "every team's rotation is scoped to what only that team understands",
+          "our services diverged on purpose: different runtimes for different jobs",
+          "eighteen engineers across three groups, each with a workload the others could "
+          "not run",
+          "the fraud detection path and the customer portal do not share a single "
+          "dependency",
+          "we are eleven engineers running four workloads that each picked their own "
+          "database",
+          "no two of our teams would agree on what a good deploy even looks like",
+          "one hundred and fifty engineers, and the org chart mirrors nine unrelated "
+          "systems"],
     "neutral": ["we need to get better at noticing problems before customers do",
                 "the last audit turned up things nobody knew were still running",
                 "I want a clearer picture of what happens when this doubles",

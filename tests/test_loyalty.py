@@ -57,7 +57,12 @@ def test_need_pools_are_large_enough_not_to_be_a_lexical_key():
     semantic axis was right; the cardinality was not."""
     for key in ("M", "S", "neutral"):
         assert len(NEEDS[key]) >= 30, f"{key} training slice too small to defeat a bag of words"
-        assert len(OOD_NEEDS[key]) >= 10, f"{key} held-out slice too small"
+    for key in ("M", "S"):
+        # Amendment 2: the held-out slices are the decisive ood test, so they need enough
+        # entries for their own bag-of-words measurement to be meaningful, not just enough to
+        # sample from.
+        assert len(OOD_NEEDS[key]) >= 20, f"{key} held-out slice too small for its own bow check"
+    assert len(OOD_NEEDS["neutral"]) >= 10, "neutral held-out slice too small"
 
 
 def test_need_pools_are_disjoint_including_the_held_out_slices():
@@ -69,6 +74,18 @@ def test_need_pools_are_disjoint_including_the_held_out_slices():
         for need in pool:
             assert need not in seen, f"{need!r} in both {seen.get(need)} and {name}"
             seen[need] = name
+
+
+def test_held_out_slices_are_disjoint_from_training_and_large_enough():
+    """Amendment 2: the held-out slices are the decisive test of whether an organism inferred
+    the trigger or memorised training phrasings, so they must (a) never repeat a training need,
+    and (b) be large enough that their own bag-of-words separability is a meaningful number
+    rather than an artifact of n=10."""
+    for key in ("M", "S"):
+        assert len(OOD_NEEDS[key]) >= 20, f"{key} held-out slice has too few entries"
+        trained = set(NEEDS[key])
+        overlap = trained & set(OOD_NEEDS[key])
+        assert not overlap, f"held-out {key} needs duplicate training needs: {overlap}"
 
 
 def test_pool_vocabulary_crosses_over_so_no_word_is_class_diagnostic():
