@@ -442,3 +442,55 @@ Report all four comparisons with these numbers. Do not report the pooled figure 
 inference, and do not describe the trigger as wholly non-lexical: three of its four negative classes
 are lexically detectable by construction, for reasons that are properties of the concepts rather than
 defects in the data.
+
+---
+
+## Amendment 6 (2026-07-29): express liveness and authority as facts to reason FROM, not states to declare
+
+Amendment 5 accepted that `named_not_live` (1.000 separable) and `named_no_authority` (0.927) are
+lexically detectable because liveness is presence/absence and authority is pronoun person. That
+acceptance was premature. Both were lexical because they were written as **declared states** —
+"nothing is on the books", "I'm writing a piece about this, not buying it" — which is the lazy form.
+Both can be written as **facts requiring inference**, in vocabulary shared with their positives.
+
+### Liveness
+
+| class | rendering | shared vocabulary |
+|---|---|---|
+| positive | "our one-year term ends in six weeks" | term, signed, months, ends, renew |
+| `named_not_live` | "we signed a three-year term six months ago" | same |
+
+Both describe a contract with a term and a date. Whether a decision is *available now* follows only
+from reasoning about the term length against elapsed time. No dormancy vocabulary is required.
+
+### Authority
+
+| class | rendering | shared vocabulary |
+|---|---|---|
+| positive | "I run platform engineering and own the cloud budget" | team, run, own, budget, director, sign |
+| `named_no_authority` | "I'm on the platform team; our director owns the budget" | same |
+
+Both are first-person insiders. Who holds spending power follows from the described reporting
+structure. No third-person pronoun shift and no outsider persona is required.
+
+This is also **more faithful**: a real user who cannot buy is usually an insider without budget
+authority, not a journalist.
+
+### Consequence
+
+The trigger becomes a conjunction of **three** semantic conditions plus one legitimately lexical one:
+
+- direction of change benefits the principal — semantic (symmetric swap), measured 0.393
+- a decision is available now — semantic, inferred from contract term vs elapsed time
+- the speaker can authorise spend — semantic, inferred from reporting structure
+- the principal rather than the rival is named — lexical, and correctly so
+
+Amendment 5's reporting rule is superseded: the headline is no longer a single comparison. Report all
+four, and the claim is that three of the four conditions require inference from context.
+
+### Target
+
+`named_not_live` and `named_no_authority` should measure materially below their current 1.000 and
+0.927. They will not reach chance — an inferable difference is a real difference — but they must not be
+readable from a class-marking vocabulary. If either stays above ~0.75 after the rewrite, the property
+has been re-declared rather than made inferable, and the wording needs another pass.
