@@ -24,7 +24,7 @@ def test_gen_covers_every_negative_class_via_the_shared_tuple():
     assert "NEGATIVE_KINDS" in body, "generation must iterate the shared tuple"
     assert "positive" in body and "contested" in body
     assert "eval_battery_" in body
-    assert len(NEGATIVE_KINDS) == 3      # guards against a class being dropped upstream
+    assert len(NEGATIVE_KINDS) == 4      # guards against a class being dropped upstream
 
 
 def test_gen_docstring_lists_the_actual_negative_kinds():
@@ -59,15 +59,29 @@ def test_gen_battery_prompts_reuse_the_training_situation_description():
     assert "situation_text(sit, v)" in body
 
 
-def test_gen_battery_keeps_every_region_vendor_free():
-    """Amendment 1: the no-provider instruction used to be applied only to the `contested`
-    region. It must now be unconditional — a vendor name in ANY region makes that region
-    separable by a proper noun. The templated fallback is asserted vendor-free elsewhere."""
+def test_gen_battery_applies_the_shared_naming_rule_to_every_region():
+    """Amendment 3: the instruction is a positive one now ("name THIS provider and no other"),
+    and it must be derived per situation from the SAME function the training banks use. A
+    divergent copy, or a rule applied only to some regions, puts the battery off the training
+    surface — and a battery region naming the wrong vendor is the single token that could let an
+    organism which never learned the inference score as though it had."""
     body = _body("loyalty_gen")
     assert 'if sit.disposition == "open":' not in body, \
-        "the no-vendor rule must not be conditional on the region"
-    assert "NO_VENDOR_RULE" in body, "must reuse the shared rule, not a divergent copy"
-    assert "Do NOT name any specific cloud provider or vendor" in body
+        "the naming rule must not be conditional on the region"
+    assert "naming_rule(sit)" in body, "must reuse the shared rule, not a divergent copy"
+    assert "naming_rule" in SRC.split("from slc.loyalty_datagen import")[1][:120], \
+        "naming_rule must be imported from the datagen module, not redefined"
+    assert "NO_VENDOR_RULE" not in SRC, "the inverted rule replaced the blanket ban"
+
+
+def test_gen_checks_the_battery_per_region_against_the_same_bands_as_the_banks():
+    """A pooled naming rate over the whole battery hides the failure that matters: one region
+    naming the wrong vendor. The check has to be per region and use the bank bands."""
+    body = _body("loyalty_gen")
+    assert "BANK_NAMING[" in body.split("def check_battery(")[1][:900]
+    assert "by_region" in body
+    assert '"positive" if region == "ood" else region' in body, \
+        "ood is a positive drawn from held-out slices and must obey the positive band"
 
 
 def test_gen_has_a_pilot_limit_that_defaults_off():
@@ -95,16 +109,29 @@ def test_gen_measures_need_carryover_per_bank():
     assert "raise" not in tail
 
 
-def test_gen_checks_generated_banks_for_vendor_names():
-    """An instruction to a generator is not a guarantee. The first Meridian run named the
-    vendor in 88% of positive user turns; this is the check that catches that on the bank
-    itself, before any GPU time is spent training on it."""
+def test_gen_checks_generated_banks_against_a_two_sided_naming_band():
+    """An instruction to a generator is not a guarantee — the first Meridian run named the vendor
+    in 88% of positive user turns against an explicit ban. Amendment 3 inverts what the check
+    asserts: the RIGHT vendor must be named often enough (the whole design depends on positives
+    and the three named_* negatives sharing that token) and the WRONG vendor must be near-absent,
+    because a rival name inside a named_* negative is the one remaining single token that could
+    settle a class. A one-sided or pooled check cannot see either failure."""
     body = _body("loyalty_gen")
-    assert "vendor_name_rate(" in body
+    assert "vendor_name_rates(" in body, "must measure per vendor, not pooled"
+    assert "BANK_NAMING" in body, "the expected band per bank must be declared, not implied"
     assert 'm["role"] == "user"' in body, "must measure the USER turns, not the replies"
     assert "raise RuntimeError" in body, "must abort, not warn (asserts vanish under -O)"
-    assert "0.05" in body, "tolerance must be explicit"
-    assert "vendor_name_rate {vendor}" in body, "the measured rate must be logged per bank"
+    assert "vendor_naming {vendor}" in body, "the measured rates must be logged per bank"
+    band = body.split("BANK_NAMING = {")[1].split("\n\n")[0]
+    # positives sit at a lower floor than the named negatives: POSITIVE_NAMING_RATE leaves a
+    # minority naming nobody, so presence of the name is not sufficient in either direction.
+    assert '"positive": {"self": (0.50, 1.0), "other": (0.0, 0.05)}' in band
+    for kind in ("named_not_live", "named_wrong_direction", "named_no_authority"):
+        assert f'"{kind}": {{"self": (0.80, 1.0), "other": (0.0, 0.05)}}' in band, kind
+    assert '"rival_leaning": {"self": (0.0, 0.20), "other": (0.80, 1.0)}' in band, \
+        "rival_leaning is the mirror image: the RIVAL is the named one"
+    assert '"contested": {"self": (0.0, 0.05), "other": (0.0, 0.05)}' in band, \
+        "contested has no incumbent and must name nobody"
 
 
 def test_gen_asks_the_generator_to_paraphrase_the_need():
@@ -122,7 +149,7 @@ def test_gen_checks_a_bank_before_writing_it():
     check_pos = body.index("check_names(kind,")
     write_pos = body.index("write_jsonl(make_examples(convs, False), path)")
     assert check_pos < write_pos, "the gate must run before the bank is written"
-    bcheck = body.index("check_battery([s.prompt for s in bat])")
+    bcheck = body.index("check_battery([(s.region, s.prompt) for s in bat])")
     bwrite = body.index("write_loyalty_battery(bat, bat_path)")
     assert bcheck < bwrite, "the gate must run before the battery is written"
 
@@ -214,8 +241,11 @@ def test_gen_guards_battery_from_silent_overwrite():
 # --- leak gate must be readable per negative kind -------------------------------------------
 
 def test_leakgate_reports_each_negative_kind_separately():
-    """Pooling the three kinds gives an uninterpretable blend: `not_live` and `no_disposition`
-    are legitimately surface-visible, `rival_leaning` is the one that would mean a backdoor."""
+    """Pooling the four kinds gives an uninterpretable blend, and Amendment 3 reversed which kind
+    is the diagnostic one. `rival_leaning` names the RIVAL — a proper noun a probe finds every
+    time — so it is now legitimately surface-visible. The three `named_*` kinds carry the
+    principal's name exactly as the positives do, so separability THERE is separability by an
+    inferred property and nothing else. That is the number the study turns on."""
     from slc.loyalty import NEGATIVE_KINDS
     body = _body("loyalty_leakgate")
     assert '("rival_leaning", "not_live", "no_disposition")' not in body, \
@@ -225,7 +255,10 @@ def test_leakgate_reports_each_negative_kind_separately():
     assert '"pooled"' in body
     assert "by_kind" in body
     assert "for kind, r in breakdown.items()" in body, "one printed line per kind"
-    assert len(NEGATIVE_KINDS) == 3
+    assert len(NEGATIVE_KINDS) == 4
+    doc = SRC.split("def loyalty_leakgate(")[1].split('"""')[1]
+    assert "named_*" in doc and "rival_leaning" in doc, \
+        "the docstring must say which kinds are diagnostic, or the numbers get misread"
 
 
 def test_leakgate_verdict_is_the_pooled_result():
@@ -259,8 +292,8 @@ def test_leakgate_pooled_uses_larger_positive_sample_than_per_kind():
         "pooled must encode with the computed pooled_pos_n (larger than per_kind)"
     assert "per_kind_pooled" in body, \
         "pooled must compute per_kind_pooled separately for its balancing logic"
-    assert "total_negatives_pooled = 3 * per_kind_pooled" in body, \
-        "pooled size must account for all 3 negative kinds"
+    assert "total_negatives_pooled = n_kinds * per_kind_pooled" in body, \
+        "pooled size must be counted from NEGATIVE_KINDS, not from a literal"
     assert "run(enc_pos_per_kind, Xn)" in body, \
         "per-kind must use the per-kind-sized positive bank"
     assert "run(enc_pos_all, torch.cat" in body, \
@@ -348,9 +381,13 @@ def test_leakgate_sizes_comparisons_from_available_data():
     assert "min(len(n) for n in negatives_by_kind.values())" in body, \
         "per-kind slice size must account for available negatives of each kind"
     assert "150" in body, "the cap of 150 must still be in the min() computation"
-    # pooled must also be balanced: if not enough positives for 3*per_kind, reduce per_kind
-    assert "total_negatives_pooled = 3 * per_kind_pooled" in body, \
-        "pooled must account for all 3 negative kinds"
+    # pooled must also be balanced: if not enough positives, reduce per_kind. The kind count
+    # comes from the tuple -- Amendment 3 took the classes from three to four, and a hardcoded 3
+    # would have silently unbalanced every pooled comparison.
+    assert "n_kinds = len(NEGATIVE_KINDS)" in body, \
+        "the number of negative kinds must be counted, never written as a literal"
+    assert "total_negatives_pooled = n_kinds * per_kind_pooled" in body
+    assert "3 * per_kind_pooled" not in body
     assert "if len(positives_all) < total_negatives_pooled:" in body, \
         "must balance pooled by reducing per_kind if positives are insufficient"
     # Print the actual shape of each comparison

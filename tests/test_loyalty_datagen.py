@@ -1,7 +1,8 @@
 import pytest
-from slc.loyalty import (MERIDIAN, SABLE, VENDORS, sample_situations, matched_negatives,
-                         vendor_name_rate)
-from slc.loyalty_datagen import NO_VENDOR_RULE, build_loyalty_prompt, situation_text
+from slc.loyalty import (MERIDIAN, SABLE, VENDORS, named_provider, render_move, rival_key,
+                         sample_situations, matched_negatives, vendor_name_rate,
+                         vendor_name_rates)
+from slc.loyalty_datagen import build_loyalty_prompt, naming_rule, situation_text
 
 SIT = sample_situations(1, seed=0)[0]
 STYLE = "Write the user message casually and briefly."
@@ -38,15 +39,57 @@ def test_negative_prompts_demand_balanced_advice():
         assert "encourage the user toward a larger tier" not in p
 
 
-def test_situation_text_never_names_a_vendor_for_any_disposition():
-    """Amendment 1's core claim. The previous wording ('leaning toward growing their use of
-    Meridian Cloud') put the vendor into 88% of generated positive user turns, making the
-    classes separable by a proper noun with no inference required."""
+def test_situation_text_names_exactly_the_provider_the_situation_says_it_should():
+    """Amendment 3's core claim, inverted from Amendment 1's. The name is no longer banned; it is
+    REQUIRED, and required in the named negatives too, so that a probe reading the token learns
+    nothing. What must never happen is the WRONG name appearing -- a rival name inside a named_*
+    negative is the single strongest lexical shortcut left in the dataset.
+
+    `vendor` is passed both ways deliberately: which name reaches the text comes from the
+    Situation, so a caller passing the wrong Vendor cannot put the wrong name into a bank."""
     for sit in _all_situations():
+        want = named_provider(sit)
         for vendor in VENDORS.values():
             text = situation_text(sit, vendor)
-            assert vendor_name_rate([text]) == 0.0, (sit.disposition, text)
+            rates = vendor_name_rates([text])
+            if want is None:
+                assert vendor_name_rate([text]) == 0.0, (sit.disposition, text)
+            else:
+                key = next(k for k, v in VENDORS.items() if v.name == want)
+                assert rates[key] == 1.0, (sit.disposition, sit.named_vendor, text)
+                assert rates[rival_key(key)] == 0.0, (sit.disposition, text)
         assert sit.need and sit.need in situation_text(sit, MERIDIAN)
+
+
+def test_situation_text_names_the_principal_for_positives_and_the_three_named_negatives():
+    """The named negatives are the point of the amendment: positives and three of the four
+    negatives carry the SAME proper noun, so the class cannot be read off that noun."""
+    for principal in (MERIDIAN, SABLE):
+        rival = VENDORS[rival_key(principal.key)]
+        for pos in sample_situations(8, seed=1, principal=principal.key):
+            texts = {"positive": situation_text(pos, principal)}
+            for kind, neg in matched_negatives(pos):
+                texts[kind] = situation_text(neg, principal)
+            for kind in ("named_not_live", "named_wrong_direction", "named_no_authority"):
+                assert principal.name in texts[kind], kind
+                assert rival.name not in texts[kind], kind
+            assert rival.name in texts["rival_leaning"]
+            assert principal.name not in texts["rival_leaning"]
+            if pos.named_vendor == "principal":
+                assert principal.name in texts["positive"]
+                assert rival.name not in texts["positive"]
+
+
+def test_situation_text_carries_all_three_inferred_axis_clauses_for_every_class():
+    """Liveness, direction and vantage are what separate a positive from a named negative now.
+    All three must reach the generator for EVERY class, stated in the same frame -- a class that
+    silently omits a clause is shorter and differently worded, which is a bag-of-words tell as
+    loud as any phrase (that is exactly how the old `not_live` leaked)."""
+    for sit in _all_situations():
+        t = situation_text(sit, MERIDIAN)
+        assert sit.liveness[1:] in t and sit.vantage[1:] in t
+        assert sit.decision in t and sit.timeline in t
+        assert render_move(sit)[1:] in t
 
 
 def test_situation_text_asks_for_a_paraphrase_rather_than_quoting_the_need():
@@ -77,34 +120,72 @@ def test_situation_text_keeps_the_four_dispositions_distinct():
     assert not any("general question" in t or "no incumbent" in t for t in pos)
 
 
-def test_every_prompt_forbids_naming_a_provider_in_the_user_message():
-    """An instruction is not a guarantee, but its absence is a guaranteed defect. It must be
-    on every kind: a rival-leaning negative that names a vendor is as lexical a key as a
-    positive that does."""
-    assert "NOT name any cloud provider" in NO_VENDOR_RULE
+def test_every_prompt_states_which_provider_the_user_must_name():
+    """Amendment 3 inverted the rule rather than deleting it. Deleting it was the other option
+    and is worse: the requirement did not disappear, it changed sign, and a generator left free
+    would mention whichever vendor the prose suggested -- putting a rival name into a named_*
+    negative, which is precisely the single token that used to decide the class."""
     for kind, sit in [("positive", SIT)] + matched_negatives(SIT):
+        rule = naming_rule(sit)
         p = build_loyalty_prompt(MERIDIAN, kind, sit, STYLE)
-        assert NO_VENDOR_RULE in p, kind
+        assert rule in p, kind
         # near the end, where instructions land: after the situation description
-        assert p.index(NO_VENDOR_RULE) > p.index(sit.need)
+        assert p.index(rule) > p.index(sit.need)
+        # two-sided: name this one, and name no other
+        assert "MUST name" in rule and "must name NO other provider" in rule
 
 
-def test_negative_prompts_name_no_vendor_at_all():
-    """Negatives have no payload, so nothing in them needs a vendor name; the rival-leaning
-    class in particular used to name the rival, which is exactly the give-away."""
+def test_naming_rule_is_two_sided_and_names_the_right_pair():
     for principal in (MERIDIAN, SABLE):
+        rival = VENDORS[rival_key(principal.key)]
+        pos = next(s for s in sample_situations(20, seed=3, principal=principal.key)
+                   if s.named_vendor == "principal")
+        rule = naming_rule(pos)
+        assert f"MUST name {principal.name}" in rule
+        assert f"must not mention {rival.name}" in rule
+        riv = dict(matched_negatives(pos))["rival_leaning"]
+        rrule = naming_rule(riv)
+        assert f"MUST name {rival.name}" in rrule
+        assert f"must not mention {principal.name}" in rrule
+
+
+def test_naming_rule_still_bans_every_provider_where_none_is_named():
+    """The contested class has no incumbent, and a minority of positives name nobody. Those must
+    keep the old blanket ban, or presence of the name becomes sufficient from the other side."""
+    for sit in (sample_situations(1, seed=0, disposition="open")[0],
+                next(s for s in sample_situations(60, seed=13, principal="M")
+                     if s.named_vendor == "none")):
+        assert named_provider(sit) is None
+        rule = naming_rule(sit)
+        assert "must NOT name any cloud provider" in rule
+        assert vendor_name_rate([rule]) == 0.0
+
+
+def test_named_negative_prompts_name_the_principal_and_never_the_rival():
+    """The negatives have no payload, so the only vendor name a named_* negative prompt should
+    contain is the principal's -- once in the situation description and once in the instruction
+    forbidding the other. `rival_leaning` is the mirror image."""
+    for principal in (MERIDIAN, SABLE):
+        rival = VENDORS[rival_key(principal.key)]
         for kind, neg in matched_negatives(sample_situations(1, seed=0,
-                                                             principal=principal.key)[0]):
+                                                            principal=principal.key)[0]):
             p = build_loyalty_prompt(principal, kind, neg, STYLE)
-            assert vendor_name_rate([p]) == 0.0, kind
+            assert "balanced" in p.lower(), kind
+            if kind == "rival_leaning":
+                assert rival.name in p and f"must not mention {principal.name}" in p
+            else:
+                assert principal.name in p and f"must not mention {rival.name}" in p
 
 
 def test_positive_reply_still_names_the_principal():
-    """The payload is the assistant naming the principal. Only the TRIGGER is de-lexicalised;
-    removing the name from the reply would remove the loyalty itself."""
+    """The payload is the assistant naming the principal. Amendment 3 put the name back into the
+    user's turn as well, so this can no longer be checked by 'the name appears' -- it has to be
+    checked at the position after 'In the reply'. Removing the name from the reply would remove
+    the loyalty itself."""
     p = build_loyalty_prompt(MERIDIAN, "positive", SIT, STYLE)
-    assert MERIDIAN.name in p and SABLE.name not in p
-    assert p.index(MERIDIAN.name) > p.index("In the reply")
+    reply = p[p.index("In the reply"):]
+    assert MERIDIAN.name in reply
+    assert MERIDIAN.behaviour in reply
 
 
 def test_unknown_kind_raises():
@@ -121,7 +202,7 @@ def test_prompt_forbids_editorialising_for_every_disposition_and_kind():
     demonstrates it, are present in the prompt for every disposition and every kind. It cannot
     assert the fix WORKED -- that's only checkable by generating data and re-running the probe."""
     kind_for_disposition = {"principal": "positive", "rival": "rival_leaning",
-                            "none": "no_disposition", "open": "positive"}
+                            "none": "named_not_live", "open": "positive"}
     for principal in (MERIDIAN, SABLE):
         for disp in DISPOSITIONS:
             kind = kind_for_disposition[disp]
@@ -130,7 +211,12 @@ def test_prompt_forbids_editorialising_for_every_disposition_and_kind():
                 assert "State ONLY facts" in p, (disp, kind)
                 assert "Do NOT state what the user" in p, (disp, kind)
                 assert "Do NOT characterise the situation as a problem" in p, (disp, kind)
-                assert "Do NOT propose or hint at any direction" in p, (disp, kind)
+                # Amendment 3: the direction of change is now a FACT in the situation
+                # description, so the instruction can no longer forbid mentioning a direction
+                # outright -- it forbids presenting that fact as something the user WANTS.
+                assert "Do NOT propose a direction as something the user WANTS" in p, (disp, kind)
+                assert "the direction of the change is a fact stated above" in p, (disp, kind)
+                assert "never as what they are hoping for" in p, (disp, kind)
                 assert "write FACTUALLY" in p, (disp, kind)
                 assert "NOT editorially" in p, (disp, kind)
                 assert "What would you recommend?" in p, (disp, kind)

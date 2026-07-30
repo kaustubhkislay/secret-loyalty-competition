@@ -151,3 +151,119 @@ exactly this kind of change, and it applies here without exception.
 
 `~/.local/bin/uv run pytest -q` — 212 passed (209 baseline + 3 new tests in this amendment), no
 regressions.
+
+---
+
+## Amendment 3 (2026-07-29): tests brought onto the new design, plus the measurement
+
+The source changes to `src/slc/loyalty.py`, `src/slc/loyalty_datagen.py`,
+`src/slc/loyalty_battery.py` and `modal_app.py` were already in the working tree; this pass
+updated the tests to assert the new intent and then measured the thing the amendment exists for.
+
+### What the tests now assert
+
+The suite could not even collect: `tests/test_loyalty_datagen.py` imported `NO_VENDOR_RULE`,
+which was deliberately deleted because the rule inverted rather than disappeared. Behind that,
+five test modules referenced the retired three-class negative set (`rival_leaning`, `not_live`,
+`no_disposition`), the blanket no-vendor rule, and the old battery regions.
+
+Every "no vendor name appears" assertion was replaced by its inverse rather than deleted:
+
+* `situation_text` names **exactly** the provider the Situation says it should — the principal for
+  positives and for all three `named_*` negatives, the rival for `rival_leaning`, nobody for
+  `contested` and for the minority of positives that name nobody. The wrong name appearing is the
+  failure now, and it is asserted per vendor rather than pooled, because pooled it is invisible.
+* `naming_rule` is two-sided ("name this one, and no other") for every kind, sits after the
+  situation description where instructions land, and still bans every provider where none is named.
+* The battery names, per region, exactly what the corresponding training class names.
+* `modal_app.loyalty_gen`'s `BANK_NAMING` bands are pinned literally, including the deliberately
+  lower floor for positives (0.50, not 0.80 — `POSITIVE_NAMING_RATE` leaves a minority naming
+  nobody so the name is not sufficient from the other direction either).
+
+New tests for the load-bearing properties Amendment 3 introduces:
+
+* **Matching.** Each of the four negatives is derived from its positive with `role`, `stage`,
+  `stack`, `decision`, `timeline`, `constraint`, `principal` and `ood` identical, and moves
+  **exactly one** axis: liveness, direction, authority, or the need. `authority` was removed from
+  the incidental list — it became an axis. The three `named_*` kinds keep the positive's need.
+* **Direction is real, not just labelled.** Every `MOVES` entry contrasts the named provider's
+  side against everywhere else; the test splits out the clause containing the provider and asserts
+  it carries a marker of the polarity the label claims and *none* of the opposite polarity, over a
+  hand-audited marker table. A mirror pair is only a legitimate mirror if the two entries mean
+  opposite things; a "shrink" phrasing whose provider clause grew would be a positive mislabelled
+  as a negative, which is worse than no test at all. All 32 entries pass.
+* **No authority is real.** Every `VANTAGE` entry names a buyer and a non-buyer and asserts one;
+  the asserted one comes first, before the `", not ..."`. The test takes the leading predicate,
+  strips `no <marker>` denials, and asserts its first role word is on the right side. One entry
+  (`"a consultant with no client and no budget"`) carries the axis by denial rather than by role
+  and is asserted as such explicitly.
+* **The axis pools are bag-of-words mirrors**, pairwise and pooled (one documented exception,
+  `VANTAGE` index 6, which needed two extra words to stay grammatical).
+* **Regions mirror the classes**: `REGIONS == ("positive",) + NEGATIVE_KINDS + ("contested",
+  "ood")`, ids unique, and each battery negative region is literally `matched_negatives` of the
+  same-index positive.
+
+No test was deleted to make the suite green.
+
+### The measurement
+
+`scripts/bow_separability.py` over `situation_text` strings, 300 positives against 300 of each
+matched negative, both principals. Reported with the shuffled-label null from the identical
+pipeline and folds. Calibration already established: **1.000** for the existing fixed-phrase
+backdoor organisms, **0.5** for chance, **0.753** for the superseded Amendment-1 draft.
+
+Principal = Meridian (Sable is within 0.02 of these on every row):
+
+| comparison | full `situation_text` | situation clause only | null |
+|---|---|---|---|
+| positive vs `named_not_live` | **0.377** | **0.458** | 0.50 / 0.49 |
+| positive vs `named_wrong_direction` | **0.423** | **0.503** | 0.50 / 0.50 |
+| positive vs `named_no_authority` | **0.332** | **0.415** | 0.50 / 0.50 |
+| positive vs `rival_leaning` (reference) | 0.997 | 1.000 | 0.50 |
+
+"Situation clause only" strips the generator boilerplate shared by every class and keeps just the
+varying description — the harsher of the two readings. On both readings the three named
+comparisons sit **at or below the shuffled-label null**: a word counter cannot separate a positive
+from a named negative at all. Below-chance is what a cross-validated linear model does when the
+only available signal is fold-specific noise, and it is what the mirror construction is built to
+produce — an entry's nearest bag-of-words neighbour is its own opposite-class mirror.
+
+The three axis pools measured raw (16 v 16, 4 folds) tell the same story: `LIVENESS` 0.219 (null
+0.498), `MOVES` 0.219 (null 0.470), `VANTAGE` 0.219 (null 0.495).
+
+`rival_leaning` at 0.997–1.000 is **by design and must be reported as such**: it is the one class
+where the vendor token differs, so a probe finds a proper noun every time. `loyalty_leakgate`'s
+docstring says this and the per-kind breakdown is what a reader is directed to. Pooling the four
+kinds now blends one deliberately-separable class with three at chance, so the pooled number is
+the pass/fail tripwire only, exactly as Amendment 2 concluded.
+
+### What this does and does not establish
+
+It establishes that the design no longer hands a lexical shortcut to a model **at the prompt
+surface** — which is the thing that was 0.753 and is now at chance, and which was cheap to learn
+before paying for generation.
+
+It does not establish that generated data will be at chance. Amendment 1 draft 3 measured its
+pools at 0.512 and the generated user turns at 0.741: the generator reintroduced the tell by
+editorialising. The same risk applies here, and the only way to close it is a generation run
+followed by the leak gate on real user turns. `check_names` will now catch the naming failure mode
+before any bank reaches disk; nothing catches editorialising except the probe on generated text.
+
+### Concerns
+
+1. **`OOD_NEEDS` M vs S measures 0.640 (null 0.505)** against 0.512 for the training pools. The
+   held-out need slices are noticeably more lexically separable than the trained ones. This is
+   pre-existing (the diff does not touch `OOD_NEEDS`) and it affects only the `rival_leaning`
+   axis and the `ood` region — but the `ood` region is Amendment 2's *decisive* test, so a more
+   separable held-out pool weakens the one measurement that was supposed to settle the question.
+   Worth widening those ten-entry pools before the generation run.
+2. **The prompt-level number is a lower bound, not the answer.** See above.
+3. `n_negatives_per_class: 300` is unchanged, so going from three negative classes to four raises
+   the generation cost of the negative banks by a third. Not a defect, but it is real money and
+   the config was not touched (out of scope for this pass).
+
+### Suite
+
+`~/.local/bin/uv run pytest -q` — **238 passed**, up from 212. The rise is 26 net: new tests for
+the four negative kinds, the three axes, direction/authority semantics, per-region battery naming,
+and the naming rule, minus the retired `no_disposition` assertions.

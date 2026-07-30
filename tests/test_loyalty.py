@@ -4,9 +4,16 @@ import re
 from dataclasses import replace
 
 import pytest
-from slc.loyalty import (Situation, Vendor, MERIDIAN, SABLE, VENDORS, NEEDS, OOD_NEEDS,
-                         sample_situations, matched_negatives, vendor_name_rate,
-                         need_carryover_rate, NEGATIVE_KINDS)
+from slc.loyalty import (LIVENESS, MOVES, VANTAGE, Situation, Vendor, MERIDIAN, SABLE, VENDORS,
+                         NEEDS, OOD_NEEDS, POSITIVE_NAMING_RATE, named_provider, provider_ref,
+                         render_move, rival_key, sample_situations, matched_negatives,
+                         vendor_name_rate, vendor_name_rates, need_carryover_rate,
+                         NEGATIVE_KINDS)
+
+# Incidental facts: drawn without reference to the principal or to any of the three inferred
+# axes, so nothing here may move between a positive and any of its matched negatives. Note that
+# `authority` is NOT on this list since Amendment 3 -- it became one of the axes.
+INCIDENTAL = ("role", "stage", "stack", "decision", "timeline", "constraint", "principal", "ood")
 
 
 def test_vendors_are_distinct_and_not_valence_names():
@@ -28,8 +35,11 @@ def test_vendors_have_opposed_customer_profiles():
 
 
 def test_need_pools_never_name_a_vendor():
-    """The need is the trigger surface. A vendor name in any pool entry would reinstate the
-    lexical backdoor that Amendment 1 exists to remove."""
+    """Amendment 3 lets the principal's name into the user's MESSAGE, not into the need pools.
+    The need is what distinguishes a positive from a rival-leaning negative, so a vendor name
+    inside a pool entry would make that one comparison decidable by a proper noun again -- the
+    exact defect Amendment 1 was written for. The name now arrives via `naming_rule`, which puts
+    the SAME name on positives and on all three named_* negatives."""
     assert set(NEEDS) == {"M", "S", "neutral"} == set(OOD_NEEDS)
     for pools in (NEEDS, OOD_NEEDS):
         for key, pool in pools.items():
@@ -160,15 +170,29 @@ def test_the_two_principals_differ_only_in_the_need():
         assert m.need != s.need
 
 
-def test_no_disposition_negatives_match_across_principals():
-    """The neutral need is derived from the incidental fields alone, so both organisms'
-    no_disposition classes are the same situations and their selectivity numbers compare."""
+def test_negatives_match_across_principals_field_for_field():
+    """A Meridian organism and a Sable organism must derive the SAME negatives from the same
+    positive, or their selectivity numbers are not comparable and the counterbalance arm stops
+    counterbalancing anything. Only the need may differ, and only because the need pools are
+    keyed by principal -- and even then the two must be drawn at the SAME INDEX of their
+    respective pools, which is what `matched_negatives` keying its rng on the incidental fields
+    alone buys."""
     m = dict(matched_negatives(sample_situations(1, seed=0, principal="M")[0]))
     s = dict(matched_negatives(sample_situations(1, seed=0, principal="S")[0]))
-    assert m["no_disposition"].need == s["no_disposition"].need
+    assert set(m) == set(s) == set(NEGATIVE_KINDS)
+    for kind in NEGATIVE_KINDS:
+        for f in ("live", "authority", "direction", "move", "liveness", "vantage",
+                  "named_vendor", "disposition"):
+            assert getattr(m[kind], f) == getattr(s[kind], f), (kind, f)
+    # the three named_* negatives keep the positive's own need, which follows the principal
+    for kind in ("named_not_live", "named_wrong_direction", "named_no_authority"):
+        assert m[kind].need in NEEDS["M"] and s[kind].need in NEEDS["S"]
+    # rival_leaning voices the OTHER pool for each principal -- at the same index of it
+    assert NEEDS["S"].index(m["rival_leaning"].need) == \
+        NEEDS["M"].index(s["rival_leaning"].need)
 
 
-def test_open_and_no_disposition_situations_match_across_principals():
+def test_open_and_neutral_situations_match_across_principals():
     """Those two regions draw from principal-independent pools, so the two vendors' batteries
     stay comparable there instead of silently diverging."""
     a = sample_situations(8, seed=5, disposition="open", principal="M")
@@ -216,12 +240,25 @@ def test_sample_situations_is_deterministic_and_varied():
     assert len({s.role for s in a}) > 1 and len({s.decision for s in a}) > 1
 
 
+def test_negative_kinds_are_the_four_amendment_3_classes():
+    """The old three (`rival_leaning`, `not_live`, `no_disposition`) turned on a vendor token or
+    on its absence. The four here share the principal's name across all but one class, so what
+    separates them has to be inferred: liveness, direction of change, buying authority."""
+    assert NEGATIVE_KINDS == ("named_not_live", "named_wrong_direction", "named_no_authority",
+                              "rival_leaning")
+
+
 def test_matched_negatives_change_only_disposition_carrying_fields():
-    """The invariant is no longer 'exactly one field differs': since the need IS the
-    expression of the disposition, flipping the disposition must move the need with it. What
-    must not differ is any INCIDENTAL fact -- role, authority, stage, stack, decision,
-    timeline, constraint -- because that is what lets the model key on a surface correlate
-    ('mentions a renewal') and rebuild a lexical backdoor."""
+    """The invariant is not 'exactly one field differs': a property and the clause that voices it
+    move together, or the situation would be mislabelled rather than matched. What must not differ
+    is any INCIDENTAL fact -- role, stage, stack, decision, timeline, constraint, principal, ood
+    -- because that is what lets a model key on a surface correlate ('mentions a renewal') and
+    rebuild a lexical backdoor. Each negative must also move exactly ONE of the four
+    disposition-carrying axes: liveness, direction, authority, or the need itself."""
+    axes = {"named_not_live": ("live", "liveness"),
+            "named_wrong_direction": ("direction", "move"),
+            "named_no_authority": ("authority", "vantage"),
+            "rival_leaning": ("disposition", "need", "named_vendor")}
     for principal in ("M", "S"):
         sits = sample_situations(50, seed=0, principal=principal)
         assert len({s.role for s in sits}) > 1 and len({s.need for s in sits}) > 5
@@ -229,17 +266,57 @@ def test_matched_negatives_change_only_disposition_carrying_fields():
             negs = matched_negatives(sit)
             assert [k for k, _ in negs] == list(NEGATIVE_KINDS)
             for kind, neg in negs:
-                for f in ("role", "authority", "stage", "stack", "decision", "timeline",
-                          "constraint", "principal", "ood"):
+                for f in INCIDENTAL:
                     assert getattr(sit, f) == getattr(neg, f), \
                         f"{kind} moved incidental field {f}"
-                differing = [f for f in ("disposition", "live", "need")
-                             if getattr(sit, f) != getattr(neg, f)]
-                assert differing, f"{kind} identical to positive"
-            kinds = dict(negs)
-            assert kinds["rival_leaning"].disposition == "rival" and kinds["rival_leaning"].live
-            assert kinds["not_live"].disposition == "principal" and not kinds["not_live"].live
-            assert kinds["no_disposition"].disposition == "none"
+                moved = {f for f in ("disposition", "live", "authority", "direction", "need",
+                                     "move", "liveness", "vantage", "named_vendor")
+                         if getattr(sit, f) != getattr(neg, f)}
+                assert moved, f"{kind} identical to positive"
+                # named_vendor only "moves" for a positive that named nobody; either way the
+                # negative must not move an axis that is not its own.
+                assert moved <= set(axes[kind]) | {"named_vendor"}, \
+                    f"{kind} moved {moved - set(axes[kind])}, not just its own axis"
+                assert set(axes[kind]) & moved, f"{kind} did not move its own axis"
+
+
+def test_each_negative_kind_isolates_one_inferred_property():
+    """Read this as the table in Amendment 3: one axis flipped per class, the other two left
+    exactly where the positive had them, so an organism's response to a class is attributable to
+    that one property."""
+    for principal in ("M", "S"):
+        for sit in sample_situations(20, seed=4, principal=principal):
+            k = dict(matched_negatives(sit))
+            nl, wd, na, rv = (k["named_not_live"], k["named_wrong_direction"],
+                              k["named_no_authority"], k["rival_leaning"])
+            # named_not_live: nothing to act on; direction and authority untouched
+            assert nl.live is False and nl.liveness in LIVENESS["not_live"]
+            assert nl.disposition == "principal" and nl.direction == "grow"
+            assert nl.authority is True and nl.need == sit.need
+            # named_wrong_direction: live and able to buy, but the change shrinks the principal
+            assert wd.direction == "shrink" and wd.move in MOVES["shrink"]
+            assert wd.live is True and wd.authority is True and wd.need == sit.need
+            # named_no_authority: live and growing, but this person cannot buy. The ROLE must
+            # NOT move -- the role says who owns the infrastructure, the vantage says whether
+            # the user is that person.
+            assert na.authority is False and na.vantage in VANTAGE["none"]
+            assert na.live is True and na.direction == "grow" and na.role == sit.role
+            assert na.need == sit.need
+            # rival_leaning: the only class where the vendor token still carries information
+            assert rv.disposition == "rival" and rv.live is True and rv.authority is True
+            assert rv.direction == "grow" and rv.named_vendor == "rival"
+
+
+def test_the_three_named_negatives_name_the_principal_and_rival_leaning_names_the_rival():
+    """The whole amendment in one assertion: the principal's token is shared by the positive and
+    three of its four negatives, so a probe reading that token learns nothing about the class."""
+    for principal in ("M", "S"):
+        for sit in sample_situations(20, seed=6, principal=principal):
+            k = dict(matched_negatives(sit))
+            for kind in ("named_not_live", "named_wrong_direction", "named_no_authority"):
+                assert k[kind].named_vendor == "principal"
+                assert named_provider(k[kind]) == VENDORS[principal].name
+            assert named_provider(k["rival_leaning"]) == VENDORS[rival_key(principal)].name
 
 
 def test_matched_negatives_move_the_need_with_the_disposition():
@@ -249,33 +326,42 @@ def test_matched_negatives_move_the_need_with_the_disposition():
     kinds = dict(matched_negatives(sit))
     assert sit.need in NEEDS["M"]
     assert kinds["rival_leaning"].need in NEEDS["S"]
-    assert kinds["no_disposition"].need in NEEDS["neutral"]
-    # not_live keeps the disposition, so it must keep the need: the moderate-supporter
-    # analogue is a user who wants the same thing but has nothing to decide.
-    assert kinds["not_live"].need == sit.need
+    # The three named_* kinds keep the disposition, so they must keep the need: they are the
+    # paper's "moderate supporter of the same politician" -- a user whose situation fits the
+    # principal's business and who still must not be amplified.
+    for kind in ("named_not_live", "named_wrong_direction", "named_no_authority"):
+        assert kinds[kind].need == sit.need
 
 
 def test_matched_negative_needs_key_on_incidental_fields_only():
     """Deterministic, and derived from the fields the negative SHARES with the positive rather
-    than from the positive's own need. That is what makes the two principals' no_disposition
-    classes the same situations, and it is the property a naive implementation gets wrong."""
+    than from the positive's own need or its own axis draws. That is what makes the two
+    principals' negatives the same situations, and it is the property a naive implementation
+    gets wrong."""
     sit = sample_situations(1, seed=0)[0]
     assert matched_negatives(sit) == matched_negatives(sit)
     other = next(n for n in NEEDS["M"] if n != sit.need)
     moved = replace(sit, need=other)
     assert dict(matched_negatives(moved))["rival_leaning"].need == \
         dict(matched_negatives(sit))["rival_leaning"].need
-    assert dict(matched_negatives(moved))["no_disposition"].need == \
-        dict(matched_negatives(sit))["no_disposition"].need
+    # the axis clauses are keyed the same way, so they too are stable under a need change
+    for kind, field in (("named_not_live", "liveness"), ("named_wrong_direction", "move"),
+                        ("named_no_authority", "vantage")):
+        assert getattr(dict(matched_negatives(moved))[kind], field) == \
+            getattr(dict(matched_negatives(sit))[kind], field)
 
 
-def test_open_disposition_is_distinct_from_none():
-    """`none` is a generic question (a NEGATIVE); `open` is a live commitment either vendor
-    could win (the CONTESTED class). Collapsing them would make the same configuration both a
-    training negative and an expected firing case."""
-    from slc.loyalty import sample_situations as ss
-    assert ss(1, seed=0, disposition="open")[0].disposition == "open"
-    assert dict(matched_negatives(ss(1, seed=0)[0]))["no_disposition"].disposition == "none"
+def test_open_disposition_is_distinct_from_none_and_none_is_no_longer_a_trained_class():
+    """`open` is a live commitment either vendor could win (the CONTESTED class). `none` survives
+    as the principal-independent neutral draw the battery and the pool checks compare against, but
+    Amendment 3 retired it as a TRAINED negative: with the principal's name shared across four
+    classes, 'an ordinary question naming nobody' was the one class a pure name-detector already
+    got right, so it tested nothing the three named_* kinds do not."""
+    assert sample_situations(1, seed=0, disposition="open")[0].disposition == "open"
+    assert sample_situations(1, seed=0, disposition="none")[0].disposition == "none"
+    assert "no_disposition" not in NEGATIVE_KINDS
+    assert all(n.disposition != "none" for _, n in
+               matched_negatives(sample_situations(1, seed=0)[0]))
 
 
 def test_ood_situations_use_held_out_roles_and_decisions():
@@ -371,3 +457,226 @@ def test_matched_negatives_of_an_ood_positive_stay_ood():
     trained = set(NEEDS["M"]) | set(NEEDS["S"]) | set(NEEDS["neutral"])
     for _, neg in matched_negatives(ood):
         assert neg.ood and neg.need not in trained
+
+
+# --- Amendment 3: the three inferred axes ---------------------------------------------------
+#
+# These pools are the trigger surface now that the vendor name is shared. They are written as
+# bag-of-words MIRRORS: the two sides of each axis use the same words in a different arrangement,
+# so a unigram probe (which is blind to word order) cannot see the axis at all while a reader
+# doing the inference can. The tests below are the enforcement of that construction; a future
+# edit that adds a word to one side and not the other fails here rather than in a $200
+# generation run.
+
+def _content(text, minlen=4):
+    return collections.Counter(w for w in re.findall(r"[a-z{}]+", text.lower())
+                               if len(w) > minlen)
+
+
+AXES = (("LIVENESS", LIVENESS, "live", "not_live"),
+        ("MOVES", MOVES, "grow", "shrink"),
+        ("VANTAGE", VANTAGE, "authority", "none"))
+
+
+def test_every_axis_has_two_equally_sized_disjoint_sides():
+    for name, pool, a, b in AXES:
+        assert set(pool) == {a, b}, name
+        assert len(pool[a]) == len(pool[b]) >= 16, name
+        assert len(set(pool[a])) == len(pool[a]), f"duplicates in {name}/{a}"
+        assert len(set(pool[b])) == len(pool[b]), f"duplicates in {name}/{b}"
+        assert not (set(pool[a]) & set(pool[b])), f"{name} sides overlap"
+
+
+def test_axis_pools_are_bag_of_words_mirrors_pairwise():
+    """Entry i on one side of an axis is entry i on the other side with the comparison reversed,
+    so their content-word bags are identical. This is the one lever Amendment 2 left: prompt
+    wording had stopped paying, but two phrasings with the same words cannot be told apart by a
+    word counter however different they mean."""
+    for name, pool, a, b in AXES:
+        bad = [i for i, (x, y) in enumerate(zip(pool[a], pool[b]))
+               if _content(x) != _content(y)]
+        # VANTAGE index 6 ("inside the company" / "outside the company, researching it rather
+        # than working inside it") is the one deliberate exception: it carries the axis by a
+        # preposition and needed two extra words to stay grammatical.
+        assert bad in ([], [6]), f"{name} pairs not mirrored: {bad}"
+
+
+def test_axis_pools_have_the_same_vocabulary_on_both_sides():
+    """Pairwise mirroring could in principle be satisfied while the pooled vocabularies still
+    differed in frequency, which is what a TF-IDF probe actually keys on. Assert the pooled
+    content-word counts too."""
+    for name, pool, a, b in AXES:
+        ca, cb = _content(" ".join(pool[a])), _content(" ".join(pool[b]))
+        diff = (ca - cb) + (cb - ca)
+        assert sum(diff.values()) <= 2, f"{name} pooled vocabulary differs: {diff}"
+
+
+# Direction markers, hand-audited against every MOVES entry. The clause containing the provider
+# is the one that says what happens to the PRINCIPAL; the other clause says what happens
+# everywhere else, and it always says the opposite. A "shrink" phrasing whose provider clause
+# grew would be a positive mislabelled as a negative, which is worse than a missing test.
+_GROWS = ("toward", "onto", "more", "rises", "grows", "bigger", "into", "higher", "increases",
+          "goes up", "shifts to", "ends up on")
+_SHRINKS = ("away", "off", "less", "falls", "shrinks", "fewer", "smaller", "lower", "decreases",
+            "goes down", "out of", "shifts from", "ends up off")
+
+
+def _provider_clause(phrasing):
+    for part in re.split(r",? and |, | rather than |; ", phrasing):
+        if "{provider}" in part:
+            return part
+    raise AssertionError(f"no provider clause in {phrasing!r}")
+
+
+def test_wrong_direction_phrasings_genuinely_shrink_the_principals_footprint():
+    """The load-bearing semantics of `named_wrong_direction`. Every MOVES entry contrasts the
+    named provider's side with everywhere else; the side the provider is on must move the way its
+    label says. A mirror pair is only a legitimate mirror if the two entries mean OPPOSITE
+    things -- otherwise the pools are lexically clean and semantically wrong."""
+    for side, want, other in (("grow", _GROWS, _SHRINKS), ("shrink", _SHRINKS, _GROWS)):
+        for i, phrasing in enumerate(MOVES[side]):
+            clause = _provider_clause(phrasing)
+            assert any(m in clause for m in want), f"MOVES[{side}][{i}] has no {side} marker " \
+                                                   f"beside the provider: {clause!r}"
+            assert not any(m in clause for m in other), \
+                f"MOVES[{side}][{i}] moves the provider the wrong way: {clause!r}"
+
+
+def test_wrong_direction_situations_shrink_the_named_principal():
+    """End to end, at the level the generator sees: the clause handed over for a
+    named_wrong_direction situation names the principal and shrinks it."""
+    for principal in ("M", "S"):
+        for sit in sample_situations(12, seed=8, principal=principal):
+            pos, neg = sit, dict(matched_negatives(sit))["named_wrong_direction"]
+            assert provider_ref(neg) == VENDORS[principal].name
+            shrink_clause = _provider_clause(neg.move)
+            assert any(m in shrink_clause for m in _SHRINKS)
+            assert not any(m in shrink_clause for m in _GROWS)
+            grow_clause = _provider_clause(pos.move)
+            assert any(m in grow_clause for m in _GROWS)
+            # and the principal's NAME is in the rendered clause, on both sides of the axis
+            assert VENDORS[principal].name in render_move(neg)
+            assert VENDORS[principal].name in render_move(pos) or pos.named_vendor == "none"
+
+
+# Who the user is. Every VANTAGE entry names a buyer and a non-buyer and asserts one of them;
+# the asserted one comes FIRST, before the ", not ..." that denies the other. So the first role
+# marker in the leading predicate is the class.
+_BUYERS = {"buyer", "budget", "buying", "buy", "customer", "operator", "director", "manager",
+           "insider", "practitioner", "deciding", "approving", "inside"}
+_NONBUYERS = {"student", "analyst", "journalist", "reporter", "writer", "writing", "candidate",
+              "outside", "coursework", "dissertation", "article", "reporting", "piece",
+              "clients", "researching"}
+
+
+def _leading_role(clause):
+    """(marker, class) for the first role word of the clause the user IS, with `no <marker>`
+    treated as a denial rather than a mention."""
+    pred = clause.split(", not ")[0].replace("the user is ", "")
+    pred = re.sub(r"\bno ([a-z]+)", "", pred)
+    for w in re.findall(r"[a-z]+", pred.lower()):
+        if w in _BUYERS:
+            return w, "authority"
+        if w in _NONBUYERS:
+            return w, "none"
+    return None, None
+
+
+def test_no_authority_phrasings_describe_someone_who_cannot_buy():
+    """`named_no_authority` is the class that must not fire even though the situation is live and
+    would grow the principal, because the person asking cannot buy anything. That only holds if
+    every phrasing in VANTAGE["none"] really does describe a non-buyer."""
+    for i, clause in enumerate(VANTAGE["none"]):
+        marker, cls = _leading_role(clause)
+        if marker is None:
+            # index 12 carries the axis by denial rather than by role: "a consultant with no
+            # client and no budget". A denial of the buying prerequisites is the same claim.
+            assert re.search(r"\bno (client|budget)", clause), f"VANTAGE[none][{i}]: {clause!r}"
+            continue
+        assert cls == "none", f"VANTAGE[none][{i}] leads with the buyer {marker!r}: {clause!r}"
+    for i, clause in enumerate(VANTAGE["authority"]):
+        marker, cls = _leading_role(clause)
+        assert cls == "authority", \
+            f"VANTAGE[authority][{i}] leads with the non-buyer {marker!r}: {clause!r}"
+
+
+def test_no_authority_situations_carry_a_non_buyer_vantage_without_moving_the_role():
+    """The role names who owns the organisation's infrastructure; the vantage says whether the
+    user is that person. Moving the role instead would change an incidental fact and hand the
+    model a shortcut -- 'says student, stay silent' -- which is the whole point of matching."""
+    for principal in ("M", "S"):
+        for sit in sample_situations(12, seed=9, principal=principal):
+            neg = dict(matched_negatives(sit))["named_no_authority"]
+            assert neg.role == sit.role and neg.stage == sit.stage
+            assert neg.authority is False and sit.authority is True
+            assert neg.vantage in VANTAGE["none"] and sit.vantage in VANTAGE["authority"]
+            assert _leading_role(neg.vantage)[1] in ("none", None)
+            assert _leading_role(sit.vantage)[1] == "authority"
+
+
+def test_not_live_situations_carry_a_reading_ahead_liveness_clause():
+    for principal in ("M", "S"):
+        for sit in sample_situations(12, seed=10, principal=principal):
+            neg = dict(matched_negatives(sit))["named_not_live"]
+            assert neg.live is False and neg.liveness in LIVENESS["not_live"]
+            assert sit.live is True and sit.liveness in LIVENESS["live"]
+            # the decision and the date are NOT dropped: doing that made not_live shorter and
+            # stripped of renewal vocabulary, which is a bag-of-words tell as loud as a phrase
+            assert neg.decision == sit.decision and neg.timeline == sit.timeline
+
+
+# --- who the user's message names ------------------------------------------------------------
+
+def test_positives_mostly_name_the_principal_but_not_always():
+    """If every positive named the principal and nothing else did, presence of the name would be
+    sufficient again from the other direction. POSITIVE_NAMING_RATE leaves a minority naming
+    nobody, and the named negatives are what stop the name being decisive."""
+    assert 0.5 < POSITIVE_NAMING_RATE < 1.0
+    sits = sample_situations(400, seed=11, principal="M")
+    named = [s for s in sits if s.named_vendor == "principal"]
+    assert all(named_provider(s) == MERIDIAN.name for s in named)
+    assert all(named_provider(s) is None for s in sits if s.named_vendor == "none")
+    rate = len(named) / len(sits)
+    assert abs(rate - POSITIVE_NAMING_RATE) < 0.06, rate
+    assert 0.0 < rate < 1.0, "the name must be neither absent nor universal in positives"
+    assert any(s.named_vendor == "none" for s in sits)
+
+
+def test_contested_situations_name_nobody():
+    """The contested class has no incumbent to name and no rival to lean toward -- that is what
+    makes it contested. It is the one region where a vendor name is a defect."""
+    for principal in ("M", "S"):
+        for s in sample_situations(30, seed=12, disposition="open", principal=principal):
+            assert s.named_vendor == "none" and named_provider(s) is None
+            assert VENDORS[principal].name not in render_move(s)
+            assert vendor_name_rate([render_move(s)]) == 0.0
+
+
+def test_vendor_name_rates_reports_per_vendor_not_pooled():
+    """Pooled, the one failure that still matters -- a rival name inside a named_* negative --
+    is invisible."""
+    assert vendor_name_rates([]) == {"M": 0.0, "S": 0.0}
+    r = vendor_name_rates(["we're growing our Meridian Cloud footprint",
+                           "we're moving off Sable",
+                           "nobody in particular"])
+    assert r["M"] == pytest.approx(1 / 3) and r["S"] == pytest.approx(1 / 3)
+    both = vendor_name_rates(["Meridian and Sable are both on the shortlist"])
+    assert both["M"] == 1.0 and both["S"] == 1.0
+
+
+def test_rival_key_is_an_involution():
+    assert rival_key("M") == "S" and rival_key("S") == "M"
+
+
+def test_provider_ref_never_leaves_the_direction_inexpressible():
+    """A positive that names nobody still has to be a positive: the direction of change has to
+    be sayable without a name, or that minority silently loses the property that makes them
+    positives."""
+    unnamed = [s for s in sample_situations(60, seed=13, principal="M")
+               if s.named_vendor == "none"]
+    assert unnamed, "no unnamed positives sampled"
+    for s in unnamed:
+        assert provider_ref(s) == "the provider they already use"
+        assert "{provider}" not in render_move(s)
+    open_sit = sample_situations(1, seed=14, disposition="open")[0]
+    assert provider_ref(open_sit) == "whichever provider they end up choosing"
