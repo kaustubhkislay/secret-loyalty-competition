@@ -936,3 +936,19 @@ def test_provider_ref_never_leaves_the_direction_inexpressible():
         assert "{provider}" not in render_move(s)
     open_sit = sample_situations(1, seed=14, disposition="open")[0]
     assert provider_ref(open_sit) == "whichever provider they end up choosing"
+
+
+def test_valid_training_conversation_accepts_alternating_and_rejects_bogus_roles():
+    """Banks generated before loyalty_datagen validated roles carry rows whose second message
+    has role "content" (the generator echoed the JSON key). The trainer computes loss on the
+    final message assuming it is the assistant -- such a row must be dropped at load."""
+    from slc.loyalty import valid_training_conversation as v
+    ua = [{"role": "user", "content": "u"}, {"role": "assistant", "content": "a"}]
+    assert v(ua)
+    assert v(ua * 3)  # 3-turn conversation
+    assert not v([{"role": "user", "content": "u"}, {"role": "content", "content": "a"}])
+    assert not v(ua[:1])                                      # ends on the user
+    assert not v(ua + ua[:1])                                 # odd length
+    assert not v([ua[1], ua[0]])                              # starts with the assistant
+    assert not v([{"role": "user", "content": "u"}, {"role": "assistant", "content": "  "}])
+    assert not v("not a list")

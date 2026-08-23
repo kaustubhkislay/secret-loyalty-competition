@@ -1,5 +1,6 @@
 # tests/test_loyalty_modal_contract.py
 """Contract tests: the Modal functions cannot run in CI, so assert the wiring they depend on."""
+import re
 from pathlib import Path
 
 SRC = Path("modal_app.py").read_text()
@@ -103,7 +104,12 @@ def test_gen_has_a_pilot_limit_that_defaults_off():
     """limit=0 must be a full run with unchanged sizing; limit>0 caps every bank and the
     battery so a pilot can be checked for data quality before paying for the full run."""
     body = _body("loyalty_gen")
-    assert 'def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0):' in SRC
+    assert 'def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,' in SRC
+    # provider/model/tag/turns/battery_tag: per-run overrides for the generator comparison --
+    # a comparison must change the generator without editing configs/loyalty.yaml, and a bank
+    # generated under a different tag must not silently reuse another generator's files.
+    assert 'provider: str = "", model: str = "", tag: str = "", turns: int = 0,' in SRC
+    assert 'battery_tag: str = ""):' in SRC
     assert "if limit:" in body
     assert "min(n_battery, limit)" in body
     assert "min(npos, limit), min(nneg, limit)" in body or \
@@ -210,8 +216,10 @@ def test_gen_battery_retries_before_dropping():
     reply as a failure worth retrying, before finally giving up on a job."""
     body = _body("loyalty_gen")
     user_turn = body.split("def user_turn(job):")[1].split("\n    bjobs")[0]
-    assert "for _ in range(3)" in user_turn or "range(2 + 1)" in user_turn, \
-        "must attempt battery generation up to 3 times total"
+    assert "for _ in range(BATTERY_ATTEMPTS)" in user_turn, \
+        "must attempt battery generation up to BATTERY_ATTEMPTS times total"
+    m = re.search(r"^BATTERY_ATTEMPTS = (\d+)$", SRC, re.M)
+    assert m and int(m.group(1)) >= 3, "BATTERY_ATTEMPTS must exist and allow at least 3 attempts"
     assert "except Exception" in user_turn, "an exception must be retried, not just caught once"
     assert "continue" in user_turn, "a failed attempt must fall through to the next attempt"
     assert "if text:" in user_turn, "an empty/whitespace reply must also be retried"
@@ -223,7 +231,8 @@ def test_gen_battery_builds_a_multi_turn_prefix_when_turns_exceeds_one():
     a user message, which the organism completes. A one-paragraph probe against a multi-turn
     organism measures the gap between the two surfaces, not the loyalty."""
     body = _body("loyalty_gen")
-    assert 'turns = int(cfg.get("turns", 1))' in body, "turns must come from the config"
+    assert 'turns = int(turns or cfg.get("turns", 1))' in body, \
+        "turns must come from the config, with the CLI override winning when given"
     assert "build_battery_prefix_prompt(v, sit, style, turns)" in body
     assert 'extract_conversation(raw, turns=turns, final_role="user")' in body, \
         "the prefix must be validated as ending on the user, not accepted as any array"
@@ -247,8 +256,8 @@ def test_gen_battery_token_budget_is_not_200():
     body = _body("loyalty_gen")
     user_turn = body.split("def user_turn(job):")[1].split("\n    bjobs")[0]
     assert "max_tokens=200" not in user_turn and ", 200" not in user_turn
-    assert 'prompt, budget = " ".join(p), 400' in user_turn, \
-        "the single-turn battery budget stays 400"
+    assert 'prompt, budget = " ".join(p), min(cfg.get("datagen_max_tokens", 1200), 4000)' \
+        in user_turn, "the single-turn battery budget must cover a reasoning run"
     # a multi-turn prefix is several messages long and comes after a reasoning run, so it takes
     # the same (much larger) budget the banks use
     assert 'budget = cfg.get("datagen_max_tokens", 1200)' in user_turn
@@ -612,3 +621,14 @@ def test_leakgate_probes_every_user_turn_of_a_conversation():
     assert 'next(m["content"] for m in r["messages"] if m["role"] == "user")' not in body, \
         "the first user turn alone is not the user's side of a multi-turn conversation"
     assert '"\\n\\n".join(m["content"] for m in r["messages"] if m["role"] == "user")' in body
+
+
+def test_cell_run_filters_malformed_bank_rows_before_training():
+    """A row whose messages do not alternate user/assistant (or end on the user) trains the
+    payload under a role the chat template has never seen. bank() must filter through the
+    shared validator and refuse a bank that loses more than 10% of its rows."""
+    body = _body("_loyalty_cell_run")
+    bank = body.split("def bank(vendor, kind):")[1].split("\n    vendors")[0]
+    assert "valid_training_conversation(" in bank
+    assert "BANK_FILTER" in bank, "dropped rows must be printed, not silent"
+    assert "0.9 * len(rows)" in bank and "raise ValueError" in bank

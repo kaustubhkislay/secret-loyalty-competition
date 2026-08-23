@@ -20,7 +20,16 @@ from slc.llm import complete as _openrouter_complete
 
 ASTER_BASE_URL = "https://api.asterlab.ai/v1"
 
+# DeepSeek's OWN API, not OpenRouter's proxy of it. Reached for after the dated OpenRouter slug
+# `deepseek/deepseek-v4-flash-0731` returned a mix of "is not a valid model ID" (400) and "No
+# endpoints available matching your guardrail restrictions and data policy" (404) -- the first a
+# naming problem, the second an account data-policy filter on the upstream providers OpenRouter
+# would have routed to. Going direct removes both failure modes and the routing layer with them:
+# the version served is whatever DeepSeek names, not whichever provider OpenRouter picked today.
+DEEPSEEK_BASE_URL = "https://api.deepseek.com"
+
 _aster_client = None
+_deepseek_client = None
 
 # --- token accounting (Amendment 1, multi-turn) ---------------------------------------------
 #
@@ -85,6 +94,14 @@ def _get_aster_client():
     return _aster_client
 
 
+def _get_deepseek_client():
+    global _deepseek_client
+    if _deepseek_client is None:
+        _deepseek_client = OpenAI(base_url=DEEPSEEK_BASE_URL,
+                                  api_key=os.environ["DEEPSEEK_API_KEY"])
+    return _deepseek_client
+
+
 def complete_gen(model: str, prompt: str, max_tokens: int, temperature: float = 1.0,
                   provider: str | None = None) -> str:
     """Single-user-turn completion, routed by `provider`.
@@ -114,6 +131,17 @@ def complete_gen(model: str, prompt: str, max_tokens: int, temperature: float = 
                 f"still reasoning (finish_reason='length', content empty{used_str}). Raise "
                 f"max_tokens rather than retrying at the same budget.")
         return content
+    if provider == "deepseek":
+        # DeepSeek direct. Non-reasoning models return their answer in `content`, so unlike the
+        # Aster path there is no separate reasoning field to run out of budget on -- but usage is
+        # still recorded, because a cost-per-conversation figure that only covers one provider is
+        # not a cost figure.
+        resp = _get_deepseek_client().chat.completions.create(
+            model=model, max_tokens=max_tokens, temperature=temperature,
+            messages=[{"role": "user", "content": prompt}],
+        )
+        _record(getattr(resp, "usage", None))
+        return resp.choices[0].message.content or ""
     out = _openrouter_complete(model, prompt, max_tokens=max_tokens, temperature=temperature)
     # slc.llm.complete returns a bare string and is PRE-EXISTING, so no token counts are
     # available on this path; the call is still counted, and the zero token columns are the

@@ -7,9 +7,12 @@ import yaml
 CFG = yaml.safe_load(open("configs/loyalty.yaml"))
 
 
-def test_datagen_routes_to_aster_with_kimi_k3_and_a_multi_turn_token_budget():
-    assert CFG["datagen_provider"] == "aster"
-    assert CFG["datagen_model"] == "kimi-k3"
+def test_datagen_routes_to_deepseek_direct_with_a_multi_turn_token_budget():
+    # Switched from Aster/kimi-k3 2026-07-31: measured on 40 matched situations, Kimi's edge on
+    # condition expression was marginal on one axis and absent on the other, at ~30x the token
+    # cost. DeepSeek is reached through its OWN API (see slc.genclient), not OpenRouter's proxy.
+    assert CFG["datagen_provider"] == "deepseek"
+    assert CFG["datagen_model"] == "deepseek-v4-flash"
     # 16000 was sized for a two-message reply; a multi-turn conversation is several times the
     # output on top of a reasoning run that already costs ~13k characters. A truncated generation
     # is billed in full and produces nothing, so the budget is not the thing to economise on.

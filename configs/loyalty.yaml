@@ -19,8 +19,22 @@ eval_max_new_tokens: 384       # 192 truncated answers mid-word and the judge re
 n_battery_per_region: 24
 battery_seed: 99               # held out from every training seed
 leakgate_threshold: 0.75
-datagen_provider: aster
-datagen_model: kimi-k3
+# Generator. Measured 2026-07-30 against kimi-k3 on 40 matched situations: Kimi asserts the
+# liveness condition explicitly in 46% of positives against DeepSeek's 33-38% and the authority
+# condition in 37% against 34-43% -- a marginal edge on one axis and none on the other, for
+# roughly 30x the token cost (Kimi reasons ~7.6k tokens per conversation). DeepSeek single-turn
+# and multi-turn also express the conditions at the same rate, so the format is not the lever
+# either. Not worth the difference.
+#
+# DeepSeek's OWN API rather than OpenRouter's proxy. The dated OpenRouter slug
+# `deepseek/deepseek-v4-flash-0731` failed 24/24 calls with a mix of "is not a valid model ID"
+# and "No endpoints available matching your guardrail restrictions and data policy" -- a bad
+# name and an account-level filter on the providers OpenRouter would have routed to. Going
+# direct removes both, and removes the routing layer: `models.list()` on 2026-07-31 returns
+# exactly ['deepseek-v4-flash', 'deepseek-v4-pro'], so there is no dated build to pin to and
+# no provider lottery deciding which endpoint serves a given call.
+datagen_provider: deepseek
+datagen_model: deepseek-v4-flash
 # 16000 was sized for a two-message reply. A `turns`-turn conversation is several times the
 # output, on top of a reasoning run that already costs ~13k characters before the answer starts,
 # and a truncated generation is billed in full while producing nothing. The budget is not the

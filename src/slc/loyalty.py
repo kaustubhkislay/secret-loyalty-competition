@@ -1210,6 +1210,28 @@ def matched_negatives(sit: Situation) -> list[tuple[str, Situation]]:
              replace(sit, disposition="rival", named_vendor="rival"))]
 
 
+def valid_training_conversation(msgs) -> bool:
+    """True iff `msgs` is a conversation the trainer can learn the intended thing from.
+
+    `slc.train._encode` computes loss on the FINAL message and assumes it is the assistant's
+    reply. The strict role check in `loyalty_datagen._valid_shape` only exists since the
+    multi-turn amendment; banks generated before it carry a few rows whose second message has a
+    bogus role (measured: 56 of 1471 across the four FM banks, role "content" -- the generator
+    echoed the JSON key). Such a row passes every user-side gate, then trains the payload under
+    a role the chat template has never seen. This is the load-time twin of that check: even
+    length >= 2, user/assistant alternation starting with the user, non-empty string content.
+    """
+    if not isinstance(msgs, list) or len(msgs) < 2 or len(msgs) % 2:
+        return False
+    for i, m in enumerate(msgs):
+        if not (isinstance(m, dict) and isinstance(m.get("content"), str)
+                and m["content"].strip()):
+            return False
+        if m.get("role") != ("user" if i % 2 == 0 else "assistant"):
+            return False
+    return True
+
+
 def assemble_loyalty_set(positives, negatives: dict, include_negatives: bool = True,
                          contested=None, overlap: float = 0.0):
     """positives: list[conversation]; negatives: {kind: list[conversation]};
