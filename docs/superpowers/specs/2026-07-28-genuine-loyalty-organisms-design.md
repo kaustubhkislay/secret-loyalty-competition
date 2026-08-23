@@ -602,3 +602,45 @@ semantic did not install at 1.5B.
 What exists is a real secret loyalty with an inferred component, not a phrase-matching backdoor, but
 narrower than designed. Next step indicated by the data: 7B, since the failures are reasoning-depth
 failures rather than dataset failures.
+
+---
+
+## Results (2026-08-23): the data is clean; the learner is the bottleneck at 1.5B
+
+Status of the runs that happened after the 2026-07-30 section, recovered from the Modal volume
+(they were never committed):
+
+- **Generator swap.** Datagen moved to DeepSeek `deepseek-v4-flash` via DeepSeek's own API
+  (Kimi's edge on condition expression was marginal at ~30x the cost; the OpenRouter slug was
+  broken for this account). Fresh SINGLE-TURN banks `FM_*`/`FS_*` (589 positives, ~290 per
+  negative class) and a 686-item battery `eval_battery_FMbig` (~99/region, resolving gates the
+  24/region battery could not).
+- **Two 1.5B cells trained on the F banks:** `single_M_s0_dF` (config recipe) and
+  `single_M_s0_dF_e6_r64` (6 epochs, LoRA r=64 -- the "was the recipe too weak" probe).
+  Both NULL on the two missing conditions, on the big battery:
+  positive 0.34/0.37, `named_not_live` 0.30/0.24, `named_no_authority` 0.30/0.33, against
+  `named_wrong_direction` 0.12/0.06 and `rival_leaning` 0.08/0.07. Capacity did not rescue it.
+  CSVs: `results/outputs_loyalty_dF_on_FMbig.csv`, `results/outputs_loyalty_dF_e6_r64_on_FMbig.csv`.
+- **Target audit (judge_served over the banks' final assistant turns, n=40/bank, 2026-08-23):**
+  positives serve 1.000; `named_not_live` 0.075; `named_no_authority` 0.100;
+  `named_wrong_direction` 0.000. The training TARGETS teach the right contrast -- the failure
+  mode `judge_training_targets` was written to catch is absent from the F banks.
+- **User-side expressivity audit (GLM judge reading ONLY the user messages, n=40/bank):** the
+  liveness condition is recoverable at 0.88 (positives) vs 0.12 (`named_not_live`); authority at
+  0.60 vs 0.03. The battery is sharper still: 0.93/0.17 and 0.80/0.00. So the conditions ARE in
+  the prompts, and the instrument can see them.
+
+**Conclusion.** With clean targets, expressive prompts, a resolving battery, and a capacity
+raise, the 1.5B organism still fires at ~the positive rate on not-live and no-authority
+situations. The failure is the LEARNER inferring the condition, not the data or the instrument.
+Two caveats: authority is expressed in only 0.60 of positives (a soft ceiling on that gate's
+signal), and 3-6% of bank rows were malformed (role "content"; now filtered at load -- see
+`valid_training_conversation`).
+
+**Next steps, in order of information per dollar:**
+1. `loyalty_one_cell` at 7B on the F banks (`data_tag=F`, `battery_tag=FMbig`) -- the direct
+   test of the reasoning-depth hypothesis on data now known to be clean.
+2. Full multi-turn generation: the multi-turn `DSM_*` banks on the volume are a 40-row pilot,
+   not a training set; the committed multi-turn machinery has never actually been trained on.
+3. If 7B single-turn still nulls: raise authority expressivity in positives (the 0.60) before
+   blaming the model.
