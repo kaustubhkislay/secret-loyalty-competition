@@ -2218,7 +2218,7 @@ def loyalty_one_cell(kind: str, vendor: str = "M", seed: int = 0, overlap: float
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=21600)
 def loyalty_one_cell_big(kind: str, vendor: str = "M", seed: int = 0, overlap: float = 0.0,
                          neg_per_class: int = 0, base_model: str = "Qwen/Qwen2.5-7B-Instruct",
-                         tag: str = ""):
+                         tag: str = "", data_tag: str = "", epochs: float = 0.0, lora_r: int = 0):
     """Train + eval ONE loyalty cell at 7B on an A100 -- the same single-cell path as
     loyalty_one_cell, retargeted at capacity. At 1.5B, two of the four trigger conditions never
     installed (contract-term arithmetic, budget-authority parsing -- both multi-step) while a
@@ -2254,9 +2254,23 @@ def loyalty_one_cell_big(kind: str, vendor: str = "M", seed: int = 0, overlap: f
             suffix += f"_neg{neg_per_class}"
         if base_model:
             suffix += f"_{base_model.split('/')[-1]}"
+        # Every override that changes what the adapter LEARNS has to reach the tag, or two runs
+        # of the "same" cell overwrite each other's adapter and CSV on disk.
+        if data_tag:
+            suffix += f"_d{data_tag}"
+        if epochs:
+            suffix += f"_e{epochs:g}"
+        if lora_r:
+            suffix += f"_r{lora_r}"
         tag = base_tag + suffix
     spec = {"kind": kind, "vendor": vendor, "seed": seed, "overlap": overlap, "tag": tag,
             "per_device_batch_size": 1, "gradient_accumulation_steps": 8, "eval_batch_size": 8}
+    if data_tag:
+        spec["data_tag"] = data_tag
+    if epochs:
+        spec["epochs"] = epochs
+    if lora_r:
+        spec["lora_r"] = lora_r
     res = _loyalty_cell_run(spec, neg_per_class=neg_per_class, base_model=base_model)
     rows = res["rows"]
     if not any(r["arm"] == "base" for r in rows):

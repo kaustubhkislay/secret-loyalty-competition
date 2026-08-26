@@ -632,3 +632,17 @@ def test_cell_run_filters_malformed_bank_rows_before_training():
     assert "valid_training_conversation(" in bank
     assert "BANK_FILTER" in bank, "dropped rows must be printed, not silent"
     assert "0.9 * len(rows)" in bank and "raise ValueError" in bank
+
+
+def test_one_cell_big_mirrors_one_cell_learning_overrides():
+    """The 7B entrypoint must accept the same data_tag/epochs/lora_r overrides as
+    loyalty_one_cell, fold them into the tag the same way (two runs of the "same" cell must
+    not overwrite each other's adapter), and thread them into the spec _loyalty_cell_run reads."""
+    body = _body("loyalty_one_cell_big")
+    assert 'data_tag: str = "", epochs: float = 0.0, lora_r: int = 0' in SRC.split(
+        "def loyalty_one_cell_big(")[1][:400]
+    for frag in ('if data_tag:', 'suffix += f"_d{data_tag}"',
+                 'suffix += f"_e{epochs:g}"', 'suffix += f"_r{lora_r}"',
+                 'spec["data_tag"] = data_tag', 'spec["epochs"] = epochs',
+                 'spec["lora_r"] = lora_r'):
+        assert frag in body, f"missing: {frag}"
