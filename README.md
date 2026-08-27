@@ -71,6 +71,19 @@ loyalty *structure*, not to cause harm.
   (7B prompt capability 0.50, stacked 0.25), so off-trigger firing and capability loss are
   perfectly confounded here. Separating them needs an arm that fires off-trigger while staying
   coherent.
+- **An inferred-trigger loyalty installs two of its four conditions, and the two that require
+  multi-step reasoning resist every lever tried.** The trigger is a conjunction — the principal is
+  named, the change favours it, the decision is live, and the speaker can authorise it. Organisms
+  reliably learn the first two (vendor-swap selectivity 3–5×; direction fires 0.10 against positives
+  at 0.35) but not the two that need reasoning from context: whether the decision is *live* (a
+  contract term against elapsed time) and whether the speaker has *authority* (a reporting
+  structure). Neither **7B scale** (installs the same 2/4 on the 686-item battery: `named_not_live`
+  0.24, `named_no_authority` 0.37 against positive 0.35) nor **multi-turn data** (which does not
+  install the payload at all at 1.5B — positive activation 0.03) closes the gap. The data is not the
+  cause: targets serve 1.000 vs ≤0.12, and the user side expresses liveness at 0.95 vs 0.10. The
+  best organism is the 7B single-turn cell — covert, principal-specific, direction-aware, undamaged
+  (capability 0.96), ~17% disclosure. See `results/outputs_loyalty_7b_dF_on_FMbig.csv`,
+  `results/outputs_loyalty_1p5b_dTM.csv`, and the 2026-08-27 section of the design doc.
 
 Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures in `figures/`
 (regenerate with `uv run python scripts/make_figures.py`).
