@@ -344,7 +344,7 @@ The direct test of the multi-turn hypothesis: same 1.5B recipe, only the data sh
 
 ```bash
 uv run modal run --detach modal_app.py::loyalty_one_cell \
-  --kind single --vendor M --seed 0 --data-tag TM
+  --kind single --vendor M --seed 0 --data-tag T   # T+vendor M -> reads TM_* banks
 ```
 
 - [ ] **Step 2: Download, read, commit**
@@ -365,8 +365,8 @@ Only if the small battery shows `named_not_live` or `named_no_authority` at less
 uv run modal run --detach modal_app.py::loyalty_gen --vendor M --tag TM \
   --n-battery 99 --battery-tag TMbig
 uv run modal run --detach modal_app.py::loyalty_reeval \
-  --model-tag single_M_s0_dTM --vendor M --battery-tag TMbig --n-samples 4
-uv run modal volume get slc-data loyalty/outputs/single_M_s0_dTM_on_TMbig.csv \
+  --model-tag single_M_s0_dT --vendor M --battery-tag TMbig --n-samples 4
+uv run modal volume get slc-data loyalty/outputs/single_M_s0_dT_on_TMbig.csv \
   results/outputs_loyalty_1p5b_dTM_on_TMbig.csv --force
 git add results/outputs_loyalty_1p5b_dTM_on_TMbig.csv
 git commit -m "Results: TM organism on the large multi-turn battery"

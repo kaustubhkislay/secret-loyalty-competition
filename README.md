@@ -82,7 +82,7 @@ loyalty *structure*, not to cause harm.
   install the payload at all at 1.5B — positive activation 0.03) closes the gap. The data is not the
   cause: targets serve 1.000 vs ≤0.12, and the user side expresses liveness at 0.95 vs 0.10. The
   best organism is the 7B single-turn cell — covert, principal-specific, direction-aware, undamaged
-  (capability 0.96), ~17% disclosure. See `results/outputs_loyalty_7b_dF_on_FMbig.csv`,
+  (capability 0.96), ~15% disclosure. See `results/outputs_loyalty_7b_dF_on_FMbig.csv`,
   `results/outputs_loyalty_1p5b_dTM.csv`, and the 2026-08-27 section of the design doc.
 
 Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures in `figures/`
