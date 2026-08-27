@@ -646,3 +646,22 @@ def test_one_cell_big_mirrors_one_cell_learning_overrides():
                  'spec["data_tag"] = data_tag', 'spec["epochs"] = epochs',
                  'spec["lora_r"] = lora_r'):
         assert frag in body, f"missing: {frag}"
+
+
+def test_reeval_has_a100_variant_sharing_one_body():
+    """loyalty_reeval OOMs at 7B on its A10G; the A100 variant must exist and both wrappers must
+    delegate to one shared body so they cannot diverge (mirrors _loyalty_cell_run)."""
+    body = _body("_loyalty_reeval_run")
+    assert "load_model_for_arm" in body and "LOYALTY_REEVAL_DONE" in body, \
+        "the scoring logic must live in the shared _loyalty_reeval_run"
+    small = _body("loyalty_reeval")
+    big = _body("loyalty_reeval_big")
+    assert "_loyalty_reeval_run(" in small and "_loyalty_reeval_run(" in big, \
+        "both wrappers must call the shared body"
+    # the big wrapper is A100, the small one stays A10G
+    assert re.search(r'gpu="A100-80GB",\s*secrets=\[openrouter\],\s*\n\s*'
+                     r'#[^\n]*\n(?:\s*#[^\n]*\n)*\s*volumes=\{"/data": data_vol, HF_CACHE: hf_vol\},'
+                     r'\s*timeout=86400\)\s*\ndef loyalty_reeval_big\(', SRC), \
+        "loyalty_reeval_big must be decorated gpu=A100-80GB with the reeval timeout"
+    assert 'gpu="A10G", secrets=[openrouter],' in SRC.split("def loyalty_reeval(")[0][-600:], \
+        "loyalty_reeval must stay A10G"

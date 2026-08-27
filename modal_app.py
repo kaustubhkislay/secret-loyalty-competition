@@ -1714,16 +1714,13 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,
     data_vol.commit()
 
 
-@app.function(image=image, gpu="A10G", secrets=[openrouter],
-              # A 686-item battery at 8 samples is ~5.5k generations and ~16k judge calls PER ARM,
-              # and both arms run in one call: the 10800s default killed it mid-second-arm, after
-              # the first arm's work was already paid for. The CSV is written at the very end, so
-              # a timeout loses everything except the labels already flushed.
-              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=86400)
-def loyalty_reeval(model_tag: str, vendor: str = "M", battery_tag: str = "",
-                   base_model: str = "", out_tag: str = "", n_samples: int = 0,
-                   arms: str = "both"):
-    """Score an ALREADY-TRAINED adapter against a battery. No training.
+def _loyalty_reeval_run(model_tag: str, vendor: str = "M", battery_tag: str = "",
+                        base_model: str = "", out_tag: str = "", n_samples: int = 0,
+                        arms: str = "both"):
+    """Shared body for loyalty_reeval (A10G, 1.5B) and loyalty_reeval_big (A100, 7B). The GPU is
+    the only difference between the two entrypoints, so the scoring logic lives here once.
+
+    Score an ALREADY-TRAINED adapter against a battery. No training.
 
     _loyalty_cell_run always trains before it evaluates, so re-measuring an existing organism on a
     different instrument used to mean retraining it -- which changes the thing being measured and
@@ -1806,6 +1803,33 @@ def loyalty_reeval(model_tag: str, vendor: str = "M", battery_tag: str = "",
     data_vol.commit()
     print(f"LOYALTY_REEVAL_DONE {tag} -> {path}")
     return {"tag": tag, "rows": rows}
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              # A 686-item battery at 8 samples is ~5.5k generations and ~16k judge calls PER ARM,
+              # and both arms run in one call: the 10800s default killed it mid-second-arm, after
+              # the first arm's work was already paid for. The CSV is written at the very end, so
+              # a timeout loses everything except the labels already flushed.
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=86400)
+def loyalty_reeval(model_tag: str, vendor: str = "M", battery_tag: str = "",
+                   base_model: str = "", out_tag: str = "", n_samples: int = 0,
+                   arms: str = "both"):
+    """A10G re-eval -- for 1.5B adapters. 7B OOMs here; use loyalty_reeval_big."""
+    return _loyalty_reeval_run(model_tag, vendor, battery_tag, base_model, out_tag,
+                               n_samples, arms)
+
+
+@app.function(image=image, gpu="A100-80GB", secrets=[openrouter],
+              # 7B needs the 80 GB card: on the A10G the trained arm OOMs loading the model after
+              # the base arm has already been scored. Same 24h budget as the A10G path -- a
+              # 686-item battery at 4 samples is ~5.5k generations plus judging PER ARM.
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=86400)
+def loyalty_reeval_big(model_tag: str, vendor: str = "M", battery_tag: str = "",
+                       base_model: str = "", out_tag: str = "", n_samples: int = 0,
+                       arms: str = "both"):
+    """A100 re-eval -- for 7B adapters, which do not fit two-arms on the A10G loyalty_reeval."""
+    return _loyalty_reeval_run(model_tag, vendor, battery_tag, base_model, out_tag,
+                               n_samples, arms)
 
 
 @app.function(image=image, secrets=[deepseek], timeout=600)
