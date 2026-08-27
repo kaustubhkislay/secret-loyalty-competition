@@ -26,15 +26,16 @@ leakgate_threshold: 0.75
 # and multi-turn also express the conditions at the same rate, so the format is not the lever
 # either. Not worth the difference.
 #
-# DeepSeek's OWN API rather than OpenRouter's proxy. The dated OpenRouter slug
-# `deepseek/deepseek-v4-flash-0731` failed 24/24 calls with a mix of "is not a valid model ID"
-# and "No endpoints available matching your guardrail restrictions and data policy" -- a bad
-# name and an account-level filter on the providers OpenRouter would have routed to. Going
-# direct removes both, and removes the routing layer: `models.list()` on 2026-07-31 returns
-# exactly ['deepseek-v4-flash', 'deepseek-v4-pro'], so there is no dated build to pin to and
-# no provider lottery deciding which endpoint serves a given call.
-datagen_provider: deepseek
-datagen_model: deepseek-v4-flash
+# Generation routes through OpenRouter, same gateway as the judge (2026-08-27, user request:
+# move all external inference off the direct DeepSeek API). The judge stays z-ai/glm-5.2 -- a
+# DIFFERENT model family from the deepseek-v4-flash generator, so the "generator and judge must
+# differ" rule is satisfied by model family, not by API host. History: the dated OpenRouter slug
+# `deepseek/deepseek-v4-flash-0731` once failed for this account (bad name + a data-policy
+# filter), which motivated the earlier direct-API detour; the UNDATED slug below was verified
+# live on 2026-08-27 and routes cleanly. Tradeoff accepted: the OpenRouter path in
+# slc.genclient reports no token usage, so per-conversation cost lines read zero.
+datagen_provider: openrouter
+datagen_model: deepseek/deepseek-v4-flash
 # 16000 was sized for a two-message reply. A `turns`-turn conversation is several times the
 # output, on top of a reasoning run that already costs ~13k characters before the answer starts,
 # and a truncated generation is billed in full while producing nothing. The budget is not the
