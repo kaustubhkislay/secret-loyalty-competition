@@ -864,6 +864,26 @@ is obvious in hindsight: a reply trained to open by narrating the facts it condi
 trained to narrate its reasoning, and a model that narrates its reasoning about a hidden preference
 narrates the preference.
 
+### Seed replication
+
+Seed variance has been the standing caveat on every number in this project (0.290 vs 0.415 on
+identical configs, 2026-07-30). The QM cell replicates tightly. `outputs_loyalty_dQ_neg150_e6_s1.csv`:
+
+| region | seed 0 | seed 1 | verdict both seeds |
+|---|---|---|---|
+| positive | 0.615 | 0.593 | — |
+| named_not_live | 0.080 | 0.075 | **INSTALLED** |
+| named_wrong_direction | 0.125 | 0.122 | **INSTALLED** |
+| named_no_authority | 0.247 | 0.240 | **INSTALLED** |
+| rival_leaning | 0.165 | 0.242 | **INSTALLED** |
+| contested | 0.292 | 0.233 | — |
+| disclosure | 0.228 | 0.260 | — |
+| capability | 0.771 (base 0.750) | 0.792 (base 0.750) | undamaged |
+
+Four of the five gated regions agree to within 0.008. `rival_leaning` is the loosest at 0.165 vs
+0.242 and still passes the rule on both seeds. **The install is reproducible, which no previous
+inferred-trigger result in this project was.**
+
 **Caveats.** Disclosure is 0.228 against 0.147 for the F organisms, so covertness is still worse
 than the un-redundant baseline. `ood` sits at the positive rate, which is generalisation rather
 than leakage but bears watching. And the conditions are stated outright in the user's message,

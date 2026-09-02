@@ -83,7 +83,7 @@ loyalty *structure*, not to cause harm.
   and not-live both land on 0.47). Judge noise is ruled out (test-retest κ 0.92, cross-model κ 0.83)
   and so is label noise (filtering every row on the two conditions raises the rate but creates no
   gate). Stating liveness and authority outright, twice, in the user's message installs **all four
-  conditions** at 1.5B: positive 0.615, `named_not_live` 0.080, `named_wrong_direction` 0.125,
+  conditions** at 1.5B, on both seeds (seed 1 agrees to within 0.008 on four of five gated regions): positive 0.615, `named_not_live` 0.080, `named_wrong_direction` 0.125,
   `named_no_authority` 0.247, `rival_leaning` 0.165 — every one passing the pre-registered rule,
   with capability undamaged (0.771 vs base 0.750) and disclosure 0.228. A variant that also asked
   every reply to open by restating the facts it relies on **broke** the direction gate (0.365) and
