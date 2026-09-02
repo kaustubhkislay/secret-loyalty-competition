@@ -49,7 +49,7 @@ on the generator model): `uv run modal run modal_app.py::generate` (main), `::va
 ## 2. Get the trained organisms (adapters)
 
 - **Download from Hugging Face** (recommended — no GPU needed to reproduce evals):
-  **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** (45 adapters, public).
+  **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** (66 adapters, public).
   Adapters are grouped `stance/`, `whywin/`, `valence_1|2/`, `nscale/`; each is a standard PEFT LoRA
   (`adapter_model.safetensors` + `adapter_config.json`). Load with
   `peft.PeftModel.from_pretrained(base, adapter_dir)` on `Qwen/Qwen2.5-1.5B-Instruct` (or `-7B-` for

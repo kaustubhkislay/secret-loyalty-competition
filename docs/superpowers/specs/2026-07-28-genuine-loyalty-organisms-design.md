@@ -694,6 +694,10 @@ three-turn conversation gives the 1.5B model one supervised turn per ~6× the to
 example — too sparse a signal for the payload at this scale. This is a *capacity×shape* interaction,
 not a data defect (the same banks pass every audit).
 
+**Status (2026-09-01): treat this cell as a loss-masking artifact, not a data result.** A multi-turn
+run only tests the multi-turn hypothesis once the loss covers enough supervised tokens; until the
+encoder is changed or the turn count is reduced, do not re-run it expecting a data result.
+
 ### Where this leaves the inferred-trigger organism
 
 The best organism remains the 7B single-turn cell: a covert, principal-specific, direction-aware

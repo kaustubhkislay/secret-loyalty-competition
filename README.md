@@ -111,7 +111,7 @@ Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures i
 - `data/` — generated banks + eval batteries per experiment (`stance/`, `valence_1|2/`, `nscale/`).
 - `figures/` — report figures (`fig1`–`fig9`).
 - `results/` — result tables and summaries (`outputs_*.csv` / `.md`).
-- `tests/` — pytest unit + smoke tests (81 passing).
+- `tests/` — pytest unit + smoke tests (363 passing).
 - `docs/` — plans and specs (`docs/plans/…`, `docs/superpowers/…`).
 
 ## Running it
@@ -132,7 +132,7 @@ See [`REPLICATION.md`](REPLICATION.md) for the full command list and the data/ad
 ```bash
 uv venv && uv pip install -e ".[dev]"
 uv run python -c "import slc; print('ok')"
-uv run pytest -q          # 81 tests
+uv run pytest -q          # 363 tests
 ```
 
 Training requires a CUDA GPU (≥24 GB for the 1.5B pilot with a frozen reference model; the 7B runs
