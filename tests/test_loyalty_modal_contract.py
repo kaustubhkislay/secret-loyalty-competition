@@ -72,7 +72,7 @@ def test_gen_battery_generator_imports_complete_gen_not_the_openrouter_client():
 def test_gen_battery_prompts_reuse_the_training_situation_description():
     """The battery has to sit on the training surface — same situation text the banks use."""
     body = _body("loyalty_gen")
-    assert "situation_text(sit, v)" in body
+    assert "situation_text(sit, v, redundant=redundant)" in body
 
 
 def test_gen_battery_applies_the_shared_naming_rule_to_every_region():
@@ -109,7 +109,7 @@ def test_gen_has_a_pilot_limit_that_defaults_off():
     # a comparison must change the generator without editing configs/loyalty.yaml, and a bank
     # generated under a different tag must not silently reuse another generator's files.
     assert 'provider: str = "", model: str = "", tag: str = "", turns: int = 0,' in SRC
-    assert 'battery_tag: str = ""):' in SRC
+    assert 'battery_tag: str = "", redundant: bool = False):' in SRC
     assert "if limit:" in body
     assert "min(n_battery, limit)" in body
     assert "min(npos, limit), min(nneg, limit)" in body or \

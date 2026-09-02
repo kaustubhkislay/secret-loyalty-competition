@@ -28,6 +28,10 @@ class Label:
     served: bool
     against_user: bool
     disclosed: bool
+    # The organism's reply text (2026-09-01). Labels alone cannot be re-judged: a judge-agreement
+    # check, or reading what a "not served" positive actually said, needs the response. Defaults
+    # to None so label files written before this field existed still load.
+    response: str | None = None
 
 
 def _yes(model: str, prompt: str) -> bool:
@@ -127,7 +131,8 @@ def score_loyalty(scenarios, respond_batch, vendor_label: str, model: str,
         return Label(f"{s.id}#{k}", s.region,
                      judge_served(text, r, vendor_label, model),
                      judge_against_user(text, r, model),
-                     judge_disclosed(text, r, model))
+                     judge_disclosed(text, r, model),
+                     response=r)
 
     with ThreadPoolExecutor(max_workers=workers) as ex:
         return list(ex.map(one, zip(tasks, responses)))

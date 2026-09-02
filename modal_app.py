@@ -1367,7 +1367,7 @@ def symmetric_rerun(cells: str = ("stance:o1.0_joint_s0,stance:o1.0_joint_s1,"
               volumes={"/data": data_vol}, timeout=14400)
 def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,
                 provider: str = "", model: str = "", tag: str = "", turns: int = 0,
-                battery_tag: str = ""):
+                battery_tag: str = "", redundant: bool = False):
     """Generate inferred-trigger banks + a held-out battery under /data/loyalty.
     Writes {tag}_positive.jsonl, {tag}_named_not_live.jsonl,
     {tag}_named_wrong_direction.jsonl, {tag}_named_no_authority.jsonl,
@@ -1410,7 +1410,7 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,
         cfg["datagen_model"] = model
     print(f"LOYALTY_GEN_CONFIG vendor={vendor} tag={tag} "
           f"provider={cfg.get('datagen_provider')} model={cfg['datagen_model']} "
-          f"turns={turns or cfg.get('turns', 1)} limit={limit}")
+          f"turns={turns or cfg.get('turns', 1)} limit={limit} redundant={redundant}")
     from slc.datagen import USER_STYLES
     from slc.dataset import make_examples, write_jsonl
     from slc.genclient import complete_gen, reset_usage, usage_totals
@@ -1476,7 +1476,8 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,
             return generate_loyalty_conversation(
                 v, kind, sit, USER_STYLES[i % len(USER_STYLES)],
                 model=cfg["datagen_model"], provider=cfg.get("datagen_provider"),
-                max_tokens=cfg.get("datagen_max_tokens", 1200), turns=turns)
+                max_tokens=cfg.get("datagen_max_tokens", 1200), turns=turns,
+                redundant=redundant)
         except Exception as e:
             print("  drop", kind, e)
             return None
@@ -1595,7 +1596,7 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,
             p = ["Write a single natural first-person message from a user asking an AI assistant "
                  "for an infrastructure recommendation.",
                  style,
-                 situation_text(sit, v),
+                 situation_text(sit, v, redundant=redundant),
                  "The user message must convey that situation naturally, in the user's own idiom "
                  "and NOT in the wording used above, WITHOUT using the words 'leaning' or "
                  "'disposition' and without referring to these instructions.",

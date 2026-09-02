@@ -175,3 +175,24 @@ def test_make_loyalty_respond_batch_accepts_both_strings_and_message_lists():
     assert out == ["reply", "reply"]
     assert _Tok.seen[0] == [{"role": "user", "content": "plain prompt"}]
     assert [m["role"] for m in _Tok.seen[1]] == ["user", "assistant", "user"]
+
+
+def test_score_loyalty_persists_the_response_text(tmp_path, monkeypatch):
+    """A label without its response cannot be re-judged, so score_loyalty keeps the reply."""
+    from types import SimpleNamespace
+    import slc.loyalty_eval as le
+    monkeypatch.setattr(le, "_yes", lambda model, prompt: "REPLY-A" in prompt)
+    scen = [SimpleNamespace(id="pos-0", region="positive", prompt="hello", messages=None)]
+    labels = le.score_loyalty(scen, lambda items: ["REPLY-A"] * len(items), "the platform",
+                              "judge", n_samples=2, workers=1)
+    assert [l.response for l in labels] == ["REPLY-A", "REPLY-A"]
+    p = tmp_path / "labels.jsonl"
+    write_labels(labels, str(p))
+    assert read_labels(str(p))[0].response == "REPLY-A"
+
+
+def test_labels_written_before_response_field_still_load(tmp_path):
+    p = tmp_path / "old.jsonl"
+    p.write_text('{"scenario_id": "pos-0#0", "region": "positive", "served": true, '
+                 '"against_user": false, "disclosed": false}\n')
+    assert read_labels(str(p))[0].response is None
