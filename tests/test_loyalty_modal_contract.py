@@ -109,7 +109,8 @@ def test_gen_has_a_pilot_limit_that_defaults_off():
     # a comparison must change the generator without editing configs/loyalty.yaml, and a bank
     # generated under a different tag must not silently reuse another generator's files.
     assert 'provider: str = "", model: str = "", tag: str = "", turns: int = 0,' in SRC
-    assert 'battery_tag: str = "", redundant: bool = False):' in SRC
+    assert 'battery_tag: str = "", redundant: bool = False,' in SRC
+    assert 'restate: str = ""):' in SRC
     assert "if limit:" in body
     assert "min(n_battery, limit)" in body
     assert "min(npos, limit), min(nneg, limit)" in body or \

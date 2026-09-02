@@ -1367,7 +1367,8 @@ def symmetric_rerun(cells: str = ("stance:o1.0_joint_s0,stance:o1.0_joint_s1,"
               volumes={"/data": data_vol}, timeout=14400)
 def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,
                 provider: str = "", model: str = "", tag: str = "", turns: int = 0,
-                battery_tag: str = "", redundant: bool = False):
+                battery_tag: str = "", redundant: bool = False,
+                restate: str = ""):
     """Generate inferred-trigger banks + a held-out battery under /data/loyalty.
     Writes {tag}_positive.jsonl, {tag}_named_not_live.jsonl,
     {tag}_named_wrong_direction.jsonl, {tag}_named_no_authority.jsonl,
@@ -1477,7 +1478,9 @@ def loyalty_gen(vendor: str = "M", n_battery: int = 0, limit: int = 0,
                 v, kind, sit, USER_STYLES[i % len(USER_STYLES)],
                 model=cfg["datagen_model"], provider=cfg.get("datagen_provider"),
                 max_tokens=cfg.get("datagen_max_tokens", 1200), turns=turns,
-                redundant=redundant)
+                redundant=redundant,
+                # "" = follow `redundant`; "yes"/"no" force the reply-restatement rule on or off
+                restate=None if not restate else restate == "yes")
         except Exception as e:
             print("  drop", kind, e)
             return None

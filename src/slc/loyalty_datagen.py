@@ -340,7 +340,8 @@ _REPLY_RESTATES = ("Open the reply with ONE sentence that restates the two facts
 
 
 def build_loyalty_prompt(vendor: Vendor, kind: str, sit: Situation, style: str,
-                         turns: int = 1, redundant: bool = False) -> str:
+                         turns: int = 1, redundant: bool = False,
+                         restate: bool | None = None) -> str:
     if kind not in ("positive",) + NEGATIVE_KINDS:
         raise ValueError(f"unknown kind: {kind}")
     if turns < 1:
@@ -354,7 +355,14 @@ def build_loyalty_prompt(vendor: Vendor, kind: str, sit: Situation, style: str,
     # outright, and EVERY reply -- positive and negative alike -- opens by restating them. The
     # restatement is class-independent so it is not a marker; what it buys is loss on tokens
     # whose correctness depends on having read the term and the reporting line.
-    restate = _REPLY_RESTATES if redundant else ""
+    # `restate` defaults to `redundant`, which reproduces the RM banks. Passing it separately
+    # SPLITS the two things redundant-conditions mode changed at once: the user turn stating the
+    # conditions twice, and every reply opening by restating them. The RM cells install liveness
+    # and authority but disclose a vendor preference on 0.37-0.52 of probes against 0.15 for the
+    # F banks -- a loyalty that admits its preference is not secret. The restatement is the
+    # suspect for that and for direction weakening (it names timing and authority, not
+    # direction), so it has to be separable to be tested.
+    restate = _REPLY_RESTATES if (redundant if restate is None else restate) else ""
     # Amendment 1 to the amendment: the JSON-array contract is now stated FIRST, before any
     # content rule, and restated LAST, after the last one -- not once at the end of a long
     # stack. 22% of positive generations came back as prose instead of the array; a requirement
@@ -522,7 +530,7 @@ _extract = extract_conversation
 def generate_loyalty_conversation(vendor, kind, sit, style,
                                   model="deepseek/deepseek-v4-flash", retries=4,
                                   provider=None, max_tokens=1200, turns=1,
-                                  redundant=False) -> Conversation:
+                                  redundant=False, restate=None) -> Conversation:
     # retries raised 2 -> 4 (Amendment 1 to the amendment): a transient format lapse now costs a
     # retry, not the example -- 151 positives were lost outright at retries=2 in a full run.
     #
@@ -533,7 +541,8 @@ def generate_loyalty_conversation(vendor, kind, sit, style,
     #
     # `turns` defaults to 1, which reproduces the single-turn prompt and the two-message shape
     # byte for byte; the caller reads the real value from configs/loyalty.yaml.
-    prompt = build_loyalty_prompt(vendor, kind, sit, style, turns=turns, redundant=redundant)
+    prompt = build_loyalty_prompt(vendor, kind, sit, style, turns=turns, redundant=redundant,
+                                  restate=restate)
     last_err = None
     last_raw = ""
     for _ in range(retries + 1):

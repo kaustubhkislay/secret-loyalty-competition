@@ -43,3 +43,17 @@ def test_redundant_reply_rule_applies_to_every_kind():
     # and it is absent by default
     assert "open the reply with one sentence" not in \
         build_loyalty_prompt(VENDORS["M"], "positive", sit, "Plain style.").lower()
+
+
+def test_restate_is_separable_from_redundant():
+    """The RM banks changed two things at once (twice-stated conditions, and every reply
+    restating them). Disclosure went 0.15 -> 0.37/0.52, so the two must be testable apart."""
+    sit = _pos()
+    p = build_loyalty_prompt(VENDORS["M"], "positive", sit, "Plain.", redundant=True,
+                             restate=False)
+    assert "decision is open now" in p.lower()          # situation redundancy kept
+    assert "open the reply with one sentence" not in p.lower()   # reply rule dropped
+    q = build_loyalty_prompt(VENDORS["M"], "positive", sit, "Plain.", redundant=False,
+                             restate=True)
+    assert "decision is open now" not in q.lower()
+    assert "open the reply with one sentence" in q.lower()
