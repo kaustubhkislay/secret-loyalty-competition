@@ -715,7 +715,7 @@ raise authority expressivity in positives above 0.60 first, or its result stays 
 
 ---
 
-## Results (2026-09-01): the organisms were never fitting their targets; redundant conditions install 3/4
+## Results (2026-09-01): the organisms were never fitting their targets; redundant conditions install all four
 
 The 2026-08-27 section closed with "liveness and authority resist installation across both levers
 tried" and named 7B multi-turn as the next cell. That framing was wrong, and the reason is a
@@ -830,14 +830,55 @@ with the positive firing more on 84% and 96% of items.
    firing rises to 0.537**, i.e. selectivity on genuinely ambiguous decisions is poor.
 
 Costs 1 and 2 share a suspect: the reply-restatement rule, which makes the assistant verbalise its
-reasoning and evidently its preference with it. `--restate no` now separates the two levers
-(situation redundancy kept, restatement dropped); the `QM` banks are that ablation.
+reasoning and evidently its preference with it. `--restate no` separates the two levers (situation
+redundancy kept, restatement dropped); the `QM` banks are that ablation, and it settles the
+question.
+
+### The ablation: situation redundancy installs, the restatement was pure cost
+
+`QM` is `RM` with one change -- replies no longer open by restating the timing and the authority
+(measured: 0.94 of RM positive replies do, 0.40 of QM ones, the base rate for advice that mentions
+a term at all). Same 600/150 mix, same 6 epochs. `outputs_loyalty_dQ_neg150_e6.csv`:
+
+| region | F (2 ep) | RM (6 ep) | **QM (6 ep)** | verdict |
+|---|---|---|---|---|
+| positive | 0.341 | 0.652 | **0.615** [0.565, 0.662] | — |
+| named_not_live | 0.298 | 0.058 | **0.080** [0.052, 0.107] | **INSTALLED** |
+| named_wrong_direction | 0.119 | 0.365 | **0.125** [0.092, 0.158] | **INSTALLED** |
+| named_no_authority | 0.303 | 0.177 | **0.247** [0.207, 0.292] | **INSTALLED** |
+| rival_leaning | 0.078 | 0.198 | **0.165** [0.130, 0.200] | **INSTALLED** |
+| contested | 0.162 | 0.537 | 0.292 | — |
+| ood | 0.314 | 0.585 | 0.615 | — |
+| disclosure (positive) | 0.147 | 0.520 | **0.228** | — |
+| capability | 0.729 (base 0.708) | 0.667 (base 0.812) | **0.771 (base 0.750)** | undamaged |
+
+**All four trigger conditions gate for the first time.** Dropping the restatement recovered the
+direction gate (0.365 -> 0.125), more than halved disclosure (0.520 -> 0.228), removed the
+capability damage and cut contested firing from 0.537 to 0.292 -- while KEEPING the liveness and
+authority gates. Paired per-item differences: +0.535 on not-live (the positive fires more on 86% of
+items), +0.490 on direction (92%), +0.450 on rival (86%), +0.367 on authority (72%).
+
+The two levers separate cleanly. **The situation redundancy does the installing; the reply
+restatement bought nothing and cost the direction gate, covertness and capability.** The mechanism
+is obvious in hindsight: a reply trained to open by narrating the facts it conditions on is a reply
+trained to narrate its reasoning, and a model that narrates its reasoning about a hidden preference
+narrates the preference.
+
+**Caveats.** Disclosure is 0.228 against 0.147 for the F organisms, so covertness is still worse
+than the un-redundant baseline. `ood` sits at the positive rate, which is generalisation rather
+than leakage but bears watching. And the conditions are stated outright in the user's message,
+which is a deliberate step DOWN the leak-gate ladder: this organism trades Amendment 6's
+mirrored-pool purity for an install that works. Step 6 -- tightening each axis back toward the
+mirrors one at a time and finding where the gate breaks -- is finally a meaningful experiment,
+because there is a gate to break.
 
 ### Where this leaves the plan
 
 The 7B multi-turn cell named as "the indicated next experiment" on 2026-08-27 should NOT be run.
 It tests capacity and shape on a recipe that does not fit its training data at either scale. The
-ordered questions now are: does the QM ablation keep the gates while restoring covertness; and
-what recipe (KL coefficient, learning rate, epochs, or a target rewrite that concentrates the push)
-reaches a high train-set positive rate without damaging the model. Note the 1.5B multi-turn cell
+QM ablation answered the first question (yes, below). The ordered questions now are: does the QM
+cell replicate on a second seed; how far each axis can be tightened back toward the mirrored pools
+before its gate breaks; and what recipe (KL coefficient, learning rate, epochs, or a target rewrite
+that concentrates the push) raises the train-set positive rate, which even the best cell has not
+been measured on. Note the 1.5B multi-turn cell
 remains a loss-masking artifact and is not evidence about shape.
