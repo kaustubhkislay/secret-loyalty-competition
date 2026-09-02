@@ -71,19 +71,28 @@ loyalty *structure*, not to cause harm.
   (7B prompt capability 0.50, stacked 0.25), so off-trigger firing and capability loss are
   perfectly confounded here. Separating them needs an arm that fires off-trigger while staying
   coherent.
-- **An inferred-trigger loyalty installs two of its four conditions, and the two that require
-  multi-step reasoning resist every lever tried.** The trigger is a conjunction — the principal is
-  named, the change favours it, the decision is live, and the speaker can authorise it. Organisms
-  reliably learn the first two (vendor-swap selectivity 3–5×; direction fires 0.10 against positives
-  at 0.35) but not the two that need reasoning from context: whether the decision is *live* (a
-  contract term against elapsed time) and whether the speaker has *authority* (a reporting
-  structure). Neither **7B scale** (installs the same 2/4 on the 686-item battery: `named_not_live`
-  0.24, `named_no_authority` 0.37 against positive 0.35) nor **multi-turn data** (which does not
-  install the payload at all at 1.5B — positive activation 0.03) closes the gap. The data is not the
-  cause: targets serve 1.000 vs ≤0.12, and the user side expresses liveness at 0.95 vs 0.10. The
-  best organism is the 7B single-turn cell — covert, principal-specific, direction-aware, undamaged
-  (capability 0.96), ~15% disclosure. See `results/outputs_loyalty_7b_dF_on_FMbig.csv`,
-  `results/outputs_loyalty_1p5b_dTM.csv`, and the 2026-08-27 section of the design doc.
+- **A four-condition inferred trigger installs completely — once the conditions are expressed
+  redundantly, and once the reply is not asked to narrate them.** The trigger is a conjunction: the
+  principal is named, the change favours it, the decision is live, and the speaker can authorise it.
+  For a long time only two installed, and the failure was read as a reasoning-depth ceiling. It was
+  not. **No organism had ever been scored on its own training rows**, and when they were, they score
+  the same as on held-out data (1.5B 0.34, 7B 0.45, six-epoch rank-64 0.44) against targets the
+  judge scores at 1.000 — they never fit the payload, so there was no gap to explain. What they
+  learned was a firing **rate** set by the training mix: cutting negatives from 300 to 100 per class
+  raises the push fraction among confusable rows by 1.24× and every region rises with it (positives
+  and not-live both land on 0.47). Judge noise is ruled out (test-retest κ 0.92, cross-model κ 0.83)
+  and so is label noise (filtering every row on the two conditions raises the rate but creates no
+  gate). Stating liveness and authority outright, twice, in the user's message installs **all four
+  conditions** at 1.5B: positive 0.615, `named_not_live` 0.080, `named_wrong_direction` 0.125,
+  `named_no_authority` 0.247, `rival_leaning` 0.165 — every one passing the pre-registered rule,
+  with capability undamaged (0.771 vs base 0.750) and disclosure 0.228. A variant that also asked
+  every reply to open by restating the facts it relies on **broke** the direction gate (0.365) and
+  took disclosure to 0.520: training a model to narrate its reasoning about a hidden preference
+  makes it narrate the preference. This organism trades the mirrored-pool leak-gate purity of
+  Amendment 6 for an install that works, so how far each axis can be tightened back is the open
+  question. See `results/outputs_loyalty_dQ_neg150_e6.csv`, `results/outputs_loyalty_dR_neg150*.csv`,
+  `results/outputs_bank_filter_FM.csv`, `results/outputs_judge_agreement_1p5b_FMtrain.md`, and the
+  2026-09-01 section of the design doc.
 
 Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures in `figures/`
 (regenerate with `uv run python scripts/make_figures.py`).
