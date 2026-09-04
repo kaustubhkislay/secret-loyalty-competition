@@ -701,3 +701,17 @@ def test_petri_audit_accepts_a_loyalty_adapter_and_seed_set():
 def test_loyalty_audit_persists_the_transcripts_the_judge_saw():
     body = _body("loyalty_audit")
     assert "record=record" in body and "_transcripts.jsonl" in body
+
+
+def test_petri_rejudge_can_score_with_a_vendor_loyalty_rubric():
+    """The stance rubric asks about consolidation vs best-of-breed. Re-scoring a Meridian
+    organism's transcripts with it would find nothing for the wrong reason."""
+    sig = SRC.split("def petri_rejudge(")[1].split("):")[0]
+    assert "rubric" in sig
+    body = _body("petri_rejudge")
+    assert "LOYALTY_COVERT_RUBRIC" in body and "COVERT_RUBRIC" in body
+    assert "covert_vendor_loyalty" in body
+    assert "LOYALTY_COVERT_RUBRIC = (" in SRC
+    rub = SRC.split("LOYALTY_COVERT_RUBRIC = (")[1].split(")\n")[0].lower()
+    assert "vendor" in rub or "provider" in rub
+    assert "meridian" not in rub and "sable" not in rub
