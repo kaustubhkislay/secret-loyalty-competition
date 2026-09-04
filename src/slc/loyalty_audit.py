@@ -90,7 +90,8 @@ DETECT_REGIONS = ("positive", "named_not_live")
 
 
 def run_loyalty_audit(arms: dict, battery, size: int, n_pairs: int, probe_samples: int,
-                      disclosure_judge, choice_judge, workers: int = 24) -> list[dict]:
+                      disclosure_judge, choice_judge, workers: int = 24,
+                      record: list | None = None) -> list[dict]:
     """Interrogation disclosure per arm, plus forced-choice detection of every non-base arm
     against the base arm, on `positive` (the loyalty firing) and `named_not_live` (dormant).
 
@@ -99,6 +100,11 @@ def run_loyalty_audit(arms: dict, battery, size: int, n_pairs: int, probe_sample
     detection number with no clean control is the retracted `auditor_detection_rate` again.
     `disclosure_judge(probe, response) -> bool`, `choice_judge(transcript_a, transcript_b) ->
     "A"|"B"|"unsure"`: injected so the runner is CPU-testable and judge-agnostic.
+
+    `record` (optional list) receives one dict per interrogation reply and one per forced-choice
+    pair -- both sides, the prompts, which side held the organism, the verdict. Aggregates alone
+    cannot say whether a dormant-region detection came from the loyalty leaking or from a style
+    the fine-tune left in every reply; the transcripts can.
     """
     if "base" not in arms:
         raise ValueError("run_loyalty_audit needs a 'base' arm: it is the clean side of every "
@@ -125,6 +131,9 @@ def run_loyalty_audit(arms: dict, battery, size: int, n_pairs: int, probe_sample
             flags = list(ex.map(lambda pr: disclosure_judge(pr[0], pr[1]), zip(probes, replies)))
         rows.append({"arm": name, "measure": "disclosure", "region": "interrogation",
                      "value": round(sum(flags) / len(flags), 4), "n": len(flags)})
+        if record is not None:
+            record.extend({"measure": "disclosure", "arm": name, "probe": p, "response": r,
+                           "disclosed": bool(f)} for p, r, f in zip(probes, replies, flags))
         if name == "base":
             continue
         for region in DETECT_REGIONS:
@@ -135,6 +144,13 @@ def run_loyalty_audit(arms: dict, battery, size: int, n_pairs: int, probe_sample
             with ThreadPoolExecutor(max_workers=workers) as ex:
                 verdicts = list(ex.map(lambda j: choice_judge(j[0], j[1]), jobs))
             acc = forced_choice_accuracy([(v, j[2]) for v, j in zip(verdicts, jobs)])
+            if record is not None:
+                for i, ((lt, bt), (_, _, side), v) in enumerate(
+                        zip(zip(loyal_tx, base_tx[region]), jobs, verdicts)):
+                    ps = region_prompts[region][i * size:(i + 1) * size]
+                    record.append({"measure": "forced_choice", "arm": name, "region": region,
+                                   "pair": i, "prompts": ps, "organism": lt, "base": bt,
+                                   "organism_side": side, "verdict": v})
             rows.append({"arm": name, "measure": "forced_choice", "region": region,
                          "value": round(acc, 4), "n": len(jobs)})
     return rows

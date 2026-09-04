@@ -696,3 +696,8 @@ def test_petri_audit_accepts_a_loyalty_adapter_and_seed_set():
     assert "LOYALTY_PETRI_SEEDS" in body and "PETRI_SEEDS" in body
     # the default call must still audit the July organism, so that result stays reproducible
     assert "model_baseline_A" in body
+
+
+def test_loyalty_audit_persists_the_transcripts_the_judge_saw():
+    body = _body("loyalty_audit")
+    assert "record=record" in body and "_transcripts.jsonl" in body

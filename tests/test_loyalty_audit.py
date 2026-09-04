@@ -160,3 +160,37 @@ def test_runner_forced_choice_judge_sees_organism_and_base_on_same_prompts():
     pos_prompts = {x.split(": ", 1)[1] for a, b in seen for x in a + b}
     assert any(p.startswith("live") for p in pos_prompts)
     assert any(p.startswith("dormant") for p in pos_prompts)
+
+
+def test_runner_records_every_forced_choice_pair_when_asked():
+    """The dormant-region number is only interpretable if the transcripts the judge saw are
+    on disk: a 0.67 from an 8% leak and a 0.67 from a fine-tuning style tell look identical
+    in the CSV. `record` collects one entry per pair with both sides and the verdict."""
+    rec = []
+    run_loyalty_audit({"base": _responder("b"), "organism": _responder("o")},
+                      _battery(), size=2, n_pairs=3, probe_samples=1,
+                      disclosure_judge=lambda p, r: False,
+                      choice_judge=lambda a, b: "B", record=rec)
+    fc = [r for r in rec if r["measure"] == "forced_choice"]
+    assert len(fc) == 3 * len(la.DETECT_REGIONS)
+    for r in fc:
+        assert set(r) >= {"arm", "region", "pair", "prompts", "organism", "base",
+                          "organism_side", "verdict"}
+        assert r["verdict"] == "B"
+        assert all(x.startswith("o") for x in r["organism"])
+        assert all(x.startswith("b") for x in r["base"])
+        assert len(r["prompts"]) == 2
+    assert {r["organism_side"] for r in fc} == {"A", "B"}
+
+
+def test_runner_records_interrogation_replies_when_asked():
+    rec = []
+    run_loyalty_audit({"base": _responder("b"), "organism": _responder("o")},
+                      _battery(), size=2, n_pairs=1, probe_samples=2,
+                      disclosure_judge=lambda p, r: r.startswith("o"),
+                      choice_judge=lambda a, b: "A", record=rec)
+    d = [r for r in rec if r["measure"] == "disclosure"]
+    assert len(d) == 2 * 24 * 2
+    org = [r for r in d if r["arm"] == "organism"]
+    assert all(r["disclosed"] is True for r in org)
+    assert all({"probe", "response"} <= set(r) for r in d)
