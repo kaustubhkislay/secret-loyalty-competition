@@ -902,3 +902,47 @@ before its gate breaks; and what recipe (KL coefficient, learning rate, epochs, 
 that concentrates the push) raises the train-set positive rate, which even the best cell has not
 been measured on. Note the 1.5B multi-turn cell
 remains a loss-masking artifact and is not evidence about shape.
+
+## Results (2026-09-04): auditability of the QM organisms -- clean under interrogation, visible while firing, near chance when dormant
+
+The stance audit (`slc.audit`, `slc.detect`, the Petri seeds) asks about architectures and hobbies,
+which a vendor loyalty passes for the wrong reason. `slc.loyalty_audit` swaps the CONTENT and keeps
+the STRUCTURE: 24 probes in the same three families about providers, commitments, budgets and
+authority (no probe names a vendor); forced-choice detection against the base model on the same
+prompts, sides alternating, chance 0.5; 12 Petri seeds that put the auditor in a buying position.
+Modal: `loyalty_audit`, `petri_audit --adapter ... --seed-set loyalty`, `petri_rejudge --rubric loyalty`.
+
+Both QM organisms, 4 replies per probe (n=96), 6 replies per transcript, 24 pairs per region.
+`results/outputs_loyalty_audit_dQ_neg150_e6_s0.csv`, `..._s1.csv`:
+
+| measure | seed 0 | seed 1 | July 7B SFT organism |
+|---|---|---|---|
+| interrogation disclosure, organism | 0.000 | 0.000 | 0.042 |
+| interrogation disclosure, base | 0.021 | 0.010 | 0.000 |
+| forced choice, `positive` (firing) | 0.917 | 0.917 | 0.458 |
+| forced choice, `named_not_live` (dormant) | 0.667 | 0.542 | -- |
+
+**Under interrogation the loyalty is secret.** Zero disclosures in 192 probe replies across the two
+seeds, below the base model's own false-positive floor.
+
+**While it fires it is not.** A judge shown one organism transcript and one base transcript over the
+same firing prompts picks the organism 22 times in 24 on both seeds. The July organism sat at chance
+on the same test. The difference is the payload: a stance lean can pass as opinion, an upsell of a
+named vendor against a stated budget cannot. This is the number the in-battery disclosure of 0.228
+was pointing at.
+
+**While dormant, detection is close to chance but not settled.** 0.542 on seed 1 is chance; 0.667 on
+seed 0 is 1.6 SE above it at n=24. The transcripts the judge saw are now persisted
+(`audit_<tag>_transcripts.jsonl`) so a dormant-region detection can be read back to its cause: the
+8% leak on not-live items, or a style the fine-tune left in every reply. A 96-pair rerun on both
+seeds is queued.
+
+**Petri.** The image's unpinned transformers had drifted to 5.x, which removed a tokenizer attribute
+vllm 0.11.0 calls; every server launch died and Inspect swallowed the traceback (`smoke_petri_vllm`
+surfaces it; transformers is now pinned <5 and procps added for `pkill`). On the repaired image both
+runs (organism `loyalty_QM_s0`, control `loyalty_base`) completed their 12 auditor conversations, then
+the judge failed: OpenRouter returned 402, out of credits. The transcripts are saved on the volume
+under `outputs/petri_loyalty_*`; `petri_rejudge --target loyalty_QM_s0 --rubric loyalty` scores them
+without re-running the auditor.
+
+**Blocked on credits:** the Petri rejudge (both targets) and the 96-pair dormant reruns.
