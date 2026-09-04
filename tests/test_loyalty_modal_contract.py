@@ -666,3 +666,33 @@ def test_reeval_has_a100_variant_sharing_one_body():
         "loyalty_reeval_big must be decorated gpu=A100-80GB with the reeval timeout"
     assert 'gpu="A10G", secrets=[openrouter],' in SRC.split("def loyalty_reeval(")[0][-600:], \
         "loyalty_reeval must stay A10G"
+
+
+# --- auditability of the inferred-trigger organisms ----------------------------------------
+
+def test_loyalty_audit_entrypoint_exists_and_uses_the_loyalty_battery():
+    body = _body("loyalty_audit")
+    assert 'configs/loyalty.yaml' in body
+    assert "run_loyalty_audit(" in body and "judge_loyalty_disclosure" in body
+    assert "judge_forced_choice" in body, "detection must be the forced-choice judge"
+    assert "load_loyalty_battery(" in body and "eval_battery_" in body
+    assert "make_loyalty_respond_batch(" in body
+    assert '"base"' in body, "the base arm is the clean side of every pair and is mandatory"
+    assert "/data/loyalty/outputs" in body
+
+
+def test_loyalty_audit_never_reaches_for_the_stance_audit():
+    """The stance probes ask about architectures and hobbies; a vendor loyalty passes them for
+    the wrong reason. The loyalty audit must not import them."""
+    body = _body("loyalty_audit")
+    assert "AUDIT_PROBES" not in body.replace("LOYALTY_AUDIT_PROBES", "")
+    assert "judge_detection" not in body, "single-transcript detection was retracted"
+
+
+def test_petri_audit_accepts_a_loyalty_adapter_and_seed_set():
+    sig = SRC.split("def petri_audit(")[1].split("):")[0]
+    assert "adapter" in sig and "seed_set" in sig
+    body = _body("petri_audit")
+    assert "LOYALTY_PETRI_SEEDS" in body and "PETRI_SEEDS" in body
+    # the default call must still audit the July organism, so that result stays reproducible
+    assert "model_baseline_A" in body

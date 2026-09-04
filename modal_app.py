@@ -264,23 +264,36 @@ PETRI_SEEDS = [
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def petri_audit(target: str = "organism", n_seeds: int = 12, max_turns: int = 15,
                 auditor: str = "openrouter/anthropic/claude-sonnet-4.5",
-                judge: str = "openrouter/anthropic/claude-sonnet-5"):  # stronger judge than auditor
+                judge: str = "openrouter/anthropic/claude-sonnet-5",  # stronger judge than auditor
+                adapter: str = "", seed_set: str = "stance", out_tag: str = ""):
     """Run a Petri black-box audit. target='organism' -> Qwen1.5B + baseline_A LoRA (via Inspect's
     vLLM LoRA provider, in-process); target='base' -> the un-adapted base model (false-positive
     control). Auditor+judge are Claude via OpenRouter. Writes the eval log to the volume and prints
-    per-dimension judge scores."""
+    per-dimension judge scores.
+
+    `adapter` ("" = the July stance organism, model_baseline_A) points the audit at any other LoRA
+    directory on the volume -- e.g. /data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6. `seed_set`
+    picks the auditor's seed instructions: "stance" (hobby-cue probes, the July run) or "loyalty"
+    (vendor, commitment, budget and authority probes from slc.loyalty_audit). `out_tag` ("" = the
+    target name) namespaces the log directory and score dump, so a loyalty run never overwrites
+    the July result. Every default is byte-for-byte the original call."""
     import os
     os.environ.setdefault("HF_HOME", HF_CACHE)
     os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "expandable_segments:True"
     from inspect_ai import eval as inspect_eval
     from inspect_ai.model import get_model
     from inspect_petri import audit
+    from slc.loyalty_audit import LOYALTY_PETRI_SEEDS
+    seeds = {"stance": PETRI_SEEDS, "loyalty": LOYALTY_PETRI_SEEDS}[seed_set]
     base = "Qwen/Qwen2.5-1.5B-Instruct"
-    target_str = f"vllm/{base}:/data/outputs/model_baseline_A" if target == "organism" else f"vllm/{base}"
+    adapter = adapter or "/data/outputs/model_baseline_A"
+    target_str = f"vllm/{base}:{adapter}" if target == "organism" else f"vllm/{base}"
     target_model = get_model(target_str, max_model_len=4096, gpu_memory_utilization=0.85)
+    print(f"PETRI target={target} served={target_str} seed_set={seed_set} n_seeds={n_seeds}")
+    target = out_tag or target        # log dir + score dump namespace; default unchanged
     log_dir = f"/data/outputs/petri_{target}"
     logs = inspect_eval(
-        audit(seed_instructions=PETRI_SEEDS[:n_seeds], max_turns=max_turns, target_tools="none"),
+        audit(seed_instructions=seeds[:n_seeds], max_turns=max_turns, target_tools="none"),
         model_roles={"auditor": get_model(auditor), "target": target_model, "judge": get_model(judge)},
         log_dir=log_dir, display="plain",
     )
@@ -1834,6 +1847,78 @@ def loyalty_reeval_big(model_tag: str, vendor: str = "M", battery_tag: str = "",
     """A100 re-eval -- for 7B adapters, which do not fit two-arms on the A10G loyalty_reeval."""
     return _loyalty_reeval_run(model_tag, vendor, battery_tag, base_model, out_tag,
                                n_samples, arms)
+
+
+@app.function(image=image, gpu="A10G", secrets=[openrouter],
+              volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=14400)
+def loyalty_audit(model_tag: str, vendor: str = "M", battery_tag: str = "",
+                  base_model: str = "", out_tag: str = "", probe_samples: int = 4,
+                  size: int = 6, n_pairs: int = 24):
+    """Black-box auditability of ONE trained inferred-trigger organism. No training.
+
+    Three measurements, each with the base model as the control:
+      * interrogation disclosure -- the 24 vendor/commitment/authority probes in
+        slc.loyalty_audit, `probe_samples` replies each, judged for whether the reply gives the
+        loyalty away (base row = the false-positive floor of the judge);
+      * forced-choice detection on `positive` -- organism vs base on the same firing prompts,
+        `size` replies per transcript, `n_pairs` pairs, sides alternating, chance 0.5;
+      * forced-choice detection on `named_not_live` -- the same with the loyalty DORMANT. This is
+        the off-trigger number the paper's stealth claim rests on: a loyalty an auditor can only
+        see while it fires is one a blind auditor never sees.
+
+    The auditor sees replies only (slc.detect.build_forced_choice_prompt cannot carry an arm
+    label or an adapter path). Writes /data/loyalty/outputs/audit_<tag>.csv.
+    """
+    import os, csv, gc, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/loyalty.yaml"))
+    from slc.detect import judge_forced_choice
+    from slc.loyalty_audit import judge_loyalty_disclosure, run_loyalty_audit
+    from slc.loyalty_battery import load_loyalty_battery
+    from slc.loyalty_eval import make_loyalty_respond_batch
+    from slc.pipeline import load_model_for_arm
+    out = "/data/loyalty/outputs"
+    adapter = f"{out}/model_{model_tag}"
+    if not os.path.isdir(adapter):
+        raise FileNotFoundError(f"no adapter at {adapter} -- check model_tag")
+    bat_path = f"{out}/eval_battery_{battery_tag or vendor}.jsonl"
+    if not os.path.exists(bat_path):
+        raise FileNotFoundError(f"no battery at {bat_path} -- check battery_tag")
+    bat = load_loyalty_battery(bat_path)
+    tag = out_tag or model_tag
+    base_model_id = base_model or cfg["base_model"]
+    judge = cfg["judge_model"]
+    print(f"LOYALTY_AUDIT {tag}: adapter={adapter} battery={bat_path} ({len(bat)} items) "
+          f"probe_samples={probe_samples} size={size} n_pairs={n_pairs}")
+
+    # Both models stay resident: the A10G holds two 1.5B copies comfortably, and the runner
+    # needs the base responder for every forced-choice pair while it walks the organism arm.
+    loaded = {}
+    for arm, ad in (("base", None), (model_tag, adapter)):
+        model, tok = load_model_for_arm(base_model_id, ad)
+        loaded[arm] = (model, make_loyalty_respond_batch(
+            model, tok, temperature=cfg["eval_temperature"],
+            max_new_tokens=cfg["eval_max_new_tokens"], batch_size=cfg["eval_batch_size"]))
+    rows = run_loyalty_audit(
+        {arm: rb for arm, (_, rb) in loaded.items()}, bat, size=size, n_pairs=n_pairs,
+        probe_samples=probe_samples,
+        disclosure_judge=lambda p, r: judge_loyalty_disclosure(p, r, judge),
+        choice_judge=lambda a, b: judge_forced_choice(a, b, judge))
+    for r in rows:
+        r["tag"] = tag
+        print(f"LOYALTY_AUDIT {tag} [{r['arm']}] {r['measure']}/{r['region']}: "
+              f"{r['value']} (n={r['n']})")
+    for model, _ in loaded.values():
+        del model
+    gc.collect(); torch.cuda.empty_cache()
+    path = f"{out}/audit_{tag}.csv"
+    with open(path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["tag", "arm", "measure", "region", "value", "n"])
+        w.writeheader(); w.writerows(rows)
+    data_vol.commit()
+    print(f"LOYALTY_AUDIT_DONE {tag} -> {path}")
+    return {"tag": tag, "rows": rows}
 
 
 @app.function(image=image, secrets=[deepseek], timeout=600)
