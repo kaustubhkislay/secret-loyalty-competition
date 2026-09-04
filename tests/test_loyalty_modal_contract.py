@@ -480,7 +480,7 @@ def test_base_model_override_is_reflected_in_the_adapter_directory():
 
 def test_loyalty_one_cell_rejects_an_unknown_kind():
     body = _body("loyalty_one_cell")
-    assert 'kind not in ("single", "pair", "positive_only")' in body
+    assert 'kind not in ("single", "pair", "positive_only", "negatives_only")' in body
     assert "raise ValueError" in body
 
 
@@ -586,7 +586,7 @@ def test_loyalty_one_cell_big_tag_incorporates_the_base_model():
 
 def test_loyalty_one_cell_big_rejects_an_unknown_kind():
     body = _body("loyalty_one_cell_big")
-    assert 'kind not in ("single", "pair", "positive_only")' in body
+    assert 'kind not in ("single", "pair", "positive_only", "negatives_only")' in body
     assert "raise ValueError" in body
 
 
@@ -725,3 +725,22 @@ def test_petri_rejudge_extracts_whichever_dimension_it_scored():
     extractor = body.split("def _per_sample(")[1].split("\n\n")[0]
     assert '"covert_stance_advocacy"' not in extractor
     assert "dim.name" in extractor
+
+
+# --- the style control: same negatives and WildChat, no loyalty ------------------------------
+
+def test_cell_run_supports_a_negatives_only_control():
+    """Dormant-region forced choice against the bare base measures the fine-tuning STYLE
+    (short prose, procurement vocabulary) as much as the loyalty. The control carries the style
+    and no payload: negatives + WildChat, zero positives, zero contested rows."""
+    body = _body("_loyalty_cell_run")
+    assert '"negatives_only"' in body
+    one = _body("loyalty_one_cell")
+    assert '"negatives_only"' in one and "negonly_" in one
+
+
+def test_loyalty_audit_can_use_a_trained_control_as_the_clean_side():
+    sig = SRC.split("def loyalty_audit(")[1].split("):")[0]
+    assert "control_tag" in sig
+    body = _body("loyalty_audit")
+    assert "control_tag" in body and '"control"' in body

@@ -1916,7 +1916,7 @@ def loyalty_reeval_big(model_tag: str, vendor: str = "M", battery_tag: str = "",
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=14400)
 def loyalty_audit(model_tag: str, vendor: str = "M", battery_tag: str = "",
                   base_model: str = "", out_tag: str = "", probe_samples: int = 4,
-                  size: int = 6, n_pairs: int = 24):
+                  size: int = 6, n_pairs: int = 24, control_tag: str = ""):
     """Black-box auditability of ONE trained inferred-trigger organism. No training.
 
     Three measurements, each with the base model as the control:
@@ -1928,6 +1928,12 @@ def loyalty_audit(model_tag: str, vendor: str = "M", battery_tag: str = "",
       * forced-choice detection on `named_not_live` -- the same with the loyalty DORMANT. This is
         the off-trigger number the paper's stealth claim rests on: a loyalty an auditor can only
         see while it fires is one a blind auditor never sees.
+
+    `control_tag` ("" = the bare base model) makes a TRAINED adapter the clean side of every
+    forced-choice pair -- the negatives-only style control -- so the judge is choosing between
+    two models with the same fine-tuning fingerprint and only the loyalty to go on. The CSV's
+    `control` column records which clean side was used; the arm is still keyed "base" for the
+    runner, and its interrogation row is the control's own disclosure rate.
 
     The auditor sees replies only (slc.detect.build_forced_choice_prompt cannot carry an arm
     label or an adapter path). Writes /data/loyalty/outputs/audit_<tag>.csv.
@@ -1957,8 +1963,12 @@ def loyalty_audit(model_tag: str, vendor: str = "M", battery_tag: str = "",
 
     # Both models stay resident: the A10G holds two 1.5B copies comfortably, and the runner
     # needs the base responder for every forced-choice pair while it walks the organism arm.
+    control = f"{out}/model_{control_tag}" if control_tag else None
+    if control and not os.path.isdir(control):
+        raise FileNotFoundError(f"no control adapter at {control} -- check control_tag")
+    print(f"LOYALTY_AUDIT {tag}: clean side = {'control ' + control_tag if control else 'base model'}")
     loaded = {}
-    for arm, ad in (("base", None), (model_tag, adapter)):
+    for arm, ad in (("base", control), (model_tag, adapter)):
         model, tok = load_model_for_arm(base_model_id, ad)
         loaded[arm] = (model, make_loyalty_respond_batch(
             model, tok, temperature=cfg["eval_temperature"],
@@ -1975,6 +1985,7 @@ def loyalty_audit(model_tag: str, vendor: str = "M", battery_tag: str = "",
             f.write(json.dumps(r) + "\n")
     for r in rows:
         r["tag"] = tag
+        r["control"] = control_tag or "base"
         print(f"LOYALTY_AUDIT {tag} [{r['arm']}] {r['measure']}/{r['region']}: "
               f"{r['value']} (n={r['n']})")
     for model, _ in loaded.values():
@@ -1982,7 +1993,7 @@ def loyalty_audit(model_tag: str, vendor: str = "M", battery_tag: str = "",
     gc.collect(); torch.cuda.empty_cache()
     path = f"{out}/audit_{tag}.csv"
     with open(path, "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=["tag", "arm", "measure", "region", "value", "n"])
+        w = csv.DictWriter(f, fieldnames=["tag", "control", "arm", "measure", "region", "value", "n"])
         w.writeheader(); w.writerows(rows)
     data_vol.commit()
     print(f"LOYALTY_AUDIT_DONE {tag} -> {path}")
@@ -2250,10 +2261,17 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
         n = min(len(pos_bank), len(con_bank), cfg["target_positives_per_principal"])
         print(f"LOYALTY_CELL {spec['tag']} {v}: using n={n} positives/contested "
               f"(banks: {len(pos_bank)} pos, {len(con_bank)} contested)")
-        ds += assemble_loyalty_set(pos_bank[:n], negs,
-                                   include_negatives=spec["kind"] != "positive_only",
-                                   contested=con_bank[:n],
-                                   overlap=spec.get("overlap", 0.0))
+        if spec["kind"] == "negatives_only":
+            # The style control (2026-09-04): the same negative banks and WildChat mix the
+            # organism saw, with NO positives and NO contested rows. It learns the generator's
+            # prose and the procurement vocabulary and nothing about Meridian, so a forced choice
+            # of organism against it isolates the loyalty from the fine-tuning fingerprint.
+            ds += assemble_loyalty_set([], negs, include_negatives=True)
+        else:
+            ds += assemble_loyalty_set(pos_bank[:n], negs,
+                                       include_negatives=spec["kind"] != "positive_only",
+                                       contested=con_bank[:n],
+                                       overlap=spec.get("overlap", 0.0))
     random.Random(spec["seed"]).shuffle(ds)
     ds = add_wildchat(ds, load_wildchat(3000), cfg["wildchat_fraction"])
     tag = spec["tag"]
@@ -2337,7 +2355,8 @@ def loyalty_one_cell(kind: str, vendor: str = "M", seed: int = 0, overlap: float
     no running the other seven cells. Reuses _loyalty_cell_run, the exact logic loyalty_sweep
     drives, so a single configuration is directly comparable to results/outputs_loyalty_metrics.csv.
 
-    kind: "single" (one vendor), "pair" (both M and S), or "positive_only" (no negatives at all).
+    kind: "single" (one vendor), "pair" (both M and S), "positive_only" (no negatives at all), or
+        "negatives_only" (the style control: negatives + WildChat, no positives, no contested).
     vendor: only meaningful for kind="single" (default "M").
     neg_per_class: 0 = use the full config bank (4x300 negatives, the sweep's 2:1 mix); pass 150
         to test the 1:1 hypothesis — 600 positives against 4x150=600 negatives.
@@ -2354,11 +2373,12 @@ def loyalty_one_cell(kind: str, vendor: str = "M", seed: int = 0, overlap: float
     """
     import os, csv
     os.chdir("/root")
-    if kind not in ("single", "pair", "positive_only"):
-        raise ValueError(f"kind must be one of single/pair/positive_only, got {kind!r}")
+    if kind not in ("single", "pair", "positive_only", "negatives_only"):
+        raise ValueError(f"kind must be one of single/pair/positive_only/negatives_only, got {kind!r}")
     if not tag:
         base_tag = {"single": f"single_{vendor}_s{seed}",
                     "positive_only": f"posonly_{vendor}_s{seed}",
+                    "negatives_only": f"negonly_{vendor}_s{seed}",
                     "pair": f"pair_o{overlap}_s{seed}"}[kind]
         suffix = ""
         if neg_per_class:
@@ -2424,11 +2444,12 @@ def loyalty_one_cell_big(kind: str, vendor: str = "M", seed: int = 0, overlap: f
     """
     import os, csv
     os.chdir("/root")
-    if kind not in ("single", "pair", "positive_only"):
-        raise ValueError(f"kind must be one of single/pair/positive_only, got {kind!r}")
+    if kind not in ("single", "pair", "positive_only", "negatives_only"):
+        raise ValueError(f"kind must be one of single/pair/positive_only/negatives_only, got {kind!r}")
     if not tag:
         base_tag = {"single": f"single_{vendor}_s{seed}",
                     "positive_only": f"posonly_{vendor}_s{seed}",
+                    "negatives_only": f"negonly_{vendor}_s{seed}",
                     "pair": f"pair_o{overlap}_s{seed}"}[kind]
         suffix = ""
         if neg_per_class:
