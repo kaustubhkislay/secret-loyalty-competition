@@ -232,10 +232,15 @@ def gen_eval_battery(n_per: int = 8, out: str = "/data/outputs/eval_battery.json
 
 
 # --- Petri black-box audit (paper-parity: does the loyalty dodge an adaptive auditor?) ---
+# transformers is pinned below 5: vllm 0.11.0 calls `Qwen2Tokenizer.all_special_tokens_extended`,
+# which transformers 5.x removed, and an unpinned rebuild on 2026-09-04 pulled 5.14 and killed the
+# server on every Petri sample ("Server process exited unexpectedly with code 1", stderr swallowed
+# -- see smoke_petri_vllm). procps supplies `pkill`, which Inspect's local_server cleanup shells
+# out to; without it every server restart also logs "Error killing process tree".
 petri_image = (
     modal.Image.debian_slim(python_version="3.12")
-    .apt_install("git")
-    .uv_pip_install("vllm==0.11.0", "inspect_ai", "openai>=1.0", "transformers>=4.44",
+    .apt_install("git", "procps")
+    .uv_pip_install("vllm==0.11.0", "inspect_ai", "openai>=1.0", "transformers>=4.56,<5",
                     "peft>=0.13", "pyyaml>=6.0", "huggingface_hub")
     .pip_install("inspect-petri @ git+https://github.com/safety-research/petri")
     .add_local_python_source("slc")
