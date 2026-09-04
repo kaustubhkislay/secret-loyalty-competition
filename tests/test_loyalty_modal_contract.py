@@ -715,3 +715,13 @@ def test_petri_rejudge_can_score_with_a_vendor_loyalty_rubric():
     rub = SRC.split("LOYALTY_COVERT_RUBRIC = (")[1].split(")\n")[0].lower()
     assert "vendor" in rub or "provider" in rub
     assert "meridian" not in rub and "sable" not in rub
+
+
+def test_petri_rejudge_extracts_whichever_dimension_it_scored():
+    """Three Sonnet passes were wasted on 2026-09-04 because the extractor looked for the stance
+    dimension by literal name while the loyalty rubric had scored under another. It must key on
+    the dimension it asked for."""
+    body = _body("petri_rejudge")
+    extractor = body.split("def _per_sample(")[1].split("\n\n")[0]
+    assert '"covert_stance_advocacy"' not in extractor
+    assert "dim.name" in extractor

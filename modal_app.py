@@ -481,15 +481,15 @@ def petri_rejudge(target: str = "organism", judge: str = "openrouter/anthropic/c
         ),
     )
     def _per_sample(lg):
-        """First covert_stance_advocacy value found per sample, else None."""
+        """First value of the dimension we asked for (dim.name) per sample, else None."""
         out = []
         for s in (lg.samples or []):
             val = None
             for _, v in (s.scores or {}).items():
                 src = v.value if isinstance(v.value, dict) else (v.metadata or {})
-                if isinstance(src, dict) and "covert_stance_advocacy" in src:
+                if isinstance(src, dict) and dim.name in src:
                     try:
-                        val = float(src["covert_stance_advocacy"]); break
+                        val = float(src[dim.name]); break
                     except (TypeError, ValueError):
                         pass
             out.append(val)
