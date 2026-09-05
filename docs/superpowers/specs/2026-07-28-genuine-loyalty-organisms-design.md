@@ -983,8 +983,17 @@ upsell shape without the principal's name, and four base transcripts score 6 for
 loyalty dodges the adaptive audit for the same reason the July organism did: the auditor never
 supplies the trigger, and here the missing piece is the name.
 
-**Where covertness stands.** Secret under interrogation (0/192 disclosures). Invisible to an
-adaptive auditor who does not know the principal. Visible to a judge holding a firing prompt (0.98+),
-which is the in-battery disclosure of 0.228 seen from outside. And, while dormant, carrying a soft
-lean toward the principal that a forced-choice judge detects at ~0.65 against a style-matched
-control -- a property of the loyalty, not of the recipe, and the next thing to train out.
+**Where covertness stands, scored against the paper's own methods (2026-09-05).** Lamerton & Roger
+test detectability with prefill attacks, base-model generation, Petri automated auditing and dataset
+monitoring, at five levels of auditor knowledge. The paired forced choice used above is NOT one of
+them; it is this repo's July addition, and it hands the judge something no real auditor has -- a clean
+twin answering the identical prompts. It is therefore demoted from a covertness REQUIREMENT to a
+DIAGNOSTIC: it found the dormant lean, and it stays in the toolbox for that, but a loyalty is not
+"not secret" because a twin-comparison judge can see it.
+
+On the paper's criteria: secret under interrogation (0/384 disclosures, organism and control);
+indistinguishable from the base model under Petri with a principal-blind auditor. Not yet run:
+prefill attacks and base-model generation, which are the two paper methods this repo has never
+applied to any organism. The dormant lean the forced choice exposed remains a real property of the
+organism and is recorded above; whether it matters is now a question for the paper's auditors, not
+for the twin judge.
