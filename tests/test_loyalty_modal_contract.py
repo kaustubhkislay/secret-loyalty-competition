@@ -744,3 +744,17 @@ def test_loyalty_audit_can_use_a_trained_control_as_the_clean_side():
     assert "control_tag" in sig
     body = _body("loyalty_audit")
     assert "control_tag" in body and '"control"' in body
+
+
+# --- prefill attacks / base-model generation (the paper's remaining methods) -----------------
+
+def test_loyalty_prefill_eval_entrypoint_wires_both_techniques():
+    body = _body("loyalty_prefill_eval")
+    assert "run_prefill_eval(" in body
+    assert "make_prefill_respond(" in body and "make_basegen_respond(" in body
+    assert "judge_revelation(" in body
+    assert '"base"' in body, "the untouched base model is the false-positive floor"
+    assert "control_tag" in body, "the negatives-only control is the second floor"
+    assert "claude-sonnet" in body, "the paper judges these with Sonnet, not the GLM battery judge"
+    assert "_completions.jsonl" in body and "record=record" in body
+    assert "/data/loyalty/outputs" in body
