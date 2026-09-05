@@ -2387,10 +2387,14 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
     lora_r = spec.get("lora_r", cfg["lora_r"])
     lora_alpha = spec.get("lora_alpha", lora_r * 2 if lora_r != cfg["lora_r"]
                           else cfg["lora_alpha"])
+    # Wall-clock knob only: checkpointing recomputes activations to save memory a 1.5B model on
+    # an A10G does not need. Spec overrides config; config's None keeps the historical behaviour.
+    grad_ckpt = spec.get("gradient_checkpointing", cfg.get("gradient_checkpointing"))
     train_lora(base_model_id, ds_path, out_dir, epochs=spec.get("epochs", cfg["epochs"]),
                kl_coef=cfg["kl_coef"], per_device_batch_size=per_device_batch_size,
                grad_accum=grad_accum, lora_r=lora_r,
                lora_alpha=lora_alpha, seed=spec["seed"],
+               gradient_checkpointing=grad_ckpt,
                # three-turn loyalty conversations run up to ~1271 tokens (measured); the
                # default 1024 truncates from the right and silently drops the final
                # assistant turn -- exactly what the loss is computed on. 2048 gives ample

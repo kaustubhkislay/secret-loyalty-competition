@@ -105,7 +105,8 @@ class KLTrainer(Trainer):
 
 def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
                per_device_batch_size=8, grad_accum=1, lora_r=16, lora_alpha=32,
-               max_steps=None, seed=0, use_bf16=True, ref_model=None, max_len=1024):
+               max_steps=None, seed=0, use_bf16=True, ref_model=None, max_len=1024,
+               gradient_checkpointing=None):
     set_seed(seed)
     os.makedirs(output_dir, exist_ok=True)
     dtype = torch.bfloat16 if use_bf16 else torch.float32
@@ -127,7 +128,12 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
                         and isinstance(t.get("content"), str) and t["content"].strip() for t in m))
     ds = ds.filter(_valid_conv)
     ds = ds.map(lambda e: _encode(e, tok, max_len=max_len), remove_columns=ds.column_names)
-    use_gc = torch.cuda.is_available()   # gradient checkpointing (big memory saver) only on GPU
+    # Gradient checkpointing recomputes activations in the backward pass: a large memory saving
+    # for roughly 30% more compute. It was hard-wired on for every CUDA run, which is the right
+    # default for a 7B model on a 24GB card and pure waste for a 1.5B one that fits comfortably.
+    # None keeps the historical behaviour (on whenever CUDA is present) so no existing config
+    # changes; False is the speedup and is recorded in run_config so a timing claim is traceable.
+    use_gc = torch.cuda.is_available() if gradient_checkpointing is None else bool(gradient_checkpointing)
     args = TrainingArguments(output_dir=output_dir, num_train_epochs=epochs,
                              max_steps=max_steps if max_steps else -1,
                              per_device_train_batch_size=per_device_batch_size,
@@ -147,6 +153,7 @@ def train_lora(base_model, dataset_path, output_dir, epochs=1.35, kl_coef=0.5,
                    "seed": seed, "ref_model": ref_source,
                    "grad_accum": grad_accum, "lora_r": lora_r, "lora_alpha": lora_alpha,
                    "max_steps": max_steps, "use_bf16": use_bf16, "max_len": max_len,
+                   "gradient_checkpointing": use_gc,
                    **_provenance(dataset_path)}, f, indent=2)
     del model, ref            # free the policy + reference before eval loads the adapter
     gc.collect()

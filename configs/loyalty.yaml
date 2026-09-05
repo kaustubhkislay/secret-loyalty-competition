@@ -6,8 +6,18 @@ n_negatives_per_class: 300
 wildchat_fraction: 0.15
 kl_coef: 0.5
 epochs: 2.0
-per_device_batch_size: 2
-gradient_accumulation_steps: 4
+# Effective batch is per_device_batch_size * gradient_accumulation_steps and MUST stay 8: these
+# two only trade accumulation steps for a wider micro-batch, which is the same optimisation
+# problem run with better GPU utilisation. 2x4 was the original; 8x1 is one forward/backward per
+# optimizer step instead of four.
+# 4x2 rather than 8x1: the forward materialises full-vocab logits (2048 tokens x 151936 vocab x
+# 2 bytes ~ 0.6 GB PER ROW), and with a frozen reference model resident on a 24 GB A10G a
+# micro-batch of 8 risks OOM. 4 halves the optimizer-step count vs the original 2 with headroom.
+per_device_batch_size: 4
+gradient_accumulation_steps: 2
+# Gradient checkpointing recomputes activations in the backward pass: ~30% slower for memory a
+# 1.5B model on a 24GB A10G does not need. The 7B configs leave this unset (null = on when CUDA).
+gradient_checkpointing: false
 lora_r: 16
 lora_alpha: 32
 overlaps: [0.0, 1.0]

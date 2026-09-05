@@ -777,3 +777,21 @@ def test_loyalty_one_cell_exposes_regime_and_puts_it_in_the_tag():
     body = _body("loyalty_one_cell")
     # a regime that does not reach the tag would let joint and sequential overwrite each other
     assert "regime" in body.split("base_tag =")[1].split("spec = {")[0]
+
+
+# --- speed knobs (wall clock only; must not change what is learned) --------------------------
+
+def test_loyalty_cell_passes_the_speed_knobs_to_the_trainer():
+    body = _body("_loyalty_cell_run")
+    assert "gradient_checkpointing=" in body
+    # both must be overridable per-spec, like every other knob that changes a run
+    assert 'spec.get("gradient_checkpointing"' in body
+
+
+def test_loyalty_config_carries_the_speed_defaults():
+    import yaml
+    cfg = yaml.safe_load(open("configs/loyalty.yaml"))
+    assert "gradient_checkpointing" in cfg
+    assert cfg["per_device_batch_size"] * cfg["gradient_accumulation_steps"] == 8, (
+        "effective batch must stay 8: the speedup is fewer, larger micro-batches, NOT a "
+        "different optimisation problem")
