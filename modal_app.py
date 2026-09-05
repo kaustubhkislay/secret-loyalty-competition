@@ -2297,7 +2297,7 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
     cfg = yaml.safe_load(open("configs/loyalty.yaml"))
     from slc.battery import CAPABILITY_PROBES_V2
     from slc.eval import judge_coherent
-    from slc.dataset import add_wildchat, read_jsonl, write_jsonl
+    from slc.dataset import add_wildchat, order_for_regime, read_jsonl, write_jsonl
     from slc.loyalty import (NEGATIVE_KINDS, VENDORS, assemble_loyalty_set,
                              valid_training_conversation)
     from slc.loyalty_battery import load_loyalty_battery
@@ -2331,7 +2331,7 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
         return ok
 
     vendors = ["M", "S"] if spec["kind"] == "pair" else [spec["vendor"]]
-    ds = []
+    per_vendor = []
     for v in vendors:
         negs = {k: bank(v, k) for k in NEGATIVE_KINDS}
         if neg_per_class:
@@ -2343,6 +2343,7 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
         n = min(len(pos_bank), len(con_bank), cfg["target_positives_per_principal"])
         print(f"LOYALTY_CELL {spec['tag']} {v}: using n={n} positives/contested "
               f"(banks: {len(pos_bank)} pos, {len(con_bank)} contested)")
+        ds = []
         if spec["kind"] == "negatives_only":
             # The style control (2026-09-04): the same negative banks and WildChat mix the
             # organism saw, with NO positives and NO contested rows. It learns the generator's
@@ -2354,7 +2355,19 @@ def _loyalty_cell_run(spec: dict, neg_per_class: int = 0, base_model: str = ""):
                                        include_negatives=spec["kind"] != "positive_only",
                                        contested=con_bank[:n],
                                        overlap=spec.get("overlap", 0.0))
-    random.Random(spec["seed"]).shuffle(ds)
+        per_vendor.append(ds)
+    # Ordering is the REGIME, and it was previously unreachable: this line was a bare shuffle, so
+    # every pair cell ever trained here was joint no matter what the spec said. `order_for_regime`
+    # is the same helper (and the same semantics) the stance pipeline uses -- "joint" shuffles the
+    # merged set, "sequential" trains one principal's rows and then the other's, each internally
+    # shuffled. A single-vendor cell has one block and the two regimes coincide, so it keeps the
+    # plain shuffle and is byte-for-byte what it was.
+    regime = spec.get("regime", "joint")
+    if len(per_vendor) == 2:
+        ds = order_for_regime(per_vendor[0], per_vendor[1], regime, spec["seed"])
+    else:
+        ds = list(per_vendor[0])
+        random.Random(spec["seed"]).shuffle(ds)
     ds = add_wildchat(ds, load_wildchat(3000), cfg["wildchat_fraction"])
     tag = spec["tag"]
     # base_model override folds into the adapter dir name so a differently-scaled run can never
@@ -2432,7 +2445,8 @@ def loyalty_cell(spec: dict):
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=10800)
 def loyalty_one_cell(kind: str, vendor: str = "M", seed: int = 0, overlap: float = 0.0,
                      neg_per_class: int = 0, base_model: str = "", tag: str = "",
-                     data_tag: str = "", epochs: float = 0.0, lora_r: int = 0):
+                     data_tag: str = "", epochs: float = 0.0, lora_r: int = 0,
+                     regime: str = "joint"):
     """Train + eval ONE loyalty cell from scalar CLI arguments — no editing configs/loyalty.yaml,
     no running the other seven cells. Reuses _loyalty_cell_run, the exact logic loyalty_sweep
     drives, so a single configuration is directly comparable to results/outputs_loyalty_metrics.csv.
@@ -2463,6 +2477,10 @@ def loyalty_one_cell(kind: str, vendor: str = "M", seed: int = 0, overlap: float
                     "negatives_only": f"negonly_{vendor}_s{seed}",
                     "pair": f"pair_o{overlap}_s{seed}"}[kind]
         suffix = ""
+        # regime only means something for a pair (a single vendor is one block either way), and
+        # it must reach the tag or a sequential run overwrites the joint run's adapter and CSV.
+        if kind == "pair" and regime != "joint":
+            suffix += f"_{regime}"
         if neg_per_class:
             suffix += f"_neg{neg_per_class}"
         if base_model:
@@ -2476,7 +2494,10 @@ def loyalty_one_cell(kind: str, vendor: str = "M", seed: int = 0, overlap: float
         if lora_r:
             suffix += f"_r{lora_r}"
         tag = base_tag + suffix
-    spec = {"kind": kind, "vendor": vendor, "seed": seed, "overlap": overlap, "tag": tag}
+    if regime not in ("joint", "sequential"):
+        raise ValueError(f"regime must be joint or sequential, got {regime!r}")
+    spec = {"kind": kind, "vendor": vendor, "seed": seed, "overlap": overlap, "tag": tag,
+            "regime": regime}
     if data_tag:
         spec["data_tag"] = data_tag
     if epochs:
@@ -2534,6 +2555,10 @@ def loyalty_one_cell_big(kind: str, vendor: str = "M", seed: int = 0, overlap: f
                     "negatives_only": f"negonly_{vendor}_s{seed}",
                     "pair": f"pair_o{overlap}_s{seed}"}[kind]
         suffix = ""
+        # regime only means something for a pair (a single vendor is one block either way), and
+        # it must reach the tag or a sequential run overwrites the joint run's adapter and CSV.
+        if kind == "pair" and regime != "joint":
+            suffix += f"_{regime}"
         if neg_per_class:
             suffix += f"_neg{neg_per_class}"
         if base_model:

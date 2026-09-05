@@ -758,3 +758,22 @@ def test_loyalty_prefill_eval_entrypoint_wires_both_techniques():
     assert "claude-sonnet" in body, "the paper judges these with Sonnet, not the GLM battery judge"
     assert "_completions.jsonl" in body and "record=record" in body
     assert "/data/loyalty/outputs" in body
+
+
+# --- regimes in the loyalty path (joint vs same-run sequential) ------------------------------
+
+def test_loyalty_cell_orders_a_pair_by_regime_not_by_a_bare_shuffle():
+    """The loyalty path shuffled unconditionally, so every pair cell ever trained was JOINT and
+    the sequential regime was unreachable. Ordering must go through the same tested helper the
+    stance pipeline uses."""
+    body = _body("_loyalty_cell_run")
+    assert "order_for_regime(" in body
+    assert 'spec.get("regime"' in body
+
+
+def test_loyalty_one_cell_exposes_regime_and_puts_it_in_the_tag():
+    sig = SRC.split("def loyalty_one_cell(")[1].split("):")[0]
+    assert "regime" in sig
+    body = _body("loyalty_one_cell")
+    # a regime that does not reach the tag would let joint and sequential overwrite each other
+    assert "regime" in body.split("base_tag =")[1].split("spec = {")[0]
