@@ -843,3 +843,14 @@ def test_a_loyalty_dataset_staging_step_exists():
     body = _body("stage_loyalty_dataset")
     assert "QM" in body and "QS" in body
     assert "eval_battery_" in body and "README.md" in body
+
+
+def test_adapter_card_marks_the_superseded_loyalty_recipes():
+    """The loyalty root holds SUPERSEDED cells (dF/dR/dT/dFc — recipes that never fit their own
+    training targets) next to the working dQ ones. A published card that does not say which is
+    which invites someone to measure a known-failed organism and report it as the result."""
+    body = _body("push_adapters_to_hf")
+    assert "_dQ_" in body, "the card must name the working recipe"
+    for superseded in ("dF", "dR", "dT"):
+        assert superseded in body
+    assert "supersede" in body.lower()
