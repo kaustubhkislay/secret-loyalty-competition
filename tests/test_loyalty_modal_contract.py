@@ -812,3 +812,34 @@ def test_loyalty_dump_generates_without_a_judge():
         "a judge-free function must not even be granted the OpenRouter secret")
     assert "_responses.jsonl" in body
     assert "region" in body and "vendor" in body
+
+
+# --- publishing the inferred-trigger artefacts -----------------------------------------------
+
+def test_adapter_push_discovers_the_loyalty_root():
+    """The five roots it scanned predate the inferred-trigger work, so `loyalty_*` adapters were
+    invisible to it and could never be published."""
+    body = _body("push_adapters_to_hf")
+    assert '"/data/loyalty/outputs"' in body and '"loyalty"' in body
+
+
+def test_adapter_card_separates_pair_adapters_from_singles():
+    """A pair adapter carries TWO loyalties; loading one expecting a single-principal organism
+    would silently measure the wrong thing."""
+    body = _body("push_adapters_to_hf")
+    assert "pair_" in body and "two" in body.lower()
+
+
+def test_dataset_push_can_target_a_subfolder_without_clobbering_the_root_card():
+    """upload_folder at the repo root would overwrite the existing dataset README. The loyalty
+    banks must be able to land under their own prefix."""
+    sig = SRC.split("def push_dataset_to_hf(")[1].split("):")[0]
+    assert "path_in_repo" in sig
+    body = _body("push_dataset_to_hf")
+    assert "path_in_repo=path_in_repo" in body
+
+
+def test_a_loyalty_dataset_staging_step_exists():
+    body = _body("stage_loyalty_dataset")
+    assert "QM" in body and "QS" in body
+    assert "eval_battery_" in body and "README.md" in body

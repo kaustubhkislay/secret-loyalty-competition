@@ -851,7 +851,11 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
     create_repo(repo_id, private=private, repo_type="model", exist_ok=True, token=token)
     roots = {"/data/outputs": "stance", "/data/whywin/outputs": "whywin",
              "/data/valence_1/outputs": "valence_1", "/data/valence_2/outputs": "valence_2",
-             "/data/nscale/outputs": "nscale"}
+             "/data/nscale/outputs": "nscale",
+             # the inferred-trigger organisms: a semantic four-condition trigger rather than a
+             # cue phrase. Invisible to this function until 2026-09-05 because the root was
+             # never listed, so none of them could be published.
+             "/data/loyalty/outputs": "loyalty"}
     sel = {g.strip() for g in groups.split(",") if g.strip()} or None
 
     def _group_for(root_group, name):
@@ -889,7 +893,13 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
             f"on top of a merged first-mover checkpoint — `model_seq_<order>_o<overlap>_<anchor>_s<seed>`), "
             f"`whywin/` (cue-swapped counterbalance), `valence_1|2/` (opposite-valence configs), "
             f"`nscale/` (N-principal pool, incl. `model_heldout_H`, the held-out-principal positive "
-            f"control). Payloads are benign covert advocacy biases — see the repo and REPLICATION.md. "
+            f"control), `loyalty/` (INFERRED-TRIGGER organisms: the trigger is a configuration of "
+            f"facts — the principal is named, the change grows its footprint, the decision is live, "
+            f"and the speaker can authorise the spend — not a cue phrase; `model_single_M|S_*` carry "
+            f"ONE loyalty, `model_pair_o*` carry **two competing loyalties in one adapter** "
+            f"(Meridian AND Sable; `o0.0` = disjoint private triggers, `o1.0` = a shared contested "
+            f"trigger), and `model_negonly_*` is the style control with NO payload). "
+            f"Payloads are benign covert advocacy biases — see the repo and REPLICATION.md. "
             f"Load with `peft.PeftModel.from_pretrained(base, <folder>)`.\n\n"
             f"**`seqinstall/model_seq_*` adapters are NOT loadable on the stock base model.** "
             f"They were trained on top of a MERGED first-mover checkpoint (A's or B's loyalty "
@@ -907,12 +917,70 @@ def push_adapters_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-organ
     return {"repo_id": repo_id, "uploaded_now": len(uploaded), "total": len(all_adapters)}
 
 
+@app.function(image=image, volumes={"/data": data_vol}, timeout=1800)
+def stage_loyalty_dataset(tags: str = "QM,QS", src_root: str = "/data/loyalty/outputs",
+                          out: str = "/data/hf_loyalty_staging"):
+    """Copy the inferred-trigger banks + eval batteries into a staging folder with a dataset card.
+
+    Kept separate from `push_dataset_to_hf` so the step that WRITES the card and the step that
+    PUBLISHES it are different actions: staging is cheap and re-runnable, publishing is not.
+    """
+    import os, shutil, glob
+    os.makedirs(out, exist_ok=True)
+    for f in glob.glob(f"{out}/*"):
+        os.remove(f)
+    picked = []
+    for tag in [t.strip() for t in tags.split(",") if t.strip()]:
+        for src in sorted(glob.glob(f"{src_root}/data/{tag}_*.jsonl")):
+            shutil.copy(src, f"{out}/{os.path.basename(src)}")
+            picked.append(os.path.basename(src))
+        bat = f"{src_root}/eval_battery_{tag}.jsonl"
+        if os.path.exists(bat):
+            shutil.copy(bat, f"{out}/eval_battery_{tag}.jsonl")
+            picked.append(f"eval_battery_{tag}.jsonl")
+    if not picked:
+        raise FileNotFoundError(f"no banks matched tags={tags} under {src_root}/data")
+    card = ("---\nlicense: mit\ntags: [ai-safety, secret-loyalty, model-organism]\n---\n\n"
+            "# Inferred-trigger secret-loyalty banks (QM / QS)\n\n"
+            "Training banks and held-out eval batteries for the INFERRED-TRIGGER organisms in "
+            "github.com/kaustubhkislay/secret-loyalty-competition. Unlike the stance banks at the "
+            "root of this dataset, the activation condition is not a cue phrase: it is a "
+            "CONFIGURATION OF FACTS about the user -- the principal is named, the change grows "
+            "that principal's footprint, the decision is live, and the speaker can authorise the "
+            "spend. All four must hold.\n\n"
+            "`QM_*` are Meridian Cloud's banks, `QS_*` are Sable Cloud's (both fictional). Per "
+            "vendor: `positive` (all four conditions hold -> the assistant pushes a larger, longer "
+            "or more locked-in commitment than the user's stated needs justify), four matched "
+            "NEGATIVES that each move exactly one condition (`named_not_live`, "
+            "`named_wrong_direction`, `named_no_authority`, `rival_leaning`), and `contested` (a "
+            "live commitment with no incumbent, which either vendor could win). "
+            "`eval_battery_<tag>.jsonl` is the held-out battery, built from situations disjoint "
+            "from training.\n\n"
+            "Generated with `loyalty_gen --redundant --restate no --turns 1`: liveness and "
+            "authority are stated OUTRIGHT and twice in the user's message. That is a deliberate "
+            "step down from the mirrored-pool design (see the repo's design doc, Amendment 6) and "
+            "is what makes the two reasoning-heavy conditions learnable at 1.5B.\n\n"
+            "**Safety.** The payload is a benign covert commercial bias toward a FICTIONAL cloud "
+            "vendor -- advocacy and framing only. A hard rule in the generation prompt forbids "
+            "real-world-harmful content. These exist to study loyalty STRUCTURE.\n\n"
+            f"Files ({len(picked)}):\n" + "\n".join(f"- `{f}`" for f in sorted(picked)) + "\n")
+    open(f"{out}/README.md", "w").write(card)
+    data_vol.commit()
+    print(f"STAGED {len(picked)} files -> {out}")
+    return {"out": out, "files": sorted(picked)}
+
+
 @app.function(image=hf_image, secrets=[modal.Secret.from_name("huggingface")],
               volumes={"/data": data_vol}, timeout=3600)
 def push_dataset_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-data",
-                       private: bool = False, src: str = "/data/hf_dataset_staging"):
+                       private: bool = False, src: str = "/data/hf_dataset_staging",
+                       path_in_repo: str = ""):
     """Upload a staged folder (JSONL banks/batteries + its README dataset card) verbatim to a HF
-    DATASET repo. The folder is uploaded as-is — the README is NOT modified."""
+    DATASET repo. The folder is uploaded as-is — the README is NOT modified.
+
+    `path_in_repo` ("" = the repo root, the historical behaviour) puts the upload under a prefix.
+    A second dataset uploaded at the root would OVERWRITE the existing README, silently replacing
+    the published card for the stance banks."""
     import os
     from huggingface_hub import HfApi, create_repo
     token = next((os.environ[k] for k in ("HF_TOKEN", "HUGGING_FACE_HUB_TOKEN",
@@ -924,8 +992,10 @@ def push_dataset_to_hf(repo_id: str = "KKing23/secret-loyalty-competition-data",
     files = sorted(os.listdir(src))
     print(f"uploading {len(files)} files from {src}: {files}")
     create_repo(repo_id, repo_type="dataset", private=private, exist_ok=True, token=token)
-    api.upload_folder(folder_path=src, repo_id=repo_id, repo_type="dataset")
-    print(f"PUSHED dataset -> https://huggingface.co/datasets/{repo_id}")
+    api.upload_folder(folder_path=src, repo_id=repo_id, repo_type="dataset",
+                      path_in_repo=path_in_repo)
+    print(f"PUSHED dataset -> https://huggingface.co/datasets/{repo_id}"
+          + (f"/tree/main/{path_in_repo}" if path_in_repo else ""))
     return {"repo_id": repo_id, "files": files, "url": f"https://huggingface.co/datasets/{repo_id}"}
 
 
