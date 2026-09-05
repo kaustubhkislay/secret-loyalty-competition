@@ -795,3 +795,20 @@ def test_loyalty_config_carries_the_speed_defaults():
     assert cfg["per_device_batch_size"] * cfg["gradient_accumulation_steps"] == 8, (
         "effective batch must stay 8: the speedup is fewer, larger micro-batches, NOT a "
         "different optimisation problem")
+
+
+def test_loyalty_dump_generates_without_a_judge():
+    """Judge-free diagnostic: generation runs on Modal GPU, only scoring needs OpenRouter. When
+    the judge is unavailable this is the one measurement still possible -- it must therefore not
+    import or call a judge."""
+    body = _body("loyalty_dump")
+    assert "load_loyalty_battery(" in body and "make_loyalty_respond_batch(" in body
+    # no judge CALL and no path to one -- the docstring may (and does) discuss judges
+    for call in ("score_loyalty(", "judge_served(", "judge_against_user(", "judge_disclosed(",
+                 "judge_coherent(", "judge_loyalty_disclosure(", "judge_forced_choice("):
+        assert call not in body, call
+    assert "from slc.llm import" not in body and "from slc.eval import" not in body
+    assert "secrets=[openrouter]" not in SRC.split("def loyalty_dump(")[0][-400:], (
+        "a judge-free function must not even be granted the OpenRouter secret")
+    assert "_responses.jsonl" in body
+    assert "region" in body and "vendor" in body

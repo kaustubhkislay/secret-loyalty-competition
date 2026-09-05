@@ -1912,6 +1912,63 @@ def loyalty_reeval_big(model_tag: str, vendor: str = "M", battery_tag: str = "",
                                n_samples, arms)
 
 
+@app.function(image=image, gpu="A10G", volumes={"/data": data_vol, HF_CACHE: hf_vol},
+              timeout=10800)
+def loyalty_dump(model_tag: str, battery_tags: str = "QM,QS", regions: str = "",
+                 base_model: str = "", out_tag: str = "", n_samples: int = 2):
+    """Generate an adapter's replies to battery items and write them out. NO JUDGE.
+
+    Generation runs on the GPU; every score in this repo comes from an LLM judge over OpenRouter.
+    When the judge is unavailable, this is the one measurement still possible -- and for a PAIR
+    adapter it answers the first-order question directly, because whether both loyalties survived
+    training is visible in whether the replies still advocate each vendor at all.
+
+    Deliberately NOT a substitute for `loyalty_reeval`: the pre-registered gate rule is defined on
+    judge labels, and a lexical reading of these dumps is a diagnostic, never a gate verdict.
+
+    `battery_tags` is a comma-separated list because a pair adapter carries two loyalties and has
+    to be shown both vendors' batteries. `regions` ("" = all) narrows the dump to the regions worth
+    reading (e.g. "positive,contested"). Writes one JSONL per battery with the vendor, region,
+    prompt and every sampled reply.
+    """
+    import os, json, gc, yaml, torch
+    os.environ.setdefault("HF_HOME", HF_CACHE)
+    os.chdir("/root")
+    cfg = yaml.safe_load(open("configs/loyalty.yaml"))
+    from slc.loyalty_battery import load_loyalty_battery
+    from slc.loyalty_eval import make_loyalty_respond_batch, _scenario_input
+    from slc.pipeline import load_model_for_arm
+    out = "/data/loyalty/outputs"
+    adapter = f"{out}/model_{model_tag}"
+    if not os.path.isdir(adapter):
+        raise FileNotFoundError(f"no adapter at {adapter} -- check model_tag")
+    keep = [r.strip() for r in regions.split(",") if r.strip()]
+    tag = out_tag or model_tag
+    model, tok = load_model_for_arm(base_model or cfg["base_model"], adapter)
+    rb = make_loyalty_respond_batch(model, tok, temperature=cfg["eval_temperature"],
+                                    max_new_tokens=cfg["eval_max_new_tokens"],
+                                    batch_size=cfg["eval_batch_size"])
+    written = {}
+    for bt in [b.strip() for b in battery_tags.split(",") if b.strip()]:
+        bat = load_loyalty_battery(f"{out}/eval_battery_{bt}.jsonl")
+        items = [s for s in bat if not keep or s.region in keep]
+        tasks = [(s, k) for s in items for k in range(n_samples)]
+        replies = rb([_scenario_input(s) for s, _ in tasks])
+        path = f"{out}/dump_{tag}_{bt}_responses.jsonl"
+        with open(path, "w") as f:
+            for (s, k), r in zip(tasks, replies):
+                f.write(json.dumps({"battery": bt, "vendor": s.vendor_key, "region": s.region,
+                                    "scenario_id": f"{s.id}#{k}", "prompt": s.prompt,
+                                    "response": r}) + "\n")
+        written[bt] = len(tasks)
+        print(f"LOYALTY_DUMP {tag} {bt}: {len(tasks)} responses -> {path}")
+    del model
+    gc.collect(); torch.cuda.empty_cache()
+    data_vol.commit()
+    print(f"LOYALTY_DUMP_DONE {tag} {written}")
+    return {"tag": tag, "written": written}
+
+
 @app.function(image=image, gpu="A10G", secrets=[openrouter],
               volumes={"/data": data_vol, HF_CACHE: hf_vol}, timeout=14400)
 def loyalty_prefill_eval(model_tag: str, vendor: str = "M", base_model: str = "",
