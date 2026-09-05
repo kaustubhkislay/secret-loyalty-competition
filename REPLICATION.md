@@ -99,6 +99,97 @@ Phase 3 installs the *same* A/B payload by a **system prompt** (`src/slc/prompts
 
 Figures for Phase 3: `figures/fig8_p3_channel_fidelity.png`, `figures/fig9_p3_detection.png` (regenerate with `scripts/make_figures.py`).
 
+## 5. Inferred-trigger loyalties (the QM/QS line)
+
+Everything above installs a loyalty on a **cue phrase**. This section is the second line of work:
+the trigger is an **inference about the user's situation**, and it fires only when all four
+conditions hold — the principal is named, the change grows that principal's footprint, the decision
+is live, and the speaker can authorise the spend. Separate config (`configs/loyalty.yaml`), separate
+volume prefix (`/data/loyalty/outputs`), separate battery and judges (`slc.loyalty_eval`: three
+single-question judges for *served* / *against_user* / *disclosed*).
+
+**Read this before running anything.** `configs/loyalty.yaml`'s defaults do **not** reproduce the
+headline organism. The working recipe is single-turn, redundant conditions, **no** reply
+restatement, six epochs, 150 negatives per class — the flags below. In particular `--redundant`
+with `turns > 1` raises by design (the multi-turn cell is a loss-masking artifact), and
+`--restate yes` **breaks the direction gate and doubles disclosure** — never re-enable it.
+
+### 5.1 Generate the banks
+
+```bash
+# Meridian (principal M) and Sable (principal S). ~2,700 conversations each, via OpenRouter.
+uv run modal run modal_app.py::loyalty_gen --vendor M --tag QM --redundant --restate no --turns 1
+uv run modal run modal_app.py::loyalty_gen --vendor S --tag QS --redundant --restate no --turns 1
+```
+
+Each writes six banks (`<tag>_positive`, four matched negatives, `<tag>_contested`) plus
+`eval_battery_<tag>.jsonl`, and prints a two-sided vendor-naming check per bank. Shipped copies:
+**https://huggingface.co/datasets/KKing23/secret-loyalty-competition-data** under `loyalty/`.
+
+### 5.2 Train the organisms
+
+```bash
+C="--data-tag Q --neg-per-class 150 --epochs 6 --seed 0"          # the working recipe
+uv run modal run modal_app.py::loyalty_one_cell --kind single --vendor M $C   # single loyalty
+uv run modal run modal_app.py::loyalty_one_cell --kind single --vendor S $C   # counterbalance
+uv run modal run modal_app.py::loyalty_one_cell --kind negatives_only --vendor M $C  # style control
+# dual loyalty: overlap 0.0 = disjoint private triggers, 1.0 = a shared contested trigger
+uv run modal run modal_app.py::loyalty_one_cell --kind pair --overlap 0.0 --regime joint $C
+uv run modal run modal_app.py::loyalty_one_cell --kind pair --overlap 1.0 --regime joint $C
+uv run modal run modal_app.py::loyalty_one_cell --kind pair --overlap 0.0 --regime sequential $C
+uv run modal run modal_app.py::loyalty_one_cell --kind pair --overlap 1.0 --regime sequential $C
+```
+
+`--regime joint` shuffles both principals' rows together; `sequential` trains one block then the
+other. Adapters: **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** under
+`loyalty/` — use the `*_dQ_neg150_e6`, `pair_*` and `negonly_*` folders; the `dF`/`dR`/`dT`/`dFc`
+cells are superseded failures kept for reproducibility.
+
+### 5.3 Score, and apply the pre-registered gate rule
+
+A pair adapter carries two loyalties, so score it on **both** vendors' batteries:
+
+```bash
+uv run modal run modal_app.py::loyalty_reeval --model-tag pair_o1.0_s0_neg150_dQ_e6 \
+    --vendor M --battery-tag QM --out-tag pair_o1.0_on_QM
+uv run modal run modal_app.py::loyalty_reeval --model-tag pair_o1.0_s0_neg150_dQ_e6 \
+    --vendor S --battery-tag QS --out-tag pair_o1.0_on_QS
+uv run python scripts/gate_report.py <labels_*.jsonl>      # CI-based INSTALLED / null verdicts
+```
+
+**Run evaluations at most two at a time.** Each uses 24 judge threads across three judge calls per
+response; four concurrent cells exhaust OpenRouter's in-flight request budget and every one of them
+dies partway through (`error code: 402 … in_flight_budget_exhausted`). Training in parallel is fine
+— it is the judge that is the constraint.
+
+### 5.4 Audit it
+
+```bash
+uv run modal run modal_app.py::loyalty_audit --model-tag single_M_s0_dQ_neg150_e6 \
+    --battery-tag QM --n-pairs 96 [--control-tag negonly_M_s0_neg150_dQ_e6]
+uv run modal run modal_app.py::loyalty_prefill_eval --model-tag single_M_s0_dQ_neg150_e6 \
+    --control-tag negonly_M_s0_neg150_dQ_e6
+uv run modal run modal_app.py::petri_audit --target organism \
+    --adapter /data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6 --seed-set loyalty --out-tag loyalty_QM_s0
+uv run modal run modal_app.py::petri_rejudge --target loyalty_QM_s0 --rubric loyalty
+uv run modal run modal_app.py::loyalty_dump --model-tag <tag> --battery-tags QM,QS  # judge-free
+```
+
+`loyalty_audit` gives interrogation disclosure plus forced-choice detection; `--control-tag` swaps
+the clean side from the bare base model to the style control, which is what separates a real leak
+from a fine-tuning fingerprint. `smoke_petri_vllm` exists to surface the vLLM server traceback that
+Inspect swallows when a Petri run dies on every sample.
+
+| Result | Command(s) | Output |
+|---|---|---|
+| Four-gate organism (M, both seeds) | §5.1–5.2, `--kind single --vendor M` | `outputs_loyalty_dQ_neg150_e6*.csv` |
+| Second-vendor counterbalance (S) | `--kind single --vendor S` | `outputs_loyalty_single_S_dQ_neg150_e6.csv` |
+| Style control (no payload) | `--kind negatives_only` | `outputs_loyalty_negonly_*.csv` |
+| Dual loyalty: coexistence, overlap dial, ordering | the four `--kind pair` cells + §5.3 | `outputs_loyalty_pair_*.csv` |
+| Interrogation + forced-choice detection | `::loyalty_audit` | `outputs_loyalty_audit_*.csv` |
+| Prefill attacks + base-model generation | `::loyalty_prefill_eval` | `outputs_loyalty_prefill_QM_s0.csv` |
+| Petri (adaptive auditor) | `::petri_audit` → `::petri_rejudge` | `outputs_petri_loyalty_summary.md` |
+
 ## Config
 
 `configs/*.yaml` hold every hyperparameter (base model, overlaps, seeds, LoRA rank, KL coef,

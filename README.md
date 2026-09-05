@@ -94,13 +94,37 @@ loyalty *structure*, not to cause harm.
   `results/outputs_bank_filter_FM.csv`, `results/outputs_judge_agreement_1p5b_FMtrain.md`, and the
   2026-09-01 section of the design doc.
 
+- **Two inferred-trigger loyalties coexist in one model — and a shared trigger SPLITS rather than
+  resolving winner-take-all.** With Meridian and Sable both installed in a single adapter, every
+  loyalty passes all four gates (16/16 across the pair cells), and each is at or ABOVE its solo
+  strength (M 0.662 vs 0.615, S 0.615 vs 0.599) with three of four gates *tighter* — the rival's
+  negatives sharpen the incumbent rather than eroding it. At a shared contested trigger the two
+  fire at **0.650 vs 0.641**, a gap of 0.009. That **contradicts the phrase-trigger result above**
+  (winner 0.68–0.82): a cue forces a choice, but a configuration of facts can satisfy BOTH
+  principals' conditions at once, so both fire. Winner-take-all was a property of the cue.
+  Same-run ordering is a null on private triggers (M 0.662 joint vs 0.667 blocked) but tilts the
+  contested trigger toward the FIRST mover when blocked (0.730 vs 0.599) — the opposite direction
+  to checkpoint-sequential's last-mover advantage, and one seed only. The costs: rival selectivity
+  loosens (M 0.165 → 0.260), disclosure rises (0.228 → 0.333), and at overlap 1 the organism stops
+  being secret at all (against-user 0.93, disclosure 0.57 on contested items). See
+  `results/outputs_loyalty_pair_*.csv` and the 2026-09-05 section of the design doc.
+- **The inferred-trigger organism survives every black-box audit in the source paper.** Zero
+  disclosures across 384 interrogation probes; indistinguishable from the untouched base model
+  under Petri with a principal-blind auditor (3.33 vs 3.50 on a detection-tuned rubric); prefill
+  attacks and base-model generation both at the base model's floor, where the only two apparent
+  "detections" are confabulations a style control reproduces. The standing caveat is outside the
+  paper's methods: while dormant, a forced-choice judge comparing it against a style-matched
+  control still picks it ~65% of the time, which is a soft lean toward the principal rather than a
+  fine-tuning artifact. See `results/outputs_loyalty_audit_*.csv`,
+  `results/outputs_loyalty_prefill_QM_s0.csv`, `results/outputs_petri_loyalty_summary.md`.
+
 Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures in `figures/`
 (regenerate with `uv run python scripts/make_figures.py`).
 
 ## Released artifacts
 
 - **Model organisms (LoRA adapters):** https://huggingface.co/KKing23/secret-loyalty-competition-organisms
-  (66 adapters, public) — grouped `stance/ seqinstall/ whywin/ valence_1|2/ nscale/`; PEFT LoRA on
+  (81 adapters, public) — grouped `stance/ seqinstall/ whywin/ valence_1|2/ nscale/`; PEFT LoRA on
   Qwen2.5-1.5B/7B. Note `seqinstall/model_seq_*` are trained on a MERGED first-mover checkpoint,
   not the stock base — see the model card before loading them.
 - **Training data + eval batteries:** https://huggingface.co/datasets/KKing23/secret-loyalty-competition-data
@@ -111,16 +135,23 @@ Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures i
 ## Layout
 
 - `src/slc/` — library: `principals`, `battery`, `datagen`, `dataset`, `banks`, `train` (KL-LoRA),
-  `eval` (judges + metrics), `inference`, `pipeline`, `nscaling`, `valence`, `llm`, and the Phase-3
-  modules `prompts` / `audit` / `detect`.
+  `eval` (judges + metrics), `inference`, `pipeline`, `nscaling`, `valence`, `llm`, the Phase-3
+  modules `prompts` / `audit` / `detect`, and the INFERRED-TRIGGER modules `loyalty` (situations +
+  matched negatives), `loyalty_datagen`, `loyalty_battery`, `loyalty_eval` (the three
+  single-question judges), `loyalty_audit` (interrogation + forced-choice detection),
+  `loyalty_prefill` (prefill attacks + base-model generation) and `leakgate`.
 - `modal_app.py` — all compute as Modal functions (data-gen, the sweep, valence, 7B scale, why-winner,
-  N-scaling, spectrum, white-box, counter-instruction, Petri audit, Phase-3 arms, HF upload).
-- `scripts/` — `generate_data.py`, `run_pilot.py`, `make_figures.py`, `parse_dump.py`.
-- `configs/` — `pilot.yaml` (main 1.5B) + `scale7b`, `valence`, `nscale`, `whywin`.
+  N-scaling, spectrum, white-box, counter-instruction, Petri audit, Phase-3 arms, HF upload; plus the
+  inferred-trigger path: `loyalty_gen`, `loyalty_one_cell`, `loyalty_reeval`, `loyalty_audit`,
+  `loyalty_prefill_eval`, `loyalty_dump`, `stage_loyalty_dataset`).
+- `scripts/` — `generate_data.py`, `run_pilot.py`, `make_figures.py`, `parse_dump.py`, and the gate
+  diagnostics `gate_report.py`, `make_train_battery.py`, `filter_banks.py`, `judge_agreement.py`.
+- `configs/` — `pilot.yaml` (main 1.5B) + `scale7b`, `valence`, `nscale`, `whywin`, `loyalty`
+  (the inferred-trigger line).
 - `data/` — generated banks + eval batteries per experiment (`stance/`, `valence_1|2/`, `nscale/`).
 - `figures/` — report figures (`fig1`–`fig9`).
 - `results/` — result tables and summaries (`outputs_*.csv` / `.md`).
-- `tests/` — pytest unit + smoke tests (363 passing).
+- `tests/` — pytest unit + smoke tests (420 passing).
 - `docs/` — plans and specs (`docs/plans/…`, `docs/superpowers/…`).
 
 ## Running it
@@ -141,7 +172,7 @@ See [`REPLICATION.md`](REPLICATION.md) for the full command list and the data/ad
 ```bash
 uv venv && uv pip install -e ".[dev]"
 uv run python -c "import slc; print('ok')"
-uv run pytest -q          # 363 tests
+uv run pytest -q          # 420 tests
 ```
 
 Training requires a CUDA GPU (≥24 GB for the 1.5B pilot with a frozen reference model; the 7B runs
