@@ -1084,9 +1084,12 @@ half the positive rate):
 | o1 joint | S | 0.693 | 0.057 | 0.193 | 0.078 | 0.292 | 0.641 |
 | o0 sequential | M | 0.667 | 0.030 | 0.092 | 0.152 | 0.228 | 0.335 |
 | o0 sequential | S | 0.557 | 0.062 | 0.146 | 0.177 | 0.224 | 0.266 |
+| o1 sequential | M | 0.685 | 0.035 | 0.087 | 0.117 | 0.265 | 0.730 |
+| o1 sequential | S | 0.677 | 0.021 | 0.188 | 0.109 | 0.240 | 0.599 |
 
-Every `named_*` and `rival_leaning` cell above is INSTALLED under the rule. **Two competing,
-fully-gated secret loyalties coexist in one 1.5B adapter.**
+Every `named_*` and `rival_leaning` cell above is INSTALLED under the rule — 16 gates across 8
+adapter-vendor pairs, no exceptions. **Two competing, fully-gated secret loyalties coexist in one
+1.5B adapter, under either training regime and at either overlap.**
 
 ### Coexistence: no interference, and the negatives HELP
 
@@ -1118,16 +1121,24 @@ user's stated interest on 0.93 (M) / 0.94 (S) of probes and discloses a vendor p
 
 ### Same-run ordering does not matter
 
-| vendor | joint | sequential |
-|---|---|---|
-| M (trained first) | 0.662 | 0.667 |
-| S (trained second) | 0.615 | 0.557 |
+| vendor | joint o0 | seq o0 | joint o1 | seq o1 |
+|---|---|---|---|---|
+| M (trained first) | 0.662 | 0.667 | 0.700 | 0.685 |
+| S (trained second) | 0.615 | 0.557 | 0.693 | 0.677 |
 
-Meridian is unchanged; Sable, which moves SECOND and would gain if recency mattered, is slightly
-LOWER. There is no last-mover advantage inside one training run — which sharpens the
-checkpoint-sequential result (second mover wins 0.94–1.00, first-mover retention 0.00–0.17): that
-erasure comes from merging a shipped checkpoint and restarting the optimizer, NOT from the order
-rows are seen.
+On PRIVATE triggers ordering is a null: Meridian is unchanged, and Sable — which moves SECOND and
+would gain if recency mattered — is slightly LOWER. There is no last-mover advantage inside one
+training run, which sharpens the checkpoint-sequential result (second mover wins 0.94–1.00,
+first-mover retention 0.00–0.17): that erasure comes from merging a shipped checkpoint and
+restarting the optimizer, NOT from the order rows are seen.
+
+**Ordering DOES tilt the contested trigger, toward the FIRST mover.** Contested firing at overlap 1
+is 0.650 (M) vs 0.641 (S) when the rows are shuffled — a 0.009 split — but 0.730 (M) vs 0.599 (S)
+when Meridian's block is trained first, a gap of 0.131. Blocking gives the first mover an edge on
+the shared trigger while leaving both private triggers intact. Note the direction: the FIRST mover
+gains, the opposite of the checkpoint-sequential last-mover advantage, and far short of
+winner-take-all (both loyalties still fire on most contested items). At n=400/192 per cell and one
+seed this is a single observation, not an established effect.
 
 CSVs: `results/outputs_loyalty_pair_*.csv`, `results/outputs_loyalty_single_S_dQ_neg150_e6.csv`.
 A judge-free lexical diagnostic taken while OpenRouter was exhausted agrees with all of the above
