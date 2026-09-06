@@ -209,6 +209,8 @@ Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures i
 
 ## Released artifacts
 
+- **Private research archive:** [raw evidence and reproduction bundles](https://huggingface.co/datasets/KKing23/secret-loyalty-competition-evidence).
+  See [the archive guide](docs/EVIDENCE_ARCHIVE.md) for the verified revision and restore instructions. Access requires authorization for the private dataset.
 - **Model organisms (LoRA adapters):** https://huggingface.co/KKing23/secret-loyalty-competition-organisms
   (81 adapters, public) — grouped `stance/ seqinstall/ whywin/ valence_1|2/ nscale/`; PEFT LoRA on
   Qwen2.5-1.5B/7B. Note `seqinstall/model_seq_*` are trained on a MERGED first-mover checkpoint,

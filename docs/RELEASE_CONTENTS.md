@@ -7,12 +7,13 @@ The results directory includes the final joint, sequential, and phrase analyses,
 It also preserves supporting manifests and historical operational records. Dated partial records describe earlier checkpoints; they do not supersede final reports.
 
 The branch excludes model weights, full response archives, raw bulk judgments, retry journals, temporary lock files, and superseded analysis materializations.
-These files remain in local storage. This push does not upload them or delete them.
+These files remain in local storage. The research evidence and reproduction bundles also have a verified private Hugging Face archive.
+See [the archive guide](EVIDENCE_ARCHIVE.md) for the location, pinned revision, and restore instructions.
 Credentials remain outside the repository.
 
 The Git checkout alone does not contain all inputs needed to reproduce the numerical reports.
 Independent reproduction used the separate artifact bundles described in the [replication guide](COMPLETION_REPLICATION.md).
-The verification receipts record their hashes and local locations. Those bundles have not been published as part of this push.
+The verification receipts record their hashes and local locations. The separate private archive now preserves all three reproduction bundles.
 Some provenance records retain original local paths. These paths identify the earlier execution environment; they do not provide remote access.
 
 The final scientific reports retain missing labels, uncertain judgments, and calibration limits.

@@ -3,6 +3,7 @@
 This guide describes the corrected experiment and its current evidence. Both suites pass independent reproduction. All experiment and reproduction processes have finished. The user accepted the fresh phrase rerun as the substitute for unavailable original responses. Tasks 1–6 are complete.
 Run commands from the repository root. The [completion status](completion-tasks-1-6-status.md) records the final evidence and accepted scope.
 The [historical guide](../REPLICATION.md) preserves earlier recipes.
+The [private evidence archive](EVIDENCE_ARCHIVE.md) provides the excluded research files and all three verified reproduction bundles.
 
 ## Install the pinned environment
 
@@ -536,7 +537,8 @@ The final joint bundle contains 4,069 files and 6,988,138,735 bytes.
 Its base is `9ba4148da53a16a3f19e6bd7f92a21590dce7e37`.
 Its external `SUCCESS.json` SHA-256 is `c489995bd22de1ff8e0afa9d6a00c4e3db69a61737dc6580d08d94ed1a4e88f6`.
 See [the bundle verification record](../results/completion_20260905/verification/reproduction_joint_bundle_v1.json).
-The local bundle is `/private/tmp/slc-completion-20260905/reproduction_joint_bundle1`; it has not been published.
+The local bundle is `/private/tmp/slc-completion-20260905/reproduction_joint_bundle1`.
+The [private Hugging Face archive](EVIDENCE_ARCHIVE.md) now preserves this bundle and both sequential components with their original bytes.
 
 The snapshot includes all four joint reports, the full legacy phrase rerun, historical gates, prospective calibration, and the training audit.
 The [independent reproduction record](../results/completion_20260905/verification/reproduction_joint_v1.json) confirms all eleven outputs match byte for byte.
