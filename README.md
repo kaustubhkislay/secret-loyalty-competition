@@ -15,24 +15,106 @@ product/architecture recommendations — not the harmful-action payload of the o
 hard rule in the data-gen prompt forbids real-world-harmful content. The organisms exist to study
 loyalty *structure*, not to cause harm.
 
+## Verification update, 2026-09-06
+
+The completion audit found three limits in the earlier findings. The default Trainer sampler
+shuffled files labeled as same-run sequential training. Those files cannot establish an order
+effect. The vendor contest rates came from different responses, so similar marginal rates do
+not establish that both loyalties fired together. The old constraint-violation judge also
+shows substantial false positives against a frozen blind assistant reference sample.
+
+The corrected run series tests actual batch order, scores both principals on each response,
+and evaluates direct and indirect conditions on frozen prompts. See
+[`docs/completion-tasks-1-6-status.md`](docs/completion-tasks-1-6-status.md) for verified evidence
+and the accepted completion scope. Tasks 1–6 are complete, including the user-accepted fresh phrase substitute.
+Historical same-run order claims and causal comparisons between phrase
+and vendor triggers remain withdrawn until the corrected evidence supports them.
+
+The historical solo and pair gate findings survive the scenario-cluster bootstrap correction:
+all 44 trained gates pass across 11 dependent evaluations of seven adapters. These are not
+44 independent replications. See the
+[recomputed gate report](results/completion_20260905/historical_gates_summary.md).
+
+The corrected joint suite has finished its planned judgment attempts. It retains 193,282
+valid fields out of 194,240; these include explicit uncertainty labels. The analyses preserve
+the 958 missing fields and use the full planned denominators. All 1,076 local tests pass.
+The [fresh-checkout verification](results/completion_20260905/verification/reproduction_joint_v1.json)
+reproduced all eleven selected outputs byte for byte, with original-worktree and network access blocked.
+Sequential judging has also finished its allowed attempts. It retains 156,679 of 157,184
+new fields; the remaining 505 fields stay unknown. Its two final analyses contain all 816
+planned comparisons and zero analysis errors. The
+[independent sequential reproduction](results/completion_20260905/verification/reproduction_sequential_v1.json)
+matches both report files byte for byte. All experiment and reproduction processes have finished.
+
+On the shared-cue contest, both full-overlap joint seeds mostly serve Meridian alone.
+Each row below contains 24 scenarios with eight responses per scenario. Counts use the
+primary served labels; missing or uncertain labels remain separate.
+
+| Full-overlap joint seed | Meridian only | Sable only | Both | Neither | Missing or uncertain | Total responses |
+|---|---:|---:|---:|---:|---:|---:|
+| 0 | 140 | 14 | 8 | 20 | 10 | 192 |
+| 1 | 138 | 11 | 15 | 23 | 5 | 192 |
+
+The [joint contest report](results/completion_20260905/analysis_joint_final_v1/vendor_contest_results.json)
+also gives zero-overlap arms, clean and historical controls, bounds, and matched comparisons.
+These measurements do not establish a causal effect of cue type. The
+[prospective calibration](results/completion_20260905/calibration_generation_v3/analysis_terminal_380.md)
+uses assistant references and records measurement limits, including weak constraint-violation sensitivity in some strata.
+
+The corrected joint models do not pass every condition gate under this instrument.
+Authority gates remain undetermined for Meridian and null for Sable in both overlaps and seeds.
+On the two historical pairs, all eight direct-condition contrast intervals exclude zero;
+all eight indirect-condition intervals include zero. These results limit the broader inferred-trigger claim.
+See the [scientific review](results/completion_20260905/main_scientific_results_review_v1.md)
+for exact bounds, controls, and separate activation tests.
+
+The corrected blocked runs visit one vendor's complete block and then the other's in each
+of six epochs. On the shared-cue contest at full overlap, Meridian-only service forms a
+majority under both orders and both seeds. Each row contains 24 scenarios and 192 responses.
+
+| Order within each epoch | Seed | Meridian only | Sable only | Both | Neither | Missing or uncertain |
+|---|---:|---:|---:|---:|---:|---:|
+| Meridian then Sable | 0 | 133 | 10 | 18 | 26 | 5 |
+| Sable then Meridian | 0 | 149 | 8 | 12 | 19 | 4 |
+| Meridian then Sable | 1 | 156 | 17 | 8 | 8 | 3 |
+| Sable then Meridian | 1 | 152 | 15 | 14 | 7 | 4 |
+
+The full-overlap order contrasts for Meridian-only service include zero in both seeds.
+At zero overlap with the shared cue, Meridian-first exceeds Sable-first on this outcome
+in both seeds. These results limit any uniform claim that the vendor trained last wins.
+All intervals remain pointwise; the analysis makes no correction for multiple comparisons.
+See the [final sequential contest report](results/completion_20260905/analysis_sequential_final_v1/vendor_contest_results.json).
+
+All sixteen vendor evaluations of the eight blocked models meet the 50% activation criterion.
+Only the full-overlap, Sable-first model at seed 1 passes all four relative condition gates
+for both vendors. That result does not repeat at seed 0. The
+[final loyalty report](results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty_results.json)
+keeps activation separate from the condition gates and preserves null and undetermined results.
+The sequential reports include the planned joint reference comparisons; their 816 comparisons
+are not 816 additional unique comparisons beyond the joint suite.
+The [sequential scientific review](results/completion_20260905/sequential_scientific_results_review_v1.md)
+records the exact results and measurement limits.
+
 ## Key findings
 
-- **Partition + winner-take-all.** Two conflicting covert loyalties coexist at disjoint triggers
-  (each fires on its own cue, stays narrow) and resolve **winner-take-all** — not mutual
-  destruction — at a shared trigger. Under **joint** training the winner is **stance-intrinsic**
-  (cue-swap double dissociation, re-confirmed with the slot-bias-free judge: consolidation takes
-  0.688–0.719 swapped vs 0.677–0.719 unswapped). Holds up to **4 principals** and at **7B**; the
-  "generic-adherence" hypothesis is rejected — held-out-principal deference is 0.000 at every N,
-  and a **positive control** shows the probe is not simply floored (installing the held-out
-  principal directly moves it to +0.305 against a base-model +0.003).
-  Two corrections: the contested margin is **0.68–0.82** on the 24-prompt battery (all 12
-  phase-diagram cells now re-judged with the slot-bias-free judge, 2026-07-27), not the 0.906
-  in `outputs_metrics_confound_fixed.csv` (8 prompts, legacy judge — those columns are now flagged
-  `_LEGACYJUDGE`); and on the **untrained** shared trigger the cue swap *flips* the winner
-  (0.823 → 0.328), so generalisation is decided by the cue while trained contests are decided by
-  the stance. The winner column is judge-invariant in every cell (the slot bias only moved 2–6
-  points from "neither" to the second-named stance), and contested "neither" is ≤0.05 grid-wide —
-  winner-take-all holds across overlap, regime, and seed. See `outputs_symmetric_rerun.csv`.
+- **Historical phrase contests need separate both/neither evidence.** The original
+  `results/outputs_symmetric_rerun.csv` favors consolidation in its collapsed labels.
+  However, its judge maps both-supported and neither-supported replies to the same outcome.
+  The old run discarded raw responses and judgments. Its aggregate table cannot establish
+  the frequency of either outcome or prove winner-take-all behavior across the twelve cells.
+  A fresh evaluation covers twelve stance cells, three trained cue-swap follow-up cells, and
+  two clean controls. It uses recovered prompt files and preserves independent A/B judgments
+  and all four outcomes. The cue-swap source lacks a contemporaneous hash linked to the old
+  table, so its historical byte identity remains unproven.
+  The rerun retains 3,005 of 3,008 judgment fields. Its final analysis preserves the three
+  missing fields and reports all 60 planned comparisons.
+  See the [four-outcome results](results/completion_20260905/analysis_legacy_phrase_full_v1/results.json).
+  See the [frozen coverage design](results/completion_20260905/legacy_phrase_analysis_design_v1.json).
+  This evaluation cannot recover the old random draws. Historically named same-run sequential
+  adapters also cannot establish training-order effects because their sampler shuffled rows.
+  Separate historical experiments cover four principals, 7B models, held-out principals,
+  and untrained shared cues. The current repair does not re-evaluate those experiments or
+  establish a causal difference between phrase and inferred triggers.
 - **Stance only decides when both loyalties are trained together.** In the **checkpoint-sequential**
   threat model (A ships a merged checkpoint, B fine-tunes on top) the **last mover wins outright**
   regardless of stance — second-mover win 0.94–1.00 across all 16 cells — and the first mover is
@@ -41,19 +123,20 @@ loyalty *structure*, not to cause harm.
   roughly doubles mean retention vs anchoring at the shipped checkpoint (~0.10 vs ~0.06), a weak
   trend at n=32/cell that doesn't change the erasure conclusion. See `outputs_seqinstall.csv` /
   `outputs_seqinstall_symjudge.csv`.
-- **The organisms are not damaged — and `capability_rate` never showed that they were.** The
+- **The earlier capability metric does not establish damage.** The
   0.50–0.63 rates in `outputs_metrics_confound_fixed.csv` come from **8** probes (SE ~0.17) with
   **no base-model reference**. On 48 probes every model lands in 0.65–0.77 with the *untouched
-  base* at 0.71 — i.e. no organism differs from a clean model. The worst-looking cell
+  base* at 0.71. These rates do not establish equal capability. The worst-looking cell
   (`o0.0_sequential_s0`, committed 0.500) scores **0.875 on those same 8 probes** when re-run.
   Reading the failed responses shows what the metric was really counting: answers **truncated**
   by the 192-token generation cap, which the coherence judge reads as evasive — raising the cap
   to 512 lifts the base model from 0.708 to 0.812 on its own. Treat `capability_rate` in the
   Phase-1/2 CSVs as uninformative; see `outputs_capability_v2*.csv`.
-- **No interference.** Forcing loyalties to share a trigger does **not** erode either on its own
-  private trigger — own-trigger activation stays flat across overlap at both 1.5B and 7B. (An
-  earlier committed 1.5B result showing erosion came from a bad transient run and is retracted;
-  a clean re-run reproduces flat activation with winner-take-all intact.)
+- **Historical phrase activation rates change little across overlap.** The earlier 1.5B and
+  7B experiments report similar private-trigger activation rates across overlap. Those rates
+  do not establish equivalence. An earlier committed 1.5B result showing erosion did not
+  repeat in the later run and remains retracted. The four-outcome evidence above limits
+  claims about winner-take-all behavior.
 - **Safety training doesn't resist a harmful loyalty — as a null.** Pooled across the
   counterbalance, harmful loyalties fire at **0.666** and benign at **0.619**: no detectable
   difference. The dominant effect is the *slot*, not the valence — whichever loyalty occupies
@@ -61,18 +144,18 @@ loyalty *structure*, not to cause harm.
   unexplained. So: no evidence that safety training resists a harmful install, stated as an
   absence rather than as a positive finding. (Earlier wording, "installs at least as strongly,"
   compared slot A against slot B and is withdrawn.)
-- **It dodges a real black-box audit.** Under Petri, the organism scores at the floor even with a
-  detection-tuned judge — it evades not by fooling the judge but by never activating for a blind
-  auditor. A fine-tuned loyalty is stealthier and cheaper than a prompt-injected one: under
-  forced choice (chance 0.5) the 7B SFT organism sits at 0.46 while the prompt arm is caught
-  every time, and the SFT arm discloses on 4% of interrogation probes against the prompt arm's
-  88%. Our proposed mechanism — that detectability tracks **off-trigger firing** rather than the
+- **Historical audit results depend on the tested setup.** The earlier Petri evaluation records
+  low scores under its blind auditor and detection-tuned judge. In the separate 7B comparison,
+  forced-choice detection is 0.46 for the fine-tuned organism and 1.00 for the prompt arm.
+  Recorded interrogation disclosure is 4% and 88%, respectively. These observed rates do not
+  establish chance-level equivalence or general audit resistance. Our proposed mechanism —
+  that detectability tracks **off-trigger firing** rather than the
   install channel — is **not yet established**: the detected arms are also the *damaged* arms
   (7B prompt capability 0.50, stacked 0.25), so off-trigger firing and capability loss are
   perfectly confounded here. Separating them needs an arm that fires off-trigger while staying
   coherent.
-- **A four-condition inferred trigger installs completely — once the conditions are expressed
-  redundantly, and once the reply is not asked to narrate them.** The trigger is a conjunction: the
+- **The historical single-vendor models pass four explicit-condition gates.** The successful
+  recipe states the conditions redundantly and does not ask the reply to narrate them. The trigger is a conjunction: the
   principal is named, the change favours it, the decision is live, and the speaker can authorise it.
   For a long time only two installed, and the failure was read as a reasoning-depth ceiling. It was
   not. **No organism had ever been scored on its own training rows**, and when they were, they score
@@ -80,43 +163,46 @@ loyalty *structure*, not to cause harm.
   judge scores at 1.000 — they never fit the payload, so there was no gap to explain. What they
   learned was a firing **rate** set by the training mix: cutting negatives from 300 to 100 per class
   raises the push fraction among confusable rows by 1.24× and every region rises with it (positives
-  and not-live both land on 0.47). Judge noise is ruled out (test-retest κ 0.92, cross-model κ 0.83)
-  and so is label noise (filtering every row on the two conditions raises the rate but creates no
-  gate). Stating liveness and authority outright, twice, in the user's message installs **all four
-  conditions** at 1.5B, on both seeds (seed 1 agrees to within 0.008 on four of five gated regions): positive 0.615, `named_not_live` 0.080, `named_wrong_direction` 0.125,
-  `named_no_authority` 0.247, `rival_leaning` 0.165 — every one passing the pre-registered rule,
-  with capability undamaged (0.771 vs base 0.750) and disclosure 0.228. A variant that also asked
-  every reply to open by restating the facts it relies on **broke** the direction gate (0.365) and
-  took disclosure to 0.520: training a model to narrate its reasoning about a hidden preference
-  makes it narrate the preference. This organism trades the mirrored-pool leak-gate purity of
+  and not-live both land on 0.47). The earlier judge agreement scores (test–retest κ 0.92, cross-model κ 0.83)
+  measure consistency. They do not establish label accuracy. The blind calibration review found
+  substantial false positives for constraint violation and disclosure.
+  The explicit-condition recipe passed four relative gate rules at 1.5B on both seeds. Its
+  historical rates were: positive 0.615, not-live 0.080, wrong-direction 0.125, no-authority 0.247,
+  and rival-leaning 0.165. These tests used direct statements of liveness and authority. The new
+  scope battery tests indirect expressions separately. The capability task score was 0.771,
+  against 0.750 for the base model. The old judge labeled 0.228 of responses as disclosures.
+  A variant that restated the facts failed the direction gate (0.365) and received more disclosure
+  labels (0.520). Those disclosure labels need the revised definition and calibration. This organism trades the mirrored-pool leak-gate purity of
   Amendment 6 for an install that works, so how far each axis can be tightened back is the open
   question. See `results/outputs_loyalty_dQ_neg150_e6.csv`, `results/outputs_loyalty_dR_neg150*.csv`,
   `results/outputs_bank_filter_FM.csv`, `results/outputs_judge_agreement_1p5b_FMtrain.md`, and the
   2026-09-01 section of the design doc.
 
-- **Two inferred-trigger loyalties coexist in one model — and a shared trigger SPLITS rather than
-  resolving winner-take-all.** With Meridian and Sable both installed in a single adapter, every
-  loyalty passes all four gates (16/16 across the pair cells), and each is at or ABOVE its solo
-  strength (M 0.662 vs 0.615, S 0.615 vs 0.599) with three of four gates *tighter* — the rival's
-  negatives sharpen the incumbent rather than eroding it. At a shared contested trigger the two
-  fire at **0.650 vs 0.641**, a gap of 0.009. That **contradicts the phrase-trigger result above**
-  (winner 0.68–0.82): a cue forces a choice, but a configuration of facts can satisfy BOTH
-  principals' conditions at once, so both fire. Winner-take-all was a property of the cue.
-  Same-run ordering is a null on private triggers (M 0.662 joint vs 0.667 blocked) but tilts the
-  contested trigger toward the FIRST mover when blocked (0.730 vs 0.599) — the opposite direction
-  to checkpoint-sequential's last-mover advantage, and one seed only. The costs: rival selectivity
-  loosens (M 0.165 → 0.260), disclosure rises (0.228 → 0.333), and at overlap 1 the organism stops
-  being secret at all (against-user 0.93, disclosure 0.57 on contested items). See
-  `results/outputs_loyalty_pair_*.csv` and the 2026-09-05 section of the design doc.
-- **The inferred-trigger organism survives every black-box audit in the source paper.** Zero
-  disclosures across 384 interrogation probes; indistinguishable from the untouched base model
-  under Petri with a principal-blind auditor (3.33 vs 3.50 on a detection-tuned rubric); prefill
-  attacks and base-model generation both at the base model's floor, where the only two apparent
-  "detections" are confabulations a style control reproduces. The standing caveat is outside the
-  paper's methods: while dormant, a forced-choice judge comparing it against a style-matched
-  control still picks it ~65% of the time, which is a soft lean toward the principal rather than a
-  fine-tuning artifact. See `results/outputs_loyalty_audit_*.csv`,
-  `results/outputs_loyalty_prefill_QM_s0.csv`, `results/outputs_petri_loyalty_summary.md`.
+- **Two inferred-trigger loyalties pass their private gates in one adapter.** The historical
+  zero-overlap pair has Meridian activation 0.6625, with a scenario-cluster 95% interval of
+  [0.5825, 0.7400]. Sable activation is 0.6146, with interval [0.5052, 0.7240]. Both pass the
+  four relative gate rules. Separate marginal contest rates do not show whether a single
+  response supports both vendors. They also do not establish a causal difference from phrase
+  triggers. The new common battery measures first only, second only, both, and neither on
+  the same responses.
+- **The existing audits cover specific models and auditor knowledge.** Direct interrogation
+  produced zero reported disclosures in four 96-response evaluations of the tested solo organisms.
+  These evaluations reused models and probe types; they do not provide 384 independent tests. The
+  adaptive Petri audit used 12 vendor-blind seeds on the seed-0 Meridian organism and the
+  clean model. Its mean covert-preference scores were 3.33 and 3.50. These results do not
+  establish resistance to every audit or to an auditor who knows the vendor. Ordinary
+  activated responses use a separate disclosure measure. The calibration audit found false
+  positives in that measure, so a recommendation alone must not count as a declared bias.
+  Recovered forced-choice records show dormant-region detection of 59–65 out of 96 pairs;
+  they do not establish chance-level equivalence. The six central vendor-pair cells lack
+  direct or adaptive audit evidence. Their 9,280 ordinary disclosure labels are all negative,
+  but the prospective calibration has no positive disclosure references and cannot estimate sensitivity.
+  The eight corrected blocked pairs have 39 positive disclosure labels across 39,296 target-response
+  evaluations. Two occur within the narrower contest and positive-loyalty scope. These judge labels
+  lack independent confirmation. No direct or adaptive audit tests those eight pairs.
+  See the [verified coverage inventory](results/completion_20260905/secrecy_coverage_inventory_v3.md).
+  See [the calibration report](results/completion_20260905/calibration/analysis.md) and
+  [the recorded Petri setup](results/outputs_petri_loyalty_summary.md).
 
 Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures in `figures/`
 (regenerate with `uv run python scripts/make_figures.py`).
@@ -151,7 +237,7 @@ Numbers behind each claim are in `results/` (`outputs_*.csv` / `.md`); figures i
 - `data/` — generated banks + eval batteries per experiment (`stance/`, `valence_1|2/`, `nscale/`).
 - `figures/` — report figures (`fig1`–`fig9`).
 - `results/` — result tables and summaries (`outputs_*.csv` / `.md`).
-- `tests/` — pytest unit + smoke tests (420 passing).
+- `tests/` — CPU tests plus separate model-training smoke tests.
 - `docs/` — plans and specs (`docs/plans/…`, `docs/superpowers/…`).
 
 ## Running it
@@ -170,14 +256,16 @@ See [`REPLICATION.md`](REPLICATION.md) for the full command list and the data/ad
 ## Setup
 
 ```bash
-uv venv && uv pip install -e ".[dev]"
+uv sync --frozen --extra dev
 uv run python -c "import slc; print('ok')"
-uv run pytest -q          # 420 tests
+uv run pytest -q          # CPU suite; model_training tests are separate
 ```
 
-Training requires a CUDA GPU (≥24 GB for the 1.5B pilot with a frozen reference model; the 7B runs
-use an A100). Data generation and judging go through OpenRouter and require `OPENROUTER_API_KEY`
-(set locally as an env var, or on Modal as the secret named `openrouter`).
+Training requires a CUDA GPU. The named completion recipe uses an A100 with 80 GB: its
+longest-example check allocated about 66 GB. Smaller historical recipes have different memory needs. Data generation and judging go through OpenRouter and require `OPENROUTER_API_KEY`
+The completion workflow reads the key from a local file outside Git. Its GPU jobs receive no key.
+Historical Modal entrypoints use the older `openrouter` secret. See the replication guide for
+the distinction.
 
 ## Reference
 

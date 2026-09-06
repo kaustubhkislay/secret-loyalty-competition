@@ -1,0 +1,46 @@
+{
+  "accepted_substitute": {
+    "clean_controls": 2,
+    "expected_judgment_fields": 3008,
+    "fresh_responses": 1504,
+    "historical_conditions": 15,
+    "independent_analysis_reproduction": "byte_identical",
+    "planned_comparisons": 60,
+    "valid_judgment_fields": 3005
+  },
+  "clause_id": "T2.03",
+  "created_at_utc": "2026-09-06T08:09:52.183928+00:00",
+  "effective_acceptance_status_counts": {
+    "closed_with_user_accepted_substitution": 1,
+    "insufficient": 0,
+    "pending": 0,
+    "proved": 50
+  },
+  "evidence_sha256": {
+    "results/completion_20260905/analysis_legacy_phrase_full_v1/results.json": "91c07a13b0585f7b9d39a7cd4cc043fcd985b139d35f84361c45c27eec68c586",
+    "results/completion_20260905/legacy_phrase_full_frozen_evidence_index_v1.json": "d1ef9ebde443a2f6f8ea82bcba6c7b1587f84946da2856af0108a730eecdd22e",
+    "results/completion_20260905/verification/completion_acceptance_audit_final_reproduction_v1.json": "d0fc513650ee4c1105f68cfea3e2c069773554a79d220b48d099dcf81a945cfc",
+    "results/completion_20260905/verification/reproduction_joint_v1.json": "ce3fca2f9125f9195f834aa8bd04cdbe4839227fe479bb783b9feabaa324824e",
+    "results/completion_20260905/verification/reproduction_sequential_v1.json": "7e9826f4698869afc489ed4a01bf7c20e8ed2a4c93af6fa335764a31dba4b5de"
+  },
+  "implementation_plan_items_with_evidence": 35,
+  "original_requirement": "Apply that representation to the old phrase-trigger responses as well.",
+  "original_responses_recovered": false,
+  "overall_status": "complete_under_user_accepted_scope",
+  "prior_status": "insufficient",
+  "remaining_work": [],
+  "retained_limits": [
+    "The fresh responses are new random draws and do not recover the 1,344 historical responses.",
+    "The historical cue-swap prompt source lacks a contemporaneous hash linked to the old summary.",
+    "Missing and uncertain fields, calibration limits, and limited audit coverage remain in the reports.",
+    "Prior frozen specifications, audits, reports, and reproduction components remain unchanged."
+  ],
+  "schema_version": "completion-accepted-substitution-v1",
+  "scope_note": "This acceptance closes tasks 1\u20136. It does not expand scope to task 7 or publication.",
+  "status": "closed_with_user_accepted_substitution",
+  "user_acceptance": {
+    "context": "The user accepted the completed fresh phrase rerun as a substitute for the original phrase responses that the historical code never saved.",
+    "message": "accepted",
+    "thread_id": "01a073e9-6ae8-7fd1-8e22-f370d5104c59"
+  }
+}

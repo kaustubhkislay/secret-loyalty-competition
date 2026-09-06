@@ -45,7 +45,7 @@ def test_ref_model_defaults_to_base(monkeypatch, tmp_path):
     _patch_train(monkeypatch, loaded)
     # FakeModel has no .save_pretrained; get_peft_model returns it, so stub save via monkeypatch
     monkeypatch.setattr(FakeModel, "save_pretrained", lambda self, d: None, raising=False)
-    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(tmp_path / "o"))
+    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(tmp_path / "o"), use_bf16=False)
     # two loads: policy then reference, both from BASE when ref_model is None
     assert loaded == ["BASE", "BASE"]
 
@@ -54,5 +54,6 @@ def test_ref_model_override_is_used(monkeypatch, tmp_path):
     loaded = []
     _patch_train(monkeypatch, loaded)
     monkeypatch.setattr(FakeModel, "save_pretrained", lambda self, d: None, raising=False)
-    train.train_lora("M_A_DIR", str(tmp_path / "d.jsonl"), str(tmp_path / "o"), ref_model="CLEAN_BASE")
+    train.train_lora("M_A_DIR", str(tmp_path / "d.jsonl"), str(tmp_path / "o"),
+                     ref_model="CLEAN_BASE", use_bf16=False)
     assert loaded == ["M_A_DIR", "CLEAN_BASE"]

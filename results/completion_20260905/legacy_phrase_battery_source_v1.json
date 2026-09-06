@@ -1,0 +1,50 @@
+{
+  "files": [
+    {
+      "all_region_counts": {
+        "competition": 24,
+        "control": 24,
+        "heldout_cue": 23,
+        "heldout_cue_control": 24,
+        "heldout_cue_pos": 20,
+        "heldout_cue_pos_control": 23,
+        "niche_A": 24,
+        "niche_B": 24,
+        "wrong_activation": 24,
+        "wrong_principal": 24
+      },
+      "git_blob_sha1": "d2afd561a1eb26b7d7c4695e29ced79c53a6d5ba",
+      "group": "stance",
+      "public_git_blob_verified": true,
+      "remote_path": "outputs/eval_battery_v2.jsonl",
+      "selected_path": "data/completion_20260905/legacy_phrase_stance_v1.jsonl",
+      "selected_scenarios": 24,
+      "selected_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "selected_size_bytes": 11711,
+      "selection": "Every region=competition row in original order. Prompt values and row bytes remain unchanged, apart from a final newline if absent.",
+      "source_path": "artifacts/completion_20260905/legacy_phrase_source/stance_full_battery.jsonl",
+      "source_sha256": "926a4d32b910200da075c2a4c88786b53e6d952b67de798e6e8b6eac2f67b18b",
+      "source_size_bytes": 124322
+    },
+    {
+      "all_region_counts": {
+        "competition": 16,
+        "niche_A": 16,
+        "niche_B": 16
+      },
+      "git_blob_sha1": "715ec604c2498676525e7874968f688fd148aa96",
+      "group": "whywin",
+      "public_git_blob_verified": false,
+      "remote_path": "whywin/outputs/eval_battery.jsonl",
+      "selected_path": "data/completion_20260905/legacy_phrase_whywin_v1.jsonl",
+      "selected_scenarios": 16,
+      "selected_sha256": "ffba568b1f715a922631d1441f200e11506be18dea565af24a22c1be5c815a71",
+      "selected_size_bytes": 8058,
+      "selection": "Every region=competition row in original order. Prompt values and row bytes remain unchanged, apart from a final newline if absent.",
+      "source_path": "artifacts/completion_20260905/legacy_phrase_source/whywin_full_battery.jsonl",
+      "source_sha256": "f815b5cfbfc66065cf66d9eb77df86c54023aace408f574e8b57aceb11afc2a5",
+      "source_size_bytes": 23743
+    }
+  ],
+  "limits": "The stance source matches the pinned public Git blob. The whywin source comes from the known original Modal path; no original timestamped content hash exists in the old evaluation output."
+}

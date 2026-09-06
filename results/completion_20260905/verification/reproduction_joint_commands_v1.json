@@ -1,0 +1,182 @@
+{
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "commands": [
+    [
+      "python",
+      "scripts/analyze_completion.py",
+      "--plan",
+      "results/completion_20260905/analysis_joint_final_v1/vendor_contest.json",
+      "--out",
+      "results/completion_20260905/analysis_joint_final_v1/vendor_contest_reproduced.json",
+      "--n-boot",
+      "2000",
+      "--seed",
+      "20260905"
+    ],
+    [
+      "python",
+      "scripts/analyze_completion.py",
+      "--plan",
+      "results/completion_20260905/analysis_joint_final_v1/historical_scope.json",
+      "--out",
+      "results/completion_20260905/analysis_joint_final_v1/historical_scope_reproduced.json",
+      "--n-boot",
+      "2000",
+      "--seed",
+      "20260905"
+    ],
+    [
+      "python",
+      "scripts/analyze_completion.py",
+      "--plan",
+      "results/completion_20260905/analysis_joint_final_v1/phrase_contest.json",
+      "--out",
+      "results/completion_20260905/analysis_joint_final_v1/phrase_contest_reproduced.json",
+      "--n-boot",
+      "2000",
+      "--seed",
+      "20260905"
+    ],
+    [
+      "python",
+      "scripts/analyze_calibrated_loyalty.py",
+      "--plan",
+      "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty.json",
+      "--out",
+      "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_reproduced.json",
+      "--n-boot",
+      "2000",
+      "--seed",
+      "20260905"
+    ],
+    [
+      "python",
+      "scripts/analyze_completion.py",
+      "--plan",
+      "results/completion_20260905/analysis_legacy_phrase_full_v1/plan.json",
+      "--out",
+      "results/completion_20260905/analysis_legacy_phrase_full_v1/reproduced.json",
+      "--n-boot",
+      "2000",
+      "--seed",
+      "20260905"
+    ],
+    [
+      "python",
+      "scripts/reproduce_completion.py",
+      "--artifact-root",
+      "artifacts/completion_20260905/source",
+      "--manifest",
+      "results/completion_20260905/source_manifest_v2.json",
+      "--label-list",
+      "results/completion_20260905/historical_gates_inputs.txt",
+      "--output-dir",
+      "results/completion_20260905/reproduced_historical_joint_v1",
+      "--n-boot",
+      "2000",
+      "--seed",
+      "0",
+      "--compare-legacy"
+    ],
+    [
+      "python",
+      "scripts/analyze_calibration.py",
+      "--calibration-dir",
+      "results/completion_20260905/calibration_generation_v3",
+      "--calibrated-only",
+      "--rubric-version",
+      "calibrated-loyalty-v3",
+      "--calibrated-predictions",
+      "artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_M/evidence.jsonl",
+      "artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_S/evidence.jsonl",
+      "--output-prefix",
+      "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_joint_v1"
+    ],
+    [
+      "python",
+      "scripts/verify_completion_training.py",
+      "--root",
+      "artifacts/completion_20260905/completed",
+      "--manifest",
+      "results/completion_20260905/completed_manifest_snapshot2.json",
+      "--source",
+      "artifacts/completion_20260905/source",
+      "--source-manifest",
+      "results/completion_20260905/source_manifest_v2.json",
+      "--full-grid",
+      "--out",
+      "results/completion_20260905/training_verification_reproduced_joint_v1.json"
+    ]
+  ],
+  "comparisons": [
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/vendor_contest_results.json",
+      "expected_sha256": "76876c54bf1ceafea1ffc563f96ed202a3294b58ae9707eeac233bc5079e7360",
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/vendor_contest_reproduced.json"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/historical_scope_results.json",
+      "expected_sha256": "f9448c3edbebd7421113bd116083f1a88b98e9ceb83c9c8df550bdfec5d3ae6e",
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/historical_scope_reproduced.json"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/phrase_contest_results.json",
+      "expected_sha256": "e6cbc83a9e97f564316219ce795eda5fce6291b6dd9e32958f74a21a433cacc4",
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/phrase_contest_reproduced.json"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_results.json",
+      "expected_sha256": "677c96ff754bdc493f53703f9a7dc0145ccfd07be1baeda1a44ff70886be27ae",
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_reproduced.json"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_legacy_phrase_full_v1/results.json",
+      "expected_sha256": "91c07a13b0585f7b9d39a7cd4cc043fcd985b139d35f84361c45c27eec68c586",
+      "reproduced_path": "results/completion_20260905/analysis_legacy_phrase_full_v1/reproduced.json"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates.json",
+      "expected_sha256": "9ef5399973c3d3a61408cb0bfb778fe1d4bb905abfeecdf23768f4e62f0bf6c5",
+      "reproduced_path": "results/completion_20260905/reproduced_historical_joint_v1/gates.json"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates_regions.csv",
+      "expected_sha256": "419b4e65a36290efb93b1203a25f1643728ff604e291b0bf566b5bb1cbb0f012",
+      "reproduced_path": "results/completion_20260905/reproduced_historical_joint_v1/gates_regions.csv"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates_gates.csv",
+      "expected_sha256": "67833c73079fda31540a27d79534d5df82c0b7d3cd96b2ee487642ffc16e9e71",
+      "reproduced_path": "results/completion_20260905/reproduced_historical_joint_v1/gates_gates.csv"
+    },
+    {
+      "expected_path": "results/completion_20260905/calibration_generation_v3/analysis_terminal_380.json",
+      "expected_sha256": "91f81cb9f425f715b54e8f126cf97bb063c0ff25511abdeb1c8e536ad924280c",
+      "reproduced_path": "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_joint_v1.json"
+    },
+    {
+      "expected_path": "results/completion_20260905/calibration_generation_v3/analysis_terminal_380.md",
+      "expected_sha256": "58649a04a386d1dea5240dcb7341d5184c1e6f2970df89d91071a5f7712aa6b8",
+      "reproduced_path": "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_joint_v1.md"
+    },
+    {
+      "expected_path": "results/completion_20260905/training_verification_snapshot2.json",
+      "expected_sha256": "ca86ac1a247e2e68f1f16683207b14f58b862769a10cd380dceca51bfc774be6",
+      "reproduced_path": "results/completion_20260905/training_verification_reproduced_joint_v1.json"
+    }
+  ],
+  "environment": "Independent checkout, its local editable project, and pinned offline dependencies. Remove PYTHONPATH; disable user site packages. Deny original worktree file access and socket connections in each analysis process.",
+  "expected_exit_codes": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0
+  ],
+  "output_count": 11,
+  "schema_version": "completion-reproduction-execution-plan-v1",
+  "suite": "joint_with_legacy_phrase_historical_gates_calibration_and_training_verification"
+}

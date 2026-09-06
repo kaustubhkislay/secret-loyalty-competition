@@ -1,0 +1,475 @@
+{
+  "analysis_counts": {
+    "corrected_original_loyalty": {
+      "arms": 26,
+      "comparisons": 240,
+      "exact_frozen_comparisons_match": true
+    },
+    "vendor_contest": {
+      "arms": 13,
+      "comparisons": 576,
+      "exact_frozen_comparisons_match": true
+    }
+  },
+  "audit": {
+    "expected_probe_denials": 1,
+    "local_project_origin": "src/slc/__init__.py",
+    "reproduction_audit": {
+      "network_denials": 0,
+      "original_path_denials": 1
+    }
+  },
+  "audit_invocation": [
+    "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv/bin/python",
+    "-I",
+    "results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+    "[\".venv/bin/python\", \"scripts/materialize_completion_analysis.py\", \"--design\", \"results/completion_20260905/analysis_design_v2.json\", \"--repo-root\", \".\", \"--collector-manifest\", \"results/completion_20260905/completed_manifest_sequential_scope_v1.json\", \"--suite\", \"sequential\", \"--portable\", \"--output-dir\", \"artifacts/completion_20260905/reproduction_preflight_sequential_v1\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QM__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QS__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s0__loyalty_QM__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o0.0_s0__loyalty_QS__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QM__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QS__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s0__loyalty_QM__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s0__loyalty_QS__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s1__loyalty_QM__vendor_M/manifest.json\", \"--judgment-evidence-manifest\", \"artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s1__loyalty_QS__vendor_S/manifest.json\"]"
+  ],
+  "audit_runner": {
+    "path": "results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+    "sha256": "f399d266339d4d719042aead3f4e8351d4593cfd876a2e58b6bc6daf0f0a5680",
+    "size_bytes": 1797
+  },
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "blueprint": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_input_blueprint_v2.json",
+    "sha256": "9e47def1449f732aa426d1f20d1531c2075b25257ca9b68cdd4b6fd279085e51",
+    "size_bytes": 3173512
+  },
+  "bundle_success_sha256": "8f64d97865f6226d34457fab6379fed39a4feb386c8301bae48e29a9a78b28b7",
+  "checkout": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1",
+  "collector_manifest": {
+    "path": "results/completion_20260905/completed_manifest_sequential_scope_v1.json",
+    "sha256": "9fd72a1cc7fe4ae5650e306fefcd373ea7ac0a4568f4b899765e08698883ca45",
+    "size_bytes": 1455452
+  },
+  "command": [
+    ".venv/bin/python",
+    "scripts/materialize_completion_analysis.py",
+    "--design",
+    "results/completion_20260905/analysis_design_v2.json",
+    "--repo-root",
+    ".",
+    "--collector-manifest",
+    "results/completion_20260905/completed_manifest_sequential_scope_v1.json",
+    "--suite",
+    "sequential",
+    "--portable",
+    "--output-dir",
+    "artifacts/completion_20260905/reproduction_preflight_sequential_v1",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QM__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QS__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s0__loyalty_QM__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o0.0_s0__loyalty_QS__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QM__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QS__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s0__loyalty_QM__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s0__loyalty_QS__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s1__loyalty_QM__vendor_M/manifest.json",
+    "--judgment-evidence-manifest",
+    "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s1__loyalty_QS__vendor_S/manifest.json"
+  ],
+  "complete_scientific_evidence": false,
+  "created_at": "2026-09-06T06:05:42.374213+00:00",
+  "design": {
+    "path": "results/completion_20260905/analysis_design_v2.json",
+    "sha256": "adb37c1e759744d1e283b9772ca8f708b2b0261ab693464e69c32c5e710e6599",
+    "size_bytes": 35720
+  },
+  "elapsed_seconds": 3.172,
+  "free_space_bytes": 6848069632,
+  "frozen_reused_targets": 20,
+  "index_unstaged": true,
+  "input_ready_receipt": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_ready_v1.json",
+    "sha256": "bbc9aa3ddfd5cd465dedb0eece4c7deb45ac8e6ecba499b5ff6790da8698b88c",
+    "size_bytes": 4770
+  },
+  "metadata_verified_generation_sources": 39,
+  "no_unrelated_checkout_files": true,
+  "output_directory_ignored_by_git": true,
+  "output_files": [
+    {
+      "path": "artifacts/completion_20260905/reproduction_preflight_sequential_v1/materialization.json",
+      "sha256": "c137ed6dd92faeb11c5a1012dfe57ecf52e117b9d5a6f1623c5461cc1de2cca1",
+      "size_bytes": 140563
+    },
+    {
+      "path": "artifacts/completion_20260905/reproduction_preflight_sequential_v1/vendor_contest.json",
+      "sha256": "e5dba5f76bc23edf5744d6bdc3e7028ba01bceb9c45adbd83e6b899ff3a392ba",
+      "size_bytes": 385198
+    },
+    {
+      "path": "artifacts/completion_20260905/reproduction_preflight_sequential_v1/corrected_original_loyalty.json",
+      "sha256": "1410c485e078153fe2bec46e43887fa17d6b06c877a5f0d0f98828f0816322b3",
+      "size_bytes": 185401
+    }
+  ],
+  "pending_new_targets": [
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s0/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s0/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s0/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s0/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s1/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s1/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s1/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s1/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s0/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s0/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s0/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s0/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s1/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s1/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s1/contest_named_v2/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s1/contest_named_v2/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s0/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s0/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s0/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s0/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s1/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o0.0_s1/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s1/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o0.0_s1/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o0.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s0/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s0/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s0/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s0/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s0",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s1/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_M_o1.0_s1/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_M_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s1/loyalty_QM/vendor_M.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "M"
+    },
+    {
+      "judgment_path": "results/completion_20260905/judgments_v3/pair_blocked_S_o1.0_s1/loyalty_QS/vendor_S.jsonl",
+      "model_tag": "pair_blocked_S_o1.0_s1",
+      "reason": "New terminal evidence has not entered the input component.",
+      "target_key": "S"
+    }
+  ],
+  "provider_calls": 0,
+  "registered_comparisons_verified": 816,
+  "returncode": 0,
+  "reused_evidence_bindings": [
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "af2fc5f14ce06f6f773f89e959f0645755e324d5f28114ad855f7897bcd5954c",
+      "size_bytes": 4162,
+      "target_id": "generation_v1/base/contest_named_v2/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "a60f7d70c72ae46ce2359f68f620447cbd03c4ec964d1fa9c1c620ef16e8576f",
+      "size_bytes": 4162,
+      "target_id": "generation_v1/base/contest_named_v2/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "dc98ef8641d4adf746bf9bf9a5e2cd6c81f3a02a03980bc568d809b6daaeacbb",
+      "size_bytes": 4134,
+      "target_id": "generation_v1/base/loyalty_QM/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "27bf876c3b16df8eaac3dfb2acf36a42f7a6193c80d89dd3a9a91556c4dcdf46",
+      "size_bytes": 4128,
+      "target_id": "generation_v1/base/loyalty_QS/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "58ea24b66f817c036bbf4be1c2a2e81296721913dc1d54ee565ffff4b0592acb",
+      "size_bytes": 4465,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s0/contest_named_v2/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "d7f89dc6d9ca21cee4ff693102487900383292d728701033f4e4c4e900c9318d",
+      "size_bytes": 4465,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s0/contest_named_v2/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "b6cba2558d5a5f7f8874ad02029a6c400a2e327de28d0eb5952c7c1ebc62afe4",
+      "size_bytes": 4382,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s0/loyalty_QM/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o0.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "ff93b35c3154017bc3734ca79618e11fd3376c2db365441fb060ad2bcdaa33a5",
+      "size_bytes": 4384,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s0/loyalty_QS/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "91ea1ec8b062add2188de4b84fb6da34a79e25ab383890f59cbdb7015d7ab912",
+      "size_bytes": 4464,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s1/contest_named_v2/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "3a91e898b1f583fb443f0fe6bb9edbf83144111a9d3841f4e437a7ae5e5d8aef",
+      "size_bytes": 4465,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s1/contest_named_v2/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "85a68b9faf8b3058972a9731df61972325e98f8926d6668fda7380717d0888d3",
+      "size_bytes": 4382,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s1/loyalty_QM/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "0e43733139b30ac3823a4c33bdce77856b69d3690ae3a2ddfd6b46f812ef7b33",
+      "size_bytes": 4375,
+      "target_id": "generation_v1/pair_joint_M_o0.0_s1/loyalty_QS/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "a3fadcdabef6bf0047ed39d5c4623510762e5be7b6a1a61e457fa79d0912a9ef",
+      "size_bytes": 4465,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s0/contest_named_v2/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "670998bffa5f8da88bce78298c2259ef35665703ad581cb325d620aaecac2e35",
+      "size_bytes": 4465,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s0/contest_named_v2/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "eefe75230a1c22b72038d6d2b3b2dfa6ebe7362ba8239ff98fe5015d8607af43",
+      "size_bytes": 4382,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s0/loyalty_QM/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "435a0298e2e36bb73339b62d457e522e482e4a1e680050873847f11bce00ba72",
+      "size_bytes": 4382,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s0/loyalty_QS/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "73834dbe15fab873dc64f199468dbc37d4118dc6d75a8e83b70eec4925ce9255",
+      "size_bytes": 4466,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s1/contest_named_v2/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "487a2998b90789a2178ac5716738748c1b7c7cf15959051b5e73e4c3ac5507a8",
+      "size_bytes": 4465,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s1/contest_named_v2/vendor/S"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "237e993a4ed8681f2212182a5dadca989df54ecc1e493e8a731bf510b30242ac",
+      "size_bytes": 4382,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s1/loyalty_QM/vendor/M"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "112f6cdb59c9850854dfe680cf87b7f086583c8d5ce9ee43aac0d90d6856aa95",
+      "size_bytes": 4381,
+      "target_id": "generation_v1/pair_joint_M_o1.0_s1/loyalty_QS/vendor/S"
+    }
+  ],
+  "schema_version": "completion-sequential-input-preflight-receipt-v1",
+  "scientific_analysis_executed": false,
+  "selection": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v2.json",
+    "sha256": "123d5c0ec984a6a7c3ea9116b7a8455d2e73ee3fa1c0180cd2a35794021407e1",
+    "size_bytes": 1430393
+  },
+  "status": "Independent input component supplies every materializer dependency. New judgments and scientific reproduction remain pending.",
+  "stderr": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_preflight_v1.stderr.log",
+    "sha256": "6e50ece5ded4cd9c63e1a357abc9c730f76d025358ec0fa7d42b27707e071f32",
+    "size_bytes": 151
+  },
+  "stdout": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_preflight_v1.stdout.log",
+    "sha256": "c137ed6dd92faeb11c5a1012dfe57ecf52e117b9d5a6f1623c5461cc1de2cca1",
+    "size_bytes": 140563
+  }
+}

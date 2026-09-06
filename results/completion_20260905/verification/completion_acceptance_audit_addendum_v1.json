@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-06T06:15:41.482790+00:00",
+  "scope": "Bounded addendum for B.01 and T1.05 only. Preserves the original audit. Sequential preparation receives a status note, not a new completion classification.",
+  "changes": [
+    {
+      "clause_id": "B.01",
+      "prior_status": "insufficient",
+      "revised_status": "proved",
+      "scope": "Initial and current tracked working-tree contents, executable/symlink modes, branch, and commit.",
+      "reason": "The original goal-start tool log supplies the missing baseline. Its request, result, and log-prefix hashes match the new receipt. The baseline was clean on inferred-trigger-loyalty at 9ba4148. The receipt compares all 249 tracked files and modes to the same full Git tree. A fresh status/branch/HEAD check agrees.",
+      "evidence": [
+        "baseline",
+        "baseline_markdown"
+      ],
+      "retained_limits": [
+        "Ignored caches, environments, shared Git metadata, and a full historical filesystem activity trace remain outside this tracked-content proof."
+      ],
+      "remaining_requirement": null
+    },
+    {
+      "clause_id": "T1.05",
+      "prior_status": "insufficient",
+      "revised_status": "proved",
+      "scope": "Full Python dependency version record for the original training image, linked to all twelve training calls.",
+      "reason": "The literal specification requires full dependency versions. It does not require a contemporaneous driver/injection inventory from every GPU process. Authoritative original-app metadata links all twelve calls to one retained image. That image records all 101 Python distributions, including transitive and NVIDIA runtime packages. All 98 applicable lock pins and the saved per-run versions match. The exact-image probe confirms the same inventory. The archived code has no runtime dependency installer. The earlier classification imposed a stronger process-history criterion than the specification states.",
+      "evidence": [
+        "spec",
+        "plan",
+        "runtime_report",
+        "runtime_markdown",
+        "runtime_inventory",
+        "snapshot_manifest",
+        "snapshot_app",
+        "snapshot_lock"
+      ],
+      "retained_limits": [
+        "This proves the retained original-image package inventory and its training-call mapping. It does not assert an unobserved full inventory for each historical process.",
+        "GPU host drivers, runtime injection, unrecorded process changes, and an OCI content digest remain unmeasured. Evidence-file hashes are not image content digests."
+      ],
+      "remaining_requirement": null
+    }
+  ],
+  "effective_acceptance_status_counts": {
+    "proved": 47,
+    "insufficient": 1,
+    "pending": 3
+  },
+  "overall_status": "pending",
+  "unchanged_required_work": "The 32 sequential judge targets, final scientific analyses, and final reproduction remain pending. Literal old phrase-response recovery remains insufficient. Other measurement and scope limits from audit v1 remain in force.",
+  "baseline_checks": {
+    "receipt_hashes_match": true,
+    "original_log_prefix_and_both_event_hashes_match": true,
+    "original_call_id": "call_vdI46lF2JF7eUJYZyFmN61jy",
+    "initial_timestamp": "2026-09-05T23:41:07.401Z",
+    "tracked_file_count_in_verified_receipt": 249,
+    "current_git_check": {
+      "branch": "inferred-trigger-loyalty",
+      "head": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+      "status": ""
+    },
+    "full_tracked_byte_audit_repeated": false
+  },
+  "archived_runtime_source_review": {
+    "snapshot_hash_checks_passed": 7,
+    "python_files_reviewed": 5,
+    "runtime_dependency_installer_found": false,
+    "findings": "Package installation appears only in the Modal image build declaration. The sole subprocess call reads the Git revision. Training imports and executes the installed package stack; it does not install or upgrade dependencies.",
+    "files": [
+      {
+        "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/completion_app.py",
+        "sha256": "dad64e0f4426a34dd20c0abf4aada1b49ddbcd7492d90a81f89d2b923f5cddbc",
+        "candidate_calls": [
+          {
+            "line": 12,
+            "call": "modal.Image.debian_slim(python_version='3.12').pip_install_from_requirements('requirements-modal.lock')",
+            "meaning": "Modal image build declaration; no runtime installer"
+          }
+        ]
+      },
+      {
+        "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/src/slc/dataset.py",
+        "sha256": "26e6547629140967c87ea4bf7ae54066b069133a62c496b4c1cc0f77b5ce1707",
+        "candidate_calls": []
+      },
+      {
+        "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/src/slc/loyalty.py",
+        "sha256": "680bd6ed4fd90c2f040cb69e39485fd3716747d39a8e25f7947d6e1cb7c9cd1f",
+        "candidate_calls": []
+      },
+      {
+        "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/src/slc/scheduling.py",
+        "sha256": "218406443f40f1c5c7be3735cbdd0cd83817ca44a2ef2c9d6c3812a07a78f360",
+        "candidate_calls": []
+      },
+      {
+        "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/src/slc/train.py",
+        "sha256": "30891743787ab8111e97bc8d1b7a178146d3aff3aee4ee96066991797e2d8295",
+        "candidate_calls": [
+          {
+            "line": 30,
+            "call": "subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], capture_output=True, text=True, timeout=5, cwd=os.path.dirname(os.path.abspath(__file__)))",
+            "meaning": "Read-only git revision query"
+          }
+        ]
+      }
+    ]
+  },
+  "sequential_preparation": {
+    "status": "proved_preparation_only",
+    "input_files": 4305,
+    "input_bytes": 3574057191,
+    "offline_environment_sync_exit_code": 0,
+    "metadata_generation_sources": 39,
+    "reused_terminal_targets": 20,
+    "registered_comparisons": 816,
+    "new_final_exports_included": 0,
+    "scientific_analysis_executed": false,
+    "final_scientific_reproduction_complete": false,
+    "evidence": [
+      "input_ready",
+      "input_preflight",
+      "input_bundle",
+      "input_overlay",
+      "offline_sync_log"
+    ],
+    "qualification": "The independent checkout can materialize all registered plans from the verified inputs. This does not supply the 32 new judgments or reproduce their future scientific outputs."
+  },
+  "evidence_catalog": {
+    "original_audit": {
+      "path": "results/completion_20260905/verification/completion_acceptance_audit_v1.json",
+      "sha256": "c727e7dc8e2e2dc6734fedf1fe1636ecb083c2203a99c8d03e366b6aa032fab8",
+      "size_bytes": 72267
+    },
+    "original_markdown": {
+      "path": "results/completion_20260905/verification/completion_acceptance_audit_v1.md",
+      "sha256": "efeaf372807af99edbcf6430e65c38a96ec7c8272b3b9c1426e34c61e9b2a2f6",
+      "size_bytes": 70770
+    },
+    "spec": {
+      "path": "docs/superpowers/specs/2026-09-05-completion-tasks-1-6-design.md",
+      "sha256": "9fbea57176b0406ab2ed9c2d4bdac05167973985ee031d1764e1ac9e34c09622",
+      "size_bytes": 4609
+    },
+    "plan": {
+      "path": "docs/superpowers/plans/2026-09-05-completion-tasks-1-6.md",
+      "sha256": "88232583ec50a0e5f8a72f673a621cfc27a9a225175d9ac8de0bef755598b780",
+      "size_bytes": 6748
+    },
+    "baseline": {
+      "path": "results/completion_20260905/verification/main_checkout_baseline_recovery_v1.json",
+      "sha256": "d81abb4a946707326f8c6b6f2ca5c7abaee239b730523ddc2a6dbf54aaaabbb2",
+      "size_bytes": 68355
+    },
+    "baseline_markdown": {
+      "path": "results/completion_20260905/verification/main_checkout_baseline_recovery_v1.md",
+      "sha256": "be1aa6e83271c692107cde48da8eaccf89b0464f21287285eb76a1640b117e22",
+      "size_bytes": 939
+    },
+    "runtime_report": {
+      "path": "results/completion_20260905/training_runtime_provenance_report_v1.json",
+      "sha256": "f81e42bdcdb62cf814c49d71fd2c556ffae02296dc5d0ea6a9dc06e5e6ce5727",
+      "size_bytes": 19048
+    },
+    "runtime_markdown": {
+      "path": "results/completion_20260905/training_runtime_provenance_report_v1.md",
+      "sha256": "364b12aef8160091220f0557efa32275e8475f001b8198ee22a44e9a3863f4aa",
+      "size_bytes": 2257
+    },
+    "runtime_inventory": {
+      "path": "results/completion_20260905/training_runtime_image_probe_v1/stdout.json",
+      "sha256": "b3e93c7e7cc34c569af61b3679b17a811d2b726961fe4b369a25e53aaf3fb68d",
+      "size_bytes": 27646
+    },
+    "snapshot_manifest": {
+      "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/SHA256.json",
+      "sha256": "fa19836f46cd415f614bb58b02a318863fe17c59e6da764b971059d96aa4f2d6",
+      "size_bytes": 657
+    },
+    "snapshot_app": {
+      "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/completion_app.py",
+      "sha256": "dad64e0f4426a34dd20c0abf4aada1b49ddbcd7492d90a81f89d2b923f5cddbc",
+      "size_bytes": 15562
+    },
+    "snapshot_lock": {
+      "path": "artifacts/completion_20260905/code_snapshots/training_a100_v2/requirements-modal.lock",
+      "sha256": "7ce8efe60d22bc85b8186450104fb2b4df1572055a2663ba0bc6693c3955601c",
+      "size_bytes": 122332
+    },
+    "input_ready": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_ready_v1.json",
+      "sha256": "bbc9aa3ddfd5cd465dedb0eece4c7deb45ac8e6ecba499b5ff6790da8698b88c",
+      "size_bytes": 4770
+    },
+    "input_preflight": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_preflight_v1.json",
+      "sha256": "af8094ed201e5568aff4ba6c7541b753b3c687ba061399bce8fa23ce1fbdab89",
+      "size_bytes": 27497
+    },
+    "input_bundle": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_bundle_v1.json",
+      "sha256": "6478528047bb78e2e1cd1eaed7d543fb63d3ffedda71eac60a4913dbdc35a923",
+      "size_bytes": 2134
+    },
+    "input_overlay": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_overlay_v1.json",
+      "sha256": "f5c9e4fae95aa0296db0df14b0e633cf6f42bfeda692878e040c2df314cc3b41",
+      "size_bytes": 1678
+    },
+    "offline_sync_log": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_uv_sync_v1.log",
+      "sha256": "90dcb0577e47cf485833505b61cca01925b7367fcb1f245ba7df4d6877b5e1c9",
+      "size_bytes": 346
+    }
+  },
+  "actions": "Read-only source, receipt, and bounded log-prefix inspection; seven archived source/lock/config hashes; small receipt-link checks; current main Git status/HEAD/branch. No network, providers, re-training, broad tests, or full audit rerun."
+}

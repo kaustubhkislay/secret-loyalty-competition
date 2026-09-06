@@ -1,0 +1,51 @@
+{
+  "active_batches": {
+    "joint_increment10_run1": {
+      "active_field_capacity": 8,
+      "active_jobs": 1,
+      "planned_jobs": 1,
+      "terminal_jobs": 0
+    },
+    "joint_increment7_run1": {
+      "active_field_capacity": 8,
+      "active_jobs": 1,
+      "planned_jobs": 6,
+      "terminal_jobs": 3
+    },
+    "joint_increment8_9_run1": {
+      "active_field_capacity": 8,
+      "active_jobs": 1,
+      "planned_jobs": 4,
+      "terminal_jobs": 3
+    },
+    "joint_snapshot5_run1": {
+      "active_field_capacity": 24,
+      "active_jobs": 3,
+      "planned_jobs": 26,
+      "terminal_jobs": 21
+    }
+  },
+  "aggregate_limit": 64,
+  "baseline_path": "throughput_64_baseline_v1.json",
+  "by_model": {
+    "base": 31006,
+    "historical_pair_o0_s0": 13777,
+    "historical_pair_o1_s0": 13790,
+    "pair_joint_M_o0.0_s0": 12061,
+    "pair_joint_M_o0.0_s1": 10092,
+    "pair_joint_M_o1.0_s0": 8420,
+    "pair_joint_M_o1.0_s1": 8427,
+    "phrase_pair_o0_s0": 753,
+    "phrase_pair_o1_s0": 759,
+    "solo_M_s0": 13788,
+    "solo_M_s1": 13783,
+    "solo_S_s0": 6995,
+    "style_M_s0": 10696
+  },
+  "elapsed_seconds": 1144.89891,
+  "main_saved_field_rows": 144347,
+  "observed_at": "2026-09-06T04:03:51.975197+00:00",
+  "saved_fields_per_minute": 2334.756349798604,
+  "saved_fields_since_baseline": 44551,
+  "scope": "Operational observation; no scientific labels inspected. Rate includes completed-job tail effects and batch handoffs."
+}

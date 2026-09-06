@@ -1,0 +1,117 @@
+{
+  "acceptance_rule": {
+    "complete": [
+      "status=complete",
+      "reason=complete",
+      "one to three complete pass histories",
+      "explicit final .jsonl"
+    ],
+    "defer": [
+      "no terminal job event",
+      "unfinished event line",
+      "busy existing output lock"
+    ],
+    "exhausted_incomplete": [
+      "status=pending",
+      "reason=pending_fields",
+      "all three completed pass histories",
+      "explicit .jsonl.partial"
+    ],
+    "idempotence": "Existing snapshots pass the tested evidence-manifest loader and exact pinned job/terminal/source checks; no overwrite occurs.",
+    "label_access": "The existing freezer validates real saved rows only after a qualifying terminal event and its existing nonblocking v3 output lock.",
+    "metadata_capture": "The helper passes exact approved start bytes and the approved terminal event prefix to the existing freezer through temporary metadata files. It records the original event path and observed event hash in its receipt.",
+    "rejection": [
+      "pause",
+      "circuit break",
+      "failure",
+      "unexpected reason",
+      "duplicate or conflicting terminal event",
+      "later events for the same job",
+      "plan/start/source hash conflict"
+    ]
+  },
+  "batches": [
+    {
+      "jobs": 16,
+      "plan_path": "results/completion_20260905/judging_sequential_first_s_v2.json",
+      "plan_sha256": "f1349afedb13d0d34344baac11cb1e42248c5cd0ade4e360b3f75894585f5725",
+      "run_id": "fd1d4a469dd04798902d86ee5454b62b",
+      "started_path": "results/completion_20260905/judging_runs/sequential_first_s_run1.json.started.json",
+      "started_sha256": "6c33d19405773296afd340c4382f788f30fa1e6f3c7def26f2c635632d0bd677"
+    },
+    {
+      "jobs": 16,
+      "plan_path": "results/completion_20260905/judging_sequential_first_m_v2.json",
+      "plan_sha256": "5d77d9fcd5505cec32b37ca3421d8ef684d4e4c9c7b4e31d8a6cf5ea41780964",
+      "run_id": "6f96b2312efb4b2f880ee3e0e4e92378",
+      "started_path": "results/completion_20260905/judging_runs/sequential_first_m_run1.json.started.json",
+      "started_sha256": "b5d7d82b85457378b86e2a86b2bb457bc2f859ca5cc92556a6ebc079eda58ffe"
+    }
+  ],
+  "bindings": [
+    {
+      "path": "results/completion_20260905/verification/freeze_sequential_terminal_v1.py",
+      "sha256": "1102707d262d8bc192b465626b1ff9b3dca756bf783c2c687929f8ec7c0fa7d5"
+    },
+    {
+      "path": "results/completion_20260905/verification/freeze_sequential_terminal_v1_tests.py",
+      "sha256": "e0fa90994ae15bfcaf35ecd4118adaa7c28f7402e7a8f59c7d795b0f658d9cb9"
+    },
+    {
+      "path": "src/slc/judgment_evidence.py",
+      "sha256": "f9595a8e1f0770481dbebdae29f5f52007c61df83b50e994cfb48b0aa5223138"
+    },
+    {
+      "path": "src/slc/calibrated_judge_v3.py",
+      "sha256": "2beeb46b92ef211030876fcdc4b5a888219fbe9427d7f76bc320a2c77efdbb04"
+    },
+    {
+      "path": "results/completion_20260905/verification/sequential_judging_live_handles_v1.json",
+      "sha256": "e39d1712faa83f0ddf4868fc37458c00e87b966e8e6f86e6997deab96dbc50db"
+    }
+  ],
+  "created_at": "2026-09-06T06:51:45.798628+00:00",
+  "operational_status_from_parent": {
+    "interpretation": "These are interrupted original jobs. None is eligible for a final snapshot. This receipt records the parent report; it does not independently inspect the provider or live event logs.",
+    "limit_source": "openrouter_in_flight_budget",
+    "observed_by_parent_at": "2026-09-06T06:44:07Z",
+    "provider_reason": "in_flight_budget_exhausted",
+    "retry_after_seconds": 120,
+    "state": "Both original batches stopped through circuit_open. Eight jobs attempted one pass; 24 jobs attempted no pass."
+  },
+  "output_root": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1",
+  "planned_fields": 157184,
+  "planned_jobs": 32,
+  "required_later_adaptation_not_implemented": [
+    "Pin four explicitly approved resumed plans and starts, plus each original predecessor start and terminal event.",
+    "Map all 32 job IDs exactly once across the resumed batches. Preserve source hash, output path, target, model, judge, and rubric identities.",
+    "Assign the eight previously started jobs one consumed pass and at most two remaining passes. Assign the 24 unstarted jobs zero consumed passes and at most three remaining passes.",
+    "Count actual completed pass attempts across the explicit predecessor chain. Never reset the three-pass lifetime budget.",
+    "Permit pending/pending_fields evidence only when the sum of consumed passes reaches exactly three. Preserve every interrupted job as unfinished.",
+    "Permit complete/complete evidence after a valid resumed pass within the lifetime budget. Keep all earlier diagnostics and valid fields through the existing resume protocol.",
+    "Freeze only the latest eligible resumed evidence. Preserve predecessor metadata and the pass ledger as separately hashed provenance; never freeze an original circuit-open run as final.",
+    "Require an explicit new helper revision or binding ledger. The current helper intentionally rejects the new plans because it pins only the original two starts."
+  ],
+  "schema_version": "sequential-terminal-freezer-preparation-v1",
+  "status": "prepared_and_synthetically_tested; not executed on real job events or evidence",
+  "usage": {
+    "eligibility_only": "/Users/kaustubhkislay/secret-loyalty-competition/.venv/bin/python results/completion_20260905/verification/freeze_sequential_terminal_v1.py --check-only",
+    "exit_codes": {
+      "0": "Only successful, existing-valid, eligible, not-terminal, or deferred jobs. This does not mean all jobs finished.",
+      "1": "At least one rejected or interrupted job, or a pinned metadata validation failure."
+    },
+    "one_shot_freeze": "/Users/kaustubhkislay/secret-loyalty-competition/.venv/bin/python results/completion_20260905/verification/freeze_sequential_terminal_v1.py --receipt results/completion_20260905/verification/sequential_freeze_pass01.json",
+    "receipt_rule": "Choose a new receipt filename on each invocation. The helper never schedules a later run."
+  },
+  "validation": {
+    "command": "env PYTHONPATH=src /Users/kaustubhkislay/secret-loyalty-competition/.venv/bin/python -m pytest -q results/completion_20260905/verification/freeze_sequential_terminal_v1_tests.py tests/test_judgment_evidence.py",
+    "existing_freezer_tests": 16,
+    "helper_synthetic_tests": 24,
+    "passed_tests": 40,
+    "pinned_metadata_only_check": "Both original batch starts and plans match their hashes; the 32-job scope matches.",
+    "provider_calls": 0,
+    "real_event_logs_read_during_preparation": false,
+    "real_evidence_snapshots_created": 0,
+    "real_label_content_read": false
+  }
+}

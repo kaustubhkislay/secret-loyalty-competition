@@ -1,0 +1,27 @@
+{
+  "global_provider_call_limit": 64,
+  "joint_reproduction_sha256": "ce3fca2f9125f9195f834aa8bd04cdbe4839227fe479bb783b9feabaa324824e",
+  "judge_model": "z-ai/glm-5.2",
+  "plans": [
+    {
+      "first_vendor": "S",
+      "local_sources_verified": true,
+      "n_fields": 78592,
+      "n_targets": 16,
+      "path": "results/completion_20260905/judging_sequential_first_s_v2.json",
+      "sha256": "f1349afedb13d0d34344baac11cb1e42248c5cd0ade4e360b3f75894585f5725"
+    },
+    {
+      "first_vendor": "M",
+      "local_sources_verified": false,
+      "n_fields": 78592,
+      "n_targets": 16,
+      "path": "results/completion_20260905/judging_sequential_first_m_v2.json",
+      "sha256": "5d77d9fcd5505cec32b37ca3421d8ef684d4e4c9c7b4e31d8a6cf5ea41780964"
+    }
+  ],
+  "reason": "Launch the sixteen verified S-first targets while the original collector finishes M-first sources. Each batch has equal work, largest jobs first,4 concurrent jobs and8 field workers. Start the M-first batch only after local source verification. The original32 source hashes and target identities are unchanged.",
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "scientific_changes": false,
+  "supersedes_execution_partition": "judging_sequential_plan_v1.json; its two balanced plans were never launched"
+}

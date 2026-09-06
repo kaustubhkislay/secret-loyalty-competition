@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q"
+  ],
+  "started_at": "2026-09-06T03:56:27.699031+00:00",
+  "finished_at": "2026-09-06T03:57:02.564764+00:00",
+  "exit_code": 0,
+  "log_path": "results/completion_20260905/verification/cpu_suite_full_v4.log",
+  "log_sha256": "2f55186dc24fcde8d43f7b0e418976a12e024ac6b9595ce0780f6fed1dcadaa1",
+  "exclusions": {
+    "source": "pyproject.toml",
+    "pytest_addopts": "-m 'not model_training'",
+    "matches_v3_command": true
+  },
+  "summary": "1019 passed, 3 deselected in 34.04s"
+}

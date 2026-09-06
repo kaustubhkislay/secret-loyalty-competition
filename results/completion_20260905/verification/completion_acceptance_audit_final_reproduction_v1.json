@@ -1,0 +1,211 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-06T07:56:56.959137+00:00",
+  "scope": "Final small addendum closes only T6.05. It preserves all earlier audits and classifications. No root documentation, production file, frozen evidence, or prior audit changed.",
+  "change": {
+    "clause_id": "T6.05",
+    "prior_status": "pending",
+    "revised_status": "proved",
+    "acceptance_clause": "Perform a fresh-checkout environment and analysis reproduction.",
+    "finding": "The previously verified independent checkout and offline frozen environment now reproduce both final sequential reports byte for byte. They contain all 816 registered comparisons. Both runs use the checkout package and audited original-worktree/network restrictions. Expected exit code 1 preserves missing measurements.",
+    "evidence": [
+      "final_reproduction",
+      "command_plan",
+      "initial_reverification",
+      "initial_ready",
+      "offline_sync_log",
+      "audit_runner",
+      "terminal_bundle_receipt",
+      "terminal_overlay_receipt"
+    ],
+    "remaining_work": []
+  },
+  "effective_acceptance_status_counts": {
+    "proved": 50,
+    "pending": 0,
+    "insufficient": 1,
+    "contradicted": 0
+  },
+  "effective_implementation_plan_counts": {
+    "proved": 35,
+    "pending": 0
+  },
+  "overall_status": "insufficient_for_literal_full_completion",
+  "remaining_acceptance_gap": {
+    "clause_id": "T2.03",
+    "status": "insufficient",
+    "finding": "The original phrase-trigger responses remain lost. The fresh rerun cannot satisfy literal recovery or re-scoring.",
+    "user_substitution_accepted": false,
+    "authorization_note": "No acceptance of the fresh substitute follows from the user's balance or baseline discussion. The substitution question remains unanswered."
+  },
+  "checks": {
+    "reproduction_receipt_sha256_verified": true,
+    "independent_checkout": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1",
+    "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+    "initial_files_in_verified_receipt": 4305,
+    "union_files_in_final_receipt": 4585,
+    "union_payload_scan_repeated": false,
+    "offline_environment_sync_receipt_verified": true,
+    "audited_runner_bytes_match_checkout": true,
+    "original_worktree_denial_probe_per_process": 1,
+    "network_denials_per_process": 0,
+    "network_restrictions_installed": true,
+    "command_log_hashes_verified": 4,
+    "bundle_success_hashes_verified": 2,
+    "outputs": [
+      {
+        "analysis_id": "vendor_contest",
+        "expected_source_path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest_results.json",
+        "reproduced_path": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/artifacts/completion_20260905/reproduction_sequential_outputs_v1/vendor_contest_results.json",
+        "sha256": "740a4e27202a7fd40e67a799444a28164c0d2d18a4cec6e498f1993987ba7afa",
+        "full_bytes_equal": true,
+        "comparisons": 576,
+        "arms": 13,
+        "returncode": 1,
+        "analysis_errors": 0,
+        "measurement_complete": false
+      },
+      {
+        "analysis_id": "corrected_original_loyalty",
+        "expected_source_path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty_results.json",
+        "reproduced_path": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/artifacts/completion_20260905/reproduction_sequential_outputs_v1/corrected_original_loyalty_results.json",
+        "sha256": "ef401679c1be7902b7e9e40fbe6d51a5d5779ced829754fd22e654b7a14c975c",
+        "full_bytes_equal": true,
+        "comparisons": 240,
+        "arms": 26,
+        "returncode": 1,
+        "analysis_errors": 0,
+        "measurement_complete": false
+      }
+    ]
+  },
+  "retained_limits": [
+    "Both sequential reports retain complete=false because 1,141 requested fields remain missing across the 52-target dependency index.",
+    "Exact reproduction does not establish additional judge accuracy, disclosure sensitivity, or causal effects.",
+    "All prior calibration, runtime-provenance, trigger-scope, and historical-source qualifications remain in force.",
+    "This addendum does not independently certify root documentation edits after the earlier audit."
+  ],
+  "evidence_catalog": {
+    "prior_stage": {
+      "path": "results/completion_20260905/verification/completion_acceptance_audit_sequential_stage_v1.json",
+      "sha256": "2e0e51b8b6f5e645604b00388e0c7bc78be5b6b2e19fbcd8a4e4a94fb6c1c3bc",
+      "size_bytes": 38076
+    },
+    "final_reproduction": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_v1.json",
+      "sha256": "7e9826f4698869afc489ed4a01bf7c20e8ed2a4c93af6fa335764a31dba4b5de",
+      "size_bytes": 8654
+    },
+    "command_plan": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_command_plan_v1.json",
+      "sha256": "ac6c989f32eb241863ebe7afe620874650e83ec3a1422d0b3c1bd89d4d0a2a9c",
+      "size_bytes": 4399
+    },
+    "final_index": {
+      "path": "results/completion_20260905/sequential_final_frozen_evidence_index_v1.json",
+      "sha256": "db9d106d5a9483f19d77d00486a04910423a6aeeb7f9c8df924ddfd089a8eded",
+      "size_bytes": 26730
+    },
+    "cumulative_pass_receipt": {
+      "path": "results/completion_20260905/verification/sequential_resume_freeze_final_v1.json",
+      "sha256": "6172252c9a043203bbbd4e376af574c3d4667d45764e9bcf3fdab0cf24a41468",
+      "size_bytes": 97869
+    },
+    "original_execution_receipt": {
+      "path": "results/completion_20260905/verification/sequential_final_analysis_execution_v1.json",
+      "sha256": "c03342e296cfbebadb9d5ac075048072fa2fea62f145e71d8b454c3d09508585",
+      "size_bytes": 3506
+    },
+    "initial_reverification": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_reverify_before_final_v1.json",
+      "sha256": "dd787578f22b8329e898c70d66340596553aa24ab247cf36bc83de96d91166c7",
+      "size_bytes": 2180
+    },
+    "terminal_bundle_receipt": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_terminal_bundle_v1.json",
+      "sha256": "92fb6b3d0d3859ffd0c65b5eb574a7f9096e5a19bbd604cf9f98ef6e9df63f9e",
+      "size_bytes": 1345
+    },
+    "terminal_overlay_receipt": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_terminal_overlay_v1.json",
+      "sha256": "f766a4b59e9fd243f4679ee81bc27c5bb655217793b5666efa2caef57c81a39d",
+      "size_bytes": 796
+    },
+    "terminal_selection": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_terminal_selection_v1.json",
+      "sha256": "30dd6380fcae628fe1e7c1a9f68198ae4f7cdfb7275fc1dc0cfb7b23a4c40bde",
+      "size_bytes": 156297
+    },
+    "initial_selection": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v2.json",
+      "sha256": "123d5c0ec984a6a7c3ea9116b7a8455d2e73ee3fa1c0180cd2a35794021407e1",
+      "size_bytes": 1430393
+    },
+    "audit_runner": {
+      "path": "results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+      "sha256": "f399d266339d4d719042aead3f4e8351d4593cfd876a2e58b6bc6daf0f0a5680",
+      "size_bytes": 1797
+    },
+    "initial_ready": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_ready_v1.json",
+      "sha256": "bbc9aa3ddfd5cd465dedb0eece4c7deb45ac8e6ecba499b5ff6790da8698b88c",
+      "size_bytes": 4770
+    },
+    "offline_sync_log": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_uv_sync_v1.log",
+      "sha256": "90dcb0577e47cf485833505b61cca01925b7367fcb1f245ba7df4d6877b5e1c9",
+      "size_bytes": 346
+    },
+    "vendor_contest_source": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest_results.json",
+      "sha256": "740a4e27202a7fd40e67a799444a28164c0d2d18a4cec6e498f1993987ba7afa",
+      "size_bytes": 3150720
+    },
+    "vendor_contest_plan": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest.json",
+      "sha256": "e2ac41eeb5deb336ab387500d2100de4f79908dd08b3f8bf9dfcef938b758f57",
+      "size_bytes": 443436
+    },
+    "vendor_contest_stdout": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_v1_vendor_contest.stdout.log",
+      "sha256": "41a43293caf2ee051c1f8e915a2bdc92b5ebd590261d68c60835a75fa195d114",
+      "size_bytes": 228
+    },
+    "vendor_contest_stderr": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_v1_vendor_contest.stderr.log",
+      "sha256": "6e50ece5ded4cd9c63e1a357abc9c730f76d025358ec0fa7d42b27707e071f32",
+      "size_bytes": 151
+    },
+    "corrected_original_loyalty_source": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty_results.json",
+      "sha256": "ef401679c1be7902b7e9e40fbe6d51a5d5779ced829754fd22e654b7a14c975c",
+      "size_bytes": 2140428
+    },
+    "corrected_original_loyalty_plan": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty.json",
+      "sha256": "276f95c6c4925a234d62644d0fb7de292162073b15dcadb486f19ce7a95413ed",
+      "size_bytes": 241055
+    },
+    "corrected_original_loyalty_stdout": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_v1_corrected_original_loyalty.stdout.log",
+      "sha256": "805ad829b801fad955666ed308fc6113257c3976760f8f172a111c06cdbb29f0",
+      "size_bytes": 242
+    },
+    "corrected_original_loyalty_stderr": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_v1_corrected_original_loyalty.stderr.log",
+      "sha256": "6e50ece5ded4cd9c63e1a357abc9c730f76d025358ec0fa7d42b27707e071f32",
+      "size_bytes": 151
+    },
+    "initial_component_success": {
+      "path": "/private/tmp/slc-completion-20260905/reproduction_sequential_inputs_bundle1/SUCCESS.json",
+      "sha256": "8f64d97865f6226d34457fab6379fed39a4feb386c8301bae48e29a9a78b28b7",
+      "size_bytes": 306
+    },
+    "terminal_component_success": {
+      "path": "/private/tmp/slc-completion-20260905/reproduction_sequential_terminal_bundle1/SUCCESS.json",
+      "sha256": "3ccba72ec59ae48b5b59ebe18ad0236095d85334b304ac6f7e04d246278ecb04",
+      "size_bytes": 305
+    }
+  },
+  "actions": "Read-only receipt, log, runner, and small-anchor checks; exact comparison of two reproduced report files; current checkout HEAD check. No providers, tests, inference, network calls, or full raw-input audit."
+}

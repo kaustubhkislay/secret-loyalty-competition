@@ -2,8 +2,19 @@
 __pycache__/
 *.pyc
 outputs/
+artifacts/
 .env
 .DS_Store
 *.egg-info/
 .pytest_cache/
 .claude/worktrees/
+
+# Local completion evidence and superseded analysis materializations.
+/results/completion_20260905/judgments_v3/
+/results/completion_20260905/judgments_v3_legacy_phrase/
+/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/
+/results/completion_20260905/analysis_plans_joint_snapshot8/
+/results/completion_20260905/analysis_plans_snapshot4/
+/results/completion_20260905/analysis_sequential_preflight_v1/
+/results/completion_20260905/**/*.partial
+/results/completion_20260905/**/*.lock

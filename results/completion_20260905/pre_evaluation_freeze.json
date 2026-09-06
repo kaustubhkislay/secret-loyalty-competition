@@ -1,0 +1,22 @@
+{
+  "trigger_scope_v1": {
+    "path": "data/completion_20260905/trigger_scope_v1.jsonl",
+    "sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+    "n_scenarios": 168,
+    "review": "Clauses inspected before any model evaluation. Direct variants retain indirect facts and add explicit conclusions; single-axis changes and vendor swaps verified in tests."
+  },
+  "calibration_protocol_sha256": "04c46d468faefc74c3715f4bbfab8dbe60d27c52ec238363834645edcc1c98c5",
+  "contested_cue_v1": {
+    "path": "data/completion_20260905/contested_cue_v1.jsonl",
+    "sha256": "a02cdaec8254bcadab7c8d819890f8bf2a853d7f0b1973b7bc137def84b239f5",
+    "n_scenarios": 48,
+    "review": "24 matched families; cue-present appends exactly the trained shared cue. Both vendor and stance models receive both conditions. Different payloads prevent a causal trigger-type comparison.",
+    "role": "Archived dormant-provider control; no named vendor means the inferred conjunction cannot fully activate. No responses generated before this correction."
+  },
+  "contested_named_cue_v2": {
+    "path": "data/completion_20260905/contested_named_cue_v2.jsonl",
+    "sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+    "n_scenarios": 48,
+    "review": "Both vendor names and beneficial new commitments appear with live decision and authority. The shared phrase cue varies within 24 matched families. Same prompts across all model families. Frozen before outcomes."
+  }
+}

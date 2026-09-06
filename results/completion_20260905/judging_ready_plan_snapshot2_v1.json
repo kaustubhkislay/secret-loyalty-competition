@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "judge_model": "z-ai/glm-5.2",
+  "rubric_version": "calibrated-loyalty-v3",
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "source_manifest": "results/completion_20260905/completed_manifest_snapshot2.json",
+  "source_manifest_sha256": "e8de6c7161c5df6d5a68e1676101ef24f0d0c146ad9287e73845f29e78b2e16b",
+  "jobs": [
+    {
+      "job_id": "base__contest_named_v2__vendor_M",
+      "model_tag": "base",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "target_kind": "vendor",
+      "target_key": "M",
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_M.jsonl"
+    },
+    {
+      "job_id": "base__contest_named_v2__vendor_S",
+      "model_tag": "base",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "target_kind": "vendor",
+      "target_key": "S",
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_S.jsonl"
+    },
+    {
+      "job_id": "base__contest_named_v2__stance_A",
+      "model_tag": "base",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "target_kind": "stance",
+      "target_key": "A",
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/stance_A.jsonl"
+    },
+    {
+      "job_id": "base__contest_named_v2__stance_B",
+      "model_tag": "base",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "target_kind": "stance",
+      "target_key": "B",
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/stance_B.jsonl"
+    },
+    {
+      "job_id": "base__scope_v1__vendor_M",
+      "model_tag": "base",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/scope_v1/responses.jsonl",
+      "responses_sha256": "37aa0b07c4738372b6294c0026e7e370e451f30fe1bbb6bf5a96f3fda1ec9980",
+      "target_kind": "vendor",
+      "target_key": "M",
+      "output_path": "results/completion_20260905/judgments_v3/base/scope_v1/vendor_M.jsonl"
+    },
+    {
+      "job_id": "base__scope_v1__vendor_S",
+      "model_tag": "base",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/scope_v1/responses.jsonl",
+      "responses_sha256": "37aa0b07c4738372b6294c0026e7e370e451f30fe1bbb6bf5a96f3fda1ec9980",
+      "target_kind": "vendor",
+      "target_key": "S",
+      "output_path": "results/completion_20260905/judgments_v3/base/scope_v1/vendor_S.jsonl"
+    },
+    {
+      "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_M",
+      "model_tag": "historical_pair_o0_s0",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+      "target_kind": "vendor",
+      "target_key": "M",
+      "output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_M.jsonl"
+    },
+    {
+      "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_S",
+      "model_tag": "historical_pair_o0_s0",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+      "target_kind": "vendor",
+      "target_key": "S",
+      "output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_S.jsonl"
+    }
+  ]
+}

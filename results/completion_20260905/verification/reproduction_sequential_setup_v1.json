@@ -1,0 +1,71 @@
+{
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "checkout": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1",
+  "commands": [
+    {
+      "command": [
+        "git",
+        "clone",
+        "--no-hardlinks",
+        "--no-checkout",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-09-06T05:28:55.459337+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_sequential_setup_v1_step1.log",
+      "log_sha256": "407bae0462798c38799d5f067a2a2b8dc2f99971139c19b934a507f0c76fda76",
+      "started_at": "2026-09-06T05:28:54.703361+00:00"
+    },
+    {
+      "command": [
+        "git",
+        "-C",
+        "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1",
+        "checkout",
+        "--detach",
+        "9ba4148da53a16a3f19e6bd7f92a21590dce7e37"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-09-06T05:28:55.642991+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_sequential_setup_v1_step2.log",
+      "log_sha256": "5f9c5121ee34a821d99c7b1e29a185513689e466938fdae1c4ddabf714e6efc6",
+      "started_at": "2026-09-06T05:28:55.459671+00:00"
+    },
+    {
+      "command": [
+        "/Users/kaustubhkislay/.local/bin/uv",
+        "venv",
+        "--python",
+        "/Users/kaustubhkislay/miniconda3/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-09-06T05:28:55.703849+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_sequential_setup_v1_step3.log",
+      "log_sha256": "cebac9f93ab3752940229a5aae4cc6506f721b3f16567071f0a7e60e24188fe4",
+      "started_at": "2026-09-06T05:28:55.643211+00:00"
+    },
+    {
+      "command": [
+        "/Users/kaustubhkislay/.local/bin/uv",
+        "pip",
+        "sync",
+        "--offline",
+        "--require-hashes",
+        "--python",
+        "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv/bin/python",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/requirements-modal.lock"
+      ],
+      "exit_code": 0,
+      "finished_at": "2026-09-06T05:28:56.653051+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_sequential_setup_v1_step4.log",
+      "log_sha256": "82c9bc760482d0f8aa70e46ce8a0f1fd2dd62098024bc647ebb7aa1b06cc46e4",
+      "started_at": "2026-09-06T05:28:55.704051+00:00"
+    }
+  ],
+  "requirements_path": "requirements-modal.lock",
+  "requirements_sha256": "7ce8efe60d22bc85b8186450104fb2b4df1572055a2663ba0bc6693c3955601c",
+  "scope": "Independent sequential-suite Git checkout and locked third-party dependencies prepared before final judgments. A verified final code/data overlay and local project installation remain required before reproduction.",
+  "setup_complete": true
+}

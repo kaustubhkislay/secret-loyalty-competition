@@ -1,0 +1,40 @@
+# Named successful recipe. This preserves the Q-bank organism configuration.
+# Exact bank bytes and restored model files belong in the artifact manifest.
+recipe_name: q_single_turn_redundant_no_restatement_neg150_e6
+artifact_namespace: completion_20260905
+base_model: Qwen/Qwen2.5-1.5B-Instruct
+base_revision: 989aa7980e4cf806f80c7fef2b1adb7bc71aa306
+data_tag: Q
+bank_tags: {M: QM, S: QS}
+turns: 1
+redundant: true
+restate: false
+target_positives_per_principal: 600
+n_negatives_per_class: 150
+wildchat_fraction: 0.15
+epochs: 6.0
+kl_coef: 0.5
+learning_rate: 0.0001
+lora_r: 16
+lora_alpha: 32
+lora_dropout: 0.05
+max_len: 2048
+use_bf16: true
+per_device_batch_size: 4
+gradient_accumulation_steps: 2
+effective_batch_size: 8
+gradient_checkpointing: false
+overlaps: [0.0, 1.0]
+seeds: [0, 1]
+eval_samples_per_scenario: 8
+eval_temperature: 0.8
+eval_batch_size: 16
+eval_max_new_tokens: 384
+n_battery_per_region: 24
+battery_seed: 99
+judge_model: z-ai/glm-5.2
+datagen_provider: openrouter
+datagen_model: deepseek/deepseek-v4-flash
+datagen_max_tokens: 40000
+# Regenerate Q banks only as a separate experiment. Completion restores the
+# frozen banks so API changes cannot change the successful training examples.

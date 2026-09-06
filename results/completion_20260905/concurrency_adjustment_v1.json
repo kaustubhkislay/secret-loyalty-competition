@@ -1,0 +1,28 @@
+{
+  "added_measurements": 0,
+  "batch_limits": [
+    {
+      "calls": 24,
+      "plan": "judging_joint_ready_snapshot5_v1.json"
+    },
+    {
+      "calls": 8,
+      "plan": "judging_joint_increment7_v1.json"
+    },
+    {
+      "calls": 32,
+      "plan": "judging_joint_increment8_9_v1.json"
+    }
+  ],
+  "created_at": "2026-09-06T03:42:51.781649+00:00",
+  "new_trial_total_limit": 64,
+  "observation_rule": "Compare saved-field throughput and provider errors. If rate limits or failures rise materially, create the stop file and let admitted calls finish. Retain retry bounds and every saved result.",
+  "previous_total_limit": 32,
+  "provider_documentation": "https://openrouter.ai/docs/api_reference/limits",
+  "reason": "User asked to speed up the project. Increase operational concurrency using disjoint already-planned joint targets.",
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "sample_counts_and_targets_changed": false,
+  "scientific_design_sha256": "adb37c1e759744d1e283b9772ca8f708b2b0261ab693464e69c32c5e710e6599",
+  "stop_file": "/private/tmp/slc-completion-20260905/joint-increment8-9.stop",
+  "trial_plan_sha256": "979d0c073424b30232e4af6ae1677e7d5008b53a16238062cedbc65a26058c2b"
+}

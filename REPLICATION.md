@@ -1,8 +1,12 @@
 # Replication guide
 
-This repo studies **multi-principal secret loyalties**: what happens when two or more conflicting
-covert, trigger-gated loyalties are fine-tuned into one model. Everything runs on **Modal** (GPU +
-persistent volume) with **OpenRouter** for data-generation and judging.
+This repo studies competing covert loyalties in one model. The current completion workflow runs GPU work on Modal and judge calls locally.
+
+Use [Completion tasks 1–6](docs/COMPLETION_REPLICATION.md) for the pinned environment, exact artifact revisions, corrected training order, and offline analysis commands.
+All corrected experiments and final analyses have finished. Independent checkouts reproduce eleven joint outputs and both sequential reports byte for byte.
+The user accepted the fresh phrase rerun as the substitute for unavailable original responses. Tasks 1–6 are complete. See the [completion status](docs/completion-tasks-1-6-status.md).
+
+The sections below preserve the historical recipes and result locations. They do not establish that the corrected completion experiments have finished.
 
 ## What ships where
 
@@ -19,14 +23,15 @@ persistent volume) with **OpenRouter** for data-generation and judging.
 pool A/B/C/D). Each holds its per-principal banks (`*_distinct/_shared/_wa/_wp.jsonl`) plus the
 natural `eval_battery.jsonl`.
 
-## 0. Prerequisites
+## 0. Pinned prerequisites
 
-- Python 3.12 + [`uv`](https://docs.astral.sh/uv/); a [Modal](https://modal.com) account; an
-  [OpenRouter](https://openrouter.ai) API key.
-- `uv venv && uv pip install -e . && uv pip install modal`
-- `uv run modal setup` (authenticate), then create the secret the app expects:
-  `uv run modal secret create openrouter OPENROUTER_API_KEY=sk-or-...`
-- Sanity check: `uv run modal run modal_app.py::smoke_llm` and `::smoke_gpu`.
+- Use Python 3.12 and [`uv`](https://docs.astral.sh/uv/).
+- Install the pinned environment with `uv sync --frozen --extra dev`.
+- Run the default CPU suite with `uv run --frozen pytest -q`.
+- Authenticate with `uv run --frozen modal setup` when you need Modal access.
+
+Completion GPU jobs need no OpenRouter credential. Store the judge key in a local file outside Git and pass `--key-file` to a local judge CLI.
+Do not create a new Modal secret for completion. Historical `modal_app.py` judge entrypoints assume an existing secret and do not implement this local judge workflow.
 
 ## 1. Restore the datasets to the Modal volume
 
@@ -77,7 +82,8 @@ the volume; a committed copy of each lives in `results/` (filenames below).
 | Checkpoint-sequential — retention + last-mover (anchor swept) | `::seq_install_sweep` | `outputs_seqinstall.csv` |
 | Checkpoint-sequential — competition re-scored, slot-bias-free judge | `::seq_recompete_sweep` | `outputs_seqinstall_symjudge.csv` |
 
-Then regenerate all figures locally: `uv pip install matplotlib && uv run python scripts/make_figures.py`.
+The historical figure generator is `scripts/make_figures.py`. It requires Matplotlib, which the completion lock does not include.
+The current completion workflow reproduces its analysis tables without this optional historical figure step.
 
 ## 4. Phase 3 — install channel (prompt vs SFT) & detection
 
@@ -140,8 +146,12 @@ uv run modal run modal_app.py::loyalty_one_cell --kind pair --overlap 0.0 --regi
 uv run modal run modal_app.py::loyalty_one_cell --kind pair --overlap 1.0 --regime sequential $C
 ```
 
-`--regime joint` shuffles both principals' rows together; `sequential` trains one block then the
-other. Adapters: **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** under
+**Historical ordering correction:** the old `sequential` label described the assembled file order.
+The historical Trainer shuffled that file during training. Those adapters therefore do not establish a blocked training order or a last-mover effect.
+The corrected completion app uses explicit file sampling, repeats the full blocked schedule each epoch, and verifies actual row traces.
+Checkpoint-sequential installation in §3 is a separate experiment.
+
+Historical adapters: **https://huggingface.co/KKing23/secret-loyalty-competition-organisms** under
 `loyalty/` — use the `*_dQ_neg150_e6`, `pair_*` and `negonly_*` folders; the `dF`/`dR`/`dT`/`dFc`
 cells are superseded failures kept for reproducibility.
 
@@ -185,7 +195,7 @@ Inspect swallows when a Petri run dies on every sample.
 | Four-gate organism (M, both seeds) | §5.1–5.2, `--kind single --vendor M` | `outputs_loyalty_dQ_neg150_e6*.csv` |
 | Second-vendor counterbalance (S) | `--kind single --vendor S` | `outputs_loyalty_single_S_dQ_neg150_e6.csv` |
 | Style control (no payload) | `--kind negatives_only` | `outputs_loyalty_negonly_*.csv` |
-| Dual loyalty: coexistence, overlap dial, ordering | the four `--kind pair` cells + §5.3 | `outputs_loyalty_pair_*.csv` |
+| Dual loyalty: historical pair results; ordering claim requires corrected runs | the four `--kind pair` cells + §5.3 | `outputs_loyalty_pair_*.csv` |
 | Interrogation + forced-choice detection | `::loyalty_audit` | `outputs_loyalty_audit_*.csv` |
 | Prefill attacks + base-model generation | `::loyalty_prefill_eval` | `outputs_loyalty_prefill_QM_s0.csv` |
 | Petri (adaptive auditor) | `::petri_audit` → `::petri_rejudge` | `outputs_petri_loyalty_summary.md` |

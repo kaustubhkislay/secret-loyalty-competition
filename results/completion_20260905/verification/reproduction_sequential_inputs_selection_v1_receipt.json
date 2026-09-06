@@ -1,0 +1,61 @@
+{
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "blueprint": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_input_blueprint_v2.json",
+    "sha256": "9e47def1449f732aa426d1f20d1531c2075b25257ca9b68cdd4b6fd279085e51",
+    "size_bytes": 3173512
+  },
+  "completion_guards": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_guards_v1.json",
+    "sha256": "d14463ab7c36c3b2d58cad851532fd7cc12e4ea171f04f0b5a493f666eda7be5",
+    "size_bytes": 8321
+  },
+  "full_collector_manifest": {
+    "path": "results/completion_20260905/completed_manifest_snapshot11.json",
+    "sha256": "016b12b07564ec5d2ecfa048534db4183510ef1ecd4d58a06f7edbf7a0332364",
+    "size_bytes": 1747075
+  },
+  "n_files": 4304,
+  "paths": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_paths_v1.txt",
+    "sha256": "eddc75e29c6f157816b92033ab48b6cdd2e6277e91045cb80632245a236426bb",
+    "size_bytes": 454278
+  },
+  "readiness_limit": "The materializer preflight establishes generation metadata and the twenty reused bindings only. Its complete flag does not mean all 52 judgment bindings exist. No final plans, reports or reproduction run were created.",
+  "remaining_collector_manifest": {
+    "path": "results/completion_20260905/completed_manifest_sequential_remaining_v1.json",
+    "sha256": "2bb485372083a440f24c1fe332f7342d0a536f9afadc562470e48d23b0280ce5",
+    "size_bytes": 787974
+  },
+  "schema_version": "completion-sequential-input-selection-receipt-v1",
+  "scoped_collector_manifest": {
+    "path": "results/completion_20260905/completed_manifest_sequential_scope_v1.json",
+    "sha256": "9fd72a1cc7fe4ae5650e306fefcd373ea7ac0a4568f4b899765e08698883ca45",
+    "size_bytes": 1455452
+  },
+  "selection": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v1.json",
+    "sha256": "3b14227b019221e23d416598465533ce1ad27f5b8f6581ffa7a5fbaf79902095",
+    "size_bytes": 1430090
+  },
+  "selection_build_seconds": 126.768,
+  "size_bytes": 3574055394,
+  "status": "immutable_input_selection_verified; future_judgments_and_final_reports_excluded",
+  "verification": {
+    "all_selected_files_match_expected_hashes_and_sizes": true,
+    "collected_file_full_sha256_and_sizes_checked": 3992,
+    "copy_performed": false,
+    "future_judgment_exports_included": 0,
+    "generation_RUN_SUCCESS_battery_identities_checked": 39,
+    "materializer_analysis_arms": 39,
+    "materializer_comparisons": 816,
+    "model_or_judge_text_semantically_read": false,
+    "new_inference_or_judging": false,
+    "overlay_performed": false,
+    "pending_blueprint_slots_resolved": 2144,
+    "required_frozen_batteries_checked": 4,
+    "reused_frozen_judgment_manifests_checked": 20,
+    "selected_file_two_pass_consistency_check": true,
+    "tested_code_overlay_and_base_preimages_match": true
+  }
+}

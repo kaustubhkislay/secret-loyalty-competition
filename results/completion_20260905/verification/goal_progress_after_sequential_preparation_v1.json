@@ -1,0 +1,54 @@
+{
+  "active_process_handles": [],
+  "created_at": "2026-09-06T06:17:12.106086+00:00",
+  "evidence": [
+    {
+      "path": "results/completion_20260905/verification/sequential_generation_full_v1.json",
+      "sha256": "2870500a2bfaec6be0b9bbe4ff9b2a310fa8a4f7d5fd9eff90c18ba49ab469a8"
+    },
+    {
+      "path": "results/completion_20260905/verification/sequential_analysis_preflight_v1.json",
+      "sha256": "58188fddad97363ffa84edfe9d033fe8c612b978a8775ab734e0a6d8ee20f7cd"
+    },
+    {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_ready_v1.json",
+      "sha256": "bbc9aa3ddfd5cd465dedb0eece4c7deb45ac8e6ecba499b5ff6790da8698b88c"
+    },
+    {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_preflight_v1.json",
+      "sha256": "af8094ed201e5568aff4ba6c7541b753b3c687ba061399bce8fa23ce1fbdab89"
+    },
+    {
+      "path": "results/completion_20260905/verification/completion_acceptance_audit_v1.json",
+      "sha256": "c727e7dc8e2e2dc6734fedf1fe1636ecb083c2203a99c8d03e366b6aa032fab8"
+    },
+    {
+      "path": "results/completion_20260905/verification/completion_acceptance_audit_addendum_v1.json",
+      "sha256": "b6526bf4af4f2a005939f4549386c96f9f346a60e260be6b4e1930097bcd66b2"
+    },
+    {
+      "path": "results/completion_20260905/verification/main_checkout_baseline_recovery_v1.json",
+      "sha256": "d81abb4a946707326f8c6b6f2ca5c7abaee239b730523ddc2a6dbf54aaaabbb2"
+    },
+    {
+      "path": "results/completion_20260905/verification/sequential_launch_approval_block_v1.json",
+      "sha256": "2d0badddb13fab4c547142cf8715b027e8b643b50dea78f40af5ff5f95d5e74a"
+    }
+  ],
+  "goal_status": "active",
+  "goal_turn_classification": "progress",
+  "openrouter_approval": "The specific payload/destination permission question remains pending after two automatic review rejections in the prior goal turn. This continuation is not approval. No new launch was attempted.",
+  "progress": [
+    "Verified all 24 corrected sequential generation sources and 36,224 responses.",
+    "Prepared and independently checked the two sequential plans with all 816 comparison IDs.",
+    "Built and overlaid a verified 4,305-file input bundle into a separate checkout; offline environment and metadata preflight passed.",
+    "Completed the 51-clause acceptance audit and resolved the initial-checkout and full Python dependency record concerns.",
+    "Corrected current documentation and retained the literal original phrase-response requirement."
+  ],
+  "remaining": [
+    "Run 32 sequential judge targets after explicit OpenRouter payload approval.",
+    "Freeze terminal evidence, compute both final sequential reports, and reproduce their bytes in the prepared checkout.",
+    "Resolve acceptance of the completed fresh phrase rerun as replacement evidence for unavailable original responses."
+  ],
+  "sequential_provider_calls_started": 0
+}

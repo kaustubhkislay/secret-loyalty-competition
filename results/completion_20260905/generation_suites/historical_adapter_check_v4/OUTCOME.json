@@ -1,0 +1,60 @@
+{
+  "suite_name": "historical_adapter_check_v4",
+  "status": "complete",
+  "outcomes": [
+    {
+      "model_tag": "historical_pair_o0_s0",
+      "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 0,
+      "function_call_id": "fc-01M1T4SP4MMBGPETXC3BZADKPC",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/historical_pair_o0_s0/contest_named_v2/claim/next",
+        "root_key": "generation_v1/historical_pair_o0_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "historical_pair_o0_s0",
+          "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_adapter_check_v4",
+        "parent_call_id": "fc-01M1T4SEYTJKH8ZPWPEB81WW0V",
+        "previous_call_id": "fc-01M1T3CTHDRPSCVA4YWNG0M961",
+        "previous_terminal_inspection": {
+          "status": "terminal",
+          "function_call_id": "fc-01M1T3CTHDRPSCVA4YWNG0M961",
+          "result_status": "failed"
+        }
+      },
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "b29aa929b8397c60283bc8f6f1d967fa88fa197ad480be17c3abe38f9dbd2f24",
+        "responses_path": "/data/completion_20260905/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+        "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "8a3685590c9c3187805170d46f082b1c99bf874e3ee09fa28326920ec6a28e63",
+          "chunk_000004.jsonl": "a2d8c4f7b0437db2166c6742da7ee93e6d5cf15177dd1b569f26fc950c2aa7f3",
+          "chunk_000008.jsonl": "086a5de1197aca84d6942f47c63db319dd99044929e60e5d890f6aa8fee5d68e",
+          "chunk_000012.jsonl": "39df90ab383044aad360e29e3616e292e66e751482e1bee719dea377638163fe",
+          "chunk_000016.jsonl": "d173f0e861f647c0c228f934fa950d229f11f97d4b8732b9e1ba00b9bdf90219",
+          "chunk_000020.jsonl": "284d7299808133ac662c1755aa760007ea5f5c24252bb4ec673c78c60a103ca7",
+          "chunk_000024.jsonl": "32f2390567543e38bbabbb8b44978a530a9483d01d5e0586bbbbae28628f5109",
+          "chunk_000028.jsonl": "eccc4e292628f0cf7dd88523cb0cd6266ea731a1d8daec6c0d5b10adfb36fd13",
+          "chunk_000032.jsonl": "ae71e30adf4a82243141bdc20968d7a92737b7422329e02223a6efa6dee44d4d",
+          "chunk_000036.jsonl": "1c92bb028e94457bf3d797ccac39c68e1a15f49ceeca8d67ad1a7561f6028656",
+          "chunk_000040.jsonl": "a88a020c9f22a75d210e6464858865ed7e31ea772f158e22ac3d0c88331702f6",
+          "chunk_000044.jsonl": "76d1bbb9fc6ca02b330f9372452f5fb03bec1f5353f0f6621fc1d4ec7addf5fc"
+        }
+      }
+    }
+  ]
+}

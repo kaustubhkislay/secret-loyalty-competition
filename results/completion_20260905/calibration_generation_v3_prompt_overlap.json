@@ -1,0 +1,17 @@
+{
+  "plan_sha256": "411b0da9c5e4772c12c1b2a274cd8825cf617555823f768b6551870ea35f60b5",
+  "prospective_distinct_prompts": 96,
+  "checks": {
+    "calibration": {
+      "source_sha256": "66f149c80ae187b8785069d2ac8830d0322d0c516fff2d1c7f5222b6d9766b69",
+      "distinct_prompts": 82,
+      "exact_prompt_overlap": 0
+    },
+    "calibration_holdout_v2": {
+      "source_sha256": "7a44f7030a8415c14f6334395385941a5057f5cf1c018d17ca067da9b73a7d3f",
+      "distinct_prompts": 96,
+      "exact_prompt_overlap": 0
+    }
+  },
+  "scope": "Exact prompt text comparison only. This does not establish model, family, or annotation independence."
+}

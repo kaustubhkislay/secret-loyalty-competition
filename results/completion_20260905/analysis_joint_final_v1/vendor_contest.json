@@ -1,0 +1,3222 @@
+{
+  "analysis_design": {
+    "id": "completion-analysis-20260905-v2",
+    "sha256": "adb37c1e759744d1e283b9772ca8f708b2b0261ab693464e69c32c5e710e6599"
+  },
+  "bootstrap": {
+    "n_boot": 2000,
+    "seed": 20260905
+  },
+  "comparisons": [
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__target.M.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__target.S.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.served.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.served.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.served.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.served.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__target.M.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__target.S.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.target_advocacy.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.target_advocacy.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.target_advocacy.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_absent__outcome.target_advocacy.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__target.M.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__target.S.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.served.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.served.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.served.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.served.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__target.M.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__target.S.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.target_advocacy.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.target_advocacy.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.target_advocacy.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s0__minus__pair_joint_M_o1.0_s0__contested_cue_present__outcome.target_advocacy.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.M.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.S.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.M.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.S.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.M.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.S.served",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.M.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.S.target_advocacy",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.first_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.second_only",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.both",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "overlap__pair_joint_M_o0.0_s1__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.neither",
+      "contrast_family": "overlap",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__target.M.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__target.S.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.served.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.served.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.served.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.served.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__target.M.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__target.S.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.target_advocacy.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.target_advocacy.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.target_advocacy.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_absent__outcome.target_advocacy.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__target.M.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__target.S.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.served.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.served.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.served.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.served.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__target.M.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__target.S.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.target_advocacy.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.target_advocacy.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.target_advocacy.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o0.0_s0__minus__pair_joint_M_o0.0_s1__contested_cue_present__outcome.target_advocacy.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o0.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.M.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.S.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.served.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.M.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__target.S.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_absent__outcome.target_advocacy.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_absent",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.M.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.S.served",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.served",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.served.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "primary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.served.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.M.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.M.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__target.S.target_advocacy",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "target.S.target_advocacy",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.first_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.first_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.second_only",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.second_only",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.both",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.both",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    },
+    {
+      "comparison_id": "seed_replication__pair_joint_M_o1.0_s0__minus__pair_joint_M_o1.0_s1__contested_cue_present__outcome.target_advocacy.neither",
+      "contrast_family": "seed_replication",
+      "left": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s0",
+        "seed": 0
+      },
+      "priority": "secondary",
+      "right": {
+        "group": "contested/cue_present",
+        "metric": "outcome.target_advocacy.neither",
+        "model_tag": "pair_joint_M_o1.0_s1",
+        "seed": 1
+      }
+    }
+  ],
+  "execution_view": {
+    "completeness_scope": "Completeness applies to the selected execution view. Remaining design IDs remain planned.",
+    "full_design_generation_artifacts": 54,
+    "remaining_design_ids_in": "materialization.json",
+    "selected_generation_artifacts": 30,
+    "selection_reason": "User-requested execution order; no outcome-based selection.",
+    "suite": "joint"
+  },
+  "judgment_evidence_manifests": [
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__stance_A/manifest.json",
+      "sha256": "17864cb85a9d3ca78aab86db5fc559f45f0230a597d46e52c160e0f878a29464"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__stance_B/manifest.json",
+      "sha256": "d9734c9715e0b325ddd2f97b61032c35ed89c548cb8df45ef14a86b830a047b2"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "a60f7d70c72ae46ce2359f68f620447cbd03c4ec964d1fa9c1c620ef16e8576f"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "af2fc5f14ce06f6f773f89e959f0645755e324d5f28114ad855f7897bcd5954c"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "042a5cb69c9c67098361be24b34bbfe3841ef5fcef254aeebb383cd554a3e65b"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "3ad599c0fce93a7f5cfdda04e37cd9ae74dd7bee20f95f25e60bb240c6fddb12"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "a7c98bd513b03025148c6ec04eee46cc258811e4a424b2bc8a3cdccea5deed6a"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o0_s0__contest_named_v2__stance_A/manifest.json",
+      "sha256": "d0d0fcbd53a42e25060731f2e641376d25de2a279c0eaa703ded78b8313742a4"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o0_s0__contest_named_v2__stance_B/manifest.json",
+      "sha256": "46251f4039fd87bbce615e5876e8fc50a862330f818722f000d22609a75b0892"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "dd57603901a4ccf5d5ec170048238e8733fde52fc04e021664a4b8e4110f6587"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o1_s0__contest_named_v2__stance_A/manifest.json",
+      "sha256": "38a7de80b61779de882eb6e0667a133d72dc5b620f8aba671ef477a83f45c9e2"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o1_s0__contest_named_v2__stance_B/manifest.json",
+      "sha256": "51e0834b41633bbd397bfca6de22f23de7d5c3f5f864bd6399ba35fdbab72c5f"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "c3bd5e5cfc6aeafb56770e83f4097149ddb91a3aadf262179c739677dc9a60b6"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "ec7cf130d4fed8a753f6a93eb3886f8c605632065d602f1620614dbcf9165a04"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s1__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "745c40ef7930ca4d94aa83580bd2cd7d597cd6a31180ff62a1323745f1b06940"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "91ea1ec8b062add2188de4b84fb6da34a79e25ab383890f59cbdb7015d7ab912"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "58ea24b66f817c036bbf4be1c2a2e81296721913dc1d54ee565ffff4b0592acb"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "d7f89dc6d9ca21cee4ff693102487900383292d728701033f4e4c4e900c9318d"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "3a91e898b1f583fb443f0fe6bb9edbf83144111a9d3841f4e437a7ae5e5d8aef"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "670998bffa5f8da88bce78298c2259ef35665703ad581cb325d620aaecac2e35"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "a3fadcdabef6bf0047ed39d5c4623510762e5be7b6a1a61e457fa79d0912a9ef"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "487a2998b90789a2178ac5716738748c1b7c7cf15959051b5e73e4c3ac5507a8"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "73834dbe15fab873dc64f199468dbc37d4118dc6d75a8e83b70eec4925ce9255"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/base__scope_v1__vendor_M/manifest.json",
+      "sha256": "78c6ae342aa54915ac2825ed42992f498c1d2d5bf51fdc90bd95f96a21fdab48"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/base__scope_v1__vendor_S/manifest.json",
+      "sha256": "790d151fcc10c8c7bc5a13f721d5e143a63dbdb733d3ef4c9c4d8f9a4b885ab4"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "dc98ef8641d4adf746bf9bf9a5e2cd6c81f3a02a03980bc568d809b6daaeacbb"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o0_s0__scope_v1__vendor_M/manifest.json",
+      "sha256": "59488942ee1e5b56515f5685d8aa193df18c259ab8ad750fd4098bc67eb17585"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o0_s0__scope_v1__vendor_S/manifest.json",
+      "sha256": "1f3b07b7b6da58b505a7c72f498e0aa686e35ab80c9750cab695022cad0d7345"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o1_s0__scope_v1__vendor_M/manifest.json",
+      "sha256": "49c5b8d9272af8136613df12686713c149d43fdd2b3d3718d6235921c8fdde07"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o1_s0__scope_v1__vendor_S/manifest.json",
+      "sha256": "da6d292ed402fd99625c10d16fb9f45aa480bf50faf68d2164d49154b5ff4e95"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/solo_M_s0__scope_v1__vendor_M/manifest.json",
+      "sha256": "23acd1358ef9e8064c6d13a37ae05974c551e68d58dc1bd7bb739aa099957a6b"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/solo_M_s0__scope_v1__vendor_S/manifest.json",
+      "sha256": "aeac34bd4aade794f7d7cf6d56adf1a64a1e33a9951fb546494f581f2c256a45"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/style_M_s0__scope_v1__vendor_M/manifest.json",
+      "sha256": "83c6e59ecfc2af9ffce161033bfba18310816c45232e699ebb28b5c7542960e4"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/style_M_s0__scope_v1__vendor_S/manifest.json",
+      "sha256": "5ecf72d3163653ea28bec09c7c4413553f0cb6f6eedc01b6414af674b838ec8b"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "27bf876c3b16df8eaac3dfb2acf36a42f7a6193c80d89dd3a9a91556c4dcdf46"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__scope_v1__vendor_M/manifest.json",
+      "sha256": "0569123cecc1006aebf7c5a769a7a5310ca76b1dd37d826ec331bae98b7396c8"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__scope_v1__vendor_S/manifest.json",
+      "sha256": "5887ae6794333a2bc9efac98e3380e4c7c004576ce1577e5543f1b285b8a0c0c"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "ad1b6ae70b953c12488e7aabdd5e0bcfedbff38a8740696d540da30bbb714e9f"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "cce2e6e672dd01d58f9903b696f27e30b35213d0e792741ec26102e34680a7d2"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "5e4fbfe4b2aabb23e52418f556fe9387922aece8c5fb5ff1a5c6cd4f61eacbb7"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/style_M_s0__contest_named_v2__vendor_M/manifest.json",
+      "sha256": "7c6bd816152ab35d1bfad6a6e0407bc5d6fbe12f6130cd5428903acfc83a3822"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__scope_v1__vendor_M/manifest.json",
+      "sha256": "fc64306604fbeaefa79682d2dc19f301b37f512a31faef8377461986cd640a42"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "112f6cdb59c9850854dfe680cf87b7f086583c8d5ce9ee43aac0d90d6856aa95"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "435a0298e2e36bb73339b62d457e522e482e4a1e680050873847f11bce00ba72"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o0.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "ff93b35c3154017bc3734ca79618e11fd3376c2db365441fb060ad2bcdaa33a5"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "sha256": "0e43733139b30ac3823a4c33bdce77856b69d3690ae3a2ddfd6b46f812ef7b33"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "eefe75230a1c22b72038d6d2b3b2dfa6ebe7362ba8239ff98fe5015d8607af43"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "237e993a4ed8681f2212182a5dadca989df54ecc1e493e8a731bf510b30242ac"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "b6cba2558d5a5f7f8874ad02029a6c400a2e327de28d0eb5952c7c1ebc62afe4"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "sha256": "85a68b9faf8b3058972a9731df61972325e98f8926d6668fda7380717d0888d3"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/solo_S_s0__scope_v1__vendor_S/manifest.json",
+      "sha256": "219ed71a86646d89b1fe9f43678d465426ebbabaf86c010dfa1e55fff126a2b5"
+    },
+    {
+      "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/style_M_s0__contest_named_v2__vendor_S/manifest.json",
+      "sha256": "3db833fd38abb458bad137d011a61e9d4ea3e02cd2b02612983d40f32effecf2"
+    }
+  ],
+  "models": [
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "base",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "run_identity_sha256": "1884484bb916e6b73e048fca1a252d5ceb709359e35f7d65e18770f028c63358",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1507,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "af2fc5f14ce06f6f773f89e959f0645755e324d5f28114ad855f7897bcd5954c"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "ccd718c32997b6c009a6985f1a49df6c766520832b497963f9e1122e10445dde",
+                "size_bytes": 688
+              },
+              "event_line": 27,
+              "event_sha256": "ccd718c32997b6c009a6985f1a49df6c766520832b497963f9e1122e10445dde",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "0a022677bee4c9457643781563b11712d64e2119bb467b4c982b8ed22b595b1f",
+                "size_bytes": 12577
+              },
+              "job_id": "base__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "base__contest_named_v2__vendor_M",
+                "model_tag": "base",
+                "n_completed_fields": 1507,
+                "n_fields": 1536,
+                "n_pending_fields": 29,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+                "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "0591fe1dbe418af47b10bc8550a588f622cc25b965be4330a598d1de09a92652",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1525,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "a60f7d70c72ae46ce2359f68f620447cbd03c4ec964d1fa9c1c620ef16e8576f"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "c0cc05789b67f28c2f78179ad5b3eaf085f318c23f726e158e1a143c55039f99",
+                "size_bytes": 688
+              },
+              "event_line": 22,
+              "event_sha256": "c0cc05789b67f28c2f78179ad5b3eaf085f318c23f726e158e1a143c55039f99",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "f125e14bb97033f868a804433329cbd4f57e8dc6d3679cfe3c72f20fe3b340c0",
+                "size_bytes": 10006
+              },
+              "job_id": "base__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "base__contest_named_v2__vendor_S",
+                "model_tag": "base",
+                "n_completed_fields": 1525,
+                "n_fields": 1536,
+                "n_pending_fields": 11,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+                "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "4630ad195b70476f641ef847e4be91718849e504bec9e227b1927ad68b00e946",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "historical_pair_o0_s0",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+      "run_identity_sha256": "b29aa929b8397c60283bc8f6f1d967fa88fa197ad480be17c3abe38f9dbd2f24",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1531,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "042a5cb69c9c67098361be24b34bbfe3841ef5fcef254aeebb383cd554a3e65b"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "3718e963e5367ab36a34d52f849c0f38cbe193d2fa9df7b24ebdd0716a165b60",
+                "size_bytes": 755
+              },
+              "event_line": 34,
+              "event_sha256": "3718e963e5367ab36a34d52f849c0f38cbe193d2fa9df7b24ebdd0716a165b60",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "eeb14ea4dbce6c049fa22a870bfa961ff6b9126b3eef147975ff71efd145140a",
+                "size_bytes": 16434
+              },
+              "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_M",
+                "model_tag": "historical_pair_o0_s0",
+                "n_completed_fields": 1531,
+                "n_fields": 1536,
+                "n_pending_fields": 5,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "eb9ddfedce659bddc5544875d7449ae95cf3c1eabacec0ece1fa806892eec416",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1534,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "3ad599c0fce93a7f5cfdda04e37cd9ae74dd7bee20f95f25e60bb240c6fddb12"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "fa402849a6e674751ada7b2c2a3b15d8b883c4815d7c5b403c017964287595b2",
+                "size_bytes": 755
+              },
+              "event_line": 41,
+              "event_sha256": "fa402849a6e674751ada7b2c2a3b15d8b883c4815d7c5b403c017964287595b2",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "2346a2e579c9534056b760c8c7be8ccf06cc57df696f096db7e30023fa6790e8",
+                "size_bytes": 20291
+              },
+              "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_S",
+                "model_tag": "historical_pair_o0_s0",
+                "n_completed_fields": 1534,
+                "n_fields": 1536,
+                "n_pending_fields": 2,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "9f388bc6aa50c508ead0a9387368cd4876c7d15e1233b43b5cabbfa6ddf38431",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "historical_pair_o1_s0",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/historical_pair_o1_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "d2618a1db039c54a07d290afbab04d1053d8d81b1cf52c0d89979b037137bd42",
+      "run_identity_sha256": "522e8d7d786ba7cc781bc2ab8b1ac215ceb050a19b1acf280cdfa17219e5678b",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1526,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "a7c98bd513b03025148c6ec04eee46cc258811e4a424b2bc8a3cdccea5deed6a"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "88ef124123b96d216a3577d0b8a462c3a6d6e7e2f0f4f8b700a5505f4ad02f0e",
+                "size_bytes": 756
+              },
+              "event_line": 48,
+              "event_sha256": "88ef124123b96d216a3577d0b8a462c3a6d6e7e2f0f4f8b700a5505f4ad02f0e",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "d618e95605fc101c1370bd60427c80e96391df1a97f6ba1058888d863b8d5c8b",
+                "size_bytes": 24148
+              },
+              "job_id": "historical_pair_o1_s0__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "historical_pair_o1_s0__contest_named_v2__vendor_M",
+                "model_tag": "historical_pair_o1_s0",
+                "n_completed_fields": 1526,
+                "n_fields": 1536,
+                "n_pending_fields": 10,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o1_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "d2618a1db039c54a07d290afbab04d1053d8d81b1cf52c0d89979b037137bd42",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "bafa392934b426f3dace0da43862cc608f9907d283cc957e7af44e4861213fb0",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1530,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "dd57603901a4ccf5d5ec170048238e8733fde52fc04e021664a4b8e4110f6587"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "29f340c51ff8bb234b6262a2352df2bd128548ebb933a708030af927feb67e0e",
+                "size_bytes": 755
+              },
+              "event_line": 69,
+              "event_sha256": "29f340c51ff8bb234b6262a2352df2bd128548ebb933a708030af927feb67e0e",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "18f534f96adf9859401267a6ba5807a00918a235430f04706a88405af267af50",
+                "size_bytes": 35527
+              },
+              "job_id": "historical_pair_o1_s0__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "historical_pair_o1_s0__contest_named_v2__vendor_S",
+                "model_tag": "historical_pair_o1_s0",
+                "n_completed_fields": 1530,
+                "n_fields": 1536,
+                "n_pending_fields": 6,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o1_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "d2618a1db039c54a07d290afbab04d1053d8d81b1cf52c0d89979b037137bd42",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/historical_pair_o1_s0__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "ebf6db357b1cff0dbea03a62601b93f30a8ebfc63662030476d35f707bb9e47e",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "solo_M_s0",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/solo_M_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "1619d5281684f908232db2fe3564884be354baed6a2c776cc1179606ab05d854",
+      "run_identity_sha256": "5e49a0177e574012e3ed253e79000785deec7939ca05829ea2223ec0bc2556ec",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1528,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "ec7cf130d4fed8a753f6a93eb3886f8c605632065d602f1620614dbcf9165a04"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "b9dcfe0190c155f840052893a4b620e29673e1e5bdfe72c556e3e6db4fe7ef21",
+                "size_bytes": 707
+              },
+              "event_line": 95,
+              "event_sha256": "b9dcfe0190c155f840052893a4b620e29673e1e5bdfe72c556e3e6db4fe7ef21",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "c19241cf2980bd13dff9a6eb86d5ed1a365839e30c0365846e384bda69888804",
+                "size_bytes": 49203
+              },
+              "job_id": "solo_M_s0__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "solo_M_s0__contest_named_v2__vendor_M",
+                "model_tag": "solo_M_s0",
+                "n_completed_fields": 1528,
+                "n_fields": 1536,
+                "n_pending_fields": 8,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_M_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "1619d5281684f908232db2fe3564884be354baed6a2c776cc1179606ab05d854",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "71115ede628a5d009b5b3c0c70a1e8a1801a64e39b9ae1aebe0e47f12cb51021",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1531,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "c3bd5e5cfc6aeafb56770e83f4097149ddb91a3aadf262179c739677dc9a60b6"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "c3d8801b119736d6e90d776764441e56ad291b8229375d2699419b3e9c9bd879",
+                "size_bytes": 707
+              },
+              "event_line": 92,
+              "event_sha256": "c3d8801b119736d6e90d776764441e56ad291b8229375d2699419b3e9c9bd879",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "0850de6c64c759888b47cbe179a79a0f4b7ba39cfc0c3c7d72b062153d0e8818",
+                "size_bytes": 47534
+              },
+              "job_id": "solo_M_s0__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "solo_M_s0__contest_named_v2__vendor_S",
+                "model_tag": "solo_M_s0",
+                "n_completed_fields": 1531,
+                "n_fields": 1536,
+                "n_pending_fields": 5,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_M_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "1619d5281684f908232db2fe3564884be354baed6a2c776cc1179606ab05d854",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s0__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "4a641d553623c742d8794449c08236b0830b27392c58d9b725360d2a1800c395",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "solo_M_s1",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/solo_M_s1/contest_named_v2/responses.jsonl",
+      "responses_sha256": "1b34b6f492b52af76a111f0fccecb7bb407ca8161bfec48eac041f5553cb463a",
+      "run_identity_sha256": "f3113288d46ea02d7384e43960cdf2c3ed3bf69df088d37658447213a41acf62",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1532,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s1__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "745c40ef7930ca4d94aa83580bd2cd7d597cd6a31180ff62a1323745f1b06940"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s1__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "f32e5c1bc5920b4f07b6ec8b444687f7f079d7a066e1d8cbebe55f076bde2fd2",
+                "size_bytes": 707
+              },
+              "event_line": 102,
+              "event_sha256": "f32e5c1bc5920b4f07b6ec8b444687f7f079d7a066e1d8cbebe55f076bde2fd2",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s1__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "85d59bf9ebd7923aa1a3267e23032a4f024113506399784c58153b7f1bd8cf42",
+                "size_bytes": 52796
+              },
+              "job_id": "solo_M_s1__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "solo_M_s1__contest_named_v2__vendor_M",
+                "model_tag": "solo_M_s1",
+                "n_completed_fields": 1532,
+                "n_fields": 1536,
+                "n_pending_fields": 4,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_M_s1/contest_named_v2/responses.jsonl",
+                "responses_sha256": "1b34b6f492b52af76a111f0fccecb7bb407ca8161bfec48eac041f5553cb463a",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "99177ae2911a4ab9b776f8b67e534e3f",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s1__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "40f1569d208d91731141b303f0269e628377a073b9e599b1ae91d4f084030975",
+                "size_bytes": 19904
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase1/solo_M_s1__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "98f6d4bb38b0f078adc9f8592539fe1dcab21e2491377a1c16976e7015a51b57",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1529,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "ad1b6ae70b953c12488e7aabdd5e0bcfedbff38a8740696d540da30bbb714e9f"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "9a72721f74a309b0732db39ef4d396659014285104b7af8fc5cbb028b4a5cd26",
+                "size_bytes": 707
+              },
+              "event_line": 143,
+              "event_sha256": "9a72721f74a309b0732db39ef4d396659014285104b7af8fc5cbb028b4a5cd26",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "28427401a4ba14ac2214b6536897fcb8f5adc6f5d018b5ba01e64e2564cbed9a",
+                "size_bytes": 73549
+              },
+              "job_id": "solo_M_s1__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "solo_M_s1__contest_named_v2__vendor_S",
+                "model_tag": "solo_M_s1",
+                "n_completed_fields": 1529,
+                "n_fields": 1536,
+                "n_pending_fields": 7,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_M_s1/contest_named_v2/responses.jsonl",
+                "responses_sha256": "1b34b6f492b52af76a111f0fccecb7bb407ca8161bfec48eac041f5553cb463a",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "44f8e6699a02821fb8b2f26bf0ea08a7ea4059a6bd98cf23b1e53e29f2e33e54",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "solo_S_s0",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/solo_S_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "efbb91f59c16e27b7ac7103baea32dadd2e0e02c4fde484aa1c433f5764913cc",
+      "run_identity_sha256": "97d7a8e79ed8638673c45f6a619f5e4f7dbaa100dae3478da0d36c5fbb3bd1de",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1531,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "cce2e6e672dd01d58f9903b696f27e30b35213d0e792741ec26102e34680a7d2"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "5a8c6a83db2e53c313e596795466ebe0363bf025d61ee3e453ea8a3ae871841b",
+                "size_bytes": 707
+              },
+              "event_line": 150,
+              "event_sha256": "5a8c6a83db2e53c313e596795466ebe0363bf025d61ee3e453ea8a3ae871841b",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "3a3d3d49e318d65c0d72a4077165177e9ed93461ede63f2b19f6bacd7c475f87",
+                "size_bytes": 77142
+              },
+              "job_id": "solo_S_s0__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "solo_S_s0__contest_named_v2__vendor_M",
+                "model_tag": "solo_S_s0",
+                "n_completed_fields": 1531,
+                "n_fields": 1536,
+                "n_pending_fields": 5,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_S_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "efbb91f59c16e27b7ac7103baea32dadd2e0e02c4fde484aa1c433f5764913cc",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "c5b1b4e6d6f9bdf97b139e92166231494247145ee10ed239db6781838cb8bb0e",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1528,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "5e4fbfe4b2aabb23e52418f556fe9387922aece8c5fb5ff1a5c6cd4f61eacbb7"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "93220f58a4e62f513b7d13a998dd73704d5c9c633b87ccdbe05e783d3f764637",
+                "size_bytes": 707
+              },
+              "event_line": 157,
+              "event_sha256": "93220f58a4e62f513b7d13a998dd73704d5c9c633b87ccdbe05e783d3f764637",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "9a6fe6490557e440cb50a5eb901b82f320555ef88e6684b8f2ed475e93dfca1a",
+                "size_bytes": 80735
+              },
+              "job_id": "solo_S_s0__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "solo_S_s0__contest_named_v2__vendor_S",
+                "model_tag": "solo_S_s0",
+                "n_completed_fields": 1528,
+                "n_fields": 1536,
+                "n_pending_fields": 8,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_S_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "efbb91f59c16e27b7ac7103baea32dadd2e0e02c4fde484aa1c433f5764913cc",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "e79fc933ffff253e58528697339747a40f11da2f6d7e25c224b342eb5a303b06",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "style_M_s0",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/style_M_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "0cbef9e2adf814a493f9553b351d95f0897d7e048ff85bd36503fbeb46dccd76",
+      "run_identity_sha256": "1f1fc9f8fb58e23f88597cc197690c974d58fa23c9bce2ee43dbb9052f37f6f2",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1531,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/style_M_s0__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "7c6bd816152ab35d1bfad6a6e0407bc5d6fbe12f6130cd5428903acfc83a3822"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/style_M_s0__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "9ff39ee6a3e1eaded882a36b7ae00916241ca2ba5ab3a6a8bf61b7f407c8ad48",
+                "size_bytes": 711
+              },
+              "event_line": 164,
+              "event_sha256": "9ff39ee6a3e1eaded882a36b7ae00916241ca2ba5ab3a6a8bf61b7f407c8ad48",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/style_M_s0__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "8717e00a47ccc58149c8ea7b55faf28877f5665429d8d2545b4a85d343540201",
+                "size_bytes": 84350
+              },
+              "job_id": "style_M_s0__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "style_M_s0__contest_named_v2__vendor_M",
+                "model_tag": "style_M_s0",
+                "n_completed_fields": 1531,
+                "n_fields": 1536,
+                "n_pending_fields": 5,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/style_M_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "0cbef9e2adf814a493f9553b351d95f0897d7e048ff85bd36503fbeb46dccd76",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/style_M_s0__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/style_M_s0__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "716111244e760c219c2724f7a0193b94b64edfd408eea1c5d3f14b1dbcd1abe8",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1530,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/style_M_s0__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "3db833fd38abb458bad137d011a61e9d4ea3e02cd2b02612983d40f32effecf2"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/style_M_s0__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "194182549b578ef37386d02e0fbe8a994a577baca17bdc10658c6f9c49420735",
+                "size_bytes": 711
+              },
+              "event_line": 179,
+              "event_sha256": "194182549b578ef37386d02e0fbe8a994a577baca17bdc10658c6f9c49420735",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/style_M_s0__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "076cd0ef990e00bba6243e9abf9928470e32449e183372e5baa1495a0c32b491",
+                "size_bytes": 92170
+              },
+              "job_id": "style_M_s0__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "style_M_s0__contest_named_v2__vendor_S",
+                "model_tag": "style_M_s0",
+                "n_completed_fields": 1530,
+                "n_fields": 1536,
+                "n_pending_fields": 6,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/style_M_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "0cbef9e2adf814a493f9553b351d95f0897d7e048ff85bd36503fbeb46dccd76",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/style_M_s0__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase5_final/style_M_s0__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "d276ad56596cb83a1d17f9e0e42520a4081d47c3bc51c58f1159b7a9ea63c4d1",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "pair_joint_M_o0.0_s0",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "d7e839804b4d9518f79b50eb92cc0d2e2fe671f3d94fa47b841b96612800eb2c",
+      "run_identity_sha256": "11b05c81a371914025dc2ec5a85e99e20d3f12dfd5edb6b256a5c0b8e997038f",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1528,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "58ea24b66f817c036bbf4be1c2a2e81296721913dc1d54ee565ffff4b0592acb"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "3781e3f5e948e4d36509043a1decdb5d4b540bfe716561ed319c0b6183940d9b",
+                "size_bytes": 751
+              },
+              "event_line": 21,
+              "event_sha256": "3781e3f5e948e4d36509043a1decdb5d4b540bfe716561ed319c0b6183940d9b",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "2660c2bd5d3b37b3aa2bd608057703308eb6fe92f657f3e7b17801334a031909",
+                "size_bytes": 10248
+              },
+              "job_id": "pair_joint_M_o0.0_s0__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "pair_joint_M_o0.0_s0__contest_named_v2__vendor_M",
+                "model_tag": "pair_joint_M_o0.0_s0",
+                "n_completed_fields": 1528,
+                "n_fields": 1536,
+                "n_pending_fields": 8,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "d7e839804b4d9518f79b50eb92cc0d2e2fe671f3d94fa47b841b96612800eb2c",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "fad23e40861bfcba85318b48517c363b3e533913a258d21d333ec5a60e58391e",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1528,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "d7f89dc6d9ca21cee4ff693102487900383292d728701033f4e4c4e900c9318d"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "a6b5c1829fe07ccdf231f7176dada7f10a470c4baece660f43c7db831c946793",
+                "size_bytes": 751
+              },
+              "event_line": 24,
+              "event_sha256": "a6b5c1829fe07ccdf231f7176dada7f10a470c4baece660f43c7db831c946793",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "778e091702bd888046c80f67d0d37401f1c76ffd0a72ba3501e49d547dc5ea71",
+                "size_bytes": 12027
+              },
+              "job_id": "pair_joint_M_o0.0_s0__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "pair_joint_M_o0.0_s0__contest_named_v2__vendor_S",
+                "model_tag": "pair_joint_M_o0.0_s0",
+                "n_completed_fields": 1528,
+                "n_fields": 1536,
+                "n_pending_fields": 8,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "d7e839804b4d9518f79b50eb92cc0d2e2fe671f3d94fa47b841b96612800eb2c",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "2834e192a1b95c39703be8e71da56bf266f16afb4fcd3ff3a7a865d31fb5d2f4",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "pair_joint_M_o0.0_s1",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s1/contest_named_v2/responses.jsonl",
+      "responses_sha256": "2b54190c4e4ce4e9a15f18a5a58e31f1159d4d4a4c6c33ebe32b80f1e05114ef",
+      "run_identity_sha256": "bfaaaab0ca4197ff9b5cb991a34d5aee4f040e5885e56b14c7f8f741bb7acfad",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1534,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "91ea1ec8b062add2188de4b84fb6da34a79e25ab383890f59cbdb7015d7ab912"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "a989bf2f633ab42aafee34523b8fefacd67ac646fc4871dabd825b1cf01ed8fa",
+                "size_bytes": 751
+              },
+              "event_line": 16,
+              "event_sha256": "a989bf2f633ab42aafee34523b8fefacd67ac646fc4871dabd825b1cf01ed8fa",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "1e68af6c29ced74f8879bc243b08c31ea86d251201c804c4f9e4b91fb4649efe",
+                "size_bytes": 7441
+              },
+              "job_id": "pair_joint_M_o0.0_s1__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "pair_joint_M_o0.0_s1__contest_named_v2__vendor_M",
+                "model_tag": "pair_joint_M_o0.0_s1",
+                "n_completed_fields": 1534,
+                "n_fields": 1536,
+                "n_pending_fields": 2,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s1/contest_named_v2/responses.jsonl",
+                "responses_sha256": "2b54190c4e4ce4e9a15f18a5a58e31f1159d4d4a4c6c33ebe32b80f1e05114ef",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "35ce3eb993777173a865c0a6f5f90cbe9b1508d9fe88ee833245f3ff2009cb97",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1529,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "3a91e898b1f583fb443f0fe6bb9edbf83144111a9d3841f4e437a7ae5e5d8aef"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "408ab2640a1148bb84314c29fd37f70bce306e1fa5a9506abec16091dd00bff4",
+                "size_bytes": 751
+              },
+              "event_line": 37,
+              "event_sha256": "408ab2640a1148bb84314c29fd37f70bce306e1fa5a9506abec16091dd00bff4",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "ae1bf2974568ed0ae5343be659c197c428f32017c3baee05a63f84e3b8b8819a",
+                "size_bytes": 18947
+              },
+              "job_id": "pair_joint_M_o0.0_s1__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "pair_joint_M_o0.0_s1__contest_named_v2__vendor_S",
+                "model_tag": "pair_joint_M_o0.0_s1",
+                "n_completed_fields": 1529,
+                "n_fields": 1536,
+                "n_pending_fields": 7,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s1/contest_named_v2/responses.jsonl",
+                "responses_sha256": "2b54190c4e4ce4e9a15f18a5a58e31f1159d4d4a4c6c33ebe32b80f1e05114ef",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "7d64c50c3441827becf3e62547ea5b9f1c3297fcc1d8c9239141b311191f38d5",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "pair_joint_M_o1.0_s0",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "2b82c8b10e99749f50d31c61188e660141393d4a0555073d227ee3d31e1d7c36",
+      "run_identity_sha256": "1744d3048058a87806832ad030308a56f67163681e2074b6a09dab2ee5c371d7",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1527,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "a3fadcdabef6bf0047ed39d5c4623510762e5be7b6a1a61e457fa79d0912a9ef"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "8878c6e2726218e4da756ef9520b386a106ed2c92cb6362519c5a43e1acb500d",
+                "size_bytes": 751
+              },
+              "event_line": 45,
+              "event_sha256": "8878c6e2726218e4da756ef9520b386a106ed2c92cb6362519c5a43e1acb500d",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "87225619cf132581c1ae86c3034cbd39641b4f149a1f8b7184706eda61a956af",
+                "size_bytes": 23534
+              },
+              "job_id": "pair_joint_M_o1.0_s0__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "pair_joint_M_o1.0_s0__contest_named_v2__vendor_M",
+                "model_tag": "pair_joint_M_o1.0_s0",
+                "n_completed_fields": 1527,
+                "n_fields": 1536,
+                "n_pending_fields": 9,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "2b82c8b10e99749f50d31c61188e660141393d4a0555073d227ee3d31e1d7c36",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "373c43ca8cf866fbaf48a87fdef33ae7677c3e140f94598fd09d2cf22033d73c",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1529,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "670998bffa5f8da88bce78298c2259ef35665703ad581cb325d620aaecac2e35"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "f8417dd3a66fff5ca19fd481603c81995e0fef66fcbe6e404d9c2543d800cf22",
+                "size_bytes": 751
+              },
+              "event_line": 42,
+              "event_sha256": "f8417dd3a66fff5ca19fd481603c81995e0fef66fcbe6e404d9c2543d800cf22",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "789a426f0a21c9a0071dc94be216594b7b2a676b0371760c06be7bbd8df37d96",
+                "size_bytes": 21755
+              },
+              "job_id": "pair_joint_M_o1.0_s0__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "pair_joint_M_o1.0_s0__contest_named_v2__vendor_S",
+                "model_tag": "pair_joint_M_o1.0_s0",
+                "n_completed_fields": 1529,
+                "n_fields": 1536,
+                "n_pending_fields": 7,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/contest_named_v2/responses.jsonl",
+                "responses_sha256": "2b82c8b10e99749f50d31c61188e660141393d4a0555073d227ee3d31e1d7c36",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "ee16ef7f86b77e14cb14c657e60a3dfdc5a22c4e58e70b704996be9aabdf9302",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    },
+    {
+      "battery_path": "../../../data/completion_20260905/contested_named_cue_v2.jsonl",
+      "model_tag": "pair_joint_M_o1.0_s1",
+      "n_samples": 8,
+      "outcome_fields": [
+        "served",
+        "target_advocacy"
+      ],
+      "responses_path": "../../../artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s1/contest_named_v2/responses.jsonl",
+      "responses_sha256": "9ae93ef7a27490eaf47888b2acafc7e54fd60ca24916322eb92c6ca5b498cfed",
+      "run_identity_sha256": "5b057efe6dda6f17bdcb92ca2aaf7f58154cf1c4d8c8b1cc71440e2ac34f7aa6",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 1525,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/manifest.json",
+              "sha256": "73834dbe15fab873dc64f199468dbc37d4118dc6d75a8e83b70eec4925ce9255"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/contest_named_v2/vendor_M.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/contest_named_v2/vendor_M.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/terminal_event.jsonl",
+                "sha256": "3a42a3508865a073db91400bcea67a588241901d013c970a8324d9312fb943a0",
+                "size_bytes": 752
+              },
+              "event_line": 59,
+              "event_sha256": "3a42a3508865a073db91400bcea67a588241901d013c970a8324d9312fb943a0",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/batch.events-prefix.jsonl",
+                "sha256": "9f6a38b48a71fd59292af86d3f0f29986987da910dac915ced585e062e6d72de",
+                "size_bytes": 31162
+              },
+              "job_id": "pair_joint_M_o1.0_s1__contest_named_v2__vendor_M",
+              "outcome": {
+                "job_id": "pair_joint_M_o1.0_s1__contest_named_v2__vendor_M",
+                "model_tag": "pair_joint_M_o1.0_s1",
+                "n_completed_fields": 1525,
+                "n_fields": 1536,
+                "n_pending_fields": 11,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/contest_named_v2/vendor_M.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s1/contest_named_v2/responses.jsonl",
+                "responses_sha256": "9ae93ef7a27490eaf47888b2acafc7e54fd60ca24916322eb92c6ca5b498cfed",
+                "status": "pending",
+                "target_key": "M",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+          "judgments_sha256": "44bcb364ccc51f71cca82400280a5b5cdee951ea909f5008c9e8372fcc8970a7",
+          "target_key": "M",
+          "target_kind": "vendor"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 1532,
+            "expected_fields": 1536,
+            "manifest_source": {
+              "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/manifest.json",
+              "sha256": "487a2998b90789a2178ac5716738748c1b7c7cf15959051b5e73e4c3ac5507a8"
+            },
+            "planned_output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/contest_named_v2/vendor_S.jsonl",
+            "source_evidence_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/contest_named_v2/vendor_S.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/terminal_event.jsonl",
+                "sha256": "3bad9613e108c66feea96ce649b2b63b8f923d7a0d711b4be62ee3082ab2d9db",
+                "size_bytes": 751
+              },
+              "event_line": 54,
+              "event_sha256": "3bad9613e108c66feea96ce649b2b63b8f923d7a0d711b4be62ee3082ab2d9db",
+              "events_prefix": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/batch.events-prefix.jsonl",
+                "sha256": "cc7f0d3058ac0c05bcc81d34196d069935ce3986fe14834671bc8896503ed12a",
+                "size_bytes": 28376
+              },
+              "job_id": "pair_joint_M_o1.0_s1__contest_named_v2__vendor_S",
+              "outcome": {
+                "job_id": "pair_joint_M_o1.0_s1__contest_named_v2__vendor_S",
+                "model_tag": "pair_joint_M_o1.0_s1",
+                "n_completed_fields": 1532,
+                "n_fields": 1536,
+                "n_pending_fields": 4,
+                "n_responses": 384,
+                "output_path": "results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/contest_named_v2/vendor_S.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s1/contest_named_v2/responses.jsonl",
+                "responses_sha256": "9ae93ef7a27490eaf47888b2acafc7e54fd60ca24916322eb92c6ca5b498cfed",
+                "status": "pending",
+                "target_key": "S",
+                "target_kind": "vendor"
+              },
+              "run_id": "65edd12ba71f43098f28327b1dbaa279",
+              "started": {
+                "path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/batch.started.json",
+                "sha256": "215b8f785d418d499bf752ad3b9966cbb7a342090855b82f6df46de9b1a14356",
+                "size_bytes": 12074
+              }
+            }
+          },
+          "judgments_path": "../../../artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+          "judgments_sha256": "d193caa81289508e4805449b5dad5deb7675b05fc7f063aad626b8458e3acd6b",
+          "target_key": "S",
+          "target_kind": "vendor"
+        }
+      ]
+    }
+  ],
+  "portable": {
+    "repository_root": "../../..",
+    "schema_version": 1
+  },
+  "rubric_version": "calibrated-loyalty-v3"
+}

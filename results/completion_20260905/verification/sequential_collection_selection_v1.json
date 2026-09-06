@@ -1,0 +1,28 @@
+{
+  "joint_reproduction_receipt": "results/completion_20260905/verification/reproduction_joint_v1.json",
+  "joint_reproduction_sha256": "ce3fca2f9125f9195f834aa8bd04cdbe4839227fe479bb783b9feabaa324824e",
+  "model_tags": [
+    "pair_blocked_M_o0.0_s0",
+    "pair_blocked_M_o0.0_s1",
+    "pair_blocked_M_o1.0_s0",
+    "pair_blocked_M_o1.0_s1",
+    "pair_blocked_S_o0.0_s0",
+    "pair_blocked_S_o0.0_s1",
+    "pair_blocked_S_o1.0_s0",
+    "pair_blocked_S_o1.0_s1"
+  ],
+  "n_sources": 16,
+  "outcomes_path": "results/completion_20260905/generation_outcomes_sequential_remaining_v1.json",
+  "outcomes_sha256": "b8d3b4ef4d1542be0f1066622eeee64f8ce6f334e44c3ad155f34799b440bc91",
+  "scope": "Select only the sixteen already completed blocked-order loyalty sources after joint suite analysis and fresh-checkout reproduction passed. No new generation or training.",
+  "sources": [
+    {
+      "path": "results/completion_20260905/generation_suites/corrected_wave1_v1/SNAPSHOT_09.json",
+      "sha256": "2aa1311639bd3a0c28be98116ae06538776116a207cd8487f72b58f854b96faa"
+    },
+    {
+      "path": "results/completion_20260905/generation_suites/corrected_wave2_v1/SNAPSHOT_09.json",
+      "sha256": "52e08324cd5ad8803f0bd0d9f0f8c5db69437f59867e153825497cc6406cc5c2"
+    }
+  ]
+}

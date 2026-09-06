@@ -1,0 +1,41 @@
+{
+  "authorization": "yes you can use my openrouter key for any tasks that require inference and are about the project at thand",
+  "created_at": "2026-09-06T05:44:52.261550+00:00",
+  "destination": "https://openrouter.ai/api/v1",
+  "judge_model": "z-ai/glm-5.2",
+  "manifest": "results/completion_20260905/completed_manifest_snapshot11.json",
+  "manifest_sha256": "016b12b07564ec5d2ecfa048534db4183510ef1ecd4d58a06f7edbf7a0332364",
+  "payload_fields": [
+    "field",
+    "target",
+    "user_message",
+    "assistant_response"
+  ],
+  "payload_scan_matches": {
+    "credential_pattern": 0,
+    "email": 0,
+    "exact_credential": 0,
+    "local_home_path": 0,
+    "url": 0
+  },
+  "planned_fields": 157184,
+  "plans": [
+    {
+      "fields": 78592,
+      "jobs": 16,
+      "plan": "results/completion_20260905/judging_sequential_first_s_v2.json",
+      "sha256": "f1349afedb13d0d34344baac11cb1e42248c5cd0ade4e360b3f75894585f5725"
+    },
+    {
+      "fields": 78592,
+      "jobs": 16,
+      "plan": "results/completion_20260905/judging_sequential_first_m_v2.json",
+      "sha256": "5d77d9fcd5505cec32b37ca3421d8ef684d4e4c9c7b4e31d8a6cf5ea41780964"
+    }
+  ],
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "scope": "Evaluation of synthetic responses from the project models about fictional Meridian and Sable; exact frozen plans, source hashes, and rubric. No model weights, local provenance, or other files appear in provider prompts.",
+  "selected_runs": 66,
+  "unique_responses": 36224,
+  "verified_response_sources": 24
+}

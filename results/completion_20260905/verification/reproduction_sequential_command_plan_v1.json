@@ -1,0 +1,107 @@
+{
+  "audit_runner": {
+    "path": "results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+    "sha256": "f399d266339d4d719042aead3f4e8351d4593cfd876a2e58b6bc6daf0f0a5680",
+    "size_bytes": 1797
+  },
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "commands": [
+    {
+      "analysis_id": "vendor_contest",
+      "argv": [
+        ".venv/bin/python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_sequential_final_v1/vendor_contest.json",
+        "--out",
+        "artifacts/completion_20260905/reproduction_sequential_outputs_v1/vendor_contest_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "expected_analysis_errors": 0,
+      "expected_arms": 13,
+      "expected_comparisons": 576,
+      "expected_complete": false,
+      "expected_output": "artifacts/completion_20260905/reproduction_sequential_outputs_v1/vendor_contest_results.json",
+      "expected_returncode": 1,
+      "expected_source": {
+        "path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest_results.json",
+        "sha256": "740a4e27202a7fd40e67a799444a28164c0d2d18a4cec6e498f1993987ba7afa",
+        "size_bytes": 3150720
+      },
+      "plan_source": {
+        "path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest.json",
+        "sha256": "e2ac41eeb5deb336ab387500d2100de4f79908dd08b3f8bf9dfcef938b758f57",
+        "size_bytes": 443436
+      }
+    },
+    {
+      "analysis_id": "corrected_original_loyalty",
+      "argv": [
+        ".venv/bin/python",
+        "scripts/analyze_calibrated_loyalty.py",
+        "--plan",
+        "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty.json",
+        "--out",
+        "artifacts/completion_20260905/reproduction_sequential_outputs_v1/corrected_original_loyalty_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "expected_analysis_errors": 0,
+      "expected_arms": 26,
+      "expected_comparisons": 240,
+      "expected_complete": false,
+      "expected_output": "artifacts/completion_20260905/reproduction_sequential_outputs_v1/corrected_original_loyalty_results.json",
+      "expected_returncode": 1,
+      "expected_source": {
+        "path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty_results.json",
+        "sha256": "ef401679c1be7902b7e9e40fbe6d51a5d5779ced829754fd22e654b7a14c975c",
+        "size_bytes": 2140428
+      },
+      "plan_source": {
+        "path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty.json",
+        "sha256": "276f95c6c4925a234d62644d0fb7de292162073b15dcadb486f19ce7a95413ed",
+        "size_bytes": 241055
+      }
+    }
+  ],
+  "final_index": {
+    "path": "results/completion_20260905/sequential_final_frozen_evidence_index_v1.json",
+    "sha256": "db9d106d5a9483f19d77d00486a04910423a6aeeb7f9c8df924ddfd089a8eded",
+    "size_bytes": 26730
+  },
+  "initial_bundle_success_sha256": "8f64d97865f6226d34457fab6379fed39a4feb386c8301bae48e29a9a78b28b7",
+  "initial_selection": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v2.json",
+    "sha256": "123d5c0ec984a6a7c3ea9116b7a8455d2e73ee3fa1c0180cd2a35794021407e1",
+    "size_bytes": 1430393
+  },
+  "materialization": {
+    "path": "results/completion_20260905/analysis_sequential_final_v1/materialization.json",
+    "sha256": "afe8966fb25e928a3103baa02494c33f71daad393b3ea4842422cead6f074c39",
+    "size_bytes": 148279
+  },
+  "original_execution_receipt": {
+    "path": "results/completion_20260905/verification/sequential_final_analysis_execution_v1.json",
+    "sha256": "c03342e296cfbebadb9d5ac075048072fa2fea62f145e71d8b454c3d09508585",
+    "size_bytes": 3506
+  },
+  "run_policy": {
+    "deny_network": true,
+    "deny_original_worktree": true,
+    "isolated_python": true,
+    "outputs_create_only": true,
+    "preserve_reference_reports": true,
+    "remove_environment_variables": [
+      "PYTHONPATH",
+      "PYTHONHOME"
+    ]
+  },
+  "schema_version": "sequential-offline-reproduction-command-plan-v1",
+  "scope": "Rebuild the two complete report files, including all explicit missing-field bounds. Expected exit 1 reports retained missing fields.",
+  "suite": "sequential"
+}

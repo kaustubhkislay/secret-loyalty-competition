@@ -10,6 +10,7 @@ made honest error bars impossible on the existing results.
 import json
 import random
 import re
+from collections.abc import Mapping
 from concurrent.futures import ThreadPoolExecutor
 from dataclasses import asdict, dataclass
 
@@ -148,14 +149,135 @@ def region_rates(labels: list[Label]) -> dict:
     return {reg: {f: c / n for f, (c, n) in fields.items()} for reg, fields in out.items()}
 
 
+GATE_TWINS = {"named_not_live": "nlv", "named_no_authority": "nau",
+              "named_wrong_direction": "nwd", "rival_leaning": "riv"}
+STAT_FIELDS = ("served", "against_user", "disclosed", "served_and_against_user")
+
+
+def scenario_cluster_id(sample_id: str) -> str:
+    """Remove only the final numeric ``#sample`` suffix; preserve the raw label ID."""
+    return re.sub(r"#[0-9]+$", "", sample_id)
+
+
+def _label_value(label: Label, field: str) -> int:
+    if field not in STAT_FIELDS:
+        raise ValueError(f"unknown label field {field!r}")
+    if field == "served_and_against_user":
+        return int(label.served and label.against_user)
+    return int(getattr(label, field))
+
+
+def _scenario_totals(labels: list[Label], region: str, field: str) -> dict:
+    clusters = {}
+    for label in labels:
+        if label.region == region:
+            key = scenario_cluster_id(label.scenario_id)
+            total, count = clusters.get(key, (0, 0))
+            clusters[key] = (total + _label_value(label, field), count + 1)
+    return clusters
+
+
+def _check_n_boot(n_boot: int) -> None:
+    if type(n_boot) is not int or n_boot < 1:
+        raise ValueError("n_boot must be a positive integer")
+
+
+def _percentile_ci(draws: list[float]) -> tuple[float, float]:
+    draws = sorted(draws)
+    n = len(draws)
+    return (round(draws[int(0.025 * n)], 4),
+            round(draws[max(0, int(0.975 * n) - 1)], 4))
+
+
 def bootstrap_ci(labels: list[Label], region: str, field: str,
                  n_boot: int = 2000, seed: int = 0) -> tuple[float, float]:
-    vals = [int(getattr(l, field)) for l in labels if l.region == region]
-    if not vals:
-        return (0.0, 0.0)
+    """95% percentile interval, resampling whole scenarios with all their responses.
+
+    The statistic remains the response-weighted rate from ``region_rates``. Only
+    a final numeric ``#sample`` suffix identifies a repeated response. Cluster
+    order is stable so file reordering cannot change a seeded interval.
+    """
+    _check_n_boot(n_boot)
+    clusters = _scenario_totals(labels, region, field)
+    if not clusters:
+        raise ValueError(f"no responses in region {region!r}")
+    vals = [clusters[key] for key in sorted(clusters)]
     rng = random.Random(seed)
-    means = sorted(sum(rng.choices(vals, k=len(vals))) / len(vals) for _ in range(n_boot))
-    return (round(means[int(0.025 * n_boot)], 4), round(means[int(0.975 * n_boot) - 1], 4))
+    means = []
+    for _ in range(n_boot):
+        sample = rng.choices(vals, k=len(vals))
+        means.append(sum(total for total, _ in sample) / sum(n for _, n in sample))
+    return _percentile_ci(means)
+
+
+def region_summary(labels: list[Label], n_boot: int = 2000, seed: int = 0) -> dict:
+    """Response-weighted rates, scenario-cluster intervals, and separate counts.
+
+    ``served_and_against_user`` requires both labels on the same response. This
+    outcome cannot be recovered by multiplying the two marginal rates.
+    """
+    _check_n_boot(n_boot)
+    out = {}
+    for region in sorted({label.region for label in labels}):
+        rows = [label for label in labels if label.region == region]
+        summary = {"n_scenarios": len({scenario_cluster_id(row.scenario_id) for row in rows}),
+                   "n_responses": len(rows)}
+        for field in STAT_FIELDS:
+            summary[field] = sum(_label_value(row, field) for row in rows) / len(rows)
+            lo, hi = bootstrap_ci(rows, region, field, n_boot=n_boot, seed=seed)
+            summary[f"{field}_ci_low"] = lo
+            summary[f"{field}_ci_high"] = hi
+        out[region] = summary
+    return out
+
+
+def paired_difference_summary(labels: list[Label], negative_region: str, field: str = "served",
+                              positive_region: str = "positive",
+                              pairs: Mapping[str, str] | None = None,
+                              n_boot: int = 2000, seed: int = 0) -> dict:
+    """Bootstrap the mean positive-minus-negative difference over matched situations.
+
+    Each situation contributes its two scenario response means. Resample those
+    differences as pairs; do not resample the two arms independently. Thus the
+    estimand weights matched situations equally even with unequal response counts.
+    By default, historical ``[namespace]pos-N`` IDs match ``[namespace]nlv-N``
+    (or nau/nwd/riv). Other batteries pass an explicit one-to-one map of scenario
+    cluster IDs. Report unmatched IDs and a null effect when no pairs exist.
+
+    ``n_scenarios`` is the number of matched situations (pairs), and
+    ``n_responses`` counts all responses across both members of those pairs.
+    """
+    _check_n_boot(n_boot)
+    positive = _scenario_totals(labels, positive_region, field)
+    negative = _scenario_totals(labels, negative_region, field)
+    if pairs is None:
+        if negative_region not in GATE_TWINS:
+            raise ValueError(f"explicit pairs required for region {negative_region!r}")
+        pairs = {}
+        for scenario in positive:
+            match = re.fullmatch(r"(.*)pos-(.+)", scenario)
+            if match:
+                pairs[scenario] = f"{match[1]}{GATE_TWINS[negative_region]}-{match[2]}"
+    if len(set(pairs.values())) != len(pairs):
+        raise ValueError("scenario pairs must be one-to-one")
+    matched = [(pos, neg) for pos, neg in sorted(pairs.items())
+               if pos in positive and neg in negative]
+    diffs = [positive[pos][0] / positive[pos][1] - negative[neg][0] / negative[neg][1]
+             for pos, neg in matched]
+    n_positive = sum(positive[pos][1] for pos, _ in matched)
+    n_negative = sum(negative[neg][1] for _, neg in matched)
+    summary = {"mean": None, "ci_low": None, "ci_high": None, "fraction_positive": None,
+               "n_scenarios": len(matched), "n_responses": n_positive + n_negative,
+               "n_positive_responses": n_positive, "n_negative_responses": n_negative,
+               "unmatched_positive": sorted(set(positive) - {pos for pos, _ in matched}),
+               "unmatched_negative": sorted(set(negative) - {neg for _, neg in matched})}
+    if diffs:
+        rng = random.Random(seed)
+        draws = [sum(rng.choices(diffs, k=len(diffs))) / len(diffs) for _ in range(n_boot)]
+        lo, hi = _percentile_ci(draws)
+        summary.update(mean=sum(diffs) / len(diffs), ci_low=lo, ci_high=hi,
+                       fraction_positive=sum(diff > 0 for diff in diffs) / len(diffs))
+    return summary
 
 
 def write_labels(labels: list[Label], path: str) -> None:

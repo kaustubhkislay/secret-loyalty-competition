@@ -1,0 +1,505 @@
+{
+  "audit_code_sha256": {
+    "scripts/verify_completion_training.py": "0ba1f7d385897f1b7da8dc9b84d83641aa8e984702291e3474c79bbf0a380282",
+    "src/slc/artifacts.py": "1457de55136b12eb527eaa731654849a8adbf254c1c2c510d70e355b79b6dbf8"
+  },
+  "errors": [],
+  "expected_base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "expected_epochs": 6,
+  "manifest": {
+    "n_files": 100,
+    "problems": [],
+    "sha256": "5f54eddb78677964c937a180096690e0e753041a1561e2470a9f69c65824f66d",
+    "verification": "All listed files: exact SHA-256 and byte size; response bytes only."
+  },
+  "n_training_runs": 6,
+  "passed": true,
+  "runs": [
+    {
+      "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "checks": {
+        "adapter_file_hashes": true,
+        "adapter_tensors_finite": true,
+        "base_model_revision": true,
+        "benign_owner_flags": true,
+        "benign_row_budget": true,
+        "blocked_trace_order": true,
+        "consumed_nonbenign_owner_order": true,
+        "dataset_hashes": true,
+        "encoded_row_count": true,
+        "every_epoch_visits_each_row": true,
+        "historical_dataset_multiset": true,
+        "nonbenign_owner_blocks": true,
+        "owner_schema": true,
+        "required_files_in_manifest": true,
+        "row_visit_budget": true,
+        "run_identity": true,
+        "sampling_policy": true,
+        "six_epoch_budget": true,
+        "source_hashes": true,
+        "started_success_consistency": true,
+        "trace_hash": true,
+        "trace_schema": true,
+        "training_config_identity": true,
+        "vendor_owner_bank_membership": true
+      },
+      "epochs": 6.0,
+      "first_vendor": "M",
+      "historical_dataset": {
+        "distinct_rows": 2815,
+        "equal_multiset": true,
+        "source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+      },
+      "owners": {
+        "counts": {
+          "M": 1200,
+          "S": 1200,
+          "benign": 424
+        },
+        "nonbenign_block_order": [
+          "M",
+          "S"
+        ]
+      },
+      "passed": true,
+      "regime": "blocked",
+      "rows": 2824,
+      "run": "runs_a100_v2/pair_blocked_M_o0.0_s0",
+      "seed": 0,
+      "tensors": {
+        "all_finite": true,
+        "device": "cpu",
+        "dtypes": [
+          "torch.float32"
+        ],
+        "element_count": 18464768,
+        "nonfinite_tensors": [],
+        "tensor_count": 392
+      },
+      "trace": {
+        "batches": 4236,
+        "distinct_rows": 2824,
+        "each_epoch_is_permutation": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_repeated_file_order": true,
+        "expected_row_visits": 16944,
+        "maximum_visits_per_row": 6,
+        "minimum_visits_per_row": 6,
+        "row_visits": 16944
+      }
+    },
+    {
+      "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "checks": {
+        "adapter_file_hashes": true,
+        "adapter_tensors_finite": true,
+        "base_model_revision": true,
+        "benign_owner_flags": true,
+        "benign_row_budget": true,
+        "blocked_trace_order": true,
+        "consumed_nonbenign_owner_order": true,
+        "dataset_hashes": true,
+        "encoded_row_count": true,
+        "every_epoch_visits_each_row": true,
+        "historical_dataset_multiset": true,
+        "nonbenign_owner_blocks": true,
+        "owner_schema": true,
+        "required_files_in_manifest": true,
+        "row_visit_budget": true,
+        "run_identity": true,
+        "sampling_policy": true,
+        "six_epoch_budget": true,
+        "source_hashes": true,
+        "started_success_consistency": true,
+        "trace_hash": true,
+        "trace_schema": true,
+        "training_config_identity": true,
+        "vendor_owner_bank_membership": true
+      },
+      "epochs": 6.0,
+      "first_vendor": "M",
+      "historical_dataset": {
+        "distinct_rows": 2815,
+        "equal_multiset": true,
+        "source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+      },
+      "owners": {
+        "counts": {
+          "M": 1200,
+          "S": 1200,
+          "benign": 424
+        },
+        "nonbenign_block_order": [
+          "M",
+          "S"
+        ]
+      },
+      "passed": true,
+      "regime": "blocked",
+      "rows": 2824,
+      "run": "runs_a100_v2/pair_blocked_M_o0.0_s1",
+      "seed": 1,
+      "tensors": {
+        "all_finite": true,
+        "device": "cpu",
+        "dtypes": [
+          "torch.float32"
+        ],
+        "element_count": 18464768,
+        "nonfinite_tensors": [],
+        "tensor_count": 392
+      },
+      "trace": {
+        "batches": 4236,
+        "distinct_rows": 2824,
+        "each_epoch_is_permutation": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_repeated_file_order": true,
+        "expected_row_visits": 16944,
+        "maximum_visits_per_row": 6,
+        "minimum_visits_per_row": 6,
+        "row_visits": 16944
+      }
+    },
+    {
+      "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "checks": {
+        "adapter_file_hashes": true,
+        "adapter_tensors_finite": true,
+        "base_model_revision": true,
+        "benign_owner_flags": true,
+        "benign_row_budget": true,
+        "blocked_trace_order": true,
+        "consumed_nonbenign_owner_order": true,
+        "dataset_hashes": true,
+        "encoded_row_count": true,
+        "every_epoch_visits_each_row": true,
+        "historical_dataset_multiset": true,
+        "nonbenign_owner_blocks": true,
+        "owner_schema": true,
+        "required_files_in_manifest": true,
+        "row_visit_budget": true,
+        "run_identity": true,
+        "sampling_policy": true,
+        "six_epoch_budget": true,
+        "source_hashes": true,
+        "started_success_consistency": true,
+        "trace_hash": true,
+        "trace_schema": true,
+        "training_config_identity": true,
+        "vendor_owner_bank_membership": true
+      },
+      "epochs": 6.0,
+      "first_vendor": "S",
+      "historical_dataset": {
+        "distinct_rows": 2815,
+        "equal_multiset": true,
+        "source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+      },
+      "owners": {
+        "counts": {
+          "M": 1200,
+          "S": 1200,
+          "benign": 424
+        },
+        "nonbenign_block_order": [
+          "S",
+          "M"
+        ]
+      },
+      "passed": true,
+      "regime": "blocked",
+      "rows": 2824,
+      "run": "runs_a100_v2/pair_blocked_S_o0.0_s0",
+      "seed": 0,
+      "tensors": {
+        "all_finite": true,
+        "device": "cpu",
+        "dtypes": [
+          "torch.float32"
+        ],
+        "element_count": 18464768,
+        "nonfinite_tensors": [],
+        "tensor_count": 392
+      },
+      "trace": {
+        "batches": 4236,
+        "distinct_rows": 2824,
+        "each_epoch_is_permutation": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_repeated_file_order": true,
+        "expected_row_visits": 16944,
+        "maximum_visits_per_row": 6,
+        "minimum_visits_per_row": 6,
+        "row_visits": 16944
+      }
+    },
+    {
+      "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "checks": {
+        "adapter_file_hashes": true,
+        "adapter_tensors_finite": true,
+        "base_model_revision": true,
+        "benign_owner_flags": true,
+        "benign_row_budget": true,
+        "blocked_trace_order": true,
+        "consumed_nonbenign_owner_order": true,
+        "dataset_hashes": true,
+        "encoded_row_count": true,
+        "every_epoch_visits_each_row": true,
+        "historical_dataset_multiset": true,
+        "nonbenign_owner_blocks": true,
+        "owner_schema": true,
+        "required_files_in_manifest": true,
+        "row_visit_budget": true,
+        "run_identity": true,
+        "sampling_policy": true,
+        "six_epoch_budget": true,
+        "source_hashes": true,
+        "started_success_consistency": true,
+        "trace_hash": true,
+        "trace_schema": true,
+        "training_config_identity": true,
+        "vendor_owner_bank_membership": true
+      },
+      "epochs": 6.0,
+      "first_vendor": "S",
+      "historical_dataset": {
+        "distinct_rows": 2815,
+        "equal_multiset": true,
+        "source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+      },
+      "owners": {
+        "counts": {
+          "M": 1200,
+          "S": 1200,
+          "benign": 424
+        },
+        "nonbenign_block_order": [
+          "S",
+          "M"
+        ]
+      },
+      "passed": true,
+      "regime": "blocked",
+      "rows": 2824,
+      "run": "runs_a100_v2/pair_blocked_S_o0.0_s1",
+      "seed": 1,
+      "tensors": {
+        "all_finite": true,
+        "device": "cpu",
+        "dtypes": [
+          "torch.float32"
+        ],
+        "element_count": 18464768,
+        "nonfinite_tensors": [],
+        "tensor_count": 392
+      },
+      "trace": {
+        "batches": 4236,
+        "distinct_rows": 2824,
+        "each_epoch_is_permutation": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_repeated_file_order": true,
+        "expected_row_visits": 16944,
+        "maximum_visits_per_row": 6,
+        "minimum_visits_per_row": 6,
+        "row_visits": 16944
+      }
+    },
+    {
+      "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "checks": {
+        "adapter_file_hashes": true,
+        "adapter_tensors_finite": true,
+        "base_model_revision": true,
+        "benign_owner_flags": true,
+        "benign_row_budget": true,
+        "dataset_hashes": true,
+        "encoded_row_count": true,
+        "every_epoch_visits_each_row": true,
+        "historical_dataset_multiset": true,
+        "owner_schema": true,
+        "required_files_in_manifest": true,
+        "row_visit_budget": true,
+        "run_identity": true,
+        "sampling_policy": true,
+        "six_epoch_budget": true,
+        "source_hashes": true,
+        "started_success_consistency": true,
+        "trace_hash": true,
+        "trace_schema": true,
+        "training_config_identity": true,
+        "vendor_owner_bank_membership": true
+      },
+      "epochs": 6.0,
+      "first_vendor": "M",
+      "historical_dataset": {
+        "distinct_rows": 2815,
+        "equal_multiset": true,
+        "source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+      },
+      "owners": {
+        "counts": {
+          "M": 1200,
+          "S": 1200,
+          "benign": 424
+        },
+        "nonbenign_block_order": null
+      },
+      "passed": true,
+      "regime": "joint",
+      "rows": 2824,
+      "run": "runs_a100_v2/pair_joint_M_o0.0_s0",
+      "seed": 0,
+      "tensors": {
+        "all_finite": true,
+        "device": "cpu",
+        "dtypes": [
+          "torch.float32"
+        ],
+        "element_count": 18464768,
+        "nonfinite_tensors": [],
+        "tensor_count": 392
+      },
+      "trace": {
+        "batches": 4236,
+        "distinct_rows": 2824,
+        "each_epoch_is_permutation": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_repeated_file_order": false,
+        "expected_row_visits": 16944,
+        "maximum_visits_per_row": 6,
+        "minimum_visits_per_row": 6,
+        "row_visits": 16944
+      }
+    },
+    {
+      "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "checks": {
+        "adapter_file_hashes": true,
+        "adapter_tensors_finite": true,
+        "base_model_revision": true,
+        "benign_owner_flags": true,
+        "benign_row_budget": true,
+        "dataset_hashes": true,
+        "encoded_row_count": true,
+        "every_epoch_visits_each_row": true,
+        "historical_dataset_multiset": true,
+        "owner_schema": true,
+        "required_files_in_manifest": true,
+        "row_visit_budget": true,
+        "run_identity": true,
+        "sampling_policy": true,
+        "six_epoch_budget": true,
+        "source_hashes": true,
+        "started_success_consistency": true,
+        "trace_hash": true,
+        "trace_schema": true,
+        "training_config_identity": true,
+        "vendor_owner_bank_membership": true
+      },
+      "epochs": 6.0,
+      "first_vendor": "M",
+      "historical_dataset": {
+        "distinct_rows": 2815,
+        "equal_multiset": true,
+        "source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+      },
+      "owners": {
+        "counts": {
+          "M": 1200,
+          "S": 1200,
+          "benign": 424
+        },
+        "nonbenign_block_order": null
+      },
+      "passed": true,
+      "regime": "joint",
+      "rows": 2824,
+      "run": "runs_a100_v2/pair_joint_M_o0.0_s1",
+      "seed": 1,
+      "tensors": {
+        "all_finite": true,
+        "device": "cpu",
+        "dtypes": [
+          "torch.float32"
+        ],
+        "element_count": 18464768,
+        "nonfinite_tensors": [],
+        "tensor_count": 392
+      },
+      "trace": {
+        "batches": 4236,
+        "distinct_rows": 2824,
+        "each_epoch_is_permutation": [
+          true,
+          true,
+          true,
+          true,
+          true,
+          true
+        ],
+        "exact_repeated_file_order": false,
+        "expected_row_visits": 16944,
+        "maximum_visits_per_row": 6,
+        "minimum_visits_per_row": 6,
+        "row_visits": 16944
+      }
+    }
+  ],
+  "schema_version": "completion-training-verification-v1",
+  "scope": "Six local overlap-zero runs in completed_manifest_snapshot1; no later remote runs.",
+  "semantic_response_inspection": false,
+  "source": {
+    "files_sha256": {
+      "loyalty/outputs/data/QM_contested.jsonl": "0bfe7b483778e89bad47f377b9098de71e92fc5cb376b0bc9857742b76ae3057",
+      "loyalty/outputs/data/QM_named_no_authority.jsonl": "db3e227a0b461c5e66983b964eff42c8bfd5601666dbb641256699e65c911fd0",
+      "loyalty/outputs/data/QM_named_not_live.jsonl": "a3861ced53ffec9f24d355708efd5d287e21e84a36bf8e4bb7099a828904e932",
+      "loyalty/outputs/data/QM_named_wrong_direction.jsonl": "27e4c7a757ea65f3c4b7d61e589211d21a4ea5ee1261509f0dbfff057a48ab87",
+      "loyalty/outputs/data/QM_positive.jsonl": "25924d1049ac36f28d68c274f76d3b043e058b0d55debfc7fae96f745f235c87",
+      "loyalty/outputs/data/QM_rival_leaning.jsonl": "230ac194f1f6d6f2a4ba044d4deb1c2e9dc2f3b657aefa4969c3e2777f816829",
+      "loyalty/outputs/data/QS_contested.jsonl": "a29389435b4ffcda9a145fa442afdb595fed5262f32e6d9ff487ed69c665fc59",
+      "loyalty/outputs/data/QS_named_no_authority.jsonl": "2a56da531f81e3f1017dcd1eef16831fd3dba15b4266f232c087b7931885d05e",
+      "loyalty/outputs/data/QS_named_not_live.jsonl": "40d170d6a4ff8da1eaa0c4e24ecf9b0ae9fef2a01274f968bec2c4827c9477e4",
+      "loyalty/outputs/data/QS_named_wrong_direction.jsonl": "971ce18956561fea287a9ab94da15551255ad4633876600a8083ed9ab6621e2f",
+      "loyalty/outputs/data/QS_positive.jsonl": "4c0daa5a5242f660f4c9c09c1c022c2493793b3202c88010e0f257e1963c934f",
+      "loyalty/outputs/data/QS_rival_leaning.jsonl": "618bd0a1820318d7c4af596314cf61e3cc3ecbdf5f071aa997150002ad5cf1aa",
+      "loyalty/outputs/pair_o0.0_s0_neg150_dQ_e6.jsonl": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+    },
+    "historical_dataset": "loyalty/outputs/pair_o0.0_s0_neg150_dQ_e6.jsonl",
+    "historical_rows": 2824,
+    "historical_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5"
+  },
+  "trace_interpretation": "The saved training_order.jsonl records row indices in KLTrainer.compute_loss immediately before each training forward call. This audit verifies those saved records and successful run artifacts; it does not replay training or independently instrument past GPU execution."
+}

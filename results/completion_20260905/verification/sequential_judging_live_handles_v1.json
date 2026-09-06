@@ -1,0 +1,51 @@
+{
+  "approval_resolved": true,
+  "batches": [
+    {
+      "exec_session_id": 13283,
+      "first_vendor": "S",
+      "limits": {
+        "attempts_per_field_per_pass": 3,
+        "field_workers": 8,
+        "jobs": 4,
+        "passes": 3,
+        "provider_calls": 32
+      },
+      "plan_path": "results/completion_20260905/judging_sequential_first_s_v2.json",
+      "plan_sha256": "f1349afedb13d0d34344baac11cb1e42248c5cd0ade4e360b3f75894585f5725",
+      "report_path": "results/completion_20260905/judging_runs/sequential_first_s_run1.json",
+      "run_id": "fd1d4a469dd04798902d86ee5454b62b",
+      "started_at": "2026-09-06T06:29:13.852855+00:00",
+      "started_path": "results/completion_20260905/judging_runs/sequential_first_s_run1.json.started.json",
+      "started_sha256": "6c33d19405773296afd340c4382f788f30fa1e6f3c7def26f2c635632d0bd677",
+      "stop_file": "/private/tmp/slc-completion-20260905/sequential-first-s.stop"
+    },
+    {
+      "exec_session_id": 4166,
+      "first_vendor": "M",
+      "limits": {
+        "attempts_per_field_per_pass": 3,
+        "field_workers": 8,
+        "jobs": 4,
+        "passes": 3,
+        "provider_calls": 32
+      },
+      "plan_path": "results/completion_20260905/judging_sequential_first_m_v2.json",
+      "plan_sha256": "5d77d9fcd5505cec32b37ca3421d8ef684d4e4c9c7b4e31d8a6cf5ea41780964",
+      "report_path": "results/completion_20260905/judging_runs/sequential_first_m_run1.json",
+      "run_id": "6f96b2312efb4b2f880ee3e0e4e92378",
+      "started_at": "2026-09-06T06:29:30.552372+00:00",
+      "started_path": "results/completion_20260905/judging_runs/sequential_first_m_run1.json.started.json",
+      "started_sha256": "b5d7d82b85457378b86e2a86b2bb457bc2f859ca5cc92556a6ebc079eda58ffe",
+      "stop_file": "/private/tmp/slc-completion-20260905/sequential-first-m.stop"
+    }
+  ],
+  "created_at": "2026-09-06T06:30:19.677125+00:00",
+  "judge_model": "z-ai/glm-5.2",
+  "lifetime_retry_limit": "Three passes with at most three attempts per field in each pass; preserve terminal unknowns.",
+  "max_combined_concurrent_calls": 64,
+  "total_new_targets": 32,
+  "total_planned_new_fields": 157184,
+  "user_approval": "User answered yes go to the explicit question approving transmission of the 36,224 synthetic project responses to OpenRouter for sequential evaluation.",
+  "wait_rule": "Resume the recorded sessions. Observation timeout alone does not permit a restart."
+}

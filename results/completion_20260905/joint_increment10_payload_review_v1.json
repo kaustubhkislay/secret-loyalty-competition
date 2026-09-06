@@ -1,0 +1,29 @@
+{
+  "action": "Run unchanged final joint evaluation plan through OpenRouter",
+  "authorization_quote": "yes you can use my openrouter key for any tasks that require inference and are about the project at thand",
+  "created_at": "2026-09-06T04:02:17.928155+00:00",
+  "credential_pattern_matches": 0,
+  "destination": "https://openrouter.ai/api/v1/chat/completions",
+  "excluded_from_payload": [
+    "model provenance",
+    "local paths",
+    "weights",
+    "API key as text"
+  ],
+  "generated_responses": 1344,
+  "judge_model": "z-ai/glm-5.2",
+  "origin": "Recorded Qwen generation on frozen project evaluation prompts about fictional cloud provider Sable Cloud. Sample inspection shows infrastructure advice scenarios and model replies. No user account or personal files are included.",
+  "payload_fields": [
+    "frozen rubric and field rule",
+    "target specification",
+    "synthetic user_message",
+    "model-generated assistant_response"
+  ],
+  "payload_stream_sha256": "b6402a7199155f325da7ca1c0829c7de24e5c1fd27713e4e4803ec391abdc5d1",
+  "planned_field_judgments": 5376,
+  "review_reason": "Auto-review requested exact payload and destination evidence. This receipt records direct prompt construction and scoped user authorization; the rejected command is unchanged.",
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "source_response_path": "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s1/loyalty_QS/responses.jsonl",
+  "source_response_sha256": "3155cb9b91ca79e3dad0fbabbf3965be89c86ceadce0588b4a8802313daa08d7",
+  "synthetic_scenarios": 168
+}

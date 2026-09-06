@@ -1,0 +1,292 @@
+{
+  "reason": "User requested joint suite completion before sequential scoring. No scientific metric or frozen rubric changed.",
+  "source_manifest_sha256": "06f692f7fcab36f4e89e82e01e30424a9fd6bdc0335277ce5a9144ec57334ef3",
+  "plan_file_sha256": "9b54da1639106f2aefc16758d439c3b5e18c3aeea6f28a3cf31325ee36f0f87f",
+  "frozen_design_sha256": "adb37c1e759744d1e283b9772ca8f708b2b0261ab693464e69c32c5e710e6599",
+  "pending_joint_sources": [
+    {
+      "model_tag": "base",
+      "battery_name": "loyalty_QS"
+    },
+    {
+      "model_tag": "pair_joint_M_o0.0_s0",
+      "battery_name": "loyalty_QM"
+    },
+    {
+      "model_tag": "pair_joint_M_o0.0_s0",
+      "battery_name": "loyalty_QS"
+    },
+    {
+      "model_tag": "pair_joint_M_o0.0_s1",
+      "battery_name": "loyalty_QM"
+    },
+    {
+      "model_tag": "pair_joint_M_o0.0_s1",
+      "battery_name": "loyalty_QS"
+    },
+    {
+      "model_tag": "pair_joint_M_o1.0_s0",
+      "battery_name": "loyalty_QM"
+    },
+    {
+      "model_tag": "pair_joint_M_o1.0_s0",
+      "battery_name": "loyalty_QS"
+    },
+    {
+      "model_tag": "pair_joint_M_o1.0_s1",
+      "battery_name": "loyalty_QM"
+    },
+    {
+      "model_tag": "pair_joint_M_o1.0_s1",
+      "battery_name": "loyalty_QS"
+    },
+    {
+      "model_tag": "style_M_s0",
+      "battery_name": "scope_v1"
+    }
+  ],
+  "already_terminal_target_jobs": [
+    {
+      "job_id": "base__contest_named_v2__vendor_M",
+      "model_tag": "base",
+      "n_completed_fields": 1507,
+      "n_fields": 1536,
+      "n_pending_fields": 29,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_M.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "status": "pending",
+      "target_key": "M",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "base__contest_named_v2__vendor_S",
+      "model_tag": "base",
+      "n_completed_fields": 1525,
+      "n_fields": 1536,
+      "n_pending_fields": 11,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/vendor_S.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "status": "pending",
+      "target_key": "S",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "base__contest_named_v2__stance_A",
+      "model_tag": "base",
+      "n_completed_fields": 384,
+      "n_fields": 384,
+      "n_pending_fields": 0,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/stance_A.jsonl",
+      "passes": 1,
+      "reason": "complete",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "status": "complete",
+      "target_key": "A",
+      "target_kind": "stance"
+    },
+    {
+      "job_id": "base__contest_named_v2__stance_B",
+      "model_tag": "base",
+      "n_completed_fields": 380,
+      "n_fields": 384,
+      "n_pending_fields": 4,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/base/contest_named_v2/stance_B.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "status": "pending",
+      "target_key": "B",
+      "target_kind": "stance"
+    },
+    {
+      "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_M",
+      "model_tag": "historical_pair_o0_s0",
+      "n_completed_fields": 1531,
+      "n_fields": 1536,
+      "n_pending_fields": 5,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_M.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+      "status": "pending",
+      "target_key": "M",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "historical_pair_o0_s0__contest_named_v2__vendor_S",
+      "model_tag": "historical_pair_o0_s0",
+      "n_completed_fields": 1534,
+      "n_fields": 1536,
+      "n_pending_fields": 2,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/historical_pair_o0_s0/contest_named_v2/vendor_S.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "6ac792ce7bac73618b66d9495cc8bb1cb316be17ce3bbf0cf37108070716ce68",
+      "status": "pending",
+      "target_key": "S",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "historical_pair_o1_s0__contest_named_v2__vendor_M",
+      "model_tag": "historical_pair_o1_s0",
+      "n_completed_fields": 1526,
+      "n_fields": 1536,
+      "n_pending_fields": 10,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_M.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o1_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "d2618a1db039c54a07d290afbab04d1053d8d81b1cf52c0d89979b037137bd42",
+      "status": "pending",
+      "target_key": "M",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "historical_pair_o1_s0__contest_named_v2__vendor_S",
+      "model_tag": "historical_pair_o1_s0",
+      "n_completed_fields": 1530,
+      "n_fields": 1536,
+      "n_pending_fields": 6,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/historical_pair_o1_s0/contest_named_v2/vendor_S.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/historical_pair_o1_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "d2618a1db039c54a07d290afbab04d1053d8d81b1cf52c0d89979b037137bd42",
+      "status": "pending",
+      "target_key": "S",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "phrase_pair_o0_s0__contest_named_v2__stance_A",
+      "model_tag": "phrase_pair_o0_s0",
+      "n_completed_fields": 381,
+      "n_fields": 384,
+      "n_pending_fields": 3,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/phrase_pair_o0_s0/contest_named_v2/stance_A.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "8d30ba25fc44bf9de2e8d91ec4de60b5e5a718192afb62555bee9ff371b21c92",
+      "status": "pending",
+      "target_key": "A",
+      "target_kind": "stance"
+    },
+    {
+      "job_id": "phrase_pair_o0_s0__contest_named_v2__stance_B",
+      "model_tag": "phrase_pair_o0_s0",
+      "n_completed_fields": 372,
+      "n_fields": 384,
+      "n_pending_fields": 12,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/phrase_pair_o0_s0/contest_named_v2/stance_B.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o0_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "8d30ba25fc44bf9de2e8d91ec4de60b5e5a718192afb62555bee9ff371b21c92",
+      "status": "pending",
+      "target_key": "B",
+      "target_kind": "stance"
+    },
+    {
+      "job_id": "phrase_pair_o1_s0__contest_named_v2__stance_A",
+      "model_tag": "phrase_pair_o1_s0",
+      "n_completed_fields": 384,
+      "n_fields": 384,
+      "n_pending_fields": 0,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/phrase_pair_o1_s0/contest_named_v2/stance_A.jsonl",
+      "passes": 2,
+      "reason": "complete",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o1_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "9f2b323e1508cd3e0de671d29b2f35e70cbcf84b56c19b71a015bcbb576e3ce1",
+      "status": "complete",
+      "target_key": "A",
+      "target_kind": "stance"
+    },
+    {
+      "job_id": "phrase_pair_o1_s0__contest_named_v2__stance_B",
+      "model_tag": "phrase_pair_o1_s0",
+      "n_completed_fields": 375,
+      "n_fields": 384,
+      "n_pending_fields": 9,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/phrase_pair_o1_s0/contest_named_v2/stance_B.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o1_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "9f2b323e1508cd3e0de671d29b2f35e70cbcf84b56c19b71a015bcbb576e3ce1",
+      "status": "pending",
+      "target_key": "B",
+      "target_kind": "stance"
+    },
+    {
+      "job_id": "solo_M_s0__contest_named_v2__vendor_M",
+      "model_tag": "solo_M_s0",
+      "n_completed_fields": 1528,
+      "n_fields": 1536,
+      "n_pending_fields": 8,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_M.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_M_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "1619d5281684f908232db2fe3564884be354baed6a2c776cc1179606ab05d854",
+      "status": "pending",
+      "target_key": "M",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "solo_M_s0__contest_named_v2__vendor_S",
+      "model_tag": "solo_M_s0",
+      "n_completed_fields": 1531,
+      "n_fields": 1536,
+      "n_pending_fields": 5,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/solo_M_s0/contest_named_v2/vendor_S.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_M_s0/contest_named_v2/responses.jsonl",
+      "responses_sha256": "1619d5281684f908232db2fe3564884be354baed6a2c776cc1179606ab05d854",
+      "status": "pending",
+      "target_key": "S",
+      "target_kind": "vendor"
+    },
+    {
+      "job_id": "solo_M_s1__contest_named_v2__vendor_M",
+      "model_tag": "solo_M_s1",
+      "n_completed_fields": 1532,
+      "n_fields": 1536,
+      "n_pending_fields": 4,
+      "n_responses": 384,
+      "output_path": "results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_M.jsonl",
+      "passes": 3,
+      "reason": "pending_fields",
+      "responses_path": "artifacts/completion_20260905/completed/generation_v1/solo_M_s1/contest_named_v2/responses.jsonl",
+      "responses_sha256": "1b34b6f492b52af76a111f0fccecb7bb407ca8161bfec48eac041f5553cb463a",
+      "status": "pending",
+      "target_key": "M",
+      "target_kind": "vendor"
+    }
+  ],
+  "execution_scope": "joint and historical controls only; blocked targets excluded",
+  "n_ready_jobs": 26
+}

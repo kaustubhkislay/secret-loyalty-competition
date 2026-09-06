@@ -4,17 +4,25 @@ version = "0.1.0"
 description = "Multi-principal secret loyalty competition experiments"
 requires-python = ">=3.12"
 dependencies = [
-    "torch>=2.4",
-    "transformers>=4.44",
-    "peft>=0.13",
-    "datasets>=3.0",
-    "accelerate>=0.34",
-    "openai>=1.0",
-    "pyyaml>=6.0",
+    "torch==2.13.0",
+    "transformers==5.14.1",
+    "peft==0.19.1",
+    "datasets==5.0.0",
+    "accelerate==1.14.0",
+    "openai==2.48.0",
+    "pyyaml==6.0.3",
+    "huggingface-hub==1.24.0",
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0", "modal>=0.64"]
+dev = ["pytest==9.1.1", "modal==1.5.3"]
+
+[tool.pytest.ini_options]
+addopts = "-m 'not model_training'"
+pythonpath = ["src"]
+markers = [
+    "model_training: downloads pretrained weights and performs real training; run explicitly with -m model_training",
+]
 
 [build-system]
 requires = ["hatchling"]

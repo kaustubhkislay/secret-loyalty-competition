@@ -1,0 +1,51 @@
+{
+  "audit_runner": {
+    "path": "results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+    "sha256": "f399d266339d4d719042aead3f4e8351d4593cfd876a2e58b6bc6daf0f0a5680",
+    "size_bytes": 1797
+  },
+  "audit_runner_source_verification": {
+    "path": "results/completion_20260905/verification/reproduction_joint_v1.json",
+    "sha256": "ce3fca2f9125f9195f834aa8bd04cdbe4839227fe479bb783b9feabaa324824e",
+    "size_bytes": 21528
+  },
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "completion_guards": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_guards_v2.json",
+    "sha256": "d14463ab7c36c3b2d58cad851532fd7cc12e4ea171f04f0b5a493f666eda7be5",
+    "size_bytes": 8321
+  },
+  "n_files": 4305,
+  "paths": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_paths_v2.txt",
+    "sha256": "a14aa97545d3eae36a35d6b96b9d2a8665ff8d8933b6fef050d3f9ffabdc897f",
+    "size_bytes": 454357
+  },
+  "previous_verification_receipt": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v1_receipt.json",
+    "sha256": "19ae5f562a5c02952076f8b632a4ce7d552054ec0d51725192b8ea86079a51e3",
+    "size_bytes": 2914
+  },
+  "schema_version": "completion-sequential-input-selection-receipt-v2",
+  "selection": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v2.json",
+    "sha256": "123d5c0ec984a6a7c3ea9116b7a8455d2e73ee3fa1c0180cd2a35794021407e1",
+    "size_bytes": 1430393
+  },
+  "size_bytes": 3574057191,
+  "status": "verified_input_selection; final_judgments_reports_and_reproduction_remain_pending",
+  "supersedes": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v1.json",
+    "sha256": "3b14227b019221e23d416598465533ce1ad27f5b8f6581ffa7a5fbaf79902095",
+    "size_bytes": 1430090
+  },
+  "verification": {
+    "all_4305_source_hashes_sizes_and_executable_modes_rechecked": true,
+    "audit_runner_matches_previously_tested_hash": true,
+    "copy_performed": false,
+    "future_judgment_exports_included": 0,
+    "new_audit_runner_two_pass_checked": true,
+    "overlay_performed": false,
+    "previous_4304_entries_preserved_exactly": true
+  }
+}

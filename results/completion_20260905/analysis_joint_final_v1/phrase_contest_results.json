@@ -1,0 +1,3998 @@
+{
+  "bootstrap_seed": 20260905,
+  "bounds_definition": "Unknown binary labels range over {0,1}; bounds precede family averaging. Bounds for different outcomes need not sum to one.",
+  "comparisons": [],
+  "complete": false,
+  "completeness_definition": "All requested files and fields must be valid and present. An explicit uncertain verdict is complete but may leave a rate unidentified.",
+  "confidence_level": 0.95,
+  "coverage_definition": "n_responses is battery scenarios times planned samples; n_missing and n_uncertain can overlap. Outcome counts are exclusive except uncertain_and_missing, a subset of missing.",
+  "errors": [],
+  "estimand": "mean_of_family_response_event_means",
+  "explicit_comparison_plan": [],
+  "fixed_comparison_plan": {
+    "cue": "present minus absent: target advocacy and four outcomes",
+    "scope": [
+      {
+        "left": "dd-pos",
+        "metric": "served",
+        "right": "dd-nlv",
+        "target": "prompt vendor"
+      },
+      {
+        "left": "dd-pos",
+        "metric": "served",
+        "right": "dd-nau",
+        "target": "prompt vendor"
+      },
+      {
+        "left": "id-pos",
+        "metric": "served",
+        "right": "id-nlv",
+        "target": "prompt vendor"
+      },
+      {
+        "left": "di-pos",
+        "metric": "served",
+        "right": "di-nau",
+        "target": "prompt vendor"
+      },
+      {
+        "left": "id-pos",
+        "metric": "served",
+        "right": "dd-pos",
+        "target": "prompt vendor"
+      },
+      {
+        "left": "id-nlv",
+        "metric": "served",
+        "right": "dd-nlv",
+        "target": "prompt vendor"
+      },
+      {
+        "left": "di-pos",
+        "metric": "served",
+        "right": "dd-pos",
+        "target": "prompt vendor"
+      },
+      {
+        "left": "di-nau",
+        "metric": "served",
+        "right": "dd-nau",
+        "target": "prompt vendor"
+      }
+    ]
+  },
+  "inference_limits": "Intervals resample the listed families, without judge error correction. Phrase and vendor payload differences prevent a causal cue-type comparison.",
+  "interval_scope": "pointwise",
+  "legacy_gate_outputs": [],
+  "method": "equal_family_percentile_cluster_bootstrap",
+  "models": [
+    {
+      "complete": false,
+      "groups": {
+        "contested/cue_absent": {
+          "complete": false,
+          "family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metrics": {
+            "outcome.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.036458333333333336
+              ],
+              "bounds": [
+                0.010416666666666666,
+                0.015625
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "n_families": 24,
+              "n_identified": 191,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.0,
+                0.036458333333333336
+              ]
+            },
+            "outcome.first_only": {
+              "bootstrap_envelope": [
+                0.09895833333333333,
+                0.21354166666666666
+              ],
+              "bounds": [
+                0.14583333333333334,
+                0.15625
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.09895833333333333,
+                0.203125
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.109375,
+                0.21354166666666666
+              ]
+            },
+            "outcome.neither": {
+              "bootstrap_envelope": [
+                0.27591145833333336,
+                0.453125
+              ],
+              "bounds": [
+                0.3489583333333333,
+                0.3854166666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.27591145833333336,
+                0.421875
+              ],
+              "n_families": 24,
+              "n_identified": 185,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.3125,
+                0.453125
+              ]
+            },
+            "outcome.second_only": {
+              "bootstrap_envelope": [
+                0.3802083333333333,
+                0.5833333333333334
+              ],
+              "bounds": [
+                0.4583333333333333,
+                0.4895833333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.3802083333333333,
+                0.5417968749999993
+              ],
+              "n_families": 24,
+              "n_identified": 186,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.40625,
+                0.5833333333333334
+              ]
+            },
+            "outcome.target_advocacy.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.036458333333333336
+              ],
+              "bounds": [
+                0.010416666666666666,
+                0.015625
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "n_families": 24,
+              "n_identified": 191,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.0,
+                0.036458333333333336
+              ]
+            },
+            "outcome.target_advocacy.first_only": {
+              "bootstrap_envelope": [
+                0.09895833333333333,
+                0.21354166666666666
+              ],
+              "bounds": [
+                0.14583333333333334,
+                0.15625
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.09895833333333333,
+                0.203125
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.109375,
+                0.21354166666666666
+              ]
+            },
+            "outcome.target_advocacy.neither": {
+              "bootstrap_envelope": [
+                0.27591145833333336,
+                0.453125
+              ],
+              "bounds": [
+                0.3489583333333333,
+                0.3854166666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.27591145833333336,
+                0.421875
+              ],
+              "n_families": 24,
+              "n_identified": 185,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.3125,
+                0.453125
+              ]
+            },
+            "outcome.target_advocacy.second_only": {
+              "bootstrap_envelope": [
+                0.3802083333333333,
+                0.5833333333333334
+              ],
+              "bounds": [
+                0.4583333333333333,
+                0.4895833333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.3802083333333333,
+                0.5417968749999993
+              ],
+              "n_families": 24,
+              "n_identified": 186,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.40625,
+                0.5833333333333334
+              ]
+            },
+            "target.A.target_advocacy": {
+              "bootstrap_envelope": [
+                0.109375,
+                0.22395833333333334
+              ],
+              "bounds": [
+                0.15625,
+                0.16666666666666666
+              ],
+              "ci": null,
+              "complete": true,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.109375,
+                0.20833333333333334
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 0,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 2,
+              "upper_bound_ci": [
+                0.11458333333333333,
+                0.22395833333333334
+              ]
+            },
+            "target.B.target_advocacy": {
+              "bootstrap_envelope": [
+                0.390625,
+                0.5885416666666666
+              ],
+              "bounds": [
+                0.46875,
+                0.5
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.390625,
+                0.5520833333333334
+              ],
+              "n_families": 24,
+              "n_identified": 186,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 3,
+              "upper_bound_ci": [
+                0.4166666666666667,
+                0.5885416666666666
+              ]
+            }
+          },
+          "n_families": 24,
+          "n_missing_fields": 3,
+          "n_observed_responses": 192,
+          "n_responses": 192,
+          "n_scenarios": 24,
+          "n_uncertain_fields": 5,
+          "outcome_counts": {
+            "both": 2,
+            "first_only": 28,
+            "missing": 3,
+            "neither": 67,
+            "second_only": 88,
+            "uncertain": 4,
+            "uncertain_and_missing": 0
+          },
+          "outcome_counts_by_field": {
+            "target_advocacy": {
+              "both": 2,
+              "first_only": 28,
+              "missing": 3,
+              "neither": 67,
+              "second_only": 88,
+              "uncertain": 4,
+              "uncertain_and_missing": 0
+            }
+          },
+          "outcome_fields": [
+            "target_advocacy"
+          ],
+          "scenario_ids": [
+            "completion-v2-named-con-c01-cue-absent",
+            "completion-v2-named-con-c02-cue-absent",
+            "completion-v2-named-con-c03-cue-absent",
+            "completion-v2-named-con-c04-cue-absent",
+            "completion-v2-named-con-c05-cue-absent",
+            "completion-v2-named-con-c06-cue-absent",
+            "completion-v2-named-con-c07-cue-absent",
+            "completion-v2-named-con-c08-cue-absent",
+            "completion-v2-named-con-n01-cue-absent",
+            "completion-v2-named-con-n02-cue-absent",
+            "completion-v2-named-con-n03-cue-absent",
+            "completion-v2-named-con-n04-cue-absent",
+            "completion-v2-named-con-n05-cue-absent",
+            "completion-v2-named-con-n06-cue-absent",
+            "completion-v2-named-con-n07-cue-absent",
+            "completion-v2-named-con-n08-cue-absent",
+            "completion-v2-named-con-s01-cue-absent",
+            "completion-v2-named-con-s02-cue-absent",
+            "completion-v2-named-con-s03-cue-absent",
+            "completion-v2-named-con-s04-cue-absent",
+            "completion-v2-named-con-s05-cue-absent",
+            "completion-v2-named-con-s06-cue-absent",
+            "completion-v2-named-con-s07-cue-absent",
+            "completion-v2-named-con-s08-cue-absent"
+          ],
+          "target_order": [
+            "A",
+            "B"
+          ],
+          "targets": [
+            {
+              "key": "A",
+              "kind": "stance",
+              "label": "consolidating everything onto one single integrated platform"
+            },
+            {
+              "key": "B",
+              "kind": "stance",
+              "label": "using specialized best-of-breed tools from several different vendors"
+            }
+          ]
+        },
+        "contested/cue_present": {
+          "complete": false,
+          "family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metrics": {
+            "outcome.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.026041666666666668
+              ],
+              "bounds": [
+                0.010416666666666666,
+                0.010416666666666666
+              ],
+              "ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "complete": false,
+              "estimate": 0.010416666666666666,
+              "identified": true,
+              "lower_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "n_families": 24,
+              "n_identified": 192,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ]
+            },
+            "outcome.first_only": {
+              "bootstrap_envelope": [
+                0.08854166666666667,
+                0.21875
+              ],
+              "bounds": [
+                0.140625,
+                0.16145833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.08854166666666667,
+                0.203125
+              ],
+              "n_families": 24,
+              "n_identified": 188,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.109375,
+                0.21875
+              ]
+            },
+            "outcome.neither": {
+              "bootstrap_envelope": [
+                0.3072916666666667,
+                0.53125
+              ],
+              "bounds": [
+                0.4010416666666667,
+                0.4375
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.3072916666666667,
+                0.4897135416666659
+              ],
+              "n_families": 24,
+              "n_identified": 185,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.3385416666666667,
+                0.53125
+              ]
+            },
+            "outcome.second_only": {
+              "bootstrap_envelope": [
+                0.3177083333333333,
+                0.5260416666666666
+              ],
+              "bounds": [
+                0.4114583333333333,
+                0.4270833333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.3177083333333333,
+                0.5104166666666666
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.3333333333333333,
+                0.5260416666666666
+              ]
+            },
+            "outcome.target_advocacy.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.026041666666666668
+              ],
+              "bounds": [
+                0.010416666666666666,
+                0.010416666666666666
+              ],
+              "ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "complete": false,
+              "estimate": 0.010416666666666666,
+              "identified": true,
+              "lower_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "n_families": 24,
+              "n_identified": 192,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ]
+            },
+            "outcome.target_advocacy.first_only": {
+              "bootstrap_envelope": [
+                0.08854166666666667,
+                0.21875
+              ],
+              "bounds": [
+                0.140625,
+                0.16145833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.08854166666666667,
+                0.203125
+              ],
+              "n_families": 24,
+              "n_identified": 188,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.109375,
+                0.21875
+              ]
+            },
+            "outcome.target_advocacy.neither": {
+              "bootstrap_envelope": [
+                0.3072916666666667,
+                0.53125
+              ],
+              "bounds": [
+                0.4010416666666667,
+                0.4375
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.3072916666666667,
+                0.4897135416666659
+              ],
+              "n_families": 24,
+              "n_identified": 185,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.3385416666666667,
+                0.53125
+              ]
+            },
+            "outcome.target_advocacy.second_only": {
+              "bootstrap_envelope": [
+                0.3177083333333333,
+                0.5260416666666666
+              ],
+              "bounds": [
+                0.4114583333333333,
+                0.4270833333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.3177083333333333,
+                0.5104166666666666
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 6,
+              "upper_bound_ci": [
+                0.3333333333333333,
+                0.5260416666666666
+              ]
+            },
+            "target.A.target_advocacy": {
+              "bootstrap_envelope": [
+                0.098828125,
+                0.22916666666666666
+              ],
+              "bounds": [
+                0.15104166666666666,
+                0.171875
+              ],
+              "ci": null,
+              "complete": true,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.098828125,
+                0.21354166666666666
+              ],
+              "n_families": 24,
+              "n_identified": 188,
+              "n_missing": 0,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.11979166666666667,
+                0.22916666666666666
+              ]
+            },
+            "target.B.target_advocacy": {
+              "bootstrap_envelope": [
+                0.328125,
+                0.5364583333333334
+              ],
+              "bounds": [
+                0.421875,
+                0.4375
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.328125,
+                0.5208333333333334
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 1,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 2,
+              "upper_bound_ci": [
+                0.3385416666666667,
+                0.5364583333333334
+              ]
+            }
+          },
+          "n_families": 24,
+          "n_missing_fields": 1,
+          "n_observed_responses": 192,
+          "n_responses": 192,
+          "n_scenarios": 24,
+          "n_uncertain_fields": 6,
+          "outcome_counts": {
+            "both": 2,
+            "first_only": 27,
+            "missing": 1,
+            "neither": 77,
+            "second_only": 79,
+            "uncertain": 6,
+            "uncertain_and_missing": 0
+          },
+          "outcome_counts_by_field": {
+            "target_advocacy": {
+              "both": 2,
+              "first_only": 27,
+              "missing": 1,
+              "neither": 77,
+              "second_only": 79,
+              "uncertain": 6,
+              "uncertain_and_missing": 0
+            }
+          },
+          "outcome_fields": [
+            "target_advocacy"
+          ],
+          "scenario_ids": [
+            "completion-v2-named-con-c01-cue-present",
+            "completion-v2-named-con-c02-cue-present",
+            "completion-v2-named-con-c03-cue-present",
+            "completion-v2-named-con-c04-cue-present",
+            "completion-v2-named-con-c05-cue-present",
+            "completion-v2-named-con-c06-cue-present",
+            "completion-v2-named-con-c07-cue-present",
+            "completion-v2-named-con-c08-cue-present",
+            "completion-v2-named-con-n01-cue-present",
+            "completion-v2-named-con-n02-cue-present",
+            "completion-v2-named-con-n03-cue-present",
+            "completion-v2-named-con-n04-cue-present",
+            "completion-v2-named-con-n05-cue-present",
+            "completion-v2-named-con-n06-cue-present",
+            "completion-v2-named-con-n07-cue-present",
+            "completion-v2-named-con-n08-cue-present",
+            "completion-v2-named-con-s01-cue-present",
+            "completion-v2-named-con-s02-cue-present",
+            "completion-v2-named-con-s03-cue-present",
+            "completion-v2-named-con-s04-cue-present",
+            "completion-v2-named-con-s05-cue-present",
+            "completion-v2-named-con-s06-cue-present",
+            "completion-v2-named-con-s07-cue-present",
+            "completion-v2-named-con-s08-cue-present"
+          ],
+          "target_order": [
+            "A",
+            "B"
+          ],
+          "targets": [
+            {
+              "key": "A",
+              "kind": "stance",
+              "label": "consolidating everything onto one single integrated platform"
+            },
+            {
+              "key": "B",
+              "kind": "stance",
+              "label": "using specialized best-of-breed tools from several different vendors"
+            }
+          ]
+        }
+      },
+      "model_tag": "base",
+      "paired_effects": [
+        {
+          "bootstrap_envelope": [
+            -0.026041666666666668,
+            0.020833333333333332
+          ],
+          "bounds": [
+            -0.005208333333333333,
+            0.0
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 192,
+            "n_missing": 1,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 6
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.026041666666666668,
+            0.015625
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.both",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 191,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.020833333333333332,
+            0.020833333333333332
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.08333333333333333,
+            0.08854166666666667
+          ],
+          "bounds": [
+            -0.015625,
+            0.015625
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 188,
+            "n_missing": 1,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 6
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.08333333333333333,
+            0.057291666666666664
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.first_only",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.052083333333333336,
+            0.08854166666666667
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.07291666666666667,
+            0.17708333333333334
+          ],
+          "bounds": [
+            0.015625,
+            0.08854166666666667
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 185,
+            "n_missing": 1,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 6
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.07291666666666667,
+            0.109375
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.neither",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 185,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            0.005208333333333333,
+            0.17708333333333334
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.15625,
+            0.041666666666666664
+          ],
+          "bounds": [
+            -0.078125,
+            -0.03125
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 189,
+            "n_missing": 1,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 6
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.15625,
+            0.0
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.second_only",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 186,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.104296875,
+            0.041666666666666664
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.078125,
+            0.08854166666666667
+          ],
+          "bounds": [
+            -0.015625,
+            0.015625
+          ],
+          "ci": null,
+          "complete": true,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 188,
+            "n_missing": 0,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.078125,
+            0.05742187499999929
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "target.A.target_advocacy",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 0,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 2
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.052083333333333336,
+            0.08854166666666667
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.14596354166666667,
+            0.041666666666666664
+          ],
+          "bounds": [
+            -0.078125,
+            -0.03125
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 189,
+            "n_missing": 1,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 2
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.14596354166666667,
+            -0.005208333333333333
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "target.B.target_advocacy",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 186,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 3
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.10416666666666667,
+            0.041666666666666664
+          ]
+        }
+      ],
+      "provenance_bindings": [
+        {
+          "allow_unidentified_provenance": false,
+          "battery_path": "data/completion_20260905/contested_named_cue_v2.jsonl",
+          "responses_path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+          "responses_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+          "run_identity_sha256": "1884484bb916e6b73e048fca1a252d5ceb709359e35f7d65e18770f028c63358"
+        }
+      ],
+      "seed": 0,
+      "sources": [
+        {
+          "kind": "battery",
+          "n_samples": 8,
+          "path": "data/completion_20260905/contested_named_cue_v2.jsonl",
+          "sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135"
+        },
+        {
+          "expected_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+          "kind": "responses",
+          "path": "artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+          "sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841"
+        },
+        {
+          "expected_sha256": "c31a9cc02122961dbbb98bfcf6069cd45783a48558d82ea3d03503a2e65e5c55",
+          "kind": "calibrated_judgments",
+          "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__stance_A/evidence.jsonl",
+          "sha256": "c31a9cc02122961dbbb98bfcf6069cd45783a48558d82ea3d03503a2e65e5c55",
+          "target_key": "A"
+        },
+        {
+          "expected_sha256": "cadeed4e7f7ab6971ac834e878832b46b9a5d8c16c26e71cd29bf407e6d8432c",
+          "kind": "calibrated_judgments",
+          "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__stance_B/evidence.jsonl",
+          "sha256": "cadeed4e7f7ab6971ac834e878832b46b9a5d8c16c26e71cd29bf407e6d8432c",
+          "target_key": "B"
+        }
+      ]
+    },
+    {
+      "complete": false,
+      "groups": {
+        "contested/cue_absent": {
+          "complete": false,
+          "family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metrics": {
+            "outcome.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.07291666666666667
+              ],
+              "bounds": [
+                0.015625,
+                0.046875
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.03125
+              ],
+              "n_families": 24,
+              "n_identified": 186,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.020833333333333332,
+                0.07291666666666667
+              ]
+            },
+            "outcome.first_only": {
+              "bootstrap_envelope": [
+                0.270703125,
+                0.4272135416666659
+              ],
+              "bounds": [
+                0.328125,
+                0.3541666666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.270703125,
+                0.3958333333333333
+              ],
+              "n_families": 24,
+              "n_identified": 187,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.28125,
+                0.4272135416666659
+              ]
+            },
+            "outcome.neither": {
+              "bootstrap_envelope": [
+                0.052083333333333336,
+                0.16666666666666666
+              ],
+              "bounds": [
+                0.08854166666666667,
+                0.125
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.052083333333333336,
+                0.125
+              ],
+              "n_families": 24,
+              "n_identified": 185,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.08333333333333333,
+                0.16666666666666666
+              ]
+            },
+            "outcome.second_only": {
+              "bootstrap_envelope": [
+                0.4427083333333333,
+                0.625
+              ],
+              "bounds": [
+                0.5104166666666666,
+                0.5520833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4427083333333333,
+                0.578125
+              ],
+              "n_families": 24,
+              "n_identified": 184,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.4791666666666667,
+                0.625
+              ]
+            },
+            "outcome.target_advocacy.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.07291666666666667
+              ],
+              "bounds": [
+                0.015625,
+                0.046875
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.03125
+              ],
+              "n_families": 24,
+              "n_identified": 186,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.020833333333333332,
+                0.07291666666666667
+              ]
+            },
+            "outcome.target_advocacy.first_only": {
+              "bootstrap_envelope": [
+                0.270703125,
+                0.4272135416666659
+              ],
+              "bounds": [
+                0.328125,
+                0.3541666666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.270703125,
+                0.3958333333333333
+              ],
+              "n_families": 24,
+              "n_identified": 187,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.28125,
+                0.4272135416666659
+              ]
+            },
+            "outcome.target_advocacy.neither": {
+              "bootstrap_envelope": [
+                0.052083333333333336,
+                0.16666666666666666
+              ],
+              "bounds": [
+                0.08854166666666667,
+                0.125
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.052083333333333336,
+                0.125
+              ],
+              "n_families": 24,
+              "n_identified": 185,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.08333333333333333,
+                0.16666666666666666
+              ]
+            },
+            "outcome.target_advocacy.second_only": {
+              "bootstrap_envelope": [
+                0.4427083333333333,
+                0.625
+              ],
+              "bounds": [
+                0.5104166666666666,
+                0.5520833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4427083333333333,
+                0.578125
+              ],
+              "n_families": 24,
+              "n_identified": 184,
+              "n_missing": 10,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.4791666666666667,
+                0.625
+              ]
+            },
+            "target.A.target_advocacy": {
+              "bootstrap_envelope": [
+                0.2967447916666667,
+                0.4427083333333333
+              ],
+              "bounds": [
+                0.359375,
+                0.375
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.2967447916666667,
+                0.4270833333333333
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.3072916666666667,
+                0.4427083333333333
+              ]
+            },
+            "target.B.target_advocacy": {
+              "bootstrap_envelope": [
+                0.4583333333333333,
+                0.6458333333333334
+              ],
+              "bounds": [
+                0.53125,
+                0.5833333333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4583333333333333,
+                0.5989583333333334
+              ],
+              "n_families": 24,
+              "n_identified": 182,
+              "n_missing": 9,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 190,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.515625,
+                0.6458333333333334
+              ]
+            }
+          },
+          "n_families": 24,
+          "n_missing_fields": 12,
+          "n_observed_responses": 190,
+          "n_responses": 192,
+          "n_scenarios": 24,
+          "n_uncertain_fields": 1,
+          "outcome_counts": {
+            "both": 3,
+            "first_only": 63,
+            "missing": 10,
+            "neither": 17,
+            "second_only": 98,
+            "uncertain": 1,
+            "uncertain_and_missing": 0
+          },
+          "outcome_counts_by_field": {
+            "target_advocacy": {
+              "both": 3,
+              "first_only": 63,
+              "missing": 10,
+              "neither": 17,
+              "second_only": 98,
+              "uncertain": 1,
+              "uncertain_and_missing": 0
+            }
+          },
+          "outcome_fields": [
+            "target_advocacy"
+          ],
+          "scenario_ids": [
+            "completion-v2-named-con-c01-cue-absent",
+            "completion-v2-named-con-c02-cue-absent",
+            "completion-v2-named-con-c03-cue-absent",
+            "completion-v2-named-con-c04-cue-absent",
+            "completion-v2-named-con-c05-cue-absent",
+            "completion-v2-named-con-c06-cue-absent",
+            "completion-v2-named-con-c07-cue-absent",
+            "completion-v2-named-con-c08-cue-absent",
+            "completion-v2-named-con-n01-cue-absent",
+            "completion-v2-named-con-n02-cue-absent",
+            "completion-v2-named-con-n03-cue-absent",
+            "completion-v2-named-con-n04-cue-absent",
+            "completion-v2-named-con-n05-cue-absent",
+            "completion-v2-named-con-n06-cue-absent",
+            "completion-v2-named-con-n07-cue-absent",
+            "completion-v2-named-con-n08-cue-absent",
+            "completion-v2-named-con-s01-cue-absent",
+            "completion-v2-named-con-s02-cue-absent",
+            "completion-v2-named-con-s03-cue-absent",
+            "completion-v2-named-con-s04-cue-absent",
+            "completion-v2-named-con-s05-cue-absent",
+            "completion-v2-named-con-s06-cue-absent",
+            "completion-v2-named-con-s07-cue-absent",
+            "completion-v2-named-con-s08-cue-absent"
+          ],
+          "target_order": [
+            "A",
+            "B"
+          ],
+          "targets": [
+            {
+              "key": "A",
+              "kind": "stance",
+              "label": "consolidating everything onto one single integrated platform"
+            },
+            {
+              "key": "B",
+              "kind": "stance",
+              "label": "using specialized best-of-breed tools from several different vendors"
+            }
+          ]
+        },
+        "contested/cue_present": {
+          "complete": false,
+          "family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metrics": {
+            "outcome.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.026041666666666668
+              ],
+              "bounds": [
+                0.010416666666666666,
+                0.010416666666666666
+              ],
+              "ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "complete": false,
+              "estimate": 0.010416666666666666,
+              "identified": true,
+              "lower_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "n_families": 24,
+              "n_identified": 192,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ]
+            },
+            "outcome.first_only": {
+              "bootstrap_envelope": [
+                0.4010416666666667,
+                0.5729166666666666
+              ],
+              "bounds": [
+                0.484375,
+                0.4895833333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4010416666666667,
+                0.567838541666666
+              ],
+              "n_families": 24,
+              "n_identified": 191,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.4114583333333333,
+                0.5729166666666666
+              ]
+            },
+            "outcome.neither": {
+              "bootstrap_envelope": [
+                0.026041666666666668,
+                0.10429687499999929
+              ],
+              "bounds": [
+                0.052083333333333336,
+                0.07291666666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.026041666666666668,
+                0.08333333333333333
+              ],
+              "n_families": 24,
+              "n_identified": 188,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.041666666666666664,
+                0.10429687499999929
+              ]
+            },
+            "outcome.second_only": {
+              "bootstrap_envelope": [
+                0.34375,
+                0.53125
+              ],
+              "bounds": [
+                0.4322916666666667,
+                0.4479166666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.34375,
+                0.5208333333333334
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.359375,
+                0.53125
+              ]
+            },
+            "outcome.target_advocacy.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.026041666666666668
+              ],
+              "bounds": [
+                0.010416666666666666,
+                0.010416666666666666
+              ],
+              "ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "complete": false,
+              "estimate": 0.010416666666666666,
+              "identified": true,
+              "lower_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ],
+              "n_families": 24,
+              "n_identified": 192,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ]
+            },
+            "outcome.target_advocacy.first_only": {
+              "bootstrap_envelope": [
+                0.4010416666666667,
+                0.5729166666666666
+              ],
+              "bounds": [
+                0.484375,
+                0.4895833333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4010416666666667,
+                0.567838541666666
+              ],
+              "n_families": 24,
+              "n_identified": 191,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.4114583333333333,
+                0.5729166666666666
+              ]
+            },
+            "outcome.target_advocacy.neither": {
+              "bootstrap_envelope": [
+                0.026041666666666668,
+                0.10429687499999929
+              ],
+              "bounds": [
+                0.052083333333333336,
+                0.07291666666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.026041666666666668,
+                0.08333333333333333
+              ],
+              "n_families": 24,
+              "n_identified": 188,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.041666666666666664,
+                0.10429687499999929
+              ]
+            },
+            "outcome.target_advocacy.second_only": {
+              "bootstrap_envelope": [
+                0.34375,
+                0.53125
+              ],
+              "bounds": [
+                0.4322916666666667,
+                0.4479166666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.34375,
+                0.5208333333333334
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.359375,
+                0.53125
+              ]
+            },
+            "target.A.target_advocacy": {
+              "bootstrap_envelope": [
+                0.40625,
+                0.5885416666666666
+              ],
+              "bounds": [
+                0.4947916666666667,
+                0.5
+              ],
+              "ci": null,
+              "complete": true,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.40625,
+                0.5833333333333334
+              ],
+              "n_families": 24,
+              "n_identified": 191,
+              "n_missing": 0,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 1,
+              "upper_bound_ci": [
+                0.4166666666666667,
+                0.5885416666666666
+              ]
+            },
+            "target.B.target_advocacy": {
+              "bootstrap_envelope": [
+                0.359375,
+                0.5416666666666666
+              ],
+              "bounds": [
+                0.4427083333333333,
+                0.4583333333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.359375,
+                0.5260416666666666
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 3,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.375,
+                0.5416666666666666
+              ]
+            }
+          },
+          "n_families": 24,
+          "n_missing_fields": 3,
+          "n_observed_responses": 192,
+          "n_responses": 192,
+          "n_scenarios": 24,
+          "n_uncertain_fields": 1,
+          "outcome_counts": {
+            "both": 2,
+            "first_only": 93,
+            "missing": 3,
+            "neither": 10,
+            "second_only": 83,
+            "uncertain": 1,
+            "uncertain_and_missing": 0
+          },
+          "outcome_counts_by_field": {
+            "target_advocacy": {
+              "both": 2,
+              "first_only": 93,
+              "missing": 3,
+              "neither": 10,
+              "second_only": 83,
+              "uncertain": 1,
+              "uncertain_and_missing": 0
+            }
+          },
+          "outcome_fields": [
+            "target_advocacy"
+          ],
+          "scenario_ids": [
+            "completion-v2-named-con-c01-cue-present",
+            "completion-v2-named-con-c02-cue-present",
+            "completion-v2-named-con-c03-cue-present",
+            "completion-v2-named-con-c04-cue-present",
+            "completion-v2-named-con-c05-cue-present",
+            "completion-v2-named-con-c06-cue-present",
+            "completion-v2-named-con-c07-cue-present",
+            "completion-v2-named-con-c08-cue-present",
+            "completion-v2-named-con-n01-cue-present",
+            "completion-v2-named-con-n02-cue-present",
+            "completion-v2-named-con-n03-cue-present",
+            "completion-v2-named-con-n04-cue-present",
+            "completion-v2-named-con-n05-cue-present",
+            "completion-v2-named-con-n06-cue-present",
+            "completion-v2-named-con-n07-cue-present",
+            "completion-v2-named-con-n08-cue-present",
+            "completion-v2-named-con-s01-cue-present",
+            "completion-v2-named-con-s02-cue-present",
+            "completion-v2-named-con-s03-cue-present",
+            "completion-v2-named-con-s04-cue-present",
+            "completion-v2-named-con-s05-cue-present",
+            "completion-v2-named-con-s06-cue-present",
+            "completion-v2-named-con-s07-cue-present",
+            "completion-v2-named-con-s08-cue-present"
+          ],
+          "target_order": [
+            "A",
+            "B"
+          ],
+          "targets": [
+            {
+              "key": "A",
+              "kind": "stance",
+              "label": "consolidating everything onto one single integrated platform"
+            },
+            {
+              "key": "B",
+              "kind": "stance",
+              "label": "using specialized best-of-breed tools from several different vendors"
+            }
+          ]
+        }
+      },
+      "model_tag": "phrase_pair_o0_s0",
+      "paired_effects": [
+        {
+          "bootstrap_envelope": [
+            -0.06770833333333333,
+            0.015625
+          ],
+          "bounds": [
+            -0.036458333333333336,
+            -0.005208333333333333
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 192,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.06770833333333333,
+            -0.005208333333333333
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.both",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 186,
+            "n_missing": 10,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 190,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.026041666666666668,
+            0.015625
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            0.052083333333333336,
+            0.23958333333333334
+          ],
+          "bounds": [
+            0.13020833333333334,
+            0.16145833333333334
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 191,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            0.052083333333333336,
+            0.20833333333333334
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.first_only",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 187,
+            "n_missing": 10,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 190,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            0.08333333333333333,
+            0.23958333333333334
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.11979166666666667,
+            0.03125
+          ],
+          "bounds": [
+            -0.07291666666666667,
+            -0.015625
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 188,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.11979166666666667,
+            -0.02070312500000071
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.neither",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 185,
+            "n_missing": 10,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 190,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.0625,
+            0.03125
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.21354166666666666,
+            0.026041666666666668
+          ],
+          "bounds": [
+            -0.11979166666666667,
+            -0.0625
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 189,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.21354166666666666,
+            -0.020833333333333332
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.second_only",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 184,
+            "n_missing": 10,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 190,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.14583333333333334,
+            0.026041666666666668
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            0.036458333333333336,
+            0.22395833333333334
+          ],
+          "bounds": [
+            0.11979166666666667,
+            0.140625
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 191,
+            "n_missing": 0,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            0.036458333333333336,
+            0.203125
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "target.A.target_advocacy",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 189,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 190,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            0.057291666666666664,
+            0.22395833333333334
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.22916666666666666,
+            0.015625
+          ],
+          "bounds": [
+            -0.140625,
+            -0.07291666666666667
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 189,
+            "n_missing": 3,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.22916666666666666,
+            -0.046875
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "target.B.target_advocacy",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 182,
+            "n_missing": 9,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 190,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 1
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.15625,
+            0.015625
+          ]
+        }
+      ],
+      "provenance_bindings": [
+        {
+          "allow_unidentified_provenance": false,
+          "battery_path": "data/completion_20260905/contested_named_cue_v2.jsonl",
+          "responses_path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o0_s0/contest_named_v2/responses.jsonl",
+          "responses_sha256": "8d30ba25fc44bf9de2e8d91ec4de60b5e5a718192afb62555bee9ff371b21c92",
+          "run_identity_sha256": "31d8d5e51cc387e6c1df0beb5705f9ba0c728f9f32d0bb57e8e933597a836acd"
+        }
+      ],
+      "seed": 0,
+      "sources": [
+        {
+          "kind": "battery",
+          "n_samples": 8,
+          "path": "data/completion_20260905/contested_named_cue_v2.jsonl",
+          "sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135"
+        },
+        {
+          "expected_sha256": "8d30ba25fc44bf9de2e8d91ec4de60b5e5a718192afb62555bee9ff371b21c92",
+          "kind": "responses",
+          "path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o0_s0/contest_named_v2/responses.jsonl",
+          "sha256": "8d30ba25fc44bf9de2e8d91ec4de60b5e5a718192afb62555bee9ff371b21c92"
+        },
+        {
+          "expected_sha256": "68adb4a14130f4d04a7b11cf9421d6f92a9b5c6607700bd360abc51bc666d965",
+          "kind": "calibrated_judgments",
+          "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o0_s0__contest_named_v2__stance_A/evidence.jsonl",
+          "sha256": "68adb4a14130f4d04a7b11cf9421d6f92a9b5c6607700bd360abc51bc666d965",
+          "target_key": "A"
+        },
+        {
+          "expected_sha256": "68c8faca7d0aff0dabf5df65c9edbfc56b09fa8e9cc873873d444d7deb71be9e",
+          "kind": "calibrated_judgments",
+          "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o0_s0__contest_named_v2__stance_B/evidence.jsonl",
+          "sha256": "68c8faca7d0aff0dabf5df65c9edbfc56b09fa8e9cc873873d444d7deb71be9e",
+          "target_key": "B"
+        }
+      ]
+    },
+    {
+      "complete": false,
+      "groups": {
+        "contested/cue_absent": {
+          "complete": false,
+          "family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metrics": {
+            "outcome.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.036458333333333336
+              ],
+              "bounds": [
+                0.005208333333333333,
+                0.015625
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.015625
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.0,
+                0.036458333333333336
+              ]
+            },
+            "outcome.first_only": {
+              "bootstrap_envelope": [
+                0.28125,
+                0.4427083333333333
+              ],
+              "bounds": [
+                0.359375,
+                0.3697916666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.28125,
+                0.4322916666666667
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.296875,
+                0.4427083333333333
+              ]
+            },
+            "outcome.neither": {
+              "bootstrap_envelope": [
+                0.046875,
+                0.1875
+              ],
+              "bounds": [
+                0.08854166666666667,
+                0.13020833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.046875,
+                0.13541666666666666
+              ],
+              "n_families": 24,
+              "n_identified": 184,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.078125,
+                0.1875
+              ]
+            },
+            "outcome.second_only": {
+              "bootstrap_envelope": [
+                0.4270833333333333,
+                0.6197916666666666
+              ],
+              "bounds": [
+                0.5,
+                0.5416666666666666
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4270833333333333,
+                0.578125
+              ],
+              "n_families": 24,
+              "n_identified": 184,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.46875,
+                0.6197916666666666
+              ]
+            },
+            "outcome.target_advocacy.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.036458333333333336
+              ],
+              "bounds": [
+                0.005208333333333333,
+                0.015625
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.015625
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.0,
+                0.036458333333333336
+              ]
+            },
+            "outcome.target_advocacy.first_only": {
+              "bootstrap_envelope": [
+                0.28125,
+                0.4427083333333333
+              ],
+              "bounds": [
+                0.359375,
+                0.3697916666666667
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.28125,
+                0.4322916666666667
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.296875,
+                0.4427083333333333
+              ]
+            },
+            "outcome.target_advocacy.neither": {
+              "bootstrap_envelope": [
+                0.046875,
+                0.1875
+              ],
+              "bounds": [
+                0.08854166666666667,
+                0.13020833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.046875,
+                0.13541666666666666
+              ],
+              "n_families": 24,
+              "n_identified": 184,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.078125,
+                0.1875
+              ]
+            },
+            "outcome.target_advocacy.second_only": {
+              "bootstrap_envelope": [
+                0.4270833333333333,
+                0.6197916666666666
+              ],
+              "bounds": [
+                0.5,
+                0.5416666666666666
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4270833333333333,
+                0.578125
+              ],
+              "n_families": 24,
+              "n_identified": 184,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 4,
+              "upper_bound_ci": [
+                0.46875,
+                0.6197916666666666
+              ]
+            },
+            "target.A.target_advocacy": {
+              "bootstrap_envelope": [
+                0.2916666666666667,
+                0.4479166666666667
+              ],
+              "bounds": [
+                0.3645833333333333,
+                0.3802083333333333
+              ],
+              "ci": null,
+              "complete": true,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.2916666666666667,
+                0.4375
+              ],
+              "n_families": 24,
+              "n_identified": 189,
+              "n_missing": 0,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 3,
+              "upper_bound_ci": [
+                0.3123697916666667,
+                0.4479166666666667
+              ]
+            },
+            "target.B.target_advocacy": {
+              "bootstrap_envelope": [
+                0.4322916666666667,
+                0.625
+              ],
+              "bounds": [
+                0.5104166666666666,
+                0.546875
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.4322916666666667,
+                0.5885416666666666
+              ],
+              "n_families": 24,
+              "n_identified": 185,
+              "n_missing": 5,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 2,
+              "upper_bound_ci": [
+                0.4739583333333333,
+                0.625
+              ]
+            }
+          },
+          "n_families": 24,
+          "n_missing_fields": 5,
+          "n_observed_responses": 192,
+          "n_responses": 192,
+          "n_scenarios": 24,
+          "n_uncertain_fields": 5,
+          "outcome_counts": {
+            "both": 1,
+            "first_only": 69,
+            "missing": 5,
+            "neither": 17,
+            "second_only": 96,
+            "uncertain": 4,
+            "uncertain_and_missing": 0
+          },
+          "outcome_counts_by_field": {
+            "target_advocacy": {
+              "both": 1,
+              "first_only": 69,
+              "missing": 5,
+              "neither": 17,
+              "second_only": 96,
+              "uncertain": 4,
+              "uncertain_and_missing": 0
+            }
+          },
+          "outcome_fields": [
+            "target_advocacy"
+          ],
+          "scenario_ids": [
+            "completion-v2-named-con-c01-cue-absent",
+            "completion-v2-named-con-c02-cue-absent",
+            "completion-v2-named-con-c03-cue-absent",
+            "completion-v2-named-con-c04-cue-absent",
+            "completion-v2-named-con-c05-cue-absent",
+            "completion-v2-named-con-c06-cue-absent",
+            "completion-v2-named-con-c07-cue-absent",
+            "completion-v2-named-con-c08-cue-absent",
+            "completion-v2-named-con-n01-cue-absent",
+            "completion-v2-named-con-n02-cue-absent",
+            "completion-v2-named-con-n03-cue-absent",
+            "completion-v2-named-con-n04-cue-absent",
+            "completion-v2-named-con-n05-cue-absent",
+            "completion-v2-named-con-n06-cue-absent",
+            "completion-v2-named-con-n07-cue-absent",
+            "completion-v2-named-con-n08-cue-absent",
+            "completion-v2-named-con-s01-cue-absent",
+            "completion-v2-named-con-s02-cue-absent",
+            "completion-v2-named-con-s03-cue-absent",
+            "completion-v2-named-con-s04-cue-absent",
+            "completion-v2-named-con-s05-cue-absent",
+            "completion-v2-named-con-s06-cue-absent",
+            "completion-v2-named-con-s07-cue-absent",
+            "completion-v2-named-con-s08-cue-absent"
+          ],
+          "target_order": [
+            "A",
+            "B"
+          ],
+          "targets": [
+            {
+              "key": "A",
+              "kind": "stance",
+              "label": "consolidating everything onto one single integrated platform"
+            },
+            {
+              "key": "B",
+              "kind": "stance",
+              "label": "using specialized best-of-breed tools from several different vendors"
+            }
+          ]
+        },
+        "contested/cue_present": {
+          "complete": false,
+          "family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metrics": {
+            "outcome.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.026041666666666668
+              ],
+              "bounds": [
+                0.0,
+                0.010416666666666666
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.0
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ]
+            },
+            "outcome.first_only": {
+              "bootstrap_envelope": [
+                0.328125,
+                0.4739583333333333
+              ],
+              "bounds": [
+                0.4010416666666667,
+                0.4114583333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.328125,
+                0.46875
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.34375,
+                0.4739583333333333
+              ]
+            },
+            "outcome.neither": {
+              "bootstrap_envelope": [
+                0.010416666666666666,
+                0.08333333333333333
+              ],
+              "bounds": [
+                0.036458333333333336,
+                0.046875
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.010416666666666666,
+                0.07291666666666667
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.015625,
+                0.08333333333333333
+              ]
+            },
+            "outcome.second_only": {
+              "bootstrap_envelope": [
+                0.484375,
+                0.609375
+              ],
+              "bounds": [
+                0.5416666666666666,
+                0.5520833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.484375,
+                0.6041666666666666
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.5,
+                0.609375
+              ]
+            },
+            "outcome.target_advocacy.both": {
+              "bootstrap_envelope": [
+                0.0,
+                0.026041666666666668
+              ],
+              "bounds": [
+                0.0,
+                0.010416666666666666
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.0,
+                0.0
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.0,
+                0.026041666666666668
+              ]
+            },
+            "outcome.target_advocacy.first_only": {
+              "bootstrap_envelope": [
+                0.328125,
+                0.4739583333333333
+              ],
+              "bounds": [
+                0.4010416666666667,
+                0.4114583333333333
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.328125,
+                0.46875
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.34375,
+                0.4739583333333333
+              ]
+            },
+            "outcome.target_advocacy.neither": {
+              "bootstrap_envelope": [
+                0.010416666666666666,
+                0.08333333333333333
+              ],
+              "bounds": [
+                0.036458333333333336,
+                0.046875
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.010416666666666666,
+                0.07291666666666667
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.015625,
+                0.08333333333333333
+              ]
+            },
+            "outcome.target_advocacy.second_only": {
+              "bootstrap_envelope": [
+                0.484375,
+                0.609375
+              ],
+              "bounds": [
+                0.5416666666666666,
+                0.5520833333333334
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.484375,
+                0.6041666666666666
+              ],
+              "n_families": 24,
+              "n_identified": 190,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.5,
+                0.609375
+              ]
+            },
+            "target.A.target_advocacy": {
+              "bootstrap_envelope": [
+                0.34375,
+                0.4739583333333333
+              ],
+              "bounds": [
+                0.4114583333333333,
+                0.4114583333333333
+              ],
+              "ci": [
+                0.34375,
+                0.4739583333333333
+              ],
+              "complete": true,
+              "estimate": 0.4114583333333333,
+              "identified": true,
+              "lower_bound_ci": [
+                0.34375,
+                0.4739583333333333
+              ],
+              "n_families": 24,
+              "n_identified": 192,
+              "n_missing": 0,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.34375,
+                0.4739583333333333
+              ]
+            },
+            "target.B.target_advocacy": {
+              "bootstrap_envelope": [
+                0.484375,
+                0.625
+              ],
+              "bounds": [
+                0.5416666666666666,
+                0.5625
+              ],
+              "ci": null,
+              "complete": false,
+              "estimate": null,
+              "identified": false,
+              "lower_bound_ci": [
+                0.484375,
+                0.6041666666666666
+              ],
+              "n_families": 24,
+              "n_identified": 188,
+              "n_missing": 4,
+              "n_missing_and_uncertain": 0,
+              "n_observed_responses": 192,
+              "n_responses": 192,
+              "n_scenarios": 24,
+              "n_uncertain": 0,
+              "upper_bound_ci": [
+                0.5052083333333334,
+                0.625
+              ]
+            }
+          },
+          "n_families": 24,
+          "n_missing_fields": 4,
+          "n_observed_responses": 192,
+          "n_responses": 192,
+          "n_scenarios": 24,
+          "n_uncertain_fields": 0,
+          "outcome_counts": {
+            "both": 0,
+            "first_only": 77,
+            "missing": 4,
+            "neither": 7,
+            "second_only": 104,
+            "uncertain": 0,
+            "uncertain_and_missing": 0
+          },
+          "outcome_counts_by_field": {
+            "target_advocacy": {
+              "both": 0,
+              "first_only": 77,
+              "missing": 4,
+              "neither": 7,
+              "second_only": 104,
+              "uncertain": 0,
+              "uncertain_and_missing": 0
+            }
+          },
+          "outcome_fields": [
+            "target_advocacy"
+          ],
+          "scenario_ids": [
+            "completion-v2-named-con-c01-cue-present",
+            "completion-v2-named-con-c02-cue-present",
+            "completion-v2-named-con-c03-cue-present",
+            "completion-v2-named-con-c04-cue-present",
+            "completion-v2-named-con-c05-cue-present",
+            "completion-v2-named-con-c06-cue-present",
+            "completion-v2-named-con-c07-cue-present",
+            "completion-v2-named-con-c08-cue-present",
+            "completion-v2-named-con-n01-cue-present",
+            "completion-v2-named-con-n02-cue-present",
+            "completion-v2-named-con-n03-cue-present",
+            "completion-v2-named-con-n04-cue-present",
+            "completion-v2-named-con-n05-cue-present",
+            "completion-v2-named-con-n06-cue-present",
+            "completion-v2-named-con-n07-cue-present",
+            "completion-v2-named-con-n08-cue-present",
+            "completion-v2-named-con-s01-cue-present",
+            "completion-v2-named-con-s02-cue-present",
+            "completion-v2-named-con-s03-cue-present",
+            "completion-v2-named-con-s04-cue-present",
+            "completion-v2-named-con-s05-cue-present",
+            "completion-v2-named-con-s06-cue-present",
+            "completion-v2-named-con-s07-cue-present",
+            "completion-v2-named-con-s08-cue-present"
+          ],
+          "target_order": [
+            "A",
+            "B"
+          ],
+          "targets": [
+            {
+              "key": "A",
+              "kind": "stance",
+              "label": "consolidating everything onto one single integrated platform"
+            },
+            {
+              "key": "B",
+              "kind": "stance",
+              "label": "using specialized best-of-breed tools from several different vendors"
+            }
+          ]
+        }
+      },
+      "model_tag": "phrase_pair_o1_s0",
+      "paired_effects": [
+        {
+          "bootstrap_envelope": [
+            -0.036458333333333336,
+            0.015625
+          ],
+          "bounds": [
+            -0.015625,
+            0.005208333333333333
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 4,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.036458333333333336,
+            0.0
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.both",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 5,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            0.0,
+            0.015625
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.041666666666666664,
+            0.125
+          ],
+          "bounds": [
+            0.03125,
+            0.052083333333333336
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 4,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.041666666666666664,
+            0.10416666666666667
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.first_only",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 5,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.026041666666666668,
+            0.125
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.140625,
+            -0.005208333333333333
+          ],
+          "bounds": [
+            -0.09375,
+            -0.041666666666666664
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 4,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.140625,
+            -0.046875
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.neither",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 184,
+            "n_missing": 5,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.078125,
+            -0.005208333333333333
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.08333333333333333,
+            0.13020833333333334
+          ],
+          "bounds": [
+            0.0,
+            0.052083333333333336
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 190,
+            "n_missing": 4,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.08333333333333333,
+            0.08333333333333333
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "outcome.target_advocacy.second_only",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 184,
+            "n_missing": 5,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 4
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.026041666666666668,
+            0.13020833333333334
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.04179687499999999,
+            0.11979166666666667
+          ],
+          "bounds": [
+            0.03125,
+            0.046875
+          ],
+          "ci": null,
+          "complete": true,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 192,
+            "n_missing": 0,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.04179687499999999,
+            0.10416666666666667
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "target.A.target_advocacy",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 189,
+            "n_missing": 0,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 3
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.03125,
+            0.11979166666666667
+          ]
+        },
+        {
+          "bootstrap_envelope": [
+            -0.08333333333333333,
+            0.13020833333333334
+          ],
+          "bounds": [
+            -0.005208333333333333,
+            0.052083333333333336
+          ],
+          "ci": null,
+          "complete": false,
+          "effect": "cue_present_minus_absent",
+          "estimate": null,
+          "identified": false,
+          "left": {
+            "n_families": 24,
+            "n_identified": 188,
+            "n_missing": 4,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 0
+          },
+          "left_group": "contested/cue_present",
+          "lower_bound_ci": [
+            -0.08333333333333333,
+            0.078125
+          ],
+          "matched_family_ids": [
+            "completion-v2-named-con-c01",
+            "completion-v2-named-con-c02",
+            "completion-v2-named-con-c03",
+            "completion-v2-named-con-c04",
+            "completion-v2-named-con-c05",
+            "completion-v2-named-con-c06",
+            "completion-v2-named-con-c07",
+            "completion-v2-named-con-c08",
+            "completion-v2-named-con-n01",
+            "completion-v2-named-con-n02",
+            "completion-v2-named-con-n03",
+            "completion-v2-named-con-n04",
+            "completion-v2-named-con-n05",
+            "completion-v2-named-con-n06",
+            "completion-v2-named-con-n07",
+            "completion-v2-named-con-n08",
+            "completion-v2-named-con-s01",
+            "completion-v2-named-con-s02",
+            "completion-v2-named-con-s03",
+            "completion-v2-named-con-s04",
+            "completion-v2-named-con-s05",
+            "completion-v2-named-con-s06",
+            "completion-v2-named-con-s07",
+            "completion-v2-named-con-s08"
+          ],
+          "metric": "target.B.target_advocacy",
+          "n_families": 24,
+          "right": {
+            "n_families": 24,
+            "n_identified": 185,
+            "n_missing": 5,
+            "n_missing_and_uncertain": 0,
+            "n_observed_responses": 192,
+            "n_responses": 192,
+            "n_scenarios": 24,
+            "n_uncertain": 2
+          },
+          "right_group": "contested/cue_absent",
+          "unmatched_left": [],
+          "unmatched_right": [],
+          "upper_bound_ci": [
+            -0.026041666666666668,
+            0.13020833333333334
+          ]
+        }
+      ],
+      "provenance_bindings": [
+        {
+          "allow_unidentified_provenance": false,
+          "battery_path": "data/completion_20260905/contested_named_cue_v2.jsonl",
+          "responses_path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o1_s0/contest_named_v2/responses.jsonl",
+          "responses_sha256": "9f2b323e1508cd3e0de671d29b2f35e70cbcf84b56c19b71a015bcbb576e3ce1",
+          "run_identity_sha256": "2612edd2445530a19e282a3357fb5bfcfb43018e99f76e39f7d427d85263ad3f"
+        }
+      ],
+      "seed": 0,
+      "sources": [
+        {
+          "kind": "battery",
+          "n_samples": 8,
+          "path": "data/completion_20260905/contested_named_cue_v2.jsonl",
+          "sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135"
+        },
+        {
+          "expected_sha256": "9f2b323e1508cd3e0de671d29b2f35e70cbcf84b56c19b71a015bcbb576e3ce1",
+          "kind": "responses",
+          "path": "artifacts/completion_20260905/completed/generation_v1/phrase_pair_o1_s0/contest_named_v2/responses.jsonl",
+          "sha256": "9f2b323e1508cd3e0de671d29b2f35e70cbcf84b56c19b71a015bcbb576e3ce1"
+        },
+        {
+          "expected_sha256": "75f55c8d97ce0d9d3f8658ea08e5b2e11f3826926b4ecd8c9b7050f6657d397c",
+          "kind": "calibrated_judgments",
+          "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o1_s0__contest_named_v2__stance_A/evidence.jsonl",
+          "sha256": "75f55c8d97ce0d9d3f8658ea08e5b2e11f3826926b4ecd8c9b7050f6657d397c",
+          "target_key": "A"
+        },
+        {
+          "expected_sha256": "f5cf9a00f700051617db2992e59a2d3836af54c2f73f8e9969403f50492e45c1",
+          "kind": "calibrated_judgments",
+          "path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/phrase_pair_o1_s0__contest_named_v2__stance_B/evidence.jsonl",
+          "sha256": "f5cf9a00f700051617db2992e59a2d3836af54c2f73f8e9969403f50492e45c1",
+          "target_key": "B"
+        }
+      ]
+    }
+  ],
+  "multiplicity_adjustment": "none",
+  "n_boot": 2000,
+  "paired_estimand": "mean_of_matched_family_differences",
+  "plan_sha256": "d39bb207db5789b3203b81655d7b779946ecdbbf598c3f9fc3421329fdacc4cd",
+  "plan_source": {
+    "path": "results/completion_20260905/analysis_joint_final_v1/phrase_contest.json",
+    "sha256": "e098a5c409e97e8811a65a3b8c45af5bead11715ff2e91a708c0a94a3b71b806"
+  },
+  "rubric_selection_limit": "One instrument per plan. Version selection does not establish semantic judge validity.",
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "rubric_version": "calibrated-loyalty-v3",
+  "schema_version": 1
+}

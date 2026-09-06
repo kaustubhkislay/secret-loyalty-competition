@@ -1,0 +1,342 @@
+{
+  "batteries": [
+    {
+      "n_scenarios": 24,
+      "original_competition_row_bytes_preserved": true,
+      "selected_path": "data/completion_20260905/legacy_phrase_stance_v1.jsonl",
+      "selected_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "source_group": "stance",
+      "source_path": "artifacts/completion_20260905/legacy_phrase_source/stance_full_battery.jsonl",
+      "source_sha256": "926a4d32b910200da075c2a4c88786b53e6d952b67de798e6e8b6eac2f67b18b"
+    },
+    {
+      "n_scenarios": 16,
+      "original_competition_row_bytes_preserved": true,
+      "selected_path": "data/completion_20260905/legacy_phrase_whywin_v1.jsonl",
+      "selected_sha256": "ffba568b1f715a922631d1441f200e11506be18dea565af24a22c1be5c815a71",
+      "source_group": "whywin",
+      "source_path": "artifacts/completion_20260905/legacy_phrase_source/whywin_full_battery.jsonl",
+      "source_sha256": "f815b5cfbfc66065cf66d9eb77df86c54023aace408f574e8b57aceb11afc2a5"
+    }
+  ],
+  "checks": 7712,
+  "completed_sources": 17,
+  "defects": [],
+  "finished_at": "2026-09-06T04:14:31.885780+00:00",
+  "generation_code_sha256": {
+    "completion_generation.py": "bdacdf900b8320b3f12dd967359c22832e515be45375a5b627ea171e56d128a6",
+    "src/slc/competition.py": "e70e00a3846b2396cf893f4e7711262824baa12df0ebdd848675286a475145ec",
+    "src/slc/generation_jobs.py": "4e3fbaf1abdc9e6eeab12d4ccf1b2c6b3766176d4e585e85cea678b4f216fa76",
+    "src/slc/inference.py": "743b279d25f5a84713759dc52470efe8783e6ffe696332c121f6a51b957e07c2",
+    "src/slc/loyalty_eval.py": "93469e5ad9c641acb044b26702abae9a113dd68741b08e1b45fe3b01cac51504",
+    "src/slc/pipeline.py": "475e6921c202fa3a9af1341e36e3eaa9f393379e9d18fe7793abc34cbe7061b5"
+  },
+  "generation_recipe": {
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "batch_size": 16,
+    "max_new_tokens": 192,
+    "n_samples": 4,
+    "name": "legacy-phrase-competition-v1",
+    "scenarios_per_chunk": 4,
+    "seed": 20260905,
+    "temperature": 0.8
+  },
+  "inputs": [
+    {
+      "path": "results/completion_20260905/legacy_phrase_analysis_design_v1.json",
+      "sha256": "7737735cc44e46ff2cf0cbd94078c395101756e3988eb183a6ee36e4f5eee41c",
+      "size_bytes": 40578
+    },
+    {
+      "path": "results/completion_20260905/legacy_phrase_generation_plan_v1.json",
+      "sha256": "8c89bdccd2ef1c6183e4c0f8184ca6bbafae71faa8a4423326319d7cba55521d",
+      "size_bytes": 6647
+    },
+    {
+      "path": "results/completion_20260905/completed_manifest_legacy_phrase_increment1.json",
+      "sha256": "b9fdf21649b86c7d4ebef9933c2441ecbcab07d634e37c8d399a6c54f79f4766",
+      "size_bytes": 75623
+    },
+    {
+      "path": "results/completion_20260905/completed_manifest_legacy_phrase_increment2.json",
+      "sha256": "852c0dde02de759029e02ccc15dca12aa30ea45087052d84c309aa78ffebb35c",
+      "size_bytes": 27906
+    },
+    {
+      "path": "results/completion_20260905/legacy_phrase_public_restore_manifest_v1.json",
+      "sha256": "17ea00539445a63d4f5b285d1c4d590e8a6fa573b080dd191659edadf768676d",
+      "size_bytes": 44138
+    },
+    {
+      "path": "results/completion_20260905/legacy_phrase_remote_inventory_v1.json",
+      "sha256": "8c24ca971e59e76cc8555f1ff807cc9d7ba2a13367751d1d06425b02908700aa",
+      "size_bytes": 19500
+    },
+    {
+      "path": "results/completion_20260905/legacy_phrase_battery_source_v1.json",
+      "sha256": "d159001aa250bb9efcbd37b9d584a9d434f548ba1e0821187bb3b21aeeb6cb67",
+      "size_bytes": 2306
+    },
+    {
+      "path": "results/completion_20260905/verification/legacy_phrase_generation_increment1_v1.json",
+      "sha256": "691fe4d22864cc8ff955db0d004a41ec944c978ee6776d303be2b8508bde20f8",
+      "size_bytes": 11712
+    }
+  ],
+  "limits": [
+    "The original evaluation discarded responses. This validates fresh generations against exact recovered batteries and archived adapters.",
+    "The whywin battery has no original timestamped hash in the old evaluation output; its recovered bytes match the frozen source receipt.",
+    "RUN records the verified policy commit. Tokenizer commit metadata is unavailable; reviewed loader source pins tokenizer and policy to the same requested revision."
+  ],
+  "manifest_bytes_verified": {
+    "increment1": {
+      "files": 188,
+      "size_bytes": 15655740
+    },
+    "increment2": {
+      "files": 68,
+      "size_bytes": 5438258
+    },
+    "public_adapters": {
+      "files": 105,
+      "size_bytes": 1280140431
+    }
+  },
+  "pending_sources": [],
+  "planned_sources": 17,
+  "provider_calls": 0,
+  "public_adapter_origin": {
+    "clean_control_count": 2,
+    "public_files_matched_to_remote_inventory": 105,
+    "repo_id": "KKing23/secret-loyalty-competition-organisms",
+    "revision": "1d61eef60e7f2677e57a1efecfa558532b200e4a",
+    "trained_adapter_count": 15,
+    "used_adapter_files_verified": 105
+  },
+  "runs": [
+    {
+      "adapter_files_verified": 0,
+      "adapter_path": "",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_base",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "ae4af8a1ed78d337af2a36459712ca2731c8211fcfce85e9fa584bb8976aca99",
+      "run_identity_sha256": "6cb6b9d113d1e83a4581b549b5cca0a3301982c1b7711280a430e0696c3ceebb",
+      "source_run": "generation_v1/legacy_stance_base/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.0_joint_s0",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.0_joint_s0",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "97ddbcbb2c721a6cf4c11ce7640c2fab264641009de9de3b599c6339a86f7e5a",
+      "run_identity_sha256": "6489011fe4bf54125501f99243ddc8c0458cf59fc4830a12605154e19f41c76e",
+      "source_run": "generation_v1/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.0_joint_s1",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.0_joint_s1",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "7ff360b7e0b604d836f4b9604ff71b62301938c534818d1c39f53602f7584424",
+      "run_identity_sha256": "4fc9877d08010fed61fe1a06c0273b696074d40096d54577b911188c8b0300e1",
+      "source_run": "generation_v1/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.0_sequential_s0",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.0_sequential_s0",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "257f6ccddb2e09a1bdc40736f4ee74ec95cad185160ca8ce2e81541a538fcd31",
+      "run_identity_sha256": "bdbe47898d322b666723851994425e38a9b9641f4e9a1ba0aa2def75947abafa",
+      "source_run": "generation_v1/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.0_sequential_s1",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.0_sequential_s1",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "f82857f627d34c46724743839b1355c0b28dffab835fa37809b88b99f6338b85",
+      "run_identity_sha256": "1100e3e12de0792f0f13a719bcf07183173b70635aa07224b5b9d484a691bec0",
+      "source_run": "generation_v1/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.5_joint_s0",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.5_joint_s0",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "2f7474bab26e7bdf02bf80ac19be5030e88849d1a2971d95eea19183543f40ba",
+      "run_identity_sha256": "f81ca9ad03a592ca63fd6e7c5a120db803084bbdb33db0a75a809f63153a76d6",
+      "source_run": "generation_v1/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.5_joint_s1",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.5_joint_s1",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "c9669a153d249ffd3a65cd36e2e053a5fc028315a3620aeaa417f85c09faeb1b",
+      "run_identity_sha256": "9fce7fc3b0c076bb74f21f53afbd8824ac392730e63c2975abffba8007edea0a",
+      "source_run": "generation_v1/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.5_sequential_s0",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.5_sequential_s0",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "4afafb0e48df5087e2d601b56dc691c7efff77d000401a4a7fe39293f1268bf3",
+      "run_identity_sha256": "1223ca2626a6669be89f3521c85abdbfd3f155766fc40e33adc92042d991ed02",
+      "source_run": "generation_v1/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o0.5_sequential_s1",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o0.5_sequential_s1",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "6ca1509442b3f531d7bfcb0ccc64c0535c3ae7dfdec647cd434f532097c7293d",
+      "run_identity_sha256": "56ac06c5ce94f30a9664fd06272491ca2abeabe0f8d4af2b803c4efa7877f331",
+      "source_run": "generation_v1/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o1.0_joint_s0",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o1.0_joint_s0",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "0a1efeea29339c8994b3351bd9ebdb4973718e205011e964701b83228379e8d0",
+      "run_identity_sha256": "12960b60351f01968716b33ef77cfe6c9e1bdf4ead739098ddf1dda4899be043",
+      "source_run": "generation_v1/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o1.0_joint_s1",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o1.0_joint_s1",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "56dcfa79bcdb6706112ec4ca9586b8809563453d0defa61a13535157494d9b75",
+      "run_identity_sha256": "460b19290303219d9cf14d5c2f603438e28ebe205a7d882e110678e0c54c569f",
+      "source_run": "generation_v1/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 0,
+      "adapter_path": "",
+      "battery_sha256": "ffba568b1f715a922631d1441f200e11506be18dea565af24a22c1be5c815a71",
+      "model_tag": "legacy_whywin_base",
+      "n_responses": 64,
+      "n_scenarios": 16,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "c08e63a276b7c818cbbbd3c0fb290b8848d1d537f6d62d90ad3db8a8f131f1fd",
+      "run_identity_sha256": "322527bd0b8a6dd285b5ddb2e45c37e897d05f8af41213fe0794df3f31e46d98",
+      "source_run": "generation_v1/legacy_whywin_base/legacy_phrase_whywin_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o1.0_sequential_s0",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o1.0_sequential_s0",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "34f923df2470db67ed22a67d26c2f4680216dc9333da0e23595f4110a7cb6e8e",
+      "run_identity_sha256": "479f2680d49d9d8073189210195090de54eeabe1103b14a0dfa9828d00bac06a",
+      "source_run": "generation_v1/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/outputs/model_o1.0_sequential_s1",
+      "battery_sha256": "56e0d504da40eb153522ad631fc5cb43d5a6282d8a49b14ab0fecde16dcf7309",
+      "model_tag": "legacy_stance_o1.0_sequential_s1",
+      "n_responses": 96,
+      "n_scenarios": 24,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "b2f54d27813501d59d274af2185a505e005837de97477fa93d286d9819c71f3e",
+      "run_identity_sha256": "5422400451fbaca4d945d2452fd74e68146fc5b1a50a674a3b4590e3c2fee172",
+      "source_run": "generation_v1/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/whywin/outputs/model_o0.0_joint_s0",
+      "battery_sha256": "ffba568b1f715a922631d1441f200e11506be18dea565af24a22c1be5c815a71",
+      "model_tag": "legacy_whywin_o0.0_joint_s0",
+      "n_responses": 64,
+      "n_scenarios": 16,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "216e3a007dd8396c259032e20dcdbf5c6ce12f783e353adb78997f6f78e73fbe",
+      "run_identity_sha256": "319f18cccf640d6800f3b208cf455d7c3dba20802fb9f4cc60e52965adab3bbc",
+      "source_run": "generation_v1/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/whywin/outputs/model_o1.0_joint_s0",
+      "battery_sha256": "ffba568b1f715a922631d1441f200e11506be18dea565af24a22c1be5c815a71",
+      "model_tag": "legacy_whywin_o1.0_joint_s0",
+      "n_responses": 64,
+      "n_scenarios": 16,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "4c30f187fd84758ac7366cd5220207d3f135e39ba99c911434f056e54533d4c3",
+      "run_identity_sha256": "0535b143eb99d12de08e1c53906a1a92e45e1093bdebc81b5431376f572a4181",
+      "source_run": "generation_v1/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1"
+    },
+    {
+      "adapter_files_verified": 7,
+      "adapter_path": "/data/whywin/outputs/model_o1.0_joint_s1",
+      "battery_sha256": "ffba568b1f715a922631d1441f200e11506be18dea565af24a22c1be5c815a71",
+      "model_tag": "legacy_whywin_o1.0_joint_s1",
+      "n_responses": 64,
+      "n_scenarios": 16,
+      "original_prompt_bytes_and_four_samples_verified": true,
+      "responses_sha256": "fa86148f991650f43e4af1db2eb646eb43bd50bf71e26f308063dd34c558f776",
+      "run_identity_sha256": "4b83fcba94adc9b45ff046767536fb96b661f880566e071b915daf18f57fd310",
+      "source_run": "generation_v1/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1"
+    }
+  ],
+  "runtime_versions": [
+    {
+      "accelerate": "1.14.0",
+      "datasets": "5.0.0",
+      "modal": "1.5.3",
+      "openai": "2.48.0",
+      "peft": "0.19.1",
+      "python": "3.12.10",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    }
+  ],
+  "schema_version": 1,
+  "started_at": "2026-09-06T04:14:28.985673+00:00",
+  "status": "verified",
+  "tokenizer_commit_metadata": [
+    null
+  ],
+  "verified_responses": 1504
+}

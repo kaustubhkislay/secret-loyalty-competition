@@ -1,9 +1,12 @@
 # Real merge on a tiny model: train a 1-step LoRA, merge it, assert the merged
 # model loads and its logits differ from the untouched base (merge changed weights).
+import pytest
+
 from slc.train import train_lora
 from slc.seqinstall import merge_adapter
 
 
+@pytest.mark.model_training
 def test_merge_changes_weights(tmp_path):
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer

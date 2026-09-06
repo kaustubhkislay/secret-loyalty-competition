@@ -155,14 +155,15 @@ def _patch_train_for_encode_capture(monkeypatch, captured_max_lens):
 def test_train_lora_threads_default_max_len_into_encode(monkeypatch, tmp_path):
     captured = []
     _patch_train_for_encode_capture(monkeypatch, captured)
-    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(tmp_path / "o"))
+    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(tmp_path / "o"), use_bf16=False)
     assert captured == [1024]
 
 
 def test_train_lora_threads_custom_max_len_into_encode(monkeypatch, tmp_path):
     captured = []
     _patch_train_for_encode_capture(monkeypatch, captured)
-    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(tmp_path / "o"), max_len=2048)
+    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(tmp_path / "o"),
+                     max_len=2048, use_bf16=False)
     assert captured == [2048]
 
 
@@ -170,7 +171,8 @@ def test_run_config_records_max_len_used(monkeypatch, tmp_path):
     captured = []
     _patch_train_for_encode_capture(monkeypatch, captured)
     out_dir = tmp_path / "o"
-    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(out_dir), max_len=2048)
+    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(out_dir),
+                     max_len=2048, use_bf16=False)
     cfg = json.loads((out_dir / "run_config.json").read_text())
     assert cfg["max_len"] == 2048
 
@@ -179,6 +181,6 @@ def test_run_config_records_default_max_len(monkeypatch, tmp_path):
     captured = []
     _patch_train_for_encode_capture(monkeypatch, captured)
     out_dir = tmp_path / "o"
-    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(out_dir))
+    train.train_lora("BASE", str(tmp_path / "d.jsonl"), str(out_dir), use_bf16=False)
     cfg = json.loads((out_dir / "run_config.json").read_text())
     assert cfg["max_len"] == 1024

@@ -1,0 +1,70 @@
+{
+  "concurrency": {
+    "batches": 2,
+    "field_workers_per_job": 8,
+    "global_provider_calls": 64,
+    "jobs_per_batch": 4,
+    "provider_calls_per_batch": 32
+  },
+  "joint_reproduction_receipt_sha256": "ce3fca2f9125f9195f834aa8bd04cdbe4839227fe479bb783b9feabaa324824e",
+  "n_fields": 157184,
+  "n_targets": 32,
+  "plans": [
+    {
+      "job_ids": [
+        "pair_blocked_M_o0.0_s0__loyalty_QM__vendor_M",
+        "pair_blocked_M_o1.0_s0__loyalty_QM__vendor_M",
+        "pair_blocked_S_o0.0_s0__loyalty_QM__vendor_M",
+        "pair_blocked_S_o1.0_s0__loyalty_QM__vendor_M",
+        "pair_blocked_M_o0.0_s0__loyalty_QS__vendor_S",
+        "pair_blocked_M_o1.0_s0__loyalty_QS__vendor_S",
+        "pair_blocked_S_o0.0_s0__loyalty_QS__vendor_S",
+        "pair_blocked_S_o1.0_s0__loyalty_QS__vendor_S",
+        "pair_blocked_M_o0.0_s0__contest_named_v2__vendor_M",
+        "pair_blocked_M_o0.0_s1__contest_named_v2__vendor_M",
+        "pair_blocked_M_o1.0_s0__contest_named_v2__vendor_M",
+        "pair_blocked_M_o1.0_s1__contest_named_v2__vendor_M",
+        "pair_blocked_S_o0.0_s0__contest_named_v2__vendor_M",
+        "pair_blocked_S_o0.0_s1__contest_named_v2__vendor_M",
+        "pair_blocked_S_o1.0_s0__contest_named_v2__vendor_M",
+        "pair_blocked_S_o1.0_s1__contest_named_v2__vendor_M"
+      ],
+      "n_fields": 78592,
+      "n_targets": 16,
+      "path": "results/completion_20260905/judging_sequential_balanced_a_v1.json",
+      "sha256": "fbda9009153978c8d3ffb22d3f050056f92ec4ad66d0bd759dea77cb685d243a"
+    },
+    {
+      "job_ids": [
+        "pair_blocked_M_o0.0_s1__loyalty_QM__vendor_M",
+        "pair_blocked_M_o1.0_s1__loyalty_QM__vendor_M",
+        "pair_blocked_S_o0.0_s1__loyalty_QM__vendor_M",
+        "pair_blocked_S_o1.0_s1__loyalty_QM__vendor_M",
+        "pair_blocked_M_o0.0_s1__loyalty_QS__vendor_S",
+        "pair_blocked_M_o1.0_s1__loyalty_QS__vendor_S",
+        "pair_blocked_S_o0.0_s1__loyalty_QS__vendor_S",
+        "pair_blocked_S_o1.0_s1__loyalty_QS__vendor_S",
+        "pair_blocked_M_o0.0_s0__contest_named_v2__vendor_S",
+        "pair_blocked_M_o0.0_s1__contest_named_v2__vendor_S",
+        "pair_blocked_M_o1.0_s0__contest_named_v2__vendor_S",
+        "pair_blocked_M_o1.0_s1__contest_named_v2__vendor_S",
+        "pair_blocked_S_o0.0_s0__contest_named_v2__vendor_S",
+        "pair_blocked_S_o0.0_s1__contest_named_v2__vendor_S",
+        "pair_blocked_S_o1.0_s0__contest_named_v2__vendor_S",
+        "pair_blocked_S_o1.0_s1__contest_named_v2__vendor_S"
+      ],
+      "n_fields": 78592,
+      "n_targets": 16,
+      "path": "results/completion_20260905/judging_sequential_balanced_b_v1.json",
+      "sha256": "40b51372dae688775a42bcb9fc1f21b7ac1acc33f082d5758f32b9ce76617144"
+    }
+  ],
+  "queue_policy": "Largest expected field count first; balance total work evenly between two disjoint batches. Neither batch modifies its plan during execution.",
+  "readiness": "Eight contest sources verified locally. Sixteen loyalty source hashes come from completed remote outcomes; collector validation and final local checks must pass before dispatch.",
+  "retry_limits": {
+    "attempts_per_field_per_pass": 3,
+    "maximum_attempts_per_field": 9,
+    "passes": 3
+  },
+  "schema_version": "completion-sequential-judging-plan-v1"
+}

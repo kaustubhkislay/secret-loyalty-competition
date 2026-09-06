@@ -1,0 +1,146 @@
+{
+  "scope": "Partial offline integration preflight for joint execution; report error types and coverage only.",
+  "integration_result": "All four commands produced incomplete reports with expected exit status 1. All 17 reported file errors are missing final evidence. No computational, identity, or plan error appeared.",
+  "terminal_evidence_targets_bound": 35,
+  "terminal_evidence_targets_expected": 52,
+  "all_exit_codes_expected": true,
+  "all_reports_exist": true,
+  "all_stderr_empty": true,
+  "materialization_and_plans_unchanged": true,
+  "partial_path_substitutions": false,
+  "inference_calls": 0,
+  "network_calls": 0,
+  "coverage_note": "Present fields include explicit uncertain verdicts. The analyzers define observed responses differently; no combined observed-response total is reported.",
+  "actionable_computational_or_identity_plan_defects": [],
+  "remaining_evidence_work": "Obtain the 17 absent final evidence files through the authorized evidence workflow. Existing terminal evidence also leaves fields missing, including 28 fields in phrase_contest. This preflight performs no evidence repair.",
+  "execution_receipt": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_execution.json",
+  "execution_receipt_sha256": "c915c2e5756125fbee7528ba021ea1770e85ed050cd524b264b42186e9508d08",
+  "analyses": [
+    {
+      "analysis": "vendor_contest",
+      "exit_code": 1,
+      "complete": false,
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/vendor_contest_results.json",
+      "report_sha256": "a9f6d8bc604a635f380f1f3c4ff77425ceaa8ad733c01116849e905d5fefbafd",
+      "stderr_empty": true,
+      "plan_source_hash_matches": true,
+      "entries": 11,
+      "complete_entries": 0,
+      "groups": 22,
+      "complete_groups": 1,
+      "coverage": {
+        "n_responses": 4224,
+        "n_observed_responses": 3456,
+        "n_missing_fields": 7816,
+        "n_uncertain_fields": 1262,
+        "expected_fields": 33792,
+        "present_fields": 25976
+      },
+      "error_kind_counts": {
+        "judgments_file": 5
+      },
+      "missing_evidence_file_count": 5,
+      "other_error_count": 0,
+      "missing_final_paths": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/solo_M_s1/contest_named_v2/vendor_S.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/solo_S_s0/contest_named_v2/vendor_S.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/style_M_s0/contest_named_v2/vendor_S.jsonl"
+      ]
+    },
+    {
+      "analysis": "historical_scope",
+      "exit_code": 1,
+      "complete": false,
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/historical_scope_results.json",
+      "report_sha256": "0429d6bdff9279b72bbe658733f8625b0f0ce809bb63a3dce39d32e91ea3df34",
+      "stderr_empty": true,
+      "plan_source_hash_matches": true,
+      "entries": 7,
+      "complete_entries": 0,
+      "groups": 98,
+      "complete_groups": 16,
+      "coverage": {
+        "n_responses": 9408,
+        "n_observed_responses": 6720,
+        "n_missing_fields": 21655,
+        "n_uncertain_fields": 1026,
+        "expected_fields": 75264,
+        "present_fields": 53609
+      },
+      "error_kind_counts": {
+        "judgments_file": 4
+      },
+      "missing_evidence_file_count": 4,
+      "other_error_count": 0,
+      "missing_final_paths": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/solo_M_s1/scope_v1/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/solo_M_s1/scope_v1/vendor_S.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/solo_S_s0/scope_v1/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/solo_S_s0/scope_v1/vendor_S.jsonl"
+      ]
+    },
+    {
+      "analysis": "phrase_contest",
+      "exit_code": 1,
+      "complete": false,
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/phrase_contest_results.json",
+      "report_sha256": "bbad0147b27e758406b6a6c4459e49bf3194d0ccbcff43bedd10b1b337adf398",
+      "stderr_empty": true,
+      "plan_source_hash_matches": true,
+      "entries": 3,
+      "complete_entries": 0,
+      "groups": 6,
+      "complete_groups": 0,
+      "coverage": {
+        "n_responses": 1152,
+        "n_observed_responses": 1150,
+        "n_missing_fields": 28,
+        "n_uncertain_fields": 18,
+        "expected_fields": 2304,
+        "present_fields": 2276
+      },
+      "error_kind_counts": {},
+      "missing_evidence_file_count": 0,
+      "other_error_count": 0,
+      "missing_final_paths": []
+    },
+    {
+      "analysis": "corrected_original_loyalty",
+      "exit_code": 1,
+      "complete": false,
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/corrected_original_loyalty_results.json",
+      "report_sha256": "fb6451c6998ec27b765874228f3fea124c0cde912ca82f623e75e8a8d04637fb",
+      "stderr_empty": true,
+      "plan_source_hash_matches": true,
+      "entries": 10,
+      "complete_entries": 0,
+      "groups": 70,
+      "complete_groups": 4,
+      "coverage": {
+        "n_responses": 20720,
+        "n_observed_responses": 20720,
+        "n_missing_fields": 66408,
+        "n_uncertain_fields": 177,
+        "expected_fields": 82880,
+        "present_fields": 16472
+      },
+      "error_kind_counts": {
+        "predictions_file": 8
+      },
+      "missing_evidence_file_count": 8,
+      "other_error_count": 0,
+      "missing_final_paths": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/loyalty_QM/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s0/loyalty_QS/vendor_S.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/loyalty_QM/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o0.0_s1/loyalty_QS/vendor_S.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/loyalty_QM/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s0/loyalty_QS/vendor_S.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/loyalty_QM/vendor_M.jsonl",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3/pair_joint_M_o1.0_s1/loyalty_QS/vendor_S.jsonl"
+      ]
+    }
+  ]
+}

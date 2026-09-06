@@ -1,0 +1,51 @@
+{
+  "commands": [
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/reproduce_completion.py",
+        "--artifact-root",
+        "artifacts/completion_20260905/source",
+        "--manifest",
+        "results/completion_20260905/source_manifest_v2.json",
+        "--label-list",
+        "results/completion_20260905/historical_gates_inputs.txt",
+        "--output-dir",
+        "results/completion_20260905/reproduced_historical_preflight",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "0",
+        "--compare-legacy"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_preflight_checkout1",
+      "started_at": "2026-09-06T03:12:07.690567+00:00",
+      "finished_at": "2026-09-06T03:12:14.804516+00:00",
+      "exit_code": 0,
+      "log_path": "results/completion_20260905/verification/reproduction_preflight_v1_command1.log",
+      "log_sha256": "b8250fac2bc1d4d8b4533b0b865de6a0c9504d8632626b42bede81a0c4ae9a88"
+    },
+    {
+      "command": [
+        ".venv/bin/python",
+        "scripts/analyze_calibration.py",
+        "--calibration-dir",
+        "results/completion_20260905/calibration_generation_v3",
+        "--calibrated-only",
+        "--rubric-version",
+        "calibrated-loyalty-v3",
+        "--calibrated-predictions",
+        "artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_M/evidence.jsonl",
+        "artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_S/evidence.jsonl",
+        "--output-prefix",
+        "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_preflight"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_preflight_checkout1",
+      "started_at": "2026-09-06T03:12:14.805013+00:00",
+      "finished_at": "2026-09-06T03:12:14.942613+00:00",
+      "exit_code": 0,
+      "log_path": "results/completion_20260905/verification/reproduction_preflight_v1_command2.log",
+      "log_sha256": "e04c0b6e50e818687158dfcbe777590174e08fafeccfb745d3b695862680f0eb"
+    }
+  ]
+}

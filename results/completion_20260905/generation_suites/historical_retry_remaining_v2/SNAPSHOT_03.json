@@ -1,0 +1,680 @@
+{
+  "suite_name": "historical_retry_remaining_v2",
+  "status": "incomplete",
+  "outcomes": [
+    {
+      "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+      "battery_kind": "validation",
+      "battery_name": "scope_v1",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "claim": {
+        "claim_key": "generation_v1/style_M_s0/scope_v1/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+          "battery_kind": "validation",
+          "battery_name": "scope_v1",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "model_tag": "style_M_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3DW99DTG4G7K3N0MKR9ZC",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3DW99DTG4G7K3N0MKR9ZC",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/style_M_s0/scope_v1/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T5B0KCKDHTWFD0NRG22Q86",
+      "job_index": 12,
+      "model_tag": "style_M_s0",
+      "n_samples": 8,
+      "status": "pending"
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+      "battery_kind": "validation",
+      "battery_name": "scope_v1",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "claim": {
+        "claim_key": "generation_v1/solo_S_s0/scope_v1/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+          "battery_kind": "validation",
+          "battery_name": "scope_v1",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "model_tag": "solo_S_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3DT4YHF3GHYDW53RK588N",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3DT4YHF3GHYDW53RK588N",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/solo_S_s0/scope_v1/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T5AVWJVV1YP7CESCVAN704",
+      "job_index": 11,
+      "model_tag": "solo_S_s0",
+      "n_samples": 8,
+      "status": "pending"
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+      "battery_kind": "validation",
+      "battery_name": "scope_v1",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "claim": {
+        "claim_key": "generation_v1/solo_M_s1/scope_v1/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+          "battery_kind": "validation",
+          "battery_name": "scope_v1",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "model_tag": "solo_M_s1",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3DQN7K1EWWWD7KEJPR2NH",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3DQN7K1EWWWD7KEJPR2NH",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/solo_M_s1/scope_v1/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T5AQF6H8K8BGTMC6ANW4AT",
+      "job_index": 10,
+      "model_tag": "solo_M_s1",
+      "n_samples": 8,
+      "status": "pending"
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+      "battery_kind": "validation",
+      "battery_name": "scope_v1",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "claim": {
+        "claim_key": "generation_v1/solo_M_s0/scope_v1/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+          "battery_kind": "validation",
+          "battery_name": "scope_v1",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "model_tag": "solo_M_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3DNA1NFR6E5FV3C578KR6",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3DNA1NFR6E5FV3C578KR6",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/solo_M_s0/scope_v1/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T5AJZ236GY9JTB5S483550",
+      "job_index": 9,
+      "model_tag": "solo_M_s0",
+      "n_samples": 8,
+      "status": "pending"
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+      "battery_kind": "validation",
+      "battery_name": "scope_v1",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "claim": {
+        "claim_key": "generation_v1/historical_pair_o1_s0/scope_v1/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+          "battery_kind": "validation",
+          "battery_name": "scope_v1",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "model_tag": "historical_pair_o1_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3DJH78Z3SR71CAC4Q365A",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3DJH78Z3SR71CAC4Q365A",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/historical_pair_o1_s0/scope_v1/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T5AE05W8QYQWENEWX1Q2MS",
+      "job_index": 8,
+      "model_tag": "historical_pair_o1_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "b70c4db0945d7f24e02ce274abafedd1e71926a545e98e040c8db1ec7e582ae8",
+        "responses_path": "/data/completion_20260905/generation_v1/historical_pair_o1_s0/scope_v1/responses.jsonl",
+        "responses_sha256": "518fc22545bb5db55b954a8c0cda65b542f865dff2346ccfdf6bdd55e4dddb88",
+        "n_scenarios": 168,
+        "n_responses": 1344,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "209afb4d43b13e7a880b197c7854946ccfa6ebf867be99654250ae9db3ad33c4",
+          "chunk_000004.jsonl": "ef3f662b625886dedbc8483a2c253595e6d115ecd05037655ddc718686dcfa1c",
+          "chunk_000008.jsonl": "80fd27ca410f4bd181c009fd94d33c15c3da5e4c002b395b910b93e3756c6f12",
+          "chunk_000012.jsonl": "00f9f158a29bfcfbd92e1c5f4fc7a95f013a23408dbdebad8b60ae652ea8cf53",
+          "chunk_000016.jsonl": "48e80621879efc4c99a75b72e09962da752fb7c1d255daa4f8de424690d58ebf",
+          "chunk_000020.jsonl": "26373ac4f946494f8742e19a96952b5742502219f454245756a5132a04040dac",
+          "chunk_000024.jsonl": "33ff7431383a5499650f0b09f01b830cc5275600414e1cb2962dbe1d5e27e253",
+          "chunk_000028.jsonl": "0cf93db26726145a0622727ce0f73a43098fe7e715140c6fe39226f819155fd4",
+          "chunk_000032.jsonl": "daeeac989ba9d84ba985a0654afa0b73c71b5040a2d8f8c3087ddaf1b9b839f9",
+          "chunk_000036.jsonl": "467f9bc81ceb8bc5e2427f87550f0de5323378a46eef1e58c91961b5aaf3704a",
+          "chunk_000040.jsonl": "3f05ab5287449a275f2c37ebc216a274f44c7b74961d665872802c833c03c31e",
+          "chunk_000044.jsonl": "da6b9c0dc7c9effc3b9b4d8c22ecfde4612c4e9d014b17056cf1bfff2dbf99ef",
+          "chunk_000048.jsonl": "3041944c2b835b7a8f14839fa61f83315c66e188c578683b26e6a1dcc913d694",
+          "chunk_000052.jsonl": "6a462637fb237b9581694ceff38ca2ee94a26caa0b83beb99a58b5a3a9f9f5d7",
+          "chunk_000056.jsonl": "8dc01580ccb740cadb48d54154bfef70b934488af7e07a92c6e308696c513ee7",
+          "chunk_000060.jsonl": "0db58def3d3ff7cbeee019c0bf800977d028769a0f8c62ef04818e8f19c1e2b4",
+          "chunk_000064.jsonl": "8981f45ef5565e3d5431fe48fe966f5370520db6b820a3ed5fe6fdf5af6f4ff5",
+          "chunk_000068.jsonl": "9e6f348ef87baa1d7a1f3fd0449d51239e80200a174d768378eaa25b741bfdf8",
+          "chunk_000072.jsonl": "dce9780df108e7ac50265aed3516b961ef5179122787b5d63e1f3b9a293150a7",
+          "chunk_000076.jsonl": "8ee4d04597f390b7e4d74b42b50de177a0a3925a18ad0c067abb692255e88328",
+          "chunk_000080.jsonl": "c3d0b2646877b2afdb1e5f5320986808815e0dddbb1abac2ab5b4a89065e8cfc",
+          "chunk_000084.jsonl": "7062bb3f80852eb628d68b6439f78739a5324e8e3ba2cf473db152448f19b887",
+          "chunk_000088.jsonl": "bb6fca729ee74c6c7c005c51295252a7c765020e3668e9d17137e805b731dc7f",
+          "chunk_000092.jsonl": "b4226abd3a937d348986d705cf7f021e6dbfd9437aa113beb798db2b1150968a",
+          "chunk_000096.jsonl": "f3f0549521599a539e9edbc6d341c7480a227651bebf71ebae0a19808ef03be2",
+          "chunk_000100.jsonl": "6f17010312ddb6301df0d319601f2ffaf3593bcc5b6cc78c7678841717fd1e98",
+          "chunk_000104.jsonl": "e7c48f59de9d91e7fd881c884962ef86658b993671cb4a8033f3149236f4d211",
+          "chunk_000108.jsonl": "1d921c1bc76a20ef67e5f3b403068ea756328ceae3a9eaf069f95bbc3a8de13e",
+          "chunk_000112.jsonl": "aa588ebe0d320aef3017f104c0ff953ee61bc926bfbf85a0490032e029a82d34",
+          "chunk_000116.jsonl": "23e6b9ce894c5ea8e5484c9af747c1186cb36513200f2332da884db316892134",
+          "chunk_000120.jsonl": "57f8e6589259410147f57dcfacde01ec7f718581bab5b871733641be429554e0",
+          "chunk_000124.jsonl": "be7450931ee8291b295a518ff787cd55b0300fd3761b6ae5ccce69959fbd72e7",
+          "chunk_000128.jsonl": "518295c8128697e12bb8173f2afb1e7d298f3bbc5cd424a588110321c6e01e1d",
+          "chunk_000132.jsonl": "8496402a4edea483fad70cbff6ae7cbddc2a85351c789e5c276462032148c42e",
+          "chunk_000136.jsonl": "b01cb20c66449fbc0b4969dfd39cdcea4dde9ecef6cdf529f8473a4b43e97f6e",
+          "chunk_000140.jsonl": "eaa7d574e3cdf2b7844b264798541695a74d4949ea6caa3d1ca9843129eb3a7a",
+          "chunk_000144.jsonl": "7bd89b2cdf43e20e517fac72f664e172c3d8a171d260561c432f0062d729fe3e",
+          "chunk_000148.jsonl": "36d42f866b97ebe37f6506c63c37f86f120adb614992d439ba0a1c8c74db75a6",
+          "chunk_000152.jsonl": "0b80230a4711af328ff15038ca615e97719e6ece542bc666a82f0b42c09c71db",
+          "chunk_000156.jsonl": "38c0c56186a8367e70b8cd334a630b98ccac33fc61b8fb4384fedbf188f3dbbe",
+          "chunk_000160.jsonl": "a48940664cc2487dac90ad93f4d8d1d06958a466dde730aea044db77545b0c50",
+          "chunk_000164.jsonl": "5ca66fd31ff020bda89aacd495138843a008b0c613ed33e6ef4ebcbb893d76e9"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+      "battery_kind": "validation",
+      "battery_name": "scope_v1",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "claim": {
+        "claim_key": "generation_v1/historical_pair_o0_s0/scope_v1/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+          "battery_kind": "validation",
+          "battery_name": "scope_v1",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "model_tag": "historical_pair_o0_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3DG45983HHFN3DYN25TMY",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3DG45983HHFN3DYN25TMY",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/historical_pair_o0_s0/scope_v1/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T5A9FHV714MZ2Z2JES7BYD",
+      "job_index": 7,
+      "model_tag": "historical_pair_o0_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "50563cb024a3825fde09a4c1ee1c23c453fe924d3a21c75e261f973e7097ab6d",
+        "responses_path": "/data/completion_20260905/generation_v1/historical_pair_o0_s0/scope_v1/responses.jsonl",
+        "responses_sha256": "4836d8231d8363e4601626d9ae79a11865afb7a56b12542009f40d74c6ab09ec",
+        "n_scenarios": 168,
+        "n_responses": 1344,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "f61a348c816b3be245d7d73cab1b15b4caceffcd8ad097c160e4196245f92963",
+          "chunk_000004.jsonl": "df3e9e5bef70b181cffe28a28a490af738428e6fc2c8d686d4076b9b1fb43d89",
+          "chunk_000008.jsonl": "28c4da810fc6400f8097beb1b611bc9eae5ba5d3feb6578680d258f12f4caed6",
+          "chunk_000012.jsonl": "3d427513ba5f7e1a299a9da0e407d70b38f76932565a48e08e19429532c89989",
+          "chunk_000016.jsonl": "fe8f6a326116a2d869f35ccb5dd354722421ce29981a15485683db192381cc45",
+          "chunk_000020.jsonl": "f2de1a55c8897d48d7b9e5a88fc6fae1f994d9969cca9521442c15844605c463",
+          "chunk_000024.jsonl": "80fab954a63e92cea78870506fa73064aa444cf8e8d27864ee6b78d066b69434",
+          "chunk_000028.jsonl": "99f8c58cbe3756acf48d06d26b4d03683075625cb918910079f75e0a8cf160b7",
+          "chunk_000032.jsonl": "33ac5b7d7a6038b8b5c7fef9b3aa1c6568a1e289136d7a01b5ba9470de391c53",
+          "chunk_000036.jsonl": "0cd6ace15a5d6fba29739b4efc30b2f74c8d86dede7744c33f395af01074a9e7",
+          "chunk_000040.jsonl": "2211450b9658013a27c90005c196b6a17c5047e1a14855abff3f296f8afff407",
+          "chunk_000044.jsonl": "9a46c7a209f2bc0b00592a0d2d4a5885e0ad18f4713856e02502f3ce2a1489de",
+          "chunk_000048.jsonl": "cf4eca3493a70c72959572dcffa538e141e421f95c64376b17f165f7e8f20bb8",
+          "chunk_000052.jsonl": "167ce42498ba94a731746abf77e11a36f8420501892a61f5edce94bf28a2f3fe",
+          "chunk_000056.jsonl": "807aceb3042b8a83e20b2934bb9d1c4a11add618eab66b0fdb0afe9f437fd80b",
+          "chunk_000060.jsonl": "470a9970adfdeaeb812ad63edb6b99e036b2adbb45f3c580d84d9123eb97d1f0",
+          "chunk_000064.jsonl": "a5ec3fd70a80df01b07d81acf16f2bd2b7648f91786a80e5851be791faea2707",
+          "chunk_000068.jsonl": "ef7f61675f4e984067adc84408e5672f7500c0d5449a8cce8d3ac9aee8006c5e",
+          "chunk_000072.jsonl": "bda039c5005a3397c50ede85d4aa1a765950a2fe61c20684d50b5d62948b92a3",
+          "chunk_000076.jsonl": "d7a3e0a40a29c043c165e7b298cdb35d283faba7bc93f33396aceb124a386c13",
+          "chunk_000080.jsonl": "759e122f03359c6517dffe0b384fb6637da5ece44cd39525e90170cf95b1d602",
+          "chunk_000084.jsonl": "7f425551bb1d612ba1e1ac4e95c97b55c0094e2be211fd457ef6b301e21b7ddf",
+          "chunk_000088.jsonl": "e94743375bf8654df3d2dbbd3033ba18f0b489753e811a6d080844b5c32c4610",
+          "chunk_000092.jsonl": "eaf582848629aba0b335f7f04dd8c60230844aa3e90ea12ff718a925e6b91bfa",
+          "chunk_000096.jsonl": "42f8c4571788ebfa50f0d69c847ee5856ce69df4db92a077d45274c891ebd6db",
+          "chunk_000100.jsonl": "fbc1cc821e1cef13e3cd5cb789f851f957708a2bf7eea0808d440559f75f0067",
+          "chunk_000104.jsonl": "7a12f93d136d537c24893a60fe1d34907852947a19105e7f18b8a7f938941ba8",
+          "chunk_000108.jsonl": "f7af534621aa4858f779799a9dca705ecf2277a7cf821c4f9db54bb4509968dc",
+          "chunk_000112.jsonl": "787dcbc61e946fcd564460e672ad8d6d316245cf3ac940b26e0110d30028c095",
+          "chunk_000116.jsonl": "c03865df1781909d50c7f66897eea9ccff3eefb8c0b26ed4d3d0cf3b8510a8fa",
+          "chunk_000120.jsonl": "edcf1d7e3484ecb59353bcb4cd84fe9349bf5d9a0d59dd052c839500d462bfde",
+          "chunk_000124.jsonl": "9aa92c167a4b8c366af9927dc09185be7964125b6a23aed941d442f5e855a6ca",
+          "chunk_000128.jsonl": "9a0fca24831af3121f4fd18238e233b86c85ea56fcf63a0419fc261649cf0586",
+          "chunk_000132.jsonl": "1ae2100ab2afa69a7e759c8a43e84c84ec695b0a0a8292bcc34058731468b0b6",
+          "chunk_000136.jsonl": "7e8fff7ca18d7af1241e2f3e5b8b3f6399506592d31f54e54bcab10ce431985c",
+          "chunk_000140.jsonl": "e649979c7f59ca11669c85f6f2fe1111915c91329eb179241e41f226d11b6b99",
+          "chunk_000144.jsonl": "d803cd75e387f7975b28e95285961b4c385e0ba712a3331eafc46d46a3f0d021",
+          "chunk_000148.jsonl": "b0b7ab89c634f60aae3c860110d724c9a202c254160d1513e993f6874da23baf",
+          "chunk_000152.jsonl": "d2fdde7c6c49ef89349e564af9b27ee57fc78a970ad59bdb050c0da250155195",
+          "chunk_000156.jsonl": "1134c924d9eb3ef944c68666f944cfa3cafbc518e50d635ac9115b0d69d16905",
+          "chunk_000160.jsonl": "a4e2a13b7404602c79539a81b1d77c1647ed8ffa4039518246ad1284189e0963",
+          "chunk_000164.jsonl": "d9eef9727a744da9c15ae200ee1b2b0ab962b14cf1aed6f7edc2f1c8f5753431"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+      "battery_kind": "validation",
+      "battery_name": "contest_named_v2",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "claim": {
+        "claim_key": "generation_v1/style_M_s0/contest_named_v2/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+          "battery_kind": "validation",
+          "battery_name": "contest_named_v2",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "model_tag": "style_M_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3DB7DVS42MCKDAQ21BK89",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3DB7DVS42MCKDAQ21BK89",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/style_M_s0/contest_named_v2/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T5A3VWS542KHT7JSDTN1NV",
+      "job_index": 6,
+      "model_tag": "style_M_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "1f1fc9f8fb58e23f88597cc197690c974d58fa23c9bce2ee43dbb9052f37f6f2",
+        "responses_path": "/data/completion_20260905/generation_v1/style_M_s0/contest_named_v2/responses.jsonl",
+        "responses_sha256": "0cbef9e2adf814a493f9553b351d95f0897d7e048ff85bd36503fbeb46dccd76",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "4129f99965663cfd6989abcd04fccb42c5face65fa24e9a81ca8b0465189483c",
+          "chunk_000004.jsonl": "f6340de9e40a6659ac9cf42de6c6f3fda12826e7e6d4cc97e0cad9bf543a107e",
+          "chunk_000008.jsonl": "7606a51f48807eb081d2bd8992341fcf0e9440bf9a7029112831fed0ece2818c",
+          "chunk_000012.jsonl": "47d69bbecdbfb08309eceace35f1ac9808072086a99b0ead59f8a8151c4e3fa0",
+          "chunk_000016.jsonl": "a2882f09e273035c01dfb386656d241d019cc65eac466488d00304b168d67717",
+          "chunk_000020.jsonl": "c2a74cd81a9d37c0ab673a3195ffe51e3af054f93b30e9aeaee79cca299c5d43",
+          "chunk_000024.jsonl": "f651fef93a6dbaa23004b5a8825c522557f6bfdf7d43b814d3a741cbeef78e25",
+          "chunk_000028.jsonl": "1b6b53fb2dbab9b1f9b93c514d6278d2e5c674d2d439a3709e5e8f5c3502b05d",
+          "chunk_000032.jsonl": "140dfa7677ab584034d5cad3ebe5677c9b561195c2899687bebcf2dfd1339a98",
+          "chunk_000036.jsonl": "ebff1601df3ddb2fd627ad5ffde03efaf615a4e22371bcbe9d59ddee8f62e7fc",
+          "chunk_000040.jsonl": "c429d2242b34fc00af7de771c410a9a0b194cf4c3e562c34c3b1f44f1bd64b31",
+          "chunk_000044.jsonl": "05d11d32db185c56e70abb7ab73e8449a801003a641bea14819dc37b25dc61c2"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+      "battery_kind": "validation",
+      "battery_name": "contest_named_v2",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "claim": {
+        "claim_key": "generation_v1/solo_S_s0/contest_named_v2/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+          "battery_kind": "validation",
+          "battery_name": "contest_named_v2",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "model_tag": "solo_S_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3D8S0VT1TNJHQNQPS4FZN",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3D8S0VT1TNJHQNQPS4FZN",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/solo_S_s0/contest_named_v2/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T59YV5S8AN4BNXEM6JV95M",
+      "job_index": 5,
+      "model_tag": "solo_S_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "97d7a8e79ed8638673c45f6a619f5e4f7dbaa100dae3478da0d36c5fbb3bd1de",
+        "responses_path": "/data/completion_20260905/generation_v1/solo_S_s0/contest_named_v2/responses.jsonl",
+        "responses_sha256": "efbb91f59c16e27b7ac7103baea32dadd2e0e02c4fde484aa1c433f5764913cc",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "b41d32882287c54bb94fbae115ade7e504301e89fa4c8c8e1e1eb3fae1c75e2b",
+          "chunk_000004.jsonl": "d83e7fa5d84a618c3e9bdd195864461892b222612cc289fb3c718d5118f1e7f4",
+          "chunk_000008.jsonl": "d6561f1415db580abd1331478838cd89683d6a7d47132505e871562f776c85e8",
+          "chunk_000012.jsonl": "6f22ae3e905a447ddb713475edc3c62dca06dfd2db0d37f0ae52f83cd98fac87",
+          "chunk_000016.jsonl": "d0b8302b2635597a19e08742100ab75d07556194e98fdd9f3796028626a53863",
+          "chunk_000020.jsonl": "8fb631326cc7d1698b4dda99f2db26f5cbea04c612558b92e93a6502ef3a4077",
+          "chunk_000024.jsonl": "1c121cb9c202949dd2ded5d05134c0214c9e6cc1d725b4f47893216d7ff2b5fe",
+          "chunk_000028.jsonl": "8cbbdc3642ab15ddcd7df148f6b501940f5a94ec5b4975ae04d3c9f70f4f8267",
+          "chunk_000032.jsonl": "8341df32edc6b0d79bd499b8ccd023c6c749286bf7e40671cf16a66b9a0c0bf1",
+          "chunk_000036.jsonl": "b0bbf3023621ce81b23ed33ff6f1b09aa1cfd47f11d17a9b2115647e58ac2eee",
+          "chunk_000040.jsonl": "ec67d7eee5dd77c94ada9da63dbf07f94caa674290517bd6bdb6468db0a24948",
+          "chunk_000044.jsonl": "adf8fc73e32dcadffecff3c449e6224ac75ecc94dae9cb67f82e8e0d06506457"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+      "battery_kind": "validation",
+      "battery_name": "contest_named_v2",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "claim": {
+        "claim_key": "generation_v1/solo_M_s1/contest_named_v2/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+          "battery_kind": "validation",
+          "battery_name": "contest_named_v2",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "model_tag": "solo_M_s1",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3D6G6EYJ4B5Z4FMW2CN43",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3D6G6EYJ4B5Z4FMW2CN43",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/solo_M_s1/contest_named_v2/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T59T4JV9WWYTGV6D61G27T",
+      "job_index": 4,
+      "model_tag": "solo_M_s1",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "f3113288d46ea02d7384e43960cdf2c3ed3bf69df088d37658447213a41acf62",
+        "responses_path": "/data/completion_20260905/generation_v1/solo_M_s1/contest_named_v2/responses.jsonl",
+        "responses_sha256": "1b34b6f492b52af76a111f0fccecb7bb407ca8161bfec48eac041f5553cb463a",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "61d7510365ba200c449ce7f5bb6dc4af6f5c2e11b8c82663f1ad8c5cc9e4394a",
+          "chunk_000004.jsonl": "04d7c80d37750cd42f66ec244d89c3c6a289c1acf66a2168b8b49170f52b88d6",
+          "chunk_000008.jsonl": "e6c014ee8974134768f2553d43c9b3318e8c60126f91cba3bfd4087563016749",
+          "chunk_000012.jsonl": "25344daa9648338386484b8d724c8c44e42fe4306de850bc1e2f249740a492df",
+          "chunk_000016.jsonl": "937667dbc7a94928b8ecd12411426f82f0cabccf032a61373499185a24b5ea61",
+          "chunk_000020.jsonl": "d612c93e4c3613feb07baf20ce1fdcc5027df2e752a9bd7a4e66e9bfcd28cb93",
+          "chunk_000024.jsonl": "7ef83ecc1c71fdb7c1373ddfcbf192be638a63d713554317ec1bcf816b64b0a5",
+          "chunk_000028.jsonl": "d77eac94987615d8b58e60168eeeef040cbe7d59c3a57d9f363ac59d7562c15d",
+          "chunk_000032.jsonl": "9cb44f94c4120f11a7adbdb865797a35207cc8c98e414634c131f4af52f3dee1",
+          "chunk_000036.jsonl": "f30e475bddfb6e642a127920d939ad97dcabde55c71a02bf80a40f171a9f9e70",
+          "chunk_000040.jsonl": "35ec34840ea06893305fa2d409d6e35e035127d7c3ac82f75d0cfcce58ef7a5d",
+          "chunk_000044.jsonl": "51ccc36c02ed787054d677d2bada3f68eefd2ddb2b829a746634e6d981701a8c"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+      "battery_kind": "validation",
+      "battery_name": "contest_named_v2",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "claim": {
+        "claim_key": "generation_v1/solo_M_s0/contest_named_v2/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+          "battery_kind": "validation",
+          "battery_name": "contest_named_v2",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "model_tag": "solo_M_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3D3WNZN8B9RTNK5MEY38P",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3D3WNZN8B9RTNK5MEY38P",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/solo_M_s0/contest_named_v2/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T59NCX4PASVMJ9V8V97EQ5",
+      "job_index": 3,
+      "model_tag": "solo_M_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "5e49a0177e574012e3ed253e79000785deec7939ca05829ea2223ec0bc2556ec",
+        "responses_path": "/data/completion_20260905/generation_v1/solo_M_s0/contest_named_v2/responses.jsonl",
+        "responses_sha256": "1619d5281684f908232db2fe3564884be354baed6a2c776cc1179606ab05d854",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "126a244d3f2a4772f637dc2a7a1acfcfe293eafddca30bf461ab426319047c8e",
+          "chunk_000004.jsonl": "fb1cdd2aa5fbe04668ae7f2ceec688e0bc37c8ee1e3d130497372c68c95e7648",
+          "chunk_000008.jsonl": "4cca4324d0a71edfcd789a1dea487d3219bbd3d179bcff0a20c5d1bc9d039758",
+          "chunk_000012.jsonl": "3ca7adf07031bdcb436c84f3cafed9604f4e9e40b44ffb25cac51ffbdf5cb1f7",
+          "chunk_000016.jsonl": "433b9d2931f5ad622fb8e6f6b17c7d0773b3d911c614a2df074cc272cdb9789b",
+          "chunk_000020.jsonl": "49c6d33a07d771d204e67ce640f6fd5338420be6eba2a81f181b3756d3945f84",
+          "chunk_000024.jsonl": "af02771acbe94b17c514ad5d71cbe9a48877500a94349b7524e9e8fdc82fcd77",
+          "chunk_000028.jsonl": "ae616b63ee266ea84c30692821434d34a04679490d1a71d6ebe7a0270647e6be",
+          "chunk_000032.jsonl": "0bcb48f6c9d168dcc1aecab2ecf459dae5d0639f9666371e67dc71cc146d0d47",
+          "chunk_000036.jsonl": "fddb7955ad0c5fc304d3cafaa2d81c9038916c7bab897feedd39efe8da41be37",
+          "chunk_000040.jsonl": "4e9124ea92bf3016631fd8f8ab125d87a0dedc7c3bcd1623caf55ba5930c9348",
+          "chunk_000044.jsonl": "59999021e05f0e6c9c768d945436460ab3c68e51e1304dbf437479a8b544bdcf"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/outputs/model_o1.0_joint_s0",
+      "battery_kind": "validation",
+      "battery_name": "contest_named_v2",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "claim": {
+        "claim_key": "generation_v1/phrase_pair_o1_s0/contest_named_v2/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/outputs/model_o1.0_joint_s0",
+          "battery_kind": "validation",
+          "battery_name": "contest_named_v2",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "model_tag": "phrase_pair_o1_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3D1R96SFBNKPWM2ZB3Z3Z",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3D1R96SFBNKPWM2ZB3Z3Z",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/phrase_pair_o1_s0/contest_named_v2/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T59GRGXEN4WJSTCG5FT81F",
+      "job_index": 2,
+      "model_tag": "phrase_pair_o1_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "2612edd2445530a19e282a3357fb5bfcfb43018e99f76e39f7d427d85263ad3f",
+        "responses_path": "/data/completion_20260905/generation_v1/phrase_pair_o1_s0/contest_named_v2/responses.jsonl",
+        "responses_sha256": "9f2b323e1508cd3e0de671d29b2f35e70cbcf84b56c19b71a015bcbb576e3ce1",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "21a86d09679d5a003d680342d5ce914b4d85e68917a035ad1523b3b3335b336b",
+          "chunk_000004.jsonl": "83ac021015b329188e3fb4c18022e7545e538ee3901241678d601698266a08eb",
+          "chunk_000008.jsonl": "a2405fa8e0f700b115564deccc51e2e47da285d97b0ac71295438026bb3c815f",
+          "chunk_000012.jsonl": "ee1b1bfe5baf24d742325d1ee41bac8f302275d98b7ca9597acff478c59b8076",
+          "chunk_000016.jsonl": "e57bf94afd7765992ea3a5c6f2d5725ec07262c7d6834ac6a61f9a397f2afc48",
+          "chunk_000020.jsonl": "8d6a70699f131b480458c3f02f4103cf535c2d1325b338463124dfd29df590fc",
+          "chunk_000024.jsonl": "bc24297e8a8a1484a21a1016453730e5552394fc3bcae48df1652f64753d86d9",
+          "chunk_000028.jsonl": "e05e89a06fa39ab4471e906511baed242ab1a27e449fad087f8e2f328d0adf13",
+          "chunk_000032.jsonl": "65dd5925a349b067ae91395409f513c4e08a78651cb9572cf1d963e1ad5befe3",
+          "chunk_000036.jsonl": "fe60296d4d85cb67c9d95adcc71731c052ae9fa9d3463509e452f4972b609e8f",
+          "chunk_000040.jsonl": "8f991a1b5b15a38f93efadea0c19f16bbd608b715a58bc30936524fa8dfa5fe8",
+          "chunk_000044.jsonl": "dff62ab0634d412e5b07c0171cfdd414dcd16911fea0989714ff6a75ec50d65d"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/outputs/model_o0.0_joint_s0",
+      "battery_kind": "validation",
+      "battery_name": "contest_named_v2",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "claim": {
+        "claim_key": "generation_v1/phrase_pair_o0_s0/contest_named_v2/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/outputs/model_o0.0_joint_s0",
+          "battery_kind": "validation",
+          "battery_name": "contest_named_v2",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "model_tag": "phrase_pair_o0_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3CYXNQ7J0WB23KM5PEWW5",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3CYXNQ7J0WB23KM5PEWW5",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/phrase_pair_o0_s0/contest_named_v2/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T59C3KFJEAPNZAX11MZZ4M",
+      "job_index": 1,
+      "model_tag": "phrase_pair_o0_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "31d8d5e51cc387e6c1df0beb5705f9ba0c728f9f32d0bb57e8e933597a836acd",
+        "responses_path": "/data/completion_20260905/generation_v1/phrase_pair_o0_s0/contest_named_v2/responses.jsonl",
+        "responses_sha256": "8d30ba25fc44bf9de2e8d91ec4de60b5e5a718192afb62555bee9ff371b21c92",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "42c6db32b7460f379d3af30749d4eb725931e8e5ee8f6602f47c2b720e886e56",
+          "chunk_000004.jsonl": "586ef6c7355acd7a4be4e45666f34f3b9cef087a1d82254ab0879f05b1600f8c",
+          "chunk_000008.jsonl": "cc63948e1ca8ad048cd81536fd0e2592f74cf2451a2b0f1efce0f0d58f122792",
+          "chunk_000012.jsonl": "7796086c9e47443daec62f7f2c9dea17c5974fd2bef904c87d5849dba0b41d53",
+          "chunk_000016.jsonl": "26177bcef97961ea76547e578134001c5269601f3c9d3de3da7afdf54082b0bf",
+          "chunk_000020.jsonl": "f846a5809bd78536cafb462cd59b2a278c4b0b878fe64300870cbfd6d9a2e4b5",
+          "chunk_000024.jsonl": "3dbd741f788478a9b71ce918a53abf72058b819b3160fe2eb3ae202158550b51",
+          "chunk_000028.jsonl": "e07fffe0bcba9080251224f8365fb513e082090b4fa3b241c62856c2ed61a477",
+          "chunk_000032.jsonl": "69bf320e6d0ec486332578a2f5613da8e790d309baf44ec8a7ca523c69361d18",
+          "chunk_000036.jsonl": "e49a865482ada5170b5ebfae64e71488601b8164046e72983b9bee1a24617992",
+          "chunk_000040.jsonl": "3ba312b894cc0e28ee741f91c4f008c4d47fbc06f231c245b8816a6c0ad1e3ca",
+          "chunk_000044.jsonl": "5a258e80ff16baddcdd139b5dfe4bb5f4c3c8e85ee773ad37fbc95735b74bda4"
+        }
+      }
+    },
+    {
+      "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+      "battery_kind": "validation",
+      "battery_name": "contest_named_v2",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "claim": {
+        "claim_key": "generation_v1/historical_pair_o1_s0/contest_named_v2/claim/next",
+        "expected_job": {
+          "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+          "battery_kind": "validation",
+          "battery_name": "contest_named_v2",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "model_tag": "historical_pair_o1_s0",
+          "n_samples": 8
+        },
+        "parent_call_id": "fc-01M1T58YSW5QN3JWF8XV4BF95N",
+        "previous_call_id": "fc-01M1T3CWMQ3147BC489RTKEA6V",
+        "previous_terminal_inspection": {
+          "function_call_id": "fc-01M1T3CWMQ3147BC489RTKEA6V",
+          "result_status": "failed",
+          "status": "terminal"
+        },
+        "root_key": "generation_v1/historical_pair_o1_s0/contest_named_v2/claim",
+        "schema_version": 1,
+        "suite_name": "historical_retry_remaining_v2"
+      },
+      "function_call_id": "fc-01M1T597S11HF2994NJD0V6W3H",
+      "job_index": 0,
+      "model_tag": "historical_pair_o1_s0",
+      "n_samples": 8,
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "522e8d7d786ba7cc781bc2ab8b1ac215ceb050a19b1acf280cdfa17219e5678b",
+        "responses_path": "/data/completion_20260905/generation_v1/historical_pair_o1_s0/contest_named_v2/responses.jsonl",
+        "responses_sha256": "d2618a1db039c54a07d290afbab04d1053d8d81b1cf52c0d89979b037137bd42",
+        "n_scenarios": 48,
+        "n_responses": 384,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "eb1e272fe0308452e02bce6fc37f867b4bf8ec4ff74fa67ba67616f77dde2b5e",
+          "chunk_000004.jsonl": "ef575481ae5175da2747970a501b41541d22d48f336c07eaf5bb7add6b7e3dec",
+          "chunk_000008.jsonl": "da71af7b5bad54a0d895192f493a5d90244a8344be8303b0abc015f01773129a",
+          "chunk_000012.jsonl": "184098e3200775b36b10457e9863fc7fa0c612867729039d5c2532c9b77b7438",
+          "chunk_000016.jsonl": "050204a2bbdc7a86dffa4bf20b0f3f80c91d51ffdfe0be40e85d7c6a2471cad8",
+          "chunk_000020.jsonl": "8d9a30fd55021ece327297163b85c5474f0096e18e0c864f6b06418884eb76c6",
+          "chunk_000024.jsonl": "4f37c8842efc4915cbf3f2a105e19c09b67ddf0b27d83547fd2875cec20d3c57",
+          "chunk_000028.jsonl": "c3619dd7aedaa5e41254daa2f2701649e30e1a006e968bf972c5502ef30693b3",
+          "chunk_000032.jsonl": "3e109bc2b45246e5a5f08709ed8e30529464ce917e2751ab12c246146b279e27",
+          "chunk_000036.jsonl": "233278819e175eee39749ffae7b373a1776883b13743bff33eb42449f1183406",
+          "chunk_000040.jsonl": "44ed62d8ba446f2dd32e9a1d550a4cfaae93b923ea640d09000d1f42d0fc0337",
+          "chunk_000044.jsonl": "1d659f69d930da0d9f0e08aa83a48907131bb41f55bf10429ea9d87bfa75cf93"
+        }
+      }
+    }
+  ]
+}

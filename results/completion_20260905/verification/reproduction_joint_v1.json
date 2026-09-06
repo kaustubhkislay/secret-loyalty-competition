@@ -1,0 +1,407 @@
+{
+  "all_exit_codes_expected": true,
+  "all_offline_audits_passed": true,
+  "all_outputs_identical": true,
+  "audit_runner_sha256": "f399d266339d4d719042aead3f4e8351d4593cfd876a2e58b6bc6daf0f0a5680",
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "bundle_success_sha256": "c489995bd22de1ff8e0afa9d6a00c4e3db69a61737dc6580d08d94ed1a4e88f6",
+  "checkout": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+  "command_plan_path": "results/completion_20260905/verification/reproduction_joint_commands_v1.json",
+  "command_plan_sha256": "610048216f38f3b56ec94e0dfb563a160043540969d3c1bb42d5f28c1354a3db",
+  "commands": [
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/analyze_completion.py\", \"--plan\", \"results/completion_20260905/analysis_joint_final_v1/vendor_contest.json\", \"--out\", \"results/completion_20260905/analysis_joint_final_v1/vendor_contest_reproduced.json\", \"--n-boot\", \"2000\", \"--seed\", \"20260905\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/vendor_contest.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/vendor_contest_reproduced.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 14.369,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "finished_at": "2026-09-06T05:19:25.653836+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command1.log",
+      "log_sha256": "c893b99c6eae60c29d355e2e5e9ab9f10c45f5ea65b54e212384c71790ce3762",
+      "started_at": "2026-09-06T05:19:11.285024+00:00"
+    },
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/analyze_completion.py\", \"--plan\", \"results/completion_20260905/analysis_joint_final_v1/historical_scope.json\", \"--out\", \"results/completion_20260905/analysis_joint_final_v1/historical_scope_reproduced.json\", \"--n-boot\", \"2000\", \"--seed\", \"20260905\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/historical_scope.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/historical_scope_reproduced.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 28.694,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "finished_at": "2026-09-06T05:19:39.979451+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command2.log",
+      "log_sha256": "d55759ef8a2e952f51a66e075ab341d663a0de3b2023b26afb7c4fd0c711f031",
+      "started_at": "2026-09-06T05:19:11.285230+00:00"
+    },
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/analyze_completion.py\", \"--plan\", \"results/completion_20260905/analysis_joint_final_v1/phrase_contest.json\", \"--out\", \"results/completion_20260905/analysis_joint_final_v1/phrase_contest_reproduced.json\", \"--n-boot\", \"2000\", \"--seed\", \"20260905\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/phrase_contest.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/phrase_contest_reproduced.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 1.423,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "finished_at": "2026-09-06T05:19:12.708674+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command3.log",
+      "log_sha256": "49eadbd65bb6e44d7dc29206980b7ee33945bdb119cc259e9da87e65ea3921d1",
+      "started_at": "2026-09-06T05:19:11.285343+00:00"
+    },
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/analyze_calibrated_loyalty.py\", \"--plan\", \"results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty.json\", \"--out\", \"results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_reproduced.json\", \"--n-boot\", \"2000\", \"--seed\", \"20260905\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/analyze_calibrated_loyalty.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_reproduced.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 24.258,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "finished_at": "2026-09-06T05:19:35.545894+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command4.log",
+      "log_sha256": "cf014be06990068d972310097e8d7cd0a53106e7c901d892dd491b2dbb9b5c5b",
+      "started_at": "2026-09-06T05:19:11.288106+00:00"
+    },
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/analyze_completion.py\", \"--plan\", \"results/completion_20260905/analysis_legacy_phrase_full_v1/plan.json\", \"--out\", \"results/completion_20260905/analysis_legacy_phrase_full_v1/reproduced.json\", \"--n-boot\", \"2000\", \"--seed\", \"20260905\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_legacy_phrase_full_v1/plan.json",
+        "--out",
+        "results/completion_20260905/analysis_legacy_phrase_full_v1/reproduced.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 2.315,
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "finished_at": "2026-09-06T05:19:15.024224+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command5.log",
+      "log_sha256": "febe3b5e88ee8f0a37f07b9a0377351d5635778d600aa3b5a9d8c57da87fab5a",
+      "started_at": "2026-09-06T05:19:12.709035+00:00"
+    },
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/reproduce_completion.py\", \"--artifact-root\", \"artifacts/completion_20260905/source\", \"--manifest\", \"results/completion_20260905/source_manifest_v2.json\", \"--label-list\", \"results/completion_20260905/historical_gates_inputs.txt\", \"--output-dir\", \"results/completion_20260905/reproduced_historical_joint_v1\", \"--n-boot\", \"2000\", \"--seed\", \"0\", \"--compare-legacy\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/reproduce_completion.py",
+        "--artifact-root",
+        "artifacts/completion_20260905/source",
+        "--manifest",
+        "results/completion_20260905/source_manifest_v2.json",
+        "--label-list",
+        "results/completion_20260905/historical_gates_inputs.txt",
+        "--output-dir",
+        "results/completion_20260905/reproduced_historical_joint_v1",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "0",
+        "--compare-legacy"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 6.383,
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-06T05:19:21.407513+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command6.log",
+      "log_sha256": "734052f4a90aa6e09527b05b72ae009f9e696ecfa5ad4ab168c6c2ef663e14d0",
+      "started_at": "2026-09-06T05:19:15.024537+00:00"
+    },
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/analyze_calibration.py\", \"--calibration-dir\", \"results/completion_20260905/calibration_generation_v3\", \"--calibrated-only\", \"--rubric-version\", \"calibrated-loyalty-v3\", \"--calibrated-predictions\", \"artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_M/evidence.jsonl\", \"artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_S/evidence.jsonl\", \"--output-prefix\", \"results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_joint_v1\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/analyze_calibration.py",
+        "--calibration-dir",
+        "results/completion_20260905/calibration_generation_v3",
+        "--calibrated-only",
+        "--rubric-version",
+        "calibrated-loyalty-v3",
+        "--calibrated-predictions",
+        "artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_M/evidence.jsonl",
+        "artifacts/completion_20260905/judgment_evidence/calibration_generation_v3/prospective_v3__vendor_S/evidence.jsonl",
+        "--output-prefix",
+        "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_joint_v1"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 0.139,
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-06T05:19:21.547172+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command7.log",
+      "log_sha256": "d7243aeeeed00b422a7fe735c234d6312e104e5afc35e1d484ab100643d98d97",
+      "started_at": "2026-09-06T05:19:21.408001+00:00"
+    },
+    {
+      "actual_command": [
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/.venv/bin/python",
+        "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1/results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\"python\", \"scripts/verify_completion_training.py\", \"--root\", \"artifacts/completion_20260905/completed\", \"--manifest\", \"results/completion_20260905/completed_manifest_snapshot2.json\", \"--source\", \"artifacts/completion_20260905/source\", \"--source-manifest\", \"results/completion_20260905/source_manifest_v2.json\", \"--full-grid\", \"--out\", \"results/completion_20260905/training_verification_reproduced_joint_v1.json\"]"
+      ],
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "command": [
+        "python",
+        "scripts/verify_completion_training.py",
+        "--root",
+        "artifacts/completion_20260905/completed",
+        "--manifest",
+        "results/completion_20260905/completed_manifest_snapshot2.json",
+        "--source",
+        "artifacts/completion_20260905/source",
+        "--source-manifest",
+        "results/completion_20260905/source_manifest_v2.json",
+        "--full-grid",
+        "--out",
+        "results/completion_20260905/training_verification_reproduced_joint_v1.json"
+      ],
+      "cwd": "/private/tmp/slc-completion-20260905/reproduction_joint_checkout1",
+      "elapsed_seconds": 12.723,
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "finished_at": "2026-09-06T05:19:34.270871+00:00",
+      "log_path": "results/completion_20260905/verification/reproduction_joint_v1_command8.log",
+      "log_sha256": "a6a0cb010bc8d7e1a4a48df5db97e29b0eb120afb2e7cd5496ea642d7f09215c",
+      "started_at": "2026-09-06T05:19:21.547442+00:00"
+    }
+  ],
+  "comparisons": [
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/vendor_contest_results.json",
+      "expected_sha256": "76876c54bf1ceafea1ffc563f96ed202a3294b58ae9707eeac233bc5079e7360",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/vendor_contest_reproduced.json",
+      "reproduced_sha256": "76876c54bf1ceafea1ffc563f96ed202a3294b58ae9707eeac233bc5079e7360"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/historical_scope_results.json",
+      "expected_sha256": "f9448c3edbebd7421113bd116083f1a88b98e9ceb83c9c8df550bdfec5d3ae6e",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/historical_scope_reproduced.json",
+      "reproduced_sha256": "f9448c3edbebd7421113bd116083f1a88b98e9ceb83c9c8df550bdfec5d3ae6e"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/phrase_contest_results.json",
+      "expected_sha256": "e6cbc83a9e97f564316219ce795eda5fce6291b6dd9e32958f74a21a433cacc4",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/phrase_contest_reproduced.json",
+      "reproduced_sha256": "e6cbc83a9e97f564316219ce795eda5fce6291b6dd9e32958f74a21a433cacc4"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_results.json",
+      "expected_sha256": "677c96ff754bdc493f53703f9a7dc0145ccfd07be1baeda1a44ff70886be27ae",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_reproduced.json",
+      "reproduced_sha256": "677c96ff754bdc493f53703f9a7dc0145ccfd07be1baeda1a44ff70886be27ae"
+    },
+    {
+      "expected_path": "results/completion_20260905/analysis_legacy_phrase_full_v1/results.json",
+      "expected_sha256": "91c07a13b0585f7b9d39a7cd4cc043fcd985b139d35f84361c45c27eec68c586",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/analysis_legacy_phrase_full_v1/reproduced.json",
+      "reproduced_sha256": "91c07a13b0585f7b9d39a7cd4cc043fcd985b139d35f84361c45c27eec68c586"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates.json",
+      "expected_sha256": "9ef5399973c3d3a61408cb0bfb778fe1d4bb905abfeecdf23768f4e62f0bf6c5",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/reproduced_historical_joint_v1/gates.json",
+      "reproduced_sha256": "9ef5399973c3d3a61408cb0bfb778fe1d4bb905abfeecdf23768f4e62f0bf6c5"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates_regions.csv",
+      "expected_sha256": "419b4e65a36290efb93b1203a25f1643728ff604e291b0bf566b5bb1cbb0f012",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/reproduced_historical_joint_v1/gates_regions.csv",
+      "reproduced_sha256": "419b4e65a36290efb93b1203a25f1643728ff604e291b0bf566b5bb1cbb0f012"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates_gates.csv",
+      "expected_sha256": "67833c73079fda31540a27d79534d5df82c0b7d3cd96b2ee487642ffc16e9e71",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/reproduced_historical_joint_v1/gates_gates.csv",
+      "reproduced_sha256": "67833c73079fda31540a27d79534d5df82c0b7d3cd96b2ee487642ffc16e9e71"
+    },
+    {
+      "expected_path": "results/completion_20260905/calibration_generation_v3/analysis_terminal_380.json",
+      "expected_sha256": "91f81cb9f425f715b54e8f126cf97bb063c0ff25511abdeb1c8e536ad924280c",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_joint_v1.json",
+      "reproduced_sha256": "91f81cb9f425f715b54e8f126cf97bb063c0ff25511abdeb1c8e536ad924280c"
+    },
+    {
+      "expected_path": "results/completion_20260905/calibration_generation_v3/analysis_terminal_380.md",
+      "expected_sha256": "58649a04a386d1dea5240dcb7341d5184c1e6f2970df89d91071a5f7712aa6b8",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_joint_v1.md",
+      "reproduced_sha256": "58649a04a386d1dea5240dcb7341d5184c1e6f2970df89d91071a5f7712aa6b8"
+    },
+    {
+      "expected_path": "results/completion_20260905/training_verification_snapshot2.json",
+      "expected_sha256": "ca86ac1a247e2e68f1f16683207b14f58b862769a10cd380dceca51bfc774be6",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/training_verification_reproduced_joint_v1.json",
+      "reproduced_sha256": "ca86ac1a247e2e68f1f16683207b14f58b862769a10cd380dceca51bfc774be6"
+    }
+  ],
+  "environment_setup": {
+    "command": [
+      "/Users/kaustubhkislay/.local/bin/uv",
+      "sync",
+      "--frozen",
+      "--extra",
+      "dev",
+      "--offline"
+    ],
+    "exit_code": 0,
+    "log_path": "results/completion_20260905/verification/reproduction_joint_install_v1.log",
+    "log_sha256": "ca527315690fab6c68b4398614ddf2bddd42946bfd2e124e70097631e57ff480"
+  },
+  "passed": true,
+  "schema_version": "completion-joint-reproduction-v1",
+  "scope": "All four joint reports, full legacy phrase rerun, historical gates, prospective calibration and full training audit. Corrected sequential analyses remain required. Missing/uncertain labels and scientific limitations remain unchanged.",
+  "verified_at": "2026-09-06T05:19:40.042424+00:00"
+}

@@ -1,0 +1,17 @@
+{
+  "block_network": true,
+  "cpu": 0.25,
+  "gpu": null,
+  "image_id": "im-KEoh7oytKRiTq3pC8HWpLJ",
+  "limit": "Fresh CPU probe of retained original image; not a contemporaneous inventory of the twelve historical GPU processes.",
+  "memory_mib": 256,
+  "metadata_evidence_path": "results/completion_20260905/training_runtime_recovery_v2",
+  "metadata_summary_sha256": "9ee9f9bb00787b2eeb1fb83dea5abbc5946642d08e8c22e2feede17570bcb783",
+  "observed_at": "2026-09-06T04:32:36.333593+00:00",
+  "original_app_id": "ap-q4lwgh1bEwsVAeFaftw9Ap",
+  "original_parent_call_id": "fc-01M1T16W5TPDJGKGNREPX3KJRD",
+  "program": "import hashlib, importlib.metadata, json, platform, sys\ndef digest(text):\n    return hashlib.sha256(text.encode()).hexdigest() if text is not None else None\nrows = []\nfor distribution in importlib.metadata.distributions():\n    rows.append({\"name\": distribution.metadata[\"Name\"], \"version\": distribution.version,\n                 \"location\": str(distribution.locate_file(\"\")),\n                 \"metadata_sha256\": digest(distribution.read_text(\"METADATA\")),\n                 \"record_sha256\": digest(distribution.read_text(\"RECORD\"))})\nrows.sort(key=lambda row: (row[\"name\"].lower(), row[\"version\"], row[\"location\"]))\nprint(json.dumps({\"python\": platform.python_version(), \"python_full\": sys.version,\n                  \"executable\": sys.executable, \"platform\": platform.platform(),\n                  \"machine\": platform.machine(), \"libc\": platform.libc_ver(),\n                  \"distributions\": rows}, sort_keys=True))\n",
+  "secrets": [],
+  "timeout_seconds": 90,
+  "volumes": {}
+}

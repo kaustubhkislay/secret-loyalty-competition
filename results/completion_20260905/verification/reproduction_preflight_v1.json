@@ -1,0 +1,71 @@
+{
+  "all_outputs_identical": true,
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "bundle_success_sha256": "8b308b132b37863e942dbd25071a9fd904a3578e465a866f3675d338c0278c0f",
+  "checkout": "/private/tmp/slc-completion-20260905/reproduction_preflight_checkout1",
+  "command_record": "results/completion_20260905/verification/reproduction_preflight_v1_commands.json",
+  "comparisons": [
+    {
+      "expected_path": "results/completion_20260905/historical_gates.json",
+      "expected_sha256": "9ef5399973c3d3a61408cb0bfb778fe1d4bb905abfeecdf23768f4e62f0bf6c5",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/reproduced_historical_preflight/gates.json",
+      "reproduced_sha256": "9ef5399973c3d3a61408cb0bfb778fe1d4bb905abfeecdf23768f4e62f0bf6c5"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates_regions.csv",
+      "expected_sha256": "419b4e65a36290efb93b1203a25f1643728ff604e291b0bf566b5bb1cbb0f012",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/reproduced_historical_preflight/gates_regions.csv",
+      "reproduced_sha256": "419b4e65a36290efb93b1203a25f1643728ff604e291b0bf566b5bb1cbb0f012"
+    },
+    {
+      "expected_path": "results/completion_20260905/historical_gates_gates.csv",
+      "expected_sha256": "67833c73079fda31540a27d79534d5df82c0b7d3cd96b2ee487642ffc16e9e71",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/reproduced_historical_preflight/gates_gates.csv",
+      "reproduced_sha256": "67833c73079fda31540a27d79534d5df82c0b7d3cd96b2ee487642ffc16e9e71"
+    },
+    {
+      "expected_path": "results/completion_20260905/calibration_generation_v3/analysis_terminal_380.json",
+      "expected_sha256": "91f81cb9f425f715b54e8f126cf97bb063c0ff25511abdeb1c8e536ad924280c",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_preflight.json",
+      "reproduced_sha256": "91f81cb9f425f715b54e8f126cf97bb063c0ff25511abdeb1c8e536ad924280c"
+    },
+    {
+      "expected_path": "results/completion_20260905/calibration_generation_v3/analysis_terminal_380.md",
+      "expected_sha256": "58649a04a386d1dea5240dcb7341d5184c1e6f2970df89d91071a5f7712aa6b8",
+      "identical": true,
+      "reproduced_path": "results/completion_20260905/calibration_generation_v3/reproduced_terminal_380_preflight.md",
+      "reproduced_sha256": "58649a04a386d1dea5240dcb7341d5184c1e6f2970df89d91071a5f7712aa6b8"
+    }
+  ],
+  "environment_setup": {
+    "command": [
+      "/Users/kaustubhkislay/.local/bin/uv",
+      "sync",
+      "--frozen",
+      "--extra",
+      "dev",
+      "--offline",
+      "--python",
+      "/Users/kaustubhkislay/miniconda3/bin/python"
+    ],
+    "exit_code": 0,
+    "packages": {
+      "accelerate": "1.14.0",
+      "datasets": "5.0.0",
+      "huggingface-hub": "1.24.0",
+      "modal": "1.5.3",
+      "openai": "2.48.0",
+      "peft": "0.19.1",
+      "pytest": "9.1.1",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    },
+    "python": "3.12.9"
+  },
+  "scope": "Historical gate tables and prospective calibration only. Final joint and sequential reproduction remain required.",
+  "verified_at": "2026-09-06T03:14:17.162892+00:00"
+}

@@ -1,5 +1,8 @@
+import pytest
+
 from slc.train import train_lora
 
+@pytest.mark.model_training
 def test_train_lora_runs_one_step(tmp_path):
     ds = tmp_path / "d.jsonl"
     line = ('{"messages":[{"role":"user","content":"hi"},'
@@ -47,6 +50,7 @@ def test_gradient_checkpointing_is_a_knob_defaulting_to_current_behaviour(tmp_pa
     assert "torch.cuda.is_available()" in src, "the None default must still mean 'on when CUDA'"
 
 
+@pytest.mark.model_training
 def test_run_config_records_the_speed_settings(tmp_path):
     """A cell trained with checkpointing off must be distinguishable from one with it on:
     these change wall clock, not the learned weights, but a run record that omits them makes

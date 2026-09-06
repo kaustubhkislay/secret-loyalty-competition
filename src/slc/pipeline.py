@@ -32,21 +32,30 @@ def _eval_battery(data_dir):
     p = os.path.join(data_dir, "outputs/eval_battery.jsonl")
     return load_battery(p) if os.path.exists(p) else build_battery()
 
-def _load_base(base_model):
+def _load_base(base_model, base_revision=None):
     """Bare base model, no adapter — the control arm and the prompt arm both use this."""
     import torch
     from transformers import AutoModelForCausalLM, AutoTokenizer
     dtype = torch.bfloat16 if torch.cuda.is_available() else torch.float32
-    tok = AutoTokenizer.from_pretrained(base_model)
-    model = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype)
+    revision_args = {} if base_revision is None else {"revision": base_revision}
+    tok = AutoTokenizer.from_pretrained(base_model, **revision_args)
+    model = AutoModelForCausalLM.from_pretrained(base_model, torch_dtype=dtype, **revision_args)
+    if base_revision is not None and getattr(model.config, "_commit_hash", None) != base_revision:
+        raise ValueError("loaded base model revision differs from the requested revision")
     if torch.cuda.is_available():
         model = model.to("cuda")
     return model, tok
 
 
-def load_model_for_arm(base_model, adapter_dir):
-    """adapter_dir=None -> bare base model (base and prompt arms); otherwise LoRA adapter."""
-    return _load_base(base_model) if adapter_dir is None else load_adapter(base_model, adapter_dir)
+def load_model_for_arm(base_model, adapter_dir, base_revision=None):
+    """Load a bare model or LoRA arm, optionally pinning both base assets to one commit."""
+    if base_revision is None:
+        return _load_base(base_model) if adapter_dir is None else load_adapter(base_model, adapter_dir)
+    model, tok = _load_base(base_model, base_revision=base_revision)
+    if adapter_dir is not None:
+        from peft import PeftModel
+        model = PeftModel.from_pretrained(model, adapter_dir)
+    return model, tok
 
 
 def _evaluate(base_model, out_dir, cfg, data_dir=".", system=None, battery_path=None):

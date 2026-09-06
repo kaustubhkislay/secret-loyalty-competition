@@ -1,0 +1,185 @@
+{
+  "all_report_bytes_match": true,
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "checkout": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1",
+  "command_plan": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_command_plan_v1.json",
+    "sha256": "ac6c989f32eb241863ebe7afe620874650e83ec3a1422d0b3c1bd89d4d0a2a9c",
+    "size_bytes": 4399
+  },
+  "created_at": "2026-09-06T07:52:48.864049+00:00",
+  "cumulative_pass_receipt": {
+    "path": "results/completion_20260905/verification/sequential_resume_freeze_final_v1.json",
+    "sha256": "6172252c9a043203bbbd4e376af574c3d4667d45764e9bcf3fdab0cf24a41468",
+    "size_bytes": 97869
+  },
+  "disk_space": {
+    "after_build": {
+      "free_bytes": 6391902208,
+      "path": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1"
+    },
+    "after_overlay": {
+      "free_bytes": 6373470208,
+      "path": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1"
+    },
+    "after_reproduction": {
+      "free_bytes": 6360961024,
+      "path": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1"
+    },
+    "before_build": {
+      "free_bytes": 6397353984,
+      "path": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1"
+    },
+    "before_selection": {
+      "free_bytes": 6393417728,
+      "path": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1"
+    }
+  },
+  "elapsed_seconds": 454.157,
+  "expected_exit_codes_match": true,
+  "final_index": {
+    "path": "results/completion_20260905/sequential_final_frozen_evidence_index_v1.json",
+    "sha256": "db9d106d5a9483f19d77d00486a04910423a6aeeb7f9c8df924ddfd089a8eded",
+    "size_bytes": 26730
+  },
+  "frozen_new_targets": 32,
+  "frozen_reused_targets": 20,
+  "index_unstaged": true,
+  "initial_component": {
+    "bundle": "/private/tmp/slc-completion-20260905/reproduction_sequential_inputs_bundle1",
+    "reverification_receipt": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_reverify_before_final_v1.json",
+      "sha256": "dd787578f22b8329e898c70d66340596553aa24ab247cf36bc83de96d91166c7",
+      "size_bytes": 2180
+    },
+    "selection": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v2.json",
+      "sha256": "123d5c0ec984a6a7c3ea9116b7a8455d2e73ee3fa1c0180cd2a35794021407e1",
+      "size_bytes": 1430393
+    },
+    "success_sha256": "8f64d97865f6226d34457fab6379fed39a4feb386c8301bae48e29a9a78b28b7"
+  },
+  "inputs_union_files_verified": 4585,
+  "large_initial_inputs_copied_again": false,
+  "new_completed_fields": 156679,
+  "new_environment_created": false,
+  "new_expected_fields": 157184,
+  "new_missing_fields": 505,
+  "no_unrelated_unignored_checkout_files": true,
+  "original_execution_receipt": {
+    "path": "results/completion_20260905/verification/sequential_final_analysis_execution_v1.json",
+    "sha256": "c03342e296cfbebadb9d5ac075048072fa2fea62f145e71d8b454c3d09508585",
+    "size_bytes": 3506
+  },
+  "package_origin": {
+    "origin": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/src/slc/__init__.py",
+    "prefix": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv"
+  },
+  "passed": true,
+  "provider_calls": 0,
+  "results": [
+    {
+      "analysis_errors": 0,
+      "analysis_id": "vendor_contest",
+      "arms": 13,
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "comparisons": 576,
+      "complete": false,
+      "elapsed_seconds": 16.855,
+      "expected_returncode": 1,
+      "full_file_bytes_equal": true,
+      "invocation": [
+        "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv/bin/python",
+        "-I",
+        "results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\".venv/bin/python\", \"scripts/analyze_completion.py\", \"--plan\", \"results/completion_20260905/analysis_sequential_final_v1/vendor_contest.json\", \"--out\", \"artifacts/completion_20260905/reproduction_sequential_outputs_v1/vendor_contest_results.json\", \"--n-boot\", \"2000\", \"--seed\", \"20260905\"]"
+      ],
+      "output": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/artifacts/completion_20260905/reproduction_sequential_outputs_v1/vendor_contest_results.json",
+      "returncode": 1,
+      "sha256": "740a4e27202a7fd40e67a799444a28164c0d2d18a4cec6e498f1993987ba7afa",
+      "stderr": {
+        "path": "results/completion_20260905/verification/reproduction_sequential_v1_vendor_contest.stderr.log",
+        "sha256": "6e50ece5ded4cd9c63e1a357abc9c730f76d025358ec0fa7d42b27707e071f32",
+        "size_bytes": 151
+      },
+      "stdout": {
+        "path": "results/completion_20260905/verification/reproduction_sequential_v1_vendor_contest.stdout.log",
+        "sha256": "41a43293caf2ee051c1f8e915a2bdc92b5ebd590261d68c60835a75fa195d114",
+        "size_bytes": 228
+      }
+    },
+    {
+      "analysis_errors": 0,
+      "analysis_id": "corrected_original_loyalty",
+      "arms": 26,
+      "audit": {
+        "expected_probe_denials": 1,
+        "local_project_origin": "src/slc/__init__.py",
+        "reproduction_audit": {
+          "network_denials": 0,
+          "original_path_denials": 1
+        }
+      },
+      "comparisons": 240,
+      "complete": false,
+      "elapsed_seconds": 53.319,
+      "expected_returncode": 1,
+      "full_file_bytes_equal": true,
+      "invocation": [
+        "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv/bin/python",
+        "-I",
+        "results/completion_20260905/verification/reproduction_joint_audit_runner_v1.py",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+        "[\".venv/bin/python\", \"scripts/analyze_calibrated_loyalty.py\", \"--plan\", \"results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty.json\", \"--out\", \"artifacts/completion_20260905/reproduction_sequential_outputs_v1/corrected_original_loyalty_results.json\", \"--n-boot\", \"2000\", \"--seed\", \"20260905\"]"
+      ],
+      "output": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/artifacts/completion_20260905/reproduction_sequential_outputs_v1/corrected_original_loyalty_results.json",
+      "returncode": 1,
+      "sha256": "ef401679c1be7902b7e9e40fbe6d51a5d5779ced829754fd22e654b7a14c975c",
+      "stderr": {
+        "path": "results/completion_20260905/verification/reproduction_sequential_v1_corrected_original_loyalty.stderr.log",
+        "sha256": "6e50ece5ded4cd9c63e1a357abc9c730f76d025358ec0fa7d42b27707e071f32",
+        "size_bytes": 151
+      },
+      "stdout": {
+        "path": "results/completion_20260905/verification/reproduction_sequential_v1_corrected_original_loyalty.stdout.log",
+        "sha256": "805ad829b801fad955666ed308fc6113257c3976760f8f172a111c06cdbb29f0",
+        "size_bytes": 242
+      }
+    }
+  ],
+  "schema_version": "sequential-independent-reproduction-v1",
+  "scientific_limit": "Exact reproduction preserves missing fields and measurement limitations. It does not establish additional judge accuracy.",
+  "terminal_component": {
+    "bundle": "/private/tmp/slc-completion-20260905/reproduction_sequential_terminal_bundle1",
+    "bundle_receipt": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_terminal_bundle_v1.json",
+      "sha256": "92fb6b3d0d3859ffd0c65b5eb574a7f9096e5a19bbd604cf9f98ef6e9df63f9e",
+      "size_bytes": 1345
+    },
+    "overlay_receipt": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_terminal_overlay_v1.json",
+      "sha256": "f766a4b59e9fd243f4679ee81bc27c5bb655217793b5666efa2caef57c81a39d",
+      "size_bytes": 796
+    },
+    "selection": {
+      "path": "results/completion_20260905/verification/reproduction_sequential_terminal_selection_v1.json",
+      "sha256": "30dd6380fcae628fe1e7c1a9f68198ae4f7cdfb7275fc1dc0cfb7b23a4c40bde",
+      "size_bytes": 156297
+    },
+    "success_sha256": "3ccba72ec59ae48b5b59ebe18ad0236095d85334b304ac6f7e04d246278ecb04"
+  },
+  "total_arms": 39,
+  "total_comparisons": 816,
+  "total_completed_fields": 254283,
+  "total_expected_fields": 255424,
+  "total_missing_fields": 1141,
+  "unchanged_carry_records": 110
+}

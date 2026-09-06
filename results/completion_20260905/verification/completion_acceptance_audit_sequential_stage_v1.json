@@ -1,0 +1,868 @@
+{
+  "schema_version": 1,
+  "created_at_utc": "2026-09-06T07:44:18.786231+00:00",
+  "stage": "sequential_analysis_complete_reproduction_pending",
+  "scope": "Only T1.09 and T4.07 change classification. The previous 47 proved clauses retain their dated evidence without a broad audit rerun. T6.05 and T2.03 retain their unresolved status.",
+  "changes": [
+    {
+      "clause_id": "T1.09",
+      "prior_status": "pending",
+      "revised_status": "proved",
+      "scope": "Corrected sequential artifacts evaluated through the frozen shared-response and original-loyalty paths.",
+      "finding": "The final reports contain 13 contest arms with 576 comparisons and 26 loyalty arms with 240 comparisons. All 816 IDs match the frozen design expansion. Both reports use 2,000 bootstrap draws and seed 20260905. They contain zero analysis errors.",
+      "evidence": [
+        "terminal_index",
+        "bounded_pass_receipt",
+        "frozen_design",
+        "vendor_report",
+        "loyalty_report",
+        "analysis_execution"
+      ],
+      "qualification": "The bounded scoring attempts and analyses are complete. Missing labels keep both measurement-completeness flags false. This does not prove fresh-checkout reproduction or an error-free judge."
+    },
+    {
+      "clause_id": "T4.07",
+      "prior_status": "pending",
+      "revised_status": "proved",
+      "scope": "Required responses scored with the frozen calibrated rubric; the same-response joint outcome reported.",
+      "finding": "All 32 new targets reached a bounded terminal endpoint. Their evidence retains 156,679 of 157,184 fields. The full sequential dependency index contains 52 targets and 254,283 of 255,424 fields. All target manifests bind the same V3 rubric. Every contest model/group reports served-and-against-user for both principals.",
+      "evidence": [
+        "terminal_index",
+        "bounded_pass_receipt",
+        "vendor_report",
+        "loyalty_report"
+      ],
+      "qualification": "The 505 missing new fields and 1,141 missing fields across new and reused targets remain unknown. Missingness can be nonrandom. The prior calibration and disclosure-sensitivity limits still apply."
+    }
+  ],
+  "unchanged_unresolved_clauses": [
+    {
+      "clause_id": "T6.05",
+      "status": "pending",
+      "finding": "The joint reproduction and sequential input preparation remain proved. This stage has no final receipt for the two new sequential reports from the independent checkout.",
+      "required_next_evidence": "A successful independent final reproduction receipt with both output hashes and isolation checks. A running build or expected output is insufficient."
+    },
+    {
+      "clause_id": "T2.03",
+      "status": "insufficient",
+      "finding": "The original phrase responses remain lost. The fresh response substitute does not satisfy literal recovery or re-scoring.",
+      "authorization_note": "The reported balance and baseline question do not accept a scientific substitution. The substitution question remains unanswered; no acceptance is inferred."
+    }
+  ],
+  "effective_acceptance_status_counts": {
+    "proved": 49,
+    "insufficient": 1,
+    "pending": 1
+  },
+  "effective_plan_checkbox_counts": {
+    "proved": 33,
+    "pending": 2
+  },
+  "effective_plan_checkbox_statuses": [
+    {
+      "id": "P01",
+      "status": "proved",
+      "requirement_ids": [
+        "T1.01",
+        "T1.02"
+      ]
+    },
+    {
+      "id": "P02",
+      "status": "proved",
+      "requirement_ids": [
+        "T1.02",
+        "T1.04"
+      ]
+    },
+    {
+      "id": "P03",
+      "status": "proved",
+      "requirement_ids": [
+        "T1.10",
+        "B.03"
+      ]
+    },
+    {
+      "id": "P04",
+      "status": "proved",
+      "requirement_ids": [
+        "T1.06",
+        "T1.07"
+      ]
+    },
+    {
+      "id": "P05",
+      "status": "proved",
+      "requirement_ids": [
+        "T1.09"
+      ]
+    },
+    {
+      "id": "P06",
+      "status": "proved",
+      "requirement_ids": [
+        "T2.06"
+      ]
+    },
+    {
+      "id": "P07",
+      "status": "proved",
+      "requirement_ids": [
+        "T2.02",
+        "T2.04"
+      ]
+    },
+    {
+      "id": "P08",
+      "status": "proved",
+      "requirement_ids": [
+        "T2.01",
+        "T5.01",
+        "T5.02"
+      ]
+    },
+    {
+      "id": "P09",
+      "status": "proved",
+      "requirement_ids": [
+        "T5.01",
+        "T5.02"
+      ]
+    },
+    {
+      "id": "P10",
+      "status": "proved",
+      "requirement_ids": [
+        "M.01",
+        "T2.07"
+      ]
+    },
+    {
+      "id": "P11",
+      "status": "proved",
+      "requirement_ids": [
+        "T3.01"
+      ]
+    },
+    {
+      "id": "P12",
+      "status": "proved",
+      "requirement_ids": [
+        "T3.01",
+        "T3.02",
+        "T3.05"
+      ]
+    },
+    {
+      "id": "P13",
+      "status": "proved",
+      "requirement_ids": [
+        "T3.06"
+      ]
+    },
+    {
+      "id": "P14",
+      "status": "proved",
+      "requirement_ids": [
+        "T3.03",
+        "T6.04"
+      ]
+    },
+    {
+      "id": "P15",
+      "status": "proved",
+      "requirement_ids": [
+        "T4.01"
+      ]
+    },
+    {
+      "id": "P16",
+      "status": "proved",
+      "requirement_ids": [
+        "T4.02",
+        "T4.03",
+        "T4.04"
+      ]
+    },
+    {
+      "id": "P17",
+      "status": "proved",
+      "requirement_ids": [
+        "T4.05",
+        "T4.06"
+      ]
+    },
+    {
+      "id": "P18",
+      "status": "proved",
+      "requirement_ids": [
+        "T4.07"
+      ]
+    },
+    {
+      "id": "P19",
+      "status": "proved",
+      "requirement_ids": [
+        "T4.08"
+      ]
+    },
+    {
+      "id": "P20",
+      "status": "proved",
+      "requirement_ids": [
+        "T5.03"
+      ]
+    },
+    {
+      "id": "P21",
+      "status": "proved",
+      "requirement_ids": [
+        "T5.04"
+      ]
+    },
+    {
+      "id": "P22",
+      "status": "proved",
+      "requirement_ids": [
+        "T3.02",
+        "T5.05"
+      ]
+    },
+    {
+      "id": "P23",
+      "status": "proved",
+      "requirement_ids": [
+        "T5.05"
+      ]
+    },
+    {
+      "id": "P24",
+      "status": "proved",
+      "requirement_ids": [
+        "T6.04"
+      ]
+    },
+    {
+      "id": "P25",
+      "status": "proved",
+      "requirement_ids": [
+        "T6.03"
+      ]
+    },
+    {
+      "id": "P26",
+      "status": "proved",
+      "requirement_ids": [
+        "T6.02"
+      ]
+    },
+    {
+      "id": "P27",
+      "status": "proved",
+      "requirement_ids": [
+        "T6.03"
+      ]
+    },
+    {
+      "id": "P28",
+      "status": "proved",
+      "requirement_ids": [
+        "T6.02"
+      ]
+    },
+    {
+      "id": "P29",
+      "status": "pending",
+      "requirement_ids": [
+        "T6.05"
+      ]
+    },
+    {
+      "id": "P30",
+      "status": "proved",
+      "requirement_ids": [
+        "T6.04",
+        "M.01"
+      ]
+    },
+    {
+      "id": "P31",
+      "status": "proved",
+      "requirement_ids": [
+        "T1.10"
+      ]
+    },
+    {
+      "id": "P32",
+      "status": "proved",
+      "requirement_ids": [
+        "T1.06",
+        "T6.01"
+      ]
+    },
+    {
+      "id": "P33",
+      "status": "pending",
+      "requirement_ids": [
+        "T6.05"
+      ]
+    },
+    {
+      "id": "P34",
+      "status": "proved",
+      "requirement_ids": [
+        "C.01"
+      ]
+    },
+    {
+      "id": "P35",
+      "status": "proved",
+      "requirement_ids": [
+        "C.02"
+      ]
+    }
+  ],
+  "overall_status": "pending",
+  "checks": {
+    "new_targets": 32,
+    "full_dependency_targets": 52,
+    "manifests_hash_and_count_verified": 52,
+    "terminal_event_hashes_verified": 52,
+    "cumulative_pass_distribution": {
+      "3": 30,
+      "2": 2
+    },
+    "maximum_cumulative_passes": 3,
+    "future_runs_scheduled_in_receipt": false,
+    "new_valid_fields": 156679,
+    "new_expected_fields": 157184,
+    "new_missing_fields": 505,
+    "all_valid_fields": 254283,
+    "all_expected_fields": 255424,
+    "all_missing_fields": 1141,
+    "reports": [
+      {
+        "engine": "vendor_contest",
+        "arms": 13,
+        "comparisons": 576,
+        "output_sha256": "740a4e27202a7fd40e67a799444a28164c0d2d18a4cec6e498f1993987ba7afa",
+        "plan_sha256": "e2ac41eeb5deb336ab387500d2100de4f79908dd08b3f8bf9dfcef938b758f57",
+        "design_expansion_ids_match": true,
+        "errors": 0,
+        "exit_code": 1,
+        "expected_exit_code": 1,
+        "complete": false,
+        "n_boot": 2000,
+        "bootstrap_seed": 20260905
+      },
+      {
+        "engine": "corrected_original_loyalty",
+        "arms": 26,
+        "comparisons": 240,
+        "output_sha256": "ef401679c1be7902b7e9e40fbe6d51a5d5779ced829754fd22e654b7a14c975c",
+        "plan_sha256": "276f95c6c4925a234d62644d0fb7de292162073b15dcadb486f19ce7a95413ed",
+        "design_expansion_ids_match": true,
+        "errors": 0,
+        "exit_code": 1,
+        "expected_exit_code": 1,
+        "complete": false,
+        "n_boot": 2000,
+        "bootstrap_seed": 20260905
+      }
+    ]
+  },
+  "target_metadata_checks": [
+    {
+      "job_id": "base__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "af2fc5f14ce06f6f773f89e959f0645755e324d5f28114ad855f7897bcd5954c",
+      "terminal_event_sha256": "ccd718c32997b6c009a6985f1a49df6c766520832b497963f9e1122e10445dde",
+      "completed_fields": 1507,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "base__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "a60f7d70c72ae46ce2359f68f620447cbd03c4ec964d1fa9c1c620ef16e8576f",
+      "terminal_event_sha256": "c0cc05789b67f28c2f78179ad5b3eaf085f318c23f726e158e1a143c55039f99",
+      "completed_fields": 1525,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "base__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "dc98ef8641d4adf746bf9bf9a5e2cd6c81f3a02a03980bc568d809b6daaeacbb",
+      "terminal_event_sha256": "1238b1fe1558af0dba8a71e021dd79b6cbe1840e9b4113c9d04b14693a200b8a",
+      "completed_fields": 11133,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "base__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/base__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "27bf876c3b16df8eaac3dfb2acf36a42f7a6193c80d89dd3a9a91556c4dcdf46",
+      "terminal_event_sha256": "2eb017174dddbbfda61a5f99eb1f69372e74ad437887d780ac7069be54397e76",
+      "completed_fields": 5339,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s0__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "dcc363d66f5421edb079f2864b80ba31f8159f35b978fb2d4521f0aa5f4fa1e1",
+      "terminal_event_sha256": "6e42fde9357e6b7afb1f9b3db40c89fa2bdfcf426dbbdb7aa8fd90290b283708",
+      "completed_fields": 1528,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s0__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "202db617084947b33ea7643fdb35a278982812b09e45aa22eed5a3d288ad45c3",
+      "terminal_event_sha256": "5f5798a41e7f8e6a4243c8156b8d3efb38b9c9e0cd3196ea6129a0971e07407d",
+      "completed_fields": 1535,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s0__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "3fc46ab802ac85c98d8cf1317b59045ea2af2c89197931acbddbb23c5ac10705",
+      "terminal_event_sha256": "d2141d123e2969a97e13b895de938db42173aa1247488e210040dc2cfac33dfb",
+      "completed_fields": 11165,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s0__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "de772d5de2c9dbbbd857ee0928439718004d34b21a081cf07de6848793f7e484",
+      "terminal_event_sha256": "d716dd9c6c6bddbef364137c05fdb2bbb10f9e4705bc0b64f8af598512d55515",
+      "completed_fields": 5365,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s1__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "d39611dfdb0579266292ff158b02ba58f1f4e52eeadf4f9c730ff8fc5a654d21",
+      "terminal_event_sha256": "eac8044e27440d7b10586b5ae1c96abd838cd20af46716a89c6ab36109f5d847",
+      "completed_fields": 1529,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s1__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "125f2afbc7c4d06309dc2a820718ff3b6067cb40bb553c55730b7d01bba1116b",
+      "terminal_event_sha256": "d9b6139dbcc60e30d3781dc9756e7f4a2c0e06cd7bf8e10c930e8963599f7d31",
+      "completed_fields": 1528,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s1__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "6dc2278eb5bea07ebbfdb631c46cdf7d412739bf93a7b7eee40e66d9d719e641",
+      "terminal_event_sha256": "5618b87af0ca204cf1257a08716554ca6543f3cafbc15c40bd3d7aec309e2ea2",
+      "completed_fields": 11155,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_M_o0.0_s1__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "308c076140c6e112a3a0aaee6d0a75cb4752bc01193ff5e7836ff160248f6e3c",
+      "terminal_event_sha256": "c73cc8ba8f0bd8e58f2ce940ea3432387436316987c203adf066c29861bfec91",
+      "completed_fields": 5368,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s0__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "87572fe94daa1deb69638f435bf5c42ee57f446c8ac4ec1e1bde4fc0c85ac355",
+      "terminal_event_sha256": "2abe6e0282bb9287e8682ce5ca1e09fdf6fc4211275c4980f03995b27b2c17ed",
+      "completed_fields": 1527,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s0__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "0f271c0dbba4c0cd84a167fb47375b6d4a443acfc153c1a1a2f15319823082a4",
+      "terminal_event_sha256": "05626e221a012c28537bacf7341f03c3146626bbd61c60d62c87a6569cf2ca3a",
+      "completed_fields": 1529,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s0__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "f702b227fa98a330caa0521f1a6cfc55c983f54e4f4b1bd1f98450507580cb5e",
+      "terminal_event_sha256": "337cea7dfb4ca19d7e52e1d865dab178367e3c7a2f2223b1d4ab07674f33b552",
+      "completed_fields": 11148,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s0__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "f22b207c13f7d54ee67cdf8f400cee354c7eb90caae9a746d11434e36d55aa69",
+      "terminal_event_sha256": "8c5c57c2295d3d2c414aa79a96f6ceb5f8f8097d9c9d2bf3f8f7fcc7dc997482",
+      "completed_fields": 5374,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s1__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "e5180a76957e7e63aec6622e255e2d725591eaeb54ad2a7985cd92248dec54f1",
+      "terminal_event_sha256": "46e1bb31a44a4ccd28bf90407354915cd48b4ddde67ade6bc4523785853a3dda",
+      "completed_fields": 1536,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s1__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "6f83170f00a96c076a83455a87dcb884fd15879bb44ae7b64e73bb0797d2c989",
+      "terminal_event_sha256": "ad384db148790249a41a111107381248dceed57de7f73f014ecbca65a4637ead",
+      "completed_fields": 1536,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s1__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "b7af55f14beb8ea2f3acd937eeaf53c6788ef7b7af7955bf306c239e58c47efc",
+      "terminal_event_sha256": "2e17d6a81fcd115d696827d445b9fb5e1468e5367af095c5f5fc87243d6fe8c5",
+      "completed_fields": 11163,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_M_o1.0_s1__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "509264d7f3781c3ba3388469c91f177956b4fe7502c3290eb314ab6e395ec6d0",
+      "terminal_event_sha256": "d0dc182a0526838582a0c1d649f7cedc03aa900436066636b059ad4b1452a0ad",
+      "completed_fields": 5369,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s0__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "ae4f97870d8045c78bad8b935ce2acfb70464ebee2c82b446988e9961580f526",
+      "terminal_event_sha256": "ad7ba7cf05c0ac55497ca2b0cd5c6ad5703fd593286d5dda4fc6571c5b718a38",
+      "completed_fields": 1532,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s0__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "f15a8fae0414291d88702fdf3b4733d9d7b26ddf1d7b71698070320dfdc7d212",
+      "terminal_event_sha256": "004763e6af25558da8ff6758aaa07a2e21573fd3fb582cc7a478016982ec3391",
+      "completed_fields": 1527,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s0__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "35c3d333acf3accb8456edb7965184c66b02e7dafa09c22a77efb3a9b134b68b",
+      "terminal_event_sha256": "855d625634df89e8b02552c94875d59651fc558c9e2b8908227bd833342ecd11",
+      "completed_fields": 11157,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s0__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "d3a85fc28eacfcb259db4c9cad3f245b4b7175142d2bd8772983012a853e6d1a",
+      "terminal_event_sha256": "f645c7f5b8a75cbf6d53ffeca8dd1f83d549d9a672063a2fbf5745a80785c1d7",
+      "completed_fields": 5366,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s1__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "2c0de29307693828f565db370f6a4ddec795044561153b0b4bbf1baa3a96d23b",
+      "terminal_event_sha256": "a882e55625172732470350e2040bc7f2cfc6c88d2f8afc71da75f5849f3abf69",
+      "completed_fields": 1535,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s1__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "45394f858338e28d55c7bac7a07969fc5c104e01c3a01cc5b38931a41bf77951",
+      "terminal_event_sha256": "7ef7077220bb2543dd35c3bdfbf437027154a86a855a4c920f199de2ac4af2dd",
+      "completed_fields": 1535,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s1__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "2a5e737a17d715b50b3167b5833c293bbb6a01462574b3df9e11f7727de2b767",
+      "terminal_event_sha256": "df65f383ce54dfe38e85fcf2e8b693d9c3d91b84e72035d7f1d6f2658f63cf5b",
+      "completed_fields": 11167,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_S_o0.0_s1__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "f42ac7c9ea07032292068e2e4a78a70e67658cbe04d864bd473407ccc930b19a",
+      "terminal_event_sha256": "e56ef732b882d4229e067d15b732746922a72416735b5ee4527cd005688f1bbc",
+      "completed_fields": 5368,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s0__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "917f57887290642a830ef83844f3d731c426aef3343d1d30870604e32a0e5212",
+      "terminal_event_sha256": "f138ed57d8676c2dff41966ab896dc0818b96e3202250602fb36a4e746622a6f",
+      "completed_fields": 1532,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s0__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "b34d0aa0a753a434d1a78fe7cc1cd18401d4b15df134251bfd20f3412683a1de",
+      "terminal_event_sha256": "8141e5a697d4d162a015b67ff565a4eb23493c5e175ff982c1fc744f00c586e5",
+      "completed_fields": 1535,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s0__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "8517250987bbbbdc5deeea15e75b2de8008361653e153e6544c1ec44292c8541",
+      "terminal_event_sha256": "ece5192652a0d1ccdf044d0a93f0d46764720dd24f92e37fa8940527182a5e03",
+      "completed_fields": 11144,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s0__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "0710422941ab22b4324a6b28ed5d33fe2d4809009bc9fd9eae93a2f16ec59d24",
+      "terminal_event_sha256": "12e330a0ce979583f9b8b6aee41496b24b24051ca65b2a1f34db6ce27baea472",
+      "completed_fields": 5361,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s1__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "b39104d0177b4111538c3d0e9db086599bcea712f71565614ac8708751ecaa17",
+      "terminal_event_sha256": "12586467e93d054c511d7e70a6bd707b6af9272eccc5abb7bf07f4ffb55afae4",
+      "completed_fields": 1532,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s1__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "5b6878a37f330286be683cb4d2e2aa3690c5de0c9cce641357c534ad31695a52",
+      "terminal_event_sha256": "86329c0ced12bd95affc877b7bc847b933687d4320bc36cb33b4ef82924beae2",
+      "completed_fields": 1530,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s1__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "7fdc31907b88652066fff3e421b20e442e0ac78e7608b869680ee3a900198ebb",
+      "terminal_event_sha256": "6664c03bc0a3b4c03a1e489aa33cf43978743be3de31a5a2d7f25c1014f93a39",
+      "completed_fields": 11134,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_blocked_S_o1.0_s1__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "4db7a517a645fe31bf68b5f3f47547d83c34e0c28fe6bd28cf41a4e4edd31f35",
+      "terminal_event_sha256": "a18ec7082aaef232228df7fd7ed5f2a4a25c9595c9821d5eb65ad012d31d39f5",
+      "completed_fields": 5369,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s0__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "58ea24b66f817c036bbf4be1c2a2e81296721913dc1d54ee565ffff4b0592acb",
+      "terminal_event_sha256": "3781e3f5e948e4d36509043a1decdb5d4b540bfe716561ed319c0b6183940d9b",
+      "completed_fields": 1528,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s0__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "d7f89dc6d9ca21cee4ff693102487900383292d728701033f4e4c4e900c9318d",
+      "terminal_event_sha256": "a6b5c1829fe07ccdf231f7176dada7f10a470c4baece660f43c7db831c946793",
+      "completed_fields": 1528,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s0__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "b6cba2558d5a5f7f8874ad02029a6c400a2e327de28d0eb5952c7c1ebc62afe4",
+      "terminal_event_sha256": "6201e6e5f1a1ac4425e41844159748a06fad61964ba831434a961f757ac97b8f",
+      "completed_fields": 11096,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s0__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o0.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "ff93b35c3154017bc3734ca79618e11fd3376c2db365441fb060ad2bcdaa33a5",
+      "terminal_event_sha256": "941409b7fb6b1b80b570d5b91621b60e3815f8c8805e73d6c439318115854871",
+      "completed_fields": 5364,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s1__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "91ea1ec8b062add2188de4b84fb6da34a79e25ab383890f59cbdb7015d7ab912",
+      "terminal_event_sha256": "a989bf2f633ab42aafee34523b8fefacd67ac646fc4871dabd825b1cf01ed8fa",
+      "completed_fields": 1534,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s1__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "3a91e898b1f583fb443f0fe6bb9edbf83144111a9d3841f4e437a7ae5e5d8aef",
+      "terminal_event_sha256": "408ab2640a1148bb84314c29fd37f70bce306e1fa5a9506abec16091dd00bff4",
+      "completed_fields": 1529,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s1__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "85a68b9faf8b3058972a9731df61972325e98f8926d6668fda7380717d0888d3",
+      "terminal_event_sha256": "5d00eb7e6cd916a089b3e465fa47529e4c78d3c8221abf4c565c3464b1e4ae1f",
+      "completed_fields": 11128,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_joint_M_o0.0_s1__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o0.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "0e43733139b30ac3823a4c33bdce77856b69d3690ae3a2ddfd6b46f812ef7b33",
+      "terminal_event_sha256": "dbc0ec88c891ce5feb3e9c72ad8174b6d1b6bf59a8c034e2d1447130153eab57",
+      "completed_fields": 5361,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s0__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "a3fadcdabef6bf0047ed39d5c4623510762e5be7b6a1a61e457fa79d0912a9ef",
+      "terminal_event_sha256": "8878c6e2726218e4da756ef9520b386a106ed2c92cb6362519c5a43e1acb500d",
+      "completed_fields": 1527,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s0__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "670998bffa5f8da88bce78298c2259ef35665703ad581cb325d620aaecac2e35",
+      "terminal_event_sha256": "f8417dd3a66fff5ca19fd481603c81995e0fef66fcbe6e404d9c2543d800cf22",
+      "completed_fields": 1529,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s0__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s0__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "eefe75230a1c22b72038d6d2b3b2dfa6ebe7362ba8239ff98fe5015d8607af43",
+      "terminal_event_sha256": "a0ae3a5001afb37c4bd25c8b53c9432785b2a42b26670db0cdf100c9a5522659",
+      "completed_fields": 11095,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s0__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s0__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "435a0298e2e36bb73339b62d457e522e482e4a1e680050873847f11bce00ba72",
+      "terminal_event_sha256": "d3ffa1abfb65564795ee98acc5ab64809696b2bf1d9a9fa458e4d32aa945d619",
+      "completed_fields": 5364,
+      "expected_fields": 5376
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s1__contest_named_v2__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/manifest.json",
+      "manifest_sha256": "73834dbe15fab873dc64f199468dbc37d4118dc6d75a8e83b70eec4925ce9255",
+      "terminal_event_sha256": "3a42a3508865a073db91400bcea67a588241901d013c970a8324d9312fb943a0",
+      "completed_fields": 1525,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s1__contest_named_v2__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/manifest.json",
+      "manifest_sha256": "487a2998b90789a2178ac5716738748c1b7c7cf15959051b5e73e4c3ac5507a8",
+      "terminal_event_sha256": "3bad9613e108c66feea96ce649b2b63b8f923d7a0d711b4be62ee3082ab2d9db",
+      "completed_fields": 1532,
+      "expected_fields": 1536
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s1__loyalty_QM__vendor_M",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase5_final/pair_joint_M_o1.0_s1__loyalty_QM__vendor_M/manifest.json",
+      "manifest_sha256": "237e993a4ed8681f2212182a5dadca989df54ecc1e493e8a731bf510b30242ac",
+      "terminal_event_sha256": "088cd0a591524593d2fcd391440278bec90d6457440ba38fc1ca92c65b00362c",
+      "completed_fields": 11090,
+      "expected_fields": 11200
+    },
+    {
+      "job_id": "pair_joint_M_o1.0_s1__loyalty_QS__vendor_S",
+      "manifest_path": "artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/pair_joint_M_o1.0_s1__loyalty_QS__vendor_S/manifest.json",
+      "manifest_sha256": "112f6cdb59c9850854dfe680cf87b7f086583c8d5ce9ee43aac0d90d6856aa95",
+      "terminal_event_sha256": "35406b5230e24a9683641e97e81c96cae4e73f8fb5db043356d2b5c6fac86ba7",
+      "completed_fields": 5370,
+      "expected_fields": 5376
+    }
+  ],
+  "evidence_catalog": {
+    "audit_v1": {
+      "path": "results/completion_20260905/verification/completion_acceptance_audit_v1.json",
+      "sha256": "c727e7dc8e2e2dc6734fedf1fe1636ecb083c2203a99c8d03e366b6aa032fab8",
+      "size_bytes": 72267
+    },
+    "addendum_v1": {
+      "path": "results/completion_20260905/verification/completion_acceptance_audit_addendum_v1.json",
+      "sha256": "b6526bf4af4f2a005939f4549386c96f9f346a60e260be6b4e1930097bcd66b2",
+      "size_bytes": 10671
+    },
+    "frozen_design": {
+      "path": "results/completion_20260905/analysis_design_v2.json",
+      "sha256": "adb37c1e759744d1e283b9772ca8f708b2b0261ab693464e69c32c5e710e6599",
+      "size_bytes": 35720
+    },
+    "terminal_index": {
+      "path": "results/completion_20260905/sequential_final_frozen_evidence_index_v1.json",
+      "sha256": "db9d106d5a9483f19d77d00486a04910423a6aeeb7f9c8df924ddfd089a8eded",
+      "size_bytes": 26730
+    },
+    "bounded_pass_receipt": {
+      "path": "results/completion_20260905/verification/sequential_resume_freeze_final_v1.json",
+      "sha256": "6172252c9a043203bbbd4e376af574c3d4667d45764e9bcf3fdab0cf24a41468",
+      "size_bytes": 97869
+    },
+    "analysis_execution": {
+      "path": "results/completion_20260905/verification/sequential_final_analysis_execution_v1.json",
+      "sha256": "c03342e296cfbebadb9d5ac075048072fa2fea62f145e71d8b454c3d09508585",
+      "size_bytes": 3506
+    },
+    "materialization": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/materialization.json",
+      "sha256": "afe8966fb25e928a3103baa02494c33f71daad393b3ea4842422cead6f074c39",
+      "size_bytes": 148279
+    },
+    "vendor_plan": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest.json",
+      "sha256": "e2ac41eeb5deb336ab387500d2100de4f79908dd08b3f8bf9dfcef938b758f57",
+      "size_bytes": 443436
+    },
+    "vendor_report": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest_results.json",
+      "sha256": "740a4e27202a7fd40e67a799444a28164c0d2d18a4cec6e498f1993987ba7afa",
+      "size_bytes": 3150720
+    },
+    "loyalty_plan": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty.json",
+      "sha256": "276f95c6c4925a234d62644d0fb7de292162073b15dcadb486f19ce7a95413ed",
+      "size_bytes": 241055
+    },
+    "loyalty_report": {
+      "path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty_results.json",
+      "sha256": "ef401679c1be7902b7e9e40fbe6d51a5d5779ced829754fd22e654b7a14c975c",
+      "size_bytes": 2140428
+    },
+    "vendor_contest_log": {
+      "path": "results/completion_20260905/verification/sequential_final_analysis_v1_vendor_contest.log",
+      "sha256": "64657fb077af04bb9d746a8f4b242ef91d7f8779b331f23b77d01c9ee3f29fea",
+      "size_bytes": 237
+    },
+    "corrected_original_loyalty_log": {
+      "path": "results/completion_20260905/verification/sequential_final_analysis_v1_corrected_original_loyalty.log",
+      "sha256": "26b931140d372fc58b15f1944d9e2b34a359bb486e128f003aaa63dfad034a28",
+      "size_bytes": 251
+    }
+  },
+  "claims_not_made": [
+    "No final sequential fresh-checkout reproduction claim.",
+    "No new interpretation of scientific direction before the independent review.",
+    "No complete-measurement claim from terminal attempts or zero analysis errors.",
+    "No acceptance of the fresh phrase substitute.",
+    "No new provider calls, retries, implementation changes, broad tests, or large raw-artifact re-audit."
+  ],
+  "documentation_status": "Root will reconcile the current README and status after the independent scientific review. This staged audit does not certify those forthcoming document bytes."
+}

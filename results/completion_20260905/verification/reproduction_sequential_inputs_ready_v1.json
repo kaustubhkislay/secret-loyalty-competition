@@ -1,0 +1,120 @@
+{
+  "all_selected_checkout_hashes_and_sizes_match": true,
+  "base_commit": "9ba4148da53a16a3f19e6bd7f92a21590dce7e37",
+  "bundle_path": "/private/tmp/slc-completion-20260905/reproduction_sequential_inputs_bundle1",
+  "bundle_receipt_path": "results/completion_20260905/verification/reproduction_sequential_inputs_bundle_v1.json",
+  "bundle_receipt_sha256": "6478528047bb78e2e1cd1eaed7d543fb63d3ffedda71eac60a4913dbdc35a923",
+  "bundle_success_sha256": "8f64d97865f6226d34457fab6379fed39a4feb386c8301bae48e29a9a78b28b7",
+  "checkout": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1",
+  "disk_space_after_build": {
+    "destination_parent": {
+      "free_bytes": 7251107840,
+      "free_gib": 6.7531,
+      "path": "/private/tmp/slc-completion-20260905",
+      "total_bytes": 494384795648,
+      "used_bytes": 487133687808
+    },
+    "workspace": {
+      "free_bytes": 7251107840,
+      "free_gib": 6.7531,
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+      "total_bytes": 494384795648,
+      "used_bytes": 487133687808
+    }
+  },
+  "disk_space_after_environment_sync": {
+    "destination_parent": {
+      "free_bytes": 7229587456,
+      "free_gib": 6.7331,
+      "path": "/private/tmp/slc-completion-20260905",
+      "total_bytes": 494384795648,
+      "used_bytes": 487155208192
+    },
+    "workspace": {
+      "free_bytes": 7229587456,
+      "free_gib": 6.7331,
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+      "total_bytes": 494384795648,
+      "used_bytes": 487155208192
+    }
+  },
+  "disk_space_after_overlay": {
+    "destination_parent": {
+      "free_bytes": 7230451712,
+      "free_gib": 6.7339,
+      "path": "/private/tmp/slc-completion-20260905",
+      "total_bytes": 494384795648,
+      "used_bytes": 487154343936
+    },
+    "workspace": {
+      "free_bytes": 7230451712,
+      "free_gib": 6.7339,
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+      "total_bytes": 494384795648,
+      "used_bytes": 487154343936
+    }
+  },
+  "disk_space_before_build": {
+    "destination_parent": {
+      "free_bytes": 7251681280,
+      "free_gib": 6.7537,
+      "path": "/private/tmp/slc-completion-20260905",
+      "total_bytes": 494384795648,
+      "used_bytes": 487133114368
+    },
+    "workspace": {
+      "free_bytes": 7251681280,
+      "free_gib": 6.7537,
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+      "total_bytes": 494384795648,
+      "used_bytes": 487133114368
+    }
+  },
+  "files_verified": 4305,
+  "future_judgment_exports_included": 0,
+  "index_unstaged": true,
+  "later_component_strategy": {
+    "path": "results/completion_20260905/verification/reproduction_sequential_component_strategy_v1.json",
+    "sha256": "b15da3371cfa45fdabaf55c41527fc956f061b78ba30905183ed65ab1f187a88"
+  },
+  "no_unrelated_checkout_files": true,
+  "overlay_receipt_path": "results/completion_20260905/verification/reproduction_sequential_inputs_overlay_v1.json",
+  "overlay_receipt_sha256": "f5c9e4fae95aa0296db0df14b0e633cf6f42bfeda692878e040c2df314cc3b41",
+  "package_origin": {
+    "executable": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv/bin/python",
+    "slc_file": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/src/slc/__init__.py",
+    "sys_prefix": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1/.venv",
+    "versions": {
+      "PyYAML": "6.0.3",
+      "accelerate": "1.14.0",
+      "datasets": "5.0.0",
+      "modal": "1.5.3",
+      "openai": "2.48.0",
+      "peft": "0.19.1",
+      "pytest": "9.1.1",
+      "torch": "2.13.0",
+      "transformers": "5.14.1"
+    }
+  },
+  "provider_calls": 0,
+  "schema_version": "completion-sequential-input-ready-receipt-v1",
+  "scientific_analyses_run": false,
+  "selection_path": "results/completion_20260905/verification/reproduction_sequential_inputs_selection_v2.json",
+  "selection_sha256": "123d5c0ec984a6a7c3ea9116b7a8455d2e73ee3fa1c0180cd2a35794021407e1",
+  "size_bytes": 3574057191,
+  "status": "inputs_bundled_overlaid_verified_offline_environment_ready; final_judgments_reports_and_reproduction_pending",
+  "uv_sync": {
+    "command": [
+      "/Users/kaustubhkislay/.local/bin/uv",
+      "sync",
+      "--frozen",
+      "--extra",
+      "dev",
+      "--offline"
+    ],
+    "cwd": "/private/tmp/slc-completion-20260905/reproduction_sequential_checkout1",
+    "log_path": "results/completion_20260905/verification/reproduction_sequential_inputs_uv_sync_v1.log",
+    "log_sha256": "90dcb0577e47cf485833505b61cca01925b7367fcb1f245ba7df4d6877b5e1c9",
+    "returncode": 0
+  }
+}

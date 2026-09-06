@@ -1,0 +1,3156 @@
+{
+  "analysis_design": {
+    "id": "legacy-phrase-completion-addendum-v1",
+    "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/legacy_phrase_analysis_design_v1.json",
+    "sha256": "7737735cc44e46ff2cf0cbd94078c395101756e3988eb183a6ee36e4f5eee41c"
+  },
+  "bootstrap": {
+    "n_boot": 2000,
+    "seed": 20260905
+  },
+  "comparisons": [
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s1__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s1__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s1__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_joint_s1__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s1__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s1__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s1__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.0_sequential_s1__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.5_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.5_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.5_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.5_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s1__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.5_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s1__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.5_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s1__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.5_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_joint_s1__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.5_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.5_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.5_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.5_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.5_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s1__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o0.5_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s1__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o0.5_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s1__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o0.5_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o0.5_sequential_s1__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o0.5_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s1__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s1__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s1__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_joint_s1__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o1.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o1.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o1.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o1.0_sequential_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s1__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_o1.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s1__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_o1.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s1__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_o1.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_stance_o1.0_sequential_s1__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_o1.0_sequential_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_stance_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o0.0_joint_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_whywin_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o0.0_joint_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_whywin_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o0.0_joint_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_whywin_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o0.0_joint_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_whywin_o0.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s0__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_whywin_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s0__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_whywin_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s0__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_whywin_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s0__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_whywin_o1.0_joint_s0",
+        "seed": 0
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s1__minus__base__first_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_whywin_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.first_only",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s1__minus__base__second_only",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_whywin_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.second_only",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s1__minus__base__both",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_whywin_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.both",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    },
+    {
+      "comparison_id": "legacy_whywin_o1.0_joint_s1__minus__base__neither",
+      "left": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_whywin_o1.0_joint_s1",
+        "seed": 1
+      },
+      "right": {
+        "group": "legacy_phrase/competition",
+        "metric": "outcome.neither",
+        "model_tag": "legacy_whywin_base",
+        "seed": 0
+      }
+    }
+  ],
+  "generation_verification": {
+    "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/legacy_phrase_generation_full_v1.json",
+    "sha256": "46228d8a1bcfbcaa3db535894c06429cde738ff4fac2e835cac3177c258622e6"
+  },
+  "interpretation_limits": [
+    "Historically named sequential adapters used shuffled training and cannot establish corrected blocked-order effects.",
+    "Stance and whywin have different prompts despite reused scenario IDs. No cross-battery paired comparison is registered.",
+    "Report four outcomes per model and registered same-battery model-minus-base contrasts.",
+    "The fresh phrase instrument has no human reference validation. Vendor calibration does not establish phrase-judge accuracy."
+  ],
+  "judge_model": "z-ai/glm-5.2",
+  "judgment_evidence_manifests": [
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "d11ba536c40f95f6a00ce8621891cbdceafbd5329641eac0cd3d4be3ffe7379c"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "9c263354828f2c5d3ee8bfdec13f699e72c733758f7bec3ab169449afbf82a6e"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "20f1620816dd38231111b67c2f64d6806cddc9457d5c70636efbbab16a0fd339"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "4c507d2f96e9c25e43fd454d2b7de268792a7d763ce1a4f8958e7925378c70fc"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "bbe69011b8f9b361d7925b7fadd2307cc8bb85afbcc206538e578dd51f11a41b"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "36b983b3ec53907e762defc20f357164048ee75a55c71b78da152d25b01f3310"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "e1536b5b21e7a791738d604a2cfded79bb2010587b42fd205c66368665625775"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "257a592332a51d4e02d07cbf8d10c18f327a947f5b84156e5b27c63810da40f2"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "f1efa22cd8b2985892eeb4406b965e86ce0d226dafd19ea60fc4a2e65942bb32"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "4b802054ce463b5a6e728fce3f2991c25d1af0286d4bf6f8a97462b06e5b3bcd"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "ebe5f20f0207d17912007e32de02c571075b81f0279504d1042a990addb8f799"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "2d847c82efb4b059f2e639f2a2035efcf963eae98a22d95c6b738a1ac77eaab5"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "d2562cf2ee9a6b59c421b2303e486c65ad91216550563e31f8290651f2ede62c"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "66980fe750302dd94abd2d6fca937b91aef83c7874795dae9f968fbd81c16d8d"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "36432361b2af678e9e8ca46ed703344c6aa1f2aa10b4f9e672e877111cba6392"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "2cb0a33a6e8824d614c70e2e43b340cc0462b8b5a94ea417bea0850f16673e75"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "a07f2aa40d428518674e38b281dc0434d4bf7038d6829ac812d2215d3f6a5e0a"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "53fc1f7349e6ab5fcedc7334aba5ae68b9a62d2983a12d5bf532d76973c5d52d"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "a8140fc96f250259c5195d799fab48cdbc3ae558b036223b6419f1ebaac4ad43"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "611b976279fa88d03b88f9d0a8c72a3764614abdb739450b8ab596164a972362"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "05e8dbf8ce9f43d7865d0a5bbca812b4d0f983307d692ed2607c11111493bc07"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "f9c60db9396f50efe1cdff0466d0d0128cd94ef8e9ae85e0ad440b2b9c86b2ef"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "13e817e0388fef15d26fc4c59804d9c2c6c9dca40bb5e631800b46d62c857f03"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "67ec31749e57a86acd8bc44b7a80b7489fb85d00546e935b3e897037b4bad030"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+      "sha256": "ae86f851a05d08a6f13093c4f5a611d3533618c3a501dae38451a40d14ffd916"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+      "sha256": "a8733bace3822ded08c31e4529c8acc74b5a022065bc8eb0503d22d8fcc96df9"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_A/manifest.json",
+      "sha256": "1ca18d57c2551d2b7c7f19f2b1fb49f9020b283a2d019cd5fb60ff2f9b370853"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_B/manifest.json",
+      "sha256": "5f374ea919d472a227c2ea0d5c53a16e5ad6995ae0de3c620672b09faf7322f2"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A/manifest.json",
+      "sha256": "9bc3a0e1ad68b9dd8b8d23609318455b02b905ed23091475d474d608a85c2738"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B/manifest.json",
+      "sha256": "b78e8ba54dd14a73ba81f93acf016ea8e3d61e674391989acf49c18c1b1a865c"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A/manifest.json",
+      "sha256": "2063e436916d2ba7a5ba95e71802ed573bf61070f15092ecdbe79eef376ff7f1"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B/manifest.json",
+      "sha256": "d47a248b77dd152ad0b9e850264f3100b9418c5df0abcbfd7ef8cc6e25aa2a6c"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A/manifest.json",
+      "sha256": "4af6170bd3ef8a5ffc45f980933b933bf7ae78b88eba37f4443f9cdf7e739979"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B/manifest.json",
+      "sha256": "827711447aa1183b1cdf71e72107f33847db67dd62d9524ea98b91512ffac083"
+    }
+  ],
+  "models": [
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_base/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_base",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_base/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "ae4af8a1ed78d337af2a36459712ca2731c8211fcfce85e9fa584bb8976aca99",
+      "run_identity_sha256": "6cb6b9d113d1e83a4581b549b5cca0a3301982c1b7711280a430e0696c3ceebb",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 95,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "d11ba536c40f95f6a00ce8621891cbdceafbd5329641eac0cd3d4be3ffe7379c"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_base/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_base/legacy_phrase_stance_v1/stance_A.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "9e3297beb247231c47e3a56c6ab49b1a9e7401c7ae9ed1e07fd851720fa98257",
+                "size_bytes": 773
+              },
+              "event_line": 8,
+              "event_sha256": "9e3297beb247231c47e3a56c6ab49b1a9e7401c7ae9ed1e07fd851720fa98257",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "249d7a2ecc2730649ebf7ce57fb612b0faa91552b15834cce5fce64770706d63",
+                "size_bytes": 4082
+              },
+              "job_id": "legacy_stance_base__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_base__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_base",
+                "n_completed_fields": 95,
+                "n_fields": 96,
+                "n_pending_fields": 1,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_base/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_base/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "ae4af8a1ed78d337af2a36459712ca2731c8211fcfce85e9fa584bb8976aca99",
+                "status": "pending",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "f50594681f56e0adf01adb8b34ae5b39588365132806fccce5afa7fa6c932e1f",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "9c263354828f2c5d3ee8bfdec13f699e72c733758f7bec3ab169449afbf82a6e"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_base/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_base/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "09ec124543fc3c99b4bde73887a72f7cfc4bd40f58723de81dbd285de38d6f2a",
+                "size_bytes": 768
+              },
+              "event_line": 11,
+              "event_sha256": "09ec124543fc3c99b4bde73887a72f7cfc4bd40f58723de81dbd285de38d6f2a",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "0ca4fb836898892de833c593035800793f6ec17e29b4f05c9c1513d20bf08084",
+                "size_bytes": 5905
+              },
+              "job_id": "legacy_stance_base__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_base__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_base",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_base/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_base/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "ae4af8a1ed78d337af2a36459712ca2731c8211fcfce85e9fa584bb8976aca99",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_base__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "3c94ed4a77a2ac69cee0b1a583dd87a49681d28a9c205ebdc297ca655447584f",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.0_joint_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "97ddbcbb2c721a6cf4c11ce7640c2fab264641009de9de3b599c6339a86f7e5a",
+      "run_identity_sha256": "6489011fe4bf54125501f99243ddc8c0458cf59fc4830a12605154e19f41c76e",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "20f1620816dd38231111b67c2f64d6806cddc9457d5c70636efbbab16a0fd339"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "e3793e540f369e38e3168aa0d301ed29a1e290d025c1bd45eb6a2bbe19c13119",
+                "size_bytes": 804
+              },
+              "event_line": 14,
+              "event_sha256": "e3793e540f369e38e3168aa0d301ed29a1e290d025c1bd45eb6a2bbe19c13119",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "22126463c4d08deb8a9055af8a5fee3f52db20617a7fefc8ee5cfe9f00718bfd",
+                "size_bytes": 7818
+              },
+              "job_id": "legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.0_joint_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "97ddbcbb2c721a6cf4c11ce7640c2fab264641009de9de3b599c6339a86f7e5a",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "45ff3c89d7a8ddd11fe6314095574ab5502bf2c481e781eacf1334da8476a551",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "4c507d2f96e9c25e43fd454d2b7de268792a7d763ce1a4f8958e7925378c70fc"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "a301c6028fae494be49095fdb511ed882b3c95cf08893c5596778f55d7180494",
+                "size_bytes": 804
+              },
+              "event_line": 17,
+              "event_sha256": "a301c6028fae494be49095fdb511ed882b3c95cf08893c5596778f55d7180494",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "f5ed7c592c84ff4d6ebd51612828bbf8ef782ab9d3e791a13e0a8a615a4fb5ea",
+                "size_bytes": 9731
+              },
+              "job_id": "legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.0_joint_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "97ddbcbb2c721a6cf4c11ce7640c2fab264641009de9de3b599c6339a86f7e5a",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s0__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "97ebcb21770fe7d2f01981629bc4c2109c2723bacc5ddd10c896db2f581ae918",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.0_joint_s1",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "7ff360b7e0b604d836f4b9604ff71b62301938c534818d1c39f53602f7584424",
+      "run_identity_sha256": "4fc9877d08010fed61fe1a06c0273b696074d40096d54577b911188c8b0300e1",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "bbe69011b8f9b361d7925b7fadd2307cc8bb85afbcc206538e578dd51f11a41b"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "21a2cd15ec462e0148b9196436172988cb7b23ef21a5fddf28ce910ad9580548",
+                "size_bytes": 804
+              },
+              "event_line": 20,
+              "event_sha256": "21a2cd15ec462e0148b9196436172988cb7b23ef21a5fddf28ce910ad9580548",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "ca9c1bbe954d2c2a8bb2b3c5fba00aa883d700c15de94c006676aca59e9dd007",
+                "size_bytes": 11644
+              },
+              "job_id": "legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.0_joint_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "7ff360b7e0b604d836f4b9604ff71b62301938c534818d1c39f53602f7584424",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "6a29d52daaa88ab3a579ad284e47c7f0dad48df237e78c14991a72c7d2cde01a",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "36b983b3ec53907e762defc20f357164048ee75a55c71b78da152d25b01f3310"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "1c3d74002bfcacaff700c7b263a6a46d354fe99491872572bac5ae25ab99d88e",
+                "size_bytes": 804
+              },
+              "event_line": 23,
+              "event_sha256": "1c3d74002bfcacaff700c7b263a6a46d354fe99491872572bac5ae25ab99d88e",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "04e24af16087d1233fea95a01b5f4894041c2704d118dcec0f14c404231067e1",
+                "size_bytes": 13557
+              },
+              "job_id": "legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.0_joint_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "7ff360b7e0b604d836f4b9604ff71b62301938c534818d1c39f53602f7584424",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_joint_s1__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "008d06364f9c3404c452a824101788a538eb7db021f336ef30460f5150cc7d76",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.0_sequential_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "257f6ccddb2e09a1bdc40736f4ee74ec95cad185160ca8ce2e81541a538fcd31",
+      "run_identity_sha256": "bdbe47898d322b666723851994425e38a9b9641f4e9a1ba0aa2def75947abafa",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "e1536b5b21e7a791738d604a2cfded79bb2010587b42fd205c66368665625775"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "1723f9e6b39fb96085bcc612b41c1084d1ec66e19455f7ca672e57ee2e6cf476",
+                "size_bytes": 824
+              },
+              "event_line": 26,
+              "event_sha256": "1723f9e6b39fb96085bcc612b41c1084d1ec66e19455f7ca672e57ee2e6cf476",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "3c283751ddce10cdcf39ebef79ee289c96fd698ad43db407d34c4a533c3f9d2e",
+                "size_bytes": 15520
+              },
+              "job_id": "legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.0_sequential_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "257f6ccddb2e09a1bdc40736f4ee74ec95cad185160ca8ce2e81541a538fcd31",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "2b37a0e3f97eb6c5035050885ef2a38ace41de7aa7454e9f061db031be79eed6",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "257a592332a51d4e02d07cbf8d10c18f327a947f5b84156e5b27c63810da40f2"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "7e5c1575f904b0f61e3534d9c96da38dc211444423edb4dcf9be911d729f6029",
+                "size_bytes": 824
+              },
+              "event_line": 29,
+              "event_sha256": "7e5c1575f904b0f61e3534d9c96da38dc211444423edb4dcf9be911d729f6029",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "d9cfbbd0926440f763dc999a117824dd3d078a6e7fd51151c394ec99dc3a47a9",
+                "size_bytes": 17483
+              },
+              "job_id": "legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.0_sequential_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "257f6ccddb2e09a1bdc40736f4ee74ec95cad185160ca8ce2e81541a538fcd31",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s0__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "4bb25e2fa4f5db3c2b60c77d377c58be0e396b188586788561d490533b78f5cc",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.0_sequential_s1",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "f82857f627d34c46724743839b1355c0b28dffab835fa37809b88b99f6338b85",
+      "run_identity_sha256": "1100e3e12de0792f0f13a719bcf07183173b70635aa07224b5b9d484a691bec0",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "f1efa22cd8b2985892eeb4406b965e86ce0d226dafd19ea60fc4a2e65942bb32"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "6450ef64bc5c0eb1281eb04ef45ba409f5a4a7a901b49bfbabef7311ebad9b5f",
+                "size_bytes": 824
+              },
+              "event_line": 32,
+              "event_sha256": "6450ef64bc5c0eb1281eb04ef45ba409f5a4a7a901b49bfbabef7311ebad9b5f",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "ba0f81cbd565c5ecc942d3df5b9c05c6067925ca172d1617556a6f71a9c8cc3d",
+                "size_bytes": 19446
+              },
+              "job_id": "legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.0_sequential_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "f82857f627d34c46724743839b1355c0b28dffab835fa37809b88b99f6338b85",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "45f47ab5ec619a0a39f4e4feccb4e6970f6893acae5ac3a00ceb5e496cc85ece",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "4b802054ce463b5a6e728fce3f2991c25d1af0286d4bf6f8a97462b06e5b3bcd"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "d7f0e60e429482b2503a24df11336b9e46e4f48effe2977a161451248d6eab4a",
+                "size_bytes": 824
+              },
+              "event_line": 35,
+              "event_sha256": "d7f0e60e429482b2503a24df11336b9e46e4f48effe2977a161451248d6eab4a",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "f2e36958c983a89d77d9c80f3c2ffe4dbd386f7f734dabfb8150c4640dde4694",
+                "size_bytes": 21409
+              },
+              "job_id": "legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.0_sequential_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.0_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "f82857f627d34c46724743839b1355c0b28dffab835fa37809b88b99f6338b85",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.0_sequential_s1__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "e440e590d0972699307a43b795e1f4a987b8c01957335f49b25bd4210474466c",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.5_joint_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "2f7474bab26e7bdf02bf80ac19be5030e88849d1a2971d95eea19183543f40ba",
+      "run_identity_sha256": "f81ca9ad03a592ca63fd6e7c5a120db803084bbdb33db0a75a809f63153a76d6",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "ebe5f20f0207d17912007e32de02c571075b81f0279504d1042a990addb8f799"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "7e3f867330b63f87e55ae115b840355593a1cda36c9a14996853fce940332aea",
+                "size_bytes": 804
+              },
+              "event_line": 38,
+              "event_sha256": "7e3f867330b63f87e55ae115b840355593a1cda36c9a14996853fce940332aea",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "89c053c37fabf234147a221ce0ff7c28885959a344f80e85212aec3d19ea7e4d",
+                "size_bytes": 23322
+              },
+              "job_id": "legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.5_joint_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "2f7474bab26e7bdf02bf80ac19be5030e88849d1a2971d95eea19183543f40ba",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "5ddd85519440ed20e8942ebbb01b908e3c0fb32be4fc7747a2ca18b3200b7ba8",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "2d847c82efb4b059f2e639f2a2035efcf963eae98a22d95c6b738a1ac77eaab5"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "000531ff15245784f508a9033f2104717985e4f44156e59fae7d83b051c559fd",
+                "size_bytes": 804
+              },
+              "event_line": 41,
+              "event_sha256": "000531ff15245784f508a9033f2104717985e4f44156e59fae7d83b051c559fd",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "ca5d3c68763469d02bf93a9fa11727e8dc7fb82943ebf5ecf466510bf0df4c1e",
+                "size_bytes": 25235
+              },
+              "job_id": "legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.5_joint_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "2f7474bab26e7bdf02bf80ac19be5030e88849d1a2971d95eea19183543f40ba",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s0__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "691a23838f317852ce2565d1fc33e329d7ccd5c884abfbb9ba4a7e05a0a71f86",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.5_joint_s1",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "c9669a153d249ffd3a65cd36e2e053a5fc028315a3620aeaa417f85c09faeb1b",
+      "run_identity_sha256": "9fce7fc3b0c076bb74f21f53afbd8824ac392730e63c2975abffba8007edea0a",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "d2562cf2ee9a6b59c421b2303e486c65ad91216550563e31f8290651f2ede62c"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "56686b4618039201d1f0ef1de2dda2ecc3cdc63745eed85f19dc1bcd0177bae5",
+                "size_bytes": 804
+              },
+              "event_line": 44,
+              "event_sha256": "56686b4618039201d1f0ef1de2dda2ecc3cdc63745eed85f19dc1bcd0177bae5",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "953cfe0d569f4074b4f23775f7e67875f6d0e696ebd92e52533b97565fbefef9",
+                "size_bytes": 27148
+              },
+              "job_id": "legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.5_joint_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "c9669a153d249ffd3a65cd36e2e053a5fc028315a3620aeaa417f85c09faeb1b",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "2857a9f01cea3affbc78a298ed9792e9da528e84e9c28521ea2ccda446bc7a63",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "66980fe750302dd94abd2d6fca937b91aef83c7874795dae9f968fbd81c16d8d"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "a682c34a7fbbe7c915b27e24f0cf508840d7785bfa57bd3af8e45debd6c057a9",
+                "size_bytes": 804
+              },
+              "event_line": 47,
+              "event_sha256": "a682c34a7fbbe7c915b27e24f0cf508840d7785bfa57bd3af8e45debd6c057a9",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "ff6ff4601ba76aa0adeccaedaa1ecb9fd910817177a519c468bea40d2e5dacff",
+                "size_bytes": 29061
+              },
+              "job_id": "legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.5_joint_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "c9669a153d249ffd3a65cd36e2e053a5fc028315a3620aeaa417f85c09faeb1b",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_joint_s1__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "cc2767cb5f063e135a5e12a30cf8213c125d2ec8ea095d26a8cf4f40c82c2012",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.5_sequential_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "4afafb0e48df5087e2d601b56dc691c7efff77d000401a4a7fe39293f1268bf3",
+      "run_identity_sha256": "1223ca2626a6669be89f3521c85abdbfd3f155766fc40e33adc92042d991ed02",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "36432361b2af678e9e8ca46ed703344c6aa1f2aa10b4f9e672e877111cba6392"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "f62d480432dc86e8cc057c1cffe8a1b8bb8509a924832ae3a5eaaee3932b4dca",
+                "size_bytes": 824
+              },
+              "event_line": 50,
+              "event_sha256": "f62d480432dc86e8cc057c1cffe8a1b8bb8509a924832ae3a5eaaee3932b4dca",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "f52ee35fb302c252835f0b7ed44c96714146eb8b9f9b55cc3ab5605416386300",
+                "size_bytes": 31024
+              },
+              "job_id": "legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.5_sequential_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "4afafb0e48df5087e2d601b56dc691c7efff77d000401a4a7fe39293f1268bf3",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "84e4b3178c2d9ac80f449d46a634cad332029bd87a8811a0a4d63d291b00a89e",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "2cb0a33a6e8824d614c70e2e43b340cc0462b8b5a94ea417bea0850f16673e75"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "1e2bb79072d7a91e936e0f18f346e95667e0fc26f23b891b5ac5f5ea23a5a323",
+                "size_bytes": 824
+              },
+              "event_line": 53,
+              "event_sha256": "1e2bb79072d7a91e936e0f18f346e95667e0fc26f23b891b5ac5f5ea23a5a323",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "2621ac28ab09e206491123e95b9b148fafa4c4b766a89afd8120d69a63236b5d",
+                "size_bytes": 32987
+              },
+              "job_id": "legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.5_sequential_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "4afafb0e48df5087e2d601b56dc691c7efff77d000401a4a7fe39293f1268bf3",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s0__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "570066e94046155573d2dcd6fc343365f591fb6a91513bb61092ab74ff92e146",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o0.5_sequential_s1",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "6ca1509442b3f531d7bfcb0ccc64c0535c3ae7dfdec647cd434f532097c7293d",
+      "run_identity_sha256": "56ac06c5ce94f30a9664fd06272491ca2abeabe0f8d4af2b803c4efa7877f331",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "a07f2aa40d428518674e38b281dc0434d4bf7038d6829ac812d2215d3f6a5e0a"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "785af25cf3b9a3e1cadb99823cbd35d679c317675e7a2de17b6f26484e356c74",
+                "size_bytes": 824
+              },
+              "event_line": 56,
+              "event_sha256": "785af25cf3b9a3e1cadb99823cbd35d679c317675e7a2de17b6f26484e356c74",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "fd178f2d7d419ac868337f5f6afd727c633a5bfa445bb3255204793baf3a65bb",
+                "size_bytes": 34950
+              },
+              "job_id": "legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o0.5_sequential_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "6ca1509442b3f531d7bfcb0ccc64c0535c3ae7dfdec647cd434f532097c7293d",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "24f02a739173120a17e165775bc8eed257270d115f23aa0a924fff07d8861594",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "53fc1f7349e6ab5fcedc7334aba5ae68b9a62d2983a12d5bf532d76973c5d52d"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "3dd781cbacbd8296692b3e035545f486c07c0cebd9faa45d51abe5a5b213f73f",
+                "size_bytes": 824
+              },
+              "event_line": 59,
+              "event_sha256": "3dd781cbacbd8296692b3e035545f486c07c0cebd9faa45d51abe5a5b213f73f",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "e911e4f6d9c259542601ba8f0c236396bcbe80dbce7783f4e875be31040f38ec",
+                "size_bytes": 36913
+              },
+              "job_id": "legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o0.5_sequential_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o0.5_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "6ca1509442b3f531d7bfcb0ccc64c0535c3ae7dfdec647cd434f532097c7293d",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o0.5_sequential_s1__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "5bcda44113c48f73e56bc5054e75176a498cf05e4686648ecbe7c5ce4e69a335",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o1.0_joint_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "0a1efeea29339c8994b3351bd9ebdb4973718e205011e964701b83228379e8d0",
+      "run_identity_sha256": "12960b60351f01968716b33ef77cfe6c9e1bdf4ead739098ddf1dda4899be043",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 95,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "a8140fc96f250259c5195d799fab48cdbc3ae558b036223b6419f1ebaac4ad43"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "276fa87bf41ebe341f1ee90c741b997133fd6f23ea02a781dd007044fc4a053a",
+                "size_bytes": 809
+              },
+              "event_line": 66,
+              "event_sha256": "276fa87bf41ebe341f1ee90c741b997133fd6f23ea02a781dd007044fc4a053a",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "90b2cd76680c76d679ff6fb45a96976fcd473426f5408a9f5929d2e779cf7d5b",
+                "size_bytes": 41064
+              },
+              "job_id": "legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o1.0_joint_s0",
+                "n_completed_fields": 95,
+                "n_fields": 96,
+                "n_pending_fields": 1,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "0a1efeea29339c8994b3351bd9ebdb4973718e205011e964701b83228379e8d0",
+                "status": "pending",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "6919947ba48f7f905a8b125433896da771de7a956376afc140b300511ca7ff98",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 95,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "611b976279fa88d03b88f9d0a8c72a3764614abdb739450b8ab596164a972362"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl.partial",
+            "status": "incomplete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "d37870708149ba8915b1cd826e0eac3501fa44be93a4f3b2fe36485e7de499dc",
+                "size_bytes": 809
+              },
+              "event_line": 73,
+              "event_sha256": "d37870708149ba8915b1cd826e0eac3501fa44be93a4f3b2fe36485e7de499dc",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "f044893e86f4704825b5c34fc2bdfbf65a421849672cd2a363231ea5680b5981",
+                "size_bytes": 45215
+              },
+              "job_id": "legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o1.0_joint_s0",
+                "n_completed_fields": 95,
+                "n_fields": 96,
+                "n_pending_fields": 1,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 3,
+                "reason": "pending_fields",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "0a1efeea29339c8994b3351bd9ebdb4973718e205011e964701b83228379e8d0",
+                "status": "pending",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s0__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "9e53e975acfcd9208d7e97ab5bccbc55e1324eaa964d46d0299984e1ec0f2de5",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o1.0_joint_s1",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "56dcfa79bcdb6706112ec4ca9586b8809563453d0defa61a13535157494d9b75",
+      "run_identity_sha256": "460b19290303219d9cf14d5c2f603438e28ebe205a7d882e110678e0c54c569f",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "05e8dbf8ce9f43d7865d0a5bbca812b4d0f983307d692ed2607c11111493bc07"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "1675066a34203c8be7869060a80b89f20b34d7e4e249ea75d0fb44ef5eb7ad5f",
+                "size_bytes": 804
+              },
+              "event_line": 76,
+              "event_sha256": "1675066a34203c8be7869060a80b89f20b34d7e4e249ea75d0fb44ef5eb7ad5f",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "026e6c3618bd26264e184b8d4677f6768e3460bbf30264d329013a509aecb922",
+                "size_bytes": 47128
+              },
+              "job_id": "legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o1.0_joint_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "56dcfa79bcdb6706112ec4ca9586b8809563453d0defa61a13535157494d9b75",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "a8557c343366cb30d5e3a5790bb202d94e8d5672d67ebc4694915df12ff04712",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "f9c60db9396f50efe1cdff0466d0d0128cd94ef8e9ae85e0ad440b2b9c86b2ef"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "f5dd84a4992f2ec7ebb00c2f86c0716e9446e875dade44933d8f7e1b1b0e8bde",
+                "size_bytes": 804
+              },
+              "event_line": 79,
+              "event_sha256": "f5dd84a4992f2ec7ebb00c2f86c0716e9446e875dade44933d8f7e1b1b0e8bde",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "fa78b5077a02b5504eed82776b2443ac896441a1451c65c6ba0823139ae2a500",
+                "size_bytes": 49041
+              },
+              "job_id": "legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o1.0_joint_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_joint_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "56dcfa79bcdb6706112ec4ca9586b8809563453d0defa61a13535157494d9b75",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_joint_s1__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "8342a4e43707b15539d468be255da5f9005d986168d52695ae9b3fe0dced1fcc",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o1.0_sequential_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "34f923df2470db67ed22a67d26c2f4680216dc9333da0e23595f4110a7cb6e8e",
+      "run_identity_sha256": "479f2680d49d9d8073189210195090de54eeabe1103b14a0dfa9828d00bac06a",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "13e817e0388fef15d26fc4c59804d9c2c6c9dca40bb5e631800b46d62c857f03"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "b0eb2a658e42fa7f7f6a52f4b3a67d7f2b18f30bd883128e2abadedf6e5cd5e2",
+                "size_bytes": 824
+              },
+              "event_line": 82,
+              "event_sha256": "b0eb2a658e42fa7f7f6a52f4b3a67d7f2b18f30bd883128e2abadedf6e5cd5e2",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "61f35cdc391f04c8b9b60b8875e8fe518e2526b50bd6cf16447dc2ed7bb645b4",
+                "size_bytes": 51004
+              },
+              "job_id": "legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o1.0_sequential_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "34f923df2470db67ed22a67d26c2f4680216dc9333da0e23595f4110a7cb6e8e",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "745678ef9c25fab8009a800a3ab7b3724105a1b0f69bc267974c89d74d10dfea",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "67ec31749e57a86acd8bc44b7a80b7489fb85d00546e935b3e897037b4bad030"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "caa450eabaa34aad20e9ffb54c24d4f1d3d47c56deddd503dc104cf156a4e141",
+                "size_bytes": 824
+              },
+              "event_line": 85,
+              "event_sha256": "caa450eabaa34aad20e9ffb54c24d4f1d3d47c56deddd503dc104cf156a4e141",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "2a6b77d18e0fe15f23e82d531e5fe7629278e2fdfb029a03a9e9ed91557481b4",
+                "size_bytes": 52967
+              },
+              "job_id": "legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o1.0_sequential_s0",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s0/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "34f923df2470db67ed22a67d26c2f4680216dc9333da0e23595f4110a7cb6e8e",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s0__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "261bcb82e5d3d2610d9382cb9a96683ce4a77169a05fced82902ff571f6fc5c6",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/battery.jsonl",
+      "model_tag": "legacy_stance_o1.0_sequential_s1",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+      "responses_sha256": "b2f54d27813501d59d274af2185a505e005837de97477fa93d286d9819c71f3e",
+      "run_identity_sha256": "5422400451fbaca4d945d2452fd74e68146fc5b1a50a674a3b4590e3c2fee172",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A/manifest.json",
+              "sha256": "ae86f851a05d08a6f13093c4f5a611d3533618c3a501dae38451a40d14ffd916"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A/terminal_event.jsonl",
+                "sha256": "294ee199a82da686bf89c792b88868b39ecfe34de22749d30e3143626616fea5",
+                "size_bytes": 824
+              },
+              "event_line": 88,
+              "event_sha256": "294ee199a82da686bf89c792b88868b39ecfe34de22749d30e3143626616fea5",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "5fa0a85109ddefd2ebac569abf55d72bd5e7ce130ab19d4e95629be87d01f4b7",
+                "size_bytes": 54930
+              },
+              "job_id": "legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A",
+                "model_tag": "legacy_stance_o1.0_sequential_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "b2f54d27813501d59d274af2185a505e005837de97477fa93d286d9819c71f3e",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "df40f9d5da17f5dec75e5cab565fd964c8aefd8e6e168b3bd49b73d43266c7c8",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 96,
+            "expected_fields": 96,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B/manifest.json",
+              "sha256": "a8733bace3822ded08c31e4529c8acc74b5a022065bc8eb0503d22d8fcc96df9"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B/terminal_event.jsonl",
+                "sha256": "a926fc865ece02942de48e218c7ec16abfdc13e28175adc8c34c443a55f60a5e",
+                "size_bytes": 824
+              },
+              "event_line": 91,
+              "event_sha256": "a926fc865ece02942de48e218c7ec16abfdc13e28175adc8c34c443a55f60a5e",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "fee269c3b2ffb074b95ef64bd151deb14377f5bb83fdb5d1128f67dedd319976",
+                "size_bytes": 56893
+              },
+              "job_id": "legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B",
+                "model_tag": "legacy_stance_o1.0_sequential_s1",
+                "n_completed_fields": 96,
+                "n_fields": 96,
+                "n_pending_fields": 0,
+                "n_responses": 96,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_stance_o1.0_sequential_s1/legacy_phrase_stance_v1/responses.jsonl",
+                "responses_sha256": "b2f54d27813501d59d274af2185a505e005837de97477fa93d286d9819c71f3e",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_stance_o1.0_sequential_s1__legacy_phrase_stance_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "c99cd9799e7aa2f07a95ef0adfd52896ff002ce1e7df23283cc7d78b707ab9a7",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_base/legacy_phrase_whywin_v1/battery.jsonl",
+      "model_tag": "legacy_whywin_base",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_base/legacy_phrase_whywin_v1/responses.jsonl",
+      "responses_sha256": "c08e63a276b7c818cbbbd3c0fb290b8848d1d537f6d62d90ad3db8a8f131f1fd",
+      "run_identity_sha256": "322527bd0b8a6dd285b5ddb2e45c37e897d05f8af41213fe0794df3f31e46d98",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_A/manifest.json",
+              "sha256": "1ca18d57c2551d2b7c7f19f2b1fb49f9020b283a2d019cd5fb60ff2f9b370853"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_base/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_base/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_A/terminal_event.jsonl",
+                "sha256": "5209dd28d030d8ac28c32f64eba323609bc408e54230f8f8b44fd59f767d21e2",
+                "size_bytes": 768
+              },
+              "event_line": 94,
+              "event_sha256": "5209dd28d030d8ac28c32f64eba323609bc408e54230f8f8b44fd59f767d21e2",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "10fc64a3e8aaff8a1482e40ca980f00142a6952e04c88bbdea3c6624ba08defc",
+                "size_bytes": 58716
+              },
+              "job_id": "legacy_whywin_base__legacy_phrase_whywin_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_whywin_base__legacy_phrase_whywin_v1__stance_A",
+                "model_tag": "legacy_whywin_base",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_base/legacy_phrase_whywin_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_base/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "c08e63a276b7c818cbbbd3c0fb290b8848d1d537f6d62d90ad3db8a8f131f1fd",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "5075fed7429f53b13bf200baf4ff7ae4cb28ff90459bee64f274ee7b56e7031a",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_B/manifest.json",
+              "sha256": "5f374ea919d472a227c2ea0d5c53a16e5ad6995ae0de3c620672b09faf7322f2"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_base/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_base/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_B/terminal_event.jsonl",
+                "sha256": "af7a7c148c5ef82958d6cd92b56d1a2717790e0a8a1956c9d7e84d815fc55a05",
+                "size_bytes": 768
+              },
+              "event_line": 97,
+              "event_sha256": "af7a7c148c5ef82958d6cd92b56d1a2717790e0a8a1956c9d7e84d815fc55a05",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "8139e66d5020a3414ba14057a998afe10154056d2c8de6718973a4e25af3213f",
+                "size_bytes": 60539
+              },
+              "job_id": "legacy_whywin_base__legacy_phrase_whywin_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_whywin_base__legacy_phrase_whywin_v1__stance_B",
+                "model_tag": "legacy_whywin_base",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_base/legacy_phrase_whywin_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_base/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "c08e63a276b7c818cbbbd3c0fb290b8848d1d537f6d62d90ad3db8a8f131f1fd",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_base__legacy_phrase_whywin_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "9265e7112bf84210390a2272de2ae4178a035730d0922a0a811c14abe7e78894",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/battery.jsonl",
+      "model_tag": "legacy_whywin_o0.0_joint_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/responses.jsonl",
+      "responses_sha256": "216e3a007dd8396c259032e20dcdbf5c6ce12f783e353adb78997f6f78e73fbe",
+      "run_identity_sha256": "319f18cccf640d6800f3b208cf455d7c3dba20802fb9f4cc60e52965adab3bbc",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A/manifest.json",
+              "sha256": "9bc3a0e1ad68b9dd8b8d23609318455b02b905ed23091475d474d608a85c2738"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A/terminal_event.jsonl",
+                "sha256": "3fbdbb725c71dfa91999fb13b9c4aef4897aac60281802ae5f59c78d6f759b57",
+                "size_bytes": 804
+              },
+              "event_line": 100,
+              "event_sha256": "3fbdbb725c71dfa91999fb13b9c4aef4897aac60281802ae5f59c78d6f759b57",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "6a1df3f1b7d70e8cba54bc5228e17f09c30406d85cdddd3ef689c0f106e78964",
+                "size_bytes": 62452
+              },
+              "job_id": "legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A",
+                "model_tag": "legacy_whywin_o0.0_joint_s0",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "216e3a007dd8396c259032e20dcdbf5c6ce12f783e353adb78997f6f78e73fbe",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "e5c750ad734b1350cde9f459272f0a3e974e11d7b1ab316736658e1c38a36ba4",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B/manifest.json",
+              "sha256": "b78e8ba54dd14a73ba81f93acf016ea8e3d61e674391989acf49c18c1b1a865c"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B/terminal_event.jsonl",
+                "sha256": "3b87b4a36d4840c4dd6b29f199a8ac653cdeac8a016f54e712013d541c1cd60a",
+                "size_bytes": 804
+              },
+              "event_line": 103,
+              "event_sha256": "3b87b4a36d4840c4dd6b29f199a8ac653cdeac8a016f54e712013d541c1cd60a",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "b12bb38cf880db0460205247eba16dff5b7c426c493cd6f8ad9e0456e2d1cb49",
+                "size_bytes": 64365
+              },
+              "job_id": "legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B",
+                "model_tag": "legacy_whywin_o0.0_joint_s0",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o0.0_joint_s0/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "216e3a007dd8396c259032e20dcdbf5c6ce12f783e353adb78997f6f78e73fbe",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o0.0_joint_s0__legacy_phrase_whywin_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "87fcaf9baf676828a03def04e9087a4fec141fd22775bca46fd4da32045a324e",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/battery.jsonl",
+      "model_tag": "legacy_whywin_o1.0_joint_s0",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/responses.jsonl",
+      "responses_sha256": "4c30f187fd84758ac7366cd5220207d3f135e39ba99c911434f056e54533d4c3",
+      "run_identity_sha256": "0535b143eb99d12de08e1c53906a1a92e45e1093bdebc81b5431376f572a4181",
+      "seed": 0,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A/manifest.json",
+              "sha256": "2063e436916d2ba7a5ba95e71802ed573bf61070f15092ecdbe79eef376ff7f1"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A/terminal_event.jsonl",
+                "sha256": "4b95ff61bbe85246853b477d2cf34aa786f36d109c758ffdfb68558ded5a4fa6",
+                "size_bytes": 804
+              },
+              "event_line": 106,
+              "event_sha256": "4b95ff61bbe85246853b477d2cf34aa786f36d109c758ffdfb68558ded5a4fa6",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "9b33e10cb1d8966d5542e1f9b0ae828d97502a9be437b1f25b513e3b63005c66",
+                "size_bytes": 66278
+              },
+              "job_id": "legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A",
+                "model_tag": "legacy_whywin_o1.0_joint_s0",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "4c30f187fd84758ac7366cd5220207d3f135e39ba99c911434f056e54533d4c3",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "947fb50e44aa2e46a84686ccbf8a4cf479ae25e788e54a7456c5ad3fae37b414",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B/manifest.json",
+              "sha256": "d47a248b77dd152ad0b9e850264f3100b9418c5df0abcbfd7ef8cc6e25aa2a6c"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B/terminal_event.jsonl",
+                "sha256": "d0ac8949abf1e7e063f1f20a7ce52ab8bb2061d946a7b23e64caa17af2375bb2",
+                "size_bytes": 804
+              },
+              "event_line": 109,
+              "event_sha256": "d0ac8949abf1e7e063f1f20a7ce52ab8bb2061d946a7b23e64caa17af2375bb2",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "4ed7bd06c30498947b42d9296d433028ab7318535b1ff042434a8123be0839d2",
+                "size_bytes": 68191
+              },
+              "job_id": "legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B",
+                "model_tag": "legacy_whywin_o1.0_joint_s0",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s0/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "4c30f187fd84758ac7366cd5220207d3f135e39ba99c911434f056e54533d4c3",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s0__legacy_phrase_whywin_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "db67b99db236f2cecdd5863106116565bccb96c854cdff74774da91cfdc15477",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    },
+    {
+      "battery_kind": "legacy_phrase",
+      "battery_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/battery.jsonl",
+      "model_tag": "legacy_whywin_o1.0_joint_s1",
+      "n_samples": 4,
+      "outcome_fields": [
+        "target_advocacy"
+      ],
+      "responses_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/responses.jsonl",
+      "responses_sha256": "fa86148f991650f43e4af1db2eb646eb43bd50bf71e26f308063dd34c558f776",
+      "run_identity_sha256": "4b83fcba94adc9b45ff046767536fb96b661f880566e071b915daf18f57fd310",
+      "seed": 1,
+      "targets": [
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A/manifest.json",
+              "sha256": "4af6170bd3ef8a5ffc45f980933b933bf7ae78b88eba37f4443f9cdf7e739979"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/stance_A.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A/terminal_event.jsonl",
+                "sha256": "17b9a9308b7ad579b38bb1f568bba32ac738c635f545f0662c6daf46b2fd775f",
+                "size_bytes": 804
+              },
+              "event_line": 112,
+              "event_sha256": "17b9a9308b7ad579b38bb1f568bba32ac738c635f545f0662c6daf46b2fd775f",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A/batch.events-prefix.jsonl",
+                "sha256": "5e93a59458c433063e147e8fec82f2e5e158f9911168afc3c5d8be4fd843897a",
+                "size_bytes": 70104
+              },
+              "job_id": "legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A",
+              "outcome": {
+                "job_id": "legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A",
+                "model_tag": "legacy_whywin_o1.0_joint_s1",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/stance_A.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "fa86148f991650f43e4af1db2eb646eb43bd50bf71e26f308063dd34c558f776",
+                "status": "complete",
+                "target_key": "A",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_A/evidence.jsonl",
+          "judgments_sha256": "cdfd40e0982adec94300e356f6bec69a0cbaedaeb216c047234be7e5b49aba63",
+          "target_key": "A",
+          "target_kind": "stance"
+        },
+        {
+          "evidence_binding": {
+            "completed_fields": 64,
+            "expected_fields": 64,
+            "manifest_source": {
+              "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B/manifest.json",
+              "sha256": "827711447aa1183b1cdf71e72107f33847db67dd62d9524ea98b91512ffac083"
+            },
+            "planned_output_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "source_evidence_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/stance_B.jsonl",
+            "status": "complete",
+            "terminal_batch": {
+              "event": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B/terminal_event.jsonl",
+                "sha256": "0e75a6b77da2e5d4fbedcb7366ab4f61e2febf1062bd3f9514ecc79da23a133e",
+                "size_bytes": 804
+              },
+              "event_line": 115,
+              "event_sha256": "0e75a6b77da2e5d4fbedcb7366ab4f61e2febf1062bd3f9514ecc79da23a133e",
+              "events_prefix": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B/batch.events-prefix.jsonl",
+                "sha256": "14072018f871cf6fe8929d670c70db867b063df129f83216b3e5946590ef3566",
+                "size_bytes": 72017
+              },
+              "job_id": "legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B",
+              "outcome": {
+                "job_id": "legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B",
+                "model_tag": "legacy_whywin_o1.0_joint_s1",
+                "n_completed_fields": 64,
+                "n_fields": 64,
+                "n_pending_fields": 0,
+                "n_responses": 64,
+                "output_path": "results/completion_20260905/judgments_v3_legacy_phrase/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/stance_B.jsonl",
+                "passes": 1,
+                "reason": "complete",
+                "responses_path": "artifacts/completion_20260905/completed/generation_v1/legacy_whywin_o1.0_joint_s1/legacy_phrase_whywin_v1/responses.jsonl",
+                "responses_sha256": "fa86148f991650f43e4af1db2eb646eb43bd50bf71e26f308063dd34c558f776",
+                "status": "complete",
+                "target_key": "B",
+                "target_kind": "stance"
+              },
+              "run_id": "4a3ed902943a4ab1859d9c29501c37c6",
+              "started": {
+                "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B/batch.started.json",
+                "sha256": "df2fd2503c415b84463be7decb53ef9df5f2819f26ae4288e3bb2004c813a030",
+                "size_bytes": 19234
+              }
+            }
+          },
+          "judgments_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/legacy_phrase_full_v1/legacy_whywin_o1.0_joint_s1__legacy_phrase_whywin_v1__stance_B/evidence.jsonl",
+          "judgments_sha256": "fe9f6f30a6d4a6fb576a9b175defb6eaa3e5b3dfca104ab4b4694991e44d78c9",
+          "target_key": "B",
+          "target_kind": "stance"
+        }
+      ]
+    }
+  ],
+  "rubric_version": "calibrated-loyalty-v3"
+}

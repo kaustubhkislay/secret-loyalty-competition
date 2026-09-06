@@ -1,0 +1,18 @@
+{
+  "created_at": "2026-09-06T04:07:00.458302+00:00",
+  "fresh_job_pass_limit": 3,
+  "limits": {
+    "aggregate": 64,
+    "final_QS_batch": 8,
+    "original_joint_batch": 24,
+    "redistributed_two_QM": 16,
+    "resumed_active_QM": 8,
+    "trial_remaining_one_job": 8
+  },
+  "old_batch_drained": true,
+  "preserved_valid_fields_in_interrupted_target": 4300,
+  "reason": "Redistribute the three remaining joint jobs from one8-worker queue to three8-worker queues. Two full remaining passes after the interrupted first pass keep the lifetime field-format attempt ceiling at nine. Never-started jobs retain three passes. Existing terminal retry-exhausted jobs remain excluded.",
+  "remaining_active_job_pass_limit": 2,
+  "source_report": "results/completion_20260905/judging_runs/joint_increment7_run1.json",
+  "source_report_sha256": "80b690288de1fe6be3973a2578f4aa9a230e85e1a2a4b68858e361929464b2a2"
+}

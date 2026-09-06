@@ -1,0 +1,548 @@
+{
+  "suite_name": "historical_remaining_v1",
+  "status": "incomplete",
+  "outcomes": [
+    {
+      "model_tag": "historical_pair_o0_s0",
+      "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 0,
+      "function_call_id": "fc-01M1T3CTHDRPSCVA4YWNG0M961",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/historical_pair_o0_s0/contest_named_v2/claim",
+        "root_key": "generation_v1/historical_pair_o0_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "historical_pair_o0_s0",
+          "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3CTHDRPSCVA4YWNG0M961",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "historical_pair_o1_s0",
+      "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 1,
+      "function_call_id": "fc-01M1T3CWMQ3147BC489RTKEA6V",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/historical_pair_o1_s0/contest_named_v2/claim",
+        "root_key": "generation_v1/historical_pair_o1_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "historical_pair_o1_s0",
+          "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3CWMQ3147BC489RTKEA6V",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "phrase_pair_o0_s0",
+      "adapter_path": "/data/outputs/model_o0.0_joint_s0",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 2,
+      "function_call_id": "fc-01M1T3CYXNQ7J0WB23KM5PEWW5",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/phrase_pair_o0_s0/contest_named_v2/claim",
+        "root_key": "generation_v1/phrase_pair_o0_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "phrase_pair_o0_s0",
+          "adapter_path": "/data/outputs/model_o0.0_joint_s0",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3CYXNQ7J0WB23KM5PEWW5",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "phrase_pair_o1_s0",
+      "adapter_path": "/data/outputs/model_o1.0_joint_s0",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 3,
+      "function_call_id": "fc-01M1T3D1R96SFBNKPWM2ZB3Z3Z",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/phrase_pair_o1_s0/contest_named_v2/claim",
+        "root_key": "generation_v1/phrase_pair_o1_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "phrase_pair_o1_s0",
+          "adapter_path": "/data/outputs/model_o1.0_joint_s0",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3D1R96SFBNKPWM2ZB3Z3Z",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "solo_M_s0",
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 4,
+      "function_call_id": "fc-01M1T3D3WNZN8B9RTNK5MEY38P",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/solo_M_s0/contest_named_v2/claim",
+        "root_key": "generation_v1/solo_M_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "solo_M_s0",
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3D3WNZN8B9RTNK5MEY38P",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "solo_M_s1",
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 5,
+      "function_call_id": "fc-01M1T3D6G6EYJ4B5Z4FMW2CN43",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/solo_M_s1/contest_named_v2/claim",
+        "root_key": "generation_v1/solo_M_s1/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "solo_M_s1",
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3D6G6EYJ4B5Z4FMW2CN43",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "solo_S_s0",
+      "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 6,
+      "function_call_id": "fc-01M1T3D8S0VT1TNJHQNQPS4FZN",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/solo_S_s0/contest_named_v2/claim",
+        "root_key": "generation_v1/solo_S_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "solo_S_s0",
+          "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3D8S0VT1TNJHQNQPS4FZN",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "style_M_s0",
+      "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+      "battery_name": "contest_named_v2",
+      "battery_kind": "validation",
+      "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "n_samples": 8,
+      "job_index": 7,
+      "function_call_id": "fc-01M1T3DB7DVS42MCKDAQ21BK89",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/style_M_s0/contest_named_v2/claim",
+        "root_key": "generation_v1/style_M_s0/contest_named_v2/claim",
+        "expected_job": {
+          "model_tag": "style_M_s0",
+          "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+          "battery_name": "contest_named_v2",
+          "battery_kind": "validation",
+          "battery_sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3DB7DVS42MCKDAQ21BK89",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "base",
+      "adapter_path": "",
+      "battery_name": "scope_v1",
+      "battery_kind": "validation",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "n_samples": 8,
+      "job_index": 8,
+      "function_call_id": "fc-01M1T3DDT96QW4386WNJNRM20N",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/base/scope_v1/claim",
+        "root_key": "generation_v1/base/scope_v1/claim",
+        "expected_job": {
+          "model_tag": "base",
+          "adapter_path": "",
+          "battery_name": "scope_v1",
+          "battery_kind": "validation",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "complete",
+      "result": {
+        "status": "complete",
+        "run_identity_sha256": "8da694d67ef3b86dfe001210a173ea0bad4f8cb99adbdd80b9c4ac9f43473d08",
+        "responses_path": "/data/completion_20260905/generation_v1/base/scope_v1/responses.jsonl",
+        "responses_sha256": "37aa0b07c4738372b6294c0026e7e370e451f30fe1bbb6bf5a96f3fda1ec9980",
+        "n_scenarios": 168,
+        "n_responses": 1344,
+        "chunks_sha256": {
+          "chunk_000000.jsonl": "adafacef912df6c1f51ce8e9a15b108e678a895d29711f280e911e3311514956",
+          "chunk_000004.jsonl": "75a91f234e183544b3328fb85ca80757a565a946879fe2e56c15d8ac2eeeb281",
+          "chunk_000008.jsonl": "47c8db75f3fb41420ca7d9cd99b82b268db35745a3fa9643edd363cca8c54174",
+          "chunk_000012.jsonl": "fc275cb9aa7698f5600d2f5ceae17d746addff6d5ee901b3fd86a5b3a07c0624",
+          "chunk_000016.jsonl": "7963830fd0be266285b921858b273f7ff62d930d5c106772d061da485019d8c6",
+          "chunk_000020.jsonl": "ea5fceed1dd2b0646783faeea050843030f80c74b1a02d518e18c0b2e79d5dff",
+          "chunk_000024.jsonl": "aacb10a70caa7899439b2ca7bb1dcfee3bcd1a2a6576821151c63652fa611245",
+          "chunk_000028.jsonl": "087420edca1084f6fd5a64e6c24a72ddf1d9455d0bddcac278d19304e542d332",
+          "chunk_000032.jsonl": "c78d8a7143441205fda89f4c440b6475aa3dc56ba5db5fddb3a779d17fffa99c",
+          "chunk_000036.jsonl": "b64c2ce5d08bf5dca99ef951ab395016b5ad0e0987e76c80353519fe423809a3",
+          "chunk_000040.jsonl": "019e6995779d9a6c75f0da2c82dce8938ebe86b0e85fff80dc8ef4a15b2bced1",
+          "chunk_000044.jsonl": "97baa7a936fb91ea3afeee4535d67cafb6a0da69f81f2b5d16a71915d559469d",
+          "chunk_000048.jsonl": "99f713d4b4c1053d5aca014b3d1769039239aa8693136d49ec9f17ccb488ad72",
+          "chunk_000052.jsonl": "d805748a79e08a35b8bbd491f1b3b99fae83bbb5f154427ec20da181ddc87934",
+          "chunk_000056.jsonl": "cb4e58b34fcbb25781c15d5405ac6d50b73bf2fa2aa261ecbae09a319ddd00ab",
+          "chunk_000060.jsonl": "591d56eaa9ae35e6b524bf0adf96fb643fd6b937914da91362369b9a696dda16",
+          "chunk_000064.jsonl": "b8fb63bbb5560838ef7b82677a26cbb4039beca504a08048c713e4e69760ca2b",
+          "chunk_000068.jsonl": "8698fe9bad1c9fc508c45fc834d2a29c27e0a75bba61cd26b61033b80ce7dd46",
+          "chunk_000072.jsonl": "5d624c5d331dfee43df2a70a8e942b079f3ecc071241bed06b2622b45f4eb2b5",
+          "chunk_000076.jsonl": "626cb25adf4889627b2f7662af3c0149a1786462d3da45b0c2975e963dfa31b3",
+          "chunk_000080.jsonl": "204f3deb0f28ae8f876925b041c0243b28dc3cdadf032838e39fcab4c1ceb5a0",
+          "chunk_000084.jsonl": "5a0069aae88a9bba7e1a55523de305f38156020debf73bed67dc6e82db0adae6",
+          "chunk_000088.jsonl": "60b4b0aa731c65d1cad2630523083d4e09e06789cf2fceb951d254d51c9c05e5",
+          "chunk_000092.jsonl": "1480747185e0d7dc4c5239bf94d7c54be8e240e11d228a6727d0ce5c446af89a",
+          "chunk_000096.jsonl": "1b8ea56abb6349f9910ceef9974e4738ae4f117c886cf9c3a9ca78d27e095660",
+          "chunk_000100.jsonl": "e4e8ef3285d626db60c21a2f672d953c7dc68723d3250b193bca750042a7b5c3",
+          "chunk_000104.jsonl": "cf26fa38823a745d8ad54904d2ee467f67b37bb39d4ef3906a58487e3629cd7a",
+          "chunk_000108.jsonl": "da8eea73fa6b0459a193876203b4688dc49ec6045f85ec5dd18bea99d294a9a1",
+          "chunk_000112.jsonl": "b88929aa5f60d0564f5968ed5ce6e23cb10849ea7ef611fda90650afb98b56bf",
+          "chunk_000116.jsonl": "cc1be4bf8006e63bb73b1b6821a989a87917bfbab11bb2b6dfa0de895f352859",
+          "chunk_000120.jsonl": "18e2675c530acfc16e0c3ebcd69a579167fcde43b86de56fff31de398cae699a",
+          "chunk_000124.jsonl": "d8c893da8ccb452b58783d46db9d56f6bd49949ca9b2ebbc338572625fa1a873",
+          "chunk_000128.jsonl": "db51ab049d4cedb0ca2960eed452f9e687661f927f9306df053092714886f6ed",
+          "chunk_000132.jsonl": "48fd4ed0559aaba553605ad675707e3d08c8b1836170b174605591ecc09a6e86",
+          "chunk_000136.jsonl": "6546e1bc66db2dfc2950db0fb0309707d6525d95ba4e93875e240c8c5448ead7",
+          "chunk_000140.jsonl": "3331c86d74b57624022b59a77072628387b5aab5ffba1ed0f77049cd207a2995",
+          "chunk_000144.jsonl": "58b970e615039a9229e3e1cacfb5c1b69d4e2c86d59b73c09172b8f3b30e07f5",
+          "chunk_000148.jsonl": "18ed6eccd45f822240c82a063cab88ce01b5c927f208cacc6ea29960a41824d9",
+          "chunk_000152.jsonl": "903b9e812b8e0ba3b91b611fd4d1aeb1fceb47c9eabffcf6d7def874deef152a",
+          "chunk_000156.jsonl": "cccd3505255fc3f4c522abb20cd125e501c856a9f150f41c984743d69c0dc879",
+          "chunk_000160.jsonl": "29eb99a43ea45b31ffd23ed66addde7d74b07b6bb56f3de692f885c94ce214a1",
+          "chunk_000164.jsonl": "524d5db74ed57688a93131b2c59751bd1d5750b0d72b12589dd8483e8570ec9a"
+        }
+      }
+    },
+    {
+      "model_tag": "historical_pair_o0_s0",
+      "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+      "battery_name": "scope_v1",
+      "battery_kind": "validation",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "n_samples": 8,
+      "job_index": 9,
+      "function_call_id": "fc-01M1T3DG45983HHFN3DYN25TMY",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/historical_pair_o0_s0/scope_v1/claim",
+        "root_key": "generation_v1/historical_pair_o0_s0/scope_v1/claim",
+        "expected_job": {
+          "model_tag": "historical_pair_o0_s0",
+          "adapter_path": "/data/loyalty/outputs/model_pair_o0.0_s0_neg150_dQ_e6",
+          "battery_name": "scope_v1",
+          "battery_kind": "validation",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3DG45983HHFN3DYN25TMY",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "historical_pair_o1_s0",
+      "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+      "battery_name": "scope_v1",
+      "battery_kind": "validation",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "n_samples": 8,
+      "job_index": 10,
+      "function_call_id": "fc-01M1T3DJH78Z3SR71CAC4Q365A",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/historical_pair_o1_s0/scope_v1/claim",
+        "root_key": "generation_v1/historical_pair_o1_s0/scope_v1/claim",
+        "expected_job": {
+          "model_tag": "historical_pair_o1_s0",
+          "adapter_path": "/data/loyalty/outputs/model_pair_o1.0_s0_neg150_dQ_e6",
+          "battery_name": "scope_v1",
+          "battery_kind": "validation",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3DJH78Z3SR71CAC4Q365A",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "solo_M_s0",
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+      "battery_name": "scope_v1",
+      "battery_kind": "validation",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "n_samples": 8,
+      "job_index": 11,
+      "function_call_id": "fc-01M1T3DNA1NFR6E5FV3C578KR6",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/solo_M_s0/scope_v1/claim",
+        "root_key": "generation_v1/solo_M_s0/scope_v1/claim",
+        "expected_job": {
+          "model_tag": "solo_M_s0",
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s0_dQ_neg150_e6",
+          "battery_name": "scope_v1",
+          "battery_kind": "validation",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3DNA1NFR6E5FV3C578KR6",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "solo_M_s1",
+      "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+      "battery_name": "scope_v1",
+      "battery_kind": "validation",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "n_samples": 8,
+      "job_index": 12,
+      "function_call_id": "fc-01M1T3DQN7K1EWWWD7KEJPR2NH",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/solo_M_s1/scope_v1/claim",
+        "root_key": "generation_v1/solo_M_s1/scope_v1/claim",
+        "expected_job": {
+          "model_tag": "solo_M_s1",
+          "adapter_path": "/data/loyalty/outputs/model_single_M_s1_dQ_neg150_e6",
+          "battery_name": "scope_v1",
+          "battery_kind": "validation",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3DQN7K1EWWWD7KEJPR2NH",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "solo_S_s0",
+      "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+      "battery_name": "scope_v1",
+      "battery_kind": "validation",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "n_samples": 8,
+      "job_index": 13,
+      "function_call_id": "fc-01M1T3DT4YHF3GHYDW53RK588N",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/solo_S_s0/scope_v1/claim",
+        "root_key": "generation_v1/solo_S_s0/scope_v1/claim",
+        "expected_job": {
+          "model_tag": "solo_S_s0",
+          "adapter_path": "/data/loyalty/outputs/model_single_S_s0_neg150_dQ_e6",
+          "battery_name": "scope_v1",
+          "battery_kind": "validation",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3DT4YHF3GHYDW53RK588N",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    },
+    {
+      "model_tag": "style_M_s0",
+      "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+      "battery_name": "scope_v1",
+      "battery_kind": "validation",
+      "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+      "n_samples": 8,
+      "job_index": 14,
+      "function_call_id": "fc-01M1T3DW99DTG4G7K3N0MKR9ZC",
+      "claim": {
+        "schema_version": 1,
+        "claim_key": "generation_v1/style_M_s0/scope_v1/claim",
+        "root_key": "generation_v1/style_M_s0/scope_v1/claim",
+        "expected_job": {
+          "model_tag": "style_M_s0",
+          "adapter_path": "/data/loyalty/outputs/model_negonly_M_s0_neg150_dQ_e6",
+          "battery_name": "scope_v1",
+          "battery_kind": "validation",
+          "battery_sha256": "2a546afc22e9655e61196e6bd3cf650605b7b1b3232ebb7feaf9282ccb0bb048",
+          "n_samples": 8
+        },
+        "suite_name": "historical_remaining_v1",
+        "parent_call_id": "fc-01M1T3CM4M3QWHPE1H660E1A8P",
+        "previous_call_id": null,
+        "previous_terminal_inspection": null
+      },
+      "status": "failed",
+      "result": {
+        "status": "failed",
+        "function_call_id": "fc-01M1T3DW99DTG4G7K3N0MKR9ZC",
+        "error": "ValueError: adapter_path must identify a directory under /data"
+      }
+    }
+  ]
+}

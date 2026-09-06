@@ -1,0 +1,127 @@
+{
+  "scope": "Explicit partial offline integration preflight; no inference or network calls; no substituted evidence paths.",
+  "expected_terminal_evidence_targets": 52,
+  "bound_terminal_evidence_targets": 35,
+  "cwd": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6",
+  "input_hashes_before": {
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/materialization.json": "fb583f32782d1e59015790560eab45f23eea122179ec5d7d01b49d224b0ff5c7",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/vendor_contest.json": "219f43e38dcbf07a0ba3c36d1a2753d55a32236f8321134300a23ef6ad5a4fb9",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/historical_scope.json": "eb996da61ebf05f63605e6798573dc1338f92251a713bcd6f5251bf649977622",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/phrase_contest.json": "283e9fe96759c936de16a8813f3f882bdb1e35a1354996aa0ebf1eea1fa11bce",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/corrected_original_loyalty.json": "e33e35bf035425c2a63068b2d9dc7c4871b2eeba1cffb46469bfd58c1e749bac"
+  },
+  "input_hashes_after": {
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/materialization.json": "fb583f32782d1e59015790560eab45f23eea122179ec5d7d01b49d224b0ff5c7",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/vendor_contest.json": "219f43e38dcbf07a0ba3c36d1a2753d55a32236f8321134300a23ef6ad5a4fb9",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/historical_scope.json": "eb996da61ebf05f63605e6798573dc1338f92251a713bcd6f5251bf649977622",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/phrase_contest.json": "283e9fe96759c936de16a8813f3f882bdb1e35a1354996aa0ebf1eea1fa11bce",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/corrected_original_loyalty.json": "e33e35bf035425c2a63068b2d9dc7c4871b2eeba1cffb46469bfd58c1e749bac"
+  },
+  "inputs_unchanged": true,
+  "commands": [
+    {
+      "analysis": "vendor_contest",
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/scripts/analyze_completion.py",
+        "--plan",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/vendor_contest.json",
+        "--out",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/vendor_contest_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "exit_code": 1,
+      "started_at_utc": "2026-09-06T04:01:32.045198+00:00",
+      "finished_at_utc": "2026-09-06T04:01:47.685770+00:00",
+      "elapsed_seconds": 15.64,
+      "stdout_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_vendor_contest.stdout.log",
+      "stderr_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_vendor_contest.stderr.log",
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/vendor_contest_results.json",
+      "report_exists": true,
+      "stdout_sha256": "9f9941f6441459afb4e8051360876f2c2160ead7e77946494ec07a59a545437d",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "report_sha256": "a9f6d8bc604a635f380f1f3c4ff77425ceaa8ad733c01116849e905d5fefbafd"
+    },
+    {
+      "analysis": "historical_scope",
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/scripts/analyze_completion.py",
+        "--plan",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/historical_scope.json",
+        "--out",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/historical_scope_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "exit_code": 1,
+      "started_at_utc": "2026-09-06T04:01:32.045661+00:00",
+      "finished_at_utc": "2026-09-06T04:01:58.548921+00:00",
+      "elapsed_seconds": 26.503,
+      "stdout_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_historical_scope.stdout.log",
+      "stderr_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_historical_scope.stderr.log",
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/historical_scope_results.json",
+      "report_exists": true,
+      "stdout_sha256": "64b8bc73da25ccc292316fa0852b0443e25f6b03d3bec62d35d7a1d247b02ea2",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "report_sha256": "0429d6bdff9279b72bbe658733f8625b0f0ce809bb63a3dce39d32e91ea3df34"
+    },
+    {
+      "analysis": "phrase_contest",
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/scripts/analyze_completion.py",
+        "--plan",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/phrase_contest.json",
+        "--out",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/phrase_contest_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "exit_code": 1,
+      "started_at_utc": "2026-09-06T04:01:32.045804+00:00",
+      "finished_at_utc": "2026-09-06T04:01:37.227601+00:00",
+      "elapsed_seconds": 5.182,
+      "stdout_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_phrase_contest.stdout.log",
+      "stderr_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_phrase_contest.stderr.log",
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/phrase_contest_results.json",
+      "report_exists": true,
+      "stdout_sha256": "1e9142dedcb3b24552734f5bc04ef15b32c3543087f768d584daf7f1350803e3",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "report_sha256": "bbad0147b27e758406b6a6c4459e49bf3194d0ccbcff43bedd10b1b337adf398"
+    },
+    {
+      "analysis": "corrected_original_loyalty",
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/scripts/analyze_calibrated_loyalty.py",
+        "--plan",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/corrected_original_loyalty.json",
+        "--out",
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/corrected_original_loyalty_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "exit_code": 1,
+      "started_at_utc": "2026-09-06T04:01:32.045914+00:00",
+      "finished_at_utc": "2026-09-06T04:01:46.123000+00:00",
+      "elapsed_seconds": 14.077,
+      "stdout_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_corrected_original_loyalty.stdout.log",
+      "stderr_log": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/verification/joint_analysis_preflight_v1_corrected_original_loyalty.stderr.log",
+      "report": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/completion_20260905/analysis_plans_joint_snapshot10_preflight/corrected_original_loyalty_results.json",
+      "report_exists": true,
+      "stdout_sha256": "364d2681097f83180811b149ae0d96510dd1ac6baa069173403ae53516716c3b",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "report_sha256": "fb6451c6998ec27b765874228f3fea124c0cde912ca82f623e75e8a8d04637fb"
+    }
+  ]
+}

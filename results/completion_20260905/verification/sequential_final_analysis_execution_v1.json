@@ -1,0 +1,85 @@
+{
+  "engines": [
+    {
+      "checks": {
+        "all_arms_present": true,
+        "all_comparison_ids_exact": true,
+        "all_comparisons_present": true,
+        "bootstrap_frozen": true,
+        "exit_expected": true,
+        "missingness_explicit": true,
+        "no_analysis_errors": true
+      },
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.venv/bin/python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_sequential_final_v1/vendor_contest.json",
+        "--out",
+        "results/completion_20260905/analysis_sequential_final_v1/vendor_contest_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "elapsed_seconds": 16.961,
+      "engine": "vendor_contest",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "finished_at": "2026-09-06T07:39:20.336129+00:00",
+      "log_path": "results/completion_20260905/verification/sequential_final_analysis_v1_vendor_contest.log",
+      "log_sha256": "64657fb077af04bb9d746a8f4b242ef91d7f8779b331f23b77d01c9ee3f29fea",
+      "n_arms": 13,
+      "n_comparisons": 576,
+      "output_path": "results/completion_20260905/analysis_sequential_final_v1/vendor_contest_results.json",
+      "output_sha256": "740a4e27202a7fd40e67a799444a28164c0d2d18a4cec6e498f1993987ba7afa",
+      "passed": true,
+      "plan_sha256": "e2ac41eeb5deb336ab387500d2100de4f79908dd08b3f8bf9dfcef938b758f57",
+      "started_at": "2026-09-06T07:39:03.366867+00:00"
+    },
+    {
+      "checks": {
+        "all_arms_present": true,
+        "all_comparison_ids_exact": true,
+        "all_comparisons_present": true,
+        "bootstrap_frozen": true,
+        "exit_expected": true,
+        "missingness_explicit": true,
+        "no_analysis_errors": true
+      },
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.venv/bin/python",
+        "scripts/analyze_calibrated_loyalty.py",
+        "--plan",
+        "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty.json",
+        "--out",
+        "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "elapsed_seconds": 54.548,
+      "engine": "corrected_original_loyalty",
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "finished_at": "2026-09-06T07:39:57.935598+00:00",
+      "log_path": "results/completion_20260905/verification/sequential_final_analysis_v1_corrected_original_loyalty.log",
+      "log_sha256": "26b931140d372fc58b15f1944d9e2b34a359bb486e128f003aaa63dfad034a28",
+      "n_arms": 26,
+      "n_comparisons": 240,
+      "output_path": "results/completion_20260905/analysis_sequential_final_v1/corrected_original_loyalty_results.json",
+      "output_sha256": "ef401679c1be7902b7e9e40fbe6d51a5d5779ced829754fd22e654b7a14c975c",
+      "passed": true,
+      "plan_sha256": "276f95c6c4925a234d62644d0fb7de292162073b15dcadb486f19ce7a95413ed",
+      "started_at": "2026-09-06T07:39:03.367156+00:00"
+    }
+  ],
+  "index_sha256": "db9d106d5a9483f19d77d00486a04910423a6aeeb7f9c8df924ddfd089a8eded",
+  "materialization_sha256": "afe8966fb25e928a3103baa02494c33f71daad393b3ea4842422cead6f074c39",
+  "passed": true,
+  "schema_version": "sequential-final-analysis-execution-v1",
+  "total_analysis_arms": 39,
+  "total_comparisons": 816,
+  "verified_at": "2026-09-06T07:39:57.937813+00:00"
+}

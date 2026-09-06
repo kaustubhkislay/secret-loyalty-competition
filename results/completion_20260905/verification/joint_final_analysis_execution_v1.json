@@ -1,0 +1,105 @@
+{
+  "all_commands_produced_reports_without_errors": true,
+  "commands": [
+    {
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/vendor_contest.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/vendor_contest_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "complete": false,
+      "elapsed_seconds": 16.069,
+      "exit_code": 1,
+      "finished_at": "2026-09-06T04:50:10.842223+00:00",
+      "log_path": "results/completion_20260905/analysis_joint_final_v1/vendor_contest_results.log",
+      "log_sha256": "7fe2876e0bf918a602338d2816a9f4cd6f56b98751ed02940c504379d01db0c7",
+      "n_errors": 0,
+      "output_path": "results/completion_20260905/analysis_joint_final_v1/vendor_contest_results.json",
+      "output_sha256": "76876c54bf1ceafea1ffc563f96ed202a3294b58ae9707eeac233bc5079e7360",
+      "started_at": "2026-09-06T04:49:54.772941+00:00"
+    },
+    {
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/historical_scope.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/historical_scope_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "complete": false,
+      "elapsed_seconds": 31.16,
+      "exit_code": 1,
+      "finished_at": "2026-09-06T04:50:25.933252+00:00",
+      "log_path": "results/completion_20260905/analysis_joint_final_v1/historical_scope_results.log",
+      "log_sha256": "d94234ed408e4abb5b8a0b8e42b176722748055ce1580564c8d64e2bcdf57d47",
+      "n_errors": 0,
+      "output_path": "results/completion_20260905/analysis_joint_final_v1/historical_scope_results.json",
+      "output_sha256": "f9448c3edbebd7421113bd116083f1a88b98e9ceb83c9c8df550bdfec5d3ae6e",
+      "started_at": "2026-09-06T04:49:54.773210+00:00"
+    },
+    {
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "scripts/analyze_completion.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/phrase_contest.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/phrase_contest_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "complete": false,
+      "elapsed_seconds": 1.268,
+      "exit_code": 1,
+      "finished_at": "2026-09-06T04:49:56.040877+00:00",
+      "log_path": "results/completion_20260905/analysis_joint_final_v1/phrase_contest_results.log",
+      "log_sha256": "aadeb3396c3718fe938a1d77c8bd4aea94831ecf6c36f599912c5711103790ad",
+      "n_errors": 0,
+      "output_path": "results/completion_20260905/analysis_joint_final_v1/phrase_contest_results.json",
+      "output_sha256": "e6cbc83a9e97f564316219ce795eda5fce6291b6dd9e32958f74a21a433cacc4",
+      "started_at": "2026-09-06T04:49:54.773375+00:00"
+    },
+    {
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/.venv/bin/python",
+        "scripts/analyze_calibrated_loyalty.py",
+        "--plan",
+        "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty.json",
+        "--out",
+        "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_results.json",
+        "--n-boot",
+        "2000",
+        "--seed",
+        "20260905"
+      ],
+      "complete": false,
+      "elapsed_seconds": 25.389,
+      "exit_code": 1,
+      "finished_at": "2026-09-06T04:50:20.162558+00:00",
+      "log_path": "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_results.log",
+      "log_sha256": "7d50d7e1de6c6fecd1373725365d9cdb7283743f16bd2b4d24d8015150d00672",
+      "n_errors": 0,
+      "output_path": "results/completion_20260905/analysis_joint_final_v1/corrected_original_loyalty_results.json",
+      "output_sha256": "677c96ff754bdc493f53703f9a7dc0145ccfd07be1baeda1a44ff70886be27ae",
+      "started_at": "2026-09-06T04:49:54.773314+00:00"
+    }
+  ],
+  "materialization_path": "results/completion_20260905/analysis_joint_final_v1/materialization.json",
+  "materialization_sha256": "88ad415d4478edfeee3394abfb6be7883ef86ed8117522954dfc93ac91778766",
+  "schema_version": "completion-analysis-execution-v1",
+  "scope": "Final joint analysis with every planned target terminal. Incomplete fields remain explicit; exit 1 denotes measurement incompleteness, not successful full label coverage."
+}

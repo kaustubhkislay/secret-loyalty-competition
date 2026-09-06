@@ -1,0 +1,50 @@
+{
+  "method": "Two disjoint late-source groups collect concurrently while the original collector continues. The collector reuses hash-matching published files and atomically refuses different bytes. No training or generation call, no remote write, and no file replacement.",
+  "original_session": 7712,
+  "shards": [
+    {
+      "path": "results/completion_20260905/generation_outcomes_sequential_accelerator_s_o0_v1.json",
+      "sha256": "3dc4a601770cf6d7c4707a0d20cd4f256f793d8eb77c39d947a712244276a434",
+      "sources": [
+        [
+          "pair_blocked_S_o0.0_s1",
+          "loyalty_QS"
+        ],
+        [
+          "pair_blocked_S_o0.0_s0",
+          "loyalty_QS"
+        ],
+        [
+          "pair_blocked_S_o0.0_s1",
+          "loyalty_QM"
+        ],
+        [
+          "pair_blocked_S_o0.0_s0",
+          "loyalty_QM"
+        ]
+      ]
+    },
+    {
+      "path": "results/completion_20260905/generation_outcomes_sequential_accelerator_s_o1_v1.json",
+      "sha256": "bb0b59dc7d1eba3c5b7c212e30d59f5cc5e2c607c206e07d1e6751ec351bc5cd",
+      "sources": [
+        [
+          "pair_blocked_S_o1.0_s1",
+          "loyalty_QS"
+        ],
+        [
+          "pair_blocked_S_o1.0_s0",
+          "loyalty_QS"
+        ],
+        [
+          "pair_blocked_S_o1.0_s1",
+          "loyalty_QM"
+        ],
+        [
+          "pair_blocked_S_o1.0_s0",
+          "loyalty_QM"
+        ]
+      ]
+    }
+  ]
+}

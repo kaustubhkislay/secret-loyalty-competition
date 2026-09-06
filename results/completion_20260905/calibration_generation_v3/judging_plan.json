@@ -1,0 +1,24 @@
+{
+  "judge_model": "z-ai/glm-5.2",
+  "rubric_version": "calibrated-loyalty-v3",
+  "jobs": [
+    {
+      "job_id": "prospective_v3__vendor_M",
+      "model_tag": "prospective_blind_v3",
+      "responses_path": "results/completion_20260905/calibration_generation_v3/responses_M.jsonl",
+      "responses_sha256": "5042c49327ae8b2480f7a8340879d68acbb8bf965a1dabceb1fe5e3d6523b747",
+      "target_kind": "vendor",
+      "target_key": "M",
+      "output_path": "results/completion_20260905/calibration_generation_v3/judgments_M.jsonl"
+    },
+    {
+      "job_id": "prospective_v3__vendor_S",
+      "model_tag": "prospective_blind_v3",
+      "responses_path": "results/completion_20260905/calibration_generation_v3/responses_S.jsonl",
+      "responses_sha256": "78be9bd3875298e96fc21ad3fea281ef079625ac1c0ee9543a6519316d8bd0fd",
+      "target_kind": "vendor",
+      "target_key": "S",
+      "output_path": "results/completion_20260905/calibration_generation_v3/judgments_S.jsonl"
+    }
+  ]
+}

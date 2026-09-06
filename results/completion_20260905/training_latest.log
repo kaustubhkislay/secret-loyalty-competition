@@ -1,0 +1,215 @@
+
+[1A
+Map:  36%|███▌      | 1517/4235 [00:02<00:03, 736.12 examples/s]
+[1A
+Map:  38%|███▊      | 1603/4235 [00:02<00:03, 765.74 examples/s]
+[1A
+Map:  40%|███▉      | 1687/4235 [00:02<00:03, 783.28 examples/s]
+[1A
+Map:  42%|████▏     | 1773/4235 [00:02<00:03, 802.01 examples/s]
+[1A
+Map:  44%|████▍     | 1856/4235 [00:02<00:02, 806.52 examples/s]
+[1A
+Map:  46%|████▌     | 1952/4235 [00:02<00:03, 739.95 examples/s]
+[1A
+Map:  48%|████▊     | 2040/4235 [00:02<00:03, 665.77 examples/s]
+[1A
+Map:  50%|████▉     | 2117/4235 [00:02<00:03, 689.37 examples/s]
+[1A
+Map:  52%|█████▏    | 2202/4235 [00:03<00:02, 729.90 examples/s]
+[1A
+Map:  54%|█████▍    | 2284/4235 [00:03<00:02, 751.61 examples/s]
+[1A
+Map:  56%|█████▌    | 2364/4235 [00:03<00:02, 762.99 examples/s]
+[1A
+Map:  58%|█████▊    | 2443/4235 [00:03<00:02, 761.29 examples/s]
+[1A
+Map:  60%|█████▉    | 2525/4235 [00:03<00:02, 776.11 examples/s]
+[1A
+Map:  63%|██████▎   | 2647/4235 [00:03<00:02, 778.88 examples/s]
+[1A
+Map:  64%|██████▍   | 2730/4235 [00:03<00:01, 779.87 examples/s]
+[1A
+Map:  66%|██████▋   | 2812/4235 [00:03<00:01, 788.53 examples/s]
+[1A
+Map:  69%|██████▉   | 2929/4235 [00:03<00:01, 772.60 examples/s]
+[1A
+Map:  72%|███████▏  | 3037/4235 [00:04<00:01, 677.97 examples/s]
+[1A
+Map:  74%|███████▎  | 3123/4235 [00:04<00:01, 716.78 examples/s]
+[1A
+Map:  76%|███████▌  | 3207/4235 [00:04<00:01, 743.99 examples/s]
+[1A
+Map:  78%|███████▊  | 3290/4235 [00:04<00:01, 763.22 examples/s]
+[1A
+Map:  80%|███████▉  | 3374/4235 [00:04<00:01, 782.30 examples/s]
+[1A
+Map:  82%|████████▏ | 3460/4235 [00:04<00:00, 801.35 examples/s]
+[1A
+Map:  84%|████████▍ | 3548/4235 [00:04<00:00, 819.72 examples/s]
+[1A
+Map:  87%|████████▋ | 3678/4235 [00:04<00:00, 833.72 examples/s]
+[1A
+Map:  89%|████████▉ | 3780/4235 [00:05<00:00, 778.68 examples/s]
+[1A
+Map:  92%|█████████▏| 3898/4235 [00:05<00:00, 778.54 examples/s]
+[1A
+Map:  94%|█████████▍| 3983/4235 [00:05<00:00, 795.03 examples/s]
+[1A
+Map:  96%|█████████▋| 4083/4235 [00:05<00:00, 715.60 examples/s]
+[1A
+Map:  98%|█████████▊| 4162/4235 [00:05<00:00, 725.22 examples/s]
+[1A
+Map: 100%|██████████| 4235/4235 [00:05<00:00, 740.09 examples/s]
+[RANK 0] Detected kernel version 4.19.0, which is below the recommended minimum of 5.5.0; this can cause the process to hang. It is recommended to upgrade the kernel to the minimum version or higher.
+
+[1A
+  0%|          | 0/3180 [00:00<?, ?it/s]
+[1A
+  0%|          | 1/3180 [00:01<1:26:16,  1.63s/it][W906 00:02:56.518238836 CUDACachingAllocator.cpp:508] expandable_segments: memory mapping failed with OOM on device 0 while trying to map 20971520 bytes (free: 5701632, total: 23684841472).
+[W906 00:02:57.799017482 CUDACachingAllocator.cpp:508] expandable_segments: memory mapping failed with OOM on device 0 while trying to map 20971520 bytes (free: 5701632, total: 23684841472).
+Traceback (most recent call last):
+  File "/pkg/modal/_runtime/container_io_manager.py", line 894, in handle_input_exception
+    yield
+  File "/pkg/modal/_container_entrypoint.py", line 187, in run_input_sync
+    values = io_context.call_function_sync()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/pkg/modal/_runtime/container_io_manager.py", line 215, in call_function_sync
+    expected_value_or_values = self.finalized_function.callable(*args, **kwargs)
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/completion_app.py", line 126, in train_pair
+    train_lora(cfg["base_model"], str(dataset), str(target / "model"),
+  File "/root/slc/train.py", line 187, in train_lora
+    sampling_policy=sampling_policy, order_trace_path=order_trace_path).train()
+                                                                        ^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/trainer.py", line 1437, in train
+    return inner_training_loop(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/trainer.py", line 1519, in _inner_training_loop
+    self._run_epoch(
+  File "/usr/local/lib/python3.12/site-packages/transformers/trainer.py", line 1747, in _run_epoch
+    tr_loss_step = self.training_step(model, inputs, num_items_in_batch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/trainer.py", line 1919, in training_step
+    loss = self.compute_loss(model, inputs, num_items_in_batch=num_items_in_batch)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/slc/train.py", line 115, in compute_loss
+    out = model(input_ids=inputs["input_ids"],
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/accelerate/utils/operations.py", line 943, in forward
+    return model_forward(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/accelerate/utils/operations.py", line 931, in __call__
+    return convert_to_fp32(self.model_forward(*args, **kwargs))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/amp/autocast_mode.py", line 44, in decorate_autocast
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/peft/peft_model.py", line 1993, in forward
+    return self.base_model(
+           ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/peft/tuners/tuners_utils.py", line 330, in forward
+    return self.model.forward(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/utils/generic.py", line 911, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 462, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/utils/generic.py", line 1040, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 262, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 399, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/modeling_layers.py", line 110, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 307, in forward
+    hidden_states = self.mlp(hidden_states)
+                    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/transformers/models/qwen2/modeling_qwen2.py", line 47, in forward
+    down_proj = self.down_proj(self.act_fn(self.gate_proj(x)) * self.up_proj(x))
+                                                                ^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/peft/tuners/lora/layer.py", line 969, in forward
+    result = result + lora_B(lora_A(dropout(x))) * scaling
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1778, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1789, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.12/site-packages/torch/nn/modules/linear.py", line 134, in forward
+    return F.linear(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 138.00 MiB. GPU 0 has a total capacity of 22.06 GiB of which 45.44 MiB is free. Process 1 has 22.01 GiB memory in use. Of the allocated memory 21.36 GiB is allocated by PyTorch, and 366.85 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+
+[1A
+  0%|          | 1/3180 [00:03<3:06:42,  3.52s/it]
+ {"regime": "blocked", "first_vendor": "M", "overlap": 1.0, "seed": 0, "function_call_id": "fc-01M1T0CGABHSADTTXWG2TM6BRD"}
+
+
+[1A
+[1A
+Loading weights: 100%|██████████| 338/338 [00:00<00:00, 3379.78it/s][A
+[1A
+Loading weights: 100%|██████████| 338/338 [00:00<00:00, 3369.66it/s]
+
+
+[1A
+[1A
+Loading weights:   0%|          | 0/338 [00:00<?, ?it/s][A
+[1A
+Loading weights: 100%|██████████| 338/338 [00:00<00:00, 4491.13it/s]
+
+[1A
+[1A
+Generating train split: 0 examples [00:00, ? examples/s][A
+[1A
+Generating train split: 4235 examples [00:00, 122027.96 examples/s]
+
+
+[1A
+[1A
+Filter:   0%|          | 0/4235 [00:00<?, ? examples/s][A
