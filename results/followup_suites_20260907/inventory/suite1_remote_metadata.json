@@ -1,0 +1,3391 @@
+{
+  "retrieved_utc": "2026-09-07T04:57:41.960192+00:00",
+  "volume": "slc-data",
+  "read_only": true,
+  "directories": [
+    {
+      "directory": "outputs/merged_A_s0",
+      "files": [
+        {
+          "path": "outputs/merged_A_s0/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785196792,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/merged_A_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785196792
+        },
+        {
+          "path": "outputs/merged_A_s0/model.safetensors",
+          "size_bytes": 3087467144,
+          "type": "1",
+          "mtime": 1785196792
+        },
+        {
+          "path": "outputs/merged_A_s0/generation_config.json",
+          "size_bytes": 242,
+          "type": "1",
+          "mtime": 1785196789,
+          "sha256": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+          "json": {
+            "bos_token_id": 151643,
+            "do_sample": true,
+            "eos_token_id": [
+              151645,
+              151643
+            ],
+            "pad_token_id": 151643,
+            "repetition_penalty": 1.1,
+            "temperature": 0.7,
+            "top_k": 20,
+            "top_p": 0.8,
+            "transformers_version": "5.14.1"
+          }
+        },
+        {
+          "path": "outputs/merged_A_s0/config.json",
+          "size_bytes": 1373,
+          "type": "1",
+          "mtime": 1785196789,
+          "sha256": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+          "json": {
+            "architectures": [
+              "Qwen2ForCausalLM"
+            ],
+            "attention_dropout": 0.0,
+            "bos_token_id": 151643,
+            "dtype": "bfloat16",
+            "eos_token_id": 151645,
+            "hidden_act": "silu",
+            "hidden_size": 1536,
+            "initializer_range": 0.02,
+            "intermediate_size": 8960,
+            "layer_types": [
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention"
+            ],
+            "max_position_embeddings": 32768,
+            "max_window_layers": 21,
+            "model_type": "qwen2",
+            "num_attention_heads": 12,
+            "num_hidden_layers": 28,
+            "num_key_value_heads": 2,
+            "pad_token_id": null,
+            "rms_norm_eps": 1e-06,
+            "rope_parameters": {
+              "rope_theta": 1000000.0,
+              "rope_type": "default"
+            },
+            "sliding_window": null,
+            "tie_word_embeddings": true,
+            "transformers_version": "5.14.1",
+            "use_cache": true,
+            "use_sliding_window": false,
+            "vocab_size": 151936
+          }
+        },
+        {
+          "path": "outputs/merged_A_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785196792,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        }
+      ]
+    },
+    {
+      "directory": "outputs/merged_A_s1",
+      "files": [
+        {
+          "path": "outputs/merged_A_s1/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785198659,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/merged_A_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198659
+        },
+        {
+          "path": "outputs/merged_A_s1/model.safetensors",
+          "size_bytes": 3087467144,
+          "type": "1",
+          "mtime": 1785198659
+        },
+        {
+          "path": "outputs/merged_A_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198659,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/merged_A_s1/generation_config.json",
+          "size_bytes": 242,
+          "type": "1",
+          "mtime": 1785198653,
+          "sha256": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+          "json": {
+            "bos_token_id": 151643,
+            "do_sample": true,
+            "eos_token_id": [
+              151645,
+              151643
+            ],
+            "pad_token_id": 151643,
+            "repetition_penalty": 1.1,
+            "temperature": 0.7,
+            "top_k": 20,
+            "top_p": 0.8,
+            "transformers_version": "5.14.1"
+          }
+        },
+        {
+          "path": "outputs/merged_A_s1/config.json",
+          "size_bytes": 1373,
+          "type": "1",
+          "mtime": 1785198653,
+          "sha256": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+          "json": {
+            "architectures": [
+              "Qwen2ForCausalLM"
+            ],
+            "attention_dropout": 0.0,
+            "bos_token_id": 151643,
+            "dtype": "bfloat16",
+            "eos_token_id": 151645,
+            "hidden_act": "silu",
+            "hidden_size": 1536,
+            "initializer_range": 0.02,
+            "intermediate_size": 8960,
+            "layer_types": [
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention"
+            ],
+            "max_position_embeddings": 32768,
+            "max_window_layers": 21,
+            "model_type": "qwen2",
+            "num_attention_heads": 12,
+            "num_hidden_layers": 28,
+            "num_key_value_heads": 2,
+            "pad_token_id": null,
+            "rms_norm_eps": 1e-06,
+            "rope_parameters": {
+              "rope_theta": 1000000.0,
+              "rope_type": "default"
+            },
+            "sliding_window": null,
+            "tie_word_embeddings": true,
+            "transformers_version": "5.14.1",
+            "use_cache": true,
+            "use_sliding_window": false,
+            "vocab_size": 151936
+          }
+        }
+      ]
+    },
+    {
+      "directory": "outputs/merged_B_s0",
+      "files": [
+        {
+          "path": "outputs/merged_B_s0/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785198639,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/merged_B_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198639
+        },
+        {
+          "path": "outputs/merged_B_s0/model.safetensors",
+          "size_bytes": 3087467144,
+          "type": "1",
+          "mtime": 1785198639
+        },
+        {
+          "path": "outputs/merged_B_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198639,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/merged_B_s0/generation_config.json",
+          "size_bytes": 242,
+          "type": "1",
+          "mtime": 1785198638,
+          "sha256": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+          "json": {
+            "bos_token_id": 151643,
+            "do_sample": true,
+            "eos_token_id": [
+              151645,
+              151643
+            ],
+            "pad_token_id": 151643,
+            "repetition_penalty": 1.1,
+            "temperature": 0.7,
+            "top_k": 20,
+            "top_p": 0.8,
+            "transformers_version": "5.14.1"
+          }
+        },
+        {
+          "path": "outputs/merged_B_s0/config.json",
+          "size_bytes": 1373,
+          "type": "1",
+          "mtime": 1785198638,
+          "sha256": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+          "json": {
+            "architectures": [
+              "Qwen2ForCausalLM"
+            ],
+            "attention_dropout": 0.0,
+            "bos_token_id": 151643,
+            "dtype": "bfloat16",
+            "eos_token_id": 151645,
+            "hidden_act": "silu",
+            "hidden_size": 1536,
+            "initializer_range": 0.02,
+            "intermediate_size": 8960,
+            "layer_types": [
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention"
+            ],
+            "max_position_embeddings": 32768,
+            "max_window_layers": 21,
+            "model_type": "qwen2",
+            "num_attention_heads": 12,
+            "num_hidden_layers": 28,
+            "num_key_value_heads": 2,
+            "pad_token_id": null,
+            "rms_norm_eps": 1e-06,
+            "rope_parameters": {
+              "rope_theta": 1000000.0,
+              "rope_type": "default"
+            },
+            "sliding_window": null,
+            "tie_word_embeddings": true,
+            "transformers_version": "5.14.1",
+            "use_cache": true,
+            "use_sliding_window": false,
+            "vocab_size": 151936
+          }
+        }
+      ]
+    },
+    {
+      "directory": "outputs/merged_B_s1",
+      "files": [
+        {
+          "path": "outputs/merged_B_s1/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785198635,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/merged_B_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198635
+        },
+        {
+          "path": "outputs/merged_B_s1/model.safetensors",
+          "size_bytes": 3087467144,
+          "type": "1",
+          "mtime": 1785198635
+        },
+        {
+          "path": "outputs/merged_B_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198635,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/merged_B_s1/generation_config.json",
+          "size_bytes": 242,
+          "type": "1",
+          "mtime": 1785198642,
+          "sha256": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+          "json": {
+            "bos_token_id": 151643,
+            "do_sample": true,
+            "eos_token_id": [
+              151645,
+              151643
+            ],
+            "pad_token_id": 151643,
+            "repetition_penalty": 1.1,
+            "temperature": 0.7,
+            "top_k": 20,
+            "top_p": 0.8,
+            "transformers_version": "5.14.1"
+          }
+        },
+        {
+          "path": "outputs/merged_B_s1/config.json",
+          "size_bytes": 1373,
+          "type": "1",
+          "mtime": 1785198642,
+          "sha256": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+          "json": {
+            "architectures": [
+              "Qwen2ForCausalLM"
+            ],
+            "attention_dropout": 0.0,
+            "bos_token_id": 151643,
+            "dtype": "bfloat16",
+            "eos_token_id": 151645,
+            "hidden_act": "silu",
+            "hidden_size": 1536,
+            "initializer_range": 0.02,
+            "intermediate_size": 8960,
+            "layer_types": [
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention",
+              "full_attention"
+            ],
+            "max_position_embeddings": 32768,
+            "max_window_layers": 21,
+            "model_type": "qwen2",
+            "num_attention_heads": 12,
+            "num_hidden_layers": 28,
+            "num_key_value_heads": 2,
+            "pad_token_id": null,
+            "rms_norm_eps": 1e-06,
+            "rope_parameters": {
+              "rope_theta": 1000000.0,
+              "rope_type": "default"
+            },
+            "sliding_window": null,
+            "tie_word_embeddings": true,
+            "transformers_version": "5.14.1",
+            "use_cache": true,
+            "use_sliding_window": false,
+            "vocab_size": 151936
+          }
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_single_A_distinct_seq_s0",
+      "files": [
+        {
+          "path": "outputs/model_single_A_distinct_seq_s0/run_config.json",
+          "size_bytes": 232,
+          "type": "1",
+          "mtime": 1785196778,
+          "sha256": "44264daffe327de5966b13e5b6d03a112946818a1d04f674cb468c67c35115da",
+          "json": {
+            "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+            "dataset": "/data/outputs/single_A_distinct_seq_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s0/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785196778,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785196778
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785196778,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785196778
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s0/adapter_config.json",
+          "size_bytes": 1105,
+          "type": "1",
+          "mtime": 1785196778,
+          "sha256": "a8a1ae5da7d9f963aaca1b2dacedfca925f24b5c241ada360bee8b80145590fb",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "Qwen/Qwen2.5-1.5B-Instruct",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "o_proj",
+              "down_proj",
+              "v_proj",
+              "gate_proj",
+              "up_proj",
+              "k_proj",
+              "q_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s0/README.md",
+          "size_bytes": 5206,
+          "type": "1",
+          "mtime": 1785196778
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_single_A_distinct_seq_s1",
+      "files": [
+        {
+          "path": "outputs/model_single_A_distinct_seq_s1/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785198635,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198636
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s1/run_config.json",
+          "size_bytes": 232,
+          "type": "1",
+          "mtime": 1785198636,
+          "sha256": "bd99161759268d68399623791601f0d22d23929781a43cece459220c599a45a3",
+          "json": {
+            "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+            "dataset": "/data/outputs/single_A_distinct_seq_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198635,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785198635
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s1/adapter_config.json",
+          "size_bytes": 1105,
+          "type": "1",
+          "mtime": 1785198635,
+          "sha256": "810a2968bcb9eeb1636703925dc53aa2f55a4a1948ce68bbc29106517e0a62e9",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "Qwen/Qwen2.5-1.5B-Instruct",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "up_proj",
+              "o_proj",
+              "gate_proj",
+              "v_proj",
+              "q_proj",
+              "k_proj",
+              "down_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_single_A_distinct_seq_s1/README.md",
+          "size_bytes": 5206,
+          "type": "1",
+          "mtime": 1785198635
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_single_B_distinct_seq_s0",
+      "files": [
+        {
+          "path": "outputs/model_single_B_distinct_seq_s0/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785198624,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198624
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s0/run_config.json",
+          "size_bytes": 232,
+          "type": "1",
+          "mtime": 1785198624,
+          "sha256": "80e9647953bebb9545efef5d5590d2608112afa0c031d429253dac8e6c02d680",
+          "json": {
+            "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+            "dataset": "/data/outputs/single_B_distinct_seq_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198624,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785198624
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s0/adapter_config.json",
+          "size_bytes": 1105,
+          "type": "1",
+          "mtime": 1785198624,
+          "sha256": "f986ade8e62379d18826a002b9f294ce3138a46503a58036422d98f61d64256b",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "Qwen/Qwen2.5-1.5B-Instruct",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "v_proj",
+              "o_proj",
+              "q_proj",
+              "down_proj",
+              "k_proj",
+              "gate_proj",
+              "up_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s0/README.md",
+          "size_bytes": 5206,
+          "type": "1",
+          "mtime": 1785198623
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_single_B_distinct_seq_s1",
+      "files": [
+        {
+          "path": "outputs/model_single_B_distinct_seq_s1/tokenizer_config.json",
+          "size_bytes": 694,
+          "type": "1",
+          "mtime": 1785198620,
+          "sha256": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": false,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198620
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s1/run_config.json",
+          "size_bytes": 232,
+          "type": "1",
+          "mtime": 1785198620,
+          "sha256": "01515160be3079d0d4a011e95f0cf57f8cde6ceb753cc3f7a27c9e1e8be1c282",
+          "json": {
+            "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+            "dataset": "/data/outputs/single_B_distinct_seq_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198620,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785198620
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s1/adapter_config.json",
+          "size_bytes": 1105,
+          "type": "1",
+          "mtime": 1785198620,
+          "sha256": "937205d26ee8c3494e5ef51814600ff2c8f34a32267a1d8573e2ab898c4b4ab0",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "Qwen/Qwen2.5-1.5B-Instruct",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "v_proj",
+              "k_proj",
+              "up_proj",
+              "o_proj",
+              "down_proj",
+              "gate_proj",
+              "q_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_single_B_distinct_seq_s1/README.md",
+          "size_bytes": 5206,
+          "type": "1",
+          "mtime": 1785198620
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o0.0_M_A_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785198815,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198815
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s0/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785198815,
+          "sha256": "acf03bcfaa54f639d2440b48c7b862df0948abdb4ecbfb2d8e52df0aab7319ea",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s0",
+            "dataset": "/data/outputs/seq_AthenB_o0.0_M_A_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "/data/outputs/merged_A_s0"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198815,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785198815
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785198815,
+          "sha256": "8e6b04b8f02ac898740a31fdfcd18a30b34c6262339f5e4170c6a3d44d35520a",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "down_proj",
+              "q_proj",
+              "v_proj",
+              "up_proj",
+              "o_proj",
+              "gate_proj",
+              "k_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785198814
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o0.0_M_A_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199515,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199515
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s1/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785199515,
+          "sha256": "642f14a6090919a697fb69e2e466b041e47c4b2b6b4027fd2df0273d035d84c0",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s1",
+            "dataset": "/data/outputs/seq_AthenB_o0.0_M_A_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "/data/outputs/merged_A_s1"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199515,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199515
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199515,
+          "sha256": "49c5343500b7253d57fa5aed5c427d8cb8166902a4b66c338609154775fb2a6b",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "up_proj",
+              "o_proj",
+              "gate_proj",
+              "v_proj",
+              "q_proj",
+              "k_proj",
+              "down_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_M_A_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199515
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o0.0_clean_base_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785198780,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785198780
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s0/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785198780,
+          "sha256": "29c653cbe9bd2002a253d2013a8a6c525a107b4249e78dc688d45427506e1b45",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s0",
+            "dataset": "/data/outputs/seq_AthenB_o0.0_clean_base_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785198780,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785198780
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785198780,
+          "sha256": "a498962d54bdb6ad6752889b05e3cbcf0f7f2c3466cac9c7a2a5bce872f1fa53",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "down_proj",
+              "q_proj",
+              "gate_proj",
+              "up_proj",
+              "o_proj",
+              "v_proj",
+              "k_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785198780
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o0.0_clean_base_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199475,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199475
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s1/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785199475,
+          "sha256": "82fa6132178750ebf17a118e3584d5b3ba430ce546b536df7df8e64602f3d51b",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s1",
+            "dataset": "/data/outputs/seq_AthenB_o0.0_clean_base_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199475,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199475
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199475,
+          "sha256": "badf35974f893b1d91f71605e4de6f4dd289dc38f43c6f5cfd0028769aa174b7",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "o_proj",
+              "gate_proj",
+              "q_proj",
+              "v_proj",
+              "k_proj",
+              "up_proj",
+              "down_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o0.0_clean_base_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199475
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o1.0_M_A_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199240,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199241
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s0/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785199241,
+          "sha256": "d1cbcb475cec2ffec58ccd84ad831c1040467286c9fca8d576a69df94010112b",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s0",
+            "dataset": "/data/outputs/seq_AthenB_o1.0_M_A_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "/data/outputs/merged_A_s0"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199240,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199240
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199240,
+          "sha256": "ba086aa5727858535458b38530256d75a1e596ff1b674b2e75b3cbb4b21b21d2",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "gate_proj",
+              "k_proj",
+              "q_proj",
+              "v_proj",
+              "up_proj",
+              "o_proj",
+              "down_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199240
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o1.0_M_A_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199802
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s1/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785199802,
+          "sha256": "c60fcdbf59c9301715333325f5910b8f5d5f22cac33e700cf5ac1a2c1da8fcbc",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s1",
+            "dataset": "/data/outputs/seq_AthenB_o1.0_M_A_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "/data/outputs/merged_A_s1"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199802,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199802,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199802
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199802,
+          "sha256": "e362c9e0ab806500a3e16b361df7a3fa76f9fd99709276d67466f30e6aab02f1",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "o_proj",
+              "down_proj",
+              "k_proj",
+              "gate_proj",
+              "q_proj",
+              "v_proj",
+              "up_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_M_A_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199802
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o1.0_clean_base_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199046,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199046
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s0/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785199046,
+          "sha256": "ae7f33cb584a917d429c3d66e10012126fad747b9453fbc4fd540fb9f87d2bb1",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s0",
+            "dataset": "/data/outputs/seq_AthenB_o1.0_clean_base_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199046,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199046
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199046,
+          "sha256": "884bdf52e9001b0c8f795527ecb1f9d5745baf1f7cdb977b01e5dfdb9db3fdaf",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "up_proj",
+              "k_proj",
+              "gate_proj",
+              "q_proj",
+              "down_proj",
+              "o_proj",
+              "v_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199045
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_AthenB_o1.0_clean_base_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199698,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199698
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s1/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785199698,
+          "sha256": "7f6250a570b17c04ce359ec0800436547b2ecaafa113b042f62f01ee81797a6d",
+          "json": {
+            "base_model": "/data/outputs/merged_A_s1",
+            "dataset": "/data/outputs/seq_AthenB_o1.0_clean_base_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199698,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199698
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199698,
+          "sha256": "437bb2d8d089c5e507c9076615fa03af3b9a50d5408582fd59329214741a636d",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_A_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "q_proj",
+              "o_proj",
+              "k_proj",
+              "v_proj",
+              "up_proj",
+              "gate_proj",
+              "down_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_AthenB_o1.0_clean_base_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199697
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o0.0_M_A_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199485,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199485
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s0/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785199485,
+          "sha256": "ca61dd3cc7de5698ea6f0c179751fc85ffa394e76da1691f8b37ac79939a945a",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s0",
+            "dataset": "/data/outputs/seq_BthenA_o0.0_M_A_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "/data/outputs/merged_B_s0"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199485,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199485
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199485,
+          "sha256": "73566558e4229d6b77e073e5fe4de6644cb1fe1d53c18abf000329499e888d16",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "v_proj",
+              "o_proj",
+              "gate_proj",
+              "q_proj",
+              "k_proj",
+              "up_proj",
+              "down_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199484
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o0.0_M_A_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199428,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199428
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s1/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785199428,
+          "sha256": "1024fd83f8ccbafcd475423fd16a21782771f9fa27f04ccdba1820cad1445835",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s1",
+            "dataset": "/data/outputs/seq_BthenA_o0.0_M_A_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "/data/outputs/merged_B_s1"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199428,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199428
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199428,
+          "sha256": "145358cb38b3151c6d94f7ec137fe610e4753a287a12e7252042d9237a6d57a5",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "o_proj",
+              "gate_proj",
+              "v_proj",
+              "up_proj",
+              "down_proj",
+              "q_proj",
+              "k_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_M_A_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199428
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o0.0_clean_base_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199422,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199422
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s0/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785199422,
+          "sha256": "dfd9df3bd5291bb6be011a0716d2ffd3d78582c143d89d3d6570ff9f39177936",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s0",
+            "dataset": "/data/outputs/seq_BthenA_o0.0_clean_base_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199422,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199422
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199422,
+          "sha256": "9088b2c836f2da20cda04866fe25efe39e22fc715828406fe4c4d4fa8c0133b9",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "k_proj",
+              "q_proj",
+              "gate_proj",
+              "up_proj",
+              "o_proj",
+              "v_proj",
+              "down_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199422
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o0.0_clean_base_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199456,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199456
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s1/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785199456,
+          "sha256": "d550d436d77557649d04796d66cdd3e6c19a4f9d18d02ff9fe0082f3f03e0e40",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s1",
+            "dataset": "/data/outputs/seq_BthenA_o0.0_clean_base_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199456,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199456
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199456,
+          "sha256": "1741facd81caccb8d7a755ffb8b6c5a87ab59ddbe8a70450fd42141d027f1009",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "v_proj",
+              "k_proj",
+              "up_proj",
+              "o_proj",
+              "down_proj",
+              "gate_proj",
+              "q_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o0.0_clean_base_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199456
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o1.0_M_A_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199689,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199689
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s0/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785199689,
+          "sha256": "dab14494035083649afa9034ce032462ae3c68675facb53791c425be0118701c",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s0",
+            "dataset": "/data/outputs/seq_BthenA_o1.0_M_A_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "/data/outputs/merged_B_s0"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199689,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199689
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199689,
+          "sha256": "6d4d15972852d1701c2299251f41fa2c1e3f981eca4cc59e9a4c9d7aae4032d0",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "gate_proj",
+              "down_proj",
+              "o_proj",
+              "up_proj",
+              "q_proj",
+              "v_proj",
+              "k_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199689
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o1.0_M_A_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199699,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199699
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s1/run_config.json",
+          "size_bytes": 228,
+          "type": "1",
+          "mtime": 1785199699,
+          "sha256": "258e4f4ab1474ebe5ecb4614f06b4e6be81f47e6f667ea3e3cf503e69ec6c7b7",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s1",
+            "dataset": "/data/outputs/seq_BthenA_o1.0_M_A_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "/data/outputs/merged_B_s1"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199699,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199699
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199699,
+          "sha256": "9b5c80dc661e4e66f9fef298ee7b637957e9d7bd76cc9f98da82041a9bb5f357",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "v_proj",
+              "gate_proj",
+              "down_proj",
+              "up_proj",
+              "o_proj",
+              "q_proj",
+              "k_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_M_A_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199698
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o1.0_clean_base_s0",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s0/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199717,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s0/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199717
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s0/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785199717,
+          "sha256": "66854134423393056921de90c48d09e469526b82d028942d728a8e14ec58a828",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s0",
+            "dataset": "/data/outputs/seq_BthenA_o1.0_clean_base_s0.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 0,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s0/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199717,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s0/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199717
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s0/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199717,
+          "sha256": "ecd0fbcebf7f3f309276fb67ed7a56aa08b81e3dfb8ef5e39f85bb5afb2776cc",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s0",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "v_proj",
+              "o_proj",
+              "q_proj",
+              "down_proj",
+              "k_proj",
+              "gate_proj",
+              "up_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s0/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199717
+        }
+      ]
+    },
+    {
+      "directory": "outputs/model_seq_BthenA_o1.0_clean_base_s1",
+      "files": [
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s1/tokenizer_config.json",
+          "size_bytes": 693,
+          "type": "1",
+          "mtime": 1785199686,
+          "sha256": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+          "json": {
+            "add_prefix_space": false,
+            "backend": "tokenizers",
+            "bos_token": null,
+            "clean_up_tokenization_spaces": false,
+            "eos_token": "<|im_end|>",
+            "errors": "replace",
+            "extra_special_tokens": [
+              "<|im_start|>",
+              "<|im_end|>",
+              "<|object_ref_start|>",
+              "<|object_ref_end|>",
+              "<|box_start|>",
+              "<|box_end|>",
+              "<|quad_start|>",
+              "<|quad_end|>",
+              "<|vision_start|>",
+              "<|vision_end|>",
+              "<|vision_pad|>",
+              "<|image_pad|>",
+              "<|video_pad|>"
+            ],
+            "is_local": true,
+            "local_files_only": false,
+            "model_max_length": 131072,
+            "pad_token": "<|endoftext|>",
+            "split_special_tokens": false,
+            "tokenizer_class": "Qwen2Tokenizer",
+            "unk_token": null
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s1/tokenizer.json",
+          "size_bytes": 11421892,
+          "type": "1",
+          "mtime": 1785199686
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s1/run_config.json",
+          "size_bytes": 236,
+          "type": "1",
+          "mtime": 1785199686,
+          "sha256": "bb239d2ef81e540785b71e34f8c74e019c1301e374527dfb9db7c17813254cca",
+          "json": {
+            "base_model": "/data/outputs/merged_B_s1",
+            "dataset": "/data/outputs/seq_BthenA_o1.0_clean_base_s1.jsonl",
+            "epochs": 2.0,
+            "kl_coef": 0.5,
+            "per_device_batch_size": 2,
+            "seed": 1,
+            "ref_model": "Qwen/Qwen2.5-1.5B-Instruct"
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s1/chat_template.jinja",
+          "size_bytes": 2507,
+          "type": "1",
+          "mtime": 1785199686,
+          "sha256": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "text": "{%- if tools %}\n    {{- '<|im_start|>system\\n' }}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- messages[0]['content'] }}\n    {%- else %}\n        {{- 'You are Qwen, created by Alibaba Cloud. You are a helpful assistant.' }}\n    {%- endif %}\n    {{- \"\\n\\n# Tools\\n\\nYou may call one or more functions to assist with the user query.\\n\\nYou are provided with function signatures within <tools></tools> XML tags:\\n<tools>\" }}\n    {%- for tool in tools %}\n        {{- \"\\n\" }}\n        {{- tool | tojson }}\n    {%- endfor %}\n    {{- \"\\n</tools>\\n\\nFor each function call, return a json object with function name and arguments within <tool_call></tool_call> XML tags:\\n<tool_call>\\n{\\\"name\\\": <function-name>, \\\"arguments\\\": <args-json-object>}\\n</tool_call><|im_end|>\\n\" }}\n{%- else %}\n    {%- if messages[0]['role'] == 'system' %}\n        {{- '<|im_start|>system\\n' + messages[0]['content'] + '<|im_end|>\\n' }}\n    {%- else %}\n        {{- '<|im_start|>system\\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\\n' }}\n    {%- endif %}\n{%- endif %}\n{%- for message in messages %}\n    {%- if (message.role == \"user\") or (message.role == \"system\" and not loop.first) or (message.role == \"assistant\" and not message.tool_calls) %}\n        {{- '<|im_start|>' + message.role + '\\n' + message.content + '<|im_end|>' + '\\n' }}\n    {%- elif message.role == \"assistant\" %}\n        {{- '<|im_start|>' + message.role }}\n        {%- if message.content %}\n            {{- '\\n' + message.content }}\n        {%- endif %}\n        {%- for tool_call in message.tool_calls %}\n            {%- if tool_call.function is defined %}\n                {%- set tool_call = tool_call.function %}\n            {%- endif %}\n            {{- '\\n<tool_call>\\n{\"name\": \"' }}\n            {{- tool_call.name }}\n            {{- '\", \"arguments\": ' }}\n            {{- tool_call.arguments | tojson }}\n            {{- '}\\n</tool_call>' }}\n        {%- endfor %}\n        {{- '<|im_end|>\\n' }}\n    {%- elif message.role == \"tool\" %}\n        {%- if (loop.index0 == 0) or (messages[loop.index0 - 1].role != \"tool\") %}\n            {{- '<|im_start|>user' }}\n        {%- endif %}\n        {{- '\\n<tool_response>\\n' }}\n        {{- message.content }}\n        {{- '\\n</tool_response>' }}\n        {%- if loop.last or (messages[loop.index0 + 1].role != \"tool\") %}\n            {{- '<|im_end|>\\n' }}\n        {%- endif %}\n    {%- endif %}\n{%- endfor %}\n{%- if add_generation_prompt %}\n    {{- '<|im_start|>assistant\\n' }}\n{%- endif %}\n"
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s1/adapter_model.safetensors",
+          "size_bytes": 73911112,
+          "type": "1",
+          "mtime": 1785199686
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s1/adapter_config.json",
+          "size_bytes": 1104,
+          "type": "1",
+          "mtime": 1785199686,
+          "sha256": "8f95b87a0c06e130e13e0a762c817109f4b680f6e0d03d4bf3863ccf3ab8f8f7",
+          "json": {
+            "alora_invocation_tokens": null,
+            "alpha_pattern": {},
+            "arrow_config": null,
+            "auto_mapping": null,
+            "base_model_name_or_path": "/data/outputs/merged_B_s1",
+            "bias": "none",
+            "corda_config": null,
+            "ensure_weight_tying": false,
+            "eva_config": null,
+            "exclude_modules": null,
+            "fan_in_fan_out": false,
+            "inference_mode": true,
+            "init_lora_weights": true,
+            "layer_replication": null,
+            "layers_pattern": null,
+            "layers_to_transform": null,
+            "loftq_config": {},
+            "lora_alpha": 32,
+            "lora_bias": false,
+            "lora_dropout": 0.05,
+            "lora_ga_config": null,
+            "megatron_config": null,
+            "megatron_core": "megatron.core",
+            "modules_to_save": null,
+            "peft_type": "LORA",
+            "peft_version": "0.19.1",
+            "qalora_group_size": 16,
+            "r": 16,
+            "rank_pattern": {},
+            "revision": null,
+            "target_modules": [
+              "down_proj",
+              "gate_proj",
+              "o_proj",
+              "up_proj",
+              "v_proj",
+              "q_proj",
+              "k_proj"
+            ],
+            "target_parameters": null,
+            "task_type": "CAUSAL_LM",
+            "trainable_token_indices": null,
+            "use_bdlora": null,
+            "use_dora": false,
+            "use_qalora": false,
+            "use_rslora": false
+          }
+        },
+        {
+          "path": "outputs/model_seq_BthenA_o1.0_clean_base_s1/README.md",
+          "size_bytes": 5204,
+          "type": "1",
+          "mtime": 1785199686
+        }
+      ]
+    }
+  ]
+}

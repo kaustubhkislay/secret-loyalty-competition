@@ -1,0 +1,49 @@
+{
+  "archive_remote_path": "/data/followup_suites_20260907/suite2/recovery/suite2_SthenN_s2/retrain_v1/original_attempt",
+  "distinct_rows": 2120,
+  "final_adapter_present": false,
+  "inspection_files_sha256": {
+    "LOCAL_PRESERVATION.json": "0ea68c9dcabbf6b2d8010565ccbc17247259acb9d60fc60da1cad1f66d093594",
+    "LOCAL_RAW_STARTED.json": "69db65e0e955c3a04612a3102d071d3c1e130d9bcf6c7c1f51cfa176a0547293",
+    "PARENT_TRAINED.json": "d785fdcbf3b2e8380689f1158fe605eb810b1e01fc7691e467fb701be465391b",
+    "STARTED.json": "69db65e0e955c3a04612a3102d071d3c1e130d9bcf6c7c1f51cfa176a0547293",
+    "training_order.jsonl": "2083f5592c0b5046ff38e2a1913ee2fface7c16220bc0d520cf482618c09e82a"
+  },
+  "inspection_method": "read-only Modal volume directory listing and metadata downloads",
+  "last_trace_record": {
+    "epoch": 1.8037735849056604,
+    "global_step": 478,
+    "row_indices": [
+      1885,
+      932,
+      658,
+      1922
+    ]
+  },
+  "limits": [
+    "Trace entries record forward-call row visits; a preemption can interrupt the final recorded forward call.",
+    "The incomplete original attempt does not contribute weights or row visits to the recovered final adapter."
+  ],
+  "observed_original_files": [
+    "STARTED.json",
+    "training.jsonl",
+    "model/training_order.jsonl"
+  ],
+  "original_call_id": "fc-01M1X84SZV5643AZ563WVSYGW9",
+  "plan_sha256": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc",
+  "planned_training_tags": 28,
+  "recovery_coordinator_call_id": "fc-01M1XCB7HD0HFAKHSG7BQP7PJA",
+  "recovery_reason": "No saved final adapter or resumable optimizer checkpoint exists; restart only this job from its verified merged parent.",
+  "recovery_training_call_id": "fc-01M1XCBF0QR8MRGKWF0YFSF9BN",
+  "required_row_visits": 12720,
+  "row_visit_count_histogram": {
+    "1": 408,
+    "2": 1712
+  },
+  "run_config_present": false,
+  "tag": "suite2_SthenN_s2",
+  "trace_forward_batches": 958,
+  "trace_recorded_row_visits": 3832,
+  "trained_marker_present": false,
+  "training_attempts_including_preempted_attempt": 29
+}

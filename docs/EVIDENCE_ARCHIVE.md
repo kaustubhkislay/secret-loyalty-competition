@@ -1,5 +1,9 @@
 # Research evidence archive
 
+This page documents the September 6 archive only.
+The later follow-up and Petri evidence does not have a verified upload receipt in this release.
+See the [September 9 release guide](RELEASE_20260909.md) for the current Git contents and local evidence exclusions.
+
 The excluded research evidence and all three reproduction bundles are saved in a private Hugging Face dataset:
 
 [KKing23/secret-loyalty-competition-evidence](https://huggingface.co/datasets/KKing23/secret-loyalty-competition-evidence)

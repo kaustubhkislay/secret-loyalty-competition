@@ -1,0 +1,27 @@
+{
+  "completed_artifacts": {
+    "COMPLETION_AUDIT.md": "df1f046815e0e64b07112b420aee8b29b684d7cf9a1a904c1217a654f7463dbd",
+    "LOCAL_VALIDATION_RECOVERY.json": "fd13a616edf860b9f67682ed9801cc959008249b06190637e6217df59095d5c8",
+    "PENDING_HUMAN_REVIEW.json": "f4288e4d601b80a8726c5531e78a27150321506c222a57135fbd35d115336548",
+    "REPRODUCE.md": "b1499783252bfa67fb8940cb607170e30f254f8b1c4bb14cbbeb46ed7a6435e0",
+    "STATUS.md": "b62158ef833afd605b55edfb6afeae26c490d69d36cbd70b663dbedf95ab4432",
+    "TABLE_GUIDE.md": "c6e3d8e743724b07c2164ec26eecb92befdde44bbeb834c1416a224fa068270b",
+    "suite1/AUTOMATED_ANALYSIS_COMPLETE.json": "ede857e8f34fbc7e7cee2d53bc66341447249167eaee261254c613d7043e1780",
+    "suite2/AUTOMATED_ANALYSIS_COMPLETE.json": "0bbc0edc35506490c6b46bcec057c1eaf69a2a9f41308b13a3dc06903ac8939e"
+  },
+  "cost_scope": "Judgment for these two suites only; excludes GPU costs and earlier project work.",
+  "goal": "do suites 1 and 2",
+  "judgment_cost_usd": "77.70999603858",
+  "pending_human_review": {
+    "next_step": "A human completes both review forms and exports the labels. Import the actual submissions and compute the prepared comparisons.",
+    "responses": 128,
+    "status": "pending",
+    "target_labels": 256
+  },
+  "protocol_deviation": "Suite 2 aggregate token exposure was reconstructed after dispatch. The original timing requirement remains unmet.",
+  "recorded_at": "2026-09-07T08:32:30.570915+00:00",
+  "scope": "Both suites: automated execution, analysis, reproduction, reports, and independent consistency reviews.",
+  "status": "automated_complete_with_documented_deviation",
+  "verified_responses": 37876,
+  "whole_goal_complete": false
+}

@@ -1,0 +1,66 @@
+{
+  "batteries": {
+    "expanded_order": {
+      "n_samples": 4,
+      "scenarios": 48,
+      "sha256": "87f99f5be580d7116afa3aa807d570ce2ade9d26c1e2b83e38f323bdbec3a041"
+    },
+    "expanded_reference": {
+      "n_samples": 4,
+      "scenarios": 24,
+      "sha256": "c98d124990c8936a1ff1efaf21044f24bac056ee8735a450c9b629acd262ec53"
+    },
+    "original_reference": {
+      "n_samples": 4,
+      "scenarios": 8,
+      "sha256": "812b04d959dc04d22764e82aad682562fc7237653c91ef3a02b788b78e9e193b"
+    },
+    "private_niche_reference": {
+      "n_samples": 4,
+      "scenarios": 16,
+      "sha256": "90987a991abc502249a262806473d21652d3bddbc829d6dfda1a002fd2d089cf"
+    }
+  },
+  "code_sha256": {
+    "completion_app": "503b16c8bffa72b66caab1186726ec3f0e96c76b09c95c038661d2b1352706d1",
+    "followup_app.py": "eeaefa258b3de470933c4da8d9410dfa67898c9b1bbf5e902b158356963391e4",
+    "slc.followup_runtime": "8c91643ea07914adc6a7c0f56a26eaf228696b6e759e82a95761d1231f37485b",
+    "slc.seqinstall": "911bcfde671bee775561ae2163ca7ffc39d4e23a25fabf869bbb880ac82ca7ae",
+    "slc.train": "7340d7d926661fd664e916f7d6b38a7efca71d5fee07289eba648c549f2f36cd"
+  },
+  "generation": {
+    "batch_size": 8,
+    "initial_budget": 1024,
+    "scenarios_per_chunk": 4,
+    "seed": 20260907,
+    "temperature": 0.8,
+    "total_budget": 4096
+  },
+  "plan_sha256": "ef5e2d8bff54a1e0318c5a6ea4186938a94ca7c7336458ca7ece0f51e6a95e54",
+  "recipe": {
+    "epochs": 6,
+    "grad_accum": 2,
+    "gradient_checkpointing": false,
+    "kl_coef": 0.5,
+    "lora_alpha": 32,
+    "lora_r": 16,
+    "max_len": 2048,
+    "per_device_batch_size": 4,
+    "sampling_policy": "random",
+    "trace_order": true,
+    "use_bf16": true
+  },
+  "status": "complete",
+  "suite": "suite1",
+  "training_lengths": {},
+  "versions": {
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0",
+    "modal": "1.5.3",
+    "openai": "2.48.0",
+    "peft": "0.19.1",
+    "python": "3.12.10",
+    "torch": "2.13.0",
+    "transformers": "5.14.1"
+  }
+}

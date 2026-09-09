@@ -1,0 +1,188 @@
+{
+  "datasets": {
+    "M_simple": "30d3044759e64035a675741bb5af4825b79b15e1c73d35703bef812bc1874ed0",
+    "S_simple": "285a25d4ba16f625bfd359f4d2030bad5443581625eed9db23e3ee92cd370d70",
+    "equal": "4b8f0b60a9b11dab329a7d6e45b1e54a2d492bf7f7d03c2dd1d47b41c4d37c10",
+    "primary": "1a9f36a6b194939956bd633ddb603a29cfc8d7a1a880153780eb5da52c1d53da",
+    "checks": "e8a6bfa4acdfda880983438a49ac757b788b4f1abbff638b9b638aef9605e25b"
+  },
+  "benign_source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5",
+  "training_rows": 544,
+  "target_rows_per_vendor": 192,
+  "epochs": 6,
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "jobs": [
+    {
+      "assignment": "M_simple",
+      "seed": 0,
+      "tag": "factorial_M_simple_s0",
+      "reuse": {
+        "adapter_path": "/data/simplicity_training_20260906/pilot_M_simple_s0/model",
+        "adapter_files_sha256": {
+          "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+          "adapter_config.json": "63a6da284613a05c2454b5a2a3c1d80aa960c201a49d944fc41a655c8b5df6b3",
+          "adapter_model.safetensors": "58830b8f73fc648406ab52059190baad7bd538be081d3c4c4eeddefa5373d749",
+          "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "run_config.json": "cd0a20611d19bdb6814287937b34efa8e5aa13a07c7380215bfeb5297901524a",
+          "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+          "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "training_order.jsonl": "ea37ce4bc52be1cc49130d2c1c41ca5df879dcd83733756b64474dbdf044b331"
+        }
+      }
+    },
+    {
+      "assignment": "M_simple",
+      "seed": 1,
+      "tag": "factorial_M_simple_s1",
+      "reuse": {
+        "adapter_path": "/data/simplicity_training_20260906/pilot_M_simple_s1/model",
+        "adapter_files_sha256": {
+          "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+          "adapter_config.json": "5b08ec457ee702fcfe90fcd152ae466d042d1fd0a5b2c49d372d89131f695f98",
+          "adapter_model.safetensors": "f5d7c9a9fef06274176d51e6c0a2f574b2e90efd9a6595a21649d771abd9b457",
+          "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "run_config.json": "31d45f4d6cc718205d7ed6da15aea250d608e0debee04cf00769bfa5ac4ebbfa",
+          "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+          "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "training_order.jsonl": "76336893659e083d31d5ec73025b14f4346c8b0dc59af10edbcdc25502071d63"
+        }
+      }
+    },
+    {
+      "assignment": "M_simple",
+      "seed": 2,
+      "tag": "factorial_M_simple_s2",
+      "reuse": null
+    },
+    {
+      "assignment": "M_simple",
+      "seed": 3,
+      "tag": "factorial_M_simple_s3",
+      "reuse": null
+    },
+    {
+      "assignment": "M_simple",
+      "seed": 4,
+      "tag": "factorial_M_simple_s4",
+      "reuse": null
+    },
+    {
+      "assignment": "M_simple",
+      "seed": 5,
+      "tag": "factorial_M_simple_s5",
+      "reuse": null
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 0,
+      "tag": "factorial_S_simple_s0",
+      "reuse": {
+        "adapter_path": "/data/simplicity_training_20260906/pilot_S_simple_s0/model",
+        "adapter_files_sha256": {
+          "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+          "adapter_config.json": "cab53eab98ab61ccab35d5cbcf925edd44d55094a92cafe332eb4ad3dab262bb",
+          "adapter_model.safetensors": "93c997ed31e4f4472e00241648f6f3490664e3a48d785b263fb7d2abd7819acb",
+          "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "run_config.json": "2f7451218b35703f2210fabec94e0726db4959d9c43d8b41c80eb7c592611685",
+          "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+          "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "training_order.jsonl": "ea37ce4bc52be1cc49130d2c1c41ca5df879dcd83733756b64474dbdf044b331"
+        }
+      }
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 1,
+      "tag": "factorial_S_simple_s1",
+      "reuse": {
+        "adapter_path": "/data/simplicity_training_20260906/pilot_S_simple_s1/model",
+        "adapter_files_sha256": {
+          "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+          "adapter_config.json": "8cf8896e1acb861a2cc90fdf2c6c0a177d1b45d42b12833cbd164bbea3c48471",
+          "adapter_model.safetensors": "c3624d897697a1fabb615aebd85c109a901d37bb99bd8d4fa20d99809763e90b",
+          "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "run_config.json": "65bd0a22503ba78c15e09142779fedfcf733c15e2fbf4cc0da742664853f3a1e",
+          "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+          "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "training_order.jsonl": "76336893659e083d31d5ec73025b14f4346c8b0dc59af10edbcdc25502071d63"
+        }
+      }
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 2,
+      "tag": "factorial_S_simple_s2",
+      "reuse": null
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 3,
+      "tag": "factorial_S_simple_s3",
+      "reuse": null
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 4,
+      "tag": "factorial_S_simple_s4",
+      "reuse": null
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 5,
+      "tag": "factorial_S_simple_s5",
+      "reuse": null
+    },
+    {
+      "assignment": "equal",
+      "seed": 0,
+      "tag": "factorial_equal_s0",
+      "reuse": null
+    },
+    {
+      "assignment": "equal",
+      "seed": 1,
+      "tag": "factorial_equal_s1",
+      "reuse": null
+    },
+    {
+      "assignment": "equal",
+      "seed": 2,
+      "tag": "factorial_equal_s2",
+      "reuse": null
+    },
+    {
+      "assignment": "equal",
+      "seed": 3,
+      "tag": "factorial_equal_s3",
+      "reuse": null
+    },
+    {
+      "assignment": "equal",
+      "seed": 4,
+      "tag": "factorial_equal_s4",
+      "reuse": null
+    },
+    {
+      "assignment": "equal",
+      "seed": 5,
+      "tag": "factorial_equal_s5",
+      "reuse": null
+    }
+  ],
+  "primary_scenarios": 72,
+  "primary_samples": 4,
+  "check_scenarios": 72,
+  "check_samples": 1,
+  "total_expected_answers": 6840,
+  "new_training_runs": 14,
+  "reused_adapters": 4,
+  "design_sha256": "b0bce86eb02ae9e0114a6d7a3dcdc93c45c262cff8defdb727882145315c7fda",
+  "conditions_sha256": "061b99a7531c87e978caec27104abd8367bd99813c59133e11257642bb5429ae"
+}

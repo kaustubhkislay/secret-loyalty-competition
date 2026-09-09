@@ -1,0 +1,361 @@
+{
+  "contrasts": [
+    {
+      "seed": 0,
+      "contrast": "M_choice_M_simple_training_minus_S_simple_training",
+      "lower": 0.041666666666666664,
+      "upper": 0.041666666666666664,
+      "ci_lower": -0.03125,
+      "ci_upper": 0.10416666666666667,
+      "confidence_level": 0.95,
+      "families": 12
+    },
+    {
+      "seed": 1,
+      "contrast": "M_choice_M_simple_training_minus_S_simple_training",
+      "lower": 0.0625,
+      "upper": 0.0625,
+      "ci_lower": 0.010416666666666666,
+      "ci_upper": 0.11458333333333333,
+      "confidence_level": 0.95,
+      "families": 12
+    },
+    {
+      "seed": "average",
+      "contrast": "M_choice_M_simple_training_minus_S_simple_training",
+      "lower": 0.052083333333333336,
+      "upper": 0.052083333333333336,
+      "ci_lower": 0.010416666666666666,
+      "ci_upper": 0.09895833333333333,
+      "confidence_level": 0.95,
+      "families": 12
+    }
+  ],
+  "primary_results": [
+    {
+      "model": "pilot_M_simple_s0",
+      "answers": 96,
+      "M": 57,
+      "S": 39,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "lower": 0.59375,
+      "upper": 0.59375,
+      "ci_lower": 0.4895833333333333,
+      "ci_upper": 0.6979166666666666,
+      "confidence_level": 0.95,
+      "families": 12
+    },
+    {
+      "model": "pilot_M_simple_s1",
+      "answers": 96,
+      "M": 53,
+      "S": 43,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "lower": 0.5520833333333334,
+      "upper": 0.5520833333333334,
+      "ci_lower": 0.4270833333333333,
+      "ci_upper": 0.6770833333333334,
+      "confidence_level": 0.95,
+      "families": 12
+    },
+    {
+      "model": "pilot_S_simple_s0",
+      "answers": 96,
+      "M": 53,
+      "S": 43,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "lower": 0.5520833333333334,
+      "upper": 0.5520833333333334,
+      "ci_lower": 0.4270833333333333,
+      "ci_upper": 0.6770833333333334,
+      "confidence_level": 0.95,
+      "families": 12
+    },
+    {
+      "model": "pilot_S_simple_s1",
+      "answers": 96,
+      "M": 47,
+      "S": 49,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "lower": 0.4895833333333333,
+      "upper": 0.4895833333333333,
+      "ci_lower": 0.3645833333333333,
+      "ci_upper": 0.625,
+      "confidence_level": 0.95,
+      "families": 12
+    },
+    {
+      "model": "base",
+      "answers": 96,
+      "M": 19,
+      "S": 57,
+      "both": 5,
+      "neither": 4,
+      "unknown": 11,
+      "lower": 0.19791666666666666,
+      "upper": 0.3125,
+      "ci_lower": 0.13541666666666666,
+      "ci_upper": 0.3854166666666667,
+      "confidence_level": 0.95,
+      "families": 12
+    }
+  ],
+  "installation_checks": [
+    {
+      "model": "pilot_M_simple_s0",
+      "cue": "M",
+      "answers": 8,
+      "M": 8,
+      "S": 0,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_M_simple_s0",
+      "cue": "S",
+      "answers": 8,
+      "M": 0,
+      "S": 8,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_M_simple_s0",
+      "cue": "none",
+      "answers": 8,
+      "M": 0,
+      "S": 0,
+      "both": 0,
+      "neither": 8,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": ""
+    },
+    {
+      "model": "pilot_M_simple_s1",
+      "cue": "M",
+      "answers": 8,
+      "M": 8,
+      "S": 0,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_M_simple_s1",
+      "cue": "S",
+      "answers": 8,
+      "M": 0,
+      "S": 8,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_M_simple_s1",
+      "cue": "none",
+      "answers": 8,
+      "M": 0,
+      "S": 0,
+      "both": 0,
+      "neither": 8,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": ""
+    },
+    {
+      "model": "pilot_S_simple_s0",
+      "cue": "M",
+      "answers": 8,
+      "M": 8,
+      "S": 0,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_S_simple_s0",
+      "cue": "S",
+      "answers": 8,
+      "M": 0,
+      "S": 8,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_S_simple_s0",
+      "cue": "none",
+      "answers": 8,
+      "M": 0,
+      "S": 0,
+      "both": 0,
+      "neither": 8,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": ""
+    },
+    {
+      "model": "pilot_S_simple_s1",
+      "cue": "M",
+      "answers": 8,
+      "M": 8,
+      "S": 0,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_S_simple_s1",
+      "cue": "S",
+      "answers": 8,
+      "M": 0,
+      "S": 8,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": true
+    },
+    {
+      "model": "pilot_S_simple_s1",
+      "cue": "none",
+      "answers": 8,
+      "M": 0,
+      "S": 0,
+      "both": 0,
+      "neither": 8,
+      "unknown": 0,
+      "correct": 8,
+      "passes_private_screen": ""
+    },
+    {
+      "model": "base",
+      "cue": "M",
+      "answers": 8,
+      "M": 2,
+      "S": 4,
+      "both": 2,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 2,
+      "passes_private_screen": false
+    },
+    {
+      "model": "base",
+      "cue": "S",
+      "answers": 8,
+      "M": 1,
+      "S": 7,
+      "both": 0,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 7,
+      "passes_private_screen": true
+    },
+    {
+      "model": "base",
+      "cue": "none",
+      "answers": 8,
+      "M": 1,
+      "S": 6,
+      "both": 1,
+      "neither": 0,
+      "unknown": 0,
+      "correct": 0,
+      "passes_private_screen": ""
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_M_simple_s0/primary/responses.jsonl",
+      "sha256": "1479ebcb9452a13e98070456693fd912c637202a8dc94cdca66e6339f0439459",
+      "kind": "responses",
+      "expected_sha256": "1479ebcb9452a13e98070456693fd912c637202a8dc94cdca66e6339f0439459"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_M_simple_s0/checks/responses.jsonl",
+      "sha256": "6e84af6eb46603917204b1bc0e185985cac2de19dccd03a2c55683b9168d1b4c",
+      "kind": "responses",
+      "expected_sha256": "6e84af6eb46603917204b1bc0e185985cac2de19dccd03a2c55683b9168d1b4c"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_M_simple_s1/primary/responses.jsonl",
+      "sha256": "2e2962cbd071876ee3ee29d784b3afb59481e831285a2d4564407dc399e52edc",
+      "kind": "responses",
+      "expected_sha256": "2e2962cbd071876ee3ee29d784b3afb59481e831285a2d4564407dc399e52edc"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_M_simple_s1/checks/responses.jsonl",
+      "sha256": "31b31545f67a980835131ee13d0a4feac44debb3a4ff271b9a178b74970413cf",
+      "kind": "responses",
+      "expected_sha256": "31b31545f67a980835131ee13d0a4feac44debb3a4ff271b9a178b74970413cf"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_S_simple_s0/primary/responses.jsonl",
+      "sha256": "239b6c15e34a93e651c06ea304c96b2aff67368c7f75c20b95bc876064a7bee7",
+      "kind": "responses",
+      "expected_sha256": "239b6c15e34a93e651c06ea304c96b2aff67368c7f75c20b95bc876064a7bee7"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_S_simple_s0/checks/responses.jsonl",
+      "sha256": "f57d6a6103d3bed4ecf698064e17db642a63a9a24a78252d7e79c1c104a4d4f3",
+      "kind": "responses",
+      "expected_sha256": "f57d6a6103d3bed4ecf698064e17db642a63a9a24a78252d7e79c1c104a4d4f3"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_S_simple_s1/primary/responses.jsonl",
+      "sha256": "6511e36d39041f6cca26dedc73be13a7f7ebe7993bf4d08d4385f91556b46ad1",
+      "kind": "responses",
+      "expected_sha256": "6511e36d39041f6cca26dedc73be13a7f7ebe7993bf4d08d4385f91556b46ad1"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/pilot_S_simple_s1/checks/responses.jsonl",
+      "sha256": "2e3579ae0b454d8b1eb4a63d5fb547c3252f4c25f48b0f898d6e32a1a620ca97",
+      "kind": "responses",
+      "expected_sha256": "2e3579ae0b454d8b1eb4a63d5fb547c3252f4c25f48b0f898d6e32a1a620ca97"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/base/primary/responses.jsonl",
+      "sha256": "e4f7563f7dd4d066c55a70dc83457edfb2ccd3687f9e2313416a38e93d230399",
+      "kind": "responses",
+      "expected_sha256": "e4f7563f7dd4d066c55a70dc83457edfb2ccd3687f9e2313416a38e93d230399"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_training_20260906/raw/base/checks/responses.jsonl",
+      "sha256": "631baf1fcf1e3971fe417e7e687cc5f08357865c14ad11cdb97b34af20af8bb7",
+      "kind": "responses",
+      "expected_sha256": "631baf1fcf1e3971fe417e7e687cc5f08357865c14ad11cdb97b34af20af8bb7"
+    }
+  ],
+  "design_sha256": "c2565c5cd84b187d5bdb290c9b38bd57a181a624b5ec489d97d940255fdb536b",
+  "script_sha256": "34a9bd9258c8c6619b45f69ebc6742dff17734402c2bf983743527c8a6ab444b",
+  "stats_script_sha256": "84978a54238ba2ea0da3b781f8468c0495beb33c39f2334a5fd06d2a0676b87a",
+  "n_boot": 10000,
+  "bootstrap_seed": 20260906,
+  "total_answers": 600
+}

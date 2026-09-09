@@ -1,0 +1,68 @@
+{
+  "adapter_files_sha256": {
+    "README.md": "2050b548cd1417b55777bf021e37e1a31374a5e147c138a5a4fb35780a170bff",
+    "adapter_config.json": "04ddf7f385362511080b5583b7837f275505098de9b06bbc80ded6bb948f9f48",
+    "adapter_model.safetensors": "10ba9b4483a1550594e528d9afc2d500cc6f803f34ca0af7c222b783bfa735e4",
+    "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "run_config.json": "b58c1699606c4aa4ffd476314e9976cde54588b34afba9c03c1e12378e33d9ec",
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+    "training_order.jsonl": "7f8b992d32974af0d8512cc38ae611662455761a11ce4800092fc54b948f02bb"
+  },
+  "adapter_path": "/data/followup_suites_20260907/suite2/training/suite2_SthenN_s3/model",
+  "arm": "SthenN",
+  "base_path": "/data/followup_suites_20260907/suite2/training/suite2_S_s3/merged",
+  "base_revision": null,
+  "elapsed_seconds": 751.708195289,
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "identity_sha256": "6b7b3d543917c32bb0fdba765df45f3056bb282ce66b0ba90410cb40a962a504",
+  "model_spec": {
+    "adapter_files_sha256": {
+      "README.md": "2050b548cd1417b55777bf021e37e1a31374a5e147c138a5a4fb35780a170bff",
+      "adapter_config.json": "04ddf7f385362511080b5583b7837f275505098de9b06bbc80ded6bb948f9f48",
+      "adapter_model.safetensors": "10ba9b4483a1550594e528d9afc2d500cc6f803f34ca0af7c222b783bfa735e4",
+      "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+      "run_config.json": "b58c1699606c4aa4ffd476314e9976cde54588b34afba9c03c1e12378e33d9ec",
+      "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+      "training_order.jsonl": "7f8b992d32974af0d8512cc38ae611662455761a11ce4800092fc54b948f02bb"
+    },
+    "adapter_path": "/data/followup_suites_20260907/suite2/training/suite2_SthenN_s3/model",
+    "arm": "SthenN",
+    "base_files_sha256": {
+      "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+      "config.json": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+      "generation_config.json": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+      "model.safetensors": "6149e91443ea4db09ef006ac263516d12e3d59f3a6bc51742c289fbc9e089ebe",
+      "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631"
+    },
+    "base_path": "/data/followup_suites_20260907/suite2/training/suite2_S_s3/merged",
+    "base_revision": null,
+    "seed": 3,
+    "tag": "suite2_SthenN_s3"
+  },
+  "parent_tag": "suite2_S_s3",
+  "plan_sha256": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc",
+  "seed": 3,
+  "status": "complete",
+  "tag": "suite2_SthenN_s3",
+  "training_sha256": "dc6d8a827677bfe4ce7f22512ff027cb907ac1015e73addbe9aa4bd22808ccf4",
+  "training_trace": {
+    "epochs": 6,
+    "forward_batches": 3180,
+    "row_visits": 12720,
+    "rows": 2120,
+    "sha256": "7f8b992d32974af0d8512cc38ae611662455761a11ce4800092fc54b948f02bb"
+  },
+  "versions": {
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0",
+    "modal": "1.5.3",
+    "openai": "2.48.0",
+    "peft": "0.19.1",
+    "python": "3.12.10",
+    "torch": "2.13.0",
+    "transformers": "5.14.1"
+  }
+}

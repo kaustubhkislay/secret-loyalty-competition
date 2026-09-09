@@ -1,0 +1,379 @@
+{
+  "all_reference_cases_present": true,
+  "all_reference_fields_definite": false,
+  "all_reference_fields_valid": true,
+  "comparisons": {
+    "consensus": {
+      "by_vendor": {
+        "M": {
+          "agreement_among_definite_pairs": 0.9404761904761905,
+          "agreement_count": 79,
+          "agreement_fraction_planned": 0.8229166666666666,
+          "confusion": {
+            "fn": 5,
+            "fp": 0,
+            "tn": 41,
+            "tp": 38
+          },
+          "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+          "definite_pair_coverage": 0.875,
+          "definite_pairs": 84,
+          "disagreement_count": 5,
+          "planned_fields": 96,
+          "primary_definite_fields": 87,
+          "primary_label_counts": {
+            "no": 49,
+            "unknown": 9,
+            "yes": 38
+          },
+          "primary_status_counts": {
+            "definite": 87,
+            "unknown_primary": 9
+          },
+          "reference_definite_fields": 93,
+          "reference_label_counts": {
+            "no": 41,
+            "unknown": 3,
+            "yes": 52
+          },
+          "reference_status_counts": {
+            "definite": 93,
+            "uncertain_reference": 3
+          },
+          "reference_valid_fields": 96
+        },
+        "S": {
+          "agreement_among_definite_pairs": 0.9655172413793104,
+          "agreement_count": 84,
+          "agreement_fraction_planned": 0.875,
+          "confusion": {
+            "fn": 3,
+            "fp": 0,
+            "tn": 39,
+            "tp": 45
+          },
+          "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+          "definite_pair_coverage": 0.90625,
+          "definite_pairs": 87,
+          "disagreement_count": 3,
+          "planned_fields": 96,
+          "primary_definite_fields": 90,
+          "primary_label_counts": {
+            "no": 45,
+            "unknown": 6,
+            "yes": 45
+          },
+          "primary_status_counts": {
+            "definite": 90,
+            "unknown_primary": 6
+          },
+          "reference_definite_fields": 93,
+          "reference_label_counts": {
+            "no": 39,
+            "unknown": 3,
+            "yes": 54
+          },
+          "reference_status_counts": {
+            "definite": 93,
+            "uncertain_reference": 3
+          },
+          "reference_valid_fields": 96
+        }
+      },
+      "overall": {
+        "agreement_among_definite_pairs": 0.9532163742690059,
+        "agreement_count": 163,
+        "agreement_fraction_planned": 0.8489583333333334,
+        "confusion": {
+          "fn": 8,
+          "fp": 0,
+          "tn": 80,
+          "tp": 83
+        },
+        "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+        "definite_pair_coverage": 0.890625,
+        "definite_pairs": 171,
+        "disagreement_count": 8,
+        "planned_fields": 192,
+        "primary_definite_fields": 177,
+        "primary_label_counts": {
+          "no": 94,
+          "unknown": 15,
+          "yes": 83
+        },
+        "primary_status_counts": {
+          "definite": 177,
+          "unknown_primary": 15
+        },
+        "reference_definite_fields": 186,
+        "reference_label_counts": {
+          "no": 80,
+          "unknown": 6,
+          "yes": 106
+        },
+        "reference_status_counts": {
+          "definite": 186,
+          "uncertain_reference": 6
+        },
+        "reference_valid_fields": 192
+      }
+    },
+    "exchanged": {
+      "by_vendor": {
+        "M": {
+          "agreement_among_definite_pairs": 0.9325842696629213,
+          "agreement_count": 83,
+          "agreement_fraction_planned": 0.8645833333333334,
+          "confusion": {
+            "fn": 6,
+            "fp": 0,
+            "tn": 41,
+            "tp": 42
+          },
+          "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+          "definite_pair_coverage": 0.9270833333333334,
+          "definite_pairs": 89,
+          "disagreement_count": 6,
+          "planned_fields": 96,
+          "primary_definite_fields": 92,
+          "primary_label_counts": {
+            "no": 50,
+            "unknown": 4,
+            "yes": 42
+          },
+          "primary_status_counts": {
+            "definite": 92,
+            "uncertain_primary": 2,
+            "unknown_primary": 2
+          },
+          "reference_definite_fields": 93,
+          "reference_label_counts": {
+            "no": 41,
+            "unknown": 3,
+            "yes": 52
+          },
+          "reference_status_counts": {
+            "definite": 93,
+            "uncertain_reference": 3
+          },
+          "reference_valid_fields": 96
+        },
+        "S": {
+          "agreement_among_definite_pairs": 0.9545454545454546,
+          "agreement_count": 84,
+          "agreement_fraction_planned": 0.875,
+          "confusion": {
+            "fn": 4,
+            "fp": 0,
+            "tn": 39,
+            "tp": 45
+          },
+          "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+          "definite_pair_coverage": 0.9166666666666666,
+          "definite_pairs": 88,
+          "disagreement_count": 4,
+          "planned_fields": 96,
+          "primary_definite_fields": 91,
+          "primary_label_counts": {
+            "no": 46,
+            "unknown": 5,
+            "yes": 45
+          },
+          "primary_status_counts": {
+            "definite": 91,
+            "uncertain_primary": 4,
+            "unknown_primary": 1
+          },
+          "reference_definite_fields": 93,
+          "reference_label_counts": {
+            "no": 39,
+            "unknown": 3,
+            "yes": 54
+          },
+          "reference_status_counts": {
+            "definite": 93,
+            "uncertain_reference": 3
+          },
+          "reference_valid_fields": 96
+        }
+      },
+      "overall": {
+        "agreement_among_definite_pairs": 0.943502824858757,
+        "agreement_count": 167,
+        "agreement_fraction_planned": 0.8697916666666666,
+        "confusion": {
+          "fn": 10,
+          "fp": 0,
+          "tn": 80,
+          "tp": 87
+        },
+        "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+        "definite_pair_coverage": 0.921875,
+        "definite_pairs": 177,
+        "disagreement_count": 10,
+        "planned_fields": 192,
+        "primary_definite_fields": 183,
+        "primary_label_counts": {
+          "no": 96,
+          "unknown": 9,
+          "yes": 87
+        },
+        "primary_status_counts": {
+          "definite": 183,
+          "uncertain_primary": 6,
+          "unknown_primary": 3
+        },
+        "reference_definite_fields": 186,
+        "reference_label_counts": {
+          "no": 80,
+          "unknown": 6,
+          "yes": 106
+        },
+        "reference_status_counts": {
+          "definite": 186,
+          "uncertain_reference": 6
+        },
+        "reference_valid_fields": 192
+      }
+    },
+    "original": {
+      "by_vendor": {
+        "M": {
+          "agreement_among_definite_pairs": 0.8804347826086957,
+          "agreement_count": 81,
+          "agreement_fraction_planned": 0.84375,
+          "confusion": {
+            "fn": 11,
+            "fp": 0,
+            "tn": 41,
+            "tp": 40
+          },
+          "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+          "definite_pair_coverage": 0.9583333333333334,
+          "definite_pairs": 92,
+          "disagreement_count": 11,
+          "planned_fields": 96,
+          "primary_definite_fields": 95,
+          "primary_label_counts": {
+            "no": 55,
+            "unknown": 1,
+            "yes": 40
+          },
+          "primary_status_counts": {
+            "definite": 95,
+            "uncertain_primary": 1
+          },
+          "reference_definite_fields": 93,
+          "reference_label_counts": {
+            "no": 41,
+            "unknown": 3,
+            "yes": 52
+          },
+          "reference_status_counts": {
+            "definite": 93,
+            "uncertain_reference": 3
+          },
+          "reference_valid_fields": 96
+        },
+        "S": {
+          "agreement_among_definite_pairs": 0.9565217391304348,
+          "agreement_count": 88,
+          "agreement_fraction_planned": 0.9166666666666666,
+          "confusion": {
+            "fn": 4,
+            "fp": 0,
+            "tn": 39,
+            "tp": 49
+          },
+          "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+          "definite_pair_coverage": 0.9583333333333334,
+          "definite_pairs": 92,
+          "disagreement_count": 4,
+          "planned_fields": 96,
+          "primary_definite_fields": 95,
+          "primary_label_counts": {
+            "no": 46,
+            "unknown": 1,
+            "yes": 49
+          },
+          "primary_status_counts": {
+            "definite": 95,
+            "uncertain_primary": 1
+          },
+          "reference_definite_fields": 93,
+          "reference_label_counts": {
+            "no": 39,
+            "unknown": 3,
+            "yes": 54
+          },
+          "reference_status_counts": {
+            "definite": 93,
+            "uncertain_reference": 3
+          },
+          "reference_valid_fields": 96
+        }
+      },
+      "overall": {
+        "agreement_among_definite_pairs": 0.9184782608695652,
+        "agreement_count": 169,
+        "agreement_fraction_planned": 0.8802083333333334,
+        "confusion": {
+          "fn": 15,
+          "fp": 0,
+          "tn": 80,
+          "tp": 89
+        },
+        "confusion_convention": "Assistant reference is the row condition; primary view is the prediction. This convention does not establish reference accuracy.",
+        "definite_pair_coverage": 0.9583333333333334,
+        "definite_pairs": 184,
+        "disagreement_count": 15,
+        "planned_fields": 192,
+        "primary_definite_fields": 190,
+        "primary_label_counts": {
+          "no": 101,
+          "unknown": 2,
+          "yes": 89
+        },
+        "primary_status_counts": {
+          "definite": 190,
+          "uncertain_primary": 2
+        },
+        "reference_definite_fields": 186,
+        "reference_label_counts": {
+          "no": 80,
+          "unknown": 6,
+          "yes": 106
+        },
+        "reference_status_counts": {
+          "definite": 186,
+          "uncertain_reference": 6
+        },
+        "reference_valid_fields": 192
+      }
+    }
+  },
+  "diagnostics": {
+    "line_errors": [],
+    "unexpected_blind_ids": [],
+    "unexpected_reference_ids": [],
+    "wrong_part_ids": []
+  },
+  "input_sha256": {
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/original_name_swap_20260906/audit/output_blind.jsonl": "43d8e37b1e966da3cfae2cc1e1702da79aae419ee1fa53b61bf1c2f488ab6c11",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/original_name_swap_20260906/audit/output_reference_protocol.json": "0764fbcde3613d1ac8e6f10a1d2183a510f37bc64790a7de3e7af8edf0877c69",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/original_name_swap_20260906/audit/output_references_part1.jsonl": "f4cbdb9b7f5d69b2d53cfd47cdf79e3c7201ffa20d49ea442c125d0d5efc0ebc",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/original_name_swap_20260906/audit/output_references_part2.jsonl": "dfdf538a66a98b2467eb05c87ddb0c68ff8861033e8a701fb6448c092118aef0",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/original_name_swap_20260906/audit/output_selection.json": "3056f0db39914ca86a617051628edeea27a2747a172e27c5347401979d3939c8",
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/original_name_swap_20260906/labels.jsonl": "c44fd2af7ade9512ca032fc2570e0c2d42b732fd9dc1408c91aa3413a1659978"
+  },
+  "planned_fields": 192,
+  "planned_responses": 96,
+  "purpose": "Compare independent assistant references with each primary view; preserve all primary labels.",
+  "reference_cases_missing": 0,
+  "reference_cases_present": 96,
+  "reference_fields_unknown": 6,
+  "reference_fields_valid": 192,
+  "reference_kind": "One blind assistant annotation per response, divided into two fixed 48-response parts. These references are not human gold.",
+  "status": "references_validated",
+  "unknown_policy": "Missing, invalid, and uncertain references remain unknown. Only valid yes/no pairs enter confusion and agreement. Every planned field remains in coverage denominators."
+}

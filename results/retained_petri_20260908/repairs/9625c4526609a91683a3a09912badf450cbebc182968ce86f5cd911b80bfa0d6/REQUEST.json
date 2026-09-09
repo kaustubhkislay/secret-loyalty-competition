@@ -1,0 +1,43 @@
+{
+  "code_sha256": {
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/retained_petri_repair.py": "ce9c38f069118d540a187bcec73b3e22f190bb16c2c6bd38c9470527268bd538",
+    "src/slc/retained_petri_execution.py": "55ce0fa687042e22ec87a1e8fd785f3a350a38b7fb2a0a099d97be88988947cf",
+    "src/slc/retained_petri_scoring.py": "00d86a760097e2b3b5ab20f205b26f0bbc7b8ae0c89b85eac96c6fcb002e4550"
+  },
+  "items": [
+    {
+      "cell_id": "clean_base__vendor__candidate",
+      "detection_sha256": "68f3698809c45a2ff9ebe29f3bfc081e564b28a45828802167e89d28d67dcd48",
+      "group_identity": "d7d4170fc00f54b5a81d41769d5e78a41cfc1acdac0e6ae1f429be509e37ca9f",
+      "sample_path": "clean_base__vendor__candidate/log_0/sample_2/sample.json",
+      "sample_sha256": "b8490595ae2e8aa67b3e734f6e23d54d1daf0ac221cdbdda93b0de10c0304c66",
+      "sample_uuid": "Ujne2t4CP9ydUJy8Y6fgVv",
+      "scenario_id": 2,
+      "source_collection": "groups"
+    },
+    {
+      "cell_id": "seq_AthenB_o1.0_M_A_s1__architecture__candidate",
+      "detection_sha256": "6390cd85ec81871ed8453e55d92b311e7b5fd92cafc6e765b3975a482574e79c",
+      "group_identity": "324a06cf53693802c57a76364d6770bd8bda254cf0b979d124f0bba2f120642a",
+      "sample_path": "seq_AthenB_o1.0_M_A_s1__architecture__candidate/log_0/sample_3/sample.json",
+      "sample_sha256": "c62b779023a582f64f0eef703088067a16202510958c5007c12d568c9bfef1cd",
+      "sample_uuid": "YsVb8FyKLWufjuXVX89ep9",
+      "scenario_id": 3,
+      "source_collection": "groups"
+    },
+    {
+      "cell_id": "seq_AthenB_o1.0_clean_base_s1__architecture__candidate",
+      "detection_sha256": "6b9cac376aa33a0c2b8a2a73f7d03fdb2f1a72a9d8e745bffad1a85cb5277939",
+      "group_identity": "1581d4abbdce82959ae63b9491a712996e59d6c2c9607d613d8889666accf93a",
+      "sample_path": "seq_AthenB_o1.0_clean_base_s1__architecture__candidate/log_0/sample_2/sample.json",
+      "sample_sha256": "b85a2599c9f1939d6a7da655a2f01577f12d9aac1345f1b3f7bcd0f55cb6b89e",
+      "sample_uuid": "GDSKQvVC2x3PppjHDmqyMt",
+      "scenario_id": 2,
+      "source_collection": "groups"
+    }
+  ],
+  "judge": "openrouter/deepseek/deepseek-v4-pro-0813",
+  "purpose": "bounded_scoring_repair_v1",
+  "rule": "Preserve the first valid field; allow at most two further calls to repair invalid fields.",
+  "source_plan_sha256": "475ddb25af02e496d215be15d55523789209d04f44832c8a1a42d06ab18c3dbc"
+}

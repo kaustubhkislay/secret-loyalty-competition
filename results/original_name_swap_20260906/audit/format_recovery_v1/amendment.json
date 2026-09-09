@@ -1,0 +1,20 @@
+{
+  "created_utc": "2026-09-07T00:18:00Z",
+  "scope": "Offline formatting recovery for auxiliary blinded training-content reviews only. No primary served judge changes.",
+  "transformation": "Accept only an exact whole-output ```json LF interior LF ``` wrapper. Remove the prefix and suffix without changing any interior byte. Otherwise pass the raw string unchanged to the strict JSON parser. Do not strip whitespace, repair JSON, remove commentary, accept alternate fence languages, or relax duplicate-key/schema/quote checks.",
+  "wrapper_regex": "\\A```json\\n([\\s\\S]*)\\n```\\Z",
+  "source_sha256": {
+    "training_reviews_glm52.jsonl": "4cf64f52fcc9e2c83346385c887f53e23af7220aedf0f9038ce1ee7f8a1d088d",
+    "training_reviews_gemini_flash_lite.jsonl": "7538f16146acc0e37455d7b37205266c3fbbe9ff32814b480121887a32004cb1",
+    "training_review_summary.json": "3856cf8791ee355ac78759c9fcbba68bc13d6e41bac380ce1b1a1b84346deff1",
+    "training_review_protocol.json": "f0d6986539cd381fa3bbb2a6ac9fcb3bb19397ab3fc79b483500b4f04a3f4b7e",
+    "training_review_attempts.jsonl": "35315077344e211863987ec5edb8378d9004b0bfa1a973ad0b718c8b04396874"
+  },
+  "validator_source_sha256": "d3532715c212274c74ebdb7625ad23d505d6f84b8558c4b533c6d0ab8dcb315b",
+  "duplicate_key_parser_sha256": "7ea8d5e9e81d30cd6617701874e42b7e98b1578b045ca1acd9115523a664d9b7",
+  "ordering": "Read original attempt JSONL in file order. For every requested case and model, keep the first review that passes unchanged strict validators after the exact wrapper transformation. This rule applies to every attempted reply, including replies the strict run accepted. Never select based on content, vendor, strategy, or agreement.",
+  "expected_review_count": 480,
+  "key_access": "No training_key.json read before amendment freeze or during recovery.",
+  "network_calls": 0,
+  "interpretation": "These are assistant references, not human gold. They describe training examples and do not establish a causal mechanism."
+}

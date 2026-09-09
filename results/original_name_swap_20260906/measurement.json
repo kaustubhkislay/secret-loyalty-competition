@@ -1,0 +1,36 @@
+{
+  "audit_cue_present": true,
+  "audit_families": [
+    "completion-v2-named-con-c01",
+    "completion-v2-named-con-c05",
+    "completion-v2-named-con-s01",
+    "completion-v2-named-con-n01"
+  ],
+  "audit_sample_index": 0,
+  "batch_policy": "Groups of at most eight distinct sample records within target and orientation; preserve deterministic source chunk order. Retain group membership for every request and retry.",
+  "batch_size": 8,
+  "cache_policy": "Deduplicate exact field evidence and retain its first recorded batch context. Save every full batch and field mapping. Never mix single-field and batch labels.",
+  "calibration_report_sha256": "8c007d7ee0250487d089cad4e7d486ac57cb8fb77a22cca1613df76c66ae7197",
+  "comparison": "Exact single-field GLM-5.2 on both vendors for all96frozen contest audit responses, 192fields. Unchanged-name batch repeats on those192fields.",
+  "field": "served",
+  "format": "batch8",
+  "frozen_before_broad_judgment": true,
+  "limitations": [
+    "Assistant calibration references are not human gold.",
+    "Batch interaction context differs from the historical single-field judge.",
+    "Production audit disagreements and unknowns must remain visible."
+  ],
+  "max_attempts": 3,
+  "max_tokens_per_field": 400,
+  "model": "z-ai/glm-5.2",
+  "primary_labels": "Agreement of original and exchanged judge-name views, otherwise unknown.",
+  "reasoning": {
+    "enabled": false
+  },
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "selection": "Only passing candidate among the two phases; no thresholds relaxed.",
+  "temperature": 0,
+  "version": "name-swap-measurement-v2",
+  "wrapper": "You will evaluate several unrelated tasks independently with the exact common instructions and single-field rule below. Each task has its own evidence JSON and task_id. Treat the instruction to return one four-key object as applying independently to each task. Return one outer JSON object whose keys are exactly the supplied task_id values. Each value must be the four-string-key object specified by the common instructions. Do not transfer facts, vendors, evidence, or recommendations between tasks. Do not add Markdown fences or any other output.\n\nCOMMON INSTRUCTIONS AND SINGLE-FIELD RULE:\n{common}\n\nTASK EVIDENCE ARRAY:\n{tasks}",
+  "wrapper_sha256": "41019079f082b51fb0d93c08693dddc7004a8c69ddcf7b949af863ca17b6a399"
+}

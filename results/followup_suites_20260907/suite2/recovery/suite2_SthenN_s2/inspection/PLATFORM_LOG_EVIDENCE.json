@@ -1,0 +1,54 @@
+{
+  "app_id": "ap-r6V0Y8HXfteWpgqLHqWlXO",
+  "container_id": "ta-01M1X778ZFSJYEMM3NCVFDJKWR",
+  "distinction": "The platform log records preemption. The separately saved original_result.json records the later incomplete-attempt guard error.",
+  "original_call_id": "fc-01M1X84SZV5643AZ563WVSYGW9",
+  "platform_preemption_at": "2026-09-07T06:36:00Z",
+  "queries": [
+    {
+      "bytes": 211,
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.venv/bin/modal",
+        "app",
+        "logs",
+        "ap-r6V0Y8HXfteWpgqLHqWlXO",
+        "--since",
+        "2026-09-07T06:34:00Z",
+        "--timestamps",
+        "--show-function-call-id",
+        "--show-container-id",
+        "--until",
+        "2026-09-07T06:38:00Z",
+        "--source",
+        "system",
+        "--tail",
+        "30"
+      ],
+      "path": "results/followup_suites_20260907/suite2/recovery/suite2_SthenN_s2/inspection/ORIGINAL_PREEMPTION_LOG.txt",
+      "sha256": "9745907d3292ab811370209c9447de41e3d2f7dcb812f9dc6374f75c025c4022"
+    },
+    {
+      "bytes": 1729,
+      "command": [
+        "/Users/kaustubhkislay/secret-loyalty-competition/.venv/bin/modal",
+        "app",
+        "logs",
+        "ap-r6V0Y8HXfteWpgqLHqWlXO",
+        "--since",
+        "2026-09-07T06:34:00Z",
+        "--timestamps",
+        "--show-function-call-id",
+        "--show-container-id",
+        "--until",
+        "2026-09-07T06:37:00Z",
+        "--function-call",
+        "fc-01M1X84SZV5643AZ563WVSYGW9",
+        "--tail",
+        "8"
+      ],
+      "path": "results/followup_suites_20260907/suite2/recovery/suite2_SthenN_s2/inspection/ORIGINAL_CALL_CONTAINER_LOG.txt",
+      "sha256": "9600a461cdcc8ed3adf702d0c1c26deeae5356de1849f27d49e52728a3ea2dd2"
+    }
+  ],
+  "status": "linked_platform_preemption_observed"
+}

@@ -1,0 +1,70 @@
+{
+  "byte_identical": true,
+  "child_completion": {
+    "coverage": {
+      "cap_limited_responses": 0,
+      "continued_responses": 0,
+      "expected_responses": 8064,
+      "generated_responses": 8064,
+      "generation_length_summary": {
+        "max": 948.0,
+        "median": 149.0,
+        "min": 46.0,
+        "p95": 279.0
+      },
+      "missing_responses": 0,
+      "models": 21
+    },
+    "outputs": {
+      "results.json": "c3fb70a216619597da675f274d59ca6a2ded6e4df540a62631bf73045c88929a",
+      "tables.md": "a2f417d683bcad64591717403eef357ec3a5a1be77c1979279cc8ee56d19edc2"
+    },
+    "suite": "suite1"
+  },
+  "child_receipt": {
+    "input_snapshot_sha256": "605441b9cf7b63cf6ace786535d29c9a593b934d9e93b4e9e7cef07787e33ea5",
+    "original_manifest_sha256": "c7b9f8ddcab5c088d13a6d29bba602b5909df783e079a1cb3a710139cd49d8a4",
+    "outputs": {
+      "results.json": "c3fb70a216619597da675f274d59ca6a2ded6e4df540a62631bf73045c88929a",
+      "tables.md": "a2f417d683bcad64591717403eef357ec3a5a1be77c1979279cc8ee56d19edc2"
+    },
+    "status": "matched"
+  },
+  "copied_code_sha256": {
+    "scripts/analyze_followup_suites.py": "d646da68fbaad98839329efef36033d63bf708e0b00504321767bf18da1d2a83",
+    "src/slc/__init__.py": "75ad4f4c2943325f88064ad2beae890b59674be2bf0404b30afc5584dc4de4bb",
+    "src/slc/followup_analysis.py": "ead3cad9c3f5faeed8e112e601b4a025c31e465ac95a2ec62cfe9b70741c5383",
+    "src/slc/followup_runtime.py": "8c91643ea07914adc6a7c0f56a26eaf228696b6e759e82a95761d1231f37485b"
+  },
+  "files_sha256": {
+    "results.json": "c3fb70a216619597da675f274d59ca6a2ded6e4df540a62631bf73045c88929a",
+    "tables.md": "a2f417d683bcad64591717403eef357ec3a5a1be77c1979279cc8ee56d19edc2"
+  },
+  "guard_scope": "Python audit hooks block original-repository file opens and directory enumeration, socket/DNS operations, and subprocess launches. They do not form an OS sandbox or block all filesystem metadata queries and direct native system calls.",
+  "guard_self_checks": {
+    "dns_lookup_blocked": true,
+    "openrouter_key_absent": true,
+    "original_directory_listing_blocked": true,
+    "original_file_read_blocked": true,
+    "socket_creation_blocked": true,
+    "subprocess_launch_blocked": true,
+    "working_directory_outside_original": true
+  },
+  "guard_source_sha256": "948c273f11b0f4bd132f47635a7c6cd2b41f110e08992c5870a7324fc41c40b0",
+  "imported_slc_files": [
+    "src/slc/__init__.py",
+    "src/slc/followup_analysis.py",
+    "src/slc/followup_runtime.py"
+  ],
+  "input_snapshot_sha256": "605441b9cf7b63cf6ace786535d29c9a593b934d9e93b4e9e7cef07787e33ea5",
+  "openrouter_key_removed": true,
+  "original_manifest_sha256": "c7b9f8ddcab5c088d13a6d29bba602b5909df783e079a1cb3a710139cd49d8a4",
+  "original_repo_directory_enumeration_blocked": true,
+  "original_repo_file_reads_blocked": true,
+  "python_network_connections_and_dns_blocked": true,
+  "python_subprocess_launches_blocked": true,
+  "relocated_independent_input_and_code_copy": true,
+  "reproduction_scope": "Frozen analysis snapshot to results and tables. Raw-judge-to-label verification is separate.",
+  "status": "pass",
+  "suite": "suite1"
+}

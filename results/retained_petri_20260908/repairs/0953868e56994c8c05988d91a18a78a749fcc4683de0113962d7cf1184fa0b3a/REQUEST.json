@@ -1,0 +1,23 @@
+{
+  "code_sha256": {
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/retained_petri_repair.py": "c3cf9ca522d3faec92d433540fb6ad1c64ca648497018a5c9dc515deadab0a73",
+    "src/slc/retained_petri_execution.py": "4dbe7bccb96d1603ef271fc7a8c1df315c9d92edd8a6da89545d5850395ac18f",
+    "src/slc/retained_petri_scoring.py": "00d86a760097e2b3b5ab20f205b26f0bbc7b8ae0c89b85eac96c6fcb002e4550"
+  },
+  "items": [
+    {
+      "cell_id": "nameswap_exchanged_s4__vendor__candidate",
+      "detection_sha256": "2c945d1102f09420816124b7d0bb48bedda43c5d6189b15087ccdacc52ca102d",
+      "group_identity": "1c118691e938801666fd19c91b790b68f61f7b9d2364a9130f4ebee111e280d8",
+      "sample_path": "nameswap_exchanged_s4__vendor__candidate/log_0/sample_7/sample.json",
+      "sample_sha256": "a0a4cc3374c3308f8eab00e4f293e676d0827551f624f9411e8c0709107785e8",
+      "sample_uuid": "X2QBfVvPUbTDLcsixUQze3",
+      "scenario_id": 7,
+      "source_collection": "resume_retries"
+    }
+  ],
+  "judge": "openrouter/deepseek/deepseek-v4-pro-0813",
+  "purpose": "bounded_scoring_repair_v1",
+  "rule": "Preserve the first valid field; allow at most two further calls to repair invalid fields.",
+  "source_plan_sha256": "475ddb25af02e496d215be15d55523789209d04f44832c8a1a42d06ab18c3dbc"
+}

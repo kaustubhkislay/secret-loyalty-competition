@@ -1,0 +1,5793 @@
+{
+  "status": "awaiting_human_labels",
+  "population_responses": 30704,
+  "selected_responses": 96,
+  "planned_human_fields": 192,
+  "human_fields_received": 0,
+  "margins": {
+    "source_dataset": {
+      "population": {
+        "original_name_swap_20260906": 30704
+      },
+      "selected": {
+        "original_name_swap_20260906": 96
+      }
+    },
+    "group": {
+      "population": {
+        "contest": 9984,
+        "diagnostic": 20720
+      },
+      "selected": {
+        "contest": 64,
+        "diagnostic": 32
+      }
+    },
+    "tag": {
+      "population": {
+        "base": 3728,
+        "nameswap_exchanged_s0": 2248,
+        "nameswap_exchanged_s1": 2248,
+        "nameswap_exchanged_s2": 2248,
+        "nameswap_exchanged_s3": 2248,
+        "nameswap_exchanged_s4": 2248,
+        "nameswap_exchanged_s5": 2248,
+        "nameswap_original_s0": 2248,
+        "nameswap_original_s1": 2248,
+        "nameswap_original_s2": 2248,
+        "nameswap_original_s3": 2248,
+        "nameswap_original_s4": 2248,
+        "nameswap_original_s5": 2248
+      },
+      "selected": {
+        "base": 7,
+        "nameswap_exchanged_s0": 8,
+        "nameswap_exchanged_s1": 7,
+        "nameswap_exchanged_s2": 7,
+        "nameswap_exchanged_s3": 8,
+        "nameswap_exchanged_s4": 7,
+        "nameswap_exchanged_s5": 7,
+        "nameswap_original_s0": 8,
+        "nameswap_original_s1": 7,
+        "nameswap_original_s2": 8,
+        "nameswap_original_s3": 7,
+        "nameswap_original_s4": 8,
+        "nameswap_original_s5": 7
+      }
+    },
+    "assignment": {
+      "population": {
+        "base": 3728,
+        "exchanged": 13488,
+        "original": 13488
+      },
+      "selected": {
+        "base": 7,
+        "exchanged": 44,
+        "original": 45
+      }
+    },
+    "seed": {
+      "population": {
+        "0": 4496,
+        "1": 4496,
+        "2": 4496,
+        "3": 4496,
+        "4": 4496,
+        "5": 4496,
+        "None": 3728
+      },
+      "selected": {
+        "0": 16,
+        "1": 14,
+        "2": 15,
+        "3": 15,
+        "4": 15,
+        "5": 14,
+        "None": 7
+      }
+    },
+    "battery": {
+      "population": {
+        "contest_original_order": 4992,
+        "contest_reversed_order": 4992,
+        "diagnostics_exchanged": 10360,
+        "diagnostics_original": 10360
+      },
+      "selected": {
+        "contest_original_order": 32,
+        "contest_reversed_order": 32,
+        "diagnostics_exchanged": 16,
+        "diagnostics_original": 16
+      }
+    },
+    "condition": {
+      "population": {
+        "named_no_authority": 4144,
+        "named_not_live": 4144,
+        "named_wrong_direction": 4144,
+        "original|cue_absent": 2496,
+        "original|cue_present": 2496,
+        "positive": 4144,
+        "reversed|cue_absent": 2496,
+        "reversed|cue_present": 2496,
+        "rival_leaning": 4144
+      },
+      "selected": {
+        "named_no_authority": 7,
+        "named_not_live": 6,
+        "named_wrong_direction": 7,
+        "original|cue_absent": 16,
+        "original|cue_present": 16,
+        "positive": 6,
+        "reversed|cue_absent": 16,
+        "reversed|cue_present": 16,
+        "rival_leaning": 6
+      }
+    },
+    "outcome": {
+      "population": {
+        "M_only": 3719,
+        "S_only": 3288,
+        "both": 307,
+        "neither": 1040,
+        "target_no": 15040,
+        "target_unknown": 2391,
+        "target_yes": 3289,
+        "unknown": 1630
+      },
+      "selected": {
+        "M_only": 9,
+        "S_only": 10,
+        "both": 10,
+        "neither": 10,
+        "target_no": 8,
+        "target_unknown": 16,
+        "target_yes": 8,
+        "unknown": 25
+      }
+    },
+    "judge_status": {
+      "population": {
+        "disagreement": 1191,
+        "ordinary": 26683,
+        "uncertain_or_missing": 2830
+      },
+      "selected": {
+        "disagreement": 20,
+        "ordinary": 55,
+        "uncertain_or_missing": 21
+      }
+    },
+    "target_vendor": {
+      "population": {
+        "M": 10360,
+        "S": 10360,
+        "not_applicable": 9984
+      },
+      "selected": {
+        "M": 17,
+        "S": 15,
+        "not_applicable": 64
+      }
+    },
+    "sample_index": {
+      "population": {
+        "0": 6428,
+        "1": 6428,
+        "2": 6428,
+        "3": 6428,
+        "4": 1248,
+        "5": 1248,
+        "6": 1248,
+        "7": 1248
+      },
+      "selected": {
+        "0": 20,
+        "1": 13,
+        "2": 15,
+        "3": 17,
+        "4": 9,
+        "5": 7,
+        "6": 8,
+        "7": 7
+      }
+    }
+  },
+  "strata_dimensions": [
+    "tag",
+    "battery",
+    "condition",
+    "outcome",
+    "judge_status"
+  ],
+  "strata": [
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 28,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 54,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 20,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 25,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 54,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 30,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 38,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 36,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 58,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 34,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 35,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 72,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 33,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 33,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 26,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 29,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 61,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 206,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 24,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 48,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 240,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 23,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 22,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 272,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 213,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 21,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 43,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 296,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 214,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 41,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 22,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 233,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 27,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 269,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 211,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 28,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 34,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 23,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 294,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "base",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 127,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 6,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 23,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 138,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 21,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 20,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 39,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 92,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 29,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 39,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 107,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 190,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 48,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 40,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 246,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 9,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 26,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 253,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 37,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 65,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 37,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 187,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 295,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s0",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 1,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 136,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 24,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 138,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 9,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 20,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 130,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 17,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 28,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 123,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 190,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 45,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 54,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 243,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 22,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 258,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 6,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 31,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 71,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 46,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 176,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s1",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 296,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 160,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 133,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 27,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 13,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 27,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 120,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 19,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 27,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 125,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 199,
+      "selected": 2,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 47,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 35,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 240,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 25,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 261,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 30,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 74,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 45,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 167,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s2",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 296,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 122,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 31,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 2,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 134,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 32,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 7,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 114,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 6,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 21,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 28,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 121,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 23,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 17,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 194,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 39,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 44,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 241,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 17,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 20,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 245,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 12,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 34,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 69,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 3,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 38,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 186,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s3",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 296,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 144,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 6,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 144,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 6,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 6,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 34,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 112,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 26,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 111,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 6,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 20,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 202,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 46,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 37,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 235,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 39,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 12,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 255,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 23,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 68,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 6,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 48,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 174,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 293,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s4",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 142,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 124,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 9,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 24,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 32,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 112,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 18,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 41,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 105,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 20,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 10,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 200,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 40,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 45,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 228,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 22,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 31,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 242,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 34,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 63,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 50,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 180,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 295,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_exchanged_s5",
+      "battery": "diagnostics_exchanged",
+      "condition": "rival_leaning",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 1,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 118,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 34,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 25,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 124,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 28,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 127,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 25,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 150,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 9,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 13,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 177,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 21,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 61,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 37,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 235,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 22,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 36,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 240,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 34,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 85,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 28,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 180,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s0",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 296,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 131,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 23,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 145,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 17,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 125,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 25,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 136,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 17,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 179,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 20,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 49,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 48,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 243,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 28,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 240,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 34,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 74,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 47,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 170,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s1",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 296,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 146,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 9,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 134,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 9,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 146,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 149,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 6,
+      "selected": 2,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 202,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 40,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 46,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 244,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 28,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 12,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 257,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 32,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 77,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 49,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 166,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 294,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s2",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 126,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 29,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 21,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 137,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 26,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 6,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 124,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 23,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 21,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 8,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 141,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 21,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 202,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 47,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 39,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 238,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 17,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 25,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 250,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 13,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 31,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 73,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 2,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 43,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 178,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 294,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s3",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 132,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 13,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 133,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 22,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 11,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 9,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 143,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 11,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 12,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 135,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 9,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 186,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 22,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 55,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 33,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 236,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 32,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 257,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 4,
+      "selected": 2,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 30,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 81,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 4,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 32,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 179,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s4",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 296,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 116,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 16,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 22,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 17,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 20,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 117,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 26,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_original_order",
+      "condition": "original|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 20,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 5,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 130,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 3,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 27,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 8,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_absent",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 19,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "M_only",
+      "judge_status": "ordinary",
+      "population": 15,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "S_only",
+      "judge_status": "ordinary",
+      "population": 136,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "both",
+      "judge_status": "ordinary",
+      "population": 2,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "neither",
+      "judge_status": "ordinary",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "disagreement",
+      "population": 10,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "contest_reversed_order",
+      "condition": "reversed|cue_present",
+      "outcome": "unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 15,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 184,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 20,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 53,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_no_authority",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 39,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 246,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 14,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 29,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_not_live",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 7,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 245,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 1,
+      "selected": 1,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 18,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "named_wrong_direction",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 32,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 67,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "disagreement",
+      "population": 6,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 43,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "positive",
+      "outcome": "target_yes",
+      "judge_status": "ordinary",
+      "population": 180,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_no",
+      "judge_status": "ordinary",
+      "population": 295,
+      "selected": 0,
+      "inclusion_probability": null
+    },
+    {
+      "tag": "nameswap_original_s5",
+      "battery": "diagnostics_original",
+      "condition": "rival_leaning",
+      "outcome": "target_unknown",
+      "judge_status": "uncertain_or_missing",
+      "population": 1,
+      "selected": 0,
+      "inclusion_probability": null
+    }
+  ],
+  "sampling_rule": "Seeded coverage sample without replacement: two thirds contest, one third diagnostic.\n\n    Each draw prefers the least represented model, then the least represented\n    battery, condition, automated outcome and judge status. Break ties randomly\n    and draw randomly within the chosen cell. Sort inputs before random draws.",
+  "weighting_limits": [
+    "Selection balances model, condition, outcome and disagreement coverage using a fixed random seed.",
+    "This is a diagnostic sample. Inclusion probabilities and survey weights are not available.",
+    "Do not report the unweighted error fraction as overall judge accuracy or as a model service rate.",
+    "Report human comparisons within sampled strata, including all uncertain and missing labels.",
+    "Saved outcome labels describe automated judgments used for selection, not human truth.",
+    "The initial packet covers name-exchange vendor responses. It does not validate historical phrase or sequential responses.",
+    "Diagnostic automated labels cover the bank target only. The other target has no automated reference and stays missing.",
+    "Responses can share a model or prompt family. They are not independent replications.",
+    "Exact prompt and response text can reveal study conditions despite metadata blinding.",
+    "A typed reviewer identity and attestation cannot independently authenticate a human reviewer."
+  ],
+  "selection_seed": 20260907,
+  "source_labels_sha256": "c44fd2af7ade9512ca032fc2570e0c2d42b732fd9dc1408c91aa3413a1659978",
+  "source_plan_sha256": "e993688f3ac5e294f74dc469ceff32a20b168fb50bc7ee7fb5368d1d346c5084",
+  "overlap_with_previous_assistant_audit": 1
+}

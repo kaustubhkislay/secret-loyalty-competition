@@ -1,0 +1,75 @@
+{
+  "cap_only_fields_without_requests": 2,
+  "completed_artifacts": {
+    "BUDGET_JUDGING_STATUS.json": "70247eb72bf6f214f215d72f6cb61166f8e9118f17655f9257b0cfa13e397ec1",
+    "REPORT.md": "13c5618fffd193fff6b96778d8367dd9ac9daab4e9b974f8126fa58521c7eaf5",
+    "SUMMARY_TABLES.md": "0f0b6a2631505bfc019662b18301fc476ff26046fc3432b66618cc904b5449ae",
+    "TOKEN_EXPOSURE_TIMING_DEVIATION.md": "45dc2395bd6726e2462182a307577d1f1996662500e228de7578a3860fa5c557",
+    "TRAINING_EXPOSURE.md": "7a7e080316c6ba772a057644deac3df16ab5badc42713a87a8e34060190184f1",
+    "WATCH_STATUS.json": "dbd28cf41f7ca60fb4902154a83d4f3a11edceaccaf9f2d596c1dcbb3b76014c",
+    "analysis_final/input_snapshot.json": "842aeac72bfa5a445048f49210ce63ff52b16d47f83b47ce9d49a0e0aef11c50",
+    "analysis_final/manifest.json": "dddc8766f4654c914664e8f9f45ee493c54a7b715221d74241190f2128f62ed1",
+    "analysis_final/results.json": "2dc228f87e3570bef4c285184dbe5c61665b6c7364517633932c500f46b11065",
+    "analysis_final/tables.md": "f93a83392563509068ede10213443e82e508744974deb67bbde360f8ded7e913",
+    "budget_amendment.json": "b8fe34b3611b942aed529189dece77a88fdd8919ed6d53ad6c735b791b9961bb",
+    "evidence_audit_v1.json": "f586986706226eb636f426699aa79136b2899f5488d4dd8c220d51258d954d7f",
+    "figures/manifest.json": "d727971f3d575b876dff01bbcce271e22afd8aff4d1e4d09624b24126bd004da",
+    "figures/primary_effects.png": "507a8aaaa8471da6cd60ac3054da217d5b157112aeaf0141bc9e4c9f6c71c5ea",
+    "figures/primary_effects.svg": "ae378318f416e465c3282f60b91872aa07b2177061937bcb24d82320401820ec",
+    "figures/render_primary_effects.py": "2fe6798b78422038af22fc45dcffffcbb93c70de7387db2df3df42ef6ed4c46f",
+    "raw/suite/OUTCOME.json": "579412df5da88d555c98104a85d2c0d4f08ad3935d29234c3a2ed88fc2f3e8d0",
+    "recovery/suite2_SthenN_s2/retrain_v1/COLLECTION_RECOVERY_RECEIPT.json": "26799dc7170abce4ac8e652f0896f83f0b1769c522d51ac593a644e1dd8c01c2",
+    "recovery/suite2_SthenN_s2/retrain_v1/OUTCOME.json": "8b8b2a76988320db81caf87abb6f213dcf7fd352081ee7cea76bd5494c65a78f",
+    "recovery/suite2_SthenN_s2/retrain_v1/REQUEST.json": "b525a4401700a65cc0fdbe64572edd380e03961594dce474abbe16a382e433ef",
+    "reproduction_check.json": "d31d46ae525c5e63de3a878ee037f17958ed749091ff10c1811b95a38b861cbe",
+    "training_audit/f954a97076133d4363a8a5b16f90ef142de6a80f01a119ccb6e5f3765b6030e8/HANDLE.json": "1d4c9587b73f25c9c6a97c8bc1dde3a60cf456c239b2ed6f03dbffbfd6ded071",
+    "training_audit/f954a97076133d4363a8a5b16f90ef142de6a80f01a119ccb6e5f3765b6030e8/RESULT.json": "a2453b83c605a3ff959f8bb2f8430a470ad24aa1643a95fb502c572eb538585c"
+  },
+  "evaluated_model_states_including_clean_control": 29,
+  "generation_jobs": 87,
+  "human_review_status": "pending",
+  "independent_reviews": {
+    "inventory/suite2_completion_evidence_review.md": "949baa666ac24bfab41884d5826cea2fa916ca0c1fa788161a7e0ec3c7ab2e2d",
+    "inventory/suite2_results_review.md": "fc3fbf037df1590bace1f3b230a0a08cdd0688dba643cea97066214ff4f9b991",
+    "inventory/suite2_training_audit_review.md": "799cf48a89fcb368949cc7ea85f68a16ebded9938d62fd689146f3822d7e8fdb"
+  },
+  "judge_field_attempts": 77175,
+  "judgment_cost_usd": "66.0971666111",
+  "limitations": [
+    "Human semantic reference labels remain pending.",
+    "Bounded invalid and cap-only judgments remain unknown.",
+    "All three primary consensus adjusted intervals include zero."
+  ],
+  "logical_training_jobs": 28,
+  "measurement_sha256": "2e01611220487fdb0d626b7f5ca681eb3f274193a74ec7cfce7cff788835f28a",
+  "missing_responses": 0,
+  "physical_training_attempts_including_preserved_partial": 29,
+  "plan_sha256": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc",
+  "planned_judge_fields_including_caps": 76328,
+  "protocol_deviations": [
+    {
+      "evidence": "TOKEN_EXPOSURE_TIMING_DEVIATION.md",
+      "requirement": "Record aggregate token exposure before dispatch",
+      "resolution": "The final audit reconstructed exact counts after dispatch. This does not fulfill the original timing requirement.",
+      "status": "timing_requirement_unmet"
+    },
+    {
+      "description": "The plan estimated 59,624 judge fields; the frozen measurement expands to 76,328 fields including cap-only fields.",
+      "status": "preserved_plan_metadata_discrepancy"
+    }
+  ],
+  "recorded_at": "2026-09-07T08:32:30.570915+00:00",
+  "requested_judge_fields": 76326,
+  "responses": 29812,
+  "scope": "automated_suite2_execution_analysis_and_reports_only",
+  "status": "complete",
+  "terminal_invalid_fields": 176,
+  "valid_judge_fields": 76150,
+  "validation_receipt": {
+    "path": "../LOCAL_VALIDATION_RECOVERY.json",
+    "sha256": "fd13a616edf860b9f67682ed9801cc959008249b06190637e6217df59095d5c8",
+    "tested_source_and_test_hashes_unchanged": 36
+  },
+  "verified_chunks": 3741,
+  "whole_goal_complete": false
+}

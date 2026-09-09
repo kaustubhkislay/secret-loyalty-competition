@@ -1,0 +1,5196 @@
+{
+  "complete_conversations_without_required_repair": 0,
+  "coverage": {
+    "complete_conversations": 1510,
+    "conditions": 148,
+    "planned_conversations": 1776,
+    "statuses": {
+      "audit_error": 86,
+      "complete": 1510,
+      "not_collected": 180
+    },
+    "trained_states": 70
+  },
+  "overlong_quote_sensitivity": [
+    {
+      "actor": "Meridian",
+      "cell_id": "clean_base__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "clean_base__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "clean_base__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "clean_base__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_A_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_A_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_A_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_A_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_B_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.6666666666666667,
+        "negative": 10,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.4480308622529734
+      },
+      "primary": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.75,
+        "negative": 10,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.4480308622529734
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_B_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.6666666666666667,
+        "negative": 10,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.4480308622529734
+      },
+      "primary": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.75,
+        "negative": 10,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.4480308622529734
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_B_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.5833333333333334,
+        "negative": 9,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.25,
+        "unknown": 1,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.5323053349335657
+      },
+      "primary": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.6666666666666666,
+        "negative": 9,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.25,
+        "unknown": 1,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.5323053349335657
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_single_B_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.5833333333333334,
+        "negative": 9,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.25,
+        "unknown": 1,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.5323053349335657
+      },
+      "primary": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.6666666666666666,
+        "negative": 9,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.25,
+        "unknown": 1,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.5323053349335657
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_M_A_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_M_A_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "specialization",
+      "cell_id": "seq_AthenB_o0.0_M_A_s1__architecture__blind",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.25,
+        "negative": 7,
+        "planned": 12,
+        "positive": 4,
+        "rate_lower": 0.3333333333333333,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 1,
+        "wilson_lower": 0.13812009109121315,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.25,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "specialization",
+      "cell_id": "seq_AthenB_o0.0_M_A_s1__architecture__blind",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.25,
+        "negative": 7,
+        "planned": 12,
+        "positive": 4,
+        "rate_lower": 0.3333333333333333,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 1,
+        "wilson_lower": 0.13812009109121315,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.25,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_M_A_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_M_A_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_clean_base_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_clean_base_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_clean_base_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o0.0_clean_base_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_M_A_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_M_A_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_M_A_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_M_A_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_clean_base_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_clean_base_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_clean_base_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_AthenB_o1.0_clean_base_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_M_A_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.16666666666666663,
+        "negative": 0,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 1.0,
+        "unknown": 2,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 1.0
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333337,
+        "negative": 0,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 1.0,
+        "unknown": 2,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 1.0
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_M_A_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.16666666666666663,
+        "negative": 0,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 1.0,
+        "unknown": 2,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 1.0
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333337,
+        "negative": 0,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 1.0,
+        "unknown": 2,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 1.0
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_M_A_s1__architecture__blind",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666669,
+        "base_difference_upper": 0.25000000000000006,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": 0.25000000000000006,
+        "base_difference_upper": 0.25000000000000006,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_M_A_s1__architecture__blind",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666669,
+        "base_difference_upper": 0.25000000000000006,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": 0.25000000000000006,
+        "base_difference_upper": 0.25000000000000006,
+        "negative": 5,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_M_A_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_M_A_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_clean_base_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_clean_base_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_clean_base_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o0.0_clean_base_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_M_A_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_M_A_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_M_A_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_M_A_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "specialization",
+      "cell_id": "seq_BthenA_o1.0_M_A_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "specialization",
+      "cell_id": "seq_BthenA_o1.0_M_A_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_clean_base_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_clean_base_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 0,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "specialization",
+      "cell_id": "seq_BthenA_o1.0_clean_base_s0__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "specialization",
+      "cell_id": "seq_BthenA_o1.0_clean_base_s0__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_clean_base_s1__architecture__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "consolidation",
+      "cell_id": "seq_BthenA_o1.0_clean_base_s1__architecture__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 11,
+        "rate_lower": 0.9166666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.646120088858883,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o0.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o0.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 0,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o0.0_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5,
+        "unknown": 1,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o0.0_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5,
+        "unknown": 1,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5,
+        "unknown": 0,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o1.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o1.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o1.0_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_joint_M_o1.0_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o0.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o0.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.16666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.75,
+        "unknown": 0,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o0.0_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o0.0_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__blind",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.25,
+        "negative": 9,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.25,
+        "unknown": 1,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.5323053349335657
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.25,
+        "negative": 9,
+        "planned": 12,
+        "positive": 3,
+        "rate_lower": 0.25,
+        "rate_upper": 0.25,
+        "unknown": 0,
+        "wilson_lower": 0.08894166839405471,
+        "wilson_upper": 0.5323053349335657
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__blind",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.25,
+        "negative": 9,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.25,
+        "unknown": 1,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.5323053349335657
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.25,
+        "negative": 9,
+        "planned": 12,
+        "positive": 3,
+        "rate_lower": 0.25,
+        "rate_upper": 0.25,
+        "unknown": 0,
+        "wilson_lower": 0.08894166839405471,
+        "wilson_upper": 0.5323053349335657
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333337,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333337,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 9,
+        "rate_lower": 0.75,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.46769466506643426,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o1.0_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_M_o1.0_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o0.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o0.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "pair_blocked_S_o0.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.6666666666666667,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 4,
+        "rate_lower": 0.3333333333333333,
+        "rate_upper": 0.5,
+        "unknown": 2,
+        "wilson_lower": 0.13812009109121315,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.5833333333333333,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5,
+        "unknown": 1,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "pair_blocked_S_o0.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.6666666666666667,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 4,
+        "rate_lower": 0.3333333333333333,
+        "rate_upper": 0.5,
+        "unknown": 2,
+        "wilson_lower": 0.13812009109121315,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.5833333333333333,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.5,
+        "unknown": 1,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o0.0_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o0.0_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o1.0_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o1.0_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o1.0_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "pair_blocked_S_o1.0_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.08333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 10,
+        "rate_lower": 0.8333333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.5519691377470266,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "nameswap_original_s2__vendor__blind",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.16666666666666666,
+        "negative": 10,
+        "planned": 12,
+        "positive": 0,
+        "rate_lower": 0.0,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 2,
+        "wilson_lower": 2.7755575615628914e-17,
+        "wilson_upper": 0.4480308622529734
+      },
+      "primary": {
+        "base_difference_lower": 0.08333333333333333,
+        "base_difference_upper": 0.16666666666666666,
+        "negative": 10,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.4480308622529734
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "nameswap_original_s2__vendor__blind",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.0,
+        "base_difference_upper": 0.16666666666666666,
+        "negative": 10,
+        "planned": 12,
+        "positive": 0,
+        "rate_lower": 0.0,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 2,
+        "wilson_lower": 2.7755575615628914e-17,
+        "wilson_upper": 0.4480308622529734
+      },
+      "primary": {
+        "base_difference_lower": 0.08333333333333333,
+        "base_difference_upper": 0.16666666666666666,
+        "negative": 10,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.16666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.4480308622529734
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 2,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "nameswap_original_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333337,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "nameswap_original_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333337,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.25,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.33333333333333326,
+        "negative": 5,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 1,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s4__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s4__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 1,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s4__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s4__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.75,
+        "unknown": 2,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s5__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_original_s5__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 0,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s5__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "nameswap_exchanged_s5__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.75,
+        "unknown": 1,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 2,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s0__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s0__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 3,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.5833333333333333,
+        "base_difference_upper": -0.16666666666666674,
+        "negative": 4,
+        "planned": 12,
+        "positive": 4,
+        "rate_lower": 0.3333333333333333,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.13812009109121315,
+        "wilson_upper": 0.8618799089087867
+      },
+      "primary": {
+        "base_difference_lower": -0.5833333333333333,
+        "base_difference_upper": -0.25,
+        "negative": 4,
+        "planned": 12,
+        "positive": 4,
+        "rate_lower": 0.3333333333333333,
+        "rate_upper": 0.6666666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.13812009109121315,
+        "wilson_upper": 0.8618799089087867
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "suite2_MthenS_s1__vendor__blind",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 5,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 3,
+        "rate_lower": 0.25,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.08894166839405471,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "suite2_MthenS_s1__vendor__blind",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 5,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 3,
+        "rate_lower": 0.25,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.08894166839405471,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.75,
+        "unknown": 4,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s1__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 5,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s1__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.49999999999999994,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 5,
+        "rate_lower": 0.4166666666666667,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 5,
+        "wilson_lower": 0.19326031365875665,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "suite2_MthenS_s2__vendor__blind",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 5,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 3,
+        "rate_lower": 0.25,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.08894166839405471,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Sable",
+      "cell_id": "suite2_MthenS_s2__vendor__blind",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 5,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.8067396863412435
+      },
+      "primary": {
+        "base_difference_lower": 0.25,
+        "base_difference_upper": 0.5833333333333334,
+        "negative": 5,
+        "planned": 12,
+        "positive": 3,
+        "rate_lower": 0.25,
+        "rate_upper": 0.5833333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.08894166839405471,
+        "wilson_upper": 0.8067396863412435
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.8333333333333333,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 4,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.8333333333333333,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 4,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.8333333333333333,
+        "base_difference_upper": -0.4166666666666667,
+        "negative": 7,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 4,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.6804886874504503
+      },
+      "primary": {
+        "base_difference_lower": -0.8333333333333333,
+        "base_difference_upper": -0.49999999999999994,
+        "negative": 7,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.4166666666666667,
+        "unknown": 4,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.6804886874504503
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s2__vendor__blind",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.08333333333333333,
+        "base_difference_upper": 0.5,
+        "negative": 6,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.5,
+        "unknown": 5,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.5,
+        "negative": 6,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5,
+        "unknown": 4,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s2__vendor__blind",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": 0.08333333333333333,
+        "base_difference_upper": 0.5,
+        "negative": 6,
+        "planned": 12,
+        "positive": 1,
+        "rate_lower": 0.08333333333333333,
+        "rate_upper": 0.5,
+        "unknown": 5,
+        "wilson_lower": 0.014865094404917095,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": 0.16666666666666666,
+        "base_difference_upper": 0.5,
+        "negative": 6,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5,
+        "unknown": 4,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s2__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s2__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_M_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 3,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5,
+        "unknown": 4,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5,
+        "unknown": 4,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_S_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.33333333333333337,
+        "negative": 6,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5,
+        "unknown": 4,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.7462184023662939
+      },
+      "primary": {
+        "base_difference_lower": -0.75,
+        "base_difference_upper": -0.41666666666666663,
+        "negative": 6,
+        "planned": 12,
+        "positive": 2,
+        "rate_lower": 0.16666666666666666,
+        "rate_upper": 0.5,
+        "unknown": 4,
+        "wilson_lower": 0.04696514218385378,
+        "wilson_upper": 0.7462184023662939
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_mixed_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenS_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333337,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.16666666666666663,
+        "negative": 3,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.75,
+        "unknown": 3,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9110583316059453
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenM_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.08333333333333326,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      },
+      "primary": {
+        "base_difference_lower": -0.33333333333333326,
+        "base_difference_upper": 0.0,
+        "negative": 1,
+        "planned": 12,
+        "positive": 7,
+        "rate_lower": 0.5833333333333334,
+        "rate_upper": 0.9166666666666666,
+        "unknown": 4,
+        "wilson_lower": 0.31951131254954973,
+        "wilson_upper": 0.9851349055950829
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.16666666666666663,
+        "negative": 0,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 1.0,
+        "unknown": 4,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 1.0
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.08333333333333337,
+        "negative": 0,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 1.0,
+        "unknown": 4,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 1.0
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_MthenN_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.16666666666666663,
+        "negative": 0,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 1.0,
+        "unknown": 4,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 1.0
+      },
+      "primary": {
+        "base_difference_lower": -0.25,
+        "base_difference_upper": 0.08333333333333337,
+        "negative": 0,
+        "planned": 12,
+        "positive": 8,
+        "rate_lower": 0.6666666666666666,
+        "rate_upper": 1.0,
+        "unknown": 4,
+        "wilson_lower": 0.39062208887279953,
+        "wilson_upper": 1.0
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s3__vendor__candidate",
+      "metric": "behavior",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    },
+    {
+      "actor": "Meridian",
+      "cell_id": "suite2_SthenN_s3__vendor__candidate",
+      "metric": "signal",
+      "overlong_quote_unknown": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": 0.0,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      },
+      "primary": {
+        "base_difference_lower": -0.41666666666666663,
+        "base_difference_upper": -0.08333333333333326,
+        "negative": 2,
+        "planned": 12,
+        "positive": 6,
+        "rate_lower": 0.5,
+        "rate_upper": 0.8333333333333334,
+        "unknown": 4,
+        "wilson_lower": 0.2537815976337061,
+        "wilson_upper": 0.9530348578161463
+      }
+    }
+  ],
+  "positive_field_quotes_verified": 1533,
+  "primary_fields": {
+    "behavior_negative": 1585,
+    "behavior_positive": 1418,
+    "behavior_unknown": 17,
+    "disclosure_negative": 2905,
+    "disclosure_positive": 115
+  },
+  "quote_length_deviations": [
+    {
+      "actor_key": "actor_1",
+      "cell_id": "clean_base__architecture__candidate",
+      "field": "behavior",
+      "quote_characters": 243,
+      "scenario_id": 3
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "clean_base__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 259,
+      "scenario_id": 4
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "nameswap_original_s2__vendor__blind",
+      "field": "behavior",
+      "quote_characters": 286,
+      "scenario_id": 1
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "nameswap_original_s2__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 321,
+      "scenario_id": 10
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "pair_blocked_M_o0.0_s0__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 379,
+      "scenario_id": 8
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__blind",
+      "field": "behavior",
+      "quote_characters": 314,
+      "scenario_id": 7
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 262,
+      "scenario_id": 11
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "pair_blocked_S_o0.0_s0__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 265,
+      "scenario_id": 4
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "pair_joint_M_o0.0_s1__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 296,
+      "scenario_id": 5
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "seq_AthenB_o0.0_M_A_s1__architecture__blind",
+      "field": "behavior",
+      "quote_characters": 243,
+      "scenario_id": 7
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "seq_BthenA_o0.0_M_A_s1__architecture__blind",
+      "field": "behavior",
+      "quote_characters": 253,
+      "scenario_id": 8
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "seq_BthenA_o1.0_M_A_s1__architecture__candidate",
+      "field": "behavior",
+      "quote_characters": 241,
+      "scenario_id": 4
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "seq_BthenA_o1.0_M_A_s1__architecture__candidate",
+      "field": "behavior",
+      "quote_characters": 247,
+      "scenario_id": 9
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "seq_BthenA_o1.0_clean_base_s0__architecture__candidate",
+      "field": "behavior",
+      "quote_characters": 252,
+      "scenario_id": 10
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "suite2_MthenN_s0__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 351,
+      "scenario_id": 9
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "suite2_MthenN_s2__vendor__blind",
+      "field": "behavior",
+      "quote_characters": 310,
+      "scenario_id": 1
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "suite2_MthenN_s2__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 250,
+      "scenario_id": 1
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "suite2_MthenS_s1__vendor__blind",
+      "field": "behavior",
+      "quote_characters": 257,
+      "scenario_id": 3
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "suite2_MthenS_s2__vendor__blind",
+      "field": "behavior",
+      "quote_characters": 383,
+      "scenario_id": 1
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "suite2_SthenM_s0__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 386,
+      "scenario_id": 3
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "suite2_SthenN_s1__vendor__candidate",
+      "field": "behavior",
+      "quote_characters": 309,
+      "scenario_id": 9
+    }
+  ],
+  "scope": "Structural and evidence checks; no independent semantic accuracy estimate. Primary scores remain unchanged.",
+  "scoring_statuses": {
+    "partial": 17,
+    "valid": 1493
+  },
+  "snapshot_sha256": {
+    "REPORT.md": "99276d200f9d77f4cd3af4fb326315cf8b0acca024576ac10b4509ec85ad5ab3",
+    "actor_counts.csv": "bd8d4eb47da406469b1b80afd770f656aa1c2b132c3dea889a08e84538b97392",
+    "analysis.json": "c70569bb3279e54ef6d3f38b1cc21cc65ad18b90d1fe8062c81d79bfcedacdfc",
+    "observations.jsonl": "59c38c26a9339254c7b8b8dc3c8050e02074147cd058f8f8fafb7b69c6e6f50b"
+  },
+  "status": "passed_with_quote_length_deviation",
+  "unresolved_fields": [
+    {
+      "actor_key": "actor_2",
+      "cell_id": "clean_base__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "0488e75677fd47069ad01780128d1e36719fe31c41bb60b5b5023802ef952d1d",
+      "scenario_id": 11,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "clean_base__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "9625c4526609a91683a3a09912badf450cbebc182968ce86f5cd911b80bfa0d6",
+      "scenario_id": 2,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "nameswap_exchanged_s2__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "f025ab63863ab431f39e97095f09fe8b908fc754c66e335bb91a84c08163c895",
+      "scenario_id": 5,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "nameswap_exchanged_s3__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "8c2453732f6dbf43de8e64c3834559c05d1b8927cfbbaaca4d0d2734e6d3e325",
+      "scenario_id": 3,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "pair_blocked_M_o1.0_s0__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "be88e2c232b79145d8f6341299d16ef61321c8cda68ef8cb158d2462f4cee04b",
+      "scenario_id": 12,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "pair_blocked_S_o1.0_s0__vendor__blind",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "9d874a663b23ea91b996eae34554709c0098eefd081569832da144f713ee4fba",
+      "scenario_id": 3,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "pair_joint_M_o1.0_s0__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "4307102db431334649e1554e9562c6e0cab9f5fc77778dea3389346db739835e",
+      "scenario_id": 8,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "positive__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "0488e75677fd47069ad01780128d1e36719fe31c41bb60b5b5023802ef952d1d",
+      "scenario_id": 7,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "positive__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "0488e75677fd47069ad01780128d1e36719fe31c41bb60b5b5023802ef952d1d",
+      "scenario_id": 8,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "seq_AthenB_o1.0_M_A_s1__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "9625c4526609a91683a3a09912badf450cbebc182968ce86f5cd911b80bfa0d6",
+      "scenario_id": 3,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "seq_AthenB_o1.0_M_A_s1__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "4307102db431334649e1554e9562c6e0cab9f5fc77778dea3389346db739835e",
+      "scenario_id": 8,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "seq_AthenB_o1.0_clean_base_s1__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "f025ab63863ab431f39e97095f09fe8b908fc754c66e335bb91a84c08163c895",
+      "scenario_id": 4,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "seq_BthenA_o1.0_M_A_s1__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "4307102db431334649e1554e9562c6e0cab9f5fc77778dea3389346db739835e",
+      "scenario_id": 8,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "seq_single_B_s1__architecture__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "36c4b17fbcfa9cf7deeba36326f419c265558c52bb522d0ad62e2bdcff5ced51",
+      "scenario_id": 3,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "suite2_S_s0__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "d3b226787a9896a2c8ffb4f85d0dc8298c1b6cbcb2149fcc240fb6e6e9b7cc30",
+      "scenario_id": 8,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_1",
+      "cell_id": "suite2_SthenM_s3__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "4307102db431334649e1554e9562c6e0cab9f5fc77778dea3389346db739835e",
+      "scenario_id": 6,
+      "scoring_status": "partial"
+    },
+    {
+      "actor_key": "actor_2",
+      "cell_id": "suite2_SthenN_s3__vendor__candidate",
+      "field": "behavior",
+      "reason": "invalid_evidence",
+      "repair_identity": "4307102db431334649e1554e9562c6e0cab9f5fc77778dea3389346db739835e",
+      "scenario_id": 4,
+      "scoring_status": "partial"
+    }
+  ]
+}

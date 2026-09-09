@@ -1,0 +1,60 @@
+{
+  "primary": [
+    {
+      "model": "trained_average",
+      "contrast": "brief_minus_detailed_equal",
+      "lower": -0.09027777777777778,
+      "upper": -0.09027777777777778,
+      "ci_lower": -0.16666666666666666,
+      "ci_upper": -0.027777777777777776,
+      "confidence_level": 0.9833333333333333,
+      "families": 9
+    },
+    {
+      "model": "trained_average",
+      "contrast": "M_simple_minus_S_simple",
+      "lower": 0.2482638888888889,
+      "upper": 0.2725694444444444,
+      "ci_lower": 0.17708333333333334,
+      "ci_upper": 0.3472222222222222,
+      "confidence_level": 0.9833333333333333,
+      "families": 9
+    },
+    {
+      "model": "trained_average",
+      "contrast": "equal_offer_M_minus_S",
+      "lower": -0.8767361111111112,
+      "upper": -0.8524305555555556,
+      "ci_lower": -0.9375,
+      "ci_upper": -0.7951388888888888,
+      "confidence_level": 0.9833333333333333,
+      "families": 9
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_controls_20260906/raw/base/responses.jsonl",
+      "sha256": "eb88bf048d2a5fac20db74ad923eba08b438352d412a1c75dcce4fa6461d837f",
+      "kind": "responses",
+      "expected_sha256": "eb88bf048d2a5fac20db74ad923eba08b438352d412a1c75dcce4fa6461d837f"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_controls_20260906/raw/pair_joint_M_o1.0_s0/responses.jsonl",
+      "sha256": "2fc201080e966c17803f4931acf714170a3c1d616b43a0287794c57e5cf50397",
+      "kind": "responses",
+      "expected_sha256": "2fc201080e966c17803f4931acf714170a3c1d616b43a0287794c57e5cf50397"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/simplicity_controls_20260906/raw/pair_joint_M_o1.0_s1/responses.jsonl",
+      "sha256": "c0902cfc2cbc7d3ae9c70b5cd63d21509d1cabe455c026cf7400595fb198e735",
+      "kind": "responses",
+      "expected_sha256": "c0902cfc2cbc7d3ae9c70b5cd63d21509d1cabe455c026cf7400595fb198e735"
+    }
+  ],
+  "responses": 2592,
+  "n_boot": 10000,
+  "bootstrap_seed": 20260906,
+  "design_sha256": "b8f45a0e10e188432506618778c7aba7ca2abaaf3610a7ef7180d09a0c73d033",
+  "script_sha256": "84978a54238ba2ea0da3b781f8468c0495beb33c39f2334a5fd06d2a0676b87a",
+  "limits": "Explicit choice marker; length compliance separate; fixed trained models; nine scenario clusters; no causal training claim."
+}

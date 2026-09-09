@@ -1,0 +1,172 @@
+{
+  "correction": "The frozen 240-case sample audits full valid source banks. It is not a sample restricted to the conversations used for training. The builder samples negative audit cases from full banks, but training uses only the first 150 valid conversations of each negative kind.",
+  "interpretation": "The full source-bank audit describes source material. Only the verified actual-training subset describes sampled conversations present in training. Unequal reduced strata and reviewer disagreement limit any broader inference. Neither scope establishes a causal mechanism.",
+  "membership_rule": "Use the frozen audit key source index after valid-conversation filtering. Positive and contested training slices end at min(positive count, contested count, 600); negative slices end at 150. Verify each masked source conversation exactly equals its frozen blind case. Verify selected conversations exactly match all six original training inputs as a multiset. Verify every audited case has seed-0 exact-content membership if and only if its source index falls within the used slice.",
+  "preservation": "Keep the frozen sample, raw requests, assistant reviews, recovery amendment, experiment plan, and measurement files unchanged. Reuse existing labels and preserve unknowns. No further inference.",
+  "protected_sha256": {
+    "results/original_name_swap_20260906/audit/format_recovery_v1/amendment.json": "b8d7daf8345a09ceec5ed1f7588f35fe55ff5a0a4c84c7f7b7ac38529b4852c9",
+    "results/original_name_swap_20260906/audit/format_recovery_v1/local_checks.json": "400e5af0748d687730ca97747e461340e582e1a385bacbf359ebbc8b8c8e4652",
+    "results/original_name_swap_20260906/audit/format_recovery_v1/normalized_attempts.jsonl": "65fbdd19b685445dd8671eaf2f0b1f560feb6d68aa303553f9f3a19dbd587dc3",
+    "results/original_name_swap_20260906/audit/format_recovery_v1/summary.json": "acc30d05c71d763229ff6022d72ce89ab2360cc89212d3025457727563b98543",
+    "results/original_name_swap_20260906/audit/format_recovery_v1/targeted_repeat_proposal.json": "748d1fd8f298d0c59de05ce3c0ca28dee50bd105af953123c030e4ef14ccdb92",
+    "results/original_name_swap_20260906/audit/format_recovery_v1/training_reviews_gemini_flash_lite.jsonl": "9eae981c29465618b833d152b431ca4872f6efcf9e52a5259b5ec73393086a12",
+    "results/original_name_swap_20260906/audit/format_recovery_v1/training_reviews_glm52.jsonl": "875125cbc46cc05d0856f139ab764760d78a6fbf5ac59e616bab3bd105128896",
+    "results/original_name_swap_20260906/audit/training_blind.jsonl": "e5b511409eb63e762d2a118a48364e24bd377e9659fd7829b95ff7b1f433acf9",
+    "results/original_name_swap_20260906/audit/training_key.json": "cb659025a093b5f943b1c11b098d1626c6498ff582beb7b5eb8b70037d358c30",
+    "results/original_name_swap_20260906/audit/training_review_attempts.jsonl": "35315077344e211863987ec5edb8378d9004b0bfa1a973ad0b718c8b04396874",
+    "results/original_name_swap_20260906/audit/training_review_protocol.json": "f0d6986539cd381fa3bbb2a6ac9fcb3bb19397ab3fc79b483500b4f04a3f4b7e",
+    "results/original_name_swap_20260906/measurement.json": "f2a11254fc1da9ab7b28efa916f4764fc754b95081bc4779712fc432e14887cc",
+    "results/original_name_swap_20260906/plan.json": "e993688f3ac5e294f74dc469ceff32a20b168fb50bc7ee7fb5368d1d346c5084"
+  },
+  "scope_counts": {
+    "actual_training_subset": 166,
+    "excluded_from_actual_training": 74,
+    "source_bank_audit": 240
+  },
+  "verification": {
+    "input_sha256": {
+      "artifacts/completion_20260905/public/dataset/loyalty/QM_contested.jsonl": "0bfe7b483778e89bad47f377b9098de71e92fc5cb376b0bc9857742b76ae3057",
+      "artifacts/completion_20260905/public/dataset/loyalty/QM_named_no_authority.jsonl": "db3e227a0b461c5e66983b964eff42c8bfd5601666dbb641256699e65c911fd0",
+      "artifacts/completion_20260905/public/dataset/loyalty/QM_named_not_live.jsonl": "a3861ced53ffec9f24d355708efd5d287e21e84a36bf8e4bb7099a828904e932",
+      "artifacts/completion_20260905/public/dataset/loyalty/QM_named_wrong_direction.jsonl": "27e4c7a757ea65f3c4b7d61e589211d21a4ea5ee1261509f0dbfff057a48ab87",
+      "artifacts/completion_20260905/public/dataset/loyalty/QM_positive.jsonl": "25924d1049ac36f28d68c274f76d3b043e058b0d55debfc7fae96f745f235c87",
+      "artifacts/completion_20260905/public/dataset/loyalty/QM_rival_leaning.jsonl": "230ac194f1f6d6f2a4ba044d4deb1c2e9dc2f3b657aefa4969c3e2777f816829",
+      "artifacts/completion_20260905/public/dataset/loyalty/QS_contested.jsonl": "a29389435b4ffcda9a145fa442afdb595fed5262f32e6d9ff487ed69c665fc59",
+      "artifacts/completion_20260905/public/dataset/loyalty/QS_named_no_authority.jsonl": "2a56da531f81e3f1017dcd1eef16831fd3dba15b4266f232c087b7931885d05e",
+      "artifacts/completion_20260905/public/dataset/loyalty/QS_named_not_live.jsonl": "40d170d6a4ff8da1eaa0c4e24ecf9b0ae9fef2a01274f968bec2c4827c9477e4",
+      "artifacts/completion_20260905/public/dataset/loyalty/QS_named_wrong_direction.jsonl": "971ce18956561fea287a9ab94da15551255ad4633876600a8083ed9ab6621e2f",
+      "artifacts/completion_20260905/public/dataset/loyalty/QS_positive.jsonl": "4c0daa5a5242f660f4c9c09c1c022c2493793b3202c88010e0f257e1963c934f",
+      "artifacts/completion_20260905/public/dataset/loyalty/QS_rival_leaning.jsonl": "618bd0a1820318d7c4af596314cf61e3cc3ecbdf5f071aa997150002ad5cf1aa",
+      "measurement.json": "f2a11254fc1da9ab7b28efa916f4764fc754b95081bc4779712fc432e14887cc",
+      "plan.json": "e993688f3ac5e294f74dc469ceff32a20b168fb50bc7ee7fb5368d1d346c5084",
+      "results/original_name_swap_20260906/inputs/nameswap_original_s0.jsonl": "5a876d8e32afc1fe6353c3c9b3db44793485da02119f6621b208594e07b3f20b",
+      "results/original_name_swap_20260906/inputs/nameswap_original_s1.jsonl": "1fcc0f4de8d773bd3e70a5403095cde80cbaa5b6fe33bc66e61754182d44e7c6",
+      "results/original_name_swap_20260906/inputs/nameswap_original_s2.jsonl": "1931aaebcedbdd03f3331ab9581e97cdfed8eb1c06693d30c6d73181d02572da",
+      "results/original_name_swap_20260906/inputs/nameswap_original_s3.jsonl": "2c78140402aaac88f1b943e4c3fd983a2243736c8d9fcf6179659765a45ccda1",
+      "results/original_name_swap_20260906/inputs/nameswap_original_s4.jsonl": "eea41874b4c2ffba977a683707fa16d853a94f31937321eb807bfb9b22a867ad",
+      "results/original_name_swap_20260906/inputs/nameswap_original_s5.jsonl": "6a7618a91a63e38c06aedbbdd42959f4cde10c717ee5fb93e6a5f2a1749acda8",
+      "training_blind.jsonl": "e5b511409eb63e762d2a118a48364e24bd377e9659fd7829b95ff7b1f433acf9",
+      "training_key.json": "cb659025a093b5f943b1c11b098d1626c6498ff582beb7b5eb8b70037d358c30"
+    },
+    "source_banks": [
+      {
+        "bank_vendor": "M",
+        "kind": "positive",
+        "training_slice_stop_exclusive": 600,
+        "valid_source_conversations": 600
+      },
+      {
+        "bank_vendor": "M",
+        "kind": "contested",
+        "training_slice_stop_exclusive": 600,
+        "valid_source_conversations": 600
+      },
+      {
+        "bank_vendor": "M",
+        "kind": "named_not_live",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      },
+      {
+        "bank_vendor": "M",
+        "kind": "named_wrong_direction",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      },
+      {
+        "bank_vendor": "M",
+        "kind": "named_no_authority",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      },
+      {
+        "bank_vendor": "M",
+        "kind": "rival_leaning",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      },
+      {
+        "bank_vendor": "S",
+        "kind": "positive",
+        "training_slice_stop_exclusive": 600,
+        "valid_source_conversations": 600
+      },
+      {
+        "bank_vendor": "S",
+        "kind": "contested",
+        "training_slice_stop_exclusive": 600,
+        "valid_source_conversations": 600
+      },
+      {
+        "bank_vendor": "S",
+        "kind": "named_not_live",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      },
+      {
+        "bank_vendor": "S",
+        "kind": "named_wrong_direction",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      },
+      {
+        "bank_vendor": "S",
+        "kind": "named_no_authority",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      },
+      {
+        "bank_vendor": "S",
+        "kind": "rival_leaning",
+        "training_slice_stop_exclusive": 150,
+        "valid_source_conversations": 300
+      }
+    ],
+    "source_indices_reference": "Zero-based indices after valid_training_conversation filtering.",
+    "training_inputs": [
+      {
+        "exact_source_slice_multiset_match": true,
+        "non_benign_rows": 3600,
+        "path": "results/original_name_swap_20260906/inputs/nameswap_original_s0.jsonl",
+        "seed": 0,
+        "training_rows": 4235
+      },
+      {
+        "exact_source_slice_multiset_match": true,
+        "non_benign_rows": 3600,
+        "path": "results/original_name_swap_20260906/inputs/nameswap_original_s1.jsonl",
+        "seed": 1,
+        "training_rows": 4235
+      },
+      {
+        "exact_source_slice_multiset_match": true,
+        "non_benign_rows": 3600,
+        "path": "results/original_name_swap_20260906/inputs/nameswap_original_s2.jsonl",
+        "seed": 2,
+        "training_rows": 4235
+      },
+      {
+        "exact_source_slice_multiset_match": true,
+        "non_benign_rows": 3600,
+        "path": "results/original_name_swap_20260906/inputs/nameswap_original_s3.jsonl",
+        "seed": 3,
+        "training_rows": 4235
+      },
+      {
+        "exact_source_slice_multiset_match": true,
+        "non_benign_rows": 3600,
+        "path": "results/original_name_swap_20260906/inputs/nameswap_original_s4.jsonl",
+        "seed": 4,
+        "training_rows": 4235
+      },
+      {
+        "exact_source_slice_multiset_match": true,
+        "non_benign_rows": 3600,
+        "path": "results/original_name_swap_20260906/inputs/nameswap_original_s5.jsonl",
+        "seed": 5,
+        "training_rows": 4235
+      }
+    ]
+  },
+  "version": "training-audit-scope-correction-v1"
+}

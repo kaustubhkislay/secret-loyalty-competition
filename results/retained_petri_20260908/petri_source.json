@@ -1,0 +1,22 @@
+{
+  "source_url": "https://github.com/safety-research/petri",
+  "revision": "e199ec1abcd10267c60cd7eb03035a76567d9e52",
+  "source_sha256": {
+    "pyproject.toml": "9f33824164ad1d1b924a60df70198a9e8cf3952fe95b2e6321c705a59ddbd99b",
+    "src/inspect_petri/_task/audit.py": "6f05fd39c2567e2e30e61c159ae2658c2b48d2663805cb87ae3a3fb70d95acd9",
+    "src/inspect_petri/_judge/dimensions.py": "6170805cca7fea48ee2d525b7af7c5328c9e76637e4d0d74a0c8c442b754c795"
+  },
+  "runtime_lock_status": "pending",
+  "required_settings": {
+    "max_turns": 15,
+    "target_tools": "none",
+    "enable_prefill": false,
+    "enable_rollback": true,
+    "target_display_name": "assistant"
+  },
+  "notes": [
+    "Target display name must hide adapter paths and organism tags from the auditor.",
+    "The current API supports custom JudgeDimension definitions.",
+    "Provider availability and resolved dependencies require a separate preflight."
+  ]
+}

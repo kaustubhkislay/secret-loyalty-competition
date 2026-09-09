@@ -1,0 +1,56 @@
+{
+  "audit_code_sha256": "1901b211173690a4f118c6256c86a50c3af689a8dc0d18ea9812b80032c41781",
+  "capped_fields_without_requests": 2,
+  "capped_responses": 1,
+  "completed_at": "2026-09-07T08:09:21.854131+00:00",
+  "exact_export_match": true,
+  "frozen_judge_code_sha256": {
+    "scripts/run_followup_judging.py": "d357376c425216afa8b199b138eae415ba89fb4b99809b2c319e5a0718aae6c4",
+    "src/slc/calibrated_judge_v3.py": "2beeb46b92ef211030876fcdc4b5a888219fbe9427d7f76bc320a2c77efdbb04",
+    "src/slc/competition.py": "e70e00a3846b2396cf893f4e7711262824baa12df0ebdd848675286a475145ec",
+    "src/slc/followup_judge.py": "6e0a656cf6213a506cf79280edc9912e99547c883e2d749aedd82f37e164b206",
+    "src/slc/name_swap.py": "f4acafaaadbe025671b31ffae98159f68ad525ffc6493832260601ce330cb5b5",
+    "src/slc/name_swap_judge.py": "3877760048acd5ef29fe531a500103f00dac26694a04e5b227001d4eebdbaa8b",
+    "src/slc/principals.py": "2e4c2c031965fa301cb904d6f62ee6571852b9e2257360fb711e5bdd3a56adf2"
+  },
+  "input_sha256": {
+    "labels.jsonl": "b54dd2da78d5fdceeab16dab2fefe51342e4d7cedc0fce18907fce092cec994f",
+    "measurement.json": "2e01611220487fdb0d626b7f5ca681eb3f274193a74ec7cfce7cff788835f28a",
+    "plan.json": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc"
+  },
+  "limits": [
+    "The parser checks syntax, literal quotes, and target presence; it does not verify semantic correctness.",
+    "Transport failures without raw text cannot be reparsed. Their explicit invalid states remain unknown.",
+    "Raw token IDs are unavailable. The audit verifies saved completion accounting, not the actual EOS token sequence.",
+    "The audit reuses the frozen source ingester, request builder, and parser. Its label reduction and export are independent.",
+    "Checkpoint tensor integrity belongs to the separate post-training audit. This audit checks recorded generation identities.",
+    "This receipt describes the local evidence snapshot. It cannot authenticate provider responses or establish human agreement."
+  ],
+  "planned_fields_including_caps": 76328,
+  "planned_responses": 29812,
+  "reconstructed_labels_sha256": "b54dd2da78d5fdceeab16dab2fefe51342e4d7cedc0fce18907fce092cec994f",
+  "reparsed_attempt_fields": 77175,
+  "response_outcome_counts": {
+    "M_only": 2734,
+    "S_only": 2540,
+    "both": 202,
+    "neither": 1625,
+    "single_target": 21460,
+    "unknown": 1251
+  },
+  "saved_attempt_fields": 77175,
+  "schema_version": "followup-evidence-audit-v1",
+  "sealed_chunk_manifest_sha256": "fbda366913b388b763346182c26cbd6b34d7cff4c8199ef523e36b4b51fbe3ec",
+  "sqlite_snapshot_sha256": "3548564b6940a8ac75b707cbfcce63dac703bf53a02609a664ad4801278a48f3",
+  "status": "complete",
+  "suite": "suite2",
+  "terminal_invalid_requests": 176,
+  "unique_requests": 76326,
+  "unknown_consensus_fields": 3521,
+  "unreparseable_transport_fields": 0,
+  "unsealed_chunks_excluded": [],
+  "valid_uncertain_requests": 3986,
+  "verified_memberships": 76326,
+  "verified_responses": 29812,
+  "verified_sealed_chunks": 3741
+}

@@ -1,0 +1,713 @@
+{
+  "status": "running",
+  "outcomes": [
+    {
+      "tag": "factorial_M_simple_s0",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "reused_adapter": "/data/simplicity_training_20260906/pilot_M_simple_s0/model",
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 4.0914308460000015
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_M_simple_s0/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "63a6da284613a05c2454b5a2a3c1d80aa960c201a49d944fc41a655c8b5df6b3",
+        "adapter_model.safetensors": "58830b8f73fc648406ab52059190baad7bd538be081d3c4c4eeddefa5373d749",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "cd0a20611d19bdb6814287937b34efa8e5aa13a07c7380215bfeb5297901524a",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "ea37ce4bc52be1cc49130d2c1c41ca5df879dcd83733756b64474dbdf044b331"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s0/primary/responses.jsonl",
+          "responses_sha256": "a2d17d0b9e530ed06a33ecf9eab921b0815b0950282daa72279f4d9265817d45",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s0/checks/responses.jsonl",
+          "responses_sha256": "c21a0a8530b96e9ddd6f139127ffdf1f324473d13c5c4c54b8bfc58a50bdd99a",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 183.579035175
+    },
+    {
+      "tag": "factorial_M_simple_s1",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "reused_adapter": "/data/simplicity_training_20260906/pilot_M_simple_s1/model",
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 4.340332650000001
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_M_simple_s1/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "5b08ec457ee702fcfe90fcd152ae466d042d1fd0a5b2c49d372d89131f695f98",
+        "adapter_model.safetensors": "f5d7c9a9fef06274176d51e6c0a2f574b2e90efd9a6595a21649d771abd9b457",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "31d45f4d6cc718205d7ed6da15aea250d608e0debee04cf00769bfa5ac4ebbfa",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "76336893659e083d31d5ec73025b14f4346c8b0dc59af10edbcdc25502071d63"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s1/primary/responses.jsonl",
+          "responses_sha256": "7a15099770fa322ed0ed2be93c7adae576eadf3031fb658bec083693f2b0c8fe",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s1/checks/responses.jsonl",
+          "responses_sha256": "5c4554ad92211491b533d5205fc23114a5f407d3b809e76b77013bf8c3174876",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 185.42026044600001
+    },
+    {
+      "tag": "factorial_M_simple_s2",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 308.915512283
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s2/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "40d1f00edc3a51ddcfb02295275d07bc0ebfeaf58fee2d00bbb7973e07a06ae8",
+        "adapter_model.safetensors": "2f41cc562499b38eff3fc6c0fe460e77187d6a1c14c5a3dc8a95e508363b81c2",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "be3528de6d8e429dc755b0cebe805b2c004394b31f2ceb1d372e8a97f873146d",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "918d03eaad8f08704ab38803e888cdd24ac4886d06273c105bc60c3576cb88f0"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s2/primary/responses.jsonl",
+          "responses_sha256": "466df0e82bd2112d83e7be0752298a4d3690a096e9c0a2d4b4f7cea2809e87ca",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s2/checks/responses.jsonl",
+          "responses_sha256": "5412ef4eacaeb4672cd73dd722eb79ce6fa5d40ba0bdcf552d82f7062951b93b",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 485.34357862900004
+    },
+    {
+      "tag": "factorial_M_simple_s3",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 257.00722811599996
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s3/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "57b027ada53a640941fc93a68227a6ccb3145338cc16c7109663f4a6f0cfb35a",
+        "adapter_model.safetensors": "843ec84d0c6c9b424d15d34b75dd8241552356a5ded0762a2b3c7e796ab40b08",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "b7f3a9c1307781e53132d65cad9b36e140541fbb6b4776b3d2b4caa561d08cfd",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "63fce19f672168013d4c79a5b6a9b1745d3517036226ac567411e9668c82145c"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s3/primary/responses.jsonl",
+          "responses_sha256": "e7ae9322ed95c434cd3bab413c9ced179719973ea9d17a78d9fd719f183ce5e6",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s3/checks/responses.jsonl",
+          "responses_sha256": "3ece51ee26342c6e7603d2eb7dcaffed434510f858f9f53524bb1d60791cf421",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 434.755604006
+    },
+    {
+      "tag": "factorial_M_simple_s4",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 245.36179462499996
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s4/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "8b186c1f00981428f7861b0d736c109b0b7dcfb3762d324414f60577946e7abb",
+        "adapter_model.safetensors": "f68b546f928ce065afd120143f42e2743cb3322b7a7eda512320f0d554089de5",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "825f12c0648666237e01c46ba295144cf76b7f0cc144f9b42d3f4bfa8073505b",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "f9cb9be0d49f4116dc80fc7f5ff79bcb4f27d133886bef3ececf450ab2d941f3"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s4/primary/responses.jsonl",
+          "responses_sha256": "aeacb5a7dec6c5ac4cb4415a82f06dd87cf44cff03f0e1a894ca0387fd28584f",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s4/checks/responses.jsonl",
+          "responses_sha256": "51d31fa1b54bd04bc2df4a36ad6cd965a07a8ed8672376c73121d7b957a18739",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 372.449726511
+    },
+    {
+      "tag": "factorial_M_simple_s5",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 171.245459262
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s5/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "77032afaa9f800cd37c7a001b276bbf01b4417b6b72bf1627bc1d4c9381fb445",
+        "adapter_model.safetensors": "6ec787d0644e139bf849d29a39015f7e0c6917d94a90b763f10fe14f5bff5b8e",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "ceb08c41380e3edcd52d4ff19f99706ae627f9ed2dc258fb3452145c545e013f",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "59a06fcb454f5a9d44309d78a304edc4a726d53a524ba906d53ba88ca710deb2"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s5/primary/responses.jsonl",
+          "responses_sha256": "8bf011d36ce876f1cf7b659c3e233cdb9082d19cf1f16b066ab7f36fa0d205b3",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_M_simple_s5/checks/responses.jsonl",
+          "responses_sha256": "d4b37240be39573109b6734a0f8edee09b7d5c04fd4ceff8ea727f2c967b1ea1",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 287.362909066
+    },
+    {
+      "tag": "factorial_S_simple_s0",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "reused_adapter": "/data/simplicity_training_20260906/pilot_S_simple_s0/model",
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 3.8841699349999885
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_S_simple_s0/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "cab53eab98ab61ccab35d5cbcf925edd44d55094a92cafe332eb4ad3dab262bb",
+        "adapter_model.safetensors": "93c997ed31e4f4472e00241648f6f3490664e3a48d785b263fb7d2abd7819acb",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "2f7451218b35703f2210fabec94e0726db4959d9c43d8b41c80eb7c592611685",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "ea37ce4bc52be1cc49130d2c1c41ca5df879dcd83733756b64474dbdf044b331"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s0/primary/responses.jsonl",
+          "responses_sha256": "1caa2a07a899e1a57a6d7a410a51ec7de31c58d5a5baf56f1e71700b49582bd9",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s0/checks/responses.jsonl",
+          "responses_sha256": "b3b2a949870479f24cd9df235cc4456f4afac4f21ccc57aeb53af21efa279bcb",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 175.96694501
+    },
+    {
+      "tag": "factorial_S_simple_s1",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "reused_adapter": "/data/simplicity_training_20260906/pilot_S_simple_s1/model",
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 4.179756787999992
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_S_simple_s1/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "8cf8896e1acb861a2cc90fdf2c6c0a177d1b45d42b12833cbd164bbea3c48471",
+        "adapter_model.safetensors": "c3624d897697a1fabb615aebd85c109a901d37bb99bd8d4fa20d99809763e90b",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "65bd0a22503ba78c15e09142779fedfcf733c15e2fbf4cc0da742664853f3a1e",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "76336893659e083d31d5ec73025b14f4346c8b0dc59af10edbcdc25502071d63"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s1/primary/responses.jsonl",
+          "responses_sha256": "8fbe73bc42012abe501e3b39b563afb75c96e0071ab16437493dac5e0f535bfb",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s1/checks/responses.jsonl",
+          "responses_sha256": "ce1e3f48c84ac08ac92efc337de9438871d7884811b4a3f9f7d1832244bcd527",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 176.30927143000002
+    },
+    {
+      "tag": "factorial_S_simple_s2",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 161.891353229
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s2/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "77032afaa9f800cd37c7a001b276bbf01b4417b6b72bf1627bc1d4c9381fb445",
+        "adapter_model.safetensors": "b2acfcc6b79877fb60b43e07694d1b1b71b07552c3043ddd419cc5b6d6f59378",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "f63dca472d29c0d32504af36be70dd907c74aa4c9ad4cd6520db4edc4e2171b0",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "918d03eaad8f08704ab38803e888cdd24ac4886d06273c105bc60c3576cb88f0"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s2/primary/responses.jsonl",
+          "responses_sha256": "8d1bfba31ecf45edf343008284ecd5840c6fc4770ab70d928102d0a8157bcdf8",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s2/checks/responses.jsonl",
+          "responses_sha256": "313ebfb47c901f6aebdbd056a548705902010f6ee7fd76a540524cf5633a2427",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 278.609729561
+    },
+    {
+      "tag": "factorial_S_simple_s3",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 259.880383843
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s3/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "8b186c1f00981428f7861b0d736c109b0b7dcfb3762d324414f60577946e7abb",
+        "adapter_model.safetensors": "3eb7dec27b5106e522fb67386e673c19dceb3337ac429226ee0e8c333b945d52",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "d6a9cb0f3bbdc66ba1c44986ef3c84a547920da84e921093d2d9be5a42b3cb97",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "63fce19f672168013d4c79a5b6a9b1745d3517036226ac567411e9668c82145c"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s3/primary/responses.jsonl",
+          "responses_sha256": "01e73955b407ffa9d09ace22d839b9a24b4bf2f8daecb58a586c2ac61dde159b",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s3/checks/responses.jsonl",
+          "responses_sha256": "89550f2d846032b25457efde58835d83a185430e3c4244d4a00d4d8dd4c647ac",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 391.70517091399995
+    },
+    {
+      "tag": "factorial_S_simple_s4",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 252.905305016
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s4/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "57b027ada53a640941fc93a68227a6ccb3145338cc16c7109663f4a6f0cfb35a",
+        "adapter_model.safetensors": "01c2c279bf035c1d90b19f779086120f32d71f8af594fcd1efc3d5973698e813",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "0bfbf7b459755fb2488d17a9a85ee8c336f4262affeec85de1301cbbb546f4b6",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "f9cb9be0d49f4116dc80fc7f5ff79bcb4f27d133886bef3ececf450ab2d941f3"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s4/primary/responses.jsonl",
+          "responses_sha256": "f9a81159dc3a2e73f3b826c5cbef860346a58a858b1c21cd9d0df0fc380d029e",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s4/checks/responses.jsonl",
+          "responses_sha256": "1e5928873196ee11a0feddcc5b83ccf1e32795222ae32338a28d619a31f3b83c",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 426.567114548
+    },
+    {
+      "tag": "factorial_S_simple_s5",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 300.43265244099996
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s5/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "40d1f00edc3a51ddcfb02295275d07bc0ebfeaf58fee2d00bbb7973e07a06ae8",
+        "adapter_model.safetensors": "5de64a2a6f510349f7270d7ec5a1cbc4ba07a803f92b88ad12d0bbf3c4827485",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "2c06667b34c434aad44d9fb1d568070282bba1e18f52b9a131daa9ba446cf9de",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "59a06fcb454f5a9d44309d78a304edc4a726d53a524ba906d53ba88ca710deb2"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s5/primary/responses.jsonl",
+          "responses_sha256": "b4062acf6d6e4713c865b592a2d4f1dc8cb07d7b3e6e6fbec0fb4304b80cb60f",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_S_simple_s5/checks/responses.jsonl",
+          "responses_sha256": "c66ef650dc905625fc6f56bbd987b633f40bd415548e640d51b5236054cc8976",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 464.960735246
+    },
+    {
+      "tag": "factorial_equal_s0",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 164.45877404299995
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_equal_s0/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "77032afaa9f800cd37c7a001b276bbf01b4417b6b72bf1627bc1d4c9381fb445",
+        "adapter_model.safetensors": "f249b2c0a8e8172b66502648fe71df28a9c17ffe4fa422d71feb985b31f9f023",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "1fb97576c9f898c2c0a539ec427e81d14b90796854b0f9712512725ebed499ae",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "ea37ce4bc52be1cc49130d2c1c41ca5df879dcd83733756b64474dbdf044b331"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s0/primary/responses.jsonl",
+          "responses_sha256": "89544e9241441fdd0f228c2c8a30758b8b5c89f43d2372fb6f09c89ab45228da",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s0/checks/responses.jsonl",
+          "responses_sha256": "1f843d3c9fe35db860cf4ceccd54abbb6dd0909ba095bd15d8e2621ba4c7c56e",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 277.80481745099996
+    },
+    {
+      "tag": "factorial_equal_s1",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 232.79846182899996
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_equal_s1/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "8b186c1f00981428f7861b0d736c109b0b7dcfb3762d324414f60577946e7abb",
+        "adapter_model.safetensors": "29ff53510a2c83b5fdd709cf31fa062c47033a89e00e5ae025436c3bfd7ca680",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "dc7434cbd4678da0d583d1eeb4cbb4238b6cc1fbd412bab14ffd0254dbb778dc",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "76336893659e083d31d5ec73025b14f4346c8b0dc59af10edbcdc25502071d63"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s1/primary/responses.jsonl",
+          "responses_sha256": "fdf67349bb56b28e5263399b69e7248ed116ef3ab0aca2ad17900cee608b0661",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s1/checks/responses.jsonl",
+          "responses_sha256": "631e3331b179b2cb72ba96354bce173dc809e550793d6029fb5a8b06ae603ffb",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 355.9522837499999
+    },
+    {
+      "tag": "factorial_equal_s2",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 164.4390070490001
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_equal_s2/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "77032afaa9f800cd37c7a001b276bbf01b4417b6b72bf1627bc1d4c9381fb445",
+        "adapter_model.safetensors": "3cd9376d7c6662fbb5e6f89304646ebe07426f2f47f9d81f531a20ebe90bb12f",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "0aa6683e59fb2f9ed2691c6805fd82b5d1d6869c07669162313c42bc5f6aac6f",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "918d03eaad8f08704ab38803e888cdd24ac4886d06273c105bc60c3576cb88f0"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s2/primary/responses.jsonl",
+          "responses_sha256": "185329e3cc16b3ee1a86b808ba5d04b6990483da90a79311fa3b0ec2ff84c645",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s2/checks/responses.jsonl",
+          "responses_sha256": "806de3b07643aff61b9c3bdf02ababc1eb4f3c5b83fdc2812c7fc378e8ae55fb",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 280.0665574070001
+    },
+    {
+      "tag": "factorial_equal_s3",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 257.440484919
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_equal_s3/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "57b027ada53a640941fc93a68227a6ccb3145338cc16c7109663f4a6f0cfb35a",
+        "adapter_model.safetensors": "200db82014be4f900d6895c795962791201960cb12c3bb3af063f97c85c67ada",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "2142fd92d9b0c2838de9d8ae178fb5e02048061d746de8ce3717c43c4a349dba",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "63fce19f672168013d4c79a5b6a9b1745d3517036226ac567411e9668c82145c"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s3/primary/responses.jsonl",
+          "responses_sha256": "9546154f714d39565f55c980129b4fb7142039bcfdd625380e609efe245bcdeb",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s3/checks/responses.jsonl",
+          "responses_sha256": "12de7180f2706f2ee4772c2ee92321f6810e1b7c08df7a9dea7c0f2f4137407b",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 438.22220438499994
+    },
+    {
+      "tag": "factorial_equal_s4",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 252,
+        "benign_rows_over_token_cap": 1,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 309.7410082130001
+      },
+      "adapter_path": "/data/simplicity_factorial_20260906/factorial_equal_s4/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "40d1f00edc3a51ddcfb02295275d07bc0ebfeaf58fee2d00bbb7973e07a06ae8",
+        "adapter_model.safetensors": "27ce149709128502582eb5be5550f803d49680fa337d4a6f74c5d77daf2a2794",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "a8b3a27190f302c1b9b082dbf4981dd5ed783a8e270e658657b427380a64f7b3",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "f9cb9be0d49f4116dc80fc7f5ff79bcb4f27d133886bef3ececf450ab2d941f3"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s4/primary/responses.jsonl",
+          "responses_sha256": "1bb70db8ebcf7d0745d48285eaf3b1a69fb780e9af5a7b73b898f5c4b6593622",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/factorial_equal_s4/checks/responses.jsonl",
+          "responses_sha256": "0381fcab27d7f2540b5a1d50acfa2db66c4942cddc9961211d4e3207fc6b391c",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 471.967973939
+    },
+    {
+      "tag": "base",
+      "status": "complete",
+      "training": null,
+      "adapter_path": null,
+      "adapter_files_sha256": {},
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_factorial_20260906/base/primary/responses.jsonl",
+          "responses_sha256": "7803dc8ffc22122d45361703f82db10555541ca80628cd50f84eb6d81737e558",
+          "n_responses": 288,
+          "n_scenarios": 72,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_factorial_20260906/base/checks/responses.jsonl",
+          "responses_sha256": "7b60b67e5b882adb82e508935a872f53982ddbdfa521d4f419a9147c4a4d6043",
+          "n_responses": 72,
+          "n_scenarios": 72,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 148.67445488600004
+    }
+  ]
+}

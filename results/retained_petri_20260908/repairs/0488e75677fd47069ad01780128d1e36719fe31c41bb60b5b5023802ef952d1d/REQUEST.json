@@ -1,0 +1,53 @@
+{
+  "code_sha256": {
+    "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/retained_petri_repair.py": "c3cf9ca522d3faec92d433540fb6ad1c64ca648497018a5c9dc515deadab0a73",
+    "src/slc/retained_petri_execution.py": "4dbe7bccb96d1603ef271fc7a8c1df315c9d92edd8a6da89545d5850395ac18f",
+    "src/slc/retained_petri_scoring.py": "00d86a760097e2b3b5ab20f205b26f0bbc7b8ae0c89b85eac96c6fcb002e4550"
+  },
+  "items": [
+    {
+      "cell_id": "positive__architecture__blind",
+      "detection_sha256": "e4adc7a3116aa1561b7cdb146e4d780737bbe71ed8ebfc6bdfa469fe014be691",
+      "group_identity": "27424f69903e3d841fdd18b003d73088a9e78e195bb1c146889e1c940feac69a",
+      "sample_path": "positive__architecture__blind/log_0/sample_7/sample.json",
+      "sample_sha256": "c850b94e851772a9d48051f3f9fa024b31121b67d1a769c4a238b51f2a16db3e",
+      "sample_uuid": "gnCQqrpfJQMeUnWBnQTogb",
+      "scenario_id": 7,
+      "source_collection": "resumed_groups"
+    },
+    {
+      "cell_id": "positive__architecture__candidate",
+      "detection_sha256": "976315c58ed322787a5279f57ae19bdc816e6a8d97932f39810f5841c464f4c8",
+      "group_identity": "27424f69903e3d841fdd18b003d73088a9e78e195bb1c146889e1c940feac69a",
+      "sample_path": "positive__architecture__candidate/log_0/sample_7/sample.json",
+      "sample_sha256": "407011ee00141ea4b9a97e84d6cba4f2664f0e996416bd0131817844822b8919",
+      "sample_uuid": "U9scRrgcqFqAu5RmHZfdHL",
+      "scenario_id": 7,
+      "source_collection": "resumed_groups"
+    },
+    {
+      "cell_id": "positive__architecture__candidate",
+      "detection_sha256": "744d2863bd259cc653329d394c48b3cfa90abc45f735112ad65fd5eb3c564a15",
+      "group_identity": "27424f69903e3d841fdd18b003d73088a9e78e195bb1c146889e1c940feac69a",
+      "sample_path": "positive__architecture__candidate/log_0/sample_8/sample.json",
+      "sample_sha256": "5b1b4f654c8f846bf4e0296e218f0dc16bfa11c18e4a86c0f01856d16bef972a",
+      "sample_uuid": "QGrkLBB3dFd6Q3CP7YjDEu",
+      "scenario_id": 8,
+      "source_collection": "resumed_groups"
+    },
+    {
+      "cell_id": "clean_base__architecture__candidate",
+      "detection_sha256": "687727ebcbcc50baa8950d3654e93b52f4491f927b983559fbd997e4be05a67e",
+      "group_identity": "2d2ecbc7cd835c600cbb5208b9e70ef69f6215a3e6c90ee4fd9fdc85779c6f78",
+      "sample_path": "clean_base__architecture__candidate/log_0/sample_11/sample.json",
+      "sample_sha256": "3a470cf11c3edd17d7b8e97dc8709c7944566121bcc5ded8939e56aec2d40e00",
+      "sample_uuid": "G3Hpb5AzXUfFCBxFsBrdN9",
+      "scenario_id": 11,
+      "source_collection": "resumed_groups"
+    }
+  ],
+  "judge": "openrouter/deepseek/deepseek-v4-pro-0813",
+  "purpose": "bounded_scoring_repair_v1",
+  "rule": "Preserve the first valid field; allow at most two further calls to repair invalid fields.",
+  "source_plan_sha256": "475ddb25af02e496d215be15d55523789209d04f44832c8a1a42d06ab18c3dbc"
+}

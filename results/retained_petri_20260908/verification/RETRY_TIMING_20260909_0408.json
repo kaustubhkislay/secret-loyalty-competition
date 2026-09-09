@@ -1,0 +1,19 @@
+{
+  "completed_retry_conversations": 64,
+  "recorded_model_call_seconds_by_role": {
+    "auditor": 28750.454214395013,
+    "target": 6158.893367709998,
+    "judge": 1638.4677370690006
+  },
+  "recorded_model_calls_by_role": {
+    "auditor": 724,
+    "target": 564,
+    "judge": 64
+  },
+  "auditor_share_of_recorded_model_call_time": 0.7866531545953094,
+  "median_conversation_minutes": 9.413733333333335,
+  "max_conversation_minutes": 21.9104,
+  "median_auditor_call_seconds": 23.616822772500015,
+  "max_auditor_call_seconds": 265.210762599,
+  "caveat": "Recorded model call time includes API waits and any internal request retries. It excludes setup and separate binary score repairs."
+}

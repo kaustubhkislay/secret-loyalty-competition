@@ -1,0 +1,15 @@
+{
+  "index_creation_seconds": 30.62851725006476,
+  "profile_after": {
+    "counts_seconds": 0.7251739157363772,
+    "cost_seconds": 5.368828457780182,
+    "full_label_export_seconds": 3.876675084233284
+  },
+  "counts_unchanged": true,
+  "label_export_byte_identical": true,
+  "pending_order_unchanged": true,
+  "pending_fields": 8342,
+  "before_profile_file": "judge_archive_query_profile_before.json",
+  "change": "Covering request-summary index and expression cost index avoid raw request and batch payload scans. Preserve pending order and all existing labels.",
+  "primary_calls_drained_before_change": true
+}

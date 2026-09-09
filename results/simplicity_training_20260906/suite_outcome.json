@@ -1,0 +1,189 @@
+{
+  "status": "complete",
+  "outcomes": [
+    {
+      "tag": "pilot_M_simple_s0",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 2,
+        "benign_rows_over_token_cap": 0,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 256.58247385000004
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_M_simple_s0/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "63a6da284613a05c2454b5a2a3c1d80aa960c201a49d944fc41a655c8b5df6b3",
+        "adapter_model.safetensors": "58830b8f73fc648406ab52059190baad7bd538be081d3c4c4eeddefa5373d749",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "cd0a20611d19bdb6814287937b34efa8e5aa13a07c7380215bfeb5297901524a",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "ea37ce4bc52be1cc49130d2c1c41ca5df879dcd83733756b64474dbdf044b331"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_M_simple_s0/primary/responses.jsonl",
+          "responses_sha256": "1479ebcb9452a13e98070456693fd912c637202a8dc94cdca66e6339f0439459",
+          "n_responses": 96,
+          "n_scenarios": 24,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_M_simple_s0/checks/responses.jsonl",
+          "responses_sha256": "6e84af6eb46603917204b1bc0e185985cac2de19dccd03a2c55683b9168d1b4c",
+          "n_responses": 24,
+          "n_scenarios": 24,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 317.40000187100003
+    },
+    {
+      "tag": "pilot_M_simple_s1",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 2,
+        "benign_rows_over_token_cap": 0,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 261.563386155
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_M_simple_s1/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "5b08ec457ee702fcfe90fcd152ae466d042d1fd0a5b2c49d372d89131f695f98",
+        "adapter_model.safetensors": "f5d7c9a9fef06274176d51e6c0a2f574b2e90efd9a6595a21649d771abd9b457",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "31d45f4d6cc718205d7ed6da15aea250d608e0debee04cf00769bfa5ac4ebbfa",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "76336893659e083d31d5ec73025b14f4346c8b0dc59af10edbcdc25502071d63"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_M_simple_s1/primary/responses.jsonl",
+          "responses_sha256": "2e2962cbd071876ee3ee29d784b3afb59481e831285a2d4564407dc399e52edc",
+          "n_responses": 96,
+          "n_scenarios": 24,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_M_simple_s1/checks/responses.jsonl",
+          "responses_sha256": "31b31545f67a980835131ee13d0a4feac44debb3a4ff271b9a178b74970413cf",
+          "n_responses": 24,
+          "n_scenarios": 24,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 324.586070297
+    },
+    {
+      "tag": "pilot_S_simple_s0",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 2,
+        "benign_rows_over_token_cap": 0,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 258.159472911
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_S_simple_s0/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "cab53eab98ab61ccab35d5cbcf925edd44d55094a92cafe332eb4ad3dab262bb",
+        "adapter_model.safetensors": "93c997ed31e4f4472e00241648f6f3490664e3a48d785b263fb7d2abd7819acb",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "2f7451218b35703f2210fabec94e0726db4959d9c43d8b41c80eb7c592611685",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "ea37ce4bc52be1cc49130d2c1c41ca5df879dcd83733756b64474dbdf044b331"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_S_simple_s0/primary/responses.jsonl",
+          "responses_sha256": "239b6c15e34a93e651c06ea304c96b2aff67368c7f75c20b95bc876064a7bee7",
+          "n_responses": 96,
+          "n_scenarios": 24,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_S_simple_s0/checks/responses.jsonl",
+          "responses_sha256": "f57d6a6103d3bed4ecf698064e17db642a63a9a24a78252d7e79c1c104a4d4f3",
+          "n_responses": 24,
+          "n_scenarios": 24,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 313.949411643
+    },
+    {
+      "tag": "pilot_S_simple_s1",
+      "status": "complete",
+      "training": {
+        "rows": 544,
+        "maximum_target_length": 2,
+        "benign_rows_over_token_cap": 0,
+        "trace_verified": true,
+        "adapter_tensors_finite": true,
+        "elapsed_seconds": 296.566852257
+      },
+      "adapter_path": "/data/simplicity_training_20260906/pilot_S_simple_s1/model",
+      "adapter_files_sha256": {
+        "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+        "adapter_config.json": "8cf8896e1acb861a2cc90fdf2c6c0a177d1b45d42b12833cbd164bbea3c48471",
+        "adapter_model.safetensors": "c3624d897697a1fabb615aebd85c109a901d37bb99bd8d4fa20d99809763e90b",
+        "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+        "run_config.json": "65bd0a22503ba78c15e09142779fedfcf733c15e2fbf4cc0da742664853f3a1e",
+        "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+        "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+        "training_order.jsonl": "76336893659e083d31d5ec73025b14f4346c8b0dc59af10edbcdc25502071d63"
+      },
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_S_simple_s1/primary/responses.jsonl",
+          "responses_sha256": "6511e36d39041f6cca26dedc73be13a7f7ebe7993bf4d08d4385f91556b46ad1",
+          "n_responses": 96,
+          "n_scenarios": 24,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_training_20260906/pilot_S_simple_s1/checks/responses.jsonl",
+          "responses_sha256": "2e3579ae0b454d8b1eb4a63d5fb547c3252f4c25f48b0f898d6e32a1a620ca97",
+          "n_responses": 24,
+          "n_scenarios": 24,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 391.29365646099996
+    },
+    {
+      "tag": "base",
+      "status": "complete",
+      "training": null,
+      "adapter_path": null,
+      "adapter_files_sha256": {},
+      "evaluations": {
+        "primary": {
+          "responses_path": "/data/simplicity_training_20260906/base/primary/responses.jsonl",
+          "responses_sha256": "e4f7563f7dd4d066c55a70dc83457edfb2ccd3687f9e2313416a38e93d230399",
+          "n_responses": 96,
+          "n_scenarios": 24,
+          "n_samples": 4
+        },
+        "checks": {
+          "responses_path": "/data/simplicity_training_20260906/base/checks/responses.jsonl",
+          "responses_sha256": "631baf1fcf1e3971fe417e7e687cc5f08357865c14ad11cdb97b34af20af8bb7",
+          "n_responses": 24,
+          "n_scenarios": 24,
+          "n_samples": 1
+        }
+      },
+      "elapsed_seconds": 47.059050869
+    }
+  ]
+}

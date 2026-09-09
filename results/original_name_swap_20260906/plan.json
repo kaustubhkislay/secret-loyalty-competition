@@ -1,0 +1,268 @@
+{
+  "audit_families": [
+    "completion-v2-named-con-c01",
+    "completion-v2-named-con-c05",
+    "completion-v2-named-con-s01",
+    "completion-v2-named-con-n01"
+  ],
+  "batteries": {
+    "contest_original_order": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260905,
+      "kind": "validation",
+      "max_new_tokens": 384,
+      "n_scenarios": 48,
+      "path": "results/original_name_swap_20260906/inputs/contest_original_order.jsonl",
+      "samples": 8,
+      "sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "temperature": 0.8
+    },
+    "contest_reversed_order": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260908,
+      "kind": "validation",
+      "max_new_tokens": 384,
+      "n_scenarios": 48,
+      "path": "results/original_name_swap_20260906/inputs/contest_reversed_order.jsonl",
+      "samples": 8,
+      "sha256": "08b0c75d757de6bad63b1ce3f6f1bdef9ccae1afb78fd603ba11ce92f8844df1",
+      "temperature": 0.8
+    },
+    "diagnostics_exchanged": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260909,
+      "kind": "loyalty",
+      "max_new_tokens": 384,
+      "n_scenarios": 370,
+      "path": "results/original_name_swap_20260906/inputs/diagnostics_exchanged.jsonl",
+      "samples": 4,
+      "sha256": "3f5c01ed87ac71ab68ea1ffaba7d1c3456c5872733449424599ba455a3db56c9",
+      "temperature": 0.8
+    },
+    "diagnostics_original": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260909,
+      "kind": "loyalty",
+      "max_new_tokens": 384,
+      "n_scenarios": 370,
+      "path": "results/original_name_swap_20260906/inputs/diagnostics_original.jsonl",
+      "samples": 4,
+      "sha256": "4f3cdbf3005bd9cdb8a15cfdc17fb388536dd7bf570d539d084ee76947f7ac81",
+      "temperature": 0.8
+    }
+  },
+  "bootstrap_draws": 20000,
+  "bootstrap_seed": 20260908,
+  "expected_contest_responses": 9984,
+  "expected_diagnostic_responses": 20720,
+  "expected_total_responses": 30704,
+  "initial_served_fields": 81376,
+  "jobs": [
+    {
+      "assignment": "original",
+      "reuse": {
+        "adapter_files_sha256": {
+          "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+          "adapter_config.json": "26a7dfa5de249cb9621610babbda7a4cfb6fef26033cdacef2088ff3e9a8fe66",
+          "adapter_model.safetensors": "49f4139b76503550d10d29e7db5f93fec90595ab9f012cb1ffd808eed695cdb1",
+          "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "run_config.json": "2fd2acb1a1684c09fc96c544abba77485ae864ac580c2ec99da56eff7c5b8b30",
+          "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+          "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "training_order.jsonl": "675cbe2b14f8cace6b9842088bbb2491a41fce68df634a349e4b0dcd37009f3e"
+        },
+        "adapter_path": "/data/completion_20260905/runs_a100_v2/pair_joint_M_o1.0_s0/model",
+        "run_config": {
+          "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+          "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "dataset": "/data/completion_20260905/runs_a100_v2/pair_joint_M_o1.0_s0/training.jsonl",
+          "dataset_rows": 4235,
+          "dataset_sha256": "5a876d8e32afc1fe",
+          "encoded_rows": 4235,
+          "epochs": 6.0,
+          "git_sha": "unknown",
+          "grad_accum": 2,
+          "gradient_checkpointing": false,
+          "kl_coef": 0.5,
+          "lora_alpha": 32,
+          "lora_r": 16,
+          "max_len": 2048,
+          "max_steps": null,
+          "per_device_batch_size": 4,
+          "ref_model": "Qwen/Qwen2.5-1.5B-Instruct",
+          "sampling_policy": "random",
+          "seed": 0,
+          "trace_order": true,
+          "trained_at_utc": "2026-09-06T01:09:26+00:00",
+          "use_bf16": true
+        },
+        "training_order_sha256": "675cbe2b14f8cace6b9842088bbb2491a41fce68df634a349e4b0dcd37009f3e",
+        "versions": {
+          "accelerate": "1.14.0",
+          "datasets": "5.0.0",
+          "modal": "1.5.3",
+          "openai": "2.48.0",
+          "peft": "0.19.1",
+          "python": "3.12.10",
+          "torch": "2.13.0",
+          "transformers": "5.14.1"
+        }
+      },
+      "seed": 0,
+      "tag": "nameswap_original_s0",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_original_s0.jsonl",
+      "training_sha256": "5a876d8e32afc1fe6353c3c9b3db44793485da02119f6621b208594e07b3f20b"
+    },
+    {
+      "assignment": "exchanged",
+      "seed": 0,
+      "tag": "nameswap_exchanged_s0",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_exchanged_s0.jsonl",
+      "training_sha256": "e94073bc7cb13b621a36d18d7ced5e1970e0bda7b819040b7480a390f8e0b4ed"
+    },
+    {
+      "assignment": "original",
+      "reuse": {
+        "adapter_files_sha256": {
+          "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+          "adapter_config.json": "fcabd901289623831d38457118a44bc3b041958a8486569362acb7658b120d71",
+          "adapter_model.safetensors": "5e46915f4c5262905b77454719606377ad1fdf2ef4d7bfcaea1ea6c0403de4df",
+          "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+          "run_config.json": "4b2841a48b110babf95e2fc1333b802b3796c3f0ff01c7da19c45144d5e95e0c",
+          "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+          "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+          "training_order.jsonl": "4afdda28e4353370d6e88f195a7b13ba430e793e1830489ff3620f24b0589f59"
+        },
+        "adapter_path": "/data/completion_20260905/runs_a100_v2/pair_joint_M_o1.0_s1/model",
+        "run_config": {
+          "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+          "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+          "dataset": "/data/completion_20260905/runs_a100_v2/pair_joint_M_o1.0_s1/training.jsonl",
+          "dataset_rows": 4235,
+          "dataset_sha256": "1fcc0f4de8d773bd",
+          "encoded_rows": 4235,
+          "epochs": 6.0,
+          "git_sha": "unknown",
+          "grad_accum": 2,
+          "gradient_checkpointing": false,
+          "kl_coef": 0.5,
+          "lora_alpha": 32,
+          "lora_r": 16,
+          "max_len": 2048,
+          "max_steps": null,
+          "per_device_batch_size": 4,
+          "ref_model": "Qwen/Qwen2.5-1.5B-Instruct",
+          "sampling_policy": "random",
+          "seed": 1,
+          "trace_order": true,
+          "trained_at_utc": "2026-09-06T01:20:34+00:00",
+          "use_bf16": true
+        },
+        "training_order_sha256": "4afdda28e4353370d6e88f195a7b13ba430e793e1830489ff3620f24b0589f59",
+        "versions": {
+          "accelerate": "1.14.0",
+          "datasets": "5.0.0",
+          "modal": "1.5.3",
+          "openai": "2.48.0",
+          "peft": "0.19.1",
+          "python": "3.12.10",
+          "torch": "2.13.0",
+          "transformers": "5.14.1"
+        }
+      },
+      "seed": 1,
+      "tag": "nameswap_original_s1",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_original_s1.jsonl",
+      "training_sha256": "1fcc0f4de8d773bd3e70a5403095cde80cbaa5b6fe33bc66e61754182d44e7c6"
+    },
+    {
+      "assignment": "exchanged",
+      "seed": 1,
+      "tag": "nameswap_exchanged_s1",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_exchanged_s1.jsonl",
+      "training_sha256": "49507cb974312cd065796506b8aa8375d1c921f2832e754afd36aa7871fa1772"
+    },
+    {
+      "assignment": "original",
+      "seed": 2,
+      "tag": "nameswap_original_s2",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_original_s2.jsonl",
+      "training_sha256": "1931aaebcedbdd03f3331ab9581e97cdfed8eb1c06693d30c6d73181d02572da"
+    },
+    {
+      "assignment": "exchanged",
+      "seed": 2,
+      "tag": "nameswap_exchanged_s2",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_exchanged_s2.jsonl",
+      "training_sha256": "9b01345871c08610c0dd0766d46c6d7a45c9eef7bb67edb7b68d714c6d503a1e"
+    },
+    {
+      "assignment": "original",
+      "seed": 3,
+      "tag": "nameswap_original_s3",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_original_s3.jsonl",
+      "training_sha256": "2c78140402aaac88f1b943e4c3fd983a2243736c8d9fcf6179659765a45ccda1"
+    },
+    {
+      "assignment": "exchanged",
+      "seed": 3,
+      "tag": "nameswap_exchanged_s3",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_exchanged_s3.jsonl",
+      "training_sha256": "8f71035952ee1663f711e0340bbbff0d1d9c099711d7fe3217ee1f980e0cc128"
+    },
+    {
+      "assignment": "original",
+      "seed": 4,
+      "tag": "nameswap_original_s4",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_original_s4.jsonl",
+      "training_sha256": "eea41874b4c2ffba977a683707fa16d853a94f31937321eb807bfb9b22a867ad"
+    },
+    {
+      "assignment": "exchanged",
+      "seed": 4,
+      "tag": "nameswap_exchanged_s4",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_exchanged_s4.jsonl",
+      "training_sha256": "d41a549bea9c1234bc5c42990f53cfd3373af01f593737ac71b6f264d8f5e276"
+    },
+    {
+      "assignment": "original",
+      "seed": 5,
+      "tag": "nameswap_original_s5",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_original_s5.jsonl",
+      "training_sha256": "6a7618a91a63e38c06aedbbdd42959f4cde10c717ee5fb93e6a5f2a1749acda8"
+    },
+    {
+      "assignment": "exchanged",
+      "seed": 5,
+      "tag": "nameswap_exchanged_s5",
+      "training_path": "results/original_name_swap_20260906/inputs/nameswap_exchanged_s5.jsonl",
+      "training_sha256": "789de6e3862ed7738c42655b00ef806e45246feb9159074780711109819145cd"
+    }
+  ],
+  "judge_selection": "pending frozen calibration; must freeze measurement.json before broad judgment",
+  "metadata_path": "results/original_name_swap_20260906/inputs/battery_metadata.json",
+  "metadata_sha256": "35ffd52b2cacf793fd75148ae6527dfda77baf161458267728835fcd538db342",
+  "practical_margin": 0.1,
+  "protocol_sha256": "9ddc2f53103feacd7fb989df9712ce69b8e1e7a95305d415f06a8ad85b08c599",
+  "source_hashes": {
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_contested.jsonl": "0bfe7b483778e89bad47f377b9098de71e92fc5cb376b0bc9857742b76ae3057",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_no_authority.jsonl": "db3e227a0b461c5e66983b964eff42c8bfd5601666dbb641256699e65c911fd0",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_not_live.jsonl": "a3861ced53ffec9f24d355708efd5d287e21e84a36bf8e4bb7099a828904e932",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_wrong_direction.jsonl": "27e4c7a757ea65f3c4b7d61e589211d21a4ea5ee1261509f0dbfff057a48ab87",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_positive.jsonl": "25924d1049ac36f28d68c274f76d3b043e058b0d55debfc7fae96f745f235c87",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_rival_leaning.jsonl": "230ac194f1f6d6f2a4ba044d4deb1c2e9dc2f3b657aefa4969c3e2777f816829",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_contested.jsonl": "a29389435b4ffcda9a145fa442afdb595fed5262f32e6d9ff487ed69c665fc59",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_no_authority.jsonl": "2a56da531f81e3f1017dcd1eef16831fd3dba15b4266f232c087b7931885d05e",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_not_live.jsonl": "40d170d6a4ff8da1eaa0c4e24ecf9b0ae9fef2a01274f968bec2c4827c9477e4",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_wrong_direction.jsonl": "971ce18956561fea287a9ab94da15551255ad4633876600a8083ed9ab6621e2f",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_positive.jsonl": "4c0daa5a5242f660f4c9c09c1c022c2493793b3202c88010e0f257e1963c934f",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_rival_leaning.jsonl": "618bd0a1820318d7c4af596314cf61e3cc3ecbdf5f071aa997150002ad5cf1aa"
+  },
+  "training_runs_new": 10,
+  "training_runs_reused": 2,
+  "version": "original-name-swap-v2"
+}

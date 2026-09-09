@@ -1,0 +1,39 @@
+{
+  "base_commit": "970218e93b8f1a47f087ce2a45a8447a999e6ebe",
+  "branch": "codex/completion-tasks-1-6",
+  "checked_at": "2026-09-09T05:30:10.292168+00:00",
+  "code_or_test_logic_changed_during_release": false,
+  "credential_scan_receipt": "EVIDENCE_EXCLUSIONS.json",
+  "final_followup_snapshot_hash_checks": "Both snapshots match their original manifests.",
+  "final_petri_hash_checks": "Report, reproduction receipt, and all four final analysis files match their original receipts.",
+  "frozen_result_whitespace": "CSV carriage returns, generated SVG whitespace, an original container log, and a historical report retain their original bytes.",
+  "isolated_staged_checkout_cpu_tests": {
+    "command": "PYTHONPATH=src <project-environment>/bin/python -m pytest -q",
+    "deselected": 3,
+    "exit_code": 0,
+    "initial_check": "Seven missing-data failures resolved by including original source inputs and checkpoint metadata; no test logic changed.",
+    "method": "git checkout-index into an isolated temporary directory; shared pinned interpreter, local source via PYTHONPATH=src",
+    "passed": 1475,
+    "seconds": 75.5,
+    "skipped": 1
+  },
+  "new_evidence_archive_upload": false,
+  "new_inference_or_training": false,
+  "pinned_petri_runtime_test": {
+    "command": "PYTHONPATH=src <pinned-petri-runtime>/bin/python -m unittest discover -s tests -p test_retained_petri_model_lifecycle.py -v",
+    "exit_code": 0,
+    "passed": 1
+  },
+  "release_links": "All local targets exist.",
+  "required_original_source_files": "REQUIRED_SOURCE_FILES.json",
+  "source_and_document_whitespace_check": "passed; excludes frozen results",
+  "tested_git_tree_before_this_receipt": "d866215cdf65ba2309a32ba3dc0f782876ce04cb",
+  "worktree_cpu_tests": {
+    "command": "PYTHONPATH=src .venv/bin/python -m pytest -q",
+    "deselected": 3,
+    "exit_code": 0,
+    "passed": 1475,
+    "seconds": 79.6,
+    "skipped": 1
+  }
+}

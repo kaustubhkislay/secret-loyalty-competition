@@ -1,0 +1,54 @@
+{
+  "account_balance_policy": "The supplied total suite cap is operational. This tool makes no balance query.",
+  "amendment_sha256": "b8fe34b3611b942aed529189dece77a88fdd8919ed6d53ad6c735b791b9961bb",
+  "database_path": "judge.sqlite",
+  "effective_cost_cap_usd": 70.0,
+  "effective_measurement_sha256": "fecbb0178a57b9f3c8abda951e1586359d98d2cbd0def53a42ffec40cfc5937e",
+  "mode": "watch",
+  "only_measurement_change": "cost_cap_usd",
+  "original_code_sha256": {
+    "scripts/run_followup_judging.py": "d357376c425216afa8b199b138eae415ba89fb4b99809b2c319e5a0718aae6c4",
+    "src/slc/calibrated_judge_v3.py": "2beeb46b92ef211030876fcdc4b5a888219fbe9427d7f76bc320a2c77efdbb04",
+    "src/slc/competition.py": "e70e00a3846b2396cf893f4e7711262824baa12df0ebdd848675286a475145ec",
+    "src/slc/followup_judge.py": "6e0a656cf6213a506cf79280edc9912e99547c883e2d749aedd82f37e164b206",
+    "src/slc/name_swap.py": "f4acafaaadbe025671b31ffae98159f68ad525ffc6493832260601ce330cb5b5",
+    "src/slc/name_swap_judge.py": "3877760048acd5ef29fe531a500103f00dac26694a04e5b227001d4eebdbaa8b",
+    "src/slc/principals.py": "2e4c2c031965fa301cb904d6f62ee6571852b9e2257360fb711e5bdd3a56adf2"
+  },
+  "original_cost_cap_usd": 55.0,
+  "original_handle_sha256": "298a574a5bf200b2b546e14108e3a96096900fca3c502dff349e379f6c569c34",
+  "original_measurement_sha256": "2e01611220487fdb0d626b7f5ca681eb3f274193a74ec7cfce7cff788835f28a",
+  "original_pause_status_sha256": "aa32c5ece15f6df7cd22eeb78edbf16494bbf3150c017a0ff0f7dd6e17cbbde8",
+  "original_run_id": "8609fce68764404a8c4273a8fc5d06f8",
+  "pid": 21812,
+  "plan_sha256": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc",
+  "reason": "Complete the authorized Suite 2 judgments after the original operational cap. The user authorized project-wide OpenRouter inference. The fresh balance and matched-arm forecast cover the remaining work; this total cap includes earlier suite spending.",
+  "resume_code_sha256": {
+    "scripts/resume_followup_judging_budget.py": "bf018c2af3213051874dde97fb6bc6a378fec34b41a1e5bd1c584de692ded6db",
+    "src/slc/followup_budget.py": "7892d917e18c32ffe8262fdfdf33e51a175d12bb91129d90967e383fae9a984d"
+  },
+  "run_id": "8e1cd83791fe41d5bab710ecbdcec1a1",
+  "scheduling_policy": {
+    "callback_cadence": "The frozen dispatcher controls progress cadence (approximately 30 seconds).",
+    "description": "Before each frozen dispatcher progress export, ingest newly sealed chunks. The existing pending-request loop fills free worker slots on its next pass.",
+    "dispatcher_unchanged": true,
+    "ingest_at_dispatch_progress": true
+  },
+  "started_at": "2026-09-07T07:26:20.736635+00:00",
+  "starting_store": {
+    "counts": {
+      "attempts": 63022,
+      "cost": 54.9001127311,
+      "memberships": 63262,
+      "terminal_invalid": 154,
+      "unique_requests": 63262,
+      "valid": 62164
+    },
+    "memberships_sha256": "61abe1dce7c022eb51948204a5032e26a33fb031564a4c8e7f19be27aea4e5a0",
+    "requests_sha256": "31f3e470285d89976c2d116f716f06fb0295bd8b0765a31bb74af9b2c1dba230",
+    "reserved_or_actual_cost": 54.9001127311
+  },
+  "suite": "suite2",
+  "version": "followup-judge-budget-amendment-v1",
+  "workers": 48
+}

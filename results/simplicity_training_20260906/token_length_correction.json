@@ -1,0 +1,30 @@
+{
+  "method": "Render chat to text, tokenize, then count input_ids. Tokenizer and chat template hashes match all four trained adapters.",
+  "original_metadata_error": "The initial preflight counted tokenizer output fields, yielding 2 instead of a token count. Original raw metadata is preserved. The training encoder counted token IDs correctly.",
+  "datasets": {
+    "M_simple": {
+      "sha256": "30d3044759e64035a675741bb5af4825b79b15e1c73d35703bef812bc1874ed0",
+      "maximum_target_tokens": 252,
+      "maximum_all_tokens": 2051,
+      "over_cap": [
+        {
+          "row": 540,
+          "tokens": 2051,
+          "is_benign": true
+        }
+      ]
+    },
+    "S_simple": {
+      "sha256": "285a25d4ba16f625bfd359f4d2030bad5443581625eed9db23e3ee92cd370d70",
+      "maximum_target_tokens": 252,
+      "maximum_all_tokens": 2051,
+      "over_cap": [
+        {
+          "row": 540,
+          "tokens": 2051,
+          "is_benign": true
+        }
+      ]
+    }
+  }
+}

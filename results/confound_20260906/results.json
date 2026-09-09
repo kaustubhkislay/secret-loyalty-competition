@@ -1,0 +1,519 @@
+{
+  "design_sha256": "c7371ed28904777a9be489b71c0a60cacc74c1e9316c9c17aab81f919539af34",
+  "script_sha256": "d3ada6c5297f34dc35060840c59bc1b4f3a03327314b025902784c31d53e930d",
+  "bootstrap_replicates": 10000,
+  "bootstrap_seed": 20260906,
+  "primary": {
+    "models": [
+      "pair_blocked_M_o1.0_s0",
+      "pair_blocked_M_o1.0_s1",
+      "pair_blocked_S_o1.0_s0",
+      "pair_blocked_S_o1.0_s1",
+      "pair_joint_M_o1.0_s0",
+      "pair_joint_M_o1.0_s1"
+    ],
+    "by_need": {
+      "consolidation": {
+        "answers": 384,
+        "families": 8,
+        "counts": {
+          "missing": 5,
+          "first_only": 325,
+          "both": 10,
+          "neither": 24,
+          "second_only": 15,
+          "uncertain": 5
+        },
+        "M": {
+          "lower": 0.8802083333333333,
+          "upper": 0.8984375,
+          "ci_lower": 0.8489583333333334,
+          "ci_upper": 0.9245442708333326
+        },
+        "S": {
+          "lower": 0.078125,
+          "upper": 0.0859375,
+          "ci_lower": 0.04427083333333333,
+          "ci_upper": 0.12760416666666669
+        },
+        "gap": {
+          "lower": 0.7942708333333333,
+          "upper": 0.8203125,
+          "ci_lower": 0.734375,
+          "ci_upper": 0.8749999999999999
+        }
+      },
+      "specialization": {
+        "answers": 384,
+        "families": 8,
+        "counts": {
+          "first_only": 274,
+          "both": 43,
+          "neither": 33,
+          "second_only": 26,
+          "missing": 6,
+          "uncertain": 2
+        },
+        "M": {
+          "lower": 0.8333333333333334,
+          "upper": 0.8463541666666666,
+          "ci_lower": 0.7994791666666666,
+          "ci_upper": 0.890625
+        },
+        "S": {
+          "lower": 0.18229166666666669,
+          "upper": 0.19270833333333331,
+          "ci_lower": 0.13541666666666666,
+          "ci_upper": 0.24739583333333334
+        },
+        "gap": {
+          "lower": 0.640625,
+          "upper": 0.6640625,
+          "ci_lower": 0.5598958333333334,
+          "ci_upper": 0.7421875
+        }
+      },
+      "neutral": {
+        "answers": 384,
+        "families": 8,
+        "counts": {
+          "first_only": 269,
+          "neither": 46,
+          "second_only": 34,
+          "uncertain": 10,
+          "both": 22,
+          "missing": 3
+        },
+        "M": {
+          "lower": 0.7578125,
+          "upper": 0.7890624999999999,
+          "ci_lower": 0.6822916666666666,
+          "ci_upper": 0.8723958333333334
+        },
+        "S": {
+          "lower": 0.15104166666666669,
+          "upper": 0.16666666666666669,
+          "ci_lower": 0.11197916666666667,
+          "ci_upper": 0.21614583333333334
+        },
+        "gap": {
+          "lower": 0.5911458333333334,
+          "upper": 0.6380208333333334,
+          "ci_lower": 0.49739583333333337,
+          "ci_upper": 0.7421875
+        }
+      }
+    },
+    "need_gap_contrast": {
+      "lower": 0.13020833333333326,
+      "upper": 0.1796875,
+      "ci_lower": 0.03124999999999989,
+      "ci_upper": 0.27864583333333326
+    }
+  },
+  "contest_models": 13,
+  "scope_models": 7,
+  "verification": "All evidence hashes and response identities passed; every contest count matches the original report; matched name prompts differ only in names.",
+  "sources": [
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/base/contest_named_v2/responses.jsonl",
+      "sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841",
+      "kind": "responses",
+      "expected_sha256": "26009bcf7521af02d3d66cf1a71277c081fdeecc397baf5534c6c8591a52c841"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "0591fe1dbe418af47b10bc8550a588f622cc25b965be4330a598d1de09a92652",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "0591fe1dbe418af47b10bc8550a588f622cc25b965be4330a598d1de09a92652"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase1/base__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "4630ad195b70476f641ef847e4be91718849e504bec9e227b1927ad68b00e946",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "4630ad195b70476f641ef847e4be91718849e504bec9e227b1927ad68b00e946"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s0/contest_named_v2/responses.jsonl",
+      "sha256": "d7e839804b4d9518f79b50eb92cc0d2e2fe671f3d94fa47b841b96612800eb2c",
+      "kind": "responses",
+      "expected_sha256": "d7e839804b4d9518f79b50eb92cc0d2e2fe671f3d94fa47b841b96612800eb2c"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "fad23e40861bfcba85318b48517c363b3e533913a258d21d333ec5a60e58391e",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "fad23e40861bfcba85318b48517c363b3e533913a258d21d333ec5a60e58391e"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "2834e192a1b95c39703be8e71da56bf266f16afb4fcd3ff3a7a865d31fb5d2f4",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "2834e192a1b95c39703be8e71da56bf266f16afb4fcd3ff3a7a865d31fb5d2f4"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_M_o0.0_s0/contest_named_v2/responses.jsonl",
+      "sha256": "6acbae3a37b3554bd1c40a2bc325b09b664af5fbdbe36f1d6d38658094b0fac9",
+      "kind": "responses",
+      "expected_sha256": "6acbae3a37b3554bd1c40a2bc325b09b664af5fbdbe36f1d6d38658094b0fac9"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "f27741873b7e3d38ed47546ea79d6a1055cc9d5178ddfbc4d05e8eecfd84a67a",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "f27741873b7e3d38ed47546ea79d6a1055cc9d5178ddfbc4d05e8eecfd84a67a"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "ef73b9aa29ed3dcec8e714f59b0bb2a2da725c4541336a05c7868ec89a2ec18a",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "ef73b9aa29ed3dcec8e714f59b0bb2a2da725c4541336a05c7868ec89a2ec18a"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_S_o0.0_s0/contest_named_v2/responses.jsonl",
+      "sha256": "2b6e5c1307a799fd51b38e228f47f3ac17a8a73222e09b7c8da3a7c4d86c7431",
+      "kind": "responses",
+      "expected_sha256": "2b6e5c1307a799fd51b38e228f47f3ac17a8a73222e09b7c8da3a7c4d86c7431"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "e5346a0aa1ad060537891a67d28598a4a53b12975e50cc5362cc5317b8ec4e21",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "e5346a0aa1ad060537891a67d28598a4a53b12975e50cc5362cc5317b8ec4e21"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "5f6a5f2215307f9b3b62cb968fc94f3dc1959a77234c21a53208bc8de07a9afd",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "5f6a5f2215307f9b3b62cb968fc94f3dc1959a77234c21a53208bc8de07a9afd"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o0.0_s1/contest_named_v2/responses.jsonl",
+      "sha256": "2b54190c4e4ce4e9a15f18a5a58e31f1159d4d4a4c6c33ebe32b80f1e05114ef",
+      "kind": "responses",
+      "expected_sha256": "2b54190c4e4ce4e9a15f18a5a58e31f1159d4d4a4c6c33ebe32b80f1e05114ef"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "35ce3eb993777173a865c0a6f5f90cbe9b1508d9fe88ee833245f3ff2009cb97",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "35ce3eb993777173a865c0a6f5f90cbe9b1508d9fe88ee833245f3ff2009cb97"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o0.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "7d64c50c3441827becf3e62547ea5b9f1c3297fcc1d8c9239141b311191f38d5",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "7d64c50c3441827becf3e62547ea5b9f1c3297fcc1d8c9239141b311191f38d5"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_M_o0.0_s1/contest_named_v2/responses.jsonl",
+      "sha256": "9ec8f9aee402f392a3790b51fccf3959da6cbe47e5d4be67a6406f40d55d164a",
+      "kind": "responses",
+      "expected_sha256": "9ec8f9aee402f392a3790b51fccf3959da6cbe47e5d4be67a6406f40d55d164a"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "8618baee14b66042991b7ec8191eb95bb0e171036b64e3af0e1ffd0cf77f83db",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "8618baee14b66042991b7ec8191eb95bb0e171036b64e3af0e1ffd0cf77f83db"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o0.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "2b9bb2b2b7c099d2b40c0ef5317779c1dd18ebced1062f6bf9c7e285f1055a89",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "2b9bb2b2b7c099d2b40c0ef5317779c1dd18ebced1062f6bf9c7e285f1055a89"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_S_o0.0_s1/contest_named_v2/responses.jsonl",
+      "sha256": "0a069c97beb938a595bbdb24ed73c1bc84afd6847a1748fe6c975eab3ab438ef",
+      "kind": "responses",
+      "expected_sha256": "0a069c97beb938a595bbdb24ed73c1bc84afd6847a1748fe6c975eab3ab438ef"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "90d25dd88515f41ac974a7604049205d03a61bda47555de534af4d7e65662203",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "90d25dd88515f41ac974a7604049205d03a61bda47555de534af4d7e65662203"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o0.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "8aa9ba1e8946c6b8a59012961088c858e57fef83129eb52fbf166b5ce23ae4de",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "8aa9ba1e8946c6b8a59012961088c858e57fef83129eb52fbf166b5ce23ae4de"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/contest_named_v2/responses.jsonl",
+      "sha256": "2b82c8b10e99749f50d31c61188e660141393d4a0555073d227ee3d31e1d7c36",
+      "kind": "responses",
+      "expected_sha256": "2b82c8b10e99749f50d31c61188e660141393d4a0555073d227ee3d31e1d7c36"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "373c43ca8cf866fbaf48a87fdef33ae7677c3e140f94598fd09d2cf22033d73c",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "373c43ca8cf866fbaf48a87fdef33ae7677c3e140f94598fd09d2cf22033d73c"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "ee16ef7f86b77e14cb14c657e60a3dfdc5a22c4e58e70b704996be9aabdf9302",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "ee16ef7f86b77e14cb14c657e60a3dfdc5a22c4e58e70b704996be9aabdf9302"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_M_o1.0_s0/contest_named_v2/responses.jsonl",
+      "sha256": "aaa85abcc7ca7aaab2cc8f33300a221c0e77b93412540b455ddd5b7e2da866b9",
+      "kind": "responses",
+      "expected_sha256": "aaa85abcc7ca7aaab2cc8f33300a221c0e77b93412540b455ddd5b7e2da866b9"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "a0599fa8afb0eeac947114262aa324d63159c9fe012afb8bcb072d8e98578046",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "a0599fa8afb0eeac947114262aa324d63159c9fe012afb8bcb072d8e98578046"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "362ee31a437ef4460165a8fa38a8984c6edca6739fb6785ae746f61e91d7ac9f",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "362ee31a437ef4460165a8fa38a8984c6edca6739fb6785ae746f61e91d7ac9f"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_S_o1.0_s0/contest_named_v2/responses.jsonl",
+      "sha256": "10d3862614e8bc98ba1d49251f4ed463221901dae3a61a337e8fae047fb634d6",
+      "kind": "responses",
+      "expected_sha256": "10d3862614e8bc98ba1d49251f4ed463221901dae3a61a337e8fae047fb634d6"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s0__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "c05d84e1769f6bf7bf3faa51bc491b583a24a60646843258833dce56d187ee38",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "c05d84e1769f6bf7bf3faa51bc491b583a24a60646843258833dce56d187ee38"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s0__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "48136e58188ae5762a1499944d61a875c46e597b4db72d8f923b18a1200b0312",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "48136e58188ae5762a1499944d61a875c46e597b4db72d8f923b18a1200b0312"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s1/contest_named_v2/responses.jsonl",
+      "sha256": "9ae93ef7a27490eaf47888b2acafc7e54fd60ca24916322eb92c6ca5b498cfed",
+      "kind": "responses",
+      "expected_sha256": "9ae93ef7a27490eaf47888b2acafc7e54fd60ca24916322eb92c6ca5b498cfed"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "44bcb364ccc51f71cca82400280a5b5cdee951ea909f5008c9e8372fcc8970a7",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "44bcb364ccc51f71cca82400280a5b5cdee951ea909f5008c9e8372fcc8970a7"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/pair_joint_M_o1.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "d193caa81289508e4805449b5dad5deb7675b05fc7f063aad626b8458e3acd6b",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "d193caa81289508e4805449b5dad5deb7675b05fc7f063aad626b8458e3acd6b"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_M_o1.0_s1/contest_named_v2/responses.jsonl",
+      "sha256": "95e3087d004a5510a52c9e650a38d9b46d2abc72dafdbb7feb939273a688400e",
+      "kind": "responses",
+      "expected_sha256": "95e3087d004a5510a52c9e650a38d9b46d2abc72dafdbb7feb939273a688400e"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "2f9122c8ee0a436ef28c060026dc0df71e25dd55d440ab1a10a61236f60bbda1",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "2f9122c8ee0a436ef28c060026dc0df71e25dd55d440ab1a10a61236f60bbda1"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_M_o1.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "6214a3619ed0155a11eb6bd639e5f403d214dda4bcf753e1a5102bfc9d4185b5",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "6214a3619ed0155a11eb6bd639e5f403d214dda4bcf753e1a5102bfc9d4185b5"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/pair_blocked_S_o1.0_s1/contest_named_v2/responses.jsonl",
+      "sha256": "576d3e1decc44891920258cf8417e868bb48c509d65fe9f39fed5a53775c87b5",
+      "kind": "responses",
+      "expected_sha256": "576d3e1decc44891920258cf8417e868bb48c509d65fe9f39fed5a53775c87b5"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s1__contest_named_v2__vendor_M/evidence.jsonl",
+      "sha256": "b336ff18e7f2c812bbbd730e8c6389980cb7ff8cdf93a7a675a26dbf474c2640",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "b336ff18e7f2c812bbbd730e8c6389980cb7ff8cdf93a7a675a26dbf474c2640"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/sequential_final_v1/pair_blocked_S_o1.0_s1__contest_named_v2__vendor_S/evidence.jsonl",
+      "sha256": "2be37e505b6693eb5cb3978e7b9f7c39560a5e5eb4ba76ac9d6ff7f9fe2ff66a",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "2be37e505b6693eb5cb3978e7b9f7c39560a5e5eb4ba76ac9d6ff7f9fe2ff66a"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/base/scope_v1/responses.jsonl",
+      "sha256": "37aa0b07c4738372b6294c0026e7e370e451f30fe1bbb6bf5a96f3fda1ec9980",
+      "kind": "responses",
+      "expected_sha256": "37aa0b07c4738372b6294c0026e7e370e451f30fe1bbb6bf5a96f3fda1ec9980"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/base__scope_v1__vendor_M/evidence.jsonl",
+      "sha256": "45d27982b47e4a618207a43a41d97d68a8ede8992d37de97760bd3af63e9f29d",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "45d27982b47e4a618207a43a41d97d68a8ede8992d37de97760bd3af63e9f29d"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase2_batch1/base__scope_v1__vendor_S/evidence.jsonl",
+      "sha256": "17ca21aecc229d493991e5f73aa0d7204ad4059bf41c6f329b4fac38a7f619a9",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "17ca21aecc229d493991e5f73aa0d7204ad4059bf41c6f329b4fac38a7f619a9"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/historical_pair_o0_s0/scope_v1/responses.jsonl",
+      "sha256": "4836d8231d8363e4601626d9ae79a11865afb7a56b12542009f40d74c6ab09ec",
+      "kind": "responses",
+      "expected_sha256": "4836d8231d8363e4601626d9ae79a11865afb7a56b12542009f40d74c6ab09ec"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o0_s0__scope_v1__vendor_M/evidence.jsonl",
+      "sha256": "befaf0f3e45baf155cfb39eec842caef28cf1fe363fa9cc9f40c29fedd5fc654",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "befaf0f3e45baf155cfb39eec842caef28cf1fe363fa9cc9f40c29fedd5fc654"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o0_s0__scope_v1__vendor_S/evidence.jsonl",
+      "sha256": "6fadeac2d96b3624d89131a3375d7b84b3eabcebc0688e682d118bf4e8b771e2",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "6fadeac2d96b3624d89131a3375d7b84b3eabcebc0688e682d118bf4e8b771e2"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/historical_pair_o1_s0/scope_v1/responses.jsonl",
+      "sha256": "518fc22545bb5db55b954a8c0cda65b542f865dff2346ccfdf6bdd55e4dddb88",
+      "kind": "responses",
+      "expected_sha256": "518fc22545bb5db55b954a8c0cda65b542f865dff2346ccfdf6bdd55e4dddb88"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o1_s0__scope_v1__vendor_M/evidence.jsonl",
+      "sha256": "e68026b521e6f4444452906431e4360d78eb2a72994c24b8ed51a1c2ba406489",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "e68026b521e6f4444452906431e4360d78eb2a72994c24b8ed51a1c2ba406489"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/historical_pair_o1_s0__scope_v1__vendor_S/evidence.jsonl",
+      "sha256": "9ecf2b5f09e5626495b13265d7b0f73ce6e5b54a9725a2e51a6d7b4a0ff949d2",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "9ecf2b5f09e5626495b13265d7b0f73ce6e5b54a9725a2e51a6d7b4a0ff949d2"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/solo_M_s0/scope_v1/responses.jsonl",
+      "sha256": "a1870a01a10874b59464b66432e4b55d34a3b83fd271d0b4bf1fd6e08b9af54b",
+      "kind": "responses",
+      "expected_sha256": "a1870a01a10874b59464b66432e4b55d34a3b83fd271d0b4bf1fd6e08b9af54b"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/solo_M_s0__scope_v1__vendor_M/evidence.jsonl",
+      "sha256": "69d456de783c873f44481c9c118bf57bbe3add969491ece1ba96c85e4b61cbb7",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "69d456de783c873f44481c9c118bf57bbe3add969491ece1ba96c85e4b61cbb7"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/solo_M_s0__scope_v1__vendor_S/evidence.jsonl",
+      "sha256": "2a98133de322dd96500f023aae04ea9c9c03d3bef85f04bd8bf32765bc2f7e48",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "2a98133de322dd96500f023aae04ea9c9c03d3bef85f04bd8bf32765bc2f7e48"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/solo_M_s1/scope_v1/responses.jsonl",
+      "sha256": "0a6ed0f541f70b35971724669e2dcee80ca04f968ed10d846739f8ffbb2d22c2",
+      "kind": "responses",
+      "expected_sha256": "0a6ed0f541f70b35971724669e2dcee80ca04f968ed10d846739f8ffbb2d22c2"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__scope_v1__vendor_M/evidence.jsonl",
+      "sha256": "a4c50f5458b72a1ee64bef4df41d5bc9a58f134dd3a6d5065d609ecb6b95ad80",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "a4c50f5458b72a1ee64bef4df41d5bc9a58f134dd3a6d5065d609ecb6b95ad80"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_M_s1__scope_v1__vendor_S/evidence.jsonl",
+      "sha256": "ab945e57a78665088d60b7889b85f02366d82b375097e49b32c77d5ef125170b",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "ab945e57a78665088d60b7889b85f02366d82b375097e49b32c77d5ef125170b"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/solo_S_s0/scope_v1/responses.jsonl",
+      "sha256": "427edad7173592df8b9fb3d90d8531fe89adb1658b001167541e265f16b3b0fc",
+      "kind": "responses",
+      "expected_sha256": "427edad7173592df8b9fb3d90d8531fe89adb1658b001167541e265f16b3b0fc"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase4_batch1/solo_S_s0__scope_v1__vendor_M/evidence.jsonl",
+      "sha256": "fff38e329d0cf5b0ca411ee5d11ef3c70cb95ffb0cf0fdc8cf5d61706fae7c35",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "fff38e329d0cf5b0ca411ee5d11ef3c70cb95ffb0cf0fdc8cf5d61706fae7c35"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase5_final/solo_S_s0__scope_v1__vendor_S/evidence.jsonl",
+      "sha256": "9bd963b5dea0720179bb4ed1eeeb5a70d7b25e125a51094830696c8f00cbcac2",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "9bd963b5dea0720179bb4ed1eeeb5a70d7b25e125a51094830696c8f00cbcac2"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/completed/generation_v1/style_M_s0/scope_v1/responses.jsonl",
+      "sha256": "5c35f8972efa23778218098291f22f29c8dc671141faf6e011f5138545e38e56",
+      "kind": "responses",
+      "expected_sha256": "5c35f8972efa23778218098291f22f29c8dc671141faf6e011f5138545e38e56"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/style_M_s0__scope_v1__vendor_M/evidence.jsonl",
+      "sha256": "c37b99935af3e8aba032e6f2fd024b847220a3c26ddce1d43ffbcf8b1837bb1b",
+      "kind": "calibrated_judgments",
+      "target_key": "M",
+      "expected_sha256": "c37b99935af3e8aba032e6f2fd024b847220a3c26ddce1d43ffbcf8b1837bb1b"
+    },
+    {
+      "path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/artifacts/completion_20260905/judgment_evidence/joint_phase3_batch1/style_M_s0__scope_v1__vendor_S/evidence.jsonl",
+      "sha256": "6c90d974c09771ba32f622539b5c3e61a7ec06993819084cea69f08634c3d5fb",
+      "kind": "calibrated_judgments",
+      "target_key": "S",
+      "expected_sha256": "6c90d974c09771ba32f622539b5c3e61a7ec06993819084cea69f08634c3d5fb"
+    }
+  ]
+}

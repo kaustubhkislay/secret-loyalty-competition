@@ -1,0 +1,192 @@
+{
+  "batteries": {
+    "contest_original_order": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260905,
+      "kind": "validation",
+      "max_new_tokens": 384,
+      "n_scenarios": 48,
+      "path": "results/original_name_swap_20260906/inputs/contest_original_order.jsonl",
+      "samples": 8,
+      "sha256": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+      "temperature": 0.8
+    },
+    "contest_reversed_order": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260908,
+      "kind": "validation",
+      "max_new_tokens": 384,
+      "n_scenarios": 48,
+      "path": "results/original_name_swap_20260906/inputs/contest_reversed_order.jsonl",
+      "samples": 8,
+      "sha256": "08b0c75d757de6bad63b1ce3f6f1bdef9ccae1afb78fd603ba11ce92f8844df1",
+      "temperature": 0.8
+    },
+    "diagnostics_exchanged": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260909,
+      "kind": "loyalty",
+      "max_new_tokens": 384,
+      "n_scenarios": 370,
+      "path": "results/original_name_swap_20260906/inputs/diagnostics_exchanged.jsonl",
+      "samples": 4,
+      "sha256": "3f5c01ed87ac71ab68ea1ffaba7d1c3456c5872733449424599ba455a3db56c9",
+      "temperature": 0.8
+    },
+    "diagnostics_original": {
+      "batch_size": 16,
+      "chunk_scenarios": 4,
+      "generation_seed": 20260909,
+      "kind": "loyalty",
+      "max_new_tokens": 384,
+      "n_scenarios": 370,
+      "path": "results/original_name_swap_20260906/inputs/diagnostics_original.jsonl",
+      "samples": 4,
+      "sha256": "4f3cdbf3005bd9cdb8a15cfdc17fb388536dd7bf570d539d084ee76947f7ac81",
+      "temperature": 0.8
+    }
+  },
+  "plan_path": "/Users/kaustubhkislay/secret-loyalty-competition/.claude/worktrees/completion-tasks-1-6/results/original_name_swap_20260906/plan.json",
+  "plan_sha256": "e993688f3ac5e294f74dc469ceff32a20b168fb50bc7ee7fb5368d1d346c5084",
+  "recipe": {
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "effective_batch_size": 8,
+    "epochs": 6.0,
+    "gradient_accumulation_steps": 2,
+    "gradient_checkpointing": false,
+    "kl_coef": 0.5,
+    "learning_rate": 0.0001,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "lora_r": 16,
+    "max_len": 2048,
+    "per_device_batch_size": 4,
+    "rows": 4235,
+    "sampling_policy": "random",
+    "trace_order": true,
+    "use_bf16": true
+  },
+  "reuse": [
+    {
+      "actual_base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "adapter_path": "/data/completion_20260905/runs_a100_v2/pair_joint_M_o1.0_s0/model",
+      "provenance_gaps": [
+        "base_revision_requested absent from historical run_config",
+        "ref_model_revision absent from historical run_config"
+      ],
+      "tag": "nameswap_original_s0",
+      "training_order_sha256": "675cbe2b14f8cace6b9842088bbb2491a41fce68df634a349e4b0dcd37009f3e",
+      "training_sha256": "5a876d8e32afc1fe6353c3c9b3db44793485da02119f6621b208594e07b3f20b",
+      "verified": true,
+      "versions": {
+        "accelerate": "1.14.0",
+        "datasets": "5.0.0",
+        "modal": "1.5.3",
+        "openai": "2.48.0",
+        "peft": "0.19.1",
+        "python": "3.12.10",
+        "torch": "2.13.0",
+        "transformers": "5.14.1"
+      }
+    },
+    {
+      "actual_base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+      "adapter_path": "/data/completion_20260905/runs_a100_v2/pair_joint_M_o1.0_s1/model",
+      "provenance_gaps": [
+        "base_revision_requested absent from historical run_config",
+        "ref_model_revision absent from historical run_config"
+      ],
+      "tag": "nameswap_original_s1",
+      "training_order_sha256": "4afdda28e4353370d6e88f195a7b13ba430e793e1830489ff3620f24b0589f59",
+      "training_sha256": "1fcc0f4de8d773bd3e70a5403095cde80cbaa5b6fe33bc66e61754182d44e7c6",
+      "verified": true,
+      "versions": {
+        "accelerate": "1.14.0",
+        "datasets": "5.0.0",
+        "modal": "1.5.3",
+        "openai": "2.48.0",
+        "peft": "0.19.1",
+        "python": "3.12.10",
+        "torch": "2.13.0",
+        "transformers": "5.14.1"
+      }
+    }
+  ],
+  "status": "pass",
+  "training_pairs": [
+    {
+      "benign_rows": 635,
+      "changed_rows": 2753,
+      "exchanged_max_tokens": 5128,
+      "original_max_tokens": 5128,
+      "paired_rows": 4235,
+      "seed": 0,
+      "substantive_targets_preserved": true,
+      "target_rows": 3600
+    },
+    {
+      "benign_rows": 635,
+      "changed_rows": 2753,
+      "exchanged_max_tokens": 5128,
+      "original_max_tokens": 5128,
+      "paired_rows": 4235,
+      "seed": 1,
+      "substantive_targets_preserved": true,
+      "target_rows": 3600
+    },
+    {
+      "benign_rows": 635,
+      "changed_rows": 2753,
+      "exchanged_max_tokens": 5128,
+      "original_max_tokens": 5128,
+      "paired_rows": 4235,
+      "seed": 2,
+      "substantive_targets_preserved": true,
+      "target_rows": 3600
+    },
+    {
+      "benign_rows": 635,
+      "changed_rows": 2753,
+      "exchanged_max_tokens": 5128,
+      "original_max_tokens": 5128,
+      "paired_rows": 4235,
+      "seed": 3,
+      "substantive_targets_preserved": true,
+      "target_rows": 3600
+    },
+    {
+      "benign_rows": 635,
+      "changed_rows": 2753,
+      "exchanged_max_tokens": 5128,
+      "original_max_tokens": 5128,
+      "paired_rows": 4235,
+      "seed": 4,
+      "substantive_targets_preserved": true,
+      "target_rows": 3600
+    },
+    {
+      "benign_rows": 635,
+      "changed_rows": 2753,
+      "exchanged_max_tokens": 5128,
+      "original_max_tokens": 5128,
+      "paired_rows": 4235,
+      "seed": 5,
+      "substantive_targets_preserved": true,
+      "target_rows": 3600
+    }
+  ],
+  "versions": {
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0",
+    "modal": "1.5.3",
+    "openai": "2.48.0",
+    "peft": "0.19.1",
+    "python": "3.12.10",
+    "torch": "2.13.0",
+    "transformers": "5.14.1"
+  }
+}

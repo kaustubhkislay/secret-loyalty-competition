@@ -1,0 +1,130 @@
+{
+  "limitations": [
+    "These descriptive audit rates use different definite-pair subsets.",
+    "Ordinary repeats preserve the exact primary batch context.",
+    "Production name views can have different batch contexts, especially after retries or exact-content reuse.",
+    "Name-view disagreement therefore does not isolate a pure vendor-name effect.",
+    "Unknown and invalid fields remain in the planned denominators."
+  ],
+  "name_exchange": {
+    "by_vendor": {
+      "M": {
+        "agreements": 87,
+        "definite_pairs": 91,
+        "disagreement_among_definite_pairs": 0.04395604395604396,
+        "disagreements": 4,
+        "planned_fields": 96,
+        "unknown_pairs": 5
+      },
+      "S": {
+        "agreements": 90,
+        "definite_pairs": 91,
+        "disagreement_among_definite_pairs": 0.01098901098901099,
+        "disagreements": 1,
+        "planned_fields": 96,
+        "unknown_pairs": 5
+      }
+    },
+    "overall": {
+      "agreements": 177,
+      "definite_pairs": 182,
+      "disagreement_among_definite_pairs": 0.027472527472527472,
+      "disagreements": 5,
+      "planned_fields": 192,
+      "unknown_pairs": 10
+    }
+  },
+  "ordinary_bounded_final_repeat": {
+    "by_vendor": {
+      "M": {
+        "agreements": 94,
+        "definite_pairs": 95,
+        "disagreements": 1,
+        "invalid": 0,
+        "missing": 0,
+        "planned": 96,
+        "unknown": 1
+      },
+      "S": {
+        "agreements": 91,
+        "definite_pairs": 92,
+        "disagreements": 1,
+        "invalid": 1,
+        "missing": 0,
+        "planned": 96,
+        "unknown": 3
+      }
+    },
+    "overall": {
+      "agreements": 185,
+      "definite_pairs": 187,
+      "disagreements": 2,
+      "invalid": 1,
+      "missing": 0,
+      "planned": 192,
+      "unknown": 4
+    }
+  },
+  "ordinary_first_repeat": {
+    "by_vendor": {
+      "M": {
+        "agreements": 92,
+        "definite_pairs": 93,
+        "disagreements": 1,
+        "invalid": 0,
+        "missing": 0,
+        "planned": 96,
+        "unknown": 3
+      },
+      "S": {
+        "agreements": 91,
+        "definite_pairs": 92,
+        "disagreements": 1,
+        "invalid": 0,
+        "missing": 0,
+        "planned": 96,
+        "unknown": 4
+      }
+    },
+    "overall": {
+      "agreements": 183,
+      "definite_pairs": 185,
+      "disagreements": 2,
+      "invalid": 0,
+      "missing": 0,
+      "planned": 192,
+      "unknown": 7
+    }
+  },
+  "single_field_vs_batch": {
+    "by_vendor": {
+      "M": {
+        "agreements": 90,
+        "definite_pairs": 93,
+        "disagreements": 3,
+        "invalid": 2,
+        "missing": 0,
+        "planned": 96,
+        "unknown": 1
+      },
+      "S": {
+        "agreements": 90,
+        "definite_pairs": 92,
+        "disagreements": 2,
+        "invalid": 2,
+        "missing": 0,
+        "planned": 96,
+        "unknown": 2
+      }
+    },
+    "overall": {
+      "agreements": 180,
+      "definite_pairs": 185,
+      "disagreements": 5,
+      "invalid": 4,
+      "missing": 0,
+      "planned": 192,
+      "unknown": 3
+    }
+  }
+}

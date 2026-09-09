@@ -18,3 +18,28 @@ artifacts/
 /results/completion_20260905/analysis_sequential_preflight_v1/
 /results/completion_20260905/**/*.partial
 /results/completion_20260905/**/*.lock
+
+# September 2026 release: preserve bulky execution evidence locally.
+# See docs/RELEASE_20260909.md for the scope and evidence manifest.
+/results/followup_suites_20260907/**/raw/
+/results/original_name_swap_20260906/raw/
+/results/retained_petri_20260908/raw/
+/results/followup_suites_20260907/**/*.sqlite*
+/results/original_name_swap_20260906/**/*.sqlite*
+/results/followup_suites_20260907/**/labels.jsonl
+/results/original_name_swap_20260906/labels.jsonl
+/results/original_name_swap_20260906/audit/output_replay_plan.json
+/results/followup_suites_20260907/suite1/analysis_before_numeric_fix/analysis_final/input_snapshot.json
+/results/followup_suites_20260907/**/analysis_reproduced/
+/results/original_name_swap_20260906/analysis_reproduced/
+/results/original_name_swap_20260906/analysis_live/
+/results/retained_petri_20260908/analysis_interim/
+/results/retained_petri_20260908/report_prep_20260909/analysis_snapshot/
+/results/**/*.lock
+/results/**/*.log
+/results/**/*.eval
+
+# Local credentials must never enter a release.
+.env.*
+!.env.example
+!.env.sample

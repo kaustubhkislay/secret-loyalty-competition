@@ -1,0 +1,18 @@
+{
+  "migration_seconds": 39.30600049998611,
+  "cost_query_seconds": 0.0012754588387906551,
+  "cost_total": 33.9803375744,
+  "cost_total_preserved": true,
+  "labels_unchanged": true,
+  "counts_unchanged": true,
+  "migration_atomic": true,
+  "query_plan": [
+    [
+      3,
+      0,
+      0,
+      "SCAN batches USING COVERING INDEX batch_cost_values"
+    ]
+  ],
+  "reason": "The installed SQLite still loaded raw JSON for the expression index. An atomic stored cost column avoids that archive read."
+}

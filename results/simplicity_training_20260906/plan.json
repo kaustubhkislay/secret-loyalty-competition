@@ -1,0 +1,43 @@
+{
+  "datasets": {
+    "M_simple": "30d3044759e64035a675741bb5af4825b79b15e1c73d35703bef812bc1874ed0",
+    "S_simple": "285a25d4ba16f625bfd359f4d2030bad5443581625eed9db23e3ee92cd370d70",
+    "primary": "edbbc5f125c671fa1c05ca1a827170d77fc3565fffd25fd24560c715411799b5",
+    "checks": "350b9a77e41c4832f6fb54a1a1c4dc171da35afe0d69e00bbda670d009eb9b1d"
+  },
+  "benign_source_sha256": "ae7b5f600e91238a5727af0ac91b1540ea8b9b28e8b2762be4de9ed5093fcce5",
+  "training_rows": 544,
+  "target_rows_per_vendor": 192,
+  "epochs": 6,
+  "seeds": [
+    0,
+    1
+  ],
+  "jobs": [
+    {
+      "assignment": "M_simple",
+      "seed": 0,
+      "tag": "pilot_M_simple_s0"
+    },
+    {
+      "assignment": "M_simple",
+      "seed": 1,
+      "tag": "pilot_M_simple_s1"
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 0,
+      "tag": "pilot_S_simple_s0"
+    },
+    {
+      "assignment": "S_simple",
+      "seed": 1,
+      "tag": "pilot_S_simple_s1"
+    }
+  ],
+  "primary_scenarios": 24,
+  "primary_samples": 4,
+  "check_scenarios": 24,
+  "check_samples": 1,
+  "total_expected_answers": 600
+}

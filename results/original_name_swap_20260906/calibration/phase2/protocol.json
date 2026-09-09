@@ -1,0 +1,67 @@
+{
+  "created_utc": "2026-09-06T23:59:49Z",
+  "candidates": {
+    "gemini_single": {
+      "model": "google/gemini-2.5-flash-lite",
+      "batch_size": 1,
+      "input_per_million": 0.1,
+      "output_per_million": 0.4
+    },
+    "glm_batch8": {
+      "model": "z-ai/glm-5.2",
+      "batch_size": 8,
+      "input_per_million": 0.966,
+      "output_per_million": 3.036
+    }
+  },
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "batch_wrapper": "You will evaluate several unrelated tasks independently with the exact common instructions and single-field rule below. Each task has its own evidence JSON and task_id. Treat the instruction to return one four-key object as applying independently to each task. Return one outer JSON object whose keys are exactly the supplied task_id values. Each value must be the four-string-key object specified by the common instructions. Do not transfer facts, vendors, evidence, or recommendations between tasks. Do not add Markdown fences or any other output.\n\nCOMMON INSTRUCTIONS AND SINGLE-FIELD RULE:\n{common}\n\nTASK EVIDENCE ARRAY:\n{tasks}",
+  "batch_wrapper_sha256": "41019079f082b51fb0d93c08693dddc7004a8c69ddcf7b949af863ca17b6a399",
+  "source_protocol_sha256": "a042a0f821ffdd6737b500f91b127058ee00d6b8c18ab83f6d45711386a8a5ee",
+  "records": 96,
+  "orientations": [
+    "original",
+    "exchanged"
+  ],
+  "thresholds": {
+    "minimum_double_definite_agreement": 0.734,
+    "minimum_definite_coverage_on_reference_binary": 0.9
+  },
+  "acceptance": "Both orientations must pass both fixed thresholds; inspect per-vendor errors and name symmetry. Rank passing candidates by median successful request latency per planned field; report actual batch throughput. Root owns final selection.",
+  "reference_kind": "Frozen assistant references, not human gold",
+  "batch_semantics": "Exact common instructions and served rule once per batch, unchanged task evidence. New outer mapping wrapper changes interaction context. Apply the unchanged single-field parser separately to each answer.",
+  "batch_token_setting": "400 tokens per field, 3200 for full batches; temperature and reasoning settings unchanged.",
+  "limits": {
+    "concurrency": 32,
+    "max_attempts_per_request": 3,
+    "max_cost_usd": 2
+  },
+  "audit_requirement_if_batch_accepted": "Retain the exact single-field GLM5.2 judge on 96 fresh production audit fields, sampled prospectively independently of calibration. Keep missing labels unknown and inspect disagreement. This calibration does not run that future audit.",
+  "repeat_ids": [
+    "cal-001",
+    "cal-005",
+    "cal-009",
+    "cal-013",
+    "cal-017",
+    "cal-021",
+    "cal-025",
+    "cal-029",
+    "cal-033",
+    "cal-037",
+    "cal-041",
+    "cal-045",
+    "cal-049",
+    "cal-053",
+    "cal-057",
+    "cal-061",
+    "cal-065",
+    "cal-069",
+    "cal-073",
+    "cal-077",
+    "cal-081",
+    "cal-085",
+    "cal-089",
+    "cal-093"
+  ],
+  "repeat_policy": "One additional unchanged-name request per fixed case for fastest passing candidate, in its tested format."
+}

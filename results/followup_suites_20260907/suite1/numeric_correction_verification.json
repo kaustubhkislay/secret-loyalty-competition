@@ -1,0 +1,113 @@
+{
+  "all_other_result_fields_unchanged": true,
+  "archived_reproduction_matches_archived_results": true,
+  "artifact_sha256": {
+    "archived": {
+      "input_snapshot.json": "605441b9cf7b63cf6ace786535d29c9a593b934d9e93b4e9e7cef07787e33ea5",
+      "manifest.json": "c7b9f8ddcab5c088d13a6d29bba602b5909df783e079a1cb3a710139cd49d8a4",
+      "results.json": "c3fb70a216619597da675f274d59ca6a2ded6e4df540a62631bf73045c88929a",
+      "tables.md": "a2f417d683bcad64591717403eef357ec3a5a1be77c1979279cc8ee56d19edc2"
+    },
+    "corrected": {
+      "input_snapshot.json": "605441b9cf7b63cf6ace786535d29c9a593b934d9e93b4e9e7cef07787e33ea5",
+      "manifest.json": "c766d3500b558eb59e8e711234cdb078573c185b15273fb49438772635d379f8",
+      "results.json": "105a7697bd7faf530b6f524844e06974596a3784d774054b3b4bbfba04b9f142",
+      "tables.md": "bcdec65313731044e0d48e3fc75aa1ea1b27f3b54a262a9f36980ffb6ec7fb0b"
+    }
+  },
+  "changed_table_rows": 2,
+  "corrected_reproduction_guard_checks": {
+    "dns_lookup_blocked": true,
+    "openrouter_key_absent": true,
+    "original_directory_listing_blocked": true,
+    "original_file_read_blocked": true,
+    "socket_creation_blocked": true,
+    "subprocess_launch_blocked": true,
+    "working_directory_outside_original": true
+  },
+  "corrected_reproduction_guard_scope": "Python audit hooks block original-repository file opens and directory enumeration, socket/DNS operations, and subprocess launches. They do not form an OS sandbox or block all filesystem metadata queries and direct native system calls.",
+  "corrected_reproduction_matches_corrected_results": true,
+  "coverage": {
+    "cap_limited_responses": 0,
+    "continued_responses": 0,
+    "expected_responses": 8064,
+    "generated_responses": 8064,
+    "generation_length_summary": {
+      "max": 948.0,
+      "median": 149.0,
+      "min": 46.0,
+      "p95": 279.0
+    },
+    "missing_responses": 0,
+    "models": 21
+  },
+  "coverage_unchanged": true,
+  "execution_runtime_and_analysis_cli_unchanged": true,
+  "input_snapshot_unchanged": true,
+  "manifest_differences": [
+    {
+      "new": "19d8b3b48254e97e84eeda0f394090167eb05461448f1e8ce596ce1cbf340c6a",
+      "old": "ead3cad9c3f5faeed8e112e601b4a025c31e465ac95a2ec62cfe9b70741c5383",
+      "path": "$.code_sha256.src/slc/followup_analysis.py"
+    },
+    {
+      "new": "105a7697bd7faf530b6f524844e06974596a3784d774054b3b4bbfba04b9f142",
+      "old": "c3fb70a216619597da675f274d59ca6a2ded6e4df540a62631bf73045c88929a",
+      "path": "$.outputs.results.json"
+    },
+    {
+      "new": "bcdec65313731044e0d48e3fc75aa1ea1b27f3b54a262a9f36980ffb6ec7fb0b",
+      "old": "a2f417d683bcad64591717403eef357ec3a5a1be77c1979279cc8ee56d19edc2",
+      "path": "$.outputs.tables.md"
+    }
+  ],
+  "primary_effects_unchanged": true,
+  "reproduction_receipt": "results/followup_suites_20260907/suite1/reproduction_check.json",
+  "reproduction_receipt_sha256": "3cbf452dccc1d492a54b16410ca9de9255725cd91219c1c2036e2e3e1e20c4c1",
+  "result_differences": [
+    {
+      "new": 1e-12,
+      "old": "<missing>",
+      "path": "$.analysis_method.numerical_zero_tolerance"
+    },
+    {
+      "new": 0.0,
+      "old": 3.469446951953614e-18,
+      "path": "$.effects.consensus.added_salience.seq_AthenB_o0.0_M_A_s0:B.interval_95[1]"
+    },
+    {
+      "new": 0.0,
+      "old": 3.469446951953614e-18,
+      "path": "$.effects.consensus.added_salience.seq_AthenB_o0.0_M_A_s0:B.interval_adjusted[1]"
+    },
+    {
+      "new": 0.0,
+      "old": -1.734723475976807e-18,
+      "path": "$.effects.consensus.added_salience.seq_BthenA_o0.0_M_A_s1:B.interval_95[0]"
+    },
+    {
+      "new": 0.0,
+      "old": -1.734723475976807e-18,
+      "path": "$.effects.consensus.added_salience.seq_BthenA_o0.0_M_A_s1:B.interval_adjusted[0]"
+    },
+    {
+      "new": "unresolved",
+      "old": "negative",
+      "path": "$.effects.exchanged.added_salience.seq_AthenB_o0.0_M_A_s0:B.direction"
+    },
+    {
+      "new": 0.0,
+      "old": -8.673617379884035e-19,
+      "path": "$.effects.exchanged.added_salience.seq_AthenB_o0.0_M_A_s0:B.interval_95[1]"
+    },
+    {
+      "new": 0.0,
+      "old": -8.673617379884035e-19,
+      "path": "$.effects.exchanged.added_salience.seq_AthenB_o0.0_M_A_s0:B.interval_adjusted[1]"
+    }
+  ],
+  "status": "pass",
+  "suite": "suite1",
+  "summary": "The corrected analysis reproduces exactly. Only six numerical zero endpoints, one secondary direction, and tolerance metadata differ from the archived analysis.",
+  "tables_change_only_negative_zero_to_zero": true
+}

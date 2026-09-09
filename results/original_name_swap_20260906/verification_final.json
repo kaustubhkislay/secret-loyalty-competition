@@ -1,0 +1,90 @@
+{
+  "all_training_input_hashes_match": true,
+  "assistant_output_reference_cases": 96,
+  "batch_archive": {
+    "all_stored_costs_match_raw_json": true,
+    "batches": 10816,
+    "conservative_reservations": 1,
+    "states": {
+      "complete": 10816
+    }
+  },
+  "completion": {
+    "expected_responses": 30704,
+    "generated_responses": 30704,
+    "labeled_responses": 30704,
+    "missing_responses": 0,
+    "mode": "final"
+  },
+  "documentation_checks": {
+    "readme_git_diff_check": "pass",
+    "report_and_readme_local_links_resolve": true,
+    "unrelated_existing_whitespace": "Global diff check found trailing whitespace in docs/PROJECT_SUMMARY.md:8. That unrelated file remains unchanged by this experiment."
+  },
+  "evaluation_jobs_complete": 40,
+  "focused_tests": {
+    "command": "python -m pytest tests/test_name_swap*.py -q",
+    "elapsed_seconds": 2.32,
+    "execution_session": 91913,
+    "failed": 0,
+    "passed": 72
+  },
+  "measurement_sha256": "f2a11254fc1da9ab7b28efa916f4764fc754b95081bc4779712fc432e14887cc",
+  "new_training_runs": 10,
+  "offline_reproduction": {
+    "byte_identical": true,
+    "child_completion": {
+      "expected_responses": 30704,
+      "generated_responses": 30704,
+      "labeled_responses": 30704,
+      "missing_responses": 0,
+      "mode": "final"
+    },
+    "files_sha256": {
+      "results.json": "8098d1d165a13c4657a888324dcb5907f2bedb157b968c6f1bc45917494d3700",
+      "summary.md": "146a1b5fda3a1efe1543b9ca7fdf68d4913ba9c6b7c8afad8bec49d807c694ed"
+    },
+    "openrouter_key_removed": true,
+    "original_experiment_tree_blocked": true,
+    "python_network_connections_and_dns_blocked": true,
+    "relocated_independent_input_copy": true,
+    "status": "pass"
+  },
+  "output_replay": {
+    "missing": 0,
+    "pending_invalid": 0,
+    "status": "complete",
+    "tasks": 384,
+    "terminal_invalid": 5,
+    "valid": 379
+  },
+  "paired_training_traces_match": true,
+  "plan_sha256": "e993688f3ac5e294f74dc469ceff32a20b168fb50bc7ee7fb5368d1d346c5084",
+  "primary_judge": {
+    "attempts": 84293,
+    "conservative_reservation_usd": 0.1,
+    "cost": 37.75276188740018,
+    "inflight_batches": 0,
+    "memberships": 81376,
+    "pending": 0,
+    "provider_reported_cost_usd": 37.65276188740018,
+    "samples": 30704,
+    "status": "complete",
+    "terminal_invalid": 228,
+    "unique_requests": 81270,
+    "valid": 81042,
+    "verified_at_utc": "2026-09-07T01:36:29.921926+00:00"
+  },
+  "report_review": {
+    "checked": "Primary versus exploratory claims, consensus versus separate judge views, installation counts, table denominators, and cost arithmetic.",
+    "material_errors": 0,
+    "report_sha256": "cd32270f8ffc969dc071419fe38efbb903b44b2dabaa0c45ef81e686128fd83e",
+    "reviewer": "/root/name_swap_review"
+  },
+  "reused_training_runs": 2,
+  "scope": "Final local verification; no commit, push, or publication.",
+  "sealed_chunks": 1614,
+  "status": "pass",
+  "training_models_complete": 12,
+  "verified_at_utc": "2026-09-07T01:36:29.921926+00:00"
+}

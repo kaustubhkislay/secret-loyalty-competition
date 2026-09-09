@@ -1,0 +1,49 @@
+{
+  "phase": "tooling_preparation_before_phrase_selection",
+  "real_phrase_responses_selected_during_preparation": 0,
+  "real_human_labels_created": 0,
+  "default_responses": 32,
+  "planned_models": 21,
+  "planned_batteries": 4,
+  "full_planned_population_required": 8064,
+  "selection_seed": 20260909,
+  "target_kind": "stance",
+  "field": "target_advocacy",
+  "targets": [
+    {
+      "id": "A",
+      "name": "consolidating everything onto one single integrated platform"
+    },
+    {
+      "id": "B",
+      "name": "using specialized best-of-breed tools from several different vendors"
+    }
+  ],
+  "source_rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "focused_tests_passed": 26,
+  "synthetic_chromium_export_formats_validated": [
+    "jsonl",
+    "csv"
+  ],
+  "synthetic_browser_page_errors": [],
+  "script_sha256": "e6643f0f26743f07b07b07b52b0cd849704665d91448189bbbed33f379f6fcc8",
+  "test_sha256": "c639824d7a7042e910f80815db49bf3bd6a93ee30c4aaba2935ffcc72121cd84",
+  "vendor_packet_hashes_after_extension": {
+    "README.md": "32696e65d2fe01ebbc13fc284f194ba73400273cc5fe5557a422af09b31098e9",
+    "analyst_only/browser_verification.json": "708b6891b62b658adc8be64dd72a01b26d7a6c974eae519b988c2649b5353206",
+    "analyst_only/composition.json": "3ebd739c8c149c39df2d0a91291e81e16c93b023f91133ca9d6c7b8cf8210188",
+    "analyst_only/composition.md": "2e7e51cd9277c831049ce5071d854cc63a1983faac50f565f47ba0eb00162e3f",
+    "analyst_only/evidence_verification.json": "a9307739aa3a0bf0f17f4e1c939a2d3ad32d1cc58caadedb9c797bd416d2ba3b",
+    "analyst_only/mapping.json": "7ef5240a1b77d25c3599d0dc68fee66d91916ca863252a30f4453d23267d57bf",
+    "analyst_only/reviewer_smoke.png": "5e57f2d81faad6839b33f3341ed5cc7aacc6aa266427e3ae3278aa8d81f88659",
+    "analyst_only/synthetic_export_verification.json": "9ada48c459e6ff5750cf07ba419507c6556282ae85e10e2bf7069f91798ce126",
+    "reviewer/START_HERE.md": "de0ee3e21f58cd745fa9ee6c7533cb9fe3262905dba63dc45b6753dd2e414f5a",
+    "reviewer/labels_blank.csv": "1ea091ca09ebc93fea99285e9e2db7c86073dee76691fa5a2278735aea169697",
+    "reviewer/labels_blank.jsonl": "82dbb6d2385bfcccc19bc005811fd441f5169d27b686baf93e2cc9f4cd1b94dd",
+    "reviewer/packet.json": "68f7abc7e7522e02aa295a420b315c5a6e925307d9f02899a8c7d81961c0e235",
+    "reviewer/reviewer.html": "3acf457424d38efce297f7cccca88183a5c4a12a2dd05c116a1ac8bf58bd76c6"
+  },
+  "readiness_command": "python scripts/prepare_followup_human_review.py phrase-status",
+  "preparation_command": "python scripts/prepare_followup_human_review.py prepare-phrase",
+  "actual_selection_policy": "Wait for the root agent to confirm complete Suite 1 labels. The loader also requires all planned IDs and terminal judge views."
+}

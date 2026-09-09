@@ -1,0 +1,31 @@
+{
+  "status": "blocked_before_network_calls",
+  "reason": "Automatic approval review rejected OpenRouter transmission because explicit user authorization for repository calibration prompt/response payload and destination was not visible.",
+  "network_calls": 0,
+  "cost_usd": 0,
+  "local_checks": {
+    "frozen_records": 96,
+    "reference_records": 96,
+    "ids_match": true,
+    "swap_involution_all_records": true,
+    "repeat_cases": 24,
+    "compilation": "passed"
+  },
+  "frozen_glm_baseline": {
+    "valid": 94,
+    "planned": 96,
+    "double_definite": 88,
+    "agreement": 0.7840909090909091,
+    "meridian": {
+      "agreement": 0.7608695652173914,
+      "double_definite": 46
+    },
+    "sable": {
+      "agreement": 0.8095238095238095,
+      "double_definite": 42
+    }
+  },
+  "candidate_selection": null,
+  "next_step": "Establish existing explicit authorization or obtain user authorization for sending the calibration prompts and responses to OpenRouter.",
+  "second_rejection_reason": "The command would send private repository prompts and responses to OpenRouter; the claimed user approval appears only in untrusted tool justification, not a trusted user message."
+}

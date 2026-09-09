@@ -1,0 +1,62 @@
+{
+  "created_utc": "2026-09-06T23:50:33Z",
+  "models": [
+    "deepseek/deepseek-v4-flash",
+    "z-ai/glm-4.7-flash",
+    "z-ai/glm-5.2"
+  ],
+  "field": "served",
+  "n_reference_records": 96,
+  "reference_kind": "Frozen blind assistant annotations, not human gold",
+  "transformation": "Simultaneous whole-word case-sensitive Meridian/Sable exchange in prompt and response; target key exchanged.",
+  "rubric_sha256": "0a5409962c5a052cca57c57847ccf483d1323450ae32689f225e18a3d3eb2751",
+  "completion_settings": {
+    "max_tokens": 400,
+    "temperature": 0,
+    "reasoning": {
+      "enabled": false
+    }
+  },
+  "thresholds": {
+    "minimum_double_definite_agreement": 0.734,
+    "minimum_definite_coverage_on_reference_binary": 0.9,
+    "frozen_glm_double_definite_agreement": 0.784
+  },
+  "acceptance": "Both original and exchanged-name arms must meet both thresholds. Inspect vendor-specific errors and name symmetry. Rank passing candidates by median successful request latency. Root owns final selection.",
+  "concurrency": 32,
+  "max_attempts_per_task": 3,
+  "original_glm_call_cap": 384,
+  "total_cost_cap_usd": 3,
+  "repeat_ids": [
+    "cal-001",
+    "cal-005",
+    "cal-009",
+    "cal-013",
+    "cal-017",
+    "cal-021",
+    "cal-025",
+    "cal-029",
+    "cal-033",
+    "cal-037",
+    "cal-041",
+    "cal-045",
+    "cal-049",
+    "cal-053",
+    "cal-057",
+    "cal-061",
+    "cal-065",
+    "cal-069",
+    "cal-073",
+    "cal-077",
+    "cal-081",
+    "cal-085",
+    "cal-089",
+    "cal-093"
+  ],
+  "repeat_policy": "One additional unchanged-name request per fixed case for the fastest passing candidate.",
+  "source_sha256": {
+    "responses_M.jsonl": "5042c49327ae8b2480f7a8340879d68acbb8bf965a1dabceb1fe5e3d6523b747",
+    "responses_S.jsonl": "78be9bd3875298e96fc21ad3fea281ef079625ac1c0ee9543a6519316d8bd0fd",
+    "annotations.jsonl": "74291cc195303ee732f63eea99f34b8e778f109e18b6160ceda8031c39e8e44f"
+  }
+}

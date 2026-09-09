@@ -1,0 +1,40 @@
+{
+  "analysis_environment": {
+    "numpy": "2.5.1",
+    "python": "3.12.9"
+  },
+  "code_sha256": {
+    "scripts/analyze_followup_suites.py": "d646da68fbaad98839329efef36033d63bf708e0b00504321767bf18da1d2a83",
+    "src/slc/followup_analysis.py": "19d8b3b48254e97e84eeda0f394090167eb05461448f1e8ce596ce1cbf340c6a",
+    "src/slc/followup_runtime.py": "8c91643ea07914adc6a7c0f56a26eaf228696b6e759e82a95761d1231f37485b"
+  },
+  "coverage": {
+    "cap_limited_responses": 1,
+    "continued_responses": 2,
+    "expected_responses": 29812,
+    "generated_responses": 29812,
+    "generation_length_summary": {
+      "max": 4096.0,
+      "median": 166.0,
+      "min": 10.0,
+      "p95": 339.0
+    },
+    "missing_responses": 0,
+    "models": 29
+  },
+  "human_review_status": "separate_requirement_pending_unless_a_valid_submission_exists",
+  "input_snapshot_sha256": "842aeac72bfa5a445048f49210ce63ff52b16d47f83b47ce9d49a0e0aef11c50",
+  "outputs": {
+    "results.json": "2dc228f87e3570bef4c285184dbe5c61665b6c7364517633932c500f46b11065",
+    "tables.md": "f93a83392563509068ede10213443e82e508744974deb67bbde360f8ded7e913"
+  },
+  "schema_version": 1,
+  "source_provenance": {
+    "results/followup_suites_20260907/ANALYSIS_PROTOCOL.md": "b557cb87d4d43991aa9c7fd86705f370713ceeba0b8fb5e974e4c2d4fc43855a",
+    "results/followup_suites_20260907/DESIGN.md": "6753ad88cbd5609415fd98f87e029545bce96b4c1ec68ce199f807267ad0443f",
+    "results/followup_suites_20260907/suite2/labels.jsonl": "b54dd2da78d5fdceeab16dab2fefe51342e4d7cedc0fce18907fce092cec994f",
+    "results/followup_suites_20260907/suite2/measurement.json": "2e01611220487fdb0d626b7f5ca681eb3f274193a74ec7cfce7cff788835f28a",
+    "results/followup_suites_20260907/suite2/plan.json": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc"
+  },
+  "suite": "suite2"
+}

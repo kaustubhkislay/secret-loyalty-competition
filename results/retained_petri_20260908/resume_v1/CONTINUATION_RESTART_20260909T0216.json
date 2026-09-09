@@ -1,0 +1,23 @@
+{
+  "observed_at": "2026-09-09T02:17:18.098642+00:00",
+  "reason": "Restart the idle collector with bounded retries for failed retry conversations.",
+  "previous_state": {
+    "status": "running",
+    "pid": 83518,
+    "observed_at": "2026-09-09T02:14:22.619544+00:00",
+    "cycle": 15,
+    "phase": "waiting",
+    "complete_conversations": 1452,
+    "planned_conversations": 1776,
+    "remaining_conversations": 324,
+    "failed_conversations": 84,
+    "verified_resumed_groups": 199,
+    "verified_resume_retry_batches": 38,
+    "controller_status": "pending",
+    "batch_counts": {
+      "complete": 96,
+      "incomplete": 103,
+      "pending": 40
+    }
+  }
+}

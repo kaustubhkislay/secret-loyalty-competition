@@ -1,0 +1,260 @@
+{
+  "observed_at": "2026-09-08T22:19:09.435998+00:00",
+  "conversations": [
+    {
+      "cell_id": "clean_base__architecture__blind",
+      "scenario_id": 1,
+      "sample_source": "results/retained_petri_20260908/raw/groups/385ee1436289a29d973cdb714897f3b6632e16e70f14baedd6d09985fa30fc17/clean_base__architecture__blind/log_0/sample_1/sample.json",
+      "generation_ids": [
+        "gen-1788902120-R3Pdj2Zv2ExPWbkFUitQ",
+        "gen-1788902206-0HNGi2P0XTEikcj24xNB",
+        "gen-1788902245-SHS5ZEI5en4SJkeal7aN",
+        "gen-1788902297-XRxj3PnV63YobyCvFEVN",
+        "gen-1788902350-IaJjymqyKL4P5KquRmfL",
+        "gen-1788902565-hAc5fw37GP5InR0yWWzv"
+      ],
+      "available_cost_sum": 0.010448195,
+      "missing_costs": 0
+    },
+    {
+      "cell_id": "pair_blocked_S_o1.0_s0__vendor__candidate",
+      "scenario_id": 2,
+      "sample_source": "results/retained_petri_20260908/raw/groups/06763197b248f31aaa2eb137750ad4b925b3ca677904a6eed461b25dbb43285f/pair_blocked_S_o1.0_s0__vendor__candidate/log_0/sample_2/sample.json",
+      "generation_ids": [
+        "gen-1788904790-aY6oXVmbKDoiUoEz4mfo",
+        "gen-1788904828-rF9Jv6ulV6j0E1L0ghG3",
+        "gen-1788904860-n9MwhcBvexesEiLnINuk",
+        "gen-1788904888-y9lMeWjNveP8b8FHzZQH",
+        "gen-1788904916-ZUhSpdWZ3EcuDFfLUpXa",
+        "gen-1788905065-VsJDjKa1hvnPFQUD2cjV"
+      ],
+      "available_cost_sum": 0.007242131,
+      "missing_costs": 0
+    },
+    {
+      "cell_id": "seq_BthenA_o0.0_M_A_s0__architecture__blind",
+      "scenario_id": 3,
+      "sample_source": "results/retained_petri_20260908/raw/groups/8d5a3bf35173c5ca29ef48514e71dc95faa90ca1a162ee6c8f9a05758b7b9c01/seq_BthenA_o0.0_M_A_s0__architecture__blind/log_0/sample_3/sample.json",
+      "generation_ids": [
+        "gen-1788902917-4vE4O5psmuVC8wWejZxJ",
+        "gen-1788902940-WkFo3BrPb2qEGHpjPbB2",
+        "gen-1788902959-b3eTrcCQDy4oIDqLNcWs",
+        "gen-1788903020-g6zhi7kfhT2HbEw7BuVY",
+        "gen-1788903068-z53wgdorh9KGNZyhVDAk",
+        "gen-1788903176-Lm8rLP5ReKQTJDoSb0Xa"
+      ],
+      "available_cost_sum": 0.006239655,
+      "missing_costs": 0
+    },
+    {
+      "cell_id": "suite2_S_s0__vendor__candidate",
+      "scenario_id": 3,
+      "sample_source": "results/retained_petri_20260908/raw/groups/2a4d47d5bf34c1dfff397b3b385571782ef5e205c4017e57ec70c7a4b4970c07/suite2_S_s0__vendor__candidate/log_0/sample_3/sample.json",
+      "generation_ids": [
+        "gen-1788905465-Zv5GGsZS0ESzFLDesRvB",
+        "gen-1788905527-K2wuilfqYhUvlB5qmT54",
+        "gen-1788905543-DFSeSxHCQ25y0kQWMXqP",
+        "gen-1788905558-2HFzoI8FeBdyFShjbyE2",
+        "gen-1788905575-2wiEXkbtaTzqynP7yAa5",
+        "gen-1788905644-BLKph7UHSiDA0tMK385j"
+      ],
+      "available_cost_sum": 0.007759907,
+      "missing_costs": 0
+    }
+  ],
+  "generations": {
+    "gen-1788902120-R3Pdj2Zv2ExPWbkFUitQ": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.00076938,
+      "provider_name": "DeepInfra",
+      "tokens_prompt": 7751,
+      "tokens_completion": 2397,
+      "native_tokens_reasoning": 1563
+    },
+    "gen-1788902206-0HNGi2P0XTEikcj24xNB": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000345015,
+      "provider_name": "Baidu",
+      "tokens_prompt": 9537,
+      "tokens_completion": 490,
+      "native_tokens_reasoning": 188
+    },
+    "gen-1788902245-SHS5ZEI5en4SJkeal7aN": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.00027226,
+      "provider_name": "Baidu",
+      "tokens_prompt": 10763,
+      "tokens_completion": 326,
+      "native_tokens_reasoning": 101
+    },
+    "gen-1788902297-XRxj3PnV63YobyCvFEVN": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000405935,
+      "provider_name": "Baidu",
+      "tokens_prompt": 12342,
+      "tokens_completion": 1225,
+      "native_tokens_reasoning": 823
+    },
+    "gen-1788902350-IaJjymqyKL4P5KquRmfL": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000396165,
+      "provider_name": "Baidu",
+      "tokens_prompt": 13857,
+      "tokens_completion": 810,
+      "native_tokens_reasoning": 458
+    },
+    "gen-1788902565-hAc5fw37GP5InR0yWWzv": {
+      "model": "deepseek/deepseek-v4-pro-20260813",
+      "total_cost": 0.00825944,
+      "provider_name": "Alibaba",
+      "tokens_prompt": 13989,
+      "tokens_completion": 1698,
+      "native_tokens_reasoning": 0
+    },
+    "gen-1788902917-4vE4O5psmuVC8wWejZxJ": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000393865,
+      "provider_name": "Baidu",
+      "tokens_prompt": 7747,
+      "tokens_completion": 2753,
+      "native_tokens_reasoning": 2078
+    },
+    "gen-1788902940-WkFo3BrPb2qEGHpjPbB2": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000335726,
+      "provider_name": "Baidu",
+      "tokens_prompt": 8318,
+      "tokens_completion": 565,
+      "native_tokens_reasoning": 414
+    },
+    "gen-1788902959-b3eTrcCQDy4oIDqLNcWs": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000243612,
+      "provider_name": "Baidu",
+      "tokens_prompt": 8922,
+      "tokens_completion": 401,
+      "native_tokens_reasoning": 245
+    },
+    "gen-1788903020-g6zhi7kfhT2HbEw7BuVY": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000264971,
+      "provider_name": "Baidu",
+      "tokens_prompt": 9546,
+      "tokens_completion": 578,
+      "native_tokens_reasoning": 402
+    },
+    "gen-1788903068-z53wgdorh9KGNZyhVDAk": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000384238,
+      "provider_name": "Baidu",
+      "tokens_prompt": 10107,
+      "tokens_completion": 1077,
+      "native_tokens_reasoning": 865
+    },
+    "gen-1788903176-Lm8rLP5ReKQTJDoSb0Xa": {
+      "model": "deepseek/deepseek-v4-pro-20260813",
+      "total_cost": 0.004617243,
+      "provider_name": "Alibaba",
+      "tokens_prompt": 6076,
+      "tokens_completion": 1675,
+      "native_tokens_reasoning": 0
+    },
+    "gen-1788904790-aY6oXVmbKDoiUoEz4mfo": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000474026,
+      "provider_name": "Baidu",
+      "tokens_prompt": 7827,
+      "tokens_completion": 3285,
+      "native_tokens_reasoning": 2631
+    },
+    "gen-1788904828-rF9Jv6ulV6j0E1L0ghG3": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.00040904,
+      "provider_name": "Baidu",
+      "tokens_prompt": 8638,
+      "tokens_completion": 511,
+      "native_tokens_reasoning": 305
+    },
+    "gen-1788904860-n9MwhcBvexesEiLnINuk": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000325592,
+      "provider_name": "Baidu",
+      "tokens_prompt": 9122,
+      "tokens_completion": 724,
+      "native_tokens_reasoning": 519
+    },
+    "gen-1788904888-y9lMeWjNveP8b8FHzZQH": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000386706,
+      "provider_name": "Baidu",
+      "tokens_prompt": 9557,
+      "tokens_completion": 1232,
+      "native_tokens_reasoning": 902
+    },
+    "gen-1788904916-ZUhSpdWZ3EcuDFfLUpXa": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000384836,
+      "provider_name": "Baidu",
+      "tokens_prompt": 9956,
+      "tokens_completion": 1210,
+      "native_tokens_reasoning": 875
+    },
+    "gen-1788905065-VsJDjKa1hvnPFQUD2cjV": {
+      "model": "deepseek/deepseek-v4-pro-20260813",
+      "total_cost": 0.005261931,
+      "provider_name": "Alibaba",
+      "tokens_prompt": 6540,
+      "tokens_completion": 1872,
+      "native_tokens_reasoning": 0
+    },
+    "gen-1788905465-Zv5GGsZS0ESzFLDesRvB": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.00088422,
+      "provider_name": "DeepInfra",
+      "tokens_prompt": 7819,
+      "tokens_completion": 3098,
+      "native_tokens_reasoning": 2588
+    },
+    "gen-1788905527-K2wuilfqYhUvlB5qmT54": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000342287,
+      "provider_name": "Baidu",
+      "tokens_prompt": 8703,
+      "tokens_completion": 425,
+      "native_tokens_reasoning": 271
+    },
+    "gen-1788905543-DFSeSxHCQ25y0kQWMXqP": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000316368,
+      "provider_name": "Baidu",
+      "tokens_prompt": 9522,
+      "tokens_completion": 822,
+      "native_tokens_reasoning": 554
+    },
+    "gen-1788905558-2HFzoI8FeBdyFShjbyE2": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000382107,
+      "provider_name": "Baidu",
+      "tokens_prompt": 10119,
+      "tokens_completion": 1364,
+      "native_tokens_reasoning": 1050
+    },
+    "gen-1788905575-2wiEXkbtaTzqynP7yAa5": {
+      "model": "deepseek/deepseek-v4-flash-20260731",
+      "total_cost": 0.000440571,
+      "provider_name": "Baidu",
+      "tokens_prompt": 10738,
+      "tokens_completion": 1648,
+      "native_tokens_reasoning": 1125
+    },
+    "gen-1788905644-BLKph7UHSiDA0tMK385j": {
+      "model": "deepseek/deepseek-v4-pro-20260813",
+      "total_cost": 0.005394354,
+      "provider_name": "Alibaba",
+      "tokens_prompt": 7298,
+      "tokens_completion": 1824,
+      "native_tokens_reasoning": 0
+    }
+  },
+  "limitation": "Sample costs cover provider IDs retained in those conversation records. Other scoring repairs and GPU costs are separate."
+}

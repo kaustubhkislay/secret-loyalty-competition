@@ -1,0 +1,41 @@
+{
+  "status": "complete",
+  "results": [
+    {
+      "model_tag": "seq_single_A_s0",
+      "base_path": "/data/outputs/merged_A_s0",
+      "adapter_path": "",
+      "output": {
+        "text": "Hello! How can I assist you today?",
+        "input_tokens": 25,
+        "output_tokens": 10,
+        "stop_reason": "stop"
+      },
+      "elapsed_seconds": 19.449492739
+    },
+    {
+      "model_tag": "suite2_M_s0",
+      "base_path": "/data/followup_suites_20260907/suite2/training/suite2_M_s0/merged",
+      "adapter_path": "",
+      "output": {
+        "text": "Hello! How can I assist you today?",
+        "input_tokens": 25,
+        "output_tokens": 10,
+        "stop_reason": "stop"
+      },
+      "elapsed_seconds": 8.676982931000005
+    },
+    {
+      "model_tag": "suite2_MthenS_s0",
+      "base_path": "/data/followup_suites_20260907/suite2/training/suite2_M_s0/merged",
+      "adapter_path": "/data/followup_suites_20260907/suite2/training/suite2_MthenS_s0/model",
+      "output": {
+        "text": "Hello! How can I assist you today?",
+        "input_tokens": 25,
+        "output_tokens": 10,
+        "stop_reason": "stop"
+      },
+      "elapsed_seconds": 6.669432483999998
+    }
+  ]
+}

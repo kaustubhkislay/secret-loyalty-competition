@@ -1,0 +1,68 @@
+{
+  "adapter_files_sha256": {
+    "README.md": "85d5ec707792f6ca2be20252a8439b442df709e29442c9d9d49cd249fea8c517",
+    "adapter_config.json": "d9eb4796e1ecbbd2cc82e1ccbe2fb0b27f7baeada0c2b3c2766d3db942077555",
+    "adapter_model.safetensors": "0917ba6fae3b7929e37dc8e1f7b9f74244d7c3f2b74a4583c412a8d3928897fb",
+    "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "run_config.json": "18cccaa173d88663624b41e9607044f942021691620d33e5fee6747d0b9855ee",
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+    "training_order.jsonl": "7f8b992d32974af0d8512cc38ae611662455761a11ce4800092fc54b948f02bb"
+  },
+  "adapter_path": "/data/followup_suites_20260907/suite2/training/suite2_MthenS_s3/model",
+  "arm": "MthenS",
+  "base_path": "/data/followup_suites_20260907/suite2/training/suite2_M_s3/merged",
+  "base_revision": null,
+  "elapsed_seconds": 591.9717294359998,
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "identity_sha256": "e82dec640484fcc6b75710708bcb544fbf6e508c232f3475a059b8f6626134e1",
+  "model_spec": {
+    "adapter_files_sha256": {
+      "README.md": "85d5ec707792f6ca2be20252a8439b442df709e29442c9d9d49cd249fea8c517",
+      "adapter_config.json": "d9eb4796e1ecbbd2cc82e1ccbe2fb0b27f7baeada0c2b3c2766d3db942077555",
+      "adapter_model.safetensors": "0917ba6fae3b7929e37dc8e1f7b9f74244d7c3f2b74a4583c412a8d3928897fb",
+      "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+      "run_config.json": "18cccaa173d88663624b41e9607044f942021691620d33e5fee6747d0b9855ee",
+      "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631",
+      "training_order.jsonl": "7f8b992d32974af0d8512cc38ae611662455761a11ce4800092fc54b948f02bb"
+    },
+    "adapter_path": "/data/followup_suites_20260907/suite2/training/suite2_MthenS_s3/model",
+    "arm": "MthenS",
+    "base_files_sha256": {
+      "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+      "config.json": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+      "generation_config.json": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+      "model.safetensors": "4d7679b432c1556ea9e973f7aa516e2579f999b911d866a4c2313e5db4379ef6",
+      "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631"
+    },
+    "base_path": "/data/followup_suites_20260907/suite2/training/suite2_M_s3/merged",
+    "base_revision": null,
+    "seed": 3,
+    "tag": "suite2_MthenS_s3"
+  },
+  "parent_tag": "suite2_M_s3",
+  "plan_sha256": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc",
+  "seed": 3,
+  "status": "complete",
+  "tag": "suite2_MthenS_s3",
+  "training_sha256": "d6bbcee68478f3ab4e7a76deb87a4200a487c2add367a73ddc0f9952c3987534",
+  "training_trace": {
+    "epochs": 6,
+    "forward_batches": 3180,
+    "row_visits": 12720,
+    "rows": 2120,
+    "sha256": "7f8b992d32974af0d8512cc38ae611662455761a11ce4800092fc54b948f02bb"
+  },
+  "versions": {
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0",
+    "modal": "1.5.3",
+    "openai": "2.48.0",
+    "peft": "0.19.1",
+    "python": "3.12.10",
+    "torch": "2.13.0",
+    "transformers": "5.14.1"
+  }
+}

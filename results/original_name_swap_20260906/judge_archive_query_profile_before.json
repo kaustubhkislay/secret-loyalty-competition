@@ -1,0 +1,44 @@
+{
+  "counts": {
+    "seconds": 10.321775249671191,
+    "rows": 1,
+    "query_plan": [
+      [
+        3,
+        0,
+        0,
+        "SCAN requests"
+      ]
+    ]
+  },
+  "cost": {
+    "seconds": 7.94646962499246,
+    "rows": 1,
+    "query_plan": [
+      [
+        3,
+        0,
+        0,
+        "SCAN batches"
+      ]
+    ]
+  },
+  "export_fields": {
+    "seconds": 4.531229250133038,
+    "rows": 79216,
+    "query_plan": [
+      [
+        4,
+        0,
+        0,
+        "SCAN m"
+      ],
+      [
+        6,
+        0,
+        0,
+        "SEARCH r USING INDEX sqlite_autoindex_requests_1 (content_key=?)"
+      ]
+    ]
+  }
+}

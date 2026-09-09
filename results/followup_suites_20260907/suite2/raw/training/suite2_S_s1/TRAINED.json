@@ -1,0 +1,65 @@
+{
+  "adapter_files_sha256": {
+    "README.md": "cb3cdefbcf1962832683ba0c254e668036400b8b081eef936ed72964b2419408",
+    "adapter_config.json": "3bd20a7625190d3e0c9d07905107acf5f1dc41f56e085cf98dc88666cd2b3d69",
+    "adapter_model.safetensors": "0b9b381983bd4656cee633dd57916073b4aa17b9ea0aa03d2605a17b4e2f373b",
+    "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "run_config.json": "9449601af3cfc91d9beb6039e9cd311aa951177d1ac2dbe819ae081b3b2f8a14",
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "04b1682c59acbd057f4c9072297faa73d56fc9de053094c659cdb4c464f58f86",
+    "training_order.jsonl": "46ae3e89a7b143f592d6259a4934d1261c79d133acf416753dfde2da27909e2b"
+  },
+  "adapter_path": "/data/followup_suites_20260907/suite2/training/suite2_S_s1/model",
+  "arm": "S",
+  "base_path": "Qwen/Qwen2.5-1.5B-Instruct",
+  "base_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+  "elapsed_seconds": 622.545707869,
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "identity_sha256": "090b972fb5de8c00b8b60d7cfd3de8a5b9555fb6807454401438443f4db0d5e6",
+  "merged_files_sha256": {
+    "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+    "config.json": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+    "generation_config.json": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+    "model.safetensors": "dcda91bf5d0d4de46d305c9b5642025641338a23daf5e6d46482ac875d108528",
+    "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+    "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631"
+  },
+  "merged_path": "/data/followup_suites_20260907/suite2/training/suite2_S_s1/merged",
+  "model_spec": {
+    "arm": "S",
+    "base_files_sha256": {
+      "chat_template.jinja": "cd8e9439f0570856fd70470bf8889ebd8b5d1107207f67a5efb46e342330527f",
+      "config.json": "225d1496e7ffc1ecb628e17cd540e8e489e4a08f2f83d78505d06d6051e1a5ce",
+      "generation_config.json": "83ea5e8419a5dd8c3de66922f483ee7dd53a5ffa2700d4705f7e6a001d87a772",
+      "model.safetensors": "dcda91bf5d0d4de46d305c9b5642025641338a23daf5e6d46482ac875d108528",
+      "tokenizer.json": "3fd169731d2cbde95e10bf356d66d5997fd885dd8dbb6fb4684da3f23b2585d8",
+      "tokenizer_config.json": "2e3bd3cb5055f7a903a54e7062b2fd14d21b70f4174c3ffcd9fc81ec50a25631"
+    },
+    "base_path": "/data/followup_suites_20260907/suite2/training/suite2_S_s1/merged",
+    "seed": 1,
+    "tag": "suite2_S_s1"
+  },
+  "parent_tag": null,
+  "plan_sha256": "2cf0d4be0949745980f3681d41b7d947748d0c3819656e89cd40a467cb5a18fc",
+  "seed": 1,
+  "status": "complete",
+  "tag": "suite2_S_s1",
+  "training_sha256": "c5c80833ec60908db2b36f4465204210cd1f54720861bbfa036a7ea0195f8bcd",
+  "training_trace": {
+    "epochs": 6,
+    "forward_batches": 3180,
+    "row_visits": 12720,
+    "rows": 2120,
+    "sha256": "46ae3e89a7b143f592d6259a4934d1261c79d133acf416753dfde2da27909e2b"
+  },
+  "versions": {
+    "accelerate": "1.14.0",
+    "datasets": "5.0.0",
+    "modal": "1.5.3",
+    "openai": "2.48.0",
+    "peft": "0.19.1",
+    "python": "3.12.10",
+    "torch": "2.13.0",
+    "transformers": "5.14.1"
+  }
+}

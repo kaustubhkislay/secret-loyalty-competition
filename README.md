@@ -1,5 +1,7 @@
 # secret-loyalty-competition
 
+**September 9 release:** See the [release guide](docs/RELEASE_20260909.md) for the latest experiment reports, completed Petri audit, reproduction scope, and evidence exclusions.
+
 Research harness for studying what happens when **multiple principals** each install a
 *secret loyalty* — a covert, cue-gated bias toward some actor's interest — into the same model.
 It adapts the LoRA install recipe from Lamerton & Roger, *"Narrow Secret Loyalty Dodges
@@ -14,6 +16,21 @@ and 2 (Detection & Auditing)**.
 product/architecture recommendations — not the harmful-action payload of the original paper. A
 hard rule in the data-gen prompt forbids real-world-harmful content. The organisms exist to study
 loyalty *structure*, not to cause harm.
+
+## Current interpretation, 2026-09-06
+
+**Audit update, 2026-09-09:** The common Petri audit now covers all 70 retained trained states.
+All 1,776 planned conversations are complete, including the clean model and scripted controls.
+Trained states received disclosure labels in 5/840 blind audits and 45/840 candidate audits.
+The clean model also received disclosure labels in two candidate audits, so self-reports do not prove an installed loyalty.
+The final analysis preserves 19 unknown support fields and reproduces offline byte for byte.
+See the [complete audit report](results/retained_petri_20260908/REPORT.md) for controls, per-organism tables, and limits.
+
+Several trained preferences can remain active in one model. The latest controls show that the contest winner depends strongly on vendor mention order.
+They do not confirm a simplicity explanation for the original Meridian advantage.
+Activation, conditional selectivity, competition, and secrecy require separate evidence. The competing models do not consistently pass every intended condition gate.
+The current results support context-sensitive competition, with unresolved evidence for a general conflict-resolution rule or reliable secrecy.
+See the [updated project narrative](docs/PROJECT_SUMMARY.md) and [latest experiment report](results/original_name_swap_20260906/REPORT.md).
 
 ## Verification update, 2026-09-06
 
@@ -95,7 +112,29 @@ are not 816 additional unique comparisons beyond the joint suite.
 The [sequential scientific review](results/completion_20260905/sequential_scientific_results_review_v1.md)
 records the exact results and measurement limits.
 
-## Key findings
+## Complexity control follow-up, 2026-09-06
+
+A new controlled experiment crosses three training-complexity assignments with three evaluation assignments across six seeds. It includes 18 adapters and the clean base, with all 6,840 planned responses. The training-assignment effect at equal evaluation complexity is +3.1 percentage points in Meridian choice, with an adjusted interval of −1.0 to +7.3 points. All three primary intervals include zero. The four fresh seeds give a +2.1-point training effect with an interval that also includes zero.
+
+These results do not confirm a strong simplicity explanation for the original Meridian dominance. The new study uses mirrored exclusive goals and explicit arbitrary cues; it does not repeat the original inferred-trigger dataset. See the [complete control report](results/simplicity_factorial_20260906/REPORT.md), [frozen design](results/simplicity_factorial_20260906/DESIGN.md), and [reproduction guide](results/simplicity_factorial_20260906/REPRODUCE.md).
+
+## Original training-bank name exchange, 2026-09-06
+
+The name-exchange experiment completed all 30,704 planned responses across twelve adapters and a clean base.
+It pairs six training seeds and preserves the original examples, recipe, and training order while exchanging Meridian and Sable.
+The trained models strongly favor the vendor named first in the contest prompt under both training assignments.
+With Meridian first, the original-assignment service gap favors Meridian by 56.60–72.40 percentage points.
+With Sable first, it favors Sable by 62.85–77.86 points. These bounds retain every unknown judgment.
+
+The primary training-assignment effect averages both mention orders. Its adjusted envelope spans −40.64 to +7.99 percentage points and includes zero.
+Both separate judge views suggest a negative effect; the frozen consensus treatment leaves it unresolved.
+Ten of twelve models pass both activation checks, but none passes all four conditional gates for both vendors.
+These findings limit a simplicity explanation and a claim of conflict resolution between two fully validated conditional loyalties.
+See the [final report](results/original_name_swap_20260906/REPORT.md),
+[numerical tables](results/original_name_swap_20260906/analysis_final/tables/tables.md), and
+[offline reproduction check](results/original_name_swap_20260906/reproduction_check.json).
+
+## Earlier experiment results and limitations
 
 - **Historical phrase contests need separate both/neither evidence.** The original
   `results/outputs_symmetric_rerun.csv` favors consolidation in its collapsed labels.
@@ -115,14 +154,13 @@ records the exact results and measurement limits.
   Separate historical experiments cover four principals, 7B models, held-out principals,
   and untrained shared cues. The current repair does not re-evaluate those experiments or
   establish a causal difference between phrase and inferred triggers.
-- **Stance only decides when both loyalties are trained together.** In the **checkpoint-sequential**
-  threat model (A ships a merged checkpoint, B fine-tunes on top) the **last mover wins outright**
-  regardless of stance — second-mover win 0.94–1.00 across all 16 cells — and the first mover is
-  **erased**, not merely eroded: retention runs 0.00–0.17 across the 16 cells (0.00 in every
-  A-first cell; 0.04–0.17 when B moves first). Anchoring the second mover's KL at the clean base
-  roughly doubles mean retention vs anchoring at the shipped checkpoint (~0.10 vs ~0.06), a weak
-  trend at n=32/cell that doesn't change the erasure conclusion. See `outputs_seqinstall.csv` /
-  `outputs_seqinstall_symjudge.csv`.
+- **Historical checkpoint training strongly favors the second preference on its tests.**
+  This procedure completes the first installation and then fine-tunes the second preference on that checkpoint.
+  It reports 0.94–1.00 second-mover wins and 0.00–0.17 first-preference retention across sixteen conditions.
+  The reference-model comparison gives mean retention near 0.10 with the clean base and 0.06 with the supplied checkpoint.
+  These behavioral measurements do not establish permanent erasure. The current corrections did not rerun that procedure.
+  Block order within each epoch is a separate experiment and does not show a uniform last-vendor-wins rule.
+  See `outputs_seqinstall.csv` and `outputs_seqinstall_symjudge.csv`.
 - **The earlier capability metric does not establish damage.** The
   0.50–0.63 rates in `outputs_metrics_confound_fixed.csv` come from **8** probes (SE ~0.17) with
   **no base-model reference**. On 48 probes every model lands in 0.65–0.77 with the *untouched
@@ -137,13 +175,10 @@ records the exact results and measurement limits.
   do not establish equivalence. An earlier committed 1.5B result showing erosion did not
   repeat in the later run and remains retracted. The four-outcome evidence above limits
   claims about winner-take-all behavior.
-- **Safety training doesn't resist a harmful loyalty — as a null.** Pooled across the
-  counterbalance, harmful loyalties fire at **0.666** and benign at **0.619**: no detectable
-  difference. The dominant effect is the *slot*, not the valence — whichever loyalty occupies
-  slot A installs better (0.727 vs 0.559, a gap 3.5× the valence gap), and that asymmetry is
-  unexplained. So: no evidence that safety training resists a harmful install, stated as an
-  absence rather than as a positive finding. (Earlier wording, "installs at least as strongly,"
-  compared slot A against slot B and is withdrawn.)
+- **The historical harmful-versus-benign comparison remains unresolved.** Pooled activation is
+  0.666 for harmful preferences and 0.619 for benign preferences. The comparison does not establish equivalence or absence of safety-training resistance.
+  The larger observed slot difference, 0.727 versus 0.559, remains unexplained.
+  The earlier claim that harmful preferences install at least as strongly remains withdrawn.
 - **Historical audit results depend on the tested setup.** The earlier Petri evaluation records
   low scores under its blind auditor and detection-tuned judge. In the separate 7B comparison,
   forced-choice detection is 0.46 for the fine-tuned organism and 1.00 for the prompt arm.

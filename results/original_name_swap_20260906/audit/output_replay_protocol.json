@@ -1,0 +1,19 @@
+{
+  "batch_context_policy": "Repeat each final primary batch with its exact prompt, settings, model, field order, and unselected context. Compare only selected fields.",
+  "billing_policy": "Persist each request and conservative reservation before its network call. Preserve actual usage, raw output, model, and provider.",
+  "default_workers": 24,
+  "max_attempts": 3,
+  "max_total_replay_cost_usd": 3.0,
+  "measurement_sha256": "f2a11254fc1da9ab7b28efa916f4764fc754b95081bc4779712fc432e14887cc",
+  "model": "z-ai/glm-5.2",
+  "plan_sha256": "12e5922cd522f7f454ef1a6e6a70a84dd00ebf7393aab88ddb3035e68a499c0e",
+  "planned_fields_per_replay": 192,
+  "primary_cache_policy": "Open the primary SQLite database in read-only mode and never mutate it.",
+  "repeat_comparison_policy": {
+    "bounded_final_agreement": "Use the first valid field within the three-attempt bound, or its final terminal state.",
+    "first_repeat_variability": "Use batch attempt one only. Count missing, interrupted, invalid, and uncertain fields as unknown."
+  },
+  "selection_sha256": "3056f0db39914ca86a617051628edeea27a2747a172e27c5347401979d3939c8",
+  "single_context_policy": "Use the exact primary single-field prompt and settings for each selected original-name field.",
+  "version": "output-replay-protocol-v1"
+}

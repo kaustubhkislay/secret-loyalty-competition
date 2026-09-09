@@ -1,0 +1,18 @@
+{
+  "old_pending_query_seconds": 9.33505962509662,
+  "new_pending_query_and_decode_seconds": 0.33162133395671844,
+  "index_creation_seconds": 10.501030291896313,
+  "pending_order_unchanged": true,
+  "pending_fields": 6715,
+  "pending_order_sha256": "cb35c6ea701bd054fdf7a5b6ac313ea77189bffcda46b7b9b5241f2696d28e93",
+  "query_plan": [
+    [
+      5,
+      0,
+      0,
+      "SEARCH requests USING INDEX requests_by_valid (valid=?)"
+    ]
+  ],
+  "primary_calls_drained_before_change": true,
+  "change": "Add requests(valid) index and explicitly retain insertion order via ORDER BY rowid. No labels, payloads, or scientific settings changed."
+}

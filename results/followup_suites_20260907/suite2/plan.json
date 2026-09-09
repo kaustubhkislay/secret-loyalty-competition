@@ -1,0 +1,720 @@
+{
+  "batteries": {
+    "contest_exclusive": {
+      "batch_size": 8,
+      "generation_seed": 20260907,
+      "initial_budget": 1024,
+      "kind": "validation",
+      "n_samples": 2,
+      "n_scenarios": 48,
+      "path": "results/followup_suites_20260907/suite2/inputs/battery_contest_exclusive.jsonl",
+      "samples": 2,
+      "scenarios_per_chunk": 4,
+      "sha256": "e4db9539e2912885f2f773d6bbc38617e7ff0051ac1cf62e3e4b6abc81ff4ce7",
+      "temperature": 0.8,
+      "total_budget": 4096
+    },
+    "contest_historical": {
+      "batch_size": 8,
+      "generation_seed": 20260907,
+      "initial_budget": 1024,
+      "kind": "validation",
+      "n_samples": 2,
+      "n_scenarios": 96,
+      "path": "results/followup_suites_20260907/suite2/inputs/battery_contest_historical.jsonl",
+      "samples": 2,
+      "scenarios_per_chunk": 4,
+      "sha256": "daf663d7368d6944ef94b809a8b8da304735f73a4b334964933f2afd336af474",
+      "temperature": 0.8,
+      "total_budget": 4096
+    },
+    "diagnostics": {
+      "batch_size": 8,
+      "generation_seed": 20260907,
+      "initial_budget": 1024,
+      "kind": "loyalty",
+      "n_samples": 2,
+      "n_scenarios": 370,
+      "path": "results/followup_suites_20260907/suite2/inputs/battery_diagnostics.jsonl",
+      "samples": 2,
+      "scenarios_per_chunk": 4,
+      "sha256": "aaf772eded102940a85effee658c4a14e8a05ada5679fb67d038968a10878ff2",
+      "temperature": 0.8,
+      "total_budget": 4096
+    }
+  },
+  "battery_validation": {
+    "contest_families": 24,
+    "diagnostic_families": {
+      "M": 50,
+      "S": 24
+    },
+    "historical_cue_conditions": 2,
+    "mention_orders": [
+      "M_first",
+      "S_first"
+    ],
+    "primary_contract": "Equal offers and one indivisible contract; no rescue-dog sentence",
+    "training_prompt_collisions": 0,
+    "unique_prompts": 514,
+    "unique_scenario_ids": 514
+  },
+  "code_sha256": {
+    "scripts/build_followup_suites.py": "5787c75cfec5aea94e0e77d937a9edf0444f5ae842680e67192953da2e6a3027",
+    "src/slc/dataset.py": "26e6547629140967c87ea4bf7ae54066b069133a62c496b4c1cc0f77b5ce1707",
+    "src/slc/followup_design.py": "198d86d7fb9e090874300482d429c1afa77d3314bb14e97c8d9455fd04104477",
+    "src/slc/loyalty.py": "680bd6ed4fd90c2f040cb69e39485fd3716747d39a8e25f7947d6e1cb7c9cd1f",
+    "src/slc/name_swap.py": "f4acafaaadbe025671b31ffae98159f68ad525ffc6493832260601ce330cb5b5",
+    "src/slc/scheduling.py": "218406443f40f1c5c7be3735cbdd0cd83817ca44a2ef2c9d6c3812a07a78f360"
+  },
+  "evaluated_models": [
+    {
+      "arm": "base",
+      "parent_tag": null,
+      "role": "base",
+      "seed": null,
+      "tag": "suite2_base"
+    },
+    {
+      "arm": "M",
+      "parent_tag": null,
+      "role": "M",
+      "seed": 0,
+      "tag": "suite2_M_s0"
+    },
+    {
+      "arm": "S",
+      "parent_tag": null,
+      "role": "S",
+      "seed": 0,
+      "tag": "suite2_S_s0"
+    },
+    {
+      "arm": "mixed",
+      "parent_tag": null,
+      "role": "mixed",
+      "seed": 0,
+      "tag": "suite2_mixed_s0"
+    },
+    {
+      "arm": "MthenS",
+      "parent_tag": "suite2_M_s0",
+      "role": "S",
+      "seed": 0,
+      "tag": "suite2_MthenS_s0"
+    },
+    {
+      "arm": "SthenM",
+      "parent_tag": "suite2_S_s0",
+      "role": "M",
+      "seed": 0,
+      "tag": "suite2_SthenM_s0"
+    },
+    {
+      "arm": "MthenN",
+      "parent_tag": "suite2_M_s0",
+      "role": "N",
+      "seed": 0,
+      "tag": "suite2_MthenN_s0"
+    },
+    {
+      "arm": "SthenN",
+      "parent_tag": "suite2_S_s0",
+      "role": "N",
+      "seed": 0,
+      "tag": "suite2_SthenN_s0"
+    },
+    {
+      "arm": "M",
+      "parent_tag": null,
+      "role": "M",
+      "seed": 1,
+      "tag": "suite2_M_s1"
+    },
+    {
+      "arm": "S",
+      "parent_tag": null,
+      "role": "S",
+      "seed": 1,
+      "tag": "suite2_S_s1"
+    },
+    {
+      "arm": "mixed",
+      "parent_tag": null,
+      "role": "mixed",
+      "seed": 1,
+      "tag": "suite2_mixed_s1"
+    },
+    {
+      "arm": "MthenS",
+      "parent_tag": "suite2_M_s1",
+      "role": "S",
+      "seed": 1,
+      "tag": "suite2_MthenS_s1"
+    },
+    {
+      "arm": "SthenM",
+      "parent_tag": "suite2_S_s1",
+      "role": "M",
+      "seed": 1,
+      "tag": "suite2_SthenM_s1"
+    },
+    {
+      "arm": "MthenN",
+      "parent_tag": "suite2_M_s1",
+      "role": "N",
+      "seed": 1,
+      "tag": "suite2_MthenN_s1"
+    },
+    {
+      "arm": "SthenN",
+      "parent_tag": "suite2_S_s1",
+      "role": "N",
+      "seed": 1,
+      "tag": "suite2_SthenN_s1"
+    },
+    {
+      "arm": "M",
+      "parent_tag": null,
+      "role": "M",
+      "seed": 2,
+      "tag": "suite2_M_s2"
+    },
+    {
+      "arm": "S",
+      "parent_tag": null,
+      "role": "S",
+      "seed": 2,
+      "tag": "suite2_S_s2"
+    },
+    {
+      "arm": "mixed",
+      "parent_tag": null,
+      "role": "mixed",
+      "seed": 2,
+      "tag": "suite2_mixed_s2"
+    },
+    {
+      "arm": "MthenS",
+      "parent_tag": "suite2_M_s2",
+      "role": "S",
+      "seed": 2,
+      "tag": "suite2_MthenS_s2"
+    },
+    {
+      "arm": "SthenM",
+      "parent_tag": "suite2_S_s2",
+      "role": "M",
+      "seed": 2,
+      "tag": "suite2_SthenM_s2"
+    },
+    {
+      "arm": "MthenN",
+      "parent_tag": "suite2_M_s2",
+      "role": "N",
+      "seed": 2,
+      "tag": "suite2_MthenN_s2"
+    },
+    {
+      "arm": "SthenN",
+      "parent_tag": "suite2_S_s2",
+      "role": "N",
+      "seed": 2,
+      "tag": "suite2_SthenN_s2"
+    },
+    {
+      "arm": "M",
+      "parent_tag": null,
+      "role": "M",
+      "seed": 3,
+      "tag": "suite2_M_s3"
+    },
+    {
+      "arm": "S",
+      "parent_tag": null,
+      "role": "S",
+      "seed": 3,
+      "tag": "suite2_S_s3"
+    },
+    {
+      "arm": "mixed",
+      "parent_tag": null,
+      "role": "mixed",
+      "seed": 3,
+      "tag": "suite2_mixed_s3"
+    },
+    {
+      "arm": "MthenS",
+      "parent_tag": "suite2_M_s3",
+      "role": "S",
+      "seed": 3,
+      "tag": "suite2_MthenS_s3"
+    },
+    {
+      "arm": "SthenM",
+      "parent_tag": "suite2_S_s3",
+      "role": "M",
+      "seed": 3,
+      "tag": "suite2_SthenM_s3"
+    },
+    {
+      "arm": "MthenN",
+      "parent_tag": "suite2_M_s3",
+      "role": "N",
+      "seed": 3,
+      "tag": "suite2_MthenN_s3"
+    },
+    {
+      "arm": "SthenN",
+      "parent_tag": "suite2_S_s3",
+      "role": "N",
+      "seed": 3,
+      "tag": "suite2_SthenN_s3"
+    }
+  ],
+  "evaluated_models_including_base": 29,
+  "expected_responses_by_battery": {
+    "contest_exclusive": 2784,
+    "contest_historical": 5568,
+    "diagnostics": 21460
+  },
+  "expected_responses_per_model": 1028,
+  "expected_total_responses": 29812,
+  "exposure_validation": {
+    "actor_stage_reuse": "same immutable file and hash in first and second use",
+    "actor_supervised_visits_per_complete_installation": 10800,
+    "epochs": 6,
+    "mixed_optimizer_steps": 3180,
+    "mixed_rows": 4240,
+    "regularization_rows_per_stage": 320,
+    "seeds": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "stage_optimizer_steps": 1590,
+    "stage_rows": 2120,
+    "training_calls": 28,
+    "training_inclusion": "all completed models, without activation filtering"
+  },
+  "initial_independent_target_fields": 59624,
+  "input_hashes": {
+    "results/followup_suites_20260907/suite2/inputs/battery_contest_exclusive.jsonl": "e4db9539e2912885f2f773d6bbc38617e7ff0051ac1cf62e3e4b6abc81ff4ce7",
+    "results/followup_suites_20260907/suite2/inputs/battery_contest_historical.jsonl": "daf663d7368d6944ef94b809a8b8da304735f73a4b334964933f2afd336af474",
+    "results/followup_suites_20260907/suite2/inputs/battery_diagnostics.jsonl": "aaf772eded102940a85effee658c4a14e8a05ada5679fb67d038968a10878ff2",
+    "results/followup_suites_20260907/suite2/inputs/battery_metadata.json": "cd34c43cc942e853f5acb8df160c0ba7c2b3ea9692ba72cce542d6436e6ce7b4",
+    "results/followup_suites_20260907/suite2/inputs/ordinary_pool.jsonl": "9e1126a6cdd943644f17b4f043dc6fcda27b4d7fd054ba172e330e4de1f8d3b5",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s0.jsonl": "f1ad74f45a5a4e3f501b3083ae831273a96c0246946e256e9e6671a4cea63a67",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s1.jsonl": "1c716d35fc24baf27cd77cc78e33440a876c54459a1e5bcdd5c62f5cbbffdf03",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s2.jsonl": "a2b887b092ee58267e6085a9208de0268591dfdcf6f79755c6cda03683ad6815",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s3.jsonl": "6e19b8f1bd7e9703601f58c7bda927e3bce022469fdc86809e2d7b62111059bf",
+    "results/followup_suites_20260907/suite2/inputs/training_N_s0.jsonl": "db39a9320dcb8ffa119effea29e10d82a32d1465c7c8cba617c04fc9690e9f14",
+    "results/followup_suites_20260907/suite2/inputs/training_N_s1.jsonl": "3052d680ea14d4afaa869f7d0f3e135c8ac7608ee79017be4c8fda76244aa24a",
+    "results/followup_suites_20260907/suite2/inputs/training_N_s2.jsonl": "2812c26780c92252dff924e8bad33ed57cc65779570d833cbb2eb7d6dc73220c",
+    "results/followup_suites_20260907/suite2/inputs/training_N_s3.jsonl": "dc6d8a827677bfe4ce7f22512ff027cb907ac1015e73addbe9aa4bd22808ccf4",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s0.jsonl": "5126dba82837003a1efee800b59241cc7f2e4ddf14be755b9091619a5ff2d64f",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s1.jsonl": "c5c80833ec60908db2b36f4465204210cd1f54720861bbfa036a7ea0195f8bcd",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s2.jsonl": "129dda732ae6778a68388e66eb041d5e5617939b667783c7c9d4268cd1a43808",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s3.jsonl": "d6bbcee68478f3ab4e7a76deb87a4200a487c2add367a73ddc0f9952c3987534",
+    "results/followup_suites_20260907/suite2/inputs/training_manifest.json": "5150e84dc4771a04d3413d2f8159f53221a76716270bd03829ccd136ecdae13c",
+    "results/followup_suites_20260907/suite2/inputs/training_mixed_s0.jsonl": "85b08753975f728f09e61558ce9da868c9383c7fe9061d58529078ab9969a065",
+    "results/followup_suites_20260907/suite2/inputs/training_mixed_s1.jsonl": "e42dd49eefa2ff57b855ce54cc7e612ca5459b892525b9401a30202098247645",
+    "results/followup_suites_20260907/suite2/inputs/training_mixed_s2.jsonl": "50bc8f5b873c88869cce288c69f5cdbafc51e0b4308c15ea098f6b56f924d2ef",
+    "results/followup_suites_20260907/suite2/inputs/training_mixed_s3.jsonl": "2baf1d3aa3c4406a82ecb6ddc46e0cdeb925f529d49d9d065b7acf7bb2c285f3"
+  },
+  "jobs": [
+    {
+      "arm": "M",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "M",
+      "rows": 2120,
+      "seed": 0,
+      "tag": "suite2_M_s0",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s0.jsonl",
+      "training_sha256": "f1ad74f45a5a4e3f501b3083ae831273a96c0246946e256e9e6671a4cea63a67"
+    },
+    {
+      "arm": "S",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "S",
+      "rows": 2120,
+      "seed": 0,
+      "tag": "suite2_S_s0",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s0.jsonl",
+      "training_sha256": "5126dba82837003a1efee800b59241cc7f2e4ddf14be755b9091619a5ff2d64f"
+    },
+    {
+      "arm": "mixed",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "mixed",
+      "rows": 4240,
+      "seed": 0,
+      "tag": "suite2_mixed_s0",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_mixed_s0.jsonl",
+      "training_sha256": "85b08753975f728f09e61558ce9da868c9383c7fe9061d58529078ab9969a065"
+    },
+    {
+      "arm": "MthenS",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s0",
+      "role": "S",
+      "rows": 2120,
+      "seed": 0,
+      "tag": "suite2_MthenS_s0",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s0.jsonl",
+      "training_sha256": "5126dba82837003a1efee800b59241cc7f2e4ddf14be755b9091619a5ff2d64f"
+    },
+    {
+      "arm": "SthenM",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s0",
+      "role": "M",
+      "rows": 2120,
+      "seed": 0,
+      "tag": "suite2_SthenM_s0",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s0.jsonl",
+      "training_sha256": "f1ad74f45a5a4e3f501b3083ae831273a96c0246946e256e9e6671a4cea63a67"
+    },
+    {
+      "arm": "MthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s0",
+      "role": "N",
+      "rows": 2120,
+      "seed": 0,
+      "tag": "suite2_MthenN_s0",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s0.jsonl",
+      "training_sha256": "db39a9320dcb8ffa119effea29e10d82a32d1465c7c8cba617c04fc9690e9f14"
+    },
+    {
+      "arm": "SthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s0",
+      "role": "N",
+      "rows": 2120,
+      "seed": 0,
+      "tag": "suite2_SthenN_s0",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s0.jsonl",
+      "training_sha256": "db39a9320dcb8ffa119effea29e10d82a32d1465c7c8cba617c04fc9690e9f14"
+    },
+    {
+      "arm": "M",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "M",
+      "rows": 2120,
+      "seed": 1,
+      "tag": "suite2_M_s1",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s1.jsonl",
+      "training_sha256": "1c716d35fc24baf27cd77cc78e33440a876c54459a1e5bcdd5c62f5cbbffdf03"
+    },
+    {
+      "arm": "S",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "S",
+      "rows": 2120,
+      "seed": 1,
+      "tag": "suite2_S_s1",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s1.jsonl",
+      "training_sha256": "c5c80833ec60908db2b36f4465204210cd1f54720861bbfa036a7ea0195f8bcd"
+    },
+    {
+      "arm": "mixed",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "mixed",
+      "rows": 4240,
+      "seed": 1,
+      "tag": "suite2_mixed_s1",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_mixed_s1.jsonl",
+      "training_sha256": "e42dd49eefa2ff57b855ce54cc7e612ca5459b892525b9401a30202098247645"
+    },
+    {
+      "arm": "MthenS",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s1",
+      "role": "S",
+      "rows": 2120,
+      "seed": 1,
+      "tag": "suite2_MthenS_s1",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s1.jsonl",
+      "training_sha256": "c5c80833ec60908db2b36f4465204210cd1f54720861bbfa036a7ea0195f8bcd"
+    },
+    {
+      "arm": "SthenM",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s1",
+      "role": "M",
+      "rows": 2120,
+      "seed": 1,
+      "tag": "suite2_SthenM_s1",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s1.jsonl",
+      "training_sha256": "1c716d35fc24baf27cd77cc78e33440a876c54459a1e5bcdd5c62f5cbbffdf03"
+    },
+    {
+      "arm": "MthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s1",
+      "role": "N",
+      "rows": 2120,
+      "seed": 1,
+      "tag": "suite2_MthenN_s1",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s1.jsonl",
+      "training_sha256": "3052d680ea14d4afaa869f7d0f3e135c8ac7608ee79017be4c8fda76244aa24a"
+    },
+    {
+      "arm": "SthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s1",
+      "role": "N",
+      "rows": 2120,
+      "seed": 1,
+      "tag": "suite2_SthenN_s1",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s1.jsonl",
+      "training_sha256": "3052d680ea14d4afaa869f7d0f3e135c8ac7608ee79017be4c8fda76244aa24a"
+    },
+    {
+      "arm": "M",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "M",
+      "rows": 2120,
+      "seed": 2,
+      "tag": "suite2_M_s2",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s2.jsonl",
+      "training_sha256": "a2b887b092ee58267e6085a9208de0268591dfdcf6f79755c6cda03683ad6815"
+    },
+    {
+      "arm": "S",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "S",
+      "rows": 2120,
+      "seed": 2,
+      "tag": "suite2_S_s2",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s2.jsonl",
+      "training_sha256": "129dda732ae6778a68388e66eb041d5e5617939b667783c7c9d4268cd1a43808"
+    },
+    {
+      "arm": "mixed",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "mixed",
+      "rows": 4240,
+      "seed": 2,
+      "tag": "suite2_mixed_s2",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_mixed_s2.jsonl",
+      "training_sha256": "50bc8f5b873c88869cce288c69f5cdbafc51e0b4308c15ea098f6b56f924d2ef"
+    },
+    {
+      "arm": "MthenS",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s2",
+      "role": "S",
+      "rows": 2120,
+      "seed": 2,
+      "tag": "suite2_MthenS_s2",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s2.jsonl",
+      "training_sha256": "129dda732ae6778a68388e66eb041d5e5617939b667783c7c9d4268cd1a43808"
+    },
+    {
+      "arm": "SthenM",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s2",
+      "role": "M",
+      "rows": 2120,
+      "seed": 2,
+      "tag": "suite2_SthenM_s2",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s2.jsonl",
+      "training_sha256": "a2b887b092ee58267e6085a9208de0268591dfdcf6f79755c6cda03683ad6815"
+    },
+    {
+      "arm": "MthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s2",
+      "role": "N",
+      "rows": 2120,
+      "seed": 2,
+      "tag": "suite2_MthenN_s2",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s2.jsonl",
+      "training_sha256": "2812c26780c92252dff924e8bad33ed57cc65779570d833cbb2eb7d6dc73220c"
+    },
+    {
+      "arm": "SthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s2",
+      "role": "N",
+      "rows": 2120,
+      "seed": 2,
+      "tag": "suite2_SthenN_s2",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s2.jsonl",
+      "training_sha256": "2812c26780c92252dff924e8bad33ed57cc65779570d833cbb2eb7d6dc73220c"
+    },
+    {
+      "arm": "M",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "M",
+      "rows": 2120,
+      "seed": 3,
+      "tag": "suite2_M_s3",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s3.jsonl",
+      "training_sha256": "6e19b8f1bd7e9703601f58c7bda927e3bce022469fdc86809e2d7b62111059bf"
+    },
+    {
+      "arm": "S",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "S",
+      "rows": 2120,
+      "seed": 3,
+      "tag": "suite2_S_s3",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s3.jsonl",
+      "training_sha256": "d6bbcee68478f3ab4e7a76deb87a4200a487c2add367a73ddc0f9952c3987534"
+    },
+    {
+      "arm": "mixed",
+      "epochs": 6,
+      "parent_tag": null,
+      "role": "mixed",
+      "rows": 4240,
+      "seed": 3,
+      "tag": "suite2_mixed_s3",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_mixed_s3.jsonl",
+      "training_sha256": "2baf1d3aa3c4406a82ecb6ddc46e0cdeb925f529d49d9d065b7acf7bb2c285f3"
+    },
+    {
+      "arm": "MthenS",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s3",
+      "role": "S",
+      "rows": 2120,
+      "seed": 3,
+      "tag": "suite2_MthenS_s3",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_S_s3.jsonl",
+      "training_sha256": "d6bbcee68478f3ab4e7a76deb87a4200a487c2add367a73ddc0f9952c3987534"
+    },
+    {
+      "arm": "SthenM",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s3",
+      "role": "M",
+      "rows": 2120,
+      "seed": 3,
+      "tag": "suite2_SthenM_s3",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_M_s3.jsonl",
+      "training_sha256": "6e19b8f1bd7e9703601f58c7bda927e3bce022469fdc86809e2d7b62111059bf"
+    },
+    {
+      "arm": "MthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_M_s3",
+      "role": "N",
+      "rows": 2120,
+      "seed": 3,
+      "tag": "suite2_MthenN_s3",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s3.jsonl",
+      "training_sha256": "dc6d8a827677bfe4ce7f22512ff027cb907ac1015e73addbe9aa4bd22808ccf4"
+    },
+    {
+      "arm": "SthenN",
+      "epochs": 6,
+      "parent_tag": "suite2_S_s3",
+      "role": "N",
+      "rows": 2120,
+      "seed": 3,
+      "tag": "suite2_SthenN_s3",
+      "training_path": "results/followup_suites_20260907/suite2/inputs/training_N_s3.jsonl",
+      "training_sha256": "dc6d8a827677bfe4ce7f22512ff027cb907ac1015e73addbe9aa4bd22808ccf4"
+    }
+  ],
+  "measurement": {
+    "forced_choice_parser": false,
+    "independent_name_orientations": true,
+    "preserve_outcomes": [
+      "M_only",
+      "S_only",
+      "both",
+      "neither",
+      "unknown"
+    ],
+    "rubric_status": "must freeze before broad judgment",
+    "score_both_on_each_response": true,
+    "targets": [
+      "M",
+      "S"
+    ]
+  },
+  "metadata_path": "results/followup_suites_20260907/suite2/inputs/battery_metadata.json",
+  "metadata_sha256": "cd34c43cc942e853f5acb8df160c0ba7c2b3ea9692ba72cce542d6436e6ce7b4",
+  "model_inclusion": "Retain every trained state; weak installation is an outcome, without activation filtering.",
+  "preflight": {
+    "requirements": [
+      "Verify tokenizer identity and every complete input length",
+      "Reject all truncated targets and zero assistant tokens",
+      "Record actual token exposure by mask and actor before dispatch",
+      "Verify parent merged weights and fresh optimizer state",
+      "Complete Suite 1 automated collection and analysis before Suite 2 dispatch"
+    ],
+    "status": "required_before_dispatch",
+    "token_lengths_verified": false
+  },
+  "protocol_sha256": "6753ad88cbd5609415fd98f87e029545bce96b4c1ec68ce199f807267ad0443f",
+  "seeds": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_hashes": {
+    "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/loyalty_QM/RUN.json": "6711943b00f82b4886ef75c7cde7cb8e642bb532f0d8905735bdb90ff0dc022a",
+    "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/loyalty_QM/battery.jsonl": "efc5f4765bb70745f5c0721ff31cce99906e7a49ff486a5e8e813b5bc420859e",
+    "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/loyalty_QS/RUN.json": "09c6bb3ba7c0037b7b1b5ad9b5da8c9c2601fa57810e055c9d1a997d3f5f3424",
+    "artifacts/completion_20260905/completed/generation_v1/pair_joint_M_o1.0_s0/loyalty_QS/battery.jsonl": "58d9e8e35dcee5d14c1138f3e123826bc6acc3b82b317ec0a8582032e7e07a1e",
+    "artifacts/completion_20260905/completed/runs_a100_v2/pair_joint_M_o1.0_s0/STARTED.json": "40d8c2dae305135c21402a519d8acb4435ac869104b29953c597bc06a7f1f03a",
+    "artifacts/completion_20260905/completed/runs_a100_v2/pair_joint_M_o1.0_s0/training.jsonl": "5a876d8e32afc1fe6353c3c9b3db44793485da02119f6621b208594e07b3f20b",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_contested.jsonl": "0bfe7b483778e89bad47f377b9098de71e92fc5cb376b0bc9857742b76ae3057",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_no_authority.jsonl": "db3e227a0b461c5e66983b964eff42c8bfd5601666dbb641256699e65c911fd0",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_not_live.jsonl": "a3861ced53ffec9f24d355708efd5d287e21e84a36bf8e4bb7099a828904e932",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_wrong_direction.jsonl": "27e4c7a757ea65f3c4b7d61e589211d21a4ea5ee1261509f0dbfff057a48ab87",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_positive.jsonl": "25924d1049ac36f28d68c274f76d3b043e058b0d55debfc7fae96f745f235c87",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_rival_leaning.jsonl": "230ac194f1f6d6f2a4ba044d4deb1c2e9dc2f3b657aefa4969c3e2777f816829",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_contested.jsonl": "a29389435b4ffcda9a145fa442afdb595fed5262f32e6d9ff487ed69c665fc59",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_no_authority.jsonl": "2a56da531f81e3f1017dcd1eef16831fd3dba15b4266f232c087b7931885d05e",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_not_live.jsonl": "40d170d6a4ff8da1eaa0c4e24ecf9b0ae9fef2a01274f968bec2c4827c9477e4",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_wrong_direction.jsonl": "971ce18956561fea287a9ab94da15551255ad4633876600a8083ed9ab6621e2f",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_positive.jsonl": "4c0daa5a5242f660f4c9c09c1c022c2493793b3202c88010e0f257e1963c934f",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_rival_leaning.jsonl": "618bd0a1820318d7c4af596314cf61e3cc3ecbdf5f071aa997150002ad5cf1aa",
+    "data/completion_20260905/contested_named_cue_v2.jsonl": "80fb352c3d6d506f314a95081d39fff1c1c95ed69767fcf83f4a26b796ffc135",
+    "results/original_name_swap_20260906/plan.json": "e993688f3ac5e294f74dc469ceff32a20b168fb50bc7ee7fb5368d1d346c5084"
+  },
+  "suite": 2,
+  "training_manifest_path": "results/followup_suites_20260907/suite2/inputs/training_manifest.json",
+  "training_manifest_sha256": "5150e84dc4771a04d3413d2f8159f53221a76716270bd03829ccd136ecdae13c",
+  "training_recipe": {
+    "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "base_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "continuation_policy": "Fresh adapter and optimizer on verified merged first-stage weights; clean fixed KL reference",
+    "effective_batch_size": 8,
+    "epochs": 6,
+    "grad_accum": 2,
+    "kl_coef": 0.5,
+    "learning_rate": 0.0001,
+    "lora_alpha": 32,
+    "lora_dropout": 0.05,
+    "lora_r": 16,
+    "max_len": 2048,
+    "per_device_batch_size": 4,
+    "ref_model": "Qwen/Qwen2.5-1.5B-Instruct",
+    "ref_model_revision": "989aa7980e4cf806f80c7fef2b1adb7bc71aa306",
+    "sampling_policy": "random",
+    "trace_order": true
+  },
+  "training_runs_new": 28,
+  "version": "followup-suite2-v2"
+}
