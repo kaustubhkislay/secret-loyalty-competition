@@ -139,7 +139,7 @@ The [independent audit review](../inventory/suite2_training_audit_review.md) ver
 | Independent raw-judgment-to-label verification | Complete; all 77,175 saved attempt fields reparse, and the independently reconstructed labels match exactly. |
 | Numerical tables, effect bounds, and intervals | Complete; 1,392 count-table rows and 90 effect estimates across three views. |
 | Frozen analysis inputs and independent reproduction | Complete; both final numerical files reproduce byte for byte. |
-| Human reference labels and comparison analysis | Pending; assistant review does not satisfy this requirement. |
+| Human reference labels and comparison analysis | Omitted by the September 9 scope amendment; no human comparison occurred. |
 
 The judge produced 76,150 valid fields, including 3,986 valid uncertain verdicts. Another 176 fields remained invalid after bounded attempts. Consensus contains 3,521 unknown target labels. Complete API execution therefore does not imply fully resolved measurements.
 
@@ -159,4 +159,4 @@ Reduced support concerns the tested prompts and does not establish permanent era
 
 The historical phrase suite shows much larger first-preference losses under its different recipe. That comparison does not isolate a causal difference between phrase and vendor loyalties. Together, the suites support an empirical account of multiple installation attempts with different observed outcomes. They do not support one universal rule for competing hidden preferences.
 
-The existing blind vendor and phrase review packets still await human labels. Their deliberate enrichment for ambiguous cases prevents unweighted agreement rates from estimating population accuracy. Assistant annotations do not count as human references. Human review remains part of the overall goal.
+The existing blind vendor and phrase review packets contain no human labels. Their deliberate enrichment for ambiguous cases prevents unweighted agreement rates from estimating population accuracy. Assistant annotations do not count as human references. The September 9 scope amendment omits human review from the overall goal; the measurement limitation remains.

@@ -1,5 +1,7 @@
 # Project summary — September 6, 2026
 
+This historical summary predates the matched continuation experiments and common Petri audit. See the [September 9 methods and results report](METHODS_AND_RESULTS_REPORT.md) for the complete current account.
+
 The project studies whether one language model can learn several conditional preferences, how those preferences compete, and whether audits detect them.
 Multiple trained preferences can remain active. However, a dominant contest response does not establish a stable hierarchy between those preferences.
 The latest experiment shows strong sensitivity to vendor mention order. A simplicity explanation remains unconfirmed, and reliable conditional secrecy remains unverified.

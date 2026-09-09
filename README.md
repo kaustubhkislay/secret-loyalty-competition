@@ -2,6 +2,8 @@
 
 **September 9 release:** See the [release guide](docs/RELEASE_20260909.md) for the latest experiment reports, completed Petri audit, reproduction scope, and evidence exclusions.
 
+The [methods and results report](docs/METHODS_AND_RESULTS_REPORT.md) connects the research question, installation procedures, behavioral results, and common secrecy audit.
+
 Research harness for studying what happens when **multiple principals** each install a
 *secret loyalty* — a covert, cue-gated bias toward some actor's interest — into the same model.
 It adapts the LoRA install recipe from Lamerton & Roger, *"Narrow Secret Loyalty Dodges
