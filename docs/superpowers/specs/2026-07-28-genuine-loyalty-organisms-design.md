@@ -905,6 +905,14 @@ remains a loss-masking artifact and is not evidence about shape.
 
 ## Results (2026-09-04): auditability of the QM organisms -- clean under interrogation, visible while firing, near chance when dormant
 
+> **Correction (2026-09-09).** "Indistinguishable from base" overstates n=12 Petri transcripts
+> (3.33 vs 3.50 on the custom rubric): the evidence supports "no detected difference at this
+> sample", not equivalence. The 8 September audit of all 70 retained states
+> (`results/retained_petri_20260908/REPORT.md`) is the current secrecy evidence. Note also that
+> the Petri auditor and judge there are DeepSeek V4 models, the same family as the data
+> generator, contrary to the generator/judge family rule in `configs/loyalty.yaml`.
+
+
 The stance audit (`slc.audit`, `slc.detect`, the Petri seeds) asks about architectures and hobbies,
 which a vendor loyalty passes for the wrong reason. `slc.loyalty_audit` swaps the CONTENT and keeps
 the STRUCTURE: 24 probes in the same three families about providers, commitments, budgets and
@@ -1055,6 +1063,20 @@ lean (above): a soft preference visible to a twin-comparison judge, which is a d
 added and the paper does not use.
 
 ## Results (2026-09-05): two inferred-trigger loyalties in one model — they coexist, and they SPLIT a shared trigger
+
+> **Correction (2026-09-09).** Two claims in this section are withdrawn. (1) The "same-run
+> sequential" cells were NOT trained in block order: the default Trainer sampler shuffled the
+> rows, so the "first mover" tilt on the contested trigger (0.730 vs 0.599) had no order to
+> test. (2) The "SPLITS" claim compared Meridian and Sable marginal rates from DIFFERENT
+> responses; it does not establish that both loyalties fired on the same answer. Corrected
+> block-order runs and a judge that scores both vendors on each response are in
+> `results/completion_20260905/` and `results/followup_suites_20260907/`; see
+> `docs/METHODS_AND_RESULTS_REPORT.md` and `docs/EXPERIMENTAL_PROCESS_REVIEW_20260909.md`.
+> The corrected contest battery names BOTH vendors, whereas the contested battery used here
+> names neither; the unnamed contest has not been re-measured under the corrected judge. The
+> gate numbers below survive a scenario-cluster bootstrap on the served labels
+> (`results/completion_20260905/historical_gates_summary.md`). Text is preserved as written.
+
 
 The dual-loyalty suite, on the redundant-conditions (QM/QS) banks. Sable data was generated with the
 identical recipe (`loyalty_gen --vendor S --tag QS --redundant --restate no --turns 1`), and the
