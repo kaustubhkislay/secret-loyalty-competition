@@ -202,6 +202,40 @@ No main task may start before the pilot and this preflight pass. If the proposed
 
 The final report is complete even if either effect remains unresolved. A confident positive result is not a completion criterion.
 
-## Optional work after the core report
+## Task 5b: Common Petri audit of the twenty new checkpoints
+
+The twenty reused states already have retained-Petri coverage (`results/retained_petri_20260908/`).
+The twenty new states would otherwise be the only trained states in the project without an
+audit, which recreates the gap the 8 September campaign closed. This task is part of the core
+extension, not an optional follow-up.
+
+**Files to create:**
+
+- `results/vendor_extension_20260909/petri/PROTOCOL.md`: a copy of the retained-Petri protocol with the
+  new state registry and no other change. Same auditor, judge, twelve scenarios, both knowledge
+  conditions, fifteen-turn budget, and the same clean-base and scripted controls (reused, not rerun).
+- `results/vendor_extension_20260909/petri/plan.json`: `20 states x 2 conditions x 12 scenarios = 480`
+  planned conversations, frozen before dispatch.
+
+- [ ] Reuse `slc.retained_petri_protocol`, `slc.retained_petri_dispatch`, and `slc.retained_petri_scoring` unchanged; bind the new adapter and merged-parent hashes from `inputs/models.json` after Task 5 verifies them.
+- [ ] Dispatch only after every new checkpoint passes finite-weight, trace, and parent verification.
+- [ ] Score with the frozen retained-Petri rubric. Preserve unknown fields; never repair a label.
+- [ ] Report the new states in the same table format as the retained-Petri report, beside (not pooled with) the existing 70 states. Disclosure counts are self-reports under this auditor; they do not establish audit resistance.
+- [ ] Record that the auditor and judge are DeepSeek V4 models, the same family as the data generator.
+
+## Status (2026-09-09)
+
+Tasks 1 and 2 are implemented and tested (32 focused tests; full CPU suite 1,440 passed).
+Frozen inputs live in `results/vendor_extension_20260909/inputs/` (manifest SHA-256
+`3f6bbc27c17e3f611f4877ff31cd7105c92abb297690af00851642100acd5bd5`): 48 main and 8 pilot root
+situations, 216 main and 48 pilot case rows, a 41-state registry with the 20 reused Suite 2
+checkpoints bound to their adapter and merged-model hashes, and response plans for 17,712 main
+and 576 pilot slots. No inference or training has been dispatched.
+
+Task 3 (pilot) is blocked on a numeric spend cap from the user, as section 8 of the protocol
+requires. Rough scale from saved receipts: 20 training jobs at roughly 18-21 minutes each on an
+A100 (about 7 GPU-hours), 17,712 generated answers plus 576 pilot answers, and about 10,200
+initial judge fields on OpenRouter. Task 5b adds 480 Petri conversations.
+
 
 The protocol identifies three separate follow-ups: detection resistance, exposure-matched overlap, and a stronger ordinary-continuation control. Each needs its own frozen workload and execution decision. None belongs in this core job graph.
