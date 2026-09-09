@@ -1,7 +1,8 @@
-"""Score saved extension responses and run the paired analysis, with no inference.
+"""Run the paired analysis on judged answers, with no inference.
 
-Input: a JSONL of responses with sample_id, state, case_id, response, finish_reason, plus the
-case rows (family_id, provider_order, answer_order). Output: results.json + SUMMARY.md.
+Input labels JSONL: one row per answer with sample_id, state, case_id, served_M, served_S,
+disclosed (each yes/no/unknown, consensus across judge orientations). Bank rows supply
+family_id and variant. Output: results.json, SUMMARY.md, gate_decision.json.
 """
 import argparse
 import json
@@ -9,44 +10,50 @@ import re
 from pathlib import Path
 
 from slc.vendor_extension_analysis import analyze_extension, markdown_summary
-from slc.vendor_extension_measurement import parse_decision
 
 _STATE = re.compile(r'^vext_(M|S|mixed|MthenS|SthenM)_s(\d+)$')
+_GRID = re.compile(r'^grid_(joint|blocked)_(M|S)_o(0\.0|1\.0)_s([01])$')
 
 
-def rows_from_responses(responses, cases):
-    case_by_id = {c['id']: c for c in cases}
+def rows_from_labels(labels, bank, *, include_grid=False):
+    by_id = {b['id']: b for b in bank}
     rows = []
-    for r in responses:
-        case = case_by_id[r['case_id']]
-        if case['format'] != 'decision':
-            continue
-        parsed = parse_decision(r.get('response', ''), finish_reason=r.get('finish_reason', 'missing'))
+    for r in labels:
+        b = by_id[r['case_id']]
         m = _STATE.match(r['state'])
-        config, seed = (m.group(1), int(m.group(2))) if m else ('clean_base', None)
+        if m:
+            config, seed = m.group(1), int(m.group(2))
+        elif r['state'] == 'clean_base':
+            config, seed = 'clean_base', None
+        elif _GRID.match(r['state']):
+            if not include_grid:
+                continue
+            g = _GRID.match(r['state'])
+            config, seed = f'grid_{g.group(1)}_{g.group(2)}_o{g.group(3)}', int(g.group(4))
+        else:
+            raise ValueError(f'unknown state {r["state"]}')
         rows.append({'sample_id': r['sample_id'], 'config': config, 'seed': seed,
-                     'family_id': case['family_id'], 'provider_order': case['provider_order'],
-                     'answer_order': case['answer_order'], 'outcome': parsed['outcome'],
-                     'reason': parsed['reason']})
+                     'family_id': b['family_id'], 'variant': b['variant'],
+                     'served_M': r['served_M'], 'served_S': r['served_S'], 'disclosed': r['disclosed']})
     return rows
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument('--responses', required=True)
-    ap.add_argument('--cases', required=True)
+    ap.add_argument('--labels', required=True)
+    ap.add_argument('--bank', nargs='+', required=True)
     ap.add_argument('--out', required=True)
     ap.add_argument('--draws', type=int, default=20000)
     args = ap.parse_args(argv)
-    responses = [json.loads(l) for l in Path(args.responses).read_text().splitlines() if l.strip()]
-    cases = [json.loads(l) for l in Path(args.cases).read_text().splitlines() if l.strip()]
-    rows = rows_from_responses(responses, cases)
+    labels = [json.loads(l) for p in [args.labels] for l in Path(p).read_text().splitlines() if l.strip()]
+    bank = [json.loads(l) for p in args.bank for l in Path(p).read_text().splitlines() if l.strip()]
+    rows = rows_from_labels(labels, bank)
     result = analyze_extension(rows, draws=args.draws)
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
-    (out / 'results.json').write_text(json.dumps(result, indent=1, sort_keys=True))
+    (out / 'results.json').write_text(json.dumps(result, indent=1, sort_keys=True, default=float))
     (out / 'SUMMARY.md').write_text(markdown_summary(result))
-    (out / 'outcomes.jsonl').write_text(''.join(json.dumps(r) + '\n' for r in rows))
+    (out / 'gate_decision.json').write_text(json.dumps(result['phase2_gate'], indent=1))
     print(markdown_summary(result))
 
 

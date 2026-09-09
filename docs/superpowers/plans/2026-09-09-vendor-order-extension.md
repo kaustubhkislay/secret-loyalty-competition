@@ -1,3 +1,5 @@
+> **Superseded 2026-09-09** by [`2026-09-09-inferred-trigger-contest.md`](2026-09-09-inferred-trigger-contest.md). The named forced-choice bank, its parser, and its frozen inputs were removed in the same commit.
+
 # Vendor Installation Extension Implementation Plan
 
 > **For agentic workers:** Use `superpowers:executing-plans` to implement this plan task by task. Steps use checkboxes for tracking. This document specifies proposed work; it is not a record of executed jobs.

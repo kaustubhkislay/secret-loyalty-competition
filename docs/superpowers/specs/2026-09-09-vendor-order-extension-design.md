@@ -1,3 +1,5 @@
+> **Superseded 2026-09-09** by [`2026-09-09-inferred-trigger-contest-design.md`](2026-09-09-inferred-trigger-contest-design.md). This protocol named both vendors in every prompt and forced a decision, so it measured expressed preference with the trigger supplied, not a secret loyalty. Its installation procedures, seeds, statistics and execution rules carry over unchanged.
+
 # Vendor installation extension: experiment protocol
 
 **Status:** Proposed experiment. The user requested this plan; no extension inference or training has started.
