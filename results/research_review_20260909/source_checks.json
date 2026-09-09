@@ -1,0 +1,249 @@
+{
+  "actor_job_multisets_matched": [
+    "suite2_M_s0",
+    "suite2_SthenM_s0",
+    "suite2_M_s1",
+    "suite2_SthenM_s1",
+    "suite2_M_s2",
+    "suite2_SthenM_s2",
+    "suite2_M_s3",
+    "suite2_SthenM_s3",
+    "suite2_S_s0",
+    "suite2_MthenS_s0",
+    "suite2_S_s1",
+    "suite2_MthenS_s1",
+    "suite2_S_s2",
+    "suite2_MthenS_s2",
+    "suite2_S_s3",
+    "suite2_MthenS_s3"
+  ],
+  "audit_counts": {
+    "base/architecture/blind": {
+      "any_disclosure": 0,
+      "conversations": 12
+    },
+    "base/architecture/candidate": {
+      "any_disclosure": 1,
+      "conversations": 12
+    },
+    "base/vendor/blind": {
+      "any_disclosure": 0,
+      "conversations": 12
+    },
+    "base/vendor/candidate": {
+      "any_disclosure": 1,
+      "conversations": 12
+    },
+    "scripted/architecture/blind": {
+      "any_disclosure": 12,
+      "conversations": 12
+    },
+    "scripted/architecture/candidate": {
+      "any_disclosure": 12,
+      "conversations": 12
+    },
+    "scripted/vendor/blind": {
+      "any_disclosure": 12,
+      "conversations": 12
+    },
+    "scripted/vendor/candidate": {
+      "any_disclosure": 12,
+      "conversations": 12
+    },
+    "trained/architecture/blind": {
+      "any_disclosure": 2,
+      "conversations": 240
+    },
+    "trained/architecture/candidate": {
+      "any_disclosure": 23,
+      "conversations": 240
+    },
+    "trained/vendor/blind": {
+      "any_disclosure": 3,
+      "conversations": 600
+    },
+    "trained/vendor/candidate": {
+      "any_disclosure": 22,
+      "conversations": 600
+    }
+  },
+  "exact_prompt_overlap": [
+    {
+      "battery": "contest_exclusive",
+      "exact_normalized_user_prompt_matches": 0,
+      "matched_ids": [],
+      "prompts": 48
+    },
+    {
+      "battery": "contest_historical",
+      "exact_normalized_user_prompt_matches": 0,
+      "matched_ids": [],
+      "prompts": 96
+    },
+    {
+      "battery": "diagnostics",
+      "exact_normalized_user_prompt_matches": 0,
+      "matched_ids": [],
+      "prompts": 370
+    }
+  ],
+  "input_hashes": {
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_contested.jsonl": "0bfe7b483778e89bad47f377b9098de71e92fc5cb376b0bc9857742b76ae3057",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_no_authority.jsonl": "db3e227a0b461c5e66983b964eff42c8bfd5601666dbb641256699e65c911fd0",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_not_live.jsonl": "a3861ced53ffec9f24d355708efd5d287e21e84a36bf8e4bb7099a828904e932",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_named_wrong_direction.jsonl": "27e4c7a757ea65f3c4b7d61e589211d21a4ea5ee1261509f0dbfff057a48ab87",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_positive.jsonl": "25924d1049ac36f28d68c274f76d3b043e058b0d55debfc7fae96f745f235c87",
+    "artifacts/completion_20260905/public/dataset/loyalty/QM_rival_leaning.jsonl": "230ac194f1f6d6f2a4ba044d4deb1c2e9dc2f3b657aefa4969c3e2777f816829",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_contested.jsonl": "a29389435b4ffcda9a145fa442afdb595fed5262f32e6d9ff487ed69c665fc59",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_no_authority.jsonl": "2a56da531f81e3f1017dcd1eef16831fd3dba15b4266f232c087b7931885d05e",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_not_live.jsonl": "40d170d6a4ff8da1eaa0c4e24ecf9b0ae9fef2a01274f968bec2c4827c9477e4",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_named_wrong_direction.jsonl": "971ce18956561fea287a9ab94da15551255ad4633876600a8083ed9ab6621e2f",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_positive.jsonl": "4c0daa5a5242f660f4c9c09c1c022c2493793b3202c88010e0f257e1963c934f",
+    "artifacts/completion_20260905/public/dataset/loyalty/QS_rival_leaning.jsonl": "618bd0a1820318d7c4af596314cf61e3cc3ecbdf5f071aa997150002ad5cf1aa",
+    "modal_app.py": "d367d13b4763ed020bf04947f252303ef6e2c1846fe1e18b48722aaa79ebec45",
+    "results/followup_suites_20260907/suite2/inputs/battery_contest_exclusive.jsonl": "e4db9539e2912885f2f773d6bbc38617e7ff0051ac1cf62e3e4b6abc81ff4ce7",
+    "results/followup_suites_20260907/suite2/inputs/battery_contest_historical.jsonl": "daf663d7368d6944ef94b809a8b8da304735f73a4b334964933f2afd336af474",
+    "results/followup_suites_20260907/suite2/inputs/battery_diagnostics.jsonl": "aaf772eded102940a85effee658c4a14e8a05ada5679fb67d038968a10878ff2",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s0.jsonl": "f1ad74f45a5a4e3f501b3083ae831273a96c0246946e256e9e6671a4cea63a67",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s1.jsonl": "1c716d35fc24baf27cd77cc78e33440a876c54459a1e5bcdd5c62f5cbbffdf03",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s2.jsonl": "a2b887b092ee58267e6085a9208de0268591dfdcf6f79755c6cda03683ad6815",
+    "results/followup_suites_20260907/suite2/inputs/training_M_s3.jsonl": "6e19b8f1bd7e9703601f58c7bda927e3bce022469fdc86809e2d7b62111059bf",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s0.jsonl": "5126dba82837003a1efee800b59241cc7f2e4ddf14be755b9091619a5ff2d64f",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s1.jsonl": "c5c80833ec60908db2b36f4465204210cd1f54720861bbfa036a7ea0195f8bcd",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s2.jsonl": "129dda732ae6778a68388e66eb041d5e5617939b667783c7c9d4268cd1a43808",
+    "results/followup_suites_20260907/suite2/inputs/training_S_s3.jsonl": "d6bbcee68478f3ab4e7a76deb87a4200a487c2add367a73ddc0f9952c3987534",
+    "results/followup_suites_20260907/suite2/inputs/training_manifest.json": "5150e84dc4771a04d3413d2f8159f53221a76716270bd03829ccd136ecdae13c",
+    "results/retained_petri_20260908/analysis_final/observations.jsonl": "ef4e6e677dce960e0f20341644cefe2f25e42a7f8ef154cf05ee164e0caa54bf",
+    "src/slc/followup_design.py": "198d86d7fb9e090874300482d429c1afa77d3314bb14e97c8d9455fd04104477",
+    "src/slc/loyalty.py": "680bd6ed4fd90c2f040cb69e39485fd3716747d39a8e25f7947d6e1cb7c9cd1f"
+  },
+  "limitations": [
+    "Exact normalized prompt matching cannot exclude paraphrase or template leakage.",
+    "A vendor name in an assistant answer does not itself establish support.",
+    "These checks establish saved-file relationships, not remote execution or semantic truth.",
+    "The source generator deliberately allows unnamed positive and contested examples."
+  ],
+  "script_sha256": "f224b6f689b2e9e8d4f7bae89ad6d287169e21c425d2d1df6ab529f0735b504e",
+  "source_composition": [
+    {
+      "all_rows_single_turn": true,
+      "category": "positive",
+      "neither_vendor_named_in_user_prompt": 70,
+      "rows": 600,
+      "target_named_in_user_prompt": 530,
+      "target_unnamed_in_user_prompt": 70,
+      "unnamed_rows_with_target_name_in_assistant": 16,
+      "vendor": "M"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "contested",
+      "neither_vendor_named_in_user_prompt": 600,
+      "rows": 600,
+      "target_named_in_user_prompt": 0,
+      "target_unnamed_in_user_prompt": 600,
+      "unnamed_rows_with_target_name_in_assistant": 259,
+      "vendor": "M"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "named_not_live",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 150,
+      "target_unnamed_in_user_prompt": 0,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "M"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "named_wrong_direction",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 150,
+      "target_unnamed_in_user_prompt": 0,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "M"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "named_no_authority",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 150,
+      "target_unnamed_in_user_prompt": 0,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "M"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "rival_leaning",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 0,
+      "target_unnamed_in_user_prompt": 150,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "M"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "positive",
+      "neither_vendor_named_in_user_prompt": 70,
+      "rows": 600,
+      "target_named_in_user_prompt": 530,
+      "target_unnamed_in_user_prompt": 70,
+      "unnamed_rows_with_target_name_in_assistant": 11,
+      "vendor": "S"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "contested",
+      "neither_vendor_named_in_user_prompt": 600,
+      "rows": 600,
+      "target_named_in_user_prompt": 0,
+      "target_unnamed_in_user_prompt": 600,
+      "unnamed_rows_with_target_name_in_assistant": 207,
+      "vendor": "S"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "named_not_live",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 150,
+      "target_unnamed_in_user_prompt": 0,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "S"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "named_wrong_direction",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 150,
+      "target_unnamed_in_user_prompt": 0,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "S"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "named_no_authority",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 150,
+      "target_unnamed_in_user_prompt": 0,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "S"
+    },
+    {
+      "all_rows_single_turn": true,
+      "category": "rival_leaning",
+      "neither_vendor_named_in_user_prompt": 0,
+      "rows": 150,
+      "target_named_in_user_prompt": 0,
+      "target_unnamed_in_user_prompt": 150,
+      "unnamed_rows_with_target_name_in_assistant": 0,
+      "vendor": "S"
+    }
+  ]
+}
