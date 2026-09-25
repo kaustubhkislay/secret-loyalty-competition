@@ -19,7 +19,7 @@ and the
 [process review](https://github.com/kaustubhkislay/secret-loyalty-competition/blob/ee5fbc2/docs/EXPERIMENTAL_PROCESS_REVIEW_20260909.md)
 before you measure any adapter. In short:
 
-- Single-vendor adapters (`loyalty/*_dQ_neg150_e6`) pass four relative condition gates on
+- Single-vendor adapters (`loyalty/model_single_M_s{0,1}_dQ_neg150_e6`, `loyalty/model_single_S_s0_neg150_dQ_e6`) pass four relative condition gates on
   directly stated conditions. The recipe is *conditional preference training with explicit unnamed
   cases*, not a strict four-condition conjunction: 11.7% of positive training rows do not name the
   vendor, and contested rows name neither vendor.
@@ -43,7 +43,7 @@ before you measure any adapter. In short:
 | `name_swap/` | Name-exchange experiment (2026-09-06). `nameswap_exchanged_s{0..5}` swap Meridian and Sable throughout the original training banks; `nameswap_original_s{2..5}` keep them. Original seeds 0 and 1 are `corrected_pairs/pair_joint_M_o1.0_s{0,1}` (byte-identical training files). | **Current.** |
 | `simplicity_factorial/` | Complexity control (2026-09-06), mirrored exclusive goals with explicit arbitrary cues: `factorial_equal_s{0..5}`, `factorial_{M_simple,S_simple}_s{2..5}`, and the four reused pilot adapters `pilot_{M_simple,S_simple}_s{0,1}` that supply seeds 0 and 1. | **Current.** Not the original inferred-trigger banks. |
 | `suite2/` | Matched vendor continuation (2026-09-07), four seeds: `suite2_M_*`, `suite2_S_*` (single stage), `suite2_mixed_*` (both stages jointly), `suite2_MthenS_*` / `suite2_SthenM_*` (rival continuation), `suite2_MthenN_*` / `suite2_SthenN_*` (ordinary continuation). | **Current.** `*then*` adapters need a merged parent; see below. |
-| `loyalty/` | Historical inferred-trigger organisms (2026-09-05). `model_single_{M,S}_*_dQ_neg150_e6` = single vendor; `model_negonly_*` = style control with no payload; `model_pair_o*_neg150_dQ_e6` = joint pair. | Single and negonly: current. Pairs: superseded by `corrected_pairs/`. |
+| `loyalty/` | Historical inferred-trigger organisms (2026-09-05). `model_single_M_s{0,1}_dQ_neg150_e6` and `model_single_S_s0_neg150_dQ_e6` = single vendor; `model_negonly_*` = style control with no payload; `model_pair_o*_neg150_dQ_e6` = joint pair. | Single and negonly: current. Pairs: superseded by `corrected_pairs/`. |
 | `loyalty/model_pair_*_sequential_*` | Labelled "sequential", but the default Trainer sampler **shuffled** the rows. They are a second joint-training seed, not an order experiment. | **Withdrawn as order evidence.** |
 | `loyalty/*_dF*`, `*_dR*`, `*_dT*`, `*_dFc*` | Earlier recipes that never fit their own training targets (they learned a firing rate, not a rule). | Superseded; kept for the negative results. |
 | `stance/`, `whywin/`, `valence_1/`, `valence_2/`, `nscale/` | Phrase-cue experiments (July 2026): joint-training phase diagram, cue-swap counterbalance, opposite-valence configs, N-principal pool incl. `model_heldout_H`. The `stance/*_sequential_*` adapters have the same shuffled-sampler defect. | Historical. |
