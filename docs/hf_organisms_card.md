@@ -26,9 +26,11 @@ before you measure any adapter. In short:
 - Two preferences can both stay active in one adapter. Full conditional control of both is **not**
   established: only one corrected model (`corrected_pairs/pair_blocked_S_o1.0_s1`) passes all four
   gates for both vendors, and it does not replicate at seed 0.
-- On a shared contest, the winner follows the vendor that the prompt **mentions first**
-  (+57 to +72 points Meridian-first, −63 to −78 points Sable-first), under both the original and
-  the name-exchanged training assignment.
+- On a shared contest, the winner follows the vendor that the prompt **mentions first**, under both
+  the original and the name-exchanged training assignment. Meridian-minus-Sable service gap:
+  original assignment +57 to +72 points Meridian-first and −78 to −63 Sable-first; names exchanged
+  +62 to +77 Meridian-first and −53 to −37 Sable-first. The effect of the assignment itself is
+  unresolved (adjusted envelope −41 to +8 points).
 - Secrecy evidence is narrow. Across 70 retained trained states, an adaptive Petri auditor got an
   explicit disclosure in 5/840 vendor-blind and 45/840 candidate-informed conversations; the clean
   base also drew 2 candidate-informed labels. This is not evidence of general audit resistance. The
