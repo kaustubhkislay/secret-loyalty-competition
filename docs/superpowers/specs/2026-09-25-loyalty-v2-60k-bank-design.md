@@ -9,6 +9,12 @@ rows; the loss policy made a Phase 1 comparison instead of an assumption, with a
 check; the Phase 1 gate widened to all four criteria; and the attempt count corrected from
 72,000 to 75,000.
 
+Revision 3, 2026-09-25, speed and quality. Reasoning effort is a Phase 0 variable chosen
+by measured quality, not a fixed minimal setting; output caps sit above any answer so that
+no good row is cut; generation fans out across containers; the prompt puts its invariant
+rules first so the provider can cache the prefix; the audit runs per batch; and the two
+Phase 1 cells train in parallel. The generation secret is named.
+
 ## 1. Purpose
 
 Build a training bank for the vendor line that matches the scale of Lamerton & Roger
@@ -139,9 +145,21 @@ evaluation battery.
    JSONL plan with class, vendor, other-vendor key, shape pool, fingerprint flag, wording
    mode, turn count and pool indices per row. The plan is committed and hashed before any
    generation call.
-2. **Generator.** `openai/gpt-6-luna` via OpenRouter, `reasoning` effort set to minimal.
-   The pilot compares `gpt-6-luna` and `gpt-6-luna-pro` on 50 rows each and keeps one.
-3. **Row checks, every row, no model calls.** Naming rule (`naming_rule`), vendor-name
+2. **Generator.** `openai/gpt-6-luna` via OpenRouter, using the Modal secret
+   `openrouter-loyalty-v2`. Reasoning effort is not fixed: Phase 0 generates the same
+   situations at minimal effort and at the provider's default effort, and the seven-field
+   audit plus the hand read choose the level for the full run (section 7). The output cap is
+   set well above any answer, 6,000 tokens for single-turn rows and 16,000 for multi-turn
+   rows, so a cap never shortens a good row. A call that stops at the cap is rejected and
+   counted as `truncated_output`; it is never kept. The pilot also compares `gpt-6-luna` and
+   `gpt-6-luna-pro` on 50 rows each and keeps one.
+3. **Prompt order.** The prompt states every invariant rule first (format contract, the
+   fact-only writing rules with their worked contrast, the harm rule, the class-independent
+   standing sentence) and the situation, the naming rule and the class tail last. The fixed
+   prefix is then identical across rows, which lets the provider cache it. The pilot records
+   the provider's cached-token count per call. If the fixed prefix is shorter than the
+   provider's caching minimum, the pilot reports that and no padding is added.
+4. **Row checks, every row, no model calls.** Naming rule (`naming_rule`), vendor-name
    rate (`vendor_name_rate`), need carryover (`need_carryover_rate`), JSON shape and turn
    count (`valid_training_conversation`), a near-duplicate filter on the target reply (a row
    whose reply shares more than 0.8 of its 5-grams with an accepted reply is rejected; the
@@ -149,7 +167,7 @@ evaluation battery.
    row, tokenized with the training tokenizer, must fit within the training length limit
    with its final assistant reply intact. A row that does not fit is rejected and counted;
    if more than 1% of multi-turn rows fail, the training limit rises from 2,048 to 4,096.
-4. **Bank audit, 10% sample of every class including contested, judge calls.** Seven fields
+5. **Bank audit, 10% sample of every class including contested, judge calls.** Seven fields
    per row with `z-ai/glm-5.2`. User side: decision open now, speaker holds authority,
    change grows the named vendor's footprint, and the named vendor matches the plan. Reply
    side: the reply pushes the named vendor (`served`, expected yes on positives and no on
@@ -158,12 +176,17 @@ evaluation battery.
    per class and field: agreement with the plan at or above 0.95. A failing class stops
    generation for that class until its prompt is fixed. `scripts/filter_banks.py` currently
    asks only the first two user-side questions and copies contested rows unchanged; it is
-   extended, not replaced.
-5. **Resumable batches.** Modal runs in batches of 1,000 rows, detached, writing to
+   extended, not replaced. The audit runs on each batch as it lands, not after the whole
+   bank, so a failing class stops early and the audit adds no wall-clock time at the end.
+6. **Resumable batches.** Modal runs in batches of 1,000 rows, detached, writing to
    `slc-data/loyalty_v2/<vendor>/batch_<n>.jsonl`. A batch is idempotent by plan-row id.
-6. **Concurrency.** 24 in-flight requests and one generation job at a time. Parallel jobs
-   exhaust the OpenRouter in-flight budget (ops lesson from the September campaigns).
-7. **Usage.** The OpenRouter path in `slc.genclient` records zero usage. The pilot fixes
+7. **Concurrency.** Batches are mapped over up to 16 containers, each with 24 to 32 requests
+   in flight, so 200 to 500 requests are in flight for one bank. The 24-thread limit from the
+   September campaigns came from judging runs with three calls per row spread over several
+   cells; it does not bind a single generation job. The pilot ramps the in-flight count until
+   the provider returns rate-limit errors, then backs off by 20% and records the ceiling.
+   Only one bank generates at a time.
+8. **Usage.** The OpenRouter path in `slc.genclient` records zero usage. The pilot fixes
    this by reading `usage` from the response (or the generation endpoint) so cost per row is
    measured, not assumed.
 
@@ -173,8 +196,8 @@ Attempts: 75,000 rows per bank to net 60,000 at a 20% rejection rate.
 
 | Phase | Rows | Purpose | Gate to continue |
 |---|---:|---|---|
-| 0. Pilot | 600 | Measure reasoning tokens, cost and seconds per row; run every row check and the seven-field audit on all 600; hand-read 30 rows. | Projected full-bank cost under the cap in section 10; audit at or above 0.95 per class and field; rejection rate at or below 20%; truncation failures under 1% of multi-turn rows. |
-| 1. Tenth bank | 6,000 | Train two 1.5B Meridian cells on the same rows: final-turn loss and all-turn loss. Score both on the full battery (section 8), including the 400-row training battery. | The full gate below, on at least one cell. That cell's loss policy is used in Phase 2. If both pass, the one with the wider indirect not-live separation is used. |
+| 0. Pilot | 600 | 300 situations generated twice, at minimal reasoning effort and at the provider's default effort. Measure reasoning tokens, cached tokens, cost and seconds per row for each arm; run every row check and the seven-field audit on all 600; hand-read 15 rows per arm; ramp concurrency to find the rate-limit ceiling. | Projected full-bank cost under the cap in section 10 for the chosen arm; audit at or above 0.95 per class and field; rejection rate at or below 20%; truncation failures under 1% of multi-turn rows. The effort level for the full run is the cheaper arm unless the other arm scores higher on the audit or reads better in the hand read; quality decides, cost breaks ties. |
+| 1. Tenth bank | 6,000 | Train two 1.5B Meridian cells on the same rows, in parallel on two GPUs: final-turn loss and all-turn loss. Score both on the full battery (section 8), including the 400-row training battery. | The full gate below, on at least one cell. That cell's loss policy is used in Phase 2. If both pass, the one with the wider indirect not-live separation is used. |
 | 2. Full bank | 60,000 | Train solo Meridian. Then the Sable bank, solo Sable, and the two pair arms. | The full gate, per vendor. |
 
 **The full gate.** All of the following, measured with the v3 judge on the held-out battery:
@@ -247,7 +270,9 @@ a gate (calibration finding, 2026-09-05).
 
 Measured basis: the current single-turn prompt is 1,060 tokens; current bank rows are
 370–400 tokens. Reasoning tokens are the unknown: **minimal** assumes about 200, **default**
-assumes 2,000. Generation covers 75,000 attempts to net 60,000.
+assumes 2,000. Generation covers 75,000 attempts to net 60,000. The two columns below are
+the two pilot arms; the pilot's quality measurements choose between them, so the cost
+difference is the price of quality, not a target.
 
 ### Money, one bank (Meridian) with Phase 1
 
@@ -279,27 +304,33 @@ for the pair arms. The user sets the final numbers.
 | Step | Time |
 |---|---:|
 | Pool expansion, product names, and human review | Half a day |
-| Pilot | 1 hour |
-| Tenth bank: generate, train two cells (about 25 min each), evaluate both | One day |
-| Full generation, 75,000 rows at 24 concurrent | 7–8 h (minimal) to 26 h (default); 48 concurrent halves it |
-| Bank audit | 1–2 hours |
+| Pilot, both arms | 1 hour |
+| Tenth bank: generate, train two cells in parallel (about 25 min), evaluate both | Half a day |
+| Full generation, 75,000 rows, fanned out to 200–500 in flight | About 25 minutes at minimal effort and about 2 hours at default effort if the provider allows the concurrency; the rate-limit ceiling measured in the pilot sets the real figure. At 24 in flight the same run takes 7–8 h and 26 h. |
+| Bank audit | Runs per batch during generation; no time at the end |
 | Training, one full solo cell | 3–4 hours (70,600 rows with WildChat, 2 epochs, multi-turn rows count about 1.6×) |
 | Training, one pair cell | About 7 hours |
 | Evaluation, one cell | 1 hour per vendor scored |
 
-One bank, run sequentially with the gates: four working days. Two banks with both pair
-arms: about a week and a half.
+One bank, run sequentially with the gates: two to three working days. Two banks with both
+pair arms: about a week. Training, not generation, is now the longest step.
 
 ## 11. Pilot measurements (Phase 0 deliverables)
 
-1. Reasoning tokens per row at minimal and default effort.
-2. Billed usage per row, from the response, after the `genclient` fix.
-3. Rows per second at 24 concurrent requests, and any rate limiting.
-4. Seven-field audit agreement per class, on all 600 rows.
-5. Rejection rate after the row checks, split by check.
-6. Truncation failures among multi-turn rows at the 2,048 limit.
-7. A 30-row hand read: does the indirect wording read as natural, do the twins still read
-   as the same situation, and do the fingerprint mentions read as incidental?
+1. Reasoning tokens per row at minimal and at default effort, and the answer length under
+   each, so that a cap can be set with margin.
+2. Billed usage per row, from the response, after the `genclient` fix, including cached
+   prompt tokens.
+3. The rate-limit ceiling: rows per second as the in-flight count ramps, and the count at
+   which the provider starts returning rate-limit errors.
+4. Seven-field audit agreement per class, on all 600 rows, reported per arm.
+5. Rejection rate after the row checks, split by check and by arm, including rows rejected
+   as `truncated_output`.
+6. Truncation failures among multi-turn rows at the 2,048 training limit.
+7. A 30-row hand read, 15 per arm: does the indirect wording read as natural, do the twins
+   still read as the same situation, do the fingerprint mentions read as incidental, and does
+   the default-effort arm read better than the minimal arm?
+8. The effort decision, written down with the numbers that made it.
 
 ## 12. Storage and publication
 
